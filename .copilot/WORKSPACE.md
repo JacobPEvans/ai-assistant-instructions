@@ -4,31 +4,10 @@
 
 ## Multi-Project Workspace Management
 
-This document provides guidelines for managing the multi-repository workspace that contains various project types
-including homelab infrastructure, cloud deployments, and development tools.
-
-## Workspace Structure
-
-### Project Categories
-
-#### Infrastructure Projects
-
-- **terraform-proxmox/**: Virtualization infrastructure management
-- **tf-splunk-aws/**: Cloud-based log management platform
-- **tf-static-website/**: Web hosting infrastructure
-- **int_homelab/**: Initial setup and configuration scripts
-
-#### Application Templates
-
-- **splunk-templates/**: Standardized Splunk app configurations
-- **splunk-favorites/**: Community resources and best practices
-- **gh-actions-test/**: CI/CD pipeline templates
-
-#### Utility Projects
-
-- **homelab/**: Documentation and automation for physical infrastructure
-- **unifi-backup-decrypt/**: Network equipment backup management
-- **ai-assistant-instructions/**: This project - AI workflow optimization
+This document provides guidelines for managing the multi-repository workspace that contains various project types including:
+* Homelab infrastructure
+* Cloud deployments
+* Development tools
 
 ## Cross-Project Standards
 
@@ -52,7 +31,6 @@ Each project must maintain:
 
 - **main**: Production-ready code only
 - **feature/**: Feature development branches
-- **hotfix/**: Critical fixes that bypass normal workflow
 - **experiment/**: Learning and testing (delete after completion)
 
 #### Commit Standards

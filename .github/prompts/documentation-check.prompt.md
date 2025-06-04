@@ -11,14 +11,15 @@ Your goal is to review and validate documentation consistency, completeness, and
 **Structure & Organization**
 - Proper README.md files at appropriate levels
 - Consistent directory structure documentation
-- Working cross-reference links
+- Utilize a single source of truth. Combine similar documentation across multiple files into the best location only
+- Valid cross-reference links
 - Required files: LICENSE, .gitignore, CHANGELOG (if applicable)
 
 **Content Quality**
 - Clear purpose statements and setup instructions
 - Working code examples with proper syntax highlighting
 - Cost estimates for cloud resources
-- US English, middle/high school reading level
+- US English, middle to high school reading level
 - Professional but approachable tone
 
 **AI-Friendly Formatting**
@@ -29,10 +30,11 @@ Your goal is to review and validate documentation consistency, completeness, and
 - Line length under 120 characters
 
 **Cross-Reference Validation**
-- Internal markdown links work correctly
-- File path references are accurate
+- Internal markdown links resolve correctly
+- Link and file path references are accurate
 - External URLs are accessible
-- GitHub Copilot integration references
+- GitHub Copilot integration references are valid
+- Avoid circular references
 
 ## Review Process
 
@@ -49,17 +51,9 @@ cspell "**/*.md"
 ```
 
 **Quality Gates**
-- **Essential**: Root README.md, working setup instructions, current contact info
+- **Essential**: Root README.md, working setup instructions
 - **Important**: Troubleshooting section, architecture overview, configuration options
 - **Nice to Have**: Detailed examples, performance guides, advanced features
-
-**Output Format**
-- List of issues found with severity (Critical/High/Medium/Low)
-- Specific file locations and line numbers
-- Actionable recommendations for fixes
-- Overall documentation health score
-- Advanced configuration options
-- Video tutorials or demos
 
 ### Compliance Standards
 
@@ -69,13 +63,13 @@ cspell "**/*.md"
 - Access control requirements clear
 - Backup and recovery procedures documented
 
-**Legal and Compliance**
+**Compliance**
 - Appropriate license files
 - Attribution for external content
-- Privacy policy references where applicable
-- Terms of use for public-facing documentation
 
 ## Output Format
+
+Never output reviews to files. Output reviews directly to the user making documentation updates directly when confidence is high.
 
 ### Review Report Structure
 
@@ -85,15 +79,7 @@ cspell "**/*.md"
 4. **Best Practices**: Compliance with standards
 5. **Maintenance Recommendations**: Ongoing care suggestions
 
-### Action Items
-
-**Priority Levels**
-- **P0 (Critical)**: Blocking issues, fix immediately
-- **P1 (High)**: Important improvements, next sprint
-- **P2 (Medium)**: Quality improvements, next release
-- **P3 (Low)**: Nice-to-have enhancements
-
 ---
 
 *Reference: [Main Instructions](../copilot-instructions.md)*  
-*See also: [Project Structure](../.copilot/PROJECT.md)*
+*See also: [Project Structure](../../.copilot/PROJECT.md)*
