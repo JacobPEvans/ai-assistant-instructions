@@ -45,12 +45,19 @@ Create `.copilot/` directory with:
 ## Git and Version Control
 - Write clear, descriptive commit messages focusing on actual file changes above chat history
 - Use `git mv` for moving or renaming files to maintain proper version control history
-- Use conventional commit prefixes (feat:, fix:, docs:, etc.)
 - Update files directly instead of using temp, old, new, or backup files
+- Use conventional commit prefixes (feat:, fix:, docs:, etc.)
+- Include appropriate .gitignore entries
+
+### Git Workflow
 - Remove unnecessary empty, temp, old, new, or backup files as needed
 - Suggest `git commit` after modifying more than 5 files or 100 lines of code
-- Include appropriate .gitignore entries
 - Always `git push` after a successful `git commit`
+- Use GitHub CLI (`gh`) for pull requests and issue management
+- Pull request titles and bodies should cover all changes made on the current branch with as much detail as possible
+- Attempt to merge pull requests automatically when possible
+- Synchronize the main branch after merging a pull request or branch
+- Always delete local and remote branches after merging pull requests
 
 ### Software & Command Management
 - Update software and requirements to latest stable versions
