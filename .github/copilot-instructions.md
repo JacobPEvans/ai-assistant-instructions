@@ -3,8 +3,9 @@
 Workspace-wide instructions for GitHub Copilot to provide consistent, high quality assistance.
 
 ## Core Principles
+- **Accuracy and Consistency**: Validate all files are consistent with each other and that files are valid for their file type
 - **Keep it simple**: Never add unnecessary complexity or configurations that work with defaults
-- **DRY (Don't Repeat Yourself)**: Prioritize modularization and reusability. Avoid files with many hundreds of lines.
+- **DRY (Don't Repeat Yourself)**: Prioritize modularization and reusability. Avoid files with many hundreds of lines
 - **Cost-conscious**: Always prefer cheapest options that meet requirements
 - **Security-first**: Input validation, principle of least privilege, and no hardcoded secrets
 - **Documentation-driven**: Maintain comprehensive documentation and examples
@@ -18,7 +19,7 @@ Create `.copilot/` directory with:
 - **README.md**: Usage guidelines
 
 ### For All Projects
-- **Root README.md**: Purpose, setup instructions, usage examples, cost estimates
+- **Root README.md**: Purpose, quick setup instructions, usage examples, cost estimates
 - **Directory READMEs**: Explanation for major subdirectories
 - **Inline Documentation**: Function/class comments, configuration explanations
 
@@ -38,6 +39,15 @@ Create `.copilot/` directory with:
 - Include comprehensive error handling and self-documenting code
 - Add inline comments for complex logic; prefer readable over clever code
 - Run linting/formatting before committing changes
+
+## Git and Version Control
+- Write clear, descriptive commit messages focusing on actual file changes above chat history
+- Use `git mv` for moving or renaming files to maintain proper version control history
+- Use conventional commit prefixes (feat:, fix:, docs:, etc.)
+- Update files directly instead of using temp, old, new, or backup files
+- Suggest `git commit` after modifying more than 5 files or 100 lines of code
+- Include appropriate .gitignore entries
+- Always `git push` after a successful `git commit`
 
 ### Software & Command Management
 - Update software and requirements to latest stable versions
@@ -87,14 +97,6 @@ Create `.copilot/` directory with:
 - **Development**: Include testing, debugging tools, VS Code extensions
 - **Production**: Focus on availability, monitoring, backup/recovery, security hardening
 - **Containerization**: Multi-stage builds, health checks, security scanning
-
-## Git and Version Control
-- Use `git mv` for moving or renaming files to maintain proper version control history
-- Write clear, descriptive commit messages focusing on actual file changes first
-- Use conventional commit prefixes (feat:, fix:, docs:, etc.)
-- Update files directly instead of using temp, old, new, or backup files
-- Suggest `git commit` after modifying more than 5 files or 100 lines of code
-- Include appropriate .gitignore entries
 
 ## Workspace-Specific Guidelines
 
