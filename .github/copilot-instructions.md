@@ -14,9 +14,11 @@ Use conventional commit prefixes: `feat:`, `fix:`, `docs:`, `refactor:`, `test:`
 
 Follow language-specific best practices with descriptive, concise naming conventions.
 
+Avoid backup, temp, old, and new type file names. Delete these kinds of files if observed.
+
 Include comprehensive error handling and prefer readable code over clever implementations.
 
-Maintain lines under 120 characters when linters indicate line length requirements.
+Keep line length under 120 characters when linters indicate line length requirements.
 
 Run formatting and linting before committing: `terraform fmt`, `terragrunt hclfmt`, `markdownlint`.
 
@@ -46,13 +48,9 @@ Enable encryption at rest and in transit for all data storage and transmission.
 
 ## Git Workflow
 
-Never make edits directly to main branch - always use feature branches with descriptive names.
+Use conventional commit prefixes and follow established branching standards.
 
-Commit changes after modifying more than 5 files or 100 lines of code.
-
-Use `git mv` for file operations to maintain proper version history.
-
-Always push changes after successful commits and clean up merged branches.
+For detailed git commit, pull request, and workflow guidelines, see: `.github/prompts/git-workflow.prompt.md`
 
 ## Cost Management
 
@@ -71,6 +69,7 @@ For detailed guidelines, see:
 
 For task-specific guidance, use prompt files:
 
-- Infrastructure reviews: `.github/prompts/terraform-review.prompt.md`
+- Git workflows: `.github/prompts/git-workflow.prompt.md`
+- Infrastructure reviews: `.github/prompts/infrastructure-review.prompt.md`
 - Security assessments: `.github/prompts/security-review.prompt.md`  
 - Documentation validation: `.github/prompts/documentation-check.prompt.md`

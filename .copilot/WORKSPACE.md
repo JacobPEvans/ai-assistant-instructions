@@ -9,23 +9,6 @@ including homelab infrastructure, cloud deployments, and development tools.
 
 ## Workspace Structure
 
-### Current Projects Overview
-
-```text
-git/
-├── ai-assistant-instructions/    # This repository - AI instruction management
-├── homelab/                     # Physical homelab automation and documentation
-├── int_homelab/                 # Initial homelab setup scripts and configs
-├── terraform-proxmox/           # Proxmox infrastructure as code
-├── tf-splunk-aws/              # AWS Splunk deployment with Terraform
-├── tf-static-website/          # Static website hosting on AWS
-├── splunk-templates/           # Reusable Splunk configurations
-├── splunk-favorites/           # Community Splunk resources
-├── unifi-backup-decrypt/       # UniFi backup management tools
-├── gh-actions-test/            # GitHub Actions testing and templates
-└── tmp/                        # Temporary files and backups
-```
-
 ### Project Categories
 
 #### Infrastructure Projects
@@ -97,7 +80,6 @@ When changes in one project affect others:
 - **Local Development**: Use `.env` files (never committed)
 - **Cloud Resources**: AWS Systems Manager Parameter Store
 - **Shared Secrets**: Centralized secret management with role-based access
-- **Backup Encryption**: All backup files must be encrypted at rest
 
 #### Access Control
 
