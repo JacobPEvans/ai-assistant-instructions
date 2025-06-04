@@ -1,120 +1,76 @@
 # GitHub Copilot Instructions
 
-Workspace-wide instructions for GitHub Copilot to provide consistent, high quality assistance.
+Repository-wide instructions for consistent, high-quality AI assistance across all workspace projects.
 
-## Core Principles
-- **Accuracy and Consistency**: Validate all files are consistent with each other and that files are valid for their file type
-- **Keep it simple**: Never add unnecessary complexity or configurations that work with defaults
-- **DRY (Don't Repeat Yourself)**: Prioritize modularization and reusability. Avoid files with many hundreds of lines
-- **Cost-conscious**: Always prefer cheapest options that meet requirements
-- **Security-first**: Input validation, principle of least privilege, and no hardcoded secrets
-- **Documentation-driven**: Maintain comprehensive documentation and examples
+## Technology Preferences
 
-## Project Documentation Structure
+Use Terraform with Terragrunt for all infrastructure deployments, not CloudFormation or other alternatives.
 
-### For Complex Projects (Infrastructure, Multi-module, etc.)
-Create `.copilot/` directory with:
-- **PROJECT.md**: Project scope, boundaries, change approval workflow
-- **ARCHITECTURE.md**: High level architecture decisions
-- **README.md**: Usage guidelines
+For cloud deployments, prefer AWS us-east-2 region and maintain cost budgets under $20/month per project.
 
-### For All Projects
-- **Root README.md**: Purpose, quick setup instructions, usage examples, cost estimates
-- **Directory READMEs**: Explanation for major subdirectories
-- **Inline Documentation**: Function/class comments, configuration explanations
+Use conventional commit prefixes: `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`.
 
-### Documentation Requirements
-- Include purpose and scope clearly at the top
-- Provide step-by-step setup instructions
-- Add usage examples and common commands
-- Document cost implications for cloud resources
-- Maintain current state information for infrastructure
-- Include troubleshooting and FAQ sections
-- Use emojis sparingly for clarity, not as decoration
-- Always include a code language tag for syntax highlighting in code blocks
+## Code Quality Standards
 
-## General Guidelines
+Follow language-specific best practices with descriptive, concise naming conventions.
 
-### Code Quality
-- Follow language/framework best practices with descriptive, short names
-- Include comprehensive error handling and self-documenting code
-- Add inline comments for complex logic; prefer readable over clever code
-- Run linting and formatting before committing changes
-- When a file format linter indicates line length, keep lines under 120 characters and only under 80 when sensible
+Include comprehensive error handling and prefer readable code over clever implementations.
 
-## Git and Version Control
-- Write clear, descriptive commit messages focusing on actual file changes above chat history
-- Use `git mv` for moving or renaming files to maintain proper version control history
-- Use conventional commit prefixes (feat:, fix:, docs:, etc.)
-- Update files directly instead of using temp, old, new, or backup files
-- Remove unnecessary empty, temp, old, new, or backup files as needed
-- Suggest `git commit` after modifying more than 5 files or 100 lines of code
-- Include appropriate .gitignore entries
-- Always `git push` after a successful `git commit`
+Maintain lines under 120 characters when linters indicate line length requirements.
 
-### Software & Command Management
-- Update software and requirements to latest stable versions
-- Use chocolatey for Windows package management (uninstall/reinstall if needed)
-- Use full file paths when running commands in terminal
-- Include auto-approve flags to reduce manual intervention
+Run formatting and linting before committing: `terraform fmt`, `terragrunt hclfmt`, `markdownlint`.
 
-### Documentation Standards
-- The master set of instructions is located in `.github/copilot-instructions.md`
-- **AI Context Files**: Create `.copilot/` directory with PROJECT.md and ARCHITECTURE.md
-- **README Requirements**: Include purpose, setup instructions, usage examples, and cost estimates
-- **Function Documentation**: Add docstrings/comments for all functions and classes
-- **Change Documentation**: Document configuration changes and their purpose
-- **Project Structure**: Use descriptive folder/file names with README files in major directories
-- Avoid double documenting. If a concept is already documented at a higher level, don't document it again
+## Documentation and Diagrams
 
-## Technology-Specific Guidelines
+Use Mermaid for all diagrams (flowcharts, workflows, sequence diagrams) with proper language tags.
 
-### Infrastructure as Code (Terraform/Terragrunt)
-- **File patterns**: `*.tf`, `*.tfvars`, `terragrunt.hcl`
-- Use Terragrunt for all configurations with S3/DynamoDB state management
-- Follow consistent naming, use relative paths, include resource tags
-- Use data sources over hardcoded values, principle of least privilege for IAM
-- **CRITICAL**: Always commit after successful `terragrunt plan` - NEVER auto-apply
-- **NEVER** run `terragrunt apply` automatically (deploys real AWS resources/costs)
-- Treat successful plans as version control milestones
-- Run `terragrunt hclfmt` before running `terragrunt plan` and committing changes
-- Run `terraform fmt` before running `terragrunt plan` and committing changes
+Use GraphViz (DOT) only for complex network topologies when Mermaid becomes inadequate.
 
-### Cloud Platforms (AWS Primary)
-- **Preferred Region**: us-east-2
-- **Cost Limit**: $20/month maximum per project
-- Always estimate monthly costs and choose cheapest viable options
-- Follow well-architected principles unless cost prohibitive
-- Do not use expensive cloud services (RDS, ELB, etc.) unless specifically requested by user
+Write documentation at US middle/high school reading level with clear setup instructions.
 
-### Configuration & Scripting
-- **Splunk** (`*.conf`, `*.xml`): Follow naming conventions, optimize searches (tstats), document queries
-- **PowerShell** (`*.ps1`): Use approved verbs, parameter validation, try/catch blocks, PascalCase
-- **Shell Scripts** (`*.sh`): Include shebangs, use `set -euo pipefail`, quote variables
-- **Config Files** (`*.json`, `*.yaml`, `*.xml`): 2-space indentation, comments, environment-specific, no secrets
+Include working code examples with proper syntax highlighting and language tags.
 
-### Security & Compliance
-- Use environment variables or secret management (never hardcode secrets)
-- Include input validation, security scanning, audit logging
-- Consider GDPR/CCPA requirements and data retention policies
+Provide cost estimates for cloud resources and usage examples.
 
-### Development & Production
-- **Development**: Include testing, debugging tools, VS Code extensions
-- **Production**: Focus on availability, monitoring, backup/recovery, security hardening
-- **Containerization**: Multi-stage builds, health checks, security scanning
+Reference detailed guidelines in [.copilot/ directory](../.copilot/PROJECT.md) for complex topics.
 
-## Workspace-Specific Guidelines
+## Security Requirements
 
-### Homelab Projects
-- Focus on learning and experimentation with detailed documentation
-- Include automation, infrastructure as code, backup procedures
-- Document lessons learned and configuration decisions
+Never hardcode secrets - use environment variables or cloud secret management services.
 
-### Templates and Reusability
-- Create parameterized templates for common configurations
-- Document usage, customization options, and maintain version control
+Apply principle of least privilege for all IAM policies and resource access.
 
----
+Include input validation for all user-facing interfaces and APIs.
 
-*Last updated: June 3, 2025*  
-*Update as workspace evolves and new technologies are adopted*
+Enable encryption at rest and in transit for all data storage and transmission.
+
+## Git Workflow
+
+Never make edits directly to main branch - always use feature branches with descriptive names.
+
+Commit changes after modifying more than 5 files or 100 lines of code.
+
+Use `git mv` for file operations to maintain proper version history.
+
+Always push changes after successful commits and clean up merged branches.
+
+## Cost Management
+
+Estimate monthly costs before deploying cloud resources and choose cheapest viable options.
+
+Prefer free tier and cost-optimized services unless specific requirements justify premium options.
+
+Document cost justifications for resources exceeding $5/month.
+
+## Context References
+
+For detailed guidelines, see:
+- [Project Overview](../.copilot/PROJECT.md) - Scope, boundaries, and change management
+- [Architecture Details](../.copilot/ARCHITECTURE.md) - Technical decisions and system design  
+- [Workspace Management](../.copilot/WORKSPACE.md) - Multi-project coordination
+
+For task-specific guidance, use prompt files:
+
+- Infrastructure reviews: `.github/prompts/terraform-review.prompt.md`
+- Security assessments: `.github/prompts/security-review.prompt.md`  
+- Documentation validation: `.github/prompts/documentation-check.prompt.md`
