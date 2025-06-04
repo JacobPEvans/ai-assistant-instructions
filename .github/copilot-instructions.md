@@ -31,6 +31,7 @@ Create `.copilot/` directory with:
 - Maintain current state information for infrastructure
 - Include troubleshooting and FAQ sections
 - Use emojis sparingly for clarity, not as decoration
+- Always include a code language tag for syntax highlighting in code blocks
 
 ## General Guidelines
 
@@ -38,13 +39,15 @@ Create `.copilot/` directory with:
 - Follow language/framework best practices with descriptive, short names
 - Include comprehensive error handling and self-documenting code
 - Add inline comments for complex logic; prefer readable over clever code
-- Run linting/formatting before committing changes
+- Run linting and formatting before committing changes
+- When a file format linter indicates line length, keep lines under 120 characters and only under 80 when sensible
 
 ## Git and Version Control
 - Write clear, descriptive commit messages focusing on actual file changes above chat history
 - Use `git mv` for moving or renaming files to maintain proper version control history
 - Use conventional commit prefixes (feat:, fix:, docs:, etc.)
 - Update files directly instead of using temp, old, new, or backup files
+- Remove unnecessary empty, temp, old, new, or backup files as needed
 - Suggest `git commit` after modifying more than 5 files or 100 lines of code
 - Include appropriate .gitignore entries
 - Always `git push` after a successful `git commit`
@@ -74,6 +77,8 @@ Create `.copilot/` directory with:
 - **CRITICAL**: Always commit after successful `terragrunt plan` - NEVER auto-apply
 - **NEVER** run `terragrunt apply` automatically (deploys real AWS resources/costs)
 - Treat successful plans as version control milestones
+- Run `terragrunt hclfmt` before running `terragrunt plan` and committing changes
+- Run `terraform fmt` before running `terragrunt plan` and committing changes
 
 ### Cloud Platforms (AWS Primary)
 - **Preferred Region**: us-east-2
