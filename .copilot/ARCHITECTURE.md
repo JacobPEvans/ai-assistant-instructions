@@ -16,9 +16,10 @@ basic repository instructions to include comprehensive workspace management.
 .github/
 ├── copilot-instructions.md          # Main repository-wide AI instructions
 └── prompts/                         # Reusable prompt templates
+    ├── documentation-check.prompt.md # Documentation consistency checks
+    ├── git-workflow.prompt.md       # Git commit and workflow standards
     ├── infrastructure-review.prompt.md # Infrastructure code reviews
-    ├── security-review.prompt.md    # Security assessment prompts
-    └── documentation-check.prompt.md # Documentation consistency checks
+    └── security-review.prompt.md    # Security assessment prompts
 
 .copilot/
 ├── PROJECT.md                       # Project scope and boundaries
@@ -41,9 +42,10 @@ basic repository instructions to include comprehensive workspace management.
   - WORKSPACE.md: Multi-repository workspace management
 
 - **`.github/prompts/`**: Task-specific reusable prompts
+  - Documentation consistency validation
+  - Git commit and workflow standards
   - Infrastructure review workflows
   - Security assessment checklists
-  - Documentation consistency validation
 
 #### AI Optimization Principles
 

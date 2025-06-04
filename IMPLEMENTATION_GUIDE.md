@@ -25,19 +25,11 @@ ai-assistant-instructions/
     └── WORKSPACE.md                    # Multi-project coordination
 ```
 
-### Workspace Configuration
-
-```text
-git/
-├── git.code-workspace                  # VS Code workspace with optimized settings
-└── [multiple project directories]     # Various infrastructure and development projects
-```
-
 ## Key Implementation Decisions
 
 ### Modular Architecture
 
-- **Main Instructions**: Kept concise in `.github/copilot-instructions.md` (~50 lines)
+- **Main Instructions**: Kept concise in `.github/copilot-instructions.md` (100 lines or less)
 - **Detailed Context**: Comprehensive guidelines in `.copilot/` directory
 - **Task-Specific Prompts**: Reusable templates in `.github/prompts/`
 - **Cross-References**: Clear navigation between related documents
@@ -71,19 +63,9 @@ graph LR
     G --> H[Deploy/Apply]
 ```
 
-**GraphViz Network Topology (when Mermaid becomes inadequate):**
-
-```dot
-digraph network {
-    rankdir=TB;
-    node [shape=box, style=filled];
-    // Complex network relationships with 10+ nodes
-}
-```
-
 ## VS Code Integration
 
-### Required Extensions
+### Extensions
 
 **Markdown and Documentation:**
 
@@ -105,9 +87,6 @@ digraph network {
 **Infrastructure and Development:**
 
 - `HashiCorp.terraform` - Terraform support
-- `GitHub.copilot` - AI assistance
-- `GitHub.copilot-chat` - Conversational AI
-- `ms-vscode.powershell` - PowerShell support
 
 ### Workspace Settings
 
@@ -162,7 +141,6 @@ digraph network {
 
 ### Manual Review Checklist
 
-- [ ] All diagrams use appropriate tool (Mermaid vs GraphViz)
 - [ ] Cross-references between files are accurate
 - [ ] Code examples include proper language tags
 - [ ] Documentation follows US middle/high school reading level
@@ -185,7 +163,7 @@ digraph network {
 - **Better Documentation**: Visual diagrams with appropriate tools
 - **Cost Management**: Built-in budget awareness and optimization
 
-### for Team Collaboration
+### For Team Collaboration
 
 - **Clear Guidelines**: Explicit standards for all contributors
 - **Reusable Patterns**: Template-based approach for common tasks

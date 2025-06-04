@@ -11,11 +11,11 @@ Your goal is to handle all git commits, pull requests, branching, and version co
 **Branch Management**
 - **main**: Production-ready code only - never commit directly
 - **feature/[description]**: Feature development with descriptive names
-- **hotfix/[issue]**: Critical fixes for production issues
 - **experiment/[topic]**: Learning and testing (delete after completion)
 
 **Commit Standards**
-Use conventional commit prefixes:
+Commit messages should describe all changes to the current branch succinctly but fully.
+Use conventional branch and commit prefixes:
 - `feat:` - New features or functionality
 - `fix:` - Bug fixes and corrections  
 - `docs:` - Documentation changes only
@@ -25,7 +25,7 @@ Use conventional commit prefixes:
 
 **Pre-Commit Requirements**
 - Change directory to the relevant git repository root
-- Run formatting: `terraform fmt`, `terragrunt hclfmt`, `markdownlint` when relevant
+- Run formatting/linting: `terraform fmt`, `terragrunt hclfmt`, `markdownlint` when relevant
 - Never commit secrets or sensitive information
 - Use `git mv` for file operations to maintain history
 - Commit after modifying 5+ files or 100+ lines of code
