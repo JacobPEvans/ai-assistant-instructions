@@ -1,91 +1,46 @@
-Your goal is to review infrastructure-as-code for best practices, cost optimization, and security compliance.
+---
+mode: 'agent'
+tools: ['codebase', 'usages', 'problems', 'changes', 'terminalLastCommand', 'githubRepo', 'editFiles', 'runCommands', 'get_syntax_docs', 'mermaid-diagram-validator', 'mermaid-diagram-preview']
+description: 'Review Terraform/Terragrunt infrastructure code for best practices, cost optimization, and security'
+---
 
-## Infrastructure Review Focus Areas
+Your goal is to review infrastructure-as-code (Terraform/Terragrunt) for best practices, cost optimization, and security compliance with AWS focus.
 
-### Code Quality & Best Practices
+## Key Review Areas
 
-**Resource Organization**
-- Verify logical resource grouping and module structure
-- Check for appropriate use of data sources vs. hardcoded values
-- Review resource naming conventions and tagging standards
-- Validate module reusability and documentation
+**Code Quality**
+- Resource organization and module structure
+- Naming conventions and tagging standards
+- State management and backend configuration
+- Module dependencies and versioning
 
-**State Management**
-- Confirm proper state file isolation and backend configuration
-- Verify state locking mechanisms when available
-- Check for sensitive data in state files
-- Review state backup and recovery procedures
+**Cost Optimization**
+- Resource sizing and instance types
+- Regional placement (prefer us-east-2)
+- Budget compliance (under $20/month per project)
+- Unused or over-provisioned resources
 
-**Dependencies & Modules**
-- Validate module versioning and source specifications
-- Check for circular dependencies
-- Review module input/output definitions
-- Verify proper dependency ordering
+**Security**
+- Network security and access controls
+- Encryption at rest and in transit
+- IAM policies following least privilege
+- Public resource exposure validation
 
-### Cost Optimization
+**Operational Excellence**
+- Monitoring, logging, and alerting setup
+- Backup and recovery strategies
+- CI/CD integration and deployment practices
 
-**Resource Sizing**
-- Review instance types and sizes for actual usage patterns
-- Check for over-provisioned resources
-- Verify auto-scaling configurations
-- Identify opportunities for reserved instances or savings plans
+## Output Requirements
 
-**Cost Controls**
-- Ensure resource tagging for cost allocation
-- Verify budget alerts and cost monitoring
-- Check for unused or orphaned resources
-- Review data transfer and storage costs
+Provide review with:
+1. **Risk Level**: Green (low), Yellow (medium), Red (high risk)
+2. **Cost Estimate**: Monthly AWS costs
+3. **Critical Issues**: Must fix before deployment
+4. **Recommendations**: Prioritized improvement list
+5. **Security Score**: Assessment of security posture
 
-**Regional Considerations**
-- Validate region selection for cost optimization
-- Check for unnecessary cross-region data transfer
-- Review availability zone distribution for cost vs. reliability
-
-### Security & Compliance
-
-**Network Security**
-- Review network configuration and subnetting
-- Validate security group and firewall rules
-- Check for public resource exposure
-- Verify load balancer and routing security
-
-**Access Control**
-- Review access policies for least privilege
-- Check resource-based policies
-- Validate cross-account access patterns
-- Ensure multi-factor authentication where appropriate
-
-**Data Protection**
-- Verify encryption at rest and in transit
-- Check backup and retention policies
-- Review key management practices
-- Validate data classification and handling
-
-### Operational Excellence
-
-**Monitoring & Alerting**
-- Review monitoring metrics and alarms
-- Check logging configuration and retention
-- Verify monitoring coverage for all critical resources
-- Validate alerting thresholds and notification targets
-
-**Backup & Recovery**
-- Review backup strategies and schedules
-- Verify cross-region backup replication when applicable
-- Check recovery testing procedures
-- Validate RTO/RPO requirements
-
-**Deployment Practices**
-- Review CI/CD integration and automation
-- Check for proper environment promotion
-- Verify rollback procedures and capabilities
-- Validate change management processes
-
-## Review Process
-
-### Pre-Review Setup
-
-1. **Environment Preparation**
+Focus on actionable feedback that improves reliability, reduces costs, and enhances security.
    ```bash
    # Format code before review
    terraform fmt -recursive
