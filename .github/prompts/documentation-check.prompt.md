@@ -42,6 +42,7 @@ Your goal is to review and validate documentation consistency, completeness, and
 ```bash
 # Run markdown linting
 markdownlint **/*.md
+# Resolve issues reported by markdownlint
 
 # Check for broken links
 markdown-link-check **/*.md

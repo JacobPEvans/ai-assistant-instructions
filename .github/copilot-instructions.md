@@ -32,7 +32,7 @@ Write documentation at US middle/high school reading level with clear setup inst
 
 Include working code examples with proper syntax highlighting and language tags.
 
-Provide cost estimates for cloud resources and usage examples.
+Provide cost estimates for cloud resources.
 
 Reference detailed guidelines in [.copilot/ directory](../.copilot/PROJECT.md) for complex topics.
 
@@ -67,7 +67,7 @@ For detailed guidelines, see:
 - [Architecture Details](../.copilot/ARCHITECTURE.md) - Technical decisions and system design  
 - [Workspace Management](../.copilot/WORKSPACE.md) - Multi-project coordination
 
-For task-specific guidance, use prompt files:
+Use prompt files for specific requests:
 
 - Git workflows: `.github/prompts/git-workflow.prompt.md`
 - Infrastructure reviews: `.github/prompts/infrastructure-review.prompt.md`

@@ -51,4 +51,4 @@ For each finding provide:
 
 ---
 
-*Reference: [Main Security Guidelines](../.github/copilot-instructions.md)*
+*Reference: [Main Security Guidelines](../copilot-instructions.md)*

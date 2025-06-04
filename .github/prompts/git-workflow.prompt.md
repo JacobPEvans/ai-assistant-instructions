@@ -14,6 +14,7 @@ Your goal is to handle all git commits, pull requests, branching, and version co
 - **experiment/[topic]**: Learning and testing (delete after completion)
 
 **Commit Standards**
+Commit messages should describe all changes to the current branch succinctly but fully.
 Use conventional branch and commit prefixes:
 - `feat:` - New features or functionality
 - `fix:` - Bug fixes and corrections  
