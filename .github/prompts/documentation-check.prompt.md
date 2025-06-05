@@ -13,7 +13,6 @@ Your goal is to review and validate documentation consistency, completeness, and
 - Consistent directory structure documentation
 - Utilize a single source of truth. Combine similar documentation across multiple files into the best location only
 - Valid cross-reference links
-- Required files: LICENSE, .gitignore, CHANGELOG (if applicable)
 
 **Content Quality**
 - Clear purpose statements and setup instructions
@@ -82,5 +81,5 @@ Never output reviews to files. Output reviews directly to the user making docume
 
 ---
 
-*Reference: [Main Instructions](../copilot-instructions.md)*  
+*Reference: [Main Instructions](../copilot-instructions.md)*
 *See also: [Project Structure](../../.copilot/PROJECT.md)*

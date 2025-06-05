@@ -151,7 +151,7 @@ redhat.vscode-yaml
 ### New Project Creation
 
 1. **Repository Setup**
-   - Initialize with appropriate .gitignore
+   - Initialize with appropriate .gitignore when relevant
    - Create README.md with project template
    - Add LICENSE file (consistent across workspace)
 
@@ -209,5 +209,5 @@ Complex projects may maintain their own `.copilot/` directories with:
 
 ---
 
-*For overall project context, see [PROJECT.md](PROJECT.md)*  
+*For overall project context, see [PROJECT.md](PROJECT.md)*
 *For technical architecture, see [ARCHITECTURE.md](ARCHITECTURE.md)*
