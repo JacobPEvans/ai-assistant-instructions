@@ -6,8 +6,9 @@ description: 'Handle git commits, pull requests, branching, and version control 
 
 # Git Workflow Standards
 
-Your goal is to handle all git commits, pull requests, branching, and version control
-workflows consistently according to established project standards.
+Your goal is to handle all git commits, pull requests, branching, and version control workflows consistently according to established project standards.
+
+This is a well-defined actionable workflow. You may make suggestions for improvements, but the goal is to run this workflow directly in the terminal.
 
 ## Complete Commit Workflow Process
 
@@ -25,6 +26,12 @@ workflows consistently according to established project standards.
    ```powershell
    git status
    git branch --show-current
+   ```
+
+3. **Create or update branch name**
+
+   ```powershell
+   git checkout -b feature/branch-name
    ```
 
 ### Step 2: File Management and Staging
