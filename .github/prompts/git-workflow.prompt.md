@@ -10,6 +10,52 @@ Your goal is to handle all git commits, pull requests, branching, and version co
 
 This is a well-defined actionable workflow. You may make suggestions for improvements, but the goal is to run this workflow directly in the terminal.
 
+## Branch Management Standards
+
+### Branch Types
+
+- **main**: Production-ready code only - never commit directly
+- **feature/[description]**: Feature development with descriptive names
+- **experiment/[topic]**: Learning and testing (delete after completion)
+- **fix/[description]**: Bug fixes and corrections
+- **docs/[description]**: Documentation-only changes
+
+### Branch Naming Conventions
+
+- Use lowercase with hyphens: `feature/add-monitoring-dashboard`
+- Include brief description: `fix/correct-terraform-syntax`
+- Avoid generic names: NOT `feature/updates` or `fix/bugs`
+
+## Commit Message Standards
+
+**Conventional Commit Prefixes:**
+
+- `feat:` - New features or functionality
+- `fix:` - Bug fixes and corrections
+- `docs:` - Documentation changes only
+- `refactor:` - Code restructuring without functional changes
+- `test:` - Test additions or modifications
+- `chore:` - Maintenance tasks, dependency updates
+
+## Quality Gates and Requirements
+
+**Pre-Commit & PR Checklist:**
+
+- ✅ **Setup**: Change to repository root using absolute path
+- ✅ **Review**: Analyze all modified files for changes made
+- ✅ **Organize**: Update .gitignore for files that shouldn't be committed if needed
+- ✅ **Quality**: Run appropriate formatting/linting tools
+- ✅ **Security**: Verify no secrets or sensitive information
+- ✅ **Verify**: Analyze changes with `git diff --cached` and `git diff --stat`
+- ✅ **Document**: Create detailed commit and PR descriptions with:
+  - Conventional prefix (feat/fix/docs/etc.)
+  - Specific changes and their purpose
+  - Testing instructions
+  - Cost impact if applicable (especially if >$5/month)
+  - Related issue references
+- ✅ **Validate**: Ensure all CI/CD checks are passing before merge
+
+
 ## Complete Commit Workflow Process
 
 ### Step 1: Repository Setup and Navigation
@@ -17,15 +63,18 @@ This is a well-defined actionable workflow. You may make suggestions for improve
 1.1. **Change to repository root directory using absolute path**
 
    ```powershell
-   cd "C:\absolute\path\to\repository"
-   # Verify correct location
+   echo "=== Attempt to change directory to repository root directory ===" && `
+   cd "C:\absolute\path\to\repository" && `
+   echo "=== Print current working directory ===" && `
    pwd
    ```
 
 1.2. **Verify git repository status**
 
    ```powershell
-   git status
+   echo "=== git status ===" && `
+   git status && `
+   echo "=== git branch --show-current ===" && `
    git branch --show-current
    ```
 
@@ -55,10 +104,14 @@ markdownlint         # For Markdown files
 3.1. **Analyze all changes made**
 
    ```powershell
-   git diff --cached                         # Review staged changes
-   git diff --stat                           # Summary of changes
-   git log --oneline <current-branch>..HEAD  # Existing commits on current branch
-   # View all actual changes
+   echo "=== Review staged changes with 'git diff --cached' ===" && `
+   git diff --cached && `
+   echo "=== Review unstaged changes with 'git diff' ===" && `
+   git diff --status && `
+   echo "=== Review commit history ===" && `
+   git log --oneline HEAD..origin/main
+
+   echo "=== Review all actual changes ===" && `
    git diff --histogram --minimal --unified=0 --no-color
    ```
 
@@ -150,8 +203,7 @@ Step 5 can be skipped if the project does not yet have fully fleshed out PROJECT
 
 6.1. **Merge directly if no pull request was created**
    ```powershell
-   git checkout main
-   git pull origin main
+   git checkout main && git pull origin main
    git merge feature/<branch-name> --squash  # Squash merge recommended for feature branches
    git push origin main
    ```
@@ -174,48 +226,3 @@ Step 5 can be skipped if the project does not yet have fully fleshed out PROJECT
    git pull origin main
    git branch -d feature/<branch-name>  # Delete local branch
    ```
-
-## Branch Management Standards
-
-### Branch Types
-
-- **main**: Production-ready code only - never commit directly
-- **feature/[description]**: Feature development with descriptive names
-- **experiment/[topic]**: Learning and testing (delete after completion)
-- **fix/[description]**: Bug fixes and corrections
-- **docs/[description]**: Documentation-only changes
-
-### Branch Naming Conventions
-
-- Use lowercase with hyphens: `feature/add-monitoring-dashboard`
-- Include brief description: `fix/correct-terraform-syntax`
-- Avoid generic names: NOT `feature/updates` or `fix/bugs`
-
-## Commit Message Standards
-
-**Conventional Commit Prefixes:**
-
-- `feat:` - New features or functionality
-- `fix:` - Bug fixes and corrections
-- `docs:` - Documentation changes only
-- `refactor:` - Code restructuring without functional changes
-- `test:` - Test additions or modifications
-- `chore:` - Maintenance tasks, dependency updates
-
-## Quality Gates and Requirements
-
-**Pre-Commit & PR Checklist:**
-
-- ✅ **Setup**: Change to repository root using absolute path
-- ✅ **Review**: Analyze all modified files for changes made
-- ✅ **Organize**: Update .gitignore for files that shouldn't be committed if needed
-- ✅ **Quality**: Run appropriate formatting/linting tools
-- ✅ **Security**: Verify no secrets or sensitive information
-- ✅ **Verify**: Analyze changes with `git diff --cached` and `git diff --stat`
-- ✅ **Document**: Create detailed commit and PR descriptions with:
-  - Conventional prefix (feat/fix/docs/etc.)
-  - Specific changes and their purpose
-  - Testing instructions
-  - Cost impact if applicable (especially if >$5/month)
-  - Related issue references
-- ✅ **Validate**: Ensure all CI/CD checks are passing before merge
