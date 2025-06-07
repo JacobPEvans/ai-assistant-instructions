@@ -25,8 +25,8 @@ Your goal is to review and validate documentation consistency, completeness, and
 - Proper markdown syntax and structure
 - Code blocks with language specifications
 - Clear section headings and navigation
+- Enforce hierarchal decimal outline numbering system (e.g. 1, 1.1, 2, 2.1, 2.1.1, 2.1.2, etc.) for all multi-level numbering
 - Descriptive link text (avoid "click here")
-- Line length under 120 characters
 
 **Cross-Reference Validation**
 - Internal markdown links resolve correctly
@@ -42,6 +42,8 @@ Your goal is to review and validate documentation consistency, completeness, and
 # Run markdown linting
 markdownlint **/*.md
 # Resolve issues reported by markdownlint
+# MD013 (line length) is customized to 120 characters in local workspace configs.
+#   Do not break a single sentence to satisfy MD013. Either break into multiple sentences or leave as is.
 
 # Check for broken links
 markdown-link-check **/*.md
