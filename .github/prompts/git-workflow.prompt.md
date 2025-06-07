@@ -172,7 +172,8 @@ Step 5 can be skipped if the project does not yet have fully fleshed out PROJECT
    ```powershell
    git checkout main
    git pull origin main
-   git branch -d feature/<branch-name>  # Delete local branch
+   # Delete all merged branches
+   git branch -d feature/<branch-name>
    ```
 
 ## Branch Management Standards
