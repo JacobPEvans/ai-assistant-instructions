@@ -63,31 +63,6 @@ graph LR
     G --> H[Deploy/Apply]
 ```
 
-## VS Code Integration
-
-### Extensions
-
-**Markdown and Documentation:**
-
-- `DavidAnson.vscode-markdownlint` - Markdown linting
-- `yzhang.markdown-all-in-one` - Markdown productivity
-
-**Mermaid Diagramming:**
-
-- `bierner.markdown-mermaid` - Mermaid syntax support
-- `vstirbu.vscode-mermaid-preview` - Live preview
-- `bpruitt-goddard.mermaid-markdown-syntax-highlighting` - Syntax highlighting
-
-**GraphViz Diagramming:**
-
-- `tintinweb.graphviz-interactive-preview` - Interactive DOT preview
-- `stephanvs.dot` - DOT language support
-- `geeklearningio.graphviz-markdown-preview` - Markdown integration
-
-**Infrastructure and Development:**
-
-- `HashiCorp.terraform` - Terraform support
-
 ### Workspace Settings
 
 ```json

@@ -87,24 +87,6 @@ When changes in one project affect others:
 
 ### Shared Tools and Configurations
 
-#### VS Code Workspace
-
-```json
-{
-  "folders": [
-    {"path": "."},
-    {"path": "ai-assistant-instructions"}
-  ],
-  "settings": {
-    "powershell.cwd": "git",
-    "terraform.format.enable": true,
-    "markdownlint.config": {
-      "MD013": {"line_length": 120}
-    }
-  }
-}
-```
-
 #### Common Dependencies
 
 - **Terraform**: Version 1.5+ for all infrastructure projects
@@ -127,11 +109,6 @@ When changes in one project affect others:
 ```text
 # Infrastructure
 HashiCorp.terraform
-ms-azuretools.vscode-azureterraform
-
-# Documentation
-DavidAnson.vscode-markdownlint
-yzhang.markdown-all-in-one
 
 # Git and GitHub
 GitHub.vscode-github-actions

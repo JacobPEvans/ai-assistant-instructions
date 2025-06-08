@@ -90,6 +90,7 @@ This is a well-defined actionable workflow. You may make suggestions for improve
 # Format code based on project type
 terraform fmt        # For Terraform files
 terragrunt hclfmt    # For Terragrunt files
+yamllint             # For yaml/yml files
 markdownlint         # For Markdown files
 # Consider and recommend other formatters and linters when relevant
 ```

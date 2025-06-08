@@ -39,7 +39,10 @@ Your goal is to review and validate documentation consistency, completeness, and
 
 **Automated Checks**
 ```bash
-# Run markdown linting
+# Run yaml/yml linting & resolve issues
+yamllint **/*.yml
+
+# Run markdown linting & resolve issues
 markdownlint **/*.md
 # Resolve issues reported by markdownlint
 # MD013 (line length) is customized to 120 characters in local workspace configs.
