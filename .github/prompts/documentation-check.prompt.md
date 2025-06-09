@@ -4,40 +4,46 @@ tools: ['codebase', 'usages', 'problems', 'changes', 'terminalLastCommand', 'fin
 description: 'Review and validate documentation consistency, completeness, and AI-friendliness'
 ---
 
+# Documentation Review and Validation
+
 Your goal is to review and validate documentation consistency, completeness, and AI-friendliness across the project.
 
-## Documentation Review Areas
+## Structure & Organization
 
-**Structure & Organization**
 - Proper README.md files at appropriate levels
 - Consistent directory structure documentation
 - Utilize a single source of truth. Combine similar documentation across multiple files into the best location only
 - Valid cross-reference links
+- Output reviews directly - not to files.
 
-**Content Quality**
+## Content Quality
+
 - Clear purpose statements and setup instructions
-- Working code examples with proper syntax highlighting
+- Working minimal code examples with proper syntax highlighting
 - Cost estimates for cloud resources
 - US English, middle to high school reading level
 - Professional but approachable tone
 
-**AI-Friendly Formatting**
+## AI-Friendly Formatting
+
 - Proper markdown syntax and structure
 - Code blocks with language specifications
 - Clear section headings and navigation
 - Enforce hierarchal decimal outline numbering system (e.g. 1, 1.1, 2, 2.1, 2.1.1, 2.1.2, etc.) for all multi-level numbering
 - Descriptive link text (avoid "click here")
 
-**Cross-Reference Validation**
+## Cross-Reference Validation
+
 - Internal markdown links resolve correctly
 - Link and file path references are accurate
 - External URLs are accessible
 - GitHub Copilot integration references are valid
 - Avoid circular references
 
-## Review Process
+## Review Process Workflow
 
-**Automated Checks**
+### Automated Checks
+
 ```bash
 # Run yaml/yml linting & resolve issues
 yamllint **/*.yml
@@ -55,26 +61,20 @@ markdown-link-check **/*.md
 cspell "**/*.md"
 ```
 
-**Quality Gates**
+### Quality Gates
+
 - **Essential**: Root README.md, working setup instructions
 - **Important**: Troubleshooting section, architecture overview, configuration options
 - **Nice to Have**: Detailed examples, performance guides, advanced features
 
 ### Compliance Standards
 
-**Security Documentation**
 - No secrets or sensitive data exposed
 - Security configuration properly documented
 - Access control requirements clear
 - Backup and recovery procedures documented
-
-**Compliance**
 - Appropriate license files
 - Attribution for external content
-
-## Output Format
-
-Never output reviews to files. Output reviews directly to the user making documentation updates directly when confidence is high.
 
 ### Review Report Structure
 

@@ -1,14 +1,16 @@
 ---
 mode: 'agent'
-tools: ['codebase', 'usages', 'problems', 'changes', 'terminalSelection', 'terminalLastCommand', 'fetch', 'findTestFiles', 'githubRepo', 'editFiles', 'runCommands', 'search', 'get_syntax_docs', 'mermaid-diagram-validator', 'mermaid-diagram-preview']
-description: 'Handle git commits, pull requests, branching, and version control workflows consistently'
+tools: ['codebase', 'usages', 'problems', 'changes', 'terminalSelection', 'terminalLastCommand', 'fetch', 'findTestFiles', 'githubRepo', 'editFiles', 'runCommands', 'search']
+description: 'Handle git version control branching, workflows, and terminal operations'
 ---
 
 # Git Workflow Standards
 
-Your goal is to handle all git commits, pull requests, branching, and version control workflows consistently according to established project standards.
+Your goal is to handle git version control repository operations consistently according to established project standards.
 
 This is a well-defined actionable workflow. You may make suggestions for improvements, but the goal is to run this workflow directly in the terminal.
+
+**Note**: Commit message generation, pull request descriptions, and code reviews are described in other instructions files. This prompt focuses on branching, workflow execution, and terminal operations.
 
 ## Branch Management Standards
 
@@ -24,22 +26,10 @@ This is a well-defined actionable workflow. You may make suggestions for improve
 
 - Use lowercase with hyphens: `feature/add-monitoring-dashboard`
 - Include brief description: `fix/correct-terraform-syntax`
-- Avoid generic names: NOT `feature/updates` or `fix/bugs`
-
-## Commit Message Standards
-
-**Conventional Commit Prefixes:**
-
-- `feat:` - New features or functionality
-- `fix:` - Bug fixes and corrections
-- `docs:` - Documentation changes only
-- `refactor:` - Code restructuring without functional changes
-- `test:` - Test additions or modifications
-- `chore:` - Maintenance tasks, dependency updates
 
 ## Quality Gates and Requirements
 
-**Pre-Commit & PR Checklist:**
+**Pre-Commit & Workflow Checklist:**
 
 - ✅ **Setup**: Change to repository root using absolute path
 - ✅ **Review**: Analyze all modified files for changes made
@@ -47,14 +37,12 @@ This is a well-defined actionable workflow. You may make suggestions for improve
 - ✅ **Quality**: Run appropriate formatting/linting tools
 - ✅ **Security**: Verify no secrets or sensitive information
 - ✅ **Verify**: Analyze changes with `git diff --cached` and `git diff --stat`
-- ✅ **Document**: Create detailed commit and PR descriptions with:
-  - Conventional prefix (feat/fix/docs/etc.)
-  - Specific changes and their purpose
-  - Testing instructions
-  - Cost impact if applicable (especially if >$5/month)
-  - Related issue references
+- ✅ **Branch**: Create appropriate branch if needed
+- ✅ **Stage**: Add files to staging area
+- ✅ **Commit**: Use `.copilot-commit-message-instructions.md` for consistent format
+- ✅ **Push**: Push to remote repository
+- ✅ **Pull Request**: Use `.copilot-pull-request-description-instructions.md` for comprehensive descriptions
 - ✅ **Validate**: Ensure all CI/CD checks are passing before merge
-
 
 ## Complete Commit Workflow Process
 
@@ -82,7 +70,7 @@ This is a well-defined actionable workflow. You may make suggestions for improve
 
 2.1. **Update .gitignore if needed** for files that shouldn't be committed
 
-   - Add patterns for temporary files, secrets, sensitive variables, build artifacts
+- Add patterns for temporary files, secrets, sensitive variables, build artifacts
 
 2.2 **Run formatting and linting tools on modified files only:**
 
@@ -118,96 +106,72 @@ markdownlint         # For Markdown files
 
 3.2. **Summarize in your own words what was changed and why**
 
-   - Focus first on the real changes shown by the `git` commands above
-     - There may be changes not mentioned in the current context
-   - Use additional context and chat history to understand the reason behind those real changes
-   - Understand the purpose and impact of each change
-   - Document reasoning for changes for use in a commit message
+- Focus first on the real changes shown by the `git` commands above
+- There may be changes not mentioned in the current context
+- Use additional context and chat history to understand the reason behind those real changes
+- Understand the purpose and impact of each change
+- Document reasoning for changes for use in a commit message
 
 ### Step 4: Staging, Branch Creation, and Commit
 
 4.1. **Stage appropriate files**
 
-   ```powershell
-   git add .  # Add all appropriate files
-   # OR selectively add specific files:
-   git add file1.md file2.py
-   ```
+```powershell
+git add .  # Add all appropriate files
+# OR selectively add specific files:
+git add file1.md file2.py
+```
 
 4.2. **Create or update branch name**
 
-   - Use the existing branch if it fits the changes
-   - Create a new branch if the branch name does not match changes
-   - Create a new branch if the current branch is `main`
+- Use the existing branch if it fits the changes
+- Create a new branch if the branch name does not match changes
+- Create a new branch if the current branch is `main`
 
-   ```powershell
-   git checkout -b feature/<branch-name>
-   ```
+```powershell
+git checkout -b feature/<branch-name>
+```
 
-4.3. **Create detailed commit message** following conventional commit format:
+4.3. **Create commit**
 
-   ```powershell
-   git commit -m "<type>: <brief description>
-
-   <detailed explanation of what was changed and why>
-
-   - Specific change 1
-   - Specific change 2
-   # - Impact or reasoning for changes
-
-   Refs: #issue-number (if applicable)"
-   ```
+Refer to `../.copilot-commit-message-instructions.md` for git commit instructions
 
 ### Step 5: Push and Pull Request Creation
 
 Step 5 can be skipped if the project does not yet have fully fleshed out PROJECT.md, CONTRIBUTING.md, etc. files.
 
-5.1. **Push branch to remote**
+5.1 **Is this a private or public repository?**
 
-   ```powershell
-   git push origin feature/<branch-name>
-   # For first push of new branch:
-   git push -u origin feature/<branch-name>
-   ```
+- If **private**, this will forever be a one man show, and you shall skip ahead to step 6.
+- If **public**, follow the steps below to create a pull request.
 
-5.2. **Create detailed pull request via GitHub CLI**
+```powershell
+# Check if repository is public or private
+gh repo view --json visibility
+```
 
-   ```powershell
-   gh pr create --title "feat: descriptive PR title" \
-     --body "## Description
+5.2. **Push branch to remote**
 
-   Detailed explanation of changes and their purpose.
+```powershell
+git push origin feature/<branch-name>
+# For first push of new branch:
+git push -u origin feature/<branch-name>
+```
 
-   ## Changes Made
-   - Specific change 1
-   - Specific change 2
+5.3. **Create pull request**
 
-   ## Testing Instructions
-   1. Step-by-step testing process
-   2. Expected outcomes   ## Cost Impact
-   - Estimated monthly cost: $X
-   - Cost justification if >$5/month
-
-   ## Related Issues
-   - Fixes #issue-number
-   - Addresses #issue-number"
-   ```
-
-5.3. **Review PR status and checks**
-
-   ```powershell
-   gh pr status
-   gh pr checks
-   ```
+Refer to `../.copilot-pull-request-description-instructions.md` for git commit instructions
 
 ### Step 6: Merge
 
 6.1. **Merge directly if no pull request was created**
-   ```powershell
-   git checkout main && git pull origin main
-   git merge feature/<branch-name> --squash  # Squash merge recommended for feature branches
-   git push origin main
-   ```
+
+```powershell
+git checkout main && git pull origin main
+git merge feature/<branch-name>           # Use normal merge when there are only a few commits
+git merge feature/<branch-name> --squash  # Squash merge recommended for feature branches
+git push origin main
+```
 
 6.2. **Merge pull request via command line**
 
@@ -222,9 +186,9 @@ Step 5 can be skipped if the project does not yet have fully fleshed out PROJECT
 
 6.3. **Clean up local environment**
 
-   ```powershell
-   git checkout main
-   git pull origin main
-   # Delete all merged branches
-   git branch -d feature/<branch-name>
-   ```
+```powershell
+git checkout main
+git pull origin main
+# Delete all merged branches
+git branch -d feature/<branch-name>
+```

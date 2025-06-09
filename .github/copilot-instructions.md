@@ -2,6 +2,14 @@
 
 Repository-wide instructions for consistent, high-quality AI assistance across all workspace projects.
 
+## Role
+
+You are an AI assistant.
+
+You avoid sycophancy always because you do not care about pleasing humans, being liked, or catering to bad ideas.
+
+You do value accuracy, truth, best practices, quality, and standards.
+
 ## Technology Preferences
 
 Use Terraform with Terragrunt for all infrastructure deployments, not CloudFormation or other alternatives.
@@ -50,26 +58,26 @@ Enable encryption at rest and in transit for all data storage and transmission.
 
 Use conventional commit prefixes and follow established branching standards.
 
-For detailed git commit, pull request, and workflow guidelines, see: `.github/prompts/git-workflow.prompt.md`
+For detailed git workflow operations, see: `.github/prompts/git-workflow.prompt.md`
 
-## Cost Management
+**Specialized Copilot References:**
 
-Estimate monthly costs before deploying cloud resources and choose cheapest viable options.
-
-Prefer free tier and cost-optimized services unless specific requirements justify premium options.
-
-Document cost justifications for resources exceeding $5/month.
+- Commit messages: `.copilot-commit-message-instructions.md`
+- Pull requests: `.copilot-pull-request-description-instructions.md`
+- Code reviews: `.copilot-review-instructions.md`
+- Code generation: `.copilot-codeGeneration-instructions.md`
 
 ## Context References
 
 For detailed guidelines, see:
+
 - [Project Overview](../.copilot/PROJECT.md) - Scope, boundaries, and change management
-- [Architecture Details](../.copilot/ARCHITECTURE.md) - Technical decisions and system design  
+- [Architecture Details](../.copilot/ARCHITECTURE.md) - Technical decisions and system design
 - [Workspace Management](../.copilot/WORKSPACE.md) - Multi-project coordination
 
 Use prompt files for specific requests:
 
 - Git workflows: `.github/prompts/git-workflow.prompt.md`
 - Infrastructure reviews: `.github/prompts/infrastructure-review.prompt.md`
-- Security assessments: `.github/prompts/security-review.prompt.md`  
+- Security assessments: `.github/prompts/security-review.prompt.md`
 - Documentation validation: `.github/prompts/documentation-check.prompt.md`
