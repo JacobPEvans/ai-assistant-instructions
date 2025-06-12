@@ -93,15 +93,15 @@ markdownlint         # For Markdown files
 3.1. **Analyze all changes made**
 
    ```powershell
-   echo "=== Review staged changes with 'git diff --cached' ===" && `
-   git diff --cached && `
+   echo "=== Review staged changes with 'git diff -w --cached' ===" && `
+   git diff -w --cached && `
    echo "=== Review unstaged changes with 'git diff' ===" && `
-   git diff --status && `
+   git diff -w --status && `
    echo "=== Review commit history ===" && `
    git log --oneline HEAD..origin/main
 
    echo "=== Review all actual changes ===" && `
-   git diff --histogram --minimal --unified=0 --no-color
+   git diff -w --histogram --minimal --unified=0 --no-color
    ```
 
 3.2. **Summarize in your own words what was changed and why**
@@ -160,7 +160,12 @@ git push -u origin feature/<branch-name>
 
 5.3. **Create pull request**
 
-Refer to `../.copilot-pull-request-description-instructions.md` for git commit instructions
+Refer to `../.copilot-pull-request-description-instructions.md` for git pull request description instructions
+
+5.4. **Evaluate GitHub Copilot automated pull request review**
+```powershell
+gh pr view #
+```
 
 ### Step 6: Merge
 
@@ -169,18 +174,16 @@ Refer to `../.copilot-pull-request-description-instructions.md` for git commit i
 ```powershell
 git checkout main && git pull origin main
 git merge feature/<branch-name>           # Use normal merge when there are only a few commits
-git merge feature/<branch-name> --squash  # Squash merge recommended for feature branches
+git merge feature/<branch-name> --squash  # Squash merge recommended for more than 5 commits
 git push origin main
 ```
 
 6.2. **Merge pull request via command line**
 
    ```powershell
-   # Squash merge (recommended for feature branches)
-   gh pr merge --squash --delete-branch
-
-   # Alternative merge methods:
-   gh pr merge --merge --delete-branch     # Standard merge
+   # Choose the best merge strategy
+   gh pr merge --squash --delete-branch    # Squash merge for multiple commits
+   gh pr merge --merge  --delete-branch    # Standard merge
    gh pr merge --rebase --delete-branch    # Rebase merge
    ```
 

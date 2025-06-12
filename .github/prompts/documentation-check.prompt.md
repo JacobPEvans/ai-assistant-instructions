@@ -8,6 +8,10 @@ description: 'Review and validate documentation consistency, completeness, and A
 
 Your goal is to review and validate documentation consistency, completeness, and AI-friendliness across the project.
 
+If defined, you shall only act on repository: ${input:repository} . If defined, no files outside of ${input:repository} shall be modified.
+
+If defined, you shall only act on the single file: ${input:file}
+
 ## Structure & Organization
 
 - Proper README.md files at appropriate levels

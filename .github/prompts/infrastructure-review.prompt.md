@@ -6,6 +6,10 @@ description: 'Review Terraform/Terragrunt infrastructure code for best practices
 
 Your goal is to review infrastructure-as-code (Terraform/Terragrunt) for best practices, cost optimization, and security compliance with AWS focus.
 
+If defined, you shall only act on repository: ${input:repository} . If defined, no files outside of ${input:repository} shall be modified.
+
+If defined, you shall only act on the single file: ${input:file}
+
 ## Key Review Areas
 
 **Code Quality**
@@ -45,7 +49,7 @@ Focus on actionable feedback that improves reliability, reduces costs, and enhan
    # Format code before review
    terraform fmt -recursive
    terragrunt hclfmt
-   
+
    # Validate syntax
    terraform validate
    terragrunt validate-inputs
@@ -55,7 +59,7 @@ Focus on actionable feedback that improves reliability, reduces costs, and enhan
    ```bash
    # Generate plan for review
    terragrunt plan -out=review.tfplan
-   
+
    # Never run apply during review!
    ```
 
@@ -113,5 +117,5 @@ Create review report with:
 
 ---
 
-*Reference: [Main Instructions](../copilot-instructions.md)*  
+*Reference: [Main Instructions](../copilot-instructions.md)*
 *See also: [Security Review Process](security-review.prompt.md)*
