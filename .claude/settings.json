@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(terragrunt plan:*)",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)",
+      "Bash(find:*)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebFetch(domain:graphite.dev)",
+      "Bash(mkdir:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl:*)",
+      "Bash(ls:*)",
+      "Bash(rm:*)",
+      "Bash(ln:*)",
+      "Bash(gh repo view:*)",
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(git push:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh pr checkout:*)"
+    ],
+    "deny": []
+  }
+}
