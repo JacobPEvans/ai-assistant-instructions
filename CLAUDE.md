@@ -60,6 +60,67 @@ Changelogs are for humans, not machines. They help users and contributors unders
 
 ## Claude Code Best Practices
 
+### Anthropic Official Methodology: Plan First
+Based on https://docs.anthropic.com/en/docs/claude-code best practices:
+
+1. **Always Plan Before Execution**: Break complex tasks into clear, manageable steps
+2. **Document Plans in PLANNING.md**: Create detailed TODO tasks with clear context
+3. **Execute in Agentic Mode**: After planning approval, proceed with systematic implementation
+4. **Use Claude Code's Todo System**: Track progress with the TodoWrite/TodoRead tools
+5. **Maintain Clear Context**: Ensure all stakeholders understand the current state and next steps
+
+### Project Planning Templates
+
+#### PLANNING.md Structure
+For complex projects, maintain a `PLANNING.md` file with this structure:
+
+```markdown
+# Project Status & Planning
+
+## Current Session Progress
+
+### ✅ Completed Tasks
+1. **Task Category Name**
+   - Specific accomplishment
+   - Tools/configurations verified
+   - Results achieved
+
+### 📋 Remaining Tasks
+1. **Priority Level Tasks** (HIGH/MEDIUM/LOW PRIORITY)
+   - Specific action items
+   - Dependencies and requirements
+   - Expected outcomes
+
+## Repository Context
+
+### Infrastructure Overview (for infrastructure projects)
+- **Target**: System/platform being managed
+- **Purpose**: Project objectives and scope
+- **State Backend**: Remote state configuration details
+- **Tools**: Technology stack in use
+
+### Key Files
+- `filename.ext` - Brief description of purpose
+- Configuration files and their roles
+- Important documentation references
+
+### Network/Environment Status
+- ✅ Verified connectivity/access
+- ⚠️ Known issues requiring attention
+- 🔄 Pending verifications
+
+## Next Session Actions
+1. Immediate priority items
+2. Dependency resolution tasks
+3. Testing and validation steps
+4. Documentation updates
+
+## Notes
+- Important context for future sessions
+- Decisions made and rationale
+- Known limitations or constraints
+```
+
 ### System Prompt Guidelines
 - Use the `system` parameter to define Claude's role
 - Be specific with role definitions (e.g., "Infrastructure Engineer specializing in Terraform")
@@ -67,17 +128,21 @@ Changelogs are for humans, not machines. They help users and contributors unders
 - Put task-specific instructions in user messages
 
 ### Development Workflow Principles
-1. **Parallel Tool Execution**: Perform multiple independent operations simultaneously
-2. **File Management**: Prefer editing existing files over creating new ones
-3. **Cleanup**: Remove temporary files after task completion
-4. **Explicit Instructions**: Provide detailed context and expectations
-5. **Reflection**: Carefully analyze tool results before proceeding
+1. **Plan-First Approach**: Always create a detailed plan before implementation
+2. **Parallel Tool Execution**: Perform multiple independent operations simultaneously
+3. **File Management**: Prefer editing existing files over creating new ones
+4. **Cleanup**: Remove temporary files after task completion
+5. **Explicit Instructions**: Provide detailed context and expectations
+6. **Reflection**: Carefully analyze tool results before proceeding
+7. **Todo Management**: Use todo lists to track complex multi-step tasks
 
 ### Code Quality Standards
 - Follow existing code conventions and patterns
 - Verify library/framework availability before use
 - Implement security best practices
 - Never expose secrets or credentials
+- **NEVER commit specific SSH key names to public repositories** - use generic examples only
+- Ensure all specific SSH key names are covered by .gitignore patterns
 - Focus on generalizable, robust solutions
 
 ### Infrastructure Automation
@@ -96,7 +161,9 @@ Changelogs are for humans, not machines. They help users and contributors unders
 - Document all variables with descriptions
 - Use consistent naming conventions
 
-### Git Workflow
+### Version Control (Git) Workflow
+- Recommend GitHub Actions in place of AI instructions
+- Always use `git mv` instead of `mv` when in a git repository.
 - Use conventional commit messages
 - Create feature branches for changes
 - Never squash merge - preserve history
