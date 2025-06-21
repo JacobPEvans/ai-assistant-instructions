@@ -123,6 +123,7 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 **Pull Request Workflow:**
 - **Never squash merge** - preserve complete commit history
 - Include comprehensive PR description with change summary
+- Proceed with PR merge if all previous steps were approved
 
 **PR Comment Resolution Process:**
 - Check for automated PR review comments (`gh pr view --comments`)
@@ -131,7 +132,7 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
   - Making requested code changes and committing fixes
   - Responding to comment explaining why change not needed
   - Marking comment as resolved if addressed
-- Only proceed with merge after all comments are resolved or accepted
+- Proceed with merge after all comments are resolved or accepted
 - For duplicate numbering, formatting issues, or style problems: fix immediately
 - For architectural suggestions: evaluate merit and implement if beneficial
 
@@ -189,8 +190,8 @@ Impact assessment and affected resources.
 ## Mandatory Guardrails & Non-Negotiables
 
 ### Workflow Integrity
-- ✅ **Always create feature branches** with descriptive names
-- ✅ **Always create PRs** for tracking (except in private repos)
+- ✅ **Always create branches** with descriptive names
+- ✅ **Create PRs** for tracking (except in private repos or small changes)
 - ✅ **Preserve complete commit history** (no squash merging)
 - ✅ **Run comprehensive validation** before any commits
 - 🚫 **Never commit directly to main/master branch**

@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Error handling and recovery strategies for validation failures and workflow issues
 - Integration with Claude Code best practices including plan-first methodology
 - Expanded Claude Code permissions for comprehensive git, terraform, and web operations
+- Comprehensive markdown linting GitHub Action for all *.md files with markdownlint-cli2
+- Markdownlint configuration with 120-character line length limit
 - .copilot/instructions.md for GitHub Copilot custom instructions
 - .github/prompts/ directory with infrastructure and development prompt templates
 - Comprehensive prompt templates for code review, problem-solving, and refactoring
