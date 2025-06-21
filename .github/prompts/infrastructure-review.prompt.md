@@ -62,38 +62,36 @@ Focus on actionable feedback that improves reliability, reduces costs, and enhan
 2. **Plan Generation**
    ```bash
    # Generate plan for review
-   terragrunt plan -out=review.tfplan
+   terragrunt plan
 
    # Never run apply during review!
    ```
 
 ### Cost Analysis
 
-**Monthly Cost Estimation**
+#### Monthly Cost Estimation
 - Use AWS Cost Calculator for major resources
 - Compare costs across regions
 - Evaluate cost vs. performance trade-offs
 - Document cost justification for expensive resources
 
-**Budget Compliance**
+#### Budget Compliance
 - Verify total monthly cost stays within project limits
 - Check cost allocation by environment (dev/test/prod)
 - Review cost trends and growth patterns
 
 ### Security Validation
 
-**Automated Checks**
+#### Automated Checks
 - Run security scanning tools
 - Check for secrets in configuration files
 - Verify compliance with security baselines
 - Review access patterns and permissions
 
-**Manual Review**
+#### Manual Review
 - Network topology and segmentation
 - Data flow and protection mechanisms
 - Incident response and monitoring capabilities
-
-## Output Requirements
 
 ### Review Documentation
 
@@ -107,14 +105,15 @@ Create review report with:
 
 ### Follow-up Actions
 
-- **Critical Issues**: Must be addressed before deployment
-- **High Priority**: Address within current sprint
-- **Medium Priority**: Include in next release cycle
-- **Low Priority**: Consider for future optimization
+1. **Critical Issues**: Must be addressed before deployment
+2. **High Priority**: Address within current sprint
+3. **Medium Priority**: Include in next release cycle
+4. **Low Priority**: Consider for future optimization
+
 
 ## Risk Assessment
 
-**Deployment Risk Levels**
+#### Deployment Risk Levels
 - **Green**: Low risk, standard deployment process
 - **Yellow**: Medium risk, additional testing required
 - **Red**: High risk, requires architecture review and approval
