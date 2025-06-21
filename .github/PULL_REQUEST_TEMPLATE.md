@@ -3,20 +3,22 @@ name: "📝 Pull Request"
 title: "feat: "
 labels: enhancement
 body:
-  - type: markdown
+
+- type: markdown
     attributes:
       value: |
         Thank you for your contribution! Please ensure your pull request adheres to the project's standards.
 
-  - type: textarea
+- type: textarea
     id: description
     attributes:
       label: "Description"
-      description: "Provide a clear and concise description of the changes. What is the purpose of this pull request? What problem does it solve?"
+      description: "Provide a clear and concise description of the changes. What is the purpose of this pull request?
+        What problem does it solve?"
     validations:
       required: true
 
-  - type: input
+- type: input
     id: issue-link
     attributes:
       label: "Related Issue"
@@ -25,7 +27,7 @@ body:
     validations:
       required: false
 
-  - type: checkboxes
+- type: checkboxes
     id: checklist
     attributes:
       label: "Checklist"

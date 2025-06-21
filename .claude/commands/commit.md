@@ -24,6 +24,8 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 **Documentation Validation:**
 
 - `markdownlint-cli2` - Check all markdown files for formatting issues
+- Attempt to resolve automatically using `markdownlint --fix`
+- Ensure `markdownlint-cli2` returns no issues before continuing
 
 **Infrastructure Validation:**
 
@@ -133,7 +135,7 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 - Address any user concerns or questions
 - Provide alternative approaches if requested
 
-### 6. Execution & Pull Request Management
+### 6. Execution & Pull Request Workflow
 
 **Commit Execution:**
 
@@ -143,23 +145,23 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 - Handle pre-commit hook issues
 - Push with upstream tracking (`git push -u origin <branch>`)
 
-**Pull Request Workflow:**
+**Pull Request (PR) Workflow:**
 
 - Avoid squash merge - preserve complete commit history
 - Include comprehensive PR description with change summary
-- Proceed with PR merge if all previous steps were approved
+- Resolve all PR checks (`gh pr checks`)
+- Resolve all pull request comments
+- Merge pull request
 
 **PR Comment Resolution Process:**
 
 - Check for automated PR review comments (`gh pr view --comments`)
-- Review all unresolved comments from copilot-pull-request-reviewer or other reviewers
+- Review all unresolved comments from reviewers
 - Address each comment by either:
   - Making requested code changes and committing fixes
   - Responding to comment explaining why change not needed
   - Marking comment as resolved if addressed
 - Proceed with merge after all comments are resolved or accepted
-- For duplicate numbering, formatting issues, or style problems: fix immediately
-- For architectural suggestions: evaluate merit and implement if beneficial
 
 ## Commit Message Format
 

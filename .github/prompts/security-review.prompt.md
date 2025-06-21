@@ -12,6 +12,7 @@ and deployment practices.
 ## Security Review Areas
 
 ### Infrastructure Security
+
 - Network security and access controls
 - Encryption at rest and in transit
 - IAM policies following least privilege
@@ -19,12 +20,14 @@ and deployment practices.
 - Backup encryption and retention
 
 ### Application Security
+
 - Input validation and sanitization
 - Authentication and authorization flows
 - Session management and password policies
 - API security and rate limiting
 
 ### Configuration Security
+
 - Environment separation and isolation
 - Secrets management (no hardcoded secrets)
 - Dependency vulnerability scanning
@@ -33,6 +36,7 @@ and deployment practices.
 ## Assessment Framework
 
 ### Risk Levels
+
 - **Critical**: Immediate security threat, block deployment
 - **High**: Address before production release
 - **Medium**: Include in next security review cycle
@@ -40,6 +44,7 @@ and deployment practices.
 
 **Output Requirements**
 For each finding provide:
+
 1. **Severity**: Critical/High/Medium/Low
 2. **Description**: Clear security issue explanation
 3. **Impact**: Potential consequences
@@ -47,6 +52,7 @@ For each finding provide:
 5. **Cost Impact**: Estimated monthly cost for fixes
 
 ### Compliance Focus
+
 - Data protection requirements (GDPR/CCPA)
 - Industry standards (if applicable)
 - Internal security policies

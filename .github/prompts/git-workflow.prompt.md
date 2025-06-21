@@ -166,6 +166,7 @@ git push -u origin feature/<branch-name>
 Refer to `../.copilot-pull-request-description-instructions.md` for git pull request description instructions
 
 5.4. **Evaluate GitHub Copilot automated pull request review**
+
 ```powershell
 gh pr view #
 ```
