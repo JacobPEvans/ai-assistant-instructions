@@ -5,6 +5,18 @@ This repository contains standardized Claude Code documentation, configurations,
 practices that apply across all projects. This serves as a centralized knowledge base for
 consistent development workflows.
 
+## Claude Code Best Practices
+
+### Anthropic Official Methodology: Plan First
+Based on https://docs.anthropic.com/en/docs/claude-code best practices:
+
+1. **Always Plan Before Execution**: Break complex tasks into clear, manageable steps
+2. **Document Plans in PLANNING.md**: Create detailed TODO tasks with clear context
+3. **Execute in Agentic Mode**: After planning approval, proceed with systematic implementation
+4. **Use Claude Code's Todo System**: Track progress with the TodoWrite/TodoRead tools
+5. **Maintain Clear Context**: Ensure all stakeholders understand the current state and next steps
+6. **Move completed tasks from PLANNING.md to CHANGELOG.md**: Keep a record of all completed tasks.
+
 ## Repository Structure
 
 ```text
@@ -19,8 +31,8 @@ consistent development workflows.
 ## Keep a Changelog Guidelines
 
 ### Purpose
-Changelogs are for humans, not machines. They help users and contributors understand the
-evolution of software through clear, readable change documentation.
+Changelogs are for humans, not machines. They help users and contributors understand the evolution of software through clear, readable change documentation.
+Changelogs are for completed tasks, not in-progress or future tasks.
 
 ### Format Guidelines
 - **Filename**: `CHANGELOG.md`
@@ -38,21 +50,16 @@ evolution of software through clear, readable change documentation.
 - **Security**: Vulnerability fixes
 
 ### Best Practices
-1. **Unreleased Section**: Track upcoming changes
-2. **Human-Readable**: Avoid raw commit logs
-3. **Clear Documentation**: Explain breaking changes and deprecations
-4. **Comprehensive**: Include all notable changes
-5. **Consistent Format**: Maintain formatting standards
+1. **Human-Readable**: Avoid raw commit logs
+2. **Clear Documentation**: Explain breaking changes and deprecations
+3. **Comprehensive**: Include all notable changes
+4. **Consistent Format**: Maintain formatting standards
 
 ### Example Structure
 ```markdown
 # Changelog
 
-## [Unreleased]
-### Added
-- New feature X
-
-## [24.12.31] - 2024-12-31
+## 2024-12-31
 ### Added
 - Initial release
 ### Changed
@@ -61,21 +68,13 @@ evolution of software through clear, readable change documentation.
 - Resolved issue with Z
 ```
 
-## Claude Code Best Practices
-
-### Anthropic Official Methodology: Plan First
-Based on https://docs.anthropic.com/en/docs/claude-code best practices:
-
-1. **Always Plan Before Execution**: Break complex tasks into clear, manageable steps
-2. **Document Plans in PLANNING.md**: Create detailed TODO tasks with clear context
-3. **Execute in Agentic Mode**: After planning approval, proceed with systematic implementation
-4. **Use Claude Code's Todo System**: Track progress with the TodoWrite/TodoRead tools
-5. **Maintain Clear Context**: Ensure all stakeholders understand the current state and next steps
-
 ### Project Planning Templates
 
 #### PLANNING.md Structure
-For complex projects, maintain a `PLANNING.md` file with this structure:
+Every projet must have and maintain a PLANNING.md file.
+PLANNING.md serves as persistent session context, project state documentation, and unfinished work.
+
+Maintain a `PLANNING.md` file with this structure:
 
 ```markdown
 # Project Status & Planning

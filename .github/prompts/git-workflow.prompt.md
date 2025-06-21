@@ -82,7 +82,7 @@ execution, and terminal operations.
 terraform fmt        # For Terraform files
 terragrunt hclfmt    # For Terragrunt files
 yamllint             # For yaml/yml files
-markdownlint         # For Markdown files
+markdownlint-cli2    # For Markdown files
 # Consider and recommend other formatters and linters when relevant
 ```
 

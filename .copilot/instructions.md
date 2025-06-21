@@ -25,7 +25,7 @@ Claude Code best practices, and system administration.
 
 ## Documentation Standards
 - Maintain comprehensive CLAUDE.md files for AI context
-- Use Keep a Changelog format for version tracking
+- Use Keep a Changelog format for change tracking
 - Include usage examples in all module documentation
 - Document security considerations and best practices
 

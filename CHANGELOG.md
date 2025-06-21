@@ -3,33 +3,27 @@
 All notable changes to the ai-assistant-instructions project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+and this project adheres to [Calendar Versioning](https://calver.org/).
 
-## [Unreleased]
+## 2025-06-21
 
 ### Added
-- Comprehensive 6-step commit workflow with systematic validation and security scanning
-- Enhanced pre-commit validation framework for infrastructure, security, and code quality
-- Mandatory CHANGELOG.md update process with calendar versioning guidance
-- Error handling and recovery strategies for validation failures and workflow issues
-- Integration with Claude Code best practices including plan-first methodology
-- Expanded Claude Code permissions for comprehensive git, terraform, and web operations
-- Comprehensive markdown linting GitHub Action for all *.md files with markdownlint-cli2
-- Markdownlint configuration with 120-character line length limit
-- .copilot/instructions.md for GitHub Copilot custom instructions
-- .github/prompts/ directory with infrastructure and development prompt templates
-- Comprehensive prompt templates for code review, problem-solving, and refactoring
-- Infrastructure-specific prompts for Terraform development and security review
+- Comprehensive 6-step commit workflow with validation and security scanning
+- Enhanced Claude Code permissions for terraform and infrastructure operations
+- PR template for consistent pull request formatting
+- Terraform workflow for infrastructure validation
 
 ### Changed
-- Complete rewrite of commit workflow from basic terraform process to enterprise-grade methodology
-- Calendar versioning adoption (YY.M.DD format) for consistent release tracking
-- Documentation standards enhanced with plan-first methodology and custom commands integration
-- Claude Code settings optimization with improved organization and expanded capabilities
-- Enhanced repository structure to support GitHub Copilot integration
-- Improved AI instruction organization for better context management
+- Standardized markdown linting with markdownlint-cli2 for consistency
+- Calendar versioning adoption (YY.M.DD format) for release tracking
+- Enhanced AI assistant instructions with plan-first methodology
+- Updated documentation standards with PLANNING.md requirements
 
-## [25.6.19] - 2025-06-19
+### Fixed
+- Markdown formatting issues across documentation files
+- Workflow configurations for better automation
+
+## 2025-06-19
 
 ### Released
 - Initial standardized Claude Code documentation
