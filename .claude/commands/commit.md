@@ -137,6 +137,7 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 - For architectural suggestions: evaluate merit and implement if beneficial
 
 ## Commit Message Format
+
 ```text
 type(scope): brief description
 
