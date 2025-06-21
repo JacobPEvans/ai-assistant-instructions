@@ -248,4 +248,5 @@ Impact assessment and affected resources.
 - **Environment awareness**: Consider current infrastructure state
 - **Task correlation**: Link commits to broader project objectives
 
-**Security Note**: This documentation uses generic examples. Reference private infrastructure context and organization-specific standards for real environment implementations.
+**Security Note**: This documentation uses generic examples. Reference private infrastructure context
+and organization-specific standards for real environment implementations.

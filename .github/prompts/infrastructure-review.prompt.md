@@ -4,33 +4,37 @@ tools: ['codebase', 'usages', 'problems', 'changes', 'terminalLastCommand', 'git
 description: 'Review Terraform/Terragrunt infrastructure code for best practices, cost optimization, and security'
 ---
 
-Your goal is to review infrastructure-as-code (Terraform/Terragrunt) for best practices, cost optimization, and security compliance with AWS focus.
+# Infrastructure Review
 
-If defined, you shall only act on repository: ${input:repository} . If defined, no files outside of ${input:repository} shall be modified.
+Your goal is to review infrastructure-as-code (Terraform/Terragrunt) for best practices,
+cost optimization, and security compliance with AWS focus.
+
+If defined, you shall only act on repository: ${input:repository} . If defined, no files
+outside of ${input:repository} shall be modified.
 
 If defined, you shall only act on the single file: ${input:file}
 
 ## Key Review Areas
 
-**Code Quality**
+### Code Quality
 - Resource organization and module structure
 - Naming conventions and tagging standards
 - State management and backend configuration
 - Module dependencies and versioning
 
-**Cost Optimization**
+### Cost Optimization
 - Resource sizing and instance types
 - Regional placement (prefer us-east-2)
 - Budget compliance (under $20/month per project)
 - Unused or over-provisioned resources
 
-**Security**
+### Security
 - Network security and access controls
 - Encryption at rest and in transit
 - IAM policies following least privilege
 - Public resource exposure validation
 
-**Operational Excellence**
+### Operational Excellence
 - Monitoring, logging, and alerting setup
 - Backup and recovery strategies
 - CI/CD integration and deployment practices

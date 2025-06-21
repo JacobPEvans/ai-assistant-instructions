@@ -8,9 +8,12 @@ description: 'Handle git version control branching, workflows, and terminal oper
 
 Your goal is to handle git version control repository operations consistently according to established project standards.
 
-This is a well-defined actionable workflow. You may make suggestions for improvements, but the goal is to run this workflow directly in the terminal.
+This is a well-defined actionable workflow. You may make suggestions for improvements,
+but the goal is to run this workflow directly in the terminal.
 
-**Note**: Commit message generation, pull request descriptions, and code reviews are described in other instructions files. This prompt focuses on branching, workflow execution, and terminal operations.
+**Note**: Commit message generation, pull request descriptions, and code reviews are
+described in other instructions files. This prompt focuses on branching, workflow
+execution, and terminal operations.
 
 ## Branch Management Standards
 
