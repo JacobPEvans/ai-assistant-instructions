@@ -115,7 +115,7 @@ Create review report with:
 
 ## Risk Assessment
 
-#### Deployment Risk Levels
+### Deployment Risk Levels
 - **Green**: Low risk, standard deployment process
 - **Yellow**: Medium risk, additional testing required
 - **Red**: High risk, requires architecture review and approval

@@ -6,7 +6,8 @@ practices that apply across all projects. This serves as a centralized knowledge
 consistent development workflows.
 
 ## Repository Structure
-```
+
+```text
 .claude/
 ├── CLAUDE.md           # This file - standardized documentation
 ├── settings.local.json # Local Claude Code permissions
