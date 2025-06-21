@@ -1,7 +1,9 @@
 # Claude Code Standardized Documentation
 
 ## Overview
-This repository contains standardized Claude Code documentation, configurations, and best practices that apply across all projects. This serves as a centralized knowledge base for consistent development workflows.
+This repository contains standardized Claude Code documentation, configurations, and best
+practices that apply across all projects. This serves as a centralized knowledge base for
+consistent development workflows.
 
 ## Repository Structure
 ```
@@ -16,7 +18,8 @@ This repository contains standardized Claude Code documentation, configurations,
 ## Keep a Changelog Guidelines
 
 ### Purpose
-Changelogs are for humans, not machines. They help users and contributors understand the evolution of software through clear, readable change documentation.
+Changelogs are for humans, not machines. They help users and contributors understand the
+evolution of software through clear, readable change documentation.
 
 ### Format Guidelines
 - **Filename**: `CHANGELOG.md`

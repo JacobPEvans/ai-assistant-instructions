@@ -31,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [25.6.19] - 2025-06-19
 
-### Added
+### Released
 - Initial standardized Claude Code documentation
 - Keep a Changelog guidelines and best practices
 - Claude Code development workflow principles

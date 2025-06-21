@@ -49,6 +49,8 @@ Provide review with:
 5. **Security Score**: Assessment of security posture
 
 Focus on actionable feedback that improves reliability, reduces costs, and enhances security.
+
+1. **Code Validation**
    ```bash
    # Format code before review
    terraform fmt -recursive
