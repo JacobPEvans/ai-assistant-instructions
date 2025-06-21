@@ -1,0 +1,9 @@
+# Markdownlint configuration
+# https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+
+# Default state for all rules
+default: true
+
+# Configure line length to be more reasonable for documentation
+MD013:
+  line_length: 120

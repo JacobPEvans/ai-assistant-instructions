@@ -4,24 +4,27 @@ tools: ['codebase', 'terminalLastCommand', 'runCommands']
 description: 'Perform comprehensive security review of infrastructure code and configurations'
 ---
 
-Your goal is to perform a comprehensive security review of infrastructure code, configurations, and deployment practices.
+# Security Review
+
+Your goal is to perform a comprehensive security review of infrastructure code, configurations,
+and deployment practices.
 
 ## Security Review Areas
 
-**Infrastructure Security**
+### Infrastructure Security
 - Network security and access controls
 - Encryption at rest and in transit
 - IAM policies following least privilege
 - Audit logging and monitoring
 - Backup encryption and retention
 
-**Application Security**
+### Application Security
 - Input validation and sanitization
 - Authentication and authorization flows
 - Session management and password policies
 - API security and rate limiting
 
-**Configuration Security**
+### Configuration Security
 - Environment separation and isolation
 - Secrets management (no hardcoded secrets)
 - Dependency vulnerability scanning
@@ -29,7 +32,7 @@ Your goal is to perform a comprehensive security review of infrastructure code, 
 
 ## Assessment Framework
 
-**Risk Levels**
+### Risk Levels
 - **Critical**: Immediate security threat, block deployment
 - **High**: Address before production release
 - **Medium**: Include in next security review cycle
@@ -43,7 +46,7 @@ For each finding provide:
 4. **Recommendation**: Specific remediation steps
 5. **Cost Impact**: Estimated monthly cost for fixes
 
-**Compliance Focus**
+### Compliance Focus
 - Data protection requirements (GDPR/CCPA)
 - Industry standards (if applicable)
 - Internal security policies

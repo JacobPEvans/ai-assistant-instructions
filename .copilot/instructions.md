@@ -1,7 +1,8 @@
 # GitHub Copilot Custom Instructions
 
 ## Development Context
-You are working in a multi-repository development environment focused on infrastructure automation, Claude Code best practices, and system administration.
+You are working in a multi-repository development environment focused on infrastructure automation,
+Claude Code best practices, and system administration.
 
 ## Key Technologies
 - **Infrastructure**: Terraform, Terragrunt, Proxmox VE
