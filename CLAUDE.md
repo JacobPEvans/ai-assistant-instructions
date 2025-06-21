@@ -128,7 +128,7 @@ For complex projects, maintain a `PLANNING.md` file with this structure:
 
 ### Development Workflow Principles
 1. **Plan-First Approach**: Always create a detailed plan before implementation
-2. **Parallel Tool Execution**: Perform multiple independent operations simultaneously whereever possible
+2. **Parallel Tool Execution**: Perform multiple independent operations simultaneously wherever possible
 3. **File Management**: Prefer editing existing files over creating new ones
 4. **Cleanup**: Remove temporary files after task completion
 5. **Explicit Instructions**: Provide detailed context and expectations
