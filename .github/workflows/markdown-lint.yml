@@ -1,8 +1,6 @@
 name: Markdown Lint
 
-on:
-  push:
-  pull_request:
+on: [push, pull_request]
 
 jobs:
   markdown-lint:
@@ -14,8 +12,8 @@ jobs:
           fetch-depth: 0
 
       - name: Run markdownlint
-        uses: DavidAnson/markdownlint-cli2-action@v16
+        uses: DavidAnson/markdownlint-cli2-action@v20
         with:
           globs: '**/*.md'
           config: '.markdownlint.yml'
-          fix: false
+          fix: true

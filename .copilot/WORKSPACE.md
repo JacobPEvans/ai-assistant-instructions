@@ -5,6 +5,7 @@
 ## Multi-Project Workspace Management
 
 This document provides guidelines for managing the multi-repository workspace that contains various project types including:
+
 * Homelab infrastructure
 * Cloud deployments
 * Development tools
@@ -16,10 +17,10 @@ This document provides guidelines for managing the multi-repository workspace th
 Each project must maintain:
 
 1. **README.md** at root level with:
-   - Purpose and scope statement
-   - Quick start instructions
-   - Usage examples
-   - Cost implications (for cloud resources)
+   * Purpose and scope statement
+   * Quick start instructions
+   * Usage examples
+   * Cost implications (for cloud resources)
 
 2. **Directory structure documentation** for complex projects
 
@@ -29,9 +30,9 @@ Each project must maintain:
 
 #### Branch Management
 
-- **main**: Production-ready code only
-- **feature/**: Feature development branches
-- **experiment/**: Learning and testing (delete after completion)
+* **main**: Production-ready code only
+* **feature/**: Feature development branches
+* **experiment/**: Learning and testing (delete after completion)
 
 #### Commit Standards
 
@@ -55,15 +56,15 @@ When changes in one project affect others:
 
 #### Secrets Management
 
-- **Local Development**: Use `.env` files (never committed)
-- **Cloud Resources**: AWS Systems Manager Parameter Store
-- **Shared Secrets**: Centralized secret management with role-based access
+* **Local Development**: Use `.env` files (never committed)
+* **Cloud Resources**: AWS Systems Manager Parameter Store
+* **Shared Secrets**: Centralized secret management with role-based access
 
 #### Access Control
 
-- **Infrastructure**: Principle of least privilege for all resources
-- **Development**: Personal access tokens with limited scope
-- **Production**: Role-based access with MFA requirements
+* **Infrastructure**: Principle of least privilege for all resources
+* **Development**: Personal access tokens with limited scope
+* **Production**: Role-based access with MFA requirements
 
 ### Cost Management
 
@@ -78,10 +79,10 @@ When changes in one project affect others:
 
 #### Resource Lifecycle
 
-- **Development**: Automatic shutdown after business hours
-- **Testing**: Manual cleanup after feature completion
-- **Production**: Scheduled backups and monitoring
-- **Experimental**: Maximum 7-day lifespan
+* **Development**: Automatic shutdown after business hours
+* **Testing**: Manual cleanup after feature completion
+* **Production**: Scheduled backups and monitoring
+* **Experimental**: Maximum 7-day lifespan
 
 ## Technology Integration
 
@@ -89,10 +90,10 @@ When changes in one project affect others:
 
 #### Common Dependencies
 
-- **Terraform**: Version 1.5+ for all infrastructure projects
-- **PowerShell**: Version 7+ for Windows automation
-- **Python**: Version 3.9+ for scripting and automation
-- **Node.js**: Version 18+ for web development projects
+* **Terraform**: Version 1.5+ for all infrastructure projects
+* **PowerShell**: Version 7+ for Windows automation
+* **Python**: Version 3.9+ for scripting and automation
+* **Node.js**: Version 18+ for web development projects
 
 ### Development Environment Setup
 
@@ -128,34 +129,34 @@ redhat.vscode-yaml
 ### New Project Creation
 
 1. **Repository Setup**
-   - Initialize with appropriate .gitignore when relevant
-   - Create README.md with project template
-   - Add LICENSE file (consistent across workspace)
+   * Initialize with appropriate .gitignore when relevant
+   * Create README.md with project template
+   * Add LICENSE file (consistent across workspace)
 
 2. **Documentation Structure**
-   - Main README.md with project overview
-   - docs/ directory for detailed documentation
-   - .copilot/ directory for AI context (if complex project)
+   * Main README.md with project overview
+   * docs/ directory for detailed documentation
+   * .copilot/ directory for AI context (if complex project)
 
 3. **Development Environment**
-   - Add to workspace configuration
-   - Configure project-specific VS Code settings
-   - Set up automated testing and validation
+   * Add to workspace configuration
+   * Configure project-specific VS Code settings
+   * Set up automated testing and validation
 
 ### Project Maintenance
 
 #### Regular Tasks
 
-- **Weekly**: Review and merge dependabot updates
-- **Monthly**: Update documentation and remove unused resources
-- **Quarterly**: Review and optimize costs, update dependencies
+* **Weekly**: Review and merge dependabot updates
+* **Monthly**: Update documentation and remove unused resources
+* **Quarterly**: Review and optimize costs, update dependencies
 
 #### Health Checks
 
-- All tests passing in CI/CD pipelines
-- Documentation current and accurate
-- No security vulnerabilities in dependencies
-- Cost usage within defined budgets
+* All tests passing in CI/CD pipelines
+* Documentation current and accurate
+* No security vulnerabilities in dependencies
+* Cost usage within defined budgets
 
 ### Project Retirement
 
@@ -170,19 +171,19 @@ redhat.vscode-yaml
 
 Projects reference the main AI instruction repository for:
 
-- Coding standards and best practices
-- Documentation formatting requirements
-- Security and compliance guidelines
-- Cost management principles
+* Coding standards and best practices
+* Documentation formatting requirements
+* Security and compliance guidelines
+* Cost management principles
 
 ### Project-Specific Instructions
 
 Complex projects may maintain their own `.copilot/` directories with:
 
-- Project-specific architectural decisions
-- Technology stack rationale
-- Custom workflow requirements
-- Integration points with other workspace projects
+* Project-specific architectural decisions
+* Technology stack rationale
+* Custom workflow requirements
+* Integration points with other workspace projects
 
 ---
 

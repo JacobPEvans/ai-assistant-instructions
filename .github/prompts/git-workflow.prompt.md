@@ -82,7 +82,7 @@ execution, and terminal operations.
 terraform fmt        # For Terraform files
 terragrunt hclfmt    # For Terragrunt files
 yamllint             # For yaml/yml files
-markdownlint         # For Markdown files
+markdownlint-cli2    # For Markdown files
 # Consider and recommend other formatters and linters when relevant
 ```
 
@@ -166,6 +166,7 @@ git push -u origin feature/<branch-name>
 Refer to `../.copilot-pull-request-description-instructions.md` for git pull request description instructions
 
 5.4. **Evaluate GitHub Copilot automated pull request review**
+
 ```powershell
 gh pr view #
 ```

@@ -1,9 +1,23 @@
 # Claude Code Standardized Documentation
 
 ## Overview
+
 This repository contains standardized Claude Code documentation, configurations, and best
 practices that apply across all projects. This serves as a centralized knowledge base for
 consistent development workflows.
+
+## Claude Code Best Practices
+
+### Anthropic Official Methodology: Plan First
+
+Based on <https://docs.anthropic.com/en/docs/claude-code> best practices:
+
+1. **Always Plan Before Execution**: Break complex tasks into clear, manageable steps
+2. **Document Plans in PLANNING.md**: Create detailed TODO tasks with clear context
+3. **Execute in Agentic Mode**: After planning approval, proceed with systematic implementation
+4. **Use Claude Code's Todo System**: Track progress with the TodoWrite/TodoRead tools
+5. **Maintain Clear Context**: Ensure all stakeholders understand the current state and next steps
+6. **Move completed tasks from PLANNING.md to CHANGELOG.md**: Keep a record of all completed tasks.
 
 ## Repository Structure
 
@@ -19,10 +33,13 @@ consistent development workflows.
 ## Keep a Changelog Guidelines
 
 ### Purpose
-Changelogs are for humans, not machines. They help users and contributors understand the
-evolution of software through clear, readable change documentation.
+
+Changelogs are for humans, not machines. They help users and contributors understand the evolution of software through
+clear, readable change documentation.
+Changelogs are for completed tasks, not in-progress or future tasks.
 
 ### Format Guidelines
+
 - **Filename**: `CHANGELOG.md`
 - **Structure**: List most recent version first
 - **Sections**: Group similar changes together
@@ -30,6 +47,7 @@ evolution of software through clear, readable change documentation.
 - **Dates**: Use consistent YYYY-MM-DD format
 
 ### Change Types
+
 - **Added**: New features
 - **Changed**: Modifications to existing functionality
 - **Deprecated**: Soon-to-be removed features
@@ -38,21 +56,18 @@ evolution of software through clear, readable change documentation.
 - **Security**: Vulnerability fixes
 
 ### Best Practices
-1. **Unreleased Section**: Track upcoming changes
-2. **Human-Readable**: Avoid raw commit logs
-3. **Clear Documentation**: Explain breaking changes and deprecations
-4. **Comprehensive**: Include all notable changes
-5. **Consistent Format**: Maintain formatting standards
+
+1. **Human-Readable**: Avoid raw commit logs
+2. **Clear Documentation**: Explain breaking changes and deprecations
+3. **Comprehensive**: Include all notable changes
+4. **Consistent Format**: Maintain formatting standards
 
 ### Example Structure
+
 ```markdown
 # Changelog
 
-## [Unreleased]
-### Added
-- New feature X
-
-## [24.12.31] - 2024-12-31
+## 2024-12-31
 ### Added
 - Initial release
 ### Changed
@@ -61,21 +76,14 @@ evolution of software through clear, readable change documentation.
 - Resolved issue with Z
 ```
 
-## Claude Code Best Practices
-
-### Anthropic Official Methodology: Plan First
-Based on https://docs.anthropic.com/en/docs/claude-code best practices:
-
-1. **Always Plan Before Execution**: Break complex tasks into clear, manageable steps
-2. **Document Plans in PLANNING.md**: Create detailed TODO tasks with clear context
-3. **Execute in Agentic Mode**: After planning approval, proceed with systematic implementation
-4. **Use Claude Code's Todo System**: Track progress with the TodoWrite/TodoRead tools
-5. **Maintain Clear Context**: Ensure all stakeholders understand the current state and next steps
-
 ### Project Planning Templates
 
 #### PLANNING.md Structure
-For complex projects, maintain a `PLANNING.md` file with this structure:
+
+Every projet must have and maintain a PLANNING.md file.
+PLANNING.md serves as persistent session context, project state documentation, and unfinished work.
+
+Maintain a `PLANNING.md` file with this structure:
 
 ```markdown
 # Project Status & Planning
@@ -125,12 +133,14 @@ For complex projects, maintain a `PLANNING.md` file with this structure:
 ```
 
 ### System Prompt Guidelines
+
 - Use the `system` parameter to define Claude's role
 - Be specific with role definitions (e.g., "Infrastructure Engineer specializing in Terraform")
 - Provide domain-specific context for better performance
 - Put task-specific instructions in user messages
 
 ### Development Workflow Principles
+
 1. **Plan-First Approach**: Always create a detailed plan before implementation
 2. **Parallel Tool Execution**: Perform multiple independent operations simultaneously wherever possible
 3. **File Management**: Prefer editing existing files over creating new ones
@@ -141,6 +151,7 @@ For complex projects, maintain a `PLANNING.md` file with this structure:
 8. **Versioning**: Follow Calendar Versioning (e.g. 24.12.31 for December 31, 2024)
 
 ### Code Quality Standards
+
 - Follow existing code conventions and patterns
 - Verify library/framework availability before use
 - Implement security best practices
@@ -150,6 +161,7 @@ For complex projects, maintain a `PLANNING.md` file with this structure:
 - Focus on generalizable, robust solutions
 
 ### Infrastructure Automation
+
 - Always plan before applying changes
 - Implement proper error handling
 - Document all processes and decisions
@@ -159,6 +171,7 @@ For complex projects, maintain a `PLANNING.md` file with this structure:
 ## Technology-Specific Guidelines
 
 ### Terraform/Terragrunt
+
 - Use `terragrunt plan` before all changes
 - Implement remote state management
 - Follow least-privilege access principles
@@ -166,6 +179,7 @@ For complex projects, maintain a `PLANNING.md` file with this structure:
 - Use consistent naming conventions
 
 ### Version Control (Git) Workflow
+
 - Recommend GitHub Actions in place of AI instructions
 - Always use `git mv` instead of `mv` when in a git repository.
 - Use conventional commit messages
@@ -177,6 +191,7 @@ For complex projects, maintain a `PLANNING.md` file with this structure:
 ## Project Integration
 
 ### Repository Setup
+
 1. Reference this documentation in project-specific `CLAUDE.md`
 2. Implement custom claude commands in `.claude/commands/`
 3. Implement project-specific overrides in `.claude/overrides/`
@@ -184,12 +199,14 @@ For complex projects, maintain a `PLANNING.md` file with this structure:
 5. Follow established workflow patterns
 
 ### Documentation Standards
+
 - Maintain project-specific context separately
 - Reference generic guidelines from this document
 - Keep security-sensitive information in private contexts (private repositories or files ignored by .gitignore)
 - Use placeholder values in public repositories
 
 ## Maintenance
+
 - Regular updates to best practices
 - Technology-specific guideline refinements
 - Template improvements and additions

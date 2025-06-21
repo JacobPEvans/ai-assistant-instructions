@@ -17,24 +17,28 @@ If defined, you shall only act on the single file: ${input:file}
 ## Key Review Areas
 
 ### Code Quality
+
 - Resource organization and module structure
 - Naming conventions and tagging standards
 - State management and backend configuration
 - Module dependencies and versioning
 
 ### Cost Optimization
+
 - Resource sizing and instance types
 - Regional placement (prefer us-east-2)
 - Budget compliance (under $20/month per project)
 - Unused or over-provisioned resources
 
 ### Security
+
 - Network security and access controls
 - Encryption at rest and in transit
 - IAM policies following least privilege
 - Public resource exposure validation
 
 ### Operational Excellence
+
 - Monitoring, logging, and alerting setup
 - Backup and recovery strategies
 - CI/CD integration and deployment practices
@@ -42,6 +46,7 @@ If defined, you shall only act on the single file: ${input:file}
 ## Output Requirements
 
 Provide review with:
+
 1. **Risk Level**: Green (low), Yellow (medium), Red (high risk)
 2. **Cost Estimate**: Monthly AWS costs
 3. **Critical Issues**: Must fix before deployment
@@ -51,6 +56,7 @@ Provide review with:
 Focus on actionable feedback that improves reliability, reduces costs, and enhances security.
 
 1. **Code Validation**
+
    ```bash
    # Format code before review
    terraform fmt -recursive
@@ -62,6 +68,7 @@ Focus on actionable feedback that improves reliability, reduces costs, and enhan
    ```
 
 2. **Plan Generation**
+
    ```bash
    # Generate plan for review
    terragrunt plan
@@ -72,12 +79,14 @@ Focus on actionable feedback that improves reliability, reduces costs, and enhan
 ### Cost Analysis
 
 #### Monthly Cost Estimation
+
 - Use AWS Cost Calculator for major resources
 - Compare costs across regions
 - Evaluate cost vs. performance trade-offs
 - Document cost justification for expensive resources
 
 #### Budget Compliance
+
 - Verify total monthly cost stays within project limits
 - Check cost allocation by environment (dev/test/prod)
 - Review cost trends and growth patterns
@@ -85,12 +94,14 @@ Focus on actionable feedback that improves reliability, reduces costs, and enhan
 ### Security Validation
 
 #### Automated Checks
+
 - Run security scanning tools
 - Check for secrets in configuration files
 - Verify compliance with security baselines
 - Review access patterns and permissions
 
 #### Manual Review
+
 - Network topology and segmentation
 - Data flow and protection mechanisms
 - Incident response and monitoring capabilities
@@ -112,10 +123,10 @@ Create review report with:
 3. **Medium Priority**: Include in next release cycle
 4. **Low Priority**: Consider for future optimization
 
-
 ## Risk Assessment
 
 ### Deployment Risk Levels
+
 - **Green**: Low risk, standard deployment process
 - **Yellow**: Medium risk, additional testing required
 - **Red**: High risk, requires architecture review and approval
