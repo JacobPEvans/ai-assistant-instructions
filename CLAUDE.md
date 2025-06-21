@@ -24,7 +24,6 @@ Changelogs are for humans, not machines. They help users and contributors unders
 - **Sections**: Group similar changes together
 - **Links**: Make versions and sections linkable
 - **Dates**: Use consistent YYYY-MM-DD format
-- **Versioning**: Follow Semantic Versioning
 
 ### Change Types
 - **Added**: New features
@@ -49,7 +48,7 @@ Changelogs are for humans, not machines. They help users and contributors unders
 ### Added
 - New feature X
 
-## [1.0.0] - 2024-01-15
+## [24.12.31] - 2024-12-31
 ### Added
 - Initial release
 ### Changed
@@ -129,12 +128,13 @@ For complex projects, maintain a `PLANNING.md` file with this structure:
 
 ### Development Workflow Principles
 1. **Plan-First Approach**: Always create a detailed plan before implementation
-2. **Parallel Tool Execution**: Perform multiple independent operations simultaneously
+2. **Parallel Tool Execution**: Perform multiple independent operations simultaneously whereever possible
 3. **File Management**: Prefer editing existing files over creating new ones
 4. **Cleanup**: Remove temporary files after task completion
 5. **Explicit Instructions**: Provide detailed context and expectations
 6. **Reflection**: Carefully analyze tool results before proceeding
 7. **Todo Management**: Use todo lists to track complex multi-step tasks
+8. **Versioning**: Follow Calendar Versioning (e.g. 24.12.31 for December 31, 2024)
 
 ### Code Quality Standards
 - Follow existing code conventions and patterns
@@ -147,10 +147,10 @@ For complex projects, maintain a `PLANNING.md` file with this structure:
 
 ### Infrastructure Automation
 - Always plan before applying changes
-- Use parallel tool calls for efficiency
 - Implement proper error handling
 - Document all processes and decisions
 - Test in isolated environments first
+- Always favor SSH keys with passwordless authentication
 
 ## Technology-Specific Guidelines
 
@@ -174,6 +174,7 @@ For complex projects, maintain a `PLANNING.md` file with this structure:
 
 ### Repository Setup
 1. Reference this documentation in project-specific `CLAUDE.md`
+2. Implement custom claude commands in `.claude/commands/`
 2. Implement project-specific overrides in `.claude/overrides/`
 3. Use standardized templates from `.claude/templates/`
 4. Follow established workflow patterns
@@ -181,7 +182,7 @@ For complex projects, maintain a `PLANNING.md` file with this structure:
 ### Documentation Standards
 - Maintain project-specific context separately
 - Reference generic guidelines from this document
-- Keep security-sensitive information in private contexts
+- Keep security-sensitive information in private contexts (private repositories or files ignored by .gitignore)
 - Use placeholder values in public repositories
 
 ## Maintenance
@@ -189,14 +190,3 @@ For complex projects, maintain a `PLANNING.md` file with this structure:
 - Technology-specific guideline refinements
 - Template improvements and additions
 - Workflow optimization based on experience
-
-## Version History
-This document follows Keep a Changelog principles:
-
-### [1.0.0] - 2024-06-19
-#### Added
-- Initial standardized Claude Code documentation
-- Keep a Changelog guidelines and best practices
-- Claude Code development workflow principles
-- Technology-specific guidelines for Terraform and Git
-- Project integration standards
