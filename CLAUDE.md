@@ -175,9 +175,9 @@ For complex projects, maintain a `PLANNING.md` file with this structure:
 ### Repository Setup
 1. Reference this documentation in project-specific `CLAUDE.md`
 2. Implement custom claude commands in `.claude/commands/`
-2. Implement project-specific overrides in `.claude/overrides/`
-3. Use standardized templates from `.claude/templates/`
-4. Follow established workflow patterns
+3. Implement project-specific overrides in `.claude/overrides/`
+4. Use standardized templates from `.claude/templates/`
+5. Follow established workflow patterns
 
 ### Documentation Standards
 - Maintain project-specific context separately

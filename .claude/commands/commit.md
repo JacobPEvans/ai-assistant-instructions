@@ -29,10 +29,10 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 
 ### 2. Pre-Commit Validation & Security Scanning (unless --no-verify)
 **Infrastructure Validation:**
-- `terraform validate` - Configuration syntax verification
-- `terraform fmt -check` - Code formatting consistency
-- `terragrunt validate` - Terragrunt configuration (if present)
-- `terragrunt plan` - Execution plan verification and resource impact analysis
+  - `terraform validate` - Configuration syntax verification
+  - `terraform fmt -check` - Code formatting consistency
+  - `terragrunt validate` - Terragrunt configuration (if present)
+  - `terragrunt plan` - Execution plan verification and resource impact analysis
 
 **Security & Quality Checks:**
 - Sensitive data scanning (API keys, passwords, certificates)
@@ -77,7 +77,7 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 1. **Extract from Commit Message**: Parse commit type and description to determine changelog category
 2. **Categorize Changes**: Map commit types to changelog sections:
    - `feat` → Added
-   - `fix` → Fixed  
+   - `fix` → Fixed
    - `docs` → Changed (for documentation improvements)
    - `chore` → Changed (for maintenance/tooling)
    - `security` → Security
@@ -95,7 +95,7 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 - Comprehensive 6-step commit workflow with validation and security scanning
 - Enhanced Claude Code permissions for terraform and infrastructure operations
 
-### Changed  
+### Changed
 - Calendar versioning adoption (YY.M.DD format) for consistent release tracking
 - Documentation standards with plan-first methodology integration
 ```
@@ -123,6 +123,17 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 **Pull Request Workflow:**
 - **Never squash merge** - preserve complete commit history
 - Include comprehensive PR description with change summary
+
+**PR Comment Resolution Process:**
+- Check for automated PR review comments (`gh pr view --comments`)
+- Review all unresolved comments from copilot-pull-request-reviewer or other reviewers
+- Address each comment by either:
+  - Making requested code changes and committing fixes
+  - Responding to comment explaining why change not needed
+  - Marking comment as resolved if addressed
+- Only proceed with merge after all comments are resolved or accepted
+- For duplicate numbering, formatting issues, or style problems: fix immediately
+- For architectural suggestions: evaluate merit and implement if beneficial
 
 ## Commit Message Format
 ```
