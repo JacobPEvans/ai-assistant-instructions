@@ -11,6 +11,7 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 
 ### Added
 
+- Enhanced Claude settings with echo command permissions for improved debugging
 - Git Standard Commits reference integration in commit workflow
 - AWS DynamoDB permissions for infrastructure monitoring (list-tables, scan)
 - Comprehensive security scanning including SSH keys and usernames
@@ -19,6 +20,10 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 
 ### Changed
 
+- Optimized Claude GitHub Actions workflow for automatic pull request reviews
+- Consolidated duplicate workflows into single streamlined claude.yml configuration
+- Updated to Claude Opus 4 model with 4-minute timeout optimization
+- Enhanced commit workflow documentation with auto-merge support
 - Enhanced Claude Code documentation standards with improved structure and clarity
 - Updated implementation guide to reflect dual AI system architecture (GitHub Copilot + Claude Code)
 - Modernized README with comprehensive dual AI system integration details
@@ -34,6 +39,10 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 - Fixed CHANGELOG.md markdown linting compliance with MD024 directive
 - Converted PR template from YAML to proper markdown format following GitHub best practices
 - Refined Claude Code permissions for better security and specificity
+
+### Removed
+
+- Redundant claude-code-review.yml workflow (consolidated into main claude.yml)
 
 ### Security
 

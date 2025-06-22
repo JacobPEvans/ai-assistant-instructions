@@ -44,7 +44,7 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 
 ### 2. Repository Analysis & Argument Parsing
 
-- Stage all modified files with `git add .`
+- Stage files logically per approved grouping
 - Determine repository type (`gh repo view --json visibility`)
 - Review all changes with parallel operations:
   - `git status -v -v` - View all changes in the working directory
@@ -129,39 +129,21 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 - Documentation standards with plan-first methodology integration
 ```
 
-### 5. User Approval & Confirmation
-
-**Commit Plan Presentation:**
-
-- Show complete commit plan with grouped changes
-- Display proposed commit message(s) and branch name
-- Highlight any security or breaking change concerns
-- Present validation results and any issues found
-
-**Explicit Confirmation Required:**
-
-- Wait for user approval before proceeding
-- Allow modifications to commit message or grouping
-- Address any user concerns or questions
-- Provide alternative approaches if requested
-
-### 6. Execution & Pull Request Workflow
+### 5. Pull Request Workflow
 
 **Commit Execution:**
 
 - Run /compact command to shrink context
-- Stage files logically per approved grouping
-- Create commit(s) with approved messages
+- Create commit(s)
 - Handle pre-commit hook issues
 - Push with upstream tracking (`git push -u origin <branch>`)
 
 **Pull Request (PR) Workflow:**
 
-- Avoid squash merge - preserve complete commit history
+- Avoid squash merge. Preserve complete commit history
 - Include comprehensive PR description with change summary
 - Resolve all PR checks (`gh pr checks`)
 - Resolve all pull request comments
-- Merge pull request
 
 **PR Comment Resolution Process:**
 
@@ -171,7 +153,21 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
   - Making requested code changes and committing fixes
   - Responding to comment explaining why change not needed
   - Marking comment as resolved if addressed
-- Proceed with merge after all comments are resolved or accepted
+
+### 6. User Approval & Confirmation
+
+**Pull Request Presentation:**
+
+- Show completed commit and pull request with grouped changes
+- Highlight any security or breaking change concerns
+- Present validation results and any issues resolved
+
+**Explicit Confirmation Required:**
+
+- Wait for user approval before proceeding
+- Allow modifications to pull request if requested
+- Address any user concerns or questions
+- Proceed with merge (`gh pr merge --auto`)
 
 ## Commit Message Format
 
@@ -239,7 +235,6 @@ Impact assessment and affected resources.
 - ✅ **Preserve complete commit history** (no squash merging)
 - ✅ **Run comprehensive validation** before any commits
 - 🚫 **Never commit directly to main/master branch**
-- 🚫 **Never auto-merge without proper review process**
 
 ### Quality & Security Standards
 
