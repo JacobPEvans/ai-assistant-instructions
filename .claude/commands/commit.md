@@ -105,6 +105,8 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 4. **Format Entry**: Use bullet points starting with action verbs (e.g., "Enhanced", "Added", "Fixed")
 5. **Include Context**: Reference relevant components, files, or systems affected
 6. **Maintain Readability**: Write for end users, not developers - avoid technical jargon
+7. **Clean Up Old Entries**: Remove oldest duplicate entries older than 1 month to keep the changelog concise
+8. **Documentation Validation**: Rerun `markdownlint-cli2` and fix all issues to ensure no formatting issues after updates
 
 **CHANGELOG.md Entry Examples:**
 
