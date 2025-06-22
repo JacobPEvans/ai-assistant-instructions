@@ -148,7 +148,7 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 
 **PR Comment Resolution Process (MANDATORY):**
 
-🚨 **CRITICAL REQUIREMENT**: Pull requests cannot be merged until ALL comments and conversations are resolved.
+🚨 **CRITICAL REQUIREMENT**: Pull requests cannot be merged until ALL comments and conversations on the pull request are resolved.
 
 **Step-by-Step Resolution Process:**
 
