@@ -28,7 +28,7 @@ Include comprehensive error handling and prefer readable code over clever implem
 
 Keep line length under 120 characters when linters indicate line length requirements.
 
-Run formatting and linting before committing: `terraform fmt`, `terragrunt hclfmt`, `markdownlint`.
+Run formatting and linting before committing: `terraform fmt`, `terragrunt hclfmt`, `markdownlint-cli2`.
 
 ## Documentation and Diagrams
 

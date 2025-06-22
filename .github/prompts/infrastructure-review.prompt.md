@@ -4,33 +4,41 @@ tools: ['codebase', 'usages', 'problems', 'changes', 'terminalLastCommand', 'git
 description: 'Review Terraform/Terragrunt infrastructure code for best practices, cost optimization, and security'
 ---
 
-Your goal is to review infrastructure-as-code (Terraform/Terragrunt) for best practices, cost optimization, and security compliance with AWS focus.
+# Infrastructure Review
 
-If defined, you shall only act on repository: ${input:repository} . If defined, no files outside of ${input:repository} shall be modified.
+Your goal is to review infrastructure-as-code (Terraform/Terragrunt) for best practices,
+cost optimization, and security compliance with AWS focus.
+
+If defined, you shall only act on repository: ${input:repository} . If defined, no files
+outside of ${input:repository} shall be modified.
 
 If defined, you shall only act on the single file: ${input:file}
 
 ## Key Review Areas
 
-**Code Quality**
+### Code Quality
+
 - Resource organization and module structure
 - Naming conventions and tagging standards
 - State management and backend configuration
 - Module dependencies and versioning
 
-**Cost Optimization**
+### Cost Optimization
+
 - Resource sizing and instance types
 - Regional placement (prefer us-east-2)
 - Budget compliance (under $20/month per project)
 - Unused or over-provisioned resources
 
-**Security**
+### Security
+
 - Network security and access controls
 - Encryption at rest and in transit
 - IAM policies following least privilege
 - Public resource exposure validation
 
-**Operational Excellence**
+### Operational Excellence
+
 - Monitoring, logging, and alerting setup
 - Backup and recovery strategies
 - CI/CD integration and deployment practices
@@ -38,6 +46,7 @@ If defined, you shall only act on the single file: ${input:file}
 ## Output Requirements
 
 Provide review with:
+
 1. **Risk Level**: Green (low), Yellow (medium), Red (high risk)
 2. **Cost Estimate**: Monthly AWS costs
 3. **Critical Issues**: Must fix before deployment
@@ -45,6 +54,9 @@ Provide review with:
 5. **Security Score**: Assessment of security posture
 
 Focus on actionable feedback that improves reliability, reduces costs, and enhances security.
+
+1. **Code Validation**
+
    ```bash
    # Format code before review
    terraform fmt -recursive
@@ -56,40 +68,43 @@ Focus on actionable feedback that improves reliability, reduces costs, and enhan
    ```
 
 2. **Plan Generation**
+
    ```bash
    # Generate plan for review
-   terragrunt plan -out=review.tfplan
+   terragrunt plan
 
    # Never run apply during review!
    ```
 
 ### Cost Analysis
 
-**Monthly Cost Estimation**
+#### Monthly Cost Estimation
+
 - Use AWS Cost Calculator for major resources
 - Compare costs across regions
 - Evaluate cost vs. performance trade-offs
 - Document cost justification for expensive resources
 
-**Budget Compliance**
+#### Budget Compliance
+
 - Verify total monthly cost stays within project limits
 - Check cost allocation by environment (dev/test/prod)
 - Review cost trends and growth patterns
 
 ### Security Validation
 
-**Automated Checks**
+#### Automated Checks
+
 - Run security scanning tools
 - Check for secrets in configuration files
 - Verify compliance with security baselines
 - Review access patterns and permissions
 
-**Manual Review**
+#### Manual Review
+
 - Network topology and segmentation
 - Data flow and protection mechanisms
 - Incident response and monitoring capabilities
-
-## Output Requirements
 
 ### Review Documentation
 
@@ -103,14 +118,15 @@ Create review report with:
 
 ### Follow-up Actions
 
-- **Critical Issues**: Must be addressed before deployment
-- **High Priority**: Address within current sprint
-- **Medium Priority**: Include in next release cycle
-- **Low Priority**: Consider for future optimization
+1. **Critical Issues**: Must be addressed before deployment
+2. **High Priority**: Address within current sprint
+3. **Medium Priority**: Include in next release cycle
+4. **Low Priority**: Consider for future optimization
 
 ## Risk Assessment
 
-**Deployment Risk Levels**
+### Deployment Risk Levels
+
 - **Green**: Low risk, standard deployment process
 - **Yellow**: Medium risk, additional testing required
 - **Red**: High risk, requires architecture review and approval

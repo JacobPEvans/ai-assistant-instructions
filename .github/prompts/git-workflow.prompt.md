@@ -8,9 +8,12 @@ description: 'Handle git version control branching, workflows, and terminal oper
 
 Your goal is to handle git version control repository operations consistently according to established project standards.
 
-This is a well-defined actionable workflow. You may make suggestions for improvements, but the goal is to run this workflow directly in the terminal.
+This is a well-defined actionable workflow. You may make suggestions for improvements,
+but the goal is to run this workflow directly in the terminal.
 
-**Note**: Commit message generation, pull request descriptions, and code reviews are described in other instructions files. This prompt focuses on branching, workflow execution, and terminal operations.
+**Note**: Commit message generation, pull request descriptions, and code reviews are
+described in other instructions files. This prompt focuses on branching, workflow
+execution, and terminal operations.
 
 ## Branch Management Standards
 
@@ -36,7 +39,7 @@ This is a well-defined actionable workflow. You may make suggestions for improve
 - ✅ **Organize**: Update .gitignore for files that shouldn't be committed if needed
 - ✅ **Quality**: Run appropriate formatting/linting tools
 - ✅ **Security**: Verify no secrets or sensitive information
-- ✅ **Verify**: Analyze changes with `git diff --cached` and `git diff --stat`
+- ✅ **Verify**: Analyze changes with `git status -v -v`
 - ✅ **Branch**: Create appropriate branch if needed
 - ✅ **Stage**: Add files to staging area
 - ✅ **Commit**: Use `.copilot-commit-message-instructions.md` for consistent format
@@ -79,7 +82,7 @@ This is a well-defined actionable workflow. You may make suggestions for improve
 terraform fmt        # For Terraform files
 terragrunt hclfmt    # For Terragrunt files
 yamllint             # For yaml/yml files
-markdownlint         # For Markdown files
+markdownlint-cli2    # For Markdown files
 # Consider and recommend other formatters and linters when relevant
 ```
 
@@ -92,15 +95,13 @@ markdownlint         # For Markdown files
 
 3.1. **Analyze all changes made**
 
-   ```powershell
-   echo "=== Review staged changes with 'git diff -w --cached' ===" && `
-   git diff -w --cached && `
-   echo "=== Review unstaged changes with 'git diff' ===" && `
-   git diff -w --status && `
-   echo "=== Review commit history ===" && `
+   ```bash
+   echo "=== Review changes with 'git status -v -v' ===" && \
+   git status -v -v \
+   echo "=== Review commit history ===" && \
    git log --oneline HEAD..origin/main
 
-   echo "=== Review all actual changes ===" && `
+   echo "=== Review all actual changes ===" && \
    git diff -w --histogram --minimal --unified=0 --no-color
    ```
 
@@ -163,6 +164,7 @@ git push -u origin feature/<branch-name>
 Refer to `../.copilot-pull-request-description-instructions.md` for git pull request description instructions
 
 5.4. **Evaluate GitHub Copilot automated pull request review**
+
 ```powershell
 gh pr view #
 ```

@@ -8,7 +8,8 @@ description: 'Review and validate documentation consistency, completeness, and A
 
 Your goal is to review and validate documentation consistency, completeness, and AI-friendliness across the project.
 
-If defined, you shall only act on repository: ${input:repository} . If defined, no files outside of ${input:repository} shall be modified.
+If defined, you shall only act on repository: ${input:repository} . If defined, no files outside of
+${input:repository} shall be modified.
 
 If defined, you shall only act on the single file: ${input:file}
 
@@ -53,10 +54,10 @@ If defined, you shall only act on the single file: ${input:file}
 yamllint **/*.yml
 
 # Run markdown linting & resolve issues
-markdownlint **/*.md
-# Resolve issues reported by markdownlint
+markdownlint-cli2 **/*.md
+# Resolve issues reported by markdownlint-cli2
 # MD013 (line length) is customized to 120 characters in local workspace configs.
-#   Do not break a single sentence to satisfy MD013. Either break into multiple sentences or leave as is.
+#   Do not break a single sentence to satisfy MD013. Instead, break into multiple sentences.
 
 # Check for broken links
 markdown-link-check **/*.md

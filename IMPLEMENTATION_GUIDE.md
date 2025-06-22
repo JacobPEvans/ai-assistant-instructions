@@ -63,25 +63,6 @@ graph LR
     G --> H[Deploy/Apply]
 ```
 
-### Workspace Settings
-
-```json
-{
-  "folders": [
-    {"path": "."},
-    {"path": "ai-assistant-instructions"}
-  ],
-  "settings": {
-    "powershell.cwd": "git",
-    "chat.promptFiles": true,
-    "terraform.format.enable": true,
-    "markdownlint.config": {
-      "MD013": {"line_length": 120}
-    }
-  }
-}
-```
-
 ## Usage Patterns
 
 ### For AI Assistants

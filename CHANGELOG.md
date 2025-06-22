@@ -1,25 +1,64 @@
 # Changelog
 
+<!-- markdownlint-disable-file MD024 -->
+
 All notable changes to the ai-assistant-instructions project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+and this project adheres to [Calendar Versioning](https://calver.org/).
 
-## [Unreleased]
+## 2025-06-22
 
 ### Added
-- .copilot/instructions.md for GitHub Copilot custom instructions
-- .github/prompts/ directory with infrastructure and development prompt templates
-- Comprehensive prompt templates for code review, problem-solving, and refactoring
-- Infrastructure-specific prompts for Terraform development and security review
+
+- Git Standard Commits reference integration in commit workflow
+- AWS DynamoDB permissions for infrastructure monitoring (list-tables, scan)
+- Comprehensive security scanning including SSH keys and usernames
+- Precise Terraform/Terragrunt permissions with version checking
+- Enhanced Claude Code repository structure following .claude/ standards
 
 ### Changed
-- Enhanced repository structure to support GitHub Copilot integration
-- Improved AI instruction organization for better context management
 
-## [1.0.0] - 2025-06-19
+- Modernized git workflow to use git status -v -v for change analysis
+- Optimized GitHub Actions timeouts for improved CI/CD efficiency
+- Streamlined commit workflow validation requirements
+- Refined changelog documentation for clarity
+- Enhanced parallel execution guidelines for better performance
+- Enhanced commit workflow with changelog cleanup and validation guidelines
+- Fixed CHANGELOG.md markdown linting compliance with MD024 directive
+- Converted PR template from YAML to proper markdown format following GitHub best practices
+- Refined Claude Code permissions for better security and specificity
+
+### Security
+
+- Expanded sensitive data scanning to include SSH keys and usernames
+- Implemented precise permission controls replacing broad wildcards
+
+## 2025-06-21
 
 ### Added
+
+- Comprehensive 6-step commit workflow with validation and security scanning
+- Enhanced Claude Code permissions for terraform and infrastructure operations
+- PR template for consistent pull request formatting
+- Terraform workflow for infrastructure validation
+
+### Changed
+
+- Standardized markdown linting with markdownlint-cli2 for consistency
+- Calendar versioning adoption (YY.M.DD format) for release tracking
+- Enhanced AI assistant instructions with plan-first methodology
+- Updated documentation standards with PLANNING.md requirements
+
+### Fixed
+
+- Markdown formatting issues across documentation files
+- Workflow configurations for better automation
+
+## 2025-06-19
+
+### Released
+
 - Initial standardized Claude Code documentation
 - Keep a Changelog guidelines and best practices
 - Claude Code development workflow principles
@@ -31,8 +70,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Code quality standards and infrastructure automation guidelines
 - Project planning templates for complex development tasks
 - Documentation standards for public/private repository separation
-
-### Security
 - Proper separation of security-sensitive information
 - Guidelines for placeholder values in public repositories
 - Best practices for secrets management and access control
