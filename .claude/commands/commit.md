@@ -153,6 +153,9 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
   - Making requested code changes and committing fixes
   - Responding to comment explaining why change not needed
   - Marking comment as resolved if addressed
+- DO NOT CONTINUE until all checks are complete and successful
+- **MANDATORY**: Evaluate all pull request comments for final action items to resolve
+  - Get user approval for any ignored action items before continuing
 
 ### 6. User Approval & Confirmation
 
