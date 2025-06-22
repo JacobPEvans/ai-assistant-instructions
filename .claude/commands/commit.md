@@ -143,19 +143,34 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 - Avoid squash merge. Preserve complete commit history
 - Include comprehensive PR description with change summary
 - Resolve all PR checks (`gh pr checks`)
-- Resolve all pull request comments
+- Resolve all pull request comments and conversations
 
-**PR Comment Resolution Process:**
+**PR Comment Resolution Process (MANDATORY):**
 
-- Check for automated PR review comments (`gh pr view --comments`)
-- Review all unresolved comments from reviewers
-- Address each comment by either:
-  - Making requested code changes and committing fixes
-  - Responding to comment explaining why change not needed
-  - Marking comment as resolved if addressed
-- DO NOT CONTINUE until all checks are complete and successful
-- **MANDATORY**: Evaluate all pull request comments for final action items to resolve
-  - Get user approval for any ignored action items before continuing
+🚨 **CRITICAL REQUIREMENT**: Pull requests cannot be merged until ALL comments and conversations are resolved.
+
+**Step-by-Step Resolution Process:**
+
+1. **Identify All Comments**: Use `gh api repos/OWNER/REPO/pulls/PR_NUMBER/comments` to get complete list
+2. **Review Each Comment**: Analyze every suggestion, question, and concern raised by reviewers
+3. **Take Action on Each Comment**:
+   - **Code Changes**: Implement requested fixes and commit changes
+   - **Explanations**: Respond with detailed explanation if change not needed
+   - **Clarifications**: Provide additional context or documentation as requested
+4. **Respond to Comments**: Always acknowledge each comment with a response explaining what action was taken
+5. **Verify Resolution**: Ensure all conversations are marked as resolved before proceeding
+
+**Non-Negotiable Requirements:**
+- ✅ **ALL comments must have responses** - No comment can be ignored
+- ✅ **ALL suggestions must be addressed** - Either implemented or explained why not
+- ✅ **ALL conversations must be resolved** - No open discussions remaining
+- 🚫 **Never merge with unresolved comments** - This violates code review standards
+- 🚫 **Never ignore reviewer feedback** - All input must be acknowledged
+
+**Before Merge Verification:**
+- Run `gh pr view PR_NUMBER --comments` to verify no unresolved comments remain
+- Confirm all CI checks pass with `gh pr checks PR_NUMBER`
+- Validate all conversations are marked as resolved on GitHub
 
 ### 6. User Approval & Confirmation
 

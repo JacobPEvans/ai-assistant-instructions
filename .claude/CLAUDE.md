@@ -186,6 +186,40 @@ Maintain a `PLANNING.md` file with this structure:
 - Include proper commit validation
 - Follow repository-specific guidelines
 
+### Pull Request and Code Review Standards
+
+🚨 **MANDATORY REQUIREMENTS FOR ALL PULL REQUESTS**
+
+**Comment Resolution (NON-NEGOTIABLE):**
+- ✅ **ALL pull request comments must be addressed** - No exceptions
+- ✅ **ALL reviewer suggestions must be implemented or explained** - Every piece of feedback requires action
+- ✅ **ALL conversations must be resolved** - No open discussions can remain
+- ✅ **Response required for every comment** - Acknowledge all reviewer input
+- 🚫 **Never merge with unresolved comments** - This violates professional standards
+- 🚫 **Never ignore reviewer feedback** - All input must be valued and addressed
+
+**Code Review Process:**
+- **Thorough Analysis**: Review all changes, not just recent commits
+- **Constructive Feedback**: Provide specific, actionable suggestions
+- **Security Focus**: Scan for vulnerabilities, secrets, and security implications
+- **Standards Compliance**: Ensure code follows project conventions and best practices
+- **Documentation**: Verify all changes are properly documented
+
+**Merge Requirements:**
+- ✅ All automated checks pass (CI/CD, linting, tests)
+- ✅ All reviewer comments resolved with responses
+- ✅ All conversations marked as resolved
+- ✅ No security vulnerabilities introduced
+- ✅ Code meets quality and documentation standards
+- ✅ Breaking changes properly documented and approved
+
+**Quality Gates:**
+- **Security Scanning**: No API keys, secrets, or sensitive data exposed
+- **Code Standards**: Follows established patterns and conventions
+- **Test Coverage**: Adequate testing for new functionality
+- **Documentation**: README, CHANGELOG, and inline documentation updated
+- **Performance**: No degradation in system performance
+
 ## Project Integration
 
 ### Repository Setup
