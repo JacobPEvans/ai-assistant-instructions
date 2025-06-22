@@ -11,6 +11,7 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 
 ### Added
 
+- GitHub GraphQL API documentation for PR comment analysis and external conversation reading
 - Enhanced Claude settings with echo command permissions for improved debugging
 - Git Standard Commits reference integration in commit workflow
 - AWS DynamoDB permissions for infrastructure monitoring (list-tables, scan)

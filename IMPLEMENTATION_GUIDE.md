@@ -96,11 +96,11 @@ graph TD
     C --> D[Branch Strategy & Commit Proposal]
     D --> E[User Approval & Confirmation]
     E --> F[Execution & Pull Request]
-    
+
     A --> A1[Documentation Validation<br/>markdownlint-cli2]
     A --> A2[Infrastructure Validation<br/>terraform validate/fmt]
     A --> A3[Security Scanning<br/>SSH keys, secrets]
-    
+
     F --> F1[Branch Creation]
     F --> F2[CHANGELOG.md Update]
     F --> F3[Pull Request Workflow]
@@ -114,6 +114,7 @@ graph TD
 2. **Real-time assistance**: Copilot applies preferences for AWS us-east-2, cost optimization
 3. **Code reviews**: Reference `.github/.copilot-review-instructions.md`
 4. **Prompt templates**: Use files in `.github/prompts/` with `@workspace` prefix
+5. **GraphQL integration**: Use GitHub GraphQL API for PR comment analysis and external conversation reading (not available via `gh` CLI)
 
 ### For Claude Code Users
 
@@ -121,6 +122,7 @@ graph TD
 2. **Comprehensive documentation**: Reference `.claude/CLAUDE.md` for standards
 3. **Permission management**: Configured in `.claude/settings.json`
 4. **Custom commands**: Available in `.claude/commands/` directory
+5. **GraphQL API access**: Uses `gh api graphql` and `jq` for PR comment reading and external conversation analysis - essential for comprehensive PR review
 
 ### For Multi-Project Development
 
@@ -200,7 +202,7 @@ graph TD
 
 - **Industry Best Practices**: Conventional commits, security scanning, documentation standards
 - **Scalable Architecture**: Template-based approach for consistent project setup
-- **Version Control Excellence**: Squash merge strategy with comprehensive PR workflows
+- **Version Control Excellence**: Merge strategy with comprehensive PR workflows
 - **Knowledge Management**: Centralized instruction repository with cross-project applicability
 
 ## Maintenance Schedule
@@ -252,6 +254,7 @@ The AI assistant instructions repository successfully integrates GitHub Copilot 
 
 - **GitHub Copilot**: Real-time coding assistance with repository-wide context
 - **Claude Code**: Standardized workflow automation with comprehensive validation
+- **GitHub GraphQL API**: Essential for PR comment/conversation analysis (unavailable in `gh` CLI) - use `gh api graphql` with basic syntax
 - **Terraform/Terragrunt**: Infrastructure as code with security and cost optimization
 - **AWS Integration**: Cost-conscious deployments with monitoring capabilities
 

@@ -186,11 +186,20 @@ Maintain a `PLANNING.md` file with this structure:
 - Include proper commit validation
 - Follow repository-specific guidelines
 
+### GitHub GraphQL API for PR Analysis
+
+Use GraphQL when `gh` CLI cannot access PR comments/conversations:
+
+- **Basic query**: `gh api graphql -f query='{ repository(owner: "user", name: "repo") { ... } }'`
+- **Parse results**: Pipe to `jq` for JSON processing
+- **Key use case**: Reading external PR comments and conversation threads not accessible via standard `gh` commands
+
 ### Pull Request and Code Review Standards
 
 🚨 **MANDATORY REQUIREMENTS FOR ALL PULL REQUESTS**
 
 **Comment Resolution (NON-NEGOTIABLE):**
+
 - ✅ **ALL pull request comments must be addressed** - No exceptions
 - ✅ **ALL reviewer suggestions must be implemented or explained** - Every piece of feedback requires action
 - ✅ **ALL conversations must be resolved** - No open discussions can remain
@@ -199,6 +208,7 @@ Maintain a `PLANNING.md` file with this structure:
 - 🚫 **Never ignore reviewer feedback** - All input must be valued and addressed
 
 **Code Review Process:**
+
 - **Thorough Analysis**: Review all changes, not just recent commits
 - **Constructive Feedback**: Provide specific, actionable suggestions
 - **Security Focus**: Scan for vulnerabilities, secrets, and security implications
@@ -206,6 +216,7 @@ Maintain a `PLANNING.md` file with this structure:
 - **Documentation**: Verify all changes are properly documented
 
 **Merge Requirements:**
+
 - ✅ All automated checks pass (CI/CD, linting, tests)
 - ✅ All reviewer comments resolved with responses
 - ✅ All conversations marked as resolved
@@ -214,6 +225,7 @@ Maintain a `PLANNING.md` file with this structure:
 - ✅ Breaking changes properly documented and approved
 
 **Quality Gates:**
+
 - **Security Scanning**: No API keys, secrets, or sensitive data exposed
 - **Code Standards**: Follows established patterns and conventions
 - **Test Coverage**: Adequate testing for new functionality
