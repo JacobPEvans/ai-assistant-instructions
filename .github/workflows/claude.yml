@@ -18,7 +18,6 @@ jobs:
       pull-requests: read
       issues: read
       id-token: write
-    timeout_minutes: 4
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,6 +27,7 @@ jobs:
       - name: Run Claude Code Review
         id: claude-review
         uses: anthropics/claude-code-action@beta
+        timeout-minutes: 4
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
 
