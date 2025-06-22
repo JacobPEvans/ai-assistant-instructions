@@ -24,9 +24,10 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 
 **Documentation Validation:**
 
-- `markdownlint-cli2` - Check all markdown files for formatting issues
 - Attempt to resolve automatically using `markdownlint-cli2 --fix`
+- `markdownlint-cli2` - Check all markdown files for formatting issues
 - `markdownlint-cli2` **must** return no issues before continuing
+  - Manually resolve issues that are not automatically fixed
 
 **Infrastructure Validation:**
 
@@ -152,6 +153,7 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 **Step-by-Step Resolution Process:**
 
 1. **Identify All Comments**: Use `gh api repos/OWNER/REPO/pulls/PR_NUMBER/comments` to get complete list
+   - For external PR comments/conversations not accessible via `gh` CLI, use GraphQL: `gh api graphql -f query='{ repository(owner: "OWNER", name: "REPO") { pullRequest(number: PR_NUMBER) { comments { nodes { body author { login } } } } } }' | jq`
 2. **Review Each Comment**: Analyze every suggestion, question, and concern raised by reviewers
 3. **Take Action on Each Comment**:
    - **Code Changes**: Implement requested fixes and commit changes
@@ -161,6 +163,7 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 5. **Verify Resolution**: Ensure all conversations are marked as resolved before proceeding
 
 **Non-Negotiable Requirements:**
+
 - ✅ **ALL comments must have responses** - No comment can be ignored
 - ✅ **ALL suggestions must be addressed** - Either implemented or explained why not
 - ✅ **ALL conversations must be resolved** - No open discussions remaining

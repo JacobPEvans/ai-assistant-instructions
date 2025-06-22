@@ -175,8 +175,8 @@ gh pr view #
 
 ```powershell
 git checkout main && git pull origin main
-git merge feature/<branch-name>           # Use normal merge when there are only a few commits
 git merge feature/<branch-name> --squash  # Squash merge recommended for more than 5 commits
+git merge feature/<branch-name>           # Use normal merge when there are only a few commits
 git push origin main
 ```
 
@@ -184,7 +184,7 @@ git push origin main
 
    ```powershell
    # Choose the best merge strategy
-   gh pr merge --squash --delete-branch    # Squash merge for multiple commits
+   gh pr merge --squash --delete-branch    # Squash merge for many commits
    gh pr merge --merge  --delete-branch    # Standard merge
    gh pr merge --rebase --delete-branch    # Rebase merge
    ```
