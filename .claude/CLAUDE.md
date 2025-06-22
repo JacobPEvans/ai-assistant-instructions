@@ -36,7 +36,7 @@ Based on <https://docs.anthropic.com/en/docs/claude-code> best practices:
 
 ### Purpose
 
-`CHANGELOG.md` help users and contributors understand the evolution of software through clear, readable change documentation.
+`CHANGELOG.md` helps users and contributors understand the evolution of software through clear, readable change documentation.
 `CHANGELOG.md` is for completed tasks - not in-progress or future tasks.
 
 ### Format Guidelines
@@ -83,7 +83,7 @@ Based on <https://docs.anthropic.com/en/docs/claude-code> best practices:
 
 ### Purpose and Requirements
 
-Every projet must have and maintain a PLANNING.md file.
+Every project must have and maintain a PLANNING.md file.
 `PLANNING.md` is for in-progress and future tasks - not completed tasks.
 `PLANNING.md` serves as persistent session context, project state documentation, and unfinished work.
 
