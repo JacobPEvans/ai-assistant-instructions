@@ -1,41 +1,58 @@
 # AI Assistant Instructions
 
-Comprehensive GitHub Copilot instructions and workspace configurations for consistent, high-quality development
-assistance across multiple project types.
+Comprehensive AI assistant instructions combining GitHub Copilot and Claude Code workflows for consistent, high-quality development assistance across multiple project types.
 
 ## Overview
 
-This repository provides centralized AI instruction management with modular, reusable configurations optimized for
-GitHub Copilot integration across VS Code, GitHub web interface, and Visual Studio environments.
+This repository provides centralized AI instruction management with modular, reusable configurations optimized for both GitHub Copilot and Claude Code integration. Features dual AI system compatibility with standardized workflows, security scanning, and cost-conscious development practices.
 
 ## Quick Start
 
 ### Using These Instructions
 
 1. **GitHub Copilot Integration**: Instructions are automatically loaded when working in this repository
-2. **Cross-Reference Navigation**: Follow links between instruction files for detailed context
-3. **Prompt Files**: Use reusable prompt templates in VS Code with Copilot Chat
+2. **Claude Code Workflows**: Execute standardized commands like `/commit` for comprehensive development processes
+3. **Cross-Reference Navigation**: Follow links between instruction files for detailed context
+4. **Prompt Files**: Use reusable prompt templates in VS Code with Copilot Chat or Claude Code
 
 ### Key Files
 
+#### GitHub Copilot Integration
+
 - **[`.github/copilot-instructions.md`](.github/copilot-instructions.md)**: Main repository-wide AI instructions
+- **[`.github/prompts/`](.github/prompts/)**: Reusable prompt templates for specific tasks
+
+#### Claude Code Workflows
+
+- **[`.claude/CLAUDE.md`](.claude/CLAUDE.md)**: Claude Code documentation standards and best practices
+- **[`.claude/settings.json`](.claude/settings.json)**: Permissions and tool configurations
+- **[`.claude/commands/commit.md`](.claude/commands/commit.md)**: 6-step commit workflow with validation
+
+#### Project Context
+
 - **[`.copilot/PROJECT.md`](.copilot/PROJECT.md)**: Project scope and change management
 - **[`.copilot/ARCHITECTURE.md`](.copilot/ARCHITECTURE.md)**: System design decisions  
 - **[`.copilot/WORKSPACE.md`](.copilot/WORKSPACE.md)**: Multi-project workspace guidelines
 
 ## Architecture
 
-### Modular Design
+### Dual AI System Design
 
-The project follows a clear hierarchical structure designed for AI optimization and maintainability.  
+The project integrates two complementary AI assistant systems for comprehensive development workflow coverage:
+
+- **GitHub Copilot**: Real-time coding assistance with repository-wide context
+- **Claude Code**: Standardized workflow automation with comprehensive validation
+- **Shared Standards**: Unified coding practices and documentation requirements across both systems
+
 See [Architecture Details](.copilot/ARCHITECTURE.md) for the complete file structure and design decisions.
 
 ### Design Principles
 
 - **AI-Optimized**: Clear hierarchical structure with explicit cross-references
 - **Modular**: Separate concerns for maintainability and selective loading
-- **GitHub-Compatible**: Follows official Copilot custom instructions best practices
-- **Cross-Platform**: Works in VS Code, GitHub web, and Visual Studio
+- **Cross-Platform Compatible**: Works across VS Code, GitHub web interface, Visual Studio, and Claude Code CLI
+- **Security First**: Comprehensive validation, security scanning, and cost management
+- **Workflow Automation**: 6-step commit process with automated documentation updates
 
 ## Target Environment
 
@@ -55,32 +72,44 @@ See [Workspace Guidelines](.copilot/WORKSPACE.md) for complete technology requir
 
 ## Usage Examples
 
-### Basic AI Assistance
+### Real-Time Coding Assistance
 
 AI automatically receives context from `.github/copilot-instructions.md` for all interactions:
 
 ```text
 User: "Create a Terraform module for an S3 bucket"
-AI: Uses preferences for AWS us-east-2, cost optimization, security best practices
+Copilot: Uses preferences for AWS us-east-2, cost optimization, security best practices
 ```
-
-### Detailed Reviews
 
 Use prompt files for comprehensive analysis:
 
 ```text
-User: "@workspace Use terraform-review.prompt.md to review my infrastructure"
-AI: Performs systematic review with cost analysis, security checks, best practices
+User: "@workspace Use infrastructure-review.prompt.md to review my infrastructure"
+Copilot: Performs systematic review with cost analysis, security checks, best practices
 ```
 
-### Project Planning
+### Standardized Development Workflows
 
-Reference architecture files for complex decisions:
+Execute standardized development processes:
+
+```text
+User: /commit
+Claude: Runs 6-step validation process including security scanning, documentation updates, PR creation
+```
 
 ```text
 User: "Help me plan a new homelab project structure"
-AI: References .copilot/WORKSPACE.md for standards and patterns
+Claude: References .copilot/WORKSPACE.md and .claude/CLAUDE.md for standards and patterns
 ```
+
+### Cross-System Benefits
+
+Both AI systems share the same preferences and standards:
+
+- **Cost Management**: AWS us-east-2 region preference with budget guidelines
+- **Security**: Comprehensive scanning for secrets, SSH keys, and sensitive data  
+- **Documentation**: Automated CHANGELOG.md updates with calendar versioning
+- **Code Quality**: Terraform/Terragrunt validation and formatting standards
 
 ## Cost Considerations
 
@@ -110,9 +139,11 @@ For complete setup and implementation details, see [IMPLEMENTATION_GUIDE.md](IMP
 
 ### Review Process
 
-- Use conventional commit prefixes (`feat:`, `fix:`, `docs:`, `refactor:`)
-- Update related files when making cross-cutting changes
-- Test instructions with actual AI interactions before finalizing
+- **Claude Code Workflow**: Use `/commit` command for comprehensive 6-step validation process
+- **Conventional Commits**: Automatic generation of proper commit prefixes (`feat:`, `fix:`, `docs:`, `refactor:`)
+- **Cross-Reference Updates**: Automated detection and updating of related files
+- **Validation**: Comprehensive security scanning, markdown linting, and infrastructure validation
+- **Documentation**: Automatic CHANGELOG.md updates with calendar versioning
 
 ## Maintenance
 
@@ -124,10 +155,12 @@ For complete setup and implementation details, see [IMPLEMENTATION_GUIDE.md](IMP
 
 ### Quality Metrics
 
-- Consistent code formatting across projects
-- Reduced manual intervention in AI workflows
-- Cost-effective resource utilization
-- Standardized documentation practices
+- **Automated Validation**: 6-step commit process with comprehensive security scanning
+- **Consistent Formatting**: Automated code formatting and markdown linting across projects
+- **Cost Optimization**: Built-in AWS cost awareness and resource optimization
+- **Security Compliance**: Pre-commit scanning for sensitive data and infrastructure validation
+- **Documentation Standards**: Calendar versioning with automated CHANGELOG.md updates
+- **Dual AI Integration**: Seamless operation across GitHub Copilot and Claude Code systems
 
 ## Support
 
@@ -140,5 +173,5 @@ For questions or improvements:
 
 ---
 
-*Last updated: June 4, 2025*  
-*See [ARCHITECTURE.md](.copilot/ARCHITECTURE.md) for technical implementation details*
+*Last updated: June 22, 2025*  
+*See [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) for complete setup details and [ARCHITECTURE.md](.copilot/ARCHITECTURE.md) for technical implementation*

@@ -85,10 +85,18 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 - Detailed explanation of infrastructure changes and reasoning
 - Impact assessment and affected resource documentation
 
+**PLANNING.md Update (Mandatory):**
+
+- **Always update PLANNING.md** as part of every commit process
+- **Move completed tasks to CHANGELOG.md**
+- **Add any incomplete tasks**
+- **Update entire file for proper ordering**
+
 **CHANGELOG.md Update (Mandatory):**
 
 - **Always update CHANGELOG.md** as part of every commit process
 - **Today's Date Section**: Add changes to `YYYY-MM-DD` section first
+- **Update entire file to consolidate duplicate entries**
 
 **CHANGELOG.md Update Process:**
 
@@ -113,11 +121,11 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 ```markdown
 ## 2025-06-21
 ### Added
-- Comprehensive 6-step commit workflow with validation and security scanning
+- Added <xyz> feature to <problem addressed>
 - Enhanced Claude Code permissions for terraform and infrastructure operations
 
 ### Changed
-- Calendar versioning adoption (YY.M.DD format) for consistent release tracking
+- Updated <xyz> feature to <problem addressed>
 - Documentation standards with plan-first methodology integration
 ```
 
@@ -277,7 +285,7 @@ Impact assessment and affected resources.
 
 - **Always plan before execution**: Break complex commits into clear steps
 - **Use TodoWrite/TodoRead**: Track progress through complex commit processes
-- **Document in PLANNING.md**: For major infrastructure changes
+- **Document in PLANNING.md**: All open TODOs and incomplete tasks
 - **Maintain clear context**: Ensure all stakeholders understand impact
 
 ### Parallel Execution Optimization

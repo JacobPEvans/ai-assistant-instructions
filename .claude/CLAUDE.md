@@ -1,5 +1,7 @@
 # Claude Code Standardized Documentation
 
+<!-- markdownlint-disable-file MD024 -->
+
 ## Overview
 
 This repository contains standardized Claude Code documentation, configurations, and best
@@ -30,12 +32,12 @@ Based on <https://docs.anthropic.com/en/docs/claude-code> best practices:
 └── best-practices/     # Technology-specific best practices
 ```
 
-## Keep a Changelog Guidelines
+## `CHANGELOG.md` Guidelines
 
 ### Purpose
 
-Changelogs help users and contributors understand the evolution of software through clear, readable change documentation.
-Changelogs are for completed tasks - not in-progress or future tasks.
+`CHANGELOG.md` help users and contributors understand the evolution of software through clear, readable change documentation.
+`CHANGELOG.md` is for completed tasks - not in-progress or future tasks.
 
 ### Format Guidelines
 
@@ -68,19 +70,22 @@ Changelogs are for completed tasks - not in-progress or future tasks.
 
 ## 2024-12-31
 ### Added
+- Specific accomplishment
 - Initial release
 ### Changed
 - Updated dependency Y
+- Results achieved
 ### Fixed
 - Resolved issue with Z
 ```
 
-### Project Planning Templates
+## `PLANNING.md` Guidelines
 
-#### PLANNING.md Structure
+### Purpose and Requirements
 
 Every projet must have and maintain a PLANNING.md file.
-PLANNING.md serves as persistent session context, project state documentation, and unfinished work.
+`PLANNING.md` is for in-progress and future tasks - not competed tasks.
+`PLANNING.md` serves as persistent session context, project state documentation, and unfinished work.
 
 Maintain a `PLANNING.md` file with this structure:
 
@@ -88,12 +93,6 @@ Maintain a `PLANNING.md` file with this structure:
 # Project Status & Planning
 
 ## Current Session Progress
-
-### ✅ Completed Tasks
-1. **Task Category Name**
-   - Specific accomplishment
-   - Tools/configurations verified
-   - Results achieved
 
 ### 📋 Remaining Tasks
 1. **Priority Level Tasks** (HIGH/MEDIUM/LOW PRIORITY)
@@ -110,7 +109,7 @@ Maintain a `PLANNING.md` file with this structure:
 - **Tools**: Technology stack in use
 
 ### Key Files
-- `filename.ext` - Brief description of purpose
+- `<filename.ext>` - Brief description of purpose
 - Configuration files and their roles
 - Important documentation references
 
@@ -131,14 +130,14 @@ Maintain a `PLANNING.md` file with this structure:
 - Known limitations or constraints
 ```
 
-### System Prompt Guidelines
+## System Prompt Guidelines
 
 - Use the `system` parameter to define Claude's role
 - Be specific with role definitions (e.g., "Infrastructure Engineer specializing in Terraform")
 - Provide domain-specific context for better performance
 - Put task-specific instructions in user messages
 
-### Development Workflow Principles
+## Development Workflow Principles
 
 1. **Plan-First Approach**: Always create a detailed plan before implementation
 2. **Parallel Tool Execution**: Perform multiple independent operations simultaneously wherever possible
@@ -149,7 +148,7 @@ Maintain a `PLANNING.md` file with this structure:
 7. **Todo Management**: Use todo lists to track complex multi-step tasks
 8. **Versioning**: Follow Calendar Versioning (e.g. 24.12.31 for December 31, 2024)
 
-### Code Quality Standards
+## Code Quality Standards
 
 - Follow existing code conventions and patterns
 - Verify library/framework availability before use
@@ -159,7 +158,7 @@ Maintain a `PLANNING.md` file with this structure:
 - Ensure all specific SSH key names are covered by .gitignore patterns
 - Focus on generalizable, robust solutions
 
-### Infrastructure Automation
+## Infrastructure Automation
 
 - Always plan before applying changes
 - Implement proper error handling
