@@ -39,7 +39,7 @@ execution, and terminal operations.
 - ✅ **Organize**: Update .gitignore for files that shouldn't be committed if needed
 - ✅ **Quality**: Run appropriate formatting/linting tools
 - ✅ **Security**: Verify no secrets or sensitive information
-- ✅ **Verify**: Analyze changes with `git diff --cached` and `git diff --stat`
+- ✅ **Verify**: Analyze changes with `git status -v -v`
 - ✅ **Branch**: Create appropriate branch if needed
 - ✅ **Stage**: Add files to staging area
 - ✅ **Commit**: Use `.copilot-commit-message-instructions.md` for consistent format
@@ -95,15 +95,13 @@ markdownlint-cli2    # For Markdown files
 
 3.1. **Analyze all changes made**
 
-   ```powershell
-   echo "=== Review staged changes with 'git diff -w --cached' ===" && `
-   git diff -w --cached && `
-   echo "=== Review unstaged changes with 'git diff' ===" && `
-   git diff -w --status && `
-   echo "=== Review commit history ===" && `
+   ```bash
+   echo "=== Review changes with 'git status -v -v' ===" && \
+   git status -v -v \
+   echo "=== Review commit history ===" && \
    git log --oneline HEAD..origin/main
 
-   echo "=== Review all actual changes ===" && `
+   echo "=== Review all actual changes ===" && \
    git diff -w --histogram --minimal --unified=0 --no-color
    ```
 

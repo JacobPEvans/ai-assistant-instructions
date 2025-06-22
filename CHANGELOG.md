@@ -1,9 +1,38 @@
 # Changelog
 
+<!-- markdownlint-disable-file MD024 -->
+
 All notable changes to the ai-assistant-instructions project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/).
+
+## 2025-06-22
+
+### Added
+
+- Git Standard Commits reference integration in commit workflow
+- AWS DynamoDB permissions for infrastructure monitoring (list-tables, scan)
+- Comprehensive security scanning including SSH keys and usernames
+- Precise Terraform/Terragrunt permissions with version checking
+- Enhanced Claude Code repository structure following .claude/ standards
+
+### Changed
+
+- Modernized git workflow to use git status -v -v for change analysis
+- Optimized GitHub Actions timeouts for improved CI/CD efficiency
+- Streamlined commit workflow validation requirements
+- Refined changelog documentation for clarity
+- Enhanced parallel execution guidelines for better performance
+- Enhanced commit workflow with changelog cleanup and validation guidelines
+- Fixed CHANGELOG.md markdown linting compliance with MD024 directive
+- Converted PR template from YAML to proper markdown format following GitHub best practices
+- Refined Claude Code permissions for better security and specificity
+
+### Security
+
+- Expanded sensitive data scanning to include SSH keys and usernames
+- Implemented precise permission controls replacing broad wildcards
 
 ## 2025-06-21
 
@@ -41,9 +70,6 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 - Code quality standards and infrastructure automation guidelines
 - Project planning templates for complex development tasks
 - Documentation standards for public/private repository separation
-
-### Security
-
 - Proper separation of security-sensitive information
 - Guidelines for placeholder values in public repositories
 - Best practices for secrets management and access control

@@ -1,49 +1,60 @@
----
-name: "📝 Pull Request"
-title: "feat: "
-labels: enhancement
-body:
+<!-- Provide a general summary of your changes in the Title above -->
 
-- type: markdown
-    attributes:
-      value: |
-        Thank you for your contribution! Please ensure your pull request adheres to the project's standards.
+## Pull Request Type
 
-- type: textarea
-    id: description
-    attributes:
-      label: "Description"
-      description: "Provide a clear and concise description of the changes. What is the purpose of this pull request?
-        What problem does it solve?"
-    validations:
-      required: true
+<!-- What kind of change does this PR introduce? Please check one that applies to this PR. -->
 
-- type: input
-    id: issue-link
-    attributes:
-      label: "Related Issue"
-      description: "Link to the issue that this pull request addresses. e.g., Closes #123"
-      placeholder: "Closes #"
-    validations:
-      required: false
+- [ ] 🚀 Feature (new functionality, infrastructure resources, or enhancements)
+- [ ] 🐛 Bug fix (fixes an issue or incorrect configuration)
+- [ ] 📝 Documentation (updates to documentation, README, or guides)
+- [ ] 🔧 Maintenance (dependency updates, refactoring, or tooling changes)
+- [ ] 🛡️ Security (security improvements or vulnerability fixes)
+- [ ] ⚡ Performance (performance improvements or optimizations)
+- [ ] 🗑️ Removal (removing features, files, or deprecated functionality)
+- [ ] 🔄 Other (please describe):
 
-- type: checkboxes
-    id: checklist
-    attributes:
-      label: "Checklist"
-      description: "Please confirm the following before submitting your pull request."
-      options:
-        - label: "I have read the [**CONTRIBUTING.md**](CONTRIBUTING.md) document."
-          required: true
-        - label: "My commit message follows the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification."
-          required: true
-        - label: "I have updated the [**CHANGELOG.md**](CHANGELOG.md) with a description of my changes."
-          required: true
-        - label: "I have removed completed tasks from [**PLANNING.md**](PLANNING.md) and added new tasks as needed."
-          required: true
-        - label: "I have performed a self-review of my own code."
-          required: true
-        - label: "I have added or updated tests to cover my changes."
-          required: false
-        - label: "All new and existing tests passed."
-          required: false
+## Description
+
+<!-- Provide a clear and concise description of your changes -->
+
+### Current Behavior
+<!-- Describe the current behavior/state before your changes -->
+
+### New Behavior
+<!-- Describe what changes with your PR -->
+
+- 
+- 
+- 
+
+## Related Issue
+
+<!-- Link to the issue that this pull request addresses -->
+<!-- Example: Closes #123 or Fixes #456 -->
+
+## Testing and Validation
+
+<!-- Describe the testing you've performed or validation steps -->
+
+- [ ] All markdown files pass linting validation
+- [ ] Infrastructure validation (if applicable)
+- [ ] Manual testing performed
+- [ ] No breaking changes introduced
+
+## Checklist
+
+<!-- Please confirm the following before submitting your pull request -->
+
+- [ ] I have read the project documentation and guidelines
+- [ ] My commit message follows the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification
+- [ ] I have updated the [**CHANGELOG.md**](CHANGELOG.md) with a description of my changes
+- [ ] I have removed completed tasks from [**PLANNING.md**](PLANNING.md) and added new tasks as needed
+- [ ] I have performed a self-review of my own code/documentation
+- [ ] I have added or updated tests to cover my changes (if applicable)
+- [ ] All security scanning and validation checks pass
+
+## Additional Information
+
+<!-- Add any additional context, screenshots, or information that would be helpful for reviewers -->
+
+<!-- Thank you for your contribution! 🎉 -->

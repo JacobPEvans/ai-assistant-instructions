@@ -11,8 +11,9 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 
 ## External References
 
-- [Claude Simone Commit](https://github.com/Helmi/claude-simone/blob/master/.claude/commands/simone/commit.md)
+- [Git Standard Commits](https://github.com/standard-commits/standard-commits/blob/main/README.md)
 - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0)
+- [Claude Simone Commit](https://github.com/Helmi/claude-simone/blob/master/.claude/commands/simone/commit.md)
 - [Graphite.dev Git Commit Message Best Practices](https://graphite.dev/guides/git-commit-message-best-practices)
 - [Keep a Living Changelog](https://keepachangelog.com/en/1.0.0/)
 - [GitHub CLI Documentation](https://cli.github.com/manual/)
@@ -24,8 +25,8 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 **Documentation Validation:**
 
 - `markdownlint-cli2` - Check all markdown files for formatting issues
-- Attempt to resolve automatically using `markdownlint --fix`
-- Ensure `markdownlint-cli2` returns no issues before continuing
+- Attempt to resolve automatically using `markdownlint-cli2 --fix`
+- `markdownlint-cli2` **must** return no issues before continuing
 
 **Infrastructure Validation:**
 
@@ -36,19 +37,18 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 
 **Security & Quality Checks:**
 
-- Sensitive data scanning (API keys, passwords, certificates)
+- Scan for sensitive data (API keys, SSH keys, usernames, passwords, certificates)
 - Resource naming convention validation
 - Network configuration security review
 - State file implications assessment
 
 ### 2. Repository Analysis & Argument Parsing
 
-- Determines repository type (`gh repo view --json visibility`)
-- Reviews all changes with parallel operations:
-  - `git status` - Current working tree status
-  - `git diff --staged` - Staged changes analysis
-  - `git diff` - Unstaged changes analysis
-  - `git log --oneline -10` - Recent commit context
+- Stage all modified files with `git add .`
+- Determine repository type (`gh repo view --json visibility`)
+- Review all changes with parallel operations:
+  - `git status -v -v` - View all changes in the working directory
+  - `git log --oneline -3` - Recent commit context
 - Parse any provided arguments (task IDs, sprint context, user instructions)
 - Analyze change scope, impact, and dependencies
 
@@ -105,6 +105,8 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 4. **Format Entry**: Use bullet points starting with action verbs (e.g., "Enhanced", "Added", "Fixed")
 5. **Include Context**: Reference relevant components, files, or systems affected
 6. **Maintain Readability**: Write for end users, not developers - avoid technical jargon
+7. **Clean Up Old Entries**: Remove oldest duplicate entries older than 1 month to keep the changelog concise
+8. **Documentation Validation**: Rerun `markdownlint-cli2` and fix all issues to ensure no formatting issues after updates
 
 **CHANGELOG.md Entry Examples:**
 
@@ -280,9 +282,7 @@ Impact assessment and affected resources.
 
 ### Parallel Execution Optimization
 
-- **Concurrent validation**: Run multiple validation checks simultaneously
-- **Batch git operations**: Execute `git status`, `git diff`, `git log` in parallel
-- **Multi-tool analysis**: Combine terraform, security, and quality checks
+- Run commands in parallel where possible
 
 ### Context Preservation
 
