@@ -6,6 +6,7 @@
       "Bash(aws dynamodb scan:*)",
       "Bash(curl:*)",
       "Bash(diff:*)",
+      "Bash(echo:*)",
       "Bash(export:*)",
       "Bash(find:*)",
       "Bash(gh auth status:*)",
