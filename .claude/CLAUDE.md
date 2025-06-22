@@ -84,7 +84,7 @@ Based on <https://docs.anthropic.com/en/docs/claude-code> best practices:
 ### Purpose and Requirements
 
 Every projet must have and maintain a PLANNING.md file.
-`PLANNING.md` is for in-progress and future tasks - not competed tasks.
+`PLANNING.md` is for in-progress and future tasks - not completed tasks.
 `PLANNING.md` serves as persistent session context, project state documentation, and unfinished work.
 
 Maintain a `PLANNING.md` file with this structure:
