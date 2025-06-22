@@ -34,9 +34,8 @@ Based on <https://docs.anthropic.com/en/docs/claude-code> best practices:
 
 ### Purpose
 
-Changelogs are for humans, not machines. They help users and contributors understand the evolution of software through
-clear, readable change documentation.
-Changelogs are for completed tasks, not in-progress or future tasks.
+Changelogs help users and contributors understand the evolution of software through clear, readable change documentation.
+Changelogs are for completed tasks - not in-progress or future tasks.
 
 ### Format Guidelines
 

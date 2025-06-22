@@ -1,8 +1,11 @@
 {
   "permissions": {
     "allow": [
+      "Bash(aws dynamodb list-tables:*)",
+      "Bash(aws dynamodb scan:*)",
       "Bash(curl:*)",
       "Bash(diff:*)",
+      "Bash(export:*)",
       "Bash(find:*)",
       "Bash(gh * view:*)",
       "Bash(gh auth:*)",
@@ -34,10 +37,14 @@
       "Bash(terraform fmt:*)",
       "Bash(terraform plan:*)",
       "Bash(terraform validate:*)",
+      "Bash(terraform version:*)",
       "Bash(terragrunt force-unlock:*)",
       "Bash(terragrunt plan:*)",
-      "Bash(terragrunt:*)",
+      "Bash(terragrunt show:*)",
+      "Bash(terragrunt validate:*)",
+      "Bash(terragrunt version:*)",
       "Bash(test:*)",
+      "List(~)",
       "WebFetch(domain:anthropic.com)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:githubusercontent.com)",
