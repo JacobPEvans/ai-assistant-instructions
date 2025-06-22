@@ -148,7 +148,7 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 
 **PR Comment Resolution Process (MANDATORY):**
 
-🚨 **CRITICAL REQUIREMENT**: Pull requests cannot be merged until ALL comments and conversations on the pull request are resolved.
+🚨 **CRITICAL REQUIREMENT**: Pull requests cannot be merged until ALL comments and conversations are resolved.
 
 **Step-by-Step Resolution Process:**
 
@@ -171,7 +171,6 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 - 🚫 **Never ignore reviewer feedback** - All input must be acknowledged
 
 **Before Merge Verification:**
-
 - Run `gh pr view PR_NUMBER --comments` to verify no unresolved comments remain
 - Confirm all CI checks pass with `gh pr checks PR_NUMBER`
 - Validate all conversations are marked as resolved on GitHub

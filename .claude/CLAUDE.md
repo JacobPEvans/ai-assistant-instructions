@@ -225,7 +225,6 @@ Use GraphQL when `gh` CLI cannot access PR comments/conversations:
 - ✅ Breaking changes properly documented and approved
 
 **Quality Gates:**
-
 - **Security Scanning**: No API keys, secrets, or sensitive data exposed
 - **Code Standards**: Follows established patterns and conventions
 - **Test Coverage**: Adequate testing for new functionality

@@ -28,6 +28,7 @@ jobs:
       - name: Run Claude Code Review
         id: claude-review
         uses: anthropics/claude-code-action@beta
+        timeout-minutes: 4
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
 
