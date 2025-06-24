@@ -47,8 +47,9 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 
 - Stage files logically per approved grouping
 - Determine repository type (`gh repo view --json visibility`)
-- Review all changes with parallel operations:
+- **CRITICAL**: Review all changes with parallel operations:
   - `git status -v -v` - View all changes in the working directory
+    - This is **mandatory** to understand the out-of-context file changes
   - `git log --oneline -3` - Recent commit context
 - Parse any provided arguments (task IDs, sprint context, user instructions)
 - Analyze change scope, impact, and dependencies
@@ -171,6 +172,7 @@ Creates standardized commits with thorough pre-planning, validation, and proper 
 - 🚫 **Never ignore reviewer feedback** - All input must be acknowledged
 
 **Before Merge Verification:**
+
 - Run `gh pr view PR_NUMBER --comments` to verify no unresolved comments remain
 - Confirm all CI checks pass with `gh pr checks PR_NUMBER`
 - Validate all conversations are marked as resolved on GitHub

@@ -7,6 +7,20 @@ All notable changes to the ai-assistant-instructions project will be documented 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/).
 
+## 2025-06-24
+
+### Added
+
+- Enhanced infrastructure automation permissions (terraform init, terragrunt apply, terragrunt state)
+
+### Changed
+
+- Enhanced Claude Code documentation with clearer methodology section titles
+- Improved commit workflow documentation with critical emphasis on change review
+- Reverted Claude GitHub Actions workflow to default Sonnet 4 model for optimal performance
+- Fixed GitHub Actions Terraform workflow YAML syntax (timeout_minutes → timeout-minutes)
+- Cleaned up CHANGELOG.md references to maintain accuracy
+
 ## 2025-06-22
 
 ### Added
@@ -23,7 +37,6 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 
 - Optimized Claude GitHub Actions workflow for automatic pull request reviews
 - Consolidated duplicate workflows into single streamlined claude.yml configuration
-- Updated to Claude Opus 4 model with 4-minute timeout optimization
 - Enhanced commit workflow documentation with auto-merge support
 - Enhanced Claude Code documentation standards with improved structure and clarity
 - Updated implementation guide to reflect dual AI system architecture (GitHub Copilot + Claude Code)
