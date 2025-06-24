@@ -10,7 +10,7 @@ consistent development workflows.
 
 ## Claude Code Best Practices
 
-### Anthropic Official Methodology: Plan First
+### Anthropic Official Methodology: Finalize a Complete Plan Before Execution
 
 Based on <https://docs.anthropic.com/en/docs/claude-code> best practices:
 
@@ -20,17 +20,6 @@ Based on <https://docs.anthropic.com/en/docs/claude-code> best practices:
 4. **Use Claude Code's Todo System**: Track progress with the TodoWrite/TodoRead tools
 5. **Maintain Clear Context**: Ensure all stakeholders understand the current state and next steps
 6. **Move completed tasks from PLANNING.md to CHANGELOG.md**: Keep a record of all completed tasks.
-
-## Repository Structure
-
-```text
-.claude/
-├── CLAUDE.md           # This file - standardized documentation
-├── settings.local.json # Local Claude Code permissions
-├── templates/          # Project templates and boilerplates
-├── workflows/          # Common development workflows
-└── best-practices/     # Technology-specific best practices
-```
 
 ## `CHANGELOG.md` Guidelines
 
@@ -225,6 +214,7 @@ Use GraphQL when `gh` CLI cannot access PR comments/conversations:
 - ✅ Breaking changes properly documented and approved
 
 **Quality Gates:**
+
 - **Security Scanning**: No API keys, secrets, or sensitive data exposed
 - **Code Standards**: Follows established patterns and conventions
 - **Test Coverage**: Adequate testing for new functionality
