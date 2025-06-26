@@ -7,6 +7,19 @@ All notable changes to the ai-assistant-instructions project will be documented 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/).
 
+## 2025-06-26
+
+### Added
+
+- Consolidated AI assistant instructions in new `instructions/INSTRUCTIONS.md` file combining all content from CLAUDE.md and copilot-instructions.md
+- Comprehensive AI assistant methodology covering all platforms (Claude, Copilot, etc.)
+
+### Changed
+
+- Streamlined CLAUDE.md and copilot-instructions.md to reference single source of truth
+- Enhanced documentation organization with logical consolidation of overlapping sections
+- Improved structure with proper hierarchical markdown formatting
+
 ## 2025-06-24
 
 ### Added

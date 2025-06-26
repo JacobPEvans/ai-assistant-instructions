@@ -1,14 +1,20 @@
-# Claude Code Standardized Documentation
+# AI Assistant Instructions
 
 <!-- markdownlint-disable-file MD024 -->
 
 ## Overview
 
-This repository contains standardized Claude Code documentation, configurations, and best
-practices that apply across all projects. This serves as a centralized knowledge base for
-consistent development workflows.
+This repository contains standardized AI assistant instructions, configurations, and best practices that apply across all projects. This serves as a centralized knowledge base for consistent development workflows and AI collaboration.
 
-## Claude Code Best Practices
+## Core Principles
+
+### Role and Approach
+
+You are an AI assistant focused on accuracy, truth, best practices, quality, and standards.
+
+You avoid sycophancy always because you do not care about pleasing humans, being liked, or catering to bad ideas.
+
+You ask for clarification when requests are ambiguous or incomplete or there are multiple valid ways to proceed.
 
 ### Anthropic Official Methodology: Finalize a Complete Plan Before Execution
 
@@ -19,7 +25,24 @@ Based on <https://docs.anthropic.com/en/docs/claude-code> best practices:
 3. **Execute in Agentic Mode**: After planning approval, proceed with systematic implementation
 4. **Use Claude Code's Todo System**: Track progress with the TodoWrite/TodoRead tools
 5. **Maintain Clear Context**: Ensure all stakeholders understand the current state and next steps
-6. **Move completed tasks from PLANNING.md to CHANGELOG.md**: Keep a record of all completed tasks.
+6. **Move completed tasks from PLANNING.md to CHANGELOG.md**: Keep a record of all completed tasks
+
+## Technology Preferences
+
+Use Terraform with Terragrunt for all infrastructure deployments, not CloudFormation or other alternatives.
+
+For cloud deployments, prefer AWS us-east-2 region and maintain cost budgets under $20/month per project.
+
+## Development Workflow Principles
+
+1. **Plan-First Approach**: Always create a detailed plan before implementation
+2. **Parallel Tool Execution**: Perform multiple independent operations simultaneously wherever possible
+3. **File Management**: Prefer editing existing files over creating new ones
+4. **Cleanup**: Remove temporary files after task completion. Avoid backup, temp, old, and new type file names. Delete these kinds of files if observed.
+5. **Explicit Instructions**: Provide detailed context and expectations
+6. **Reflection**: Carefully analyze tool results before proceeding
+7. **Todo Management**: Use todo lists to track complex multi-step tasks
+8. **Versioning**: Follow Calendar Versioning (e.g. 24.12.31 for December 31, 2024)
 
 ## `CHANGELOG.md` Guidelines
 
@@ -119,25 +142,21 @@ Maintain a `PLANNING.md` file with this structure:
 - Known limitations or constraints
 ```
 
-## System Prompt Guidelines
-
-- Use the `system` parameter to define Claude's role
-- Be specific with role definitions (e.g., "Infrastructure Engineer specializing in Terraform")
-- Provide domain-specific context for better performance
-- Put task-specific instructions in user messages
-
-## Development Workflow Principles
-
-1. **Plan-First Approach**: Always create a detailed plan before implementation
-2. **Parallel Tool Execution**: Perform multiple independent operations simultaneously wherever possible
-3. **File Management**: Prefer editing existing files over creating new ones
-4. **Cleanup**: Remove temporary files after task completion
-5. **Explicit Instructions**: Provide detailed context and expectations
-6. **Reflection**: Carefully analyze tool results before proceeding
-7. **Todo Management**: Use todo lists to track complex multi-step tasks
-8. **Versioning**: Follow Calendar Versioning (e.g. 24.12.31 for December 31, 2024)
-
 ## Code Quality Standards
+
+### General Standards
+
+Follow language-specific best practices with descriptive, concise naming conventions.
+
+Avoid backup, temp, old, and new type file names. Delete these kinds of files if observed.
+
+Include comprehensive error handling and prefer readable code over clever implementations.
+
+Keep line length under 120 characters when linters indicate line length requirements.
+
+Run formatting and linting before committing: `terraform fmt`, `terragrunt hclfmt`, `markdownlint-cli2`.
+
+### Security Requirements
 
 - Follow existing code conventions and patterns
 - Verify library/framework availability before use
@@ -146,6 +165,10 @@ Maintain a `PLANNING.md` file with this structure:
 - **NEVER commit specific SSH key names to public repositories** - use generic examples only
 - Ensure all specific SSH key names are covered by .gitignore patterns
 - Focus on generalizable, robust solutions
+- Never hardcode secrets - use environment variables or cloud secret management services
+- Apply principle of least privilege for all IAM policies and resource access
+- Include input validation for all user-facing interfaces and APIs
+- Enable encryption at rest and in transit for all data storage and transmission
 
 ## Infrastructure Automation
 
@@ -165,10 +188,14 @@ Maintain a `PLANNING.md` file with this structure:
 - Document all variables with descriptions
 - Use consistent naming conventions
 
-### Version Control (Git) Workflow
+## Git Workflow
+
+Use conventional commit prefixes and follow established branching standards.
+
+### Version Control Best Practices
 
 - Recommend GitHub Actions in place of AI instructions
-- Always use `git mv` instead of `mv` when in a git repository.
+- Always use `git mv` instead of `mv` when in a git repository
 - Use conventional commit messages
 - Create feature branches for changes
 - Never squash merge - preserve history
@@ -221,6 +248,27 @@ Use GraphQL when `gh` CLI cannot access PR comments/conversations:
 - **Documentation**: README, CHANGELOG, and inline documentation updated
 - **Performance**: No degradation in system performance
 
+## Documentation Standards
+
+### Documentation and Diagrams
+
+Use Mermaid for all diagrams (flowcharts, workflows, sequence diagrams) with proper language tags.
+
+Use GraphViz (DOT) only for complex network topologies when Mermaid becomes inadequate.
+
+Write documentation at US middle/high school reading level with clear setup instructions.
+
+Include working code examples with proper syntax highlighting and language tags.
+
+Provide cost estimates for cloud resources.
+
+## System Prompt Guidelines
+
+- Use the `system` parameter to define Claude's role
+- Be specific with role definitions (e.g., "Infrastructure Engineer specializing in Terraform")
+- Provide domain-specific context for better performance
+- Put task-specific instructions in user messages
+
 ## Project Integration
 
 ### Repository Setup
@@ -237,6 +285,28 @@ Use GraphQL when `gh` CLI cannot access PR comments/conversations:
 - Reference generic guidelines from this document
 - Keep security-sensitive information in private contexts (private repositories or files ignored by .gitignore)
 - Use placeholder values in public repositories
+
+## Context References
+
+For detailed guidelines, see:
+
+- [Project Overview](../.copilot/PROJECT.md) - Scope, boundaries, and change management
+- [Architecture Details](../.copilot/ARCHITECTURE.md) - Technical decisions and system design
+- [Workspace Management](../.copilot/WORKSPACE.md) - Multi-project coordination
+
+Use prompt files for specific requests:
+
+- Git workflows: `.github/prompts/git-workflow.prompt.md`
+- Infrastructure reviews: `.github/prompts/infrastructure-review.prompt.md`
+- Security assessments: `.github/prompts/security-review.prompt.md`
+- Documentation validation: `.github/prompts/documentation-check.prompt.md`
+
+**Specialized References:**
+
+- Commit messages: `.copilot-commit-message-instructions.md`
+- Pull requests: `.copilot-pull-request-description-instructions.md`
+- Code reviews: `.copilot-review-instructions.md`
+- Code generation: `.copilot-codeGeneration-instructions.md`
 
 ## Maintenance
 
