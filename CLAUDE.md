@@ -1,7 +1,5 @@
 # Claude Instructions
 
-The single source of truth for all AI assistant instructions is located in the following file:
+All instructions for this project have been centralized.
 
-[AI Assistant Instructions](./instructions/INSTRUCTIONS.md)
-
-Please refer to that file for all instructions.
+Please refer to the instructions in the [`.ai-instructions`](./.ai-instructions/INSTRUCTIONS.md) directory.
