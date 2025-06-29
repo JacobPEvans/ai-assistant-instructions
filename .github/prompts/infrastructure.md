@@ -1,6 +1,6 @@
-# Infrastructure Development Prompts
+# GitHub Prompt: Infrastructure Development
 
 This file references the centralized prompts for infrastructure development tasks.
 
-- **[Review Infrastructure](../.ai-instructions/prompts/infrastructure-review.md)**
-- **[Generate Code](../.ai-instructions/prompts/generate-code.md)**
+- **[Review Infrastructure](../../.ai-instructions/commands/infrastructure-review.md)**
+- **[Generate Code](../../.ai-instructions/commands/generate-code.md)**
