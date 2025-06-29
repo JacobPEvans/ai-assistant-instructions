@@ -2,45 +2,26 @@
 
 ## Current Session Progress
 
-### 📋 Remaining Tasks
-
-Currently no remaining tasks - all documentation and infrastructure enhancements completed.
+All major refactoring and consolidation of the AI instructions are complete.
+The repository now follows the DRY principle with a single source of truth in the `.ai-instructions` directory.
 
 ## Repository Context
 
-### Infrastructure Overview
-
-- **Target**: Standardized Claude Code documentation and workflows
-- **Purpose**: Centralized knowledge base for consistent development practices across all projects
-- **Tools**: Claude Code, GitHub Actions, Terraform/Terragrunt, Markdown linting
+- **Target**: Standardized, vendor-agnostic AI assistant instructions.
+- **Purpose**: To provide a centralized, maintainable, and extensible knowledge base for consistent AI-assisted development workflows.
+- **Tools**: GitHub Actions, Markdown linting, various AI assistants (Claude, Copilot, etc.).
 
 ### Key Files
 
-- `.claude/CLAUDE.md` - Master documentation for Claude Code standards and best practices
-- `.claude/commands/commit.md` - Comprehensive 6-step commit workflow documentation
-- `.claude/settings.json` - Claude Code permissions and tool configurations
-- `.github/workflows/` - CI/CD automation for Claude and Terraform workflows
-- `CHANGELOG.md` - Project evolution tracking with calendar versioning
-- `PLANNING.md` - This file - session context and task management
+- `.ai-instructions/` - The single source of truth for all instructions, commands, and concepts.
+- `.claude/`, `.github/`, `.copilot/` - Vendor-specific directories that now contain only links to the files in `.ai-instructions`.
+- `CHANGELOG.md` - Tracks all notable changes to the project.
+- `PLANNING.md` - This file, used for planning future work.
 
-### Network/Environment Status
+## Next Session Actions & Future Improvements
 
-- ✅ Repository is public with appropriate security measures
-- ✅ GitHub Actions workflows validated and optimized
-- ✅ Markdown linting compliance verified
-- ✅ All documentation standards updated and consistent
-
-## Next Session Actions
-
-1. Monitor GitHub Actions workflow performance after model reversion
-2. Validate terraform/terragrunt permissions in real infrastructure scenarios
-3. Gather feedback on documentation clarity improvements
-4. Consider additional security permission refinements as needed
-
-## Notes
-
-- Documentation enhancements focus on clarity and actionable guidance
-- Infrastructure permissions expanded to support full automation workflows
-- CI/CD optimizations balance performance with functionality
-- Maintained backward compatibility across all changes
-- Public repository security maintained with no sensitive data exposure
+- **Automated Link Checking**: Implement a GitHub Action to regularly check for broken markdown links.
+- **Command Validation**: Explore creating a script that validates the structure of the vendor-specific directories.
+- **Add More Granular Commands**: Consider breaking down the existing commands into even more granular tasks.
+- **Expand Concepts**: Add more conceptual documents to the `.ai-instructions/concepts` directory.
+- **Re-evaluate Markdown Rules**: Re-visit the disabled markdown rules in `.markdownlint.yml` and fix the files to comply.
