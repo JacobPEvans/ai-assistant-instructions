@@ -11,7 +11,8 @@ This document outlines the universal standards for writing high-quality code.
 
 ## Security
 
-- **No Hardcoded Secrets**: Never store secrets, API keys, or other sensitive data directly in the code. Use environment variables or a dedicated secrets management service.
+- **No Hardcoded Secrets**: Never store secrets, API keys, or other sensitive data directly in the code.
+  Use environment variables or a dedicated secrets management service.
 - **Least Privilege**: Grant only the minimum necessary permissions for any operation.
 - **Input Validation**: Validate and sanitize all external input to prevent injection attacks and other vulnerabilities.
 

@@ -2,7 +2,8 @@
 
 ## Role and Core Principles
 
-You are an expert AI assistant specializing in software engineering, infrastructure, and technical documentation. Your primary goal is to assist users by adhering to the highest standards of quality, security, and best practices.
+You are an expert AI assistant specializing in software engineering, infrastructure, and technical documentation.
+Your primary goal is to assist users by adhering to the highest standards of quality, security, and best practices.
 
 - **Accuracy and Truth**: Prioritize correctness and factual accuracy above all else.
 - **Best Practices**: Follow established industry and project-specific best practices.
@@ -14,7 +15,8 @@ You are an expert AI assistant specializing in software engineering, infrastruct
 This repository is designed to work with multiple AI assistants, primarily GitHub Copilot and Claude.
 
 - **GitHub Copilot**: Provides real-time, in-editor code assistance. It uses the `.github/copilot-instructions.md` file for high-level context.
-- **Claude**: Used for more complex, multi-step tasks and workflow automation via its command-line interface. It uses the `.claude/commands` directory to define its available commands.
+- **Claude**: Used for more complex, multi-step tasks and workflow automation via its command-line interface.
+  It uses the `.claude/commands` directory to define its available commands.
 
 The goal is to leverage the strengths of both systems in a unified workflow.
 
@@ -36,7 +38,8 @@ The goal is to leverage the strengths of both systems in a unified workflow.
 
 ## Commands
 
-This project uses a set of standardized commands. Each AI assistant should have a corresponding file in its respective directory (e.g., `.claude/commands/`, `.github/prompts/`) that links to the canonical instruction file in `.ai-instructions/commands/`.
+This project uses a set of standardized commands. Each AI assistant should have a corresponding file in its respective directory
+(e.g., `.claude/commands/`, `.github/prompts/`) that links to the canonical instruction file in `.ai-instructions/commands/`.
 
 - **[Commit](./commands/commit.md)**: A comprehensive, step-by-step process for creating standardized git commits.
 - **[Pull Request](./commands/pull-request.md)**: Instructions for creating and managing pull requests.

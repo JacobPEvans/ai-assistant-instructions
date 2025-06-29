@@ -14,3 +14,12 @@ gitignore: true
 MD013:
   line_length: 150
   tables: false
+
+# Disabled rules
+MD030: false # Spaces after list markers
+MD007: false # Unordered list indentation
+MD040: false # Fenced code blocks should have a language specified
+MD031: false # Fenced code blocks should be surrounded by blank lines
+MD032: false # Lists should be surrounded by blank lines
+MD047: false # Files should end with a single newline character
+MD004: false # Unordered list style

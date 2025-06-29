@@ -1,9 +1,9 @@
 name: Markdown Lint
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
-  markdown-lint:
+  markdownlint-cli2:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

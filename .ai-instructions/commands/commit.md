@@ -30,12 +30,12 @@ graph TD
 Before committing, ensure you are on the correct branch. Never commit directly to `main`.
 
 - **Branch Naming**: Use a descriptive prefix and name, separated by a slash.
-    - `feat/<description>`: For new features.
-    - `fix/<description>`: For bug fixes.
-    - `docs/<description>`: For documentation-only changes.
-    - `chore/<description>`: For maintenance tasks (e.g., dependency updates).
-    - `refactor/<description>`: For code restructuring without changing functionality.
-    - `test/<description>`: For adding or modifying tests.
+  - `feat/<description>`: For new features.
+  - `fix/<description>`: For bug fixes.
+  - `docs/<description>`: For documentation-only changes.
+  - `chore/<description>`: For maintenance tasks (e.g., dependency updates).
+  - `refactor/<description>`: For code restructuring.
+  - `test/<description>`: For adding or modifying tests.
 - **Example**: `git checkout -b feat/add-user-authentication`
 
 ## Pre-Commit Validation
@@ -60,29 +60,31 @@ All commit messages must follow the [Conventional Commits](https://www.conventio
 
 ### Structure
 
-```
+```text
 <type>(<scope>): <subject>
-<BLANK LINE>
+
 <body>
-<BLANK LINE>
+
 <footer>
 ```
 
--   **Type**: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`.
--   **Scope** (optional): The part of the codebase affected (e.g., `auth`, `db`, `ui`).
--   **Subject**: A concise description of the change, in lowercase, under 72 characters.
--   **Body** (optional): A more detailed explanation of the changes, the "why" behind them, and any impact on cloud resource costs.
--   **Footer** (optional): Reference related issues (e.g., `Fixes #123`).
+- **Type**: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`.
+- **Scope** (optional): The part of the codebase affected (e.g., `auth`, `db`, `ui`).
+- **Subject**: A concise description of the change, in lowercase, under 72 characters.
+- **Body** (optional): A more detailed explanation of the changes, the "why" behind them, and any impact on cloud resource costs.
+- **Footer** (optional): Reference related issues (e.g., `Fixes #123`).
 
 ### Examples
 
 **Simple Commit:**
-```
+
+```bash
 feat(auth): implement passwordless login via email links
 ```
 
 **Complex Commit:**
-```
+
+```bash
 fix(api): resolve intermittent 502 errors on user-service
 
 The user-service was experiencing connection timeouts to the Redis cache
@@ -100,4 +102,4 @@ Refs: #456
 
 ## Finalizing the Commit
 
-After crafting the message, commit the changes using `git commit`. Then, push the branch to the remote repository (`git push -u origin <branch-name>`) and proceed to create a pull request.
+After crafting the message, commit the changes using `git commit`. Then, push the branch to the remote repository and proceed to create a pull request.
