@@ -41,20 +41,17 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 
 - **Broken Links**: Corrected multiple broken internal links in `.github`
   pointer files.
-
-### Fixed
-
 - **✅ MAJOR BREAKTHROUGH: PR Conversation Resolution**: Successfully resolved the GitHub PR conversation/comment resolution issue that was blocking PR automation.
   Developed and tested working GraphQL queries that can reliably:
   1. Get ALL pull request review threads and comments with resolution status
   2. Resolve individual conversations after fixing underlying issues
-  
+
   **Impact**: This breakthrough enables fully automated PR management workflows. The exact working GraphQL queries are documented in
   `pull-request-review-feedback.md` with detailed variable substitution examples.
-  
-  **Technical Details**: 
+
+  **Technical Details**:
   - Query: `repository.pullRequest.reviewThreads` with nested comments
-  - Mutation: `resolveReviewThread(input: {threadId})` 
+  - Mutation: `resolveReviewThread(input: {threadId})`
   - Successfully tested on python-template PR #2, resolving all 6 conversations
   - Added critical rule: NEVER suppress linters - always fix root causes
 

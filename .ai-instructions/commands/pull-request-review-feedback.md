@@ -1,6 +1,5 @@
 # Pull Request Review Feedback Management with GraphQL
 
-
 This document contains the **EXACT, TESTED, WORKING** GraphQL queries and commands for managing pull request review feedback and conversations.
 These queries have been successfully tested and verified to work.
 
@@ -9,6 +8,7 @@ These queries have been successfully tested and verified to work.
 ### **NEVER SUPPRESS LINTERS OR QUALITY CHECKS**
 
 **ABSOLUTE RULE:** You are **NEVER** allowed to suppress, ignore, or disable linting errors, type checking errors, or any code quality issues by:
+
 - Adding `# noqa` comments
 - Adding `# pylint: disable` comments
 - Adding `# type: ignore` comments
@@ -120,6 +120,7 @@ gh api graphql --field query="
 ```
 
 **Example Response Structure:**
+
 ```json
 {
   "data": {
@@ -175,6 +176,7 @@ gh api repos/$OWNER/$REPO/pulls/$PR_NUMBER/comments
 ```
 
 **Real Example Used Successfully:**
+
 ```bash
 gh api repos/JacobPEvans/python-template/pulls/2/comments
 ```
@@ -271,6 +273,7 @@ mutation {
 ```
 
 **Success Response:**
+
 ```json
 {
   "data": {
@@ -364,6 +367,7 @@ gh api graphql --field query='
 Here's a real example from successfully resolving all conversations on python-template PR #2:
 
 ### Step 1: Get Conversations
+
 ```bash
 gh api graphql --field query='
 {
@@ -387,11 +391,13 @@ gh api graphql --field query='
 ```
 
 Response showed 6 threads, 3 already resolved, 3 unresolved:
+
 - `PRRT_kwDOPLZ56M5UgSNo` (unresolved)
 - `PRRT_kwDOPLZ56M5UgSNp` (unresolved)
 - `PRRT_kwDOPLZ56M5UgSNq` (unresolved)
 
 ### Step 2: Fix Issues Then Resolve
+
 After fixing the actual code issues (README formatting, gitignore patterns, etc.):
 
 ```bash
@@ -421,6 +427,7 @@ mutation {
 ```
 
 ### Step 3: Verify All Resolved
+
 ```bash
 gh api graphql --field query='
 {
@@ -444,16 +451,19 @@ Result: All 6 threads showing `"isResolved": true` ✅
 ### Common Issues and Solutions
 
 #### Q: GraphQL query returns empty reviewThreads
+
 - Check that PR_NUMBER is correct and exists
 - Verify OWNER and REPO are spelled correctly
 - Try the REST API method as alternative
 
 #### Q: resolveReviewThread mutation fails
+
 - Ensure THREAD_ID is exactly as returned from Step 1 (starts with `PRRT_`)
 - Check that you have write permissions to the repository
 - Verify the thread actually exists and isn't already resolved
 
 #### Q: Variables not substituting correctly
+
 - Use double quotes around the entire query when substituting variables
 - Escape inner quotes with backslashes: `\"$VARIABLE\"`
 - For integers like PR_NUMBER, don't use quotes in the GraphQL
@@ -461,6 +471,7 @@ Result: All 6 threads showing `"isResolved": true` ✅
 ### Thread ID Format
 
 Valid thread IDs always follow this pattern:
+
 - **Format:** `PRRT_` followed by alphanumeric characters
 - **Example:** `PRRT_kwDOPLZ56M5UgSNm`
 - **Invalid:** Any ID not starting with `PRRT_`
@@ -468,6 +479,7 @@ Valid thread IDs always follow this pattern:
 ### Required Permissions
 
 To resolve conversations, you need:
+
 - Write access to the repository
 - GitHub CLI authenticated (`gh auth status`)
 - Pull request must be open (not merged/closed)
