@@ -52,7 +52,8 @@ Before committing, ensure you are on the correct branch. Never commit directly t
 Before staging files, run all relevant validation checks.
 
 - **Code Formatting**: `terraform fmt`, `prettier --write .`, etc.
-- **Linting**: `markdownlint-cli2 .`, `eslint .`, etc.
+- **Markdown Linting**: **REQUIRED** for all markdown files: `markdownlint-cli2 .`
+- **Linting**: `eslint .`, etc.
 - **Infrastructure**: `terraform validate` and `terragrunt plan`.
 - **Security**: Scan for sensitive data (API keys, secrets).
 

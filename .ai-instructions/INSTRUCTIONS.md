@@ -53,8 +53,8 @@ If any step fails, the cycle must restart from Step 1 after documenting the fail
 
 ## Commands
 
-This project uses a set of standardized commands. Each AI assistant should have a corresponding file in its respective directory
-(e.g., `.claude/commands/`, `.github/prompts/`) that links to the canonical instruction file in `.ai-instructions/commands/`.
+This project uses a set of standardized commands. Each AI assistant should have a corresponding reference file in its respective directory
+(e.g., `.claude/commands/`, `.github/prompts/`) that links to the single source of truth in `.ai-instructions/commands/`.
 
 - **[Commit](./commands/commit.md)**: Standardized git commit process with validation checks
 - **[Pull Request](./commands/pull-request.md)**: Complete PR lifecycle management from creation to merge
