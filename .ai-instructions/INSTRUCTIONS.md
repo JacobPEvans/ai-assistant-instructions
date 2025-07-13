@@ -49,7 +49,7 @@ If any step fails, the cycle must restart from Step 1 after documenting the fail
 - **[Infrastructure Standards](./concepts/infrastructure-standards.md)**: Best practices for managing Infrastructure as Code (IaC).
 - **[Documentation Standards](./concepts/documentation-standards.md)**: Rules and formats for creating clear and effective documentation.
 - **[Diagramming Standards](./concepts/diagramming-standards.md)**: Best practices for creating diagrams using Mermaid and Graphviz.
-- **[Workspace Management](./concepts/workspace-management/README.md)**: Guidelines for managing a multi-repository workspace.
+- **[Workspace Management](./concepts/workspace-management.md)**: Guidelines for managing a multi-repository workspace.
 
 ## Commands
 
