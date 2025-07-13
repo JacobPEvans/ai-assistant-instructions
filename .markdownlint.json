@@ -2,5 +2,8 @@
   "default": true,
   "fix": true,
   "gitignore": true,
-  "MD013": false
+  "MD013": {
+    "line_length": 150,
+    "tables": false
+  }
 }
