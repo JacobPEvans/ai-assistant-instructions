@@ -110,6 +110,8 @@ gh pr comment 22 --body "I have addressed this issue in commit f640821."
 
 ### 2.4. Resolve PR Conversations (Automated)
 
+**⚠️ WORK IN PROGRESS:** The PR conversation resolution system is currently unresolved and may not work as documented. This is a known issue.
+
 **CRITICAL:** GitHub requires all conversations to be marked as "resolved" before allowing PR merge. This **must** be automated.
 
 #### Step 1: List All Unresolved Conversations
@@ -180,6 +182,8 @@ done
 ```
 
 **IMPORTANT:** Only resolve conversations **after** you have actually fixed the underlying issues. Resolving without fixing will cause reviewer confusion.
+
+**⚠️ NOTE:** These GraphQL commands for conversation resolution are experimental and may not work consistently. This is an ongoing issue.
 
 ### 2.5. Triage and Address All Feedback
 

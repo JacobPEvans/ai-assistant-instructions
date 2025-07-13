@@ -36,6 +36,10 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 - **Broken Links**: Corrected multiple broken internal links in `.github`
   pointer files.
 
+### Unresolved
+
+- **PR Conversation Resolution**: Multiple sessions attempted to resolve the GitHub PR conversation/comment resolution issue blocking PR #22 completion. Despite investigation using GraphQL APIs and various approaches, the core problem remains unresolved. The issue prevents automatic resolution of PR conversations when underlying problems are fixed.
+
 ## 2025-06-29
 
 ### Changed

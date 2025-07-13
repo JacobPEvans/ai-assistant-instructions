@@ -2,6 +2,8 @@
 
 This task outlines the process for providing a thorough, constructive code review.
 
+**⚠️ NOTE:** PR conversation resolution features may not work as expected - this is an ongoing issue.
+
 ## Review Focus Areas
 
 Apply [Code Standards](../concepts/code-standards.md), [Infrastructure Standards](../concepts/infrastructure-standards.md), and
