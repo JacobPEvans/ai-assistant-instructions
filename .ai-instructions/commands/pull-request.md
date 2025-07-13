@@ -53,17 +53,49 @@ If the Health Check shows failing checks:
 
 2.2.5. **Restart the Loop**: Go back to **Step 2.1**.
 
-### 2.3. Triage and Address All Feedback
+### 2.3. Read Line-Level Review Comments (Simple Method)
+
+The simplest way to get specific line-level feedback that needs addressing:
+
+    ```bash
+    # Get all line-level review comments for your PR (replace placeholders)
+    gh api repos/<OWNER>/<REPO>/pulls/<PR_NUMBER>/comments
+    
+    # Example for this repository (PR #22):
+    gh api repos/JacobPEvans/ai-assistant-instructions/pulls/22/comments
+    ```
+
+This returns an array of review comments with:
+- `body`: The comment text and suggested changes
+- `path`: File path where comment was made  
+- `line`: Line number in the file
+- `pull_request_review_id`: ID of the review this comment belongs to
+
+**Responding to Comments:**
+
+    ```bash
+    # Reply to a specific PR comment
+    gh pr comment <PR_NUMBER> --body "I have addressed this issue in commit <COMMIT_HASH>."
+    
+    # Example:
+    gh pr comment 22 --body "I have addressed this issue in commit f640821."
+    ```
+
+**Wait 1 Minute After Pushing:** Always wait 1 minute after pushing changes to allow AI reviewers to process updates before checking for new feedback.
+
+### 2.4. Triage and Address All Feedback
 
 If the Health Check shows pending reviews or open comments:
 
-2.3.1. **List All Feedback**: Use the following command to get every review and comment.
+2.4.1. **List All Feedback**: Use the following command to get every review and comment.
+
+**TODO:** Ignore GitHub "outdated" comments and conversations.
 
     ```bash
     gh pr view <PR_URL_OR_ID> --json reviews,comments --jq '.reviews, .comments'
     ```
 
-2.3.2. **Address Each Piece of Feedback**:
+2.4.2. **Address Each Piece of Feedback**:
     - **If the feedback is correct**: Fix the code, commit, and push. Then, reply to the comment referencing your commit.
     - **If the feedback is incorrect**: Reply to the comment with a clear explanation.
 
@@ -71,7 +103,7 @@ If the Health Check shows pending reviews or open comments:
         gh pr comment <PR_URL_OR_ID> --body "Replying to review: [Your explanation here]"
         ```
 
-2.3.3. **Resolve Formal Review Threads**: If the feedback was part of a formal review, find the thread ID and resolve it after addressing it.
+2.4.3. **Resolve Formal Review Threads**: If the feedback was part of a formal review, find the thread ID and resolve it after addressing it.
 
     ```bash
     # This command is complex; use it to find unresolved thread IDs
@@ -85,7 +117,7 @@ If the Health Check shows pending reviews or open comments:
       resolveReviewThread(input: {threadId: $threadId}) { clientMutationId } }' -f threadId='<THREAD_ID>'
     ```
 
-2.3.4. **Restart the Loop**: Go back to **Step 2.1**.
+2.4.4. **Restart the Loop**: Go back to **Step 2.1**.
 
 ## 3. Final Merge
 
