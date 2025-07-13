@@ -15,7 +15,8 @@ These queries have been successfully tested and verified to work.
 - Modifying `.flake8`, `pyproject.toml`, or any config files to ignore specific errors
 - Using `per-file-ignores` or similar mechanisms
 
-**ALWAYS FIX THE ROOT CAUSE.** If there's a linting error, fix the actual code issue. This rule exists because suppressing errors masks real problems and reduces code quality.
+**ALWAYS FIX THE ROOT CAUSE.** If there's a linting error, fix the actual code issue. This rule exists because suppressing errors masks real problems and reduces
+code quality.
 
 ### **ALWAYS RESOLVE CONVERSATIONS AFTER FIXING ISSUES**
 
@@ -287,7 +288,7 @@ mutation {
 
 If you have many conversations to resolve, use this approach:
 
-**Step 2A: Get All Unresolved Thread IDs**
+#### Step 2A: Get All Unresolved Thread IDs
 
 ```bash
 # Get only unresolved thread IDs
@@ -306,7 +307,7 @@ gh api graphql --field query='
 }' | jq -r '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false) | .id'
 ```
 
-**Step 2B: Resolve Each Thread**
+#### Step 2B: Resolve Each Thread
 
 ```bash
 # Loop through and resolve each unresolved thread
@@ -442,17 +443,17 @@ Result: All 6 threads showing `"isResolved": true` ✅
 
 ### Common Issues and Solutions
 
-**Q: GraphQL query returns empty reviewThreads**
+#### Q: GraphQL query returns empty reviewThreads
 - Check that PR_NUMBER is correct and exists
 - Verify OWNER and REPO are spelled correctly
 - Try the REST API method as alternative
 
-**Q: resolveReviewThread mutation fails**
+#### Q: resolveReviewThread mutation fails
 - Ensure THREAD_ID is exactly as returned from Step 1 (starts with `PRRT_`)
 - Check that you have write permissions to the repository
 - Verify the thread actually exists and isn't already resolved
 
-**Q: Variables not substituting correctly**
+#### Q: Variables not substituting correctly
 - Use double quotes around the entire query when substituting variables
 - Escape inner quotes with backslashes: `\"$VARIABLE\"`
 - For integers like PR_NUMBER, don't use quotes in the GraphQL
