@@ -10,7 +10,7 @@
 ## Tasks
 
 1. **Create a Temporary PRD File.**
-    1.1. Create a new file named `/.tmp/prd-<task-name>.md`.
+    1.1. Create a new file named `.tmp/prd-<task-name>.md`.
     1.2. Replace `<task-name>` with a short name for the current task.
 
 2. **Write the PRD.** The PRD must contain the following sections:

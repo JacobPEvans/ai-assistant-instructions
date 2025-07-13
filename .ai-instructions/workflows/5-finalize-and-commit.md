@@ -7,11 +7,11 @@
 1. **Handle Success or Failure.**
     1.1. **If Step 4 was successful:** Proceed with the tasks below to finalize the project.
     1.2. **If Step 4 failed:**
-        1.2.1. Do not commit any broken code.
-        1.2.2. You must document the failure in detail.
+        1.2.1. Do not merge broken code.
+        1.2.2. Document the failure in detail.
         1.2.3. Update `PLANNING.md` with a summary of what went wrong, what was tried, and why it failed.
         1.2.4. Update the `CHANGELOG.md` to note the failed attempt.
-        1.2.5. After documenting, the process is complete. A new cycle will begin from Step 1.
+        1.2.5. After documenting, the process is complete. A new cycle to resolve the issue will begin from Step 1.
 
 2. **Update Documentation (on Success).**
     2.1. Update the `README.md` if your changes affect it.
