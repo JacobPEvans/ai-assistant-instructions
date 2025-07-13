@@ -29,9 +29,9 @@ Any other relevant information for reviewers.
 
 1.2. **Set Auto-Merge**: Immediately after creating the PR, set it to auto-merge. This is a mandatory step.
 
-    ```bash
-    gh pr merge <PR_URL_OR_ID> --rebase --auto
-    ```
+```bash
+gh pr merge <PR_URL_OR_ID> --rebase --auto
+```
 
 ## 2. Begin the PR Resolution Loop
 
@@ -41,7 +41,9 @@ You must now repeatedly check and fix the PR until it is in a mergeable state. T
 
 Start every loop by getting the complete status of the PR.
 
-    gh pr view <PR_URL_OR_ID> --json state,mergeable,statusCheckRollup,reviews,comments
+```bash
+gh pr view <PR_URL_OR_ID> --json state,mergeable,statusCheckRollup,reviews,comments
+```
 
 Analyze the output:
 
@@ -59,19 +61,19 @@ If the Health Check shows failing checks:
 2.2.1. **Identify Failed Checks**: Use `gh pr checks <PR_URL_OR_ID>` to see which jobs failed.
 2.2.2. **View the Logs**: Get the ID of the failed run and view its log.
 
-    ```bash
-    # First, get the ID of the latest run for that workflow
-    gh run list --workflow=<workflow_file.yml> --branch=<branch_name> --limit=1
-    # Then, view the log
-    gh run view <run_id> --log
-    ```
+```bash
+# First, get the ID of the latest run for that workflow
+gh run list --workflow=<workflow_file.yml> --branch=<branch_name> --limit=1
+# Then, view the log
+gh run view <run_id> --log
+```
 
 2.2.3. **Fix, Commit, and Push**: Fix the root cause of the error, commit the change with a clear message, and push it to the PR branch.
 2.2.4. **Wait for CI**: You **must** wait for the new checks to complete before restarting the loop.
 
-    ```bash
-    gh pr checks <PR_URL_OR_ID> --watch
-    ```
+```bash
+gh pr checks <PR_URL_OR_ID> --watch
+```
 
 2.2.5. **Restart the Loop**: Go back to **Step 2.1**.
 
@@ -79,15 +81,16 @@ If the Health Check shows failing checks:
 
 The simplest way to get specific line-level feedback that needs addressing:
 
-    ```bash
-    # Get all line-level review comments for your PR (replace placeholders)
-    gh api repos/<OWNER>/<REPO>/pulls/<PR_NUMBER>/comments
-    
-    # Example for this repository (PR #22):
-    gh api repos/JacobPEvans/ai-assistant-instructions/pulls/22/comments
-    ```
+```bash
+# Get all line-level review comments for your PR (replace placeholders)
+gh api repos/<OWNER>/<REPO>/pulls/<PR_NUMBER>/comments
+
+# Example for this repository (PR #22):
+gh api repos/JacobPEvans/ai-assistant-instructions/pulls/22/comments
+```
 
 This returns an array of review comments with:
+
 - `body`: The comment text and suggested changes
 - `path`: File path where comment was made  
 - `line`: Line number in the file
@@ -95,13 +98,13 @@ This returns an array of review comments with:
 
 **Responding to Comments:**
 
-    ```bash
-    # Reply to a specific PR comment
-    gh pr comment <PR_NUMBER> --body "I have addressed this issue in commit <COMMIT_HASH>."
-    
-    # Example:
-    gh pr comment 22 --body "I have addressed this issue in commit f640821."
-    ```
+```bash
+# Reply to a specific PR comment
+gh pr comment <PR_NUMBER> --body "I have addressed this issue in commit <COMMIT_HASH>."
+
+# Example:
+gh pr comment 22 --body "I have addressed this issue in commit f640821."
+```
 
 **Wait 1 Minute After Pushing:** Always wait 1 minute after pushing changes to allow AI reviewers to process updates before checking for new feedback.
 
@@ -109,42 +112,72 @@ This returns an array of review comments with:
 
 **CRITICAL:** GitHub requires all conversations to be marked as "resolved" before allowing PR merge. This **must** be automated.
 
-**Step 1: List All Unresolved Conversations**
+#### Step 1: List All Unresolved Conversations
 
-    ```bash
-    # Get all review threads and their resolution status
-    gh api graphql -f query='{ repository(owner: "OWNER", name: "REPO") { pullRequest(number: PR_NUMBER) { reviewThreads(first: 50) { nodes { id isResolved comments(first: 1) { nodes { body path line } } } } } } }'
-    
-    # Example for this repository:
-    gh api graphql -f query='{ repository(owner: "JacobPEvans", name: "ai-assistant-instructions") { pullRequest(number: 22) { reviewThreads(first: 50) { nodes { id isResolved comments(first: 1) { nodes { body path line } } } } } } }'
-    ```
+```bash
+# Get all review threads and their resolution status
+gh api graphql -f query='{ repository(owner: "OWNER", name: "REPO") { 
+  pullRequest(number: PR_NUMBER) { 
+    reviewThreads(first: 50) { 
+      nodes { 
+        id isResolved 
+        comments(first: 1) { 
+          nodes { body path line } 
+        } 
+      } 
+    } 
+  } 
+}'
 
-**Step 2: Resolve Individual Conversations**
+# Example for this repository:
+gh api graphql -f query='{ repository(owner: "JacobPEvans", name: "ai-assistant-instructions") { 
+  pullRequest(number: 22) { 
+    reviewThreads(first: 50) { 
+      nodes { 
+        id isResolved 
+        comments(first: 1) { 
+          nodes { body path line } 
+        } 
+      } 
+    } 
+  } 
+}'
+```
+
+#### Step 2: Resolve Individual Conversations
 
 After fixing the issues mentioned in unresolved conversations:
 
-    ```bash
-    # Resolve a specific conversation thread
-    gh api graphql -f query='mutation { resolveReviewThread(input: {threadId: "THREAD_ID"}) { clientMutationId } }'
-    
-    # Example:
-    gh api graphql -f query='mutation { resolveReviewThread(input: {threadId: "PRRT_kwDOO1m-OM5UgDfm"}) { clientMutationId } }'
-    ```
+```bash
+# Resolve a specific conversation thread
+gh api graphql -f query='mutation { resolveReviewThread(input: {threadId: "THREAD_ID"}) { clientMutationId } }'
 
-**Step 3: Automated Resolution Script (For Multiple Conversations)**
+# Example:
+gh api graphql -f query='mutation { resolveReviewThread(input: {threadId: "PRRT_kwDOO1m-OM5UgDfm"}) { clientMutationId } }'
+```
+
+#### Step 3: Automated Resolution Script (For Multiple Conversations)
 
 For efficiency when resolving many conversations:
 
-    ```bash
-    # Extract all unresolved thread IDs and resolve them
-    UNRESOLVED_IDS=$(gh api graphql -f query='{ repository(owner: "OWNER", name: "REPO") { pullRequest(number: PR_NUMBER) { reviewThreads(first: 50) { nodes { id isResolved } } } } }' | jq -r '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false) | .id')
-    
-    # Resolve each unresolved thread
-    for thread_id in $UNRESOLVED_IDS; do
-        echo "Resolving thread: $thread_id"
-        gh api graphql -f query="mutation { resolveReviewThread(input: {threadId: \"$thread_id\"}) { clientMutationId } }"
-    done
-    ```
+```bash
+# Extract all unresolved thread IDs and resolve them
+UNRESOLVED_IDS=$(gh api graphql -f query='{ repository(owner: "OWNER", name: "REPO") { 
+  pullRequest(number: PR_NUMBER) { 
+    reviewThreads(first: 50) { 
+      nodes { 
+        id isResolved 
+      } 
+    } 
+  } 
+}' | jq -r '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false) | .id')
+
+# Resolve each unresolved thread
+for thread_id in $UNRESOLVED_IDS; do
+    echo "Resolving thread: $thread_id"
+    gh api graphql -f query="mutation { resolveReviewThread(input: {threadId: \"$thread_id\"}) { clientMutationId } }"
+done
+```
 
 **IMPORTANT:** Only resolve conversations **after** you have actually fixed the underlying issues. Resolving without fixing will cause reviewer confusion.
 
@@ -156,17 +189,17 @@ If the Health Check shows pending reviews or open comments:
 
 **TODO:** Ignore GitHub "outdated" comments and conversations.
 
-    ```bash
-    gh pr view <PR_URL_OR_ID> --json reviews,comments --jq '.reviews, .comments'
-    ```
+```bash
+gh pr view <PR_URL_OR_ID> --json reviews,comments --jq '.reviews, .comments'
+```
 
 2.5.2. **Address Each Piece of Feedback**:
     - **If the feedback is correct**: Fix the code, commit, and push. Then, reply to the comment referencing your commit.
     - **If the feedback is incorrect**: Reply to the comment with a clear explanation.
 
-        ```bash
-        gh pr comment <PR_URL_OR_ID> --body "Replying to review: [Your explanation here]"
-        ```
+```bash
+gh pr comment <PR_URL_OR_ID> --body "Replying to review: [Your explanation here]"
+```
 
 2.5.3. **Restart the Loop**: Go back to **Step 2.1**.
 
