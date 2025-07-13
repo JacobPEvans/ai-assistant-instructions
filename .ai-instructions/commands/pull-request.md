@@ -27,6 +27,7 @@ Analyze the output:
 - `state`: Must be `OPEN`.
 - `mergeable`: Must be `MERGEABLE`.
 - `statusCheckRollup`: The `state` field must be `SUCCESS`.
+- `reviews` and `comments`: Must have no unresolved feedback.
 
 **If the PR is clean, proceed to Step 3. Otherwise, continue the loop.**
 
@@ -75,7 +76,8 @@ If the Health Check shows pending reviews or open comments:
 
     ```bash
     # This command is complex; use it to find unresolved thread IDs
-    gh api graphql -f query='query($owner: String!, $repo: String!, $pr: Int!) { repository(owner: $owner, name: $repo) { pullRequest(number: $pr) { reviewThreads(first: 50) { nodes { id, isResolved } } } } }' -f owner='<OWNER>' -f repo='<REPO>' -F pr=<PR_NUMBER> | jq '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved | not) | .id'
+    gh api graphql -f query='query($owner: String!, $repo: String!, $pr: Int!) { repository(owner: $owner, name: $repo) { pullRequest(number: $pr) { reviewThreads(first: 50) { nodes { id, isResolved } } } } }' -f owner='<OWNER>' -f repo='<REPO>' -F pr=<PR_NUMBER> |
+    jq '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved | not) | .id'
 
     # Use the ID to resolve the thread
     gh api graphql -f query='mutation($threadId: ID!) { resolveReviewThread(input: {threadId: $threadId}) { clientMutationId } }' -f threadId='<THREAD_ID>'
