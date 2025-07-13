@@ -20,13 +20,18 @@ This repository is designed to work with multiple AI assistants, primarily GitHu
 
 The goal is to leverage the strengths of both systems in a unified workflow.
 
-## General Workflow
+## Core Workflow
 
-1.  **Plan First**: Before making changes, create a clear, step-by-step plan. For complex tasks, document this in a `PLANNING.md` file.
-2.  **Analyze Context**: Use available tools to understand the existing codebase, file structures, and project conventions.
-3.  **Execute Systematically**: Implement the plan, using parallel tool execution where possible for efficiency.
-4.  **Verify Changes**: After making changes, run linters, tests, and other validation tools to ensure quality and correctness.
-5.  **Clean Up**: Remove any temporary files created during the process.
+This project follows a strict, 5-step development cycle. All tasks must be executed by following these steps in order.
+This process is designed to be automated and repeatable.
+
+- **[Step 1: Research and Explore](./workflows/1-research-and-explore.md)**: Understand the task.
+- **[Step 2: Plan and Document](./workflows/2-plan-and-document.md)**: Create a detailed, locked plan.
+- **[Step 3: Define Success and Create PR](./workflows/3-define-success-and-pr.md)**: Write tests and get approval.
+- **[Step 4: Implement and Verify](./workflows/4-implement-and-verify.md)**: Write code to pass the tests.
+- **[Step 5: Finalize and Commit](./workflows/5-finalize-and-commit.md)**: Document, clean up, and finish.
+
+If any step fails, the cycle must restart from Step 1 after documenting the failure in Step 5.
 
 ## Core Concepts
 
