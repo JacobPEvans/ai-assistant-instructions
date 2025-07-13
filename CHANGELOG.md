@@ -13,28 +13,38 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 - **New 5-Step Workflow**: Created a new, rigorous 5-step workflow
   (`.ai-instructions/workflows/`) designed for automated, high-quality,
   test-driven development.
-- **PRD Integration**: Integrated Product Requirements Document (PRD) principles into the planning step (Step 2) to ensure the "why" is documented before the "how".
+- **PRD Integration**: Integrated Product Requirements Document (PRD) principles
+  into the planning step (Step 2) to ensure the "why" is documented before the
+  "how".
 
 ### Changed
 
-- **Updated Core Instructions**: The main `INSTRUCTIONS.md` and `README.md` now reference the new 5-step workflow as the primary process.
-- **Refined `PLANNING.md`**: Added future-looking goal of multi-AI agent collaboration.
-- **Improved Commit Workflow**: Updated the `commit.md` command to align with the new 5-step,
-  test-first process.
+- **Updated Core Instructions**: The main `INSTRUCTIONS.md` and `README.md` now
+  reference the new 5-step workflow as the primary process.
+- **Refined `PLANNING.md`**: Added future-looking goal of multi-AI agent
+  collaboration.
+- **Improved Commit Workflow**: Updated the `commit.md` command to align with
+  the new 5-step, test-first process.
 
 ### Fixed
 
-- **Broken Links**: Corrected multiple broken internal links in `.github` pointer files.
+- **Broken Links**: Corrected multiple broken internal links in `.github`
+  pointer files.
 
 ## 2025-06-29
 
 ### Changed
 
-- **Major Refactoring**: Centralized all AI instructions into a single `.ai-instructions` directory to act as the single source of truth (DRY).
-- **Consolidated Instructions**: Merged all vendor-specific instructions into a unified set of `commands` and `concepts`.
-- **Standardized Vendor Files**: Updated all vendor-specific files to be simple pointers to the new centralized instructions.
-- **Simplified Structure**: Merged `main.md` into `INSTRUCTIONS.md` and removed the `prompts` vs. `commands` distinction.
-- **Updated `IMPLEMENTATION_GUIDE.md`**: Merged essential content into the new `.ai-instructions` and removed the redundant file.
+- **Major Refactoring**: Centralized all AI instructions into a single
+  `.ai-instructions` directory to act as the single source of truth (DRY).
+- **Consolidated Instructions**: Merged all vendor-specific instructions into a
+  unified set of `commands` and `concepts`.
+- **Standardized Vendor Files**: Updated all vendor-specific files to be simple
+  pointers to the new centralized instructions.
+- **Simplified Structure**: Merged `main.md` into `INSTRUCTIONS.md` and removed
+  the `prompts` vs. `commands` distinction.
+- **Updated `IMPLEMENTATION_GUIDE.md`**: Merged essential content into the new
+  `.ai-instructions` and removed the redundant file.
 
 ### Removed
 
@@ -44,8 +54,10 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 
 ### Added
 
-- Initial consolidation of AI assistant instructions into a single `instructions/INSTRUCTIONS.md` file.
-- Streamlined `CLAUDE.md` and `copilot-instructions.md` to reference the single source of truth.
+- Initial consolidation of AI assistant instructions into a single
+  `instructions/INSTRUCTIONS.md` file.
+- Streamlined `CLAUDE.md` and `copilot-instructions.md` to reference the single
+  source of truth.
 
 ## 2025-06-24
 
@@ -55,23 +67,31 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 
 ### Changed
 
-- Improved commit workflow documentation with a critical emphasis on change review.
-- Reverted Claude GitHub Actions workflow to the default Sonnet 3.5 model for optimal performance.
+- Improved commit workflow documentation with a critical emphasis on change
+  review.
+- Reverted Claude GitHub Actions workflow to the default Sonnet 3.5 model for
+  optimal performance.
 - Fixed GitHub Actions Terraform workflow YAML syntax.
 
 ## 2025-06-22
 
 ### Added
 
-- **Comprehensive Security**: Enhanced security scanning for SSH keys and usernames, and implemented precise, least-privilege permissions.
-- **GraphQL for PRs**: Added documentation for using the GitHub GraphQL API to analyze PR comments.
-- **`.claude/` Structure**: Adopted the official `.claude/` directory structure for commands and settings.
+- **Comprehensive Security**: Enhanced security scanning for SSH keys and
+  usernames, and implemented precise, least-privilege permissions.
+- **GraphQL for PRs**: Added documentation for using the GitHub GraphQL API to
+  analyze PR comments.
+- **`.claude/` Structure**: Adopted the official `.claude/` directory structure
+  for commands and settings.
 
 ### Changed
 
-- **Optimized CI/CD**: Consolidated duplicate workflows into a single, streamlined `claude.yml` and optimized GitHub Actions timeouts.
-- **Modernized Git Workflow**: Updated the standard git workflow to use `git status -v -v` for more detailed change analysis.
-- **Improved Documentation**: Modernized the `README.md` and all other documentation with a focus on a dual AI system.
+- **Optimized CI/CD**: Consolidated duplicate workflows into a single,
+  streamlined `claude.yml` and optimized GitHub Actions timeouts.
+- **Modernized Git Workflow**: Updated the standard git workflow to use
+  `git status -v -v` for more detailed change analysis.
+- **Improved Documentation**: Modernized the `README.md` and all other
+  documentation with a focus on a dual AI system.
 
 ### Removed
 
