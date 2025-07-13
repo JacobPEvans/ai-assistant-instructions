@@ -4,7 +4,8 @@ This document serves as the comprehensive coding styleguide for AI-assisted deve
 
 ## Introduction
 
-This styleguide consolidates all coding standards, best practices, and conventions for this project. It is designed to be consumed by AI code review systems to ensure consistent, high-quality code reviews.
+This styleguide consolidates all coding standards, best practices, and conventions for this project. It is designed to be consumed by 
+AI code review systems to ensure consistent, high-quality code reviews.
 
 ## Key Principles
 
