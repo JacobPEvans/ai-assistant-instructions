@@ -4,7 +4,7 @@ This document outlines the universal standards for managing Infrastructure as Co
 
 ## General Principles
 
-- **Idempotency**: All infrastructure code should be idempotent, meaning it can be applied multiple times with the same result.
+- **[Idempotency](./idempotency.md)**: All infrastructure code must be idempotent.
 - **Modularity**: Organize code into reusable modules.
 - **State Management**: Use remote state with locking to prevent conflicts.
 
