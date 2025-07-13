@@ -25,7 +25,9 @@ This session's work is complete. The following tasks were accomplished:
 
 ## Known Issues
 
-- **Unresolved PR Conversation Resolution**: The GitHub Pull Request conversation resolution system remains unresolved despite multiple investigation sessions. The specific issue is that PR comments/conversations are not being automatically resolved when the underlying issues are fixed. This blocks completion of PR #22. Multiple approaches have been attempted including GraphQL API investigation, but the core problem persists.
+- **Unresolved PR Conversation Resolution**: The GitHub Pull Request conversation resolution system remains unresolved despite multiple investigation sessions.
+  The specific issue is that PR comments/conversations are not being automatically resolved when the underlying issues are fixed.
+  This blocks completion of PR #22. Multiple approaches have been attempted including GraphQL API investigation, but the core problem persists.
 
 - **Persistent Markdown Linting Failures**: The `markdownlint-cli2` GitHub Action is consistently failing on pull request #22, citing
   `MD013/line-length` and `MD046/code-block-style` errors. Multiple attempts to fix these issues by re-writing files and using different tools have failed.
