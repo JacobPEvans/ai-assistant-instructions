@@ -19,11 +19,10 @@ You must now repeatedly check and fix the PR until it is in a mergeable state. T
 
 Start every loop by getting the complete status of the PR.
 
-```bash
-gh pr view <PR_URL_OR_ID> --json state,mergeable,statusCheckRollup,reviews,comments
-```
+    gh pr view <PR_URL_OR_ID> --json state,mergeable,statusCheckRollup,reviews,comments
 
 Analyze the output:
+
 - `state`: Must be `OPEN`.
 - `mergeable`: Must be `MERGEABLE`.
 - `statusCheckRollup`: The `state` field must be `SUCCESS`.
@@ -76,15 +75,19 @@ If the Health Check shows pending reviews or open comments:
 
     ```bash
     # This command is complex; use it to find unresolved thread IDs
-    gh api graphql -f query='query($owner: String!, $repo: String!, $pr: Int!) { repository(owner: $owner, name: $repo) { pullRequest(number: $pr) { reviewThreads(first: 50) { nodes { id, isResolved } } } } }' -f owner='<OWNER>' -f repo='<REPO>' -F pr=<PR_NUMBER> |
+    gh api graphql -f query='query($owner: String!, $repo: String!, $pr: Int!) { repository(owner: $owner, name: $repo) {
+      pullRequest(number: $pr) { reviewThreads(first: 50) { nodes { id, isResolved } } } } }' \
+      -f owner='<OWNER>' -f repo='<REPO>' -F pr=<PR_NUMBER> |
     jq '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved | not) | .id'
 
     # Use the ID to resolve the thread
-    gh api graphql -f query='mutation($threadId: ID!) { resolveReviewThread(input: {threadId: $threadId}) { clientMutationId } }' -f threadId='<THREAD_ID>'
+    gh api graphql -f query='mutation($threadId: ID!) {
+      resolveReviewThread(input: {threadId: $threadId}) { clientMutationId } }' -f threadId='<THREAD_ID>'
     ```
 
 2.3.4. **Restart the Loop**: Go back to **Step 2.1**.
 
 ## 3. Final Merge
 
-Once the "PR Health Check" (Step 2.1) shows that all checks are passing, the PR is mergeable, and all feedback is resolved, the PR will merge automatically. Your work is complete.
+Once the "PR Health Check" (Step 2.1) shows that all checks are passing, the PR is mergeable, and all feedback is resolved,
+the PR will merge automatically. Your work is complete.
