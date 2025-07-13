@@ -15,5 +15,5 @@ jobs:
         uses: DavidAnson/markdownlint-cli2-action@v20
         with:
           globs: '**/*.md'
-          config: '.markdownlint.yml'
+          config: '.markdownlint.json'
           fix: true

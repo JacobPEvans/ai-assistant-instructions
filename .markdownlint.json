@@ -1,0 +1,6 @@
+{
+  "default": true,
+  "fix": true,
+  "gitignore": true,
+  "MD013": false
+}
