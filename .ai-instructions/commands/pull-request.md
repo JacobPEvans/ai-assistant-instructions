@@ -8,7 +8,7 @@ This task outlines the complete, systematic workflow for creating, monitoring, a
 
 ## 1. Create the Pull Request
 
-1.1. **Pre-requisites**: Before creating a pull request, ensure the local repository is ready:
+1.1. **Prerequisites**: Before creating a pull request, ensure the local repository is ready:
 
 1.1.1. **Verify Working Directory is Clean**: The local working directory must be clean with no uncommitted changes.
 
