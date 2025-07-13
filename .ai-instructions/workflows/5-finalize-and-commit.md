@@ -9,7 +9,7 @@
     1.2. **If Step 4 failed:**
         1.2.1. Do not merge broken code.
         1.2.2. Document the failure in detail.
-        1.2.3. Update `PLANNING.md` with a summary of what went wrong, what was tried, and why it failed.
+        1.2.3. Update the temporary PRD file (from Step 2) with a summary of what went wrong, what was tried, and why it failed. Also update `PLANNING.md` if this failure affects the overall project roadmap.
         1.2.4. Update the `CHANGELOG.md` to note the failed attempt.
         1.2.5. After documenting, the process is complete. A new cycle to resolve the issue will begin from Step 1.
 
