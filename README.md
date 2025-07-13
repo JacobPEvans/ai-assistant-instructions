@@ -19,6 +19,7 @@ It features dual AI system compatibility with standardized workflows, security s
 This project uses a centralized, single-source-of-truth model.
 The `.ai-instructions` directory contains the canonical documentation, which is then referenced by vendor-specific files.
 This adheres to the DRY (Don't Repeat Yourself) principle, making maintenance easier.
+The core of this project is a rigorous, 5-step development workflow designed for automation.
 
 For more details, see the main instruction file:
 **[`.ai-instructions/INSTRUCTIONS.md`](.ai-instructions/INSTRUCTIONS.md)**.
