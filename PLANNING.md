@@ -25,4 +25,4 @@ The repository now follows the DRY principle with a single source of truth in th
 - **Command Validation**: Explore creating a script that validates the structure of the vendor-specific directories.
 - **Add More Granular Commands**: Consider breaking down the existing commands into even more granular tasks.
 - **Expand Concepts**: Add more conceptual documents to the `.ai-instructions/concepts` directory.
-- **Re-evaluate Markdown Rules**: Re-visit the disabled markdown rules in `.markdownlint.yml` and fix the files to comply.
+- **Re-evaluate Markdown Rules**: Re-visit the disabled markdown rules in `.markdownlint.json` and fix the files to comply.
