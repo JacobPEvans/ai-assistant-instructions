@@ -126,7 +126,13 @@ gh pr comment <PR_NUMBER> --body "I have addressed this issue in commit <COMMIT_
 gh pr comment 22 --body "I have addressed this issue in commit f640821."
 ```
 
-**Wait 1 Minute After Pushing:** Always wait 1 minute after pushing changes to allow AI reviewers to process updates before checking for new feedback.
+**MANDATORY 60-Second Wait:** Always wait EXACTLY 60 seconds after pushing changes or creating a PR to allow AI reviewers to process updates. This is not optional.
+
+**CRITICAL:** After any wait period, you MUST verify ALL the following before proceeding:
+1. Check ALL review conversations are resolved (not just status checks)
+2. Verify PR is actually mergeable 
+3. Confirm no new unresolved feedback exists
+4. Work is NOT complete until the PR is confirmed mergeable with zero open conversations
 
 ### 2.4. Resolve PR Conversations (Automated) ✅ WORKING
 
@@ -199,7 +205,19 @@ gh pr comment <PR_URL_OR_ID> --body "Replying to review: [Your explanation here]
 
 2.5.3. **Restart the Loop**: Go back to **Step 2.1**.
 
-## 3. Final Merge
+## 3. Final Verification and Merge
 
-Once the "PR Health Check" (Step 2.1) shows that all checks are passing, the PR is mergeable, and all feedback is resolved,
-the PR will merge automatically. Your work is complete.
+**MANDATORY FINAL CHECK:** Before concluding work, you MUST verify:
+
+1. **Wait 60 seconds** after your last change/commit
+2. **Run complete conversation check**: `gh api graphql` to verify ALL conversations resolved
+3. **Verify mergeable status**: Confirm PR shows as `MERGEABLE` 
+4. **Check for new feedback**: Ensure no new unresolved comments exist
+
+**CRITICAL ERROR PATTERN:** AIs frequently declare PRs "ready" while conversations remain unresolved. This pattern MUST be broken by:
+- Never assuming status checks = ready to merge
+- Always checking conversation threads explicitly  
+- Waiting full 60 seconds for AI reviewer processing
+- Verifying mergeable status as the final step
+
+Once ALL verifications pass, the PR will merge automatically. Work is complete ONLY when PR is confirmed mergeable with zero open conversations.
