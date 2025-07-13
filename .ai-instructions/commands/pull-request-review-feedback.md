@@ -1,8 +1,8 @@
 # Pull Request Review Feedback Management with GraphQL
 
-<!-- markdownlint-disable-file MD013 MD033 -->
 
-This document contains the **EXACT, TESTED, WORKING** GraphQL queries and commands for managing pull request review feedback and conversations. These queries have been successfully tested and verified to work.
+This document contains the **EXACT, TESTED, WORKING** GraphQL queries and commands for managing pull request review feedback and conversations.
+These queries have been successfully tested and verified to work.
 
 ## 🚨 CRITICAL RULES
 
