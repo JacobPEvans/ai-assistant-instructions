@@ -18,7 +18,8 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 
 - **Updated Core Instructions**: The main `INSTRUCTIONS.md` and `README.md` now reference the new 5-step workflow as the primary process.
 - **Refined `PLANNING.md`**: Added future-looking goal of multi-AI agent collaboration.
-- **Improved Commit Workflow**: Updated the `commit.md` command to align with the new 5-step, test-first process.
+- **Improved Commit Workflow**: Updated the `commit.md` command to align with the new 5-step,
+  test-first process.
 
 ### Fixed
 
