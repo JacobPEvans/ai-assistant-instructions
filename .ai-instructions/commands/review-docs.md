@@ -37,7 +37,7 @@ Review the project's documentation files (`.md`) for consistency, completeness, 
     * Are there clear, step-by-step instructions for setup and usage?
     * Are code examples correct and easy to follow?
     * Cross-reference code: "Verify @src/components/ matches documentation"
-    * Test documented commands and workflows: `npm install && npm test`
+    * Test documented commands and workflows (e.g., `make test`, `npm test`, `terraform apply`, etc.)
 
 5. **Project Standards Compliance**:
     * Follow [Documentation Standards](./../concepts/documentation-standards.md)
