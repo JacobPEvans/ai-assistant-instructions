@@ -4,20 +4,12 @@ This task outlines the process for providing a thorough, constructive code revie
 
 ## Review Focus Areas
 
-- **Security**:
-  - **Secrets Management**: No hardcoded credentials, API keys, or sensitive data.
-  - **Input Validation**: Proper sanitization and validation of user inputs.
-  - **Access Control**: The principle of least privilege is applied to all permissions.
-- **Code Quality**:
-  - **Standards Compliance**: Follows established coding conventions and formatting.
-  - **Error Handling**: Comprehensive error handling with meaningful messages.
-  - **Readability**: The code is clear, self-documenting, and easy to understand.
-- **Infrastructure & Cost** (if applicable):
-  - **Resource Optimization**: Cloud resources are right-sized and cost-effective.
-  - **Terraform Standards**: Follows module structure and naming conventions.
-- **Maintainability**:
-  - **Modularity**: Functions and modules have single responsibilities.
-  - **Dependencies**: Minimal and well-justified external dependencies.
+Apply [Code Standards](../concepts/code-standards.md), [Infrastructure Standards](../concepts/infrastructure-standards.md), and [Styleguide](../concepts/styleguide.md) when reviewing:
+
+- **Security**: Secrets management, input validation, access control  
+- **Code Quality**: Standards compliance, error handling, readability
+- **Infrastructure**: Resource optimization, Terraform standards (if applicable)
+- **Maintainability**: Modularity, dependencies
 
 ## Feedback Guidelines
 

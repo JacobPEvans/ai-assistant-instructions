@@ -6,6 +6,7 @@
 
 - **Do Not Change Tests.** You must not change any test files. Your only job is to make the existing tests pass.
 - **Focus on the Plan.** Follow the plan from Step 2 exactly.
+- **[Idempotency](../concepts/idempotency.md)**: All operations must be repeatable with consistent results.
 - **Compact Your Context.** Forget the research from Step 1. Focus only on the plan from Step 2 and the code you need to write.
 - **One Thing at a Time**: Strictly follow your plan.
   - Execute one checklist item at a time except where subtasks can run in parallel.

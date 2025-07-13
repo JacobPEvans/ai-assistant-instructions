@@ -9,18 +9,7 @@ This task outlines the standards for generating high-quality, maintainable, and 
 
 ## 2. General Principles
 
-- **Code Quality**:
-  - Follow language-specific conventions and formatting rules.
-  - Use descriptive, concise naming for variables, functions, and classes.
-  - Prefer readable code over clever implementations.
-- **Documentation**:
-  - Write self-documenting code with clear variable/function names.
-  - Include comments to explain *why*, not *what*.
-  - Document cost implications for cloud resources.
-- **Security**:
-  - Never hardcode secrets. Use environment variables or a secret management service.
-  - Apply the principle of least privilege for all permissions.
-  - Include input validation for all user-facing interfaces.
+Follow [Code Standards](../concepts/code-standards.md) for code quality, security, and documentation requirements.
 
 ## 3. Technology-Specific Guidelines
 
