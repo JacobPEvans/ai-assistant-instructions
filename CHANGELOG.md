@@ -10,8 +10,9 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 
 ### Added
 
-- **New 5-Step Workflow**: Created a new, rigorous 5-step workflow (`.ai-instructions/workflows/`)
-  designed for automated, high-quality, test-driven development.
+- **New 5-Step Workflow**: Created a new, rigorous 5-step workflow
+  (`.ai-instructions/workflows/`) designed for automated, high-quality,
+  test-driven development.
 - **PRD Integration**: Integrated Product Requirements Document (PRD) principles into the planning step (Step 2) to ensure the "why" is documented before the "how".
 
 ### Changed
