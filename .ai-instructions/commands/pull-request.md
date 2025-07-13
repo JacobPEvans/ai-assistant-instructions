@@ -37,7 +37,8 @@ Use the `gh pr status` command to get a summary of checks and reviews.
 2.3.1. **List Unresolved Conversations**: Use the following command to get the ID, author, and content of all unresolved review threads.
 
     ```bash
-    gh pr view <PR_URL_OR_ID> --json comments,reviews --jq '.reviews[] | .comments.nodes[] | select(.isResolved | not) | {id: .id, author: .author.login, body: .body}'
+    gh pr view <PR_URL_OR_ID> --json comments,reviews --jq '.reviews[] | .comments.nodes[] | select(.isResolved | not) |
+      {id: .id, author: .author.login, body: .body}'
     ```
 
 2.3.2. **Analyze Each Conversation**: For each unresolved conversation:
