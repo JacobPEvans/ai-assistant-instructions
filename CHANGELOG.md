@@ -6,6 +6,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/).
 
+## 2025-07-13
+
+### Added
+
+- **New 5-Step Workflow**: Created a new, rigorous 5-step workflow (`.ai-instructions/workflows/`)
+  designed for automated, high-quality, test-driven development.
+- **PRD Integration**: Integrated Product Requirements Document (PRD) principles into the planning step (Step 2) to ensure the "why" is documented before the "how".
+
+### Changed
+
+- **Updated Core Instructions**: The main `INSTRUCTIONS.md` and `README.md` now reference the new 5-step workflow as the primary process.
+- **Refined `PLANNING.md`**: Added future-looking goal of multi-AI agent collaboration.
+- **Improved Commit Workflow**: Updated the `commit.md` command to align with the new 5-step, test-first process.
+
+### Fixed
+
+- **Broken Links**: Corrected multiple broken internal links in `.github` pointer files.
+
 ## 2025-06-29
 
 ### Changed
