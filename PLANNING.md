@@ -25,7 +25,11 @@ This session's work is complete. The following tasks were accomplished:
 
 ## Known Issues
 
-- **Persistent Markdown Linting Failures**: The `markdownlint-cli2` GitHub Action is consistently failing on pull request #22, citing `MD013/line-length` and `MD046/code-block-style` errors. Multiple attempts to fix these issues by re-writing files and using different tools have failed. The root cause appears to be a discrepancy between the local environment and the CI environment, or a fundamental misunderstanding of how the linter is configured in the action. Future attempts must start by disabling the `MD013` and `MD046` rules entirely in `.markdownlint.json` to establish a passing baseline, then re-introduce them one by one.
+- **Persistent Markdown Linting Failures**: The `markdownlint-cli2` GitHub Action is consistently failing on pull request #22, citing
+  `MD013/line-length` and `MD046/code-block-style` errors. Multiple attempts to fix these issues by re-writing files and using different tools have failed.
+  The root cause appears to be a discrepancy between the local environment and the CI environment, or a fundamental misunderstanding of how the linter
+  is configured in the action. Future attempts must start by disabling the `MD013` and `MD046` rules entirely in `.markdownlint.json` to establish a
+  passing baseline, then re-introduce them one by one.
 
 ## Next Session Actions & Future Improvements
 

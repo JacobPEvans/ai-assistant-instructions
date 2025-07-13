@@ -33,6 +33,9 @@ This process is designed to be automated and repeatable.
 
 If any step fails, the cycle must restart from Step 1 after documenting the failure in Step 5.
 
+**CRITICAL**: Documentation review via [Review Documentation](./commands/review-docs.md) is mandatory before any pull request.
+All markdownlint issues must be resolved to pass CI/CD.
+
 ## Core Concepts
 
 - **[The DRY Principle](./concepts/dry-principle.md)**: The "Don't Repeat Yourself" principle for code and documentation.
