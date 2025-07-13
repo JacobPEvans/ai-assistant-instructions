@@ -8,6 +8,9 @@ This document outlines the universal standards for writing high-quality code.
 - **Naming**: Use descriptive, concise names for variables, functions, and classes.
 - **DRY Principle**: Don't Repeat Yourself. Encapsulate reusable logic. See [The DRY Principle](./dry-principle.md).
 - **Comments**: Use comments to explain *why* something is done, not *what* is being done.
+- **Security**: Write code that is secure by default. Follow best practices for input validation, output encoding, and dependency management.
+- **Test-Driven Development (TDD)**: Development must follow the TDD methodology. Write failing tests before writing implementation code.
+- **Simplicity**: Keep code simple and easy to understand. Avoid unnecessary complexity.
 
 ## Security
 

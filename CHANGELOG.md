@@ -16,6 +16,11 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 - **PRD Integration**: Integrated Product Requirements Document (PRD) principles
   into the planning step (Step 2) to ensure the "why" is documented before the
   "how".
+- **Memory Bank Concept**: Introduced the "Memory Bank" (`.ai-instructions/concepts/memory-bank/`) as a structured external brain for the AI, improving
+  context retention and session management.
+- **AI Best Practices**: Integrated several expert-level AI interaction best practices, including adversarial testing, checklist-driven plans, and TDD.
+- **Workspace and Vendor Standards**: Added new concepts for managing multi-repository workspaces and standardizing vendor-specific configuration files to
+  enforce DRY principles.
 
 ### Changed
 
