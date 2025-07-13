@@ -36,10 +36,15 @@ If any step fails, the cycle must restart from Step 1 after documenting the fail
 ## Core Concepts
 
 - **[The DRY Principle](./concepts/dry-principle.md)**: The "Don't Repeat Yourself" principle for code and documentation.
+- **[The Memory Bank](./concepts/memory-bank/README.md)**: A set of documents that act as the AI's external brain.
+- **[AI Tooling](./concepts/ai-tooling.md)**: Best practices for giving AI assistants access to your development environment.
+- **[Adversarial Testing](./concepts/adversarial-testing.md)**: A method for improving plan robustness by seeking critique from a second AI.
+- **[Vendor-Specific Configuration](./concepts/vendor-config-standards.md)**: Standards for creating vendor-specific AI configuration files.
 - **[Code Standards](./concepts/code-standards.md)**: Guidelines for writing high-quality, secure, and maintainable code.
 - **[Infrastructure Standards](./concepts/infrastructure-standards.md)**: Best practices for managing Infrastructure as Code (IaC).
 - **[Documentation Standards](./concepts/documentation-standards.md)**: Rules and formats for creating clear and effective documentation.
 - **[Diagramming Standards](./concepts/diagramming-standards.md)**: Best practices for creating diagrams using Mermaid and Graphviz.
+- **[Workspace Management](./concepts/workspace-management/README.md)**: Guidelines for managing a multi-repository workspace.
 
 ## Commands
 

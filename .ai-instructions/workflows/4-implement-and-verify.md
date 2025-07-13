@@ -7,12 +7,15 @@
 - **Do Not Change Tests.** You must not change any test files. Your only job is to make the existing tests pass.
 - **Focus on the Plan.** Follow the plan from Step 2 exactly.
 - **Compact Your Context.** Forget the research from Step 1. Focus only on the plan from Step 2 and the code you need to write.
+- **One Thing at a Time**: Strictly follow your plan.
+  - Execute one checklist item at a time except where subtasks can run in parallel.
+- **Review, Don't Chat**: If AI-generated code has flaws, don't fix it via conversation. Reject the change, improve the plan in Step 2, and retry the step.
 
 ## Tasks
 
 1. **Implement the Code.**
     1.1. Following the plan from Step 2, write or modify the application code.
-    1.2. Write the code in small, logical steps.
+    1.2. Write the code in small, logical steps, committing frequently after each piece of functionality works.
 
 2. **Verify with Tests.**
     2.1. After each small change, run the tests.
