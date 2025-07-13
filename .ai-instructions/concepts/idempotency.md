@@ -9,16 +9,19 @@ An idempotent operation produces the same result regardless of how many times it
 ## Applications
 
 ### Code Operations
+
 - API endpoints return same response for identical requests
 - Database migrations create consistent state
 - Function calls with same parameters yield identical outputs
 
 ### Infrastructure
+
 - Terraform/Terragrunt deployments reach same end state
 - Configuration management tools maintain desired state
 - Container deployments produce identical environments
 
 ### AI Workflows
+
 - Same prompts generate consistent outputs when possible
 - Workflow steps can be re-run safely
 - Documentation updates don't break existing references

@@ -4,7 +4,7 @@ This document serves as the comprehensive coding styleguide for AI-assisted deve
 
 ## Introduction
 
-This styleguide consolidates all coding standards, best practices, and conventions for this project. It is designed to be consumed by 
+This styleguide consolidates all coding standards, best practices, and conventions for this project. It is designed to be consumed by
 AI code review systems to ensure consistent, high-quality code reviews.
 
 ## Key Principles
@@ -44,17 +44,20 @@ For Infrastructure as Code guidelines, see [Infrastructure Standards](./infrastr
 ## Language-Specific Conventions
 
 ### JavaScript/TypeScript
+
 - Use TypeScript for all new JavaScript code
 - Prefer `const` over `let`, avoid `var`
 - Use descriptive function and variable names
 - Implement proper error boundaries in React components
 
 ### Python
+
 - Follow PEP 8 style guidelines
 - Use type hints for all function signatures
 - Prefer list comprehensions over loops where readable
 
 ### Markdown
+
 - Maximum line length: 160 characters (MD013 rule)
 - Use hierarchical numbering (1., 1.1., 1.1.1.) for structured content
 - Reference other documents instead of duplicating content
@@ -62,14 +65,17 @@ For Infrastructure as Code guidelines, see [Infrastructure Standards](./infrastr
 ## AI Tools Integration
 
 ### GitHub Copilot
+
 - Configuration in `.github/copilot-instructions.md`
 - Used for real-time, in-editor assistance
 
 ### Claude Code
+
 - Configuration in `.claude/` directory
 - Used for complex, multi-step workflows
 
 ### Gemini Code Assist
+
 - Configuration in `.gemini/` directory
 - Used for code reviews and pull request analysis
 
@@ -88,6 +94,7 @@ When reviewing code, focus on:
 ## Examples of Preferred Code Structure
 
 ### Function Documentation
+
 ```typescript
 /**
  * Calculates the compound interest for an investment.
@@ -102,6 +109,7 @@ function calculateCompoundInterest(principal: number, rate: number, time: number
 ```
 
 ### Error Handling
+
 ```typescript
 async function fetchUserData(userId: string): Promise<User | null> {
   try {

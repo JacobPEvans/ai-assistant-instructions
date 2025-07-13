@@ -4,7 +4,7 @@ This task outlines the process for providing a thorough, constructive code revie
 
 ## Review Focus Areas
 
-Apply [Code Standards](../concepts/code-standards.md), [Infrastructure Standards](../concepts/infrastructure-standards.md), and 
+Apply [Code Standards](../concepts/code-standards.md), [Infrastructure Standards](../concepts/infrastructure-standards.md), and
 [Styleguide](../concepts/styleguide.md) when reviewing:
 
 - **Security**: Secrets management, input validation, access control  
