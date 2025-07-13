@@ -124,6 +124,7 @@ gh pr comment 22 --body "I have addressed this issue in commit f640821."
 #### Quick Reference: Two-Step Process
 
 #### Step 1: Get ALL Review Conversations
+
 ```bash
 gh api graphql --field query='
 {
@@ -144,6 +145,7 @@ gh api graphql --field query='
 ```
 
 #### Step 2: Resolve Individual Conversations (after fixing issues)
+
 ```bash
 gh api graphql --field query='
 mutation {
@@ -153,7 +155,8 @@ mutation {
 }'
 ```
 
-**IMPORTANT:** 
+**IMPORTANT:**
+
 - Only resolve conversations **after** you have actually fixed the underlying issues
 - Never suppress linters or quality checks - always fix root causes
 - See [pull-request-review-feedback.md](pull-request-review-feedback.md) for complete documentation
