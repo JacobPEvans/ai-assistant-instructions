@@ -49,7 +49,8 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
   1. Get ALL pull request review threads and comments with resolution status
   2. Resolve individual conversations after fixing underlying issues
   
-  **Impact**: This breakthrough enables fully automated PR management workflows. The exact working GraphQL queries are documented in `pull-request-review-feedback.md` with detailed variable substitution examples.
+  **Impact**: This breakthrough enables fully automated PR management workflows. The exact working GraphQL queries are documented in
+  `pull-request-review-feedback.md` with detailed variable substitution examples.
   
   **Technical Details**: 
   - Query: `repository.pullRequest.reviewThreads` with nested comments

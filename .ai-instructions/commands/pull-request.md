@@ -123,7 +123,7 @@ gh pr comment 22 --body "I have addressed this issue in commit f640821."
 
 #### Quick Reference: Two-Step Process
 
-**Step 1: Get ALL Review Conversations**
+#### Step 1: Get ALL Review Conversations
 ```bash
 gh api graphql --field query='
 {
@@ -143,7 +143,7 @@ gh api graphql --field query='
 }'
 ```
 
-**Step 2: Resolve Individual Conversations (after fixing issues)**
+#### Step 2: Resolve Individual Conversations (after fixing issues)
 ```bash
 gh api graphql --field query='
 mutation {
