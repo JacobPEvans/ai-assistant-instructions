@@ -21,7 +21,7 @@ Output should show `working tree clean`. If not, commit or stash changes before 
 1.1.2. **Push Local Branch to Remote**: Ensure all local commits are pushed to the remote repository.
 
 ```bash
-git push -u origin <branch-name>
+git push -u origin $(git branch --show-current)
 ```
 
 1.2. **Create the PR**: Use the `gh pr create` command with a detailed title and body.
