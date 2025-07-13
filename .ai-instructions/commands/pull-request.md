@@ -115,33 +115,41 @@ gh pr comment 22 --body "I have addressed this issue in commit f640821."
 #### Step 1: List All Unresolved Conversations
 
 ```bash
-# Get all review threads and their resolution status
-gh api graphql -f query='{ repository(owner: "OWNER", name: "REPO") { 
-  pullRequest(number: PR_NUMBER) { 
-    reviewThreads(first: 50) { 
-      nodes { 
-        id isResolved 
-        comments(first: 1) { 
-          nodes { body path line } 
-        } 
-      } 
-    } 
-  } 
-}'
+# Get all review threads and their resolution status (replace placeholders)
+gh api graphql -f query='
+  query($owner: String!, $repo: String!, $pr: Int!) {
+    repository(owner: $owner, name: $repo) {
+      pullRequest(number: $pr) {
+        reviewThreads(first: 50) {
+          nodes {
+            id
+            isResolved
+            comments(first: 1) {
+              nodes { body path line }
+            }
+          }
+        }
+      }
+    }
+  }' -f owner='OWNER' -f repo='REPO' -F pr=PR_NUMBER
 
 # Example for this repository:
-gh api graphql -f query='{ repository(owner: "JacobPEvans", name: "ai-assistant-instructions") { 
-  pullRequest(number: 22) { 
-    reviewThreads(first: 50) { 
-      nodes { 
-        id isResolved 
-        comments(first: 1) { 
-          nodes { body path line } 
-        } 
-      } 
-    } 
-  } 
-}'
+gh api graphql -f query='
+  query($owner: String!, $repo: String!, $pr: Int!) {
+    repository(owner: $owner, name: $repo) {
+      pullRequest(number: $pr) {
+        reviewThreads(first: 50) {
+          nodes {
+            id
+            isResolved
+            comments(first: 1) {
+              nodes { body path line }
+            }
+          }
+        }
+      }
+    }
+  }' -f owner='JacobPEvans' -f repo='ai-assistant-instructions' -F pr=22
 ```
 
 #### Step 2: Resolve Individual Conversations
@@ -149,11 +157,11 @@ gh api graphql -f query='{ repository(owner: "JacobPEvans", name: "ai-assistant-
 After fixing the issues mentioned in unresolved conversations:
 
 ```bash
-# Resolve a specific conversation thread
-gh api graphql -f query='mutation { resolveReviewThread(input: {threadId: "THREAD_ID"}) { clientMutationId } }'
+# Resolve a specific conversation thread (replace THREAD_ID placeholder)
+gh api graphql -f query='mutation($threadId: ID!) { resolveReviewThread(input: {threadId: $threadId}) { clientMutationId } }' -f threadId='THREAD_ID'
 
 # Example:
-gh api graphql -f query='mutation { resolveReviewThread(input: {threadId: "PRRT_kwDOO1m-OM5UgDfm"}) { clientMutationId } }'
+gh api graphql -f query='mutation($threadId: ID!) { resolveReviewThread(input: {threadId: $threadId}) { clientMutationId } }' -f threadId='PRRT_kwDOO1m-OM5UgDfm'
 ```
 
 #### Step 3: Automated Resolution Script (For Multiple Conversations)
@@ -161,21 +169,13 @@ gh api graphql -f query='mutation { resolveReviewThread(input: {threadId: "PRRT_
 For efficiency when resolving many conversations:
 
 ```bash
-# Extract all unresolved thread IDs and resolve them
-UNRESOLVED_IDS=$(gh api graphql -f query='{ repository(owner: "OWNER", name: "REPO") { 
-  pullRequest(number: PR_NUMBER) { 
-    reviewThreads(first: 50) { 
-      nodes { 
-        id isResolved 
-      } 
-    } 
-  } 
-}' | jq -r '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false) | .id')
+# Extract all unresolved thread IDs and resolve them (replace placeholders)
+UNRESOLVED_IDS=$(gh api graphql -f query='query($owner: String!, $repo: String!, $pr: Int!) { repository(owner: $owner, name: $repo) { pullRequest(number: $pr) { reviewThreads(first: 50) { nodes { id isResolved } } } } }' -f owner='OWNER' -f repo='REPO' -F pr=PR_NUMBER | jq -r '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false) | .id')
 
 # Resolve each unresolved thread
 for thread_id in $UNRESOLVED_IDS; do
     echo "Resolving thread: $thread_id"
-    gh api graphql -f query="mutation { resolveReviewThread(input: {threadId: \"$thread_id\"}) { clientMutationId } }"
+    gh api graphql -f query='mutation($threadId: ID!) { resolveReviewThread(input: {threadId: $threadId}) { clientMutationId } }' -f threadId="$thread_id"
 done
 ```
 

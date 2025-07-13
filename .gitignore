@@ -1,7 +1,9 @@
 todos/
 
 .claude/projects/
+.claude/shell-snapshots/
 .claude/statsig/
+.claude/*.sh
 
 *credentials*
 *.jsonl
