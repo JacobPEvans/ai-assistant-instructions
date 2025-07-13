@@ -7,7 +7,8 @@ This task outlines the complete, systematic workflow for creating high-quality, 
 This commit process is used in multiple steps of the core workflow:
 
 - **Step 3:** A single `test` commit is created containing only the new, failing tests. This commit is used to create the initial pull request for review.
-- **Step 4:** One or more `feat`, `fix`, or `refactor` commits are created as you implement the code to make the tests pass. These are pushed to the existing pull request branch.
+- **Step 4:** One or more `feat`, `fix`, or `refactor` commits are created as you implement the code to make the tests pass.
+  These are pushed to the existing pull request branch.
 
 ## Workflow Overview
 
