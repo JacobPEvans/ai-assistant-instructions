@@ -8,7 +8,23 @@ This task outlines the complete, systematic workflow for creating, monitoring, a
 
 ## 1. Create the Pull Request
 
-1.1. **Create the PR**: Use the `gh pr create` command with a detailed title and body.
+1.1. **Pre-requisites**: Before creating a pull request, ensure the local repository is ready:
+
+1.1.1. **Verify Working Directory is Clean**: The local working directory must be clean with no uncommitted changes.
+
+```bash
+git status
+```
+
+Output should show `working tree clean`. If not, commit or stash changes before proceeding.
+
+1.1.2. **Push Local Branch to Remote**: Ensure all local commits are pushed to the remote repository.
+
+```bash
+git push -u origin <branch-name>
+```
+
+1.2. **Create the PR**: Use the `gh pr create` command with a detailed title and body.
 
 **PR Description Template:**
 
@@ -31,7 +47,7 @@ Link to the PRD file created in Step 2: `.tmp/prd-<task-name>.md`
 Any other relevant information for reviewers.
 ```
 
-1.2. **Set Auto-Merge**: Immediately after creating the PR, set it to auto-merge. This is a mandatory step.
+1.3. **Set Auto-Merge**: Immediately after creating the PR, set it to auto-merge. This is a mandatory step.
 
 ```bash
 gh pr merge <PR_URL_OR_ID> --rebase --auto
