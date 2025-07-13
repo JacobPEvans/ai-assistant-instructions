@@ -1,91 +1,54 @@
-# Task: Pull Request
+# Task: Pull Request Management
 
-This task outlines the complete, non-negotiable workflow for creating, verifying, and managing pull requests (PRs) to ensure a clean and linear git history.
+This task outlines the complete, systematic workflow for creating, monitoring, and fixing a pull request (PR) until it is ready to merge.
 
-## 1. PR Description Template
+## 1. Create the Pull Request
 
-All pull requests must use the following template.
-
-```markdown
-## Description
-
-[Detailed explanation of the changes and their purpose. Explain the "why," not just the "what." Address the business value or the problem being solved.]
-
-## Changes Made
-
-- [Specific functional change 1]
-- [Specific functional change 2]
-- [Highlight any security or performance implications]
-
-## Testing Instructions
-
-1.  [Provide clear, step-by-step instructions for reviewers to validate the changes.]
-2.  [Include both positive and negative test cases.]
-3.  [Specify any required test data or setup.]
-
-## Cost Impact
-
-- [Estimate the monthly cost impact of any cloud resource changes.]
-- [Provide justification for any resources costing over $5/month.]
-
-## Related Issues
-
-- Fixes #issue-number
-- Addresses #issue-number
-```
-
-## 2. Create the Pull Request & Set Auto-Merge
-
-Create the PR and immediately set it to auto-merge. This is a mandatory step.
-
-```bash
-# Create the pull request
-gh pr create --title "<title>" --body-file <path_to_description_file>
-
-# Set auto-merge using the rebase strategy
-gh pr merge <PR_URL_OR_ID> --rebase --auto
-```
-
-## 3. Post-Creation Verification (Mandatory)
-
-After creating the PR and setting auto-merge, you **must** monitor it and resolve any issues that arise.
-
-### Step 3.1: Wait for and Verify CI/CD Checks
-
-Automated checks can take time to complete. You must wait for them and ensure they all pass.
-
-**Action:**
-
-- Run `gh pr checks <PR_URL_OR_ID> --watch --interval 30` to monitor the checks.
-- **Do not proceed** until all required checks are completed and have passed successfully. If any check fails, you must analyze the failure, fix the underlying issue, commit the fix, and push the changes. The watcher will automatically pick up the new checks.
-
-### Step 3.2: Check for and Resolve All Conversations
-
-A PR cannot be merged until all conversations are resolved.
-
-**Action:**
-
-1. **List Conversations**: Use the following GraphQL query to find all unresolved review threads.
+1.1. **Create the PR**: Use the `gh pr create` command with a detailed title and body.
+1.2. **Set Auto-Merge**: Immediately after creating the PR, set it to auto-merge. This is a mandatory step.
 
     ```bash
-    gh api graphql -f query='
-      query($owner: String!, $repo: String!, $pr: Int!) {
-        repository(owner: $owner, name: $repo) {
-          pullRequest(number: $pr) {
-            reviewThreads(first: 100) {
-              nodes {
-                id
-                isResolved
-              }
-            }
-          }
-        }
-      }' -f owner='<OWNER>' -f repo='<REPO>' -F pr=<PR_NUMBER> | \
-      jq '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)'
+    gh pr merge <PR_URL_OR_ID> --rebase --auto
     ```
 
-2. **Address Feedback**: For any unresolved threads, you must address the feedback by pushing code changes.
-3. **Resolve Threads**: After pushing fixes, programmatically resolve the conversation threads using their `id` from the previous query.
+## 2. Begin the PR Resolution Loop
+
+You must now repeatedly check and fix the PR until it is in a mergeable state. Continue this loop until the `gh pr status` command shows all checks passing and all conversations resolved.
+
+### 2.1. Check the PR Status
+
+Use the `gh pr status` command to get a summary of checks and reviews.
+
+### 2.2. Analyze and Fix Failed Checks
+
+2.2.1. **Identify Failed Checks**: Look for any checks with a `✖` status.
+2.2.2. **View the Logs**: For each failed check, view the detailed logs to find the error.
+
+    ```bash
+    gh run list --workflow=<workflow_file.yml> --branch=<branch_name>
+    gh run view <run_id> --log
+    ```
+
+2.2.3. **Fix the Code**: Make the necessary code changes to fix the root cause of the failure.
+2.2.4. **Commit and Push**: Commit the fix with a clear message and push it to the PR branch. This will re-run the checks.
+
+### 2.3. Analyze and Resolve Conversations
+
+2.3.1. **List Unresolved Conversations**: Use the following command to get the ID, author, and content of all unresolved review threads.
+
+    ```bash
+    gh pr view <PR_URL_OR_ID> --json comments,reviews --jq '.reviews[] | .comments.nodes[] | select(.isResolved | not) | {id: .id, author: .author.login, body: .body}'
+    ```
+
+2.3.2. **Analyze Each Conversation**: For each unresolved conversation:
+    - **If the feedback is correct**: Fix the code as requested. Commit and push the changes.
+    - **If the feedback is incorrect or you disagree**: Post a reply comment explaining your reasoning.
+
+        ```bash
+        gh pr comment <PR_URL_OR_ID> --body "Replying to review: [Your explanation here]"
+        ```
+
+2.3.3. **Resolve the Conversation**: After addressing the feedback (by pushing a code fix or replying), resolve the thread using its `id`.
 
     ```bash
     gh api graphql -f query='
@@ -98,6 +61,10 @@ A PR cannot be merged until all conversations are resolved.
       }' -f threadId='<THREAD_ID>'
     ```
 
-## 4. Final Merge
+### 2.4. Repeat the Loop
+
+After pushing fixes or resolving conversations, go back to **Step 2.1** and check the status again. Continue this process until the PR is clean.
+
+## 3. Final Merge
 
 Once all checks have passed and all conversations are resolved, the PR will merge automatically. No further action is needed.
