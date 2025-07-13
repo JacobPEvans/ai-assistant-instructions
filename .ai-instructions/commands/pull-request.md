@@ -1,6 +1,10 @@
 # Task: Pull Request Management
 
+<!-- markdownlint-disable-file MD013 -->
+
 This task outlines the complete, systematic workflow for creating, monitoring, and fixing a pull request (PR) until it is ready to merge.
+
+TODO: Remove ignoring MD013 rule once the PR conversation resolution system is fully implemented.
 
 ## 1. Create the Pull Request
 
@@ -92,7 +96,7 @@ gh api repos/JacobPEvans/ai-assistant-instructions/pulls/22/comments
 This returns an array of review comments with:
 
 - `body`: The comment text and suggested changes
-- `path`: File path where comment was made  
+- `path`: File path where comment was made
 - `line`: Line number in the file
 - `pull_request_review_id`: ID of the review this comment belongs to
 
@@ -160,10 +164,7 @@ After fixing the issues mentioned in unresolved conversations:
 
 ```bash
 # Resolve a specific conversation thread (replace THREAD_ID placeholder)
-gh api graphql -f query='mutation($threadId: ID!) { resolveReviewThread(input: {threadId: $threadId}) { clientMutationId } }' -f threadId='THREAD_ID'
-
-# Example:
-gh api graphql -f query='mutation($threadId: ID!) { resolveReviewThread(input: {threadId: $threadId}) { clientMutationId } }' -f threadId='PRRT_kwDOO1m-OM5UgDfm'
+gh api graphql -f query='mutation($threadId: ID!) { resolveReviewThread(input: {threadId: $threadId}) { clientMutationId } }' -f threadId='<THREAD_ID>'
 ```
 
 #### Step 3: Automated Resolution Script (For Multiple Conversations)

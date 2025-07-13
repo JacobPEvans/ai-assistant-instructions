@@ -30,5 +30,5 @@
 
 4. **Wait for Approval.**
     4.1. Do not move to Step 4 until the PR has been reviewed and approved. This is a mandatory stop.
-    
+
 **⚠️ NOTE:** PR conversation resolution may require manual intervention as the automated system is a work in progress.
