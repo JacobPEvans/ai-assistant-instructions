@@ -13,59 +13,76 @@ This task outlines the complete, systematic workflow for creating, monitoring, a
 
 ## 2. Begin the PR Resolution Loop
 
-You must now repeatedly check and fix the PR until it is in a mergeable state. Continue this loop until the `gh pr status` command shows all checks passing and all conversations resolved.
+You must now repeatedly check and fix the PR until it is in a mergeable state. This is a mandatory, cyclical process.
 
-### 2.1. Check the PR Status
+### 2.1. Run the PR Health Check
 
-Use the `gh pr status` command to get a summary of checks and reviews.
+Start every loop by getting the complete status of the PR.
 
-### 2.2. Analyze and Fix Failed Checks
+```bash
+gh pr view <PR_URL_OR_ID> --json state,mergeable,statusCheckRollup,reviews,comments
+```
 
-2.2.1. **Identify Failed Checks**: Look for any checks with a `✖` status.
-2.2.2. **View the Logs**: For each failed check, view the detailed logs to find the error.
+Analyze the output:
+- `state`: Must be `OPEN`.
+- `mergeable`: Must be `MERGEABLE`.
+- `statusCheckRollup`: The `state` field must be `SUCCESS`.
+
+**If the PR is clean, proceed to Step 3. Otherwise, continue the loop.**
+
+### 2.2. Triage and Fix Failed Checks
+
+If the Health Check shows failing checks:
+
+2.2.1. **Identify Failed Checks**: Use `gh pr checks <PR_URL_OR_ID>` to see which jobs failed.
+2.2.2. **View the Logs**: Get the ID of the failed run and view its log.
 
     ```bash
-    gh run list --workflow=<workflow_file.yml> --branch=<branch_name>
+    # First, get the ID of the latest run for that workflow
+    gh run list --workflow=<workflow_file.yml> --branch=<branch_name> --limit=1
+    # Then, view the log
     gh run view <run_id> --log
     ```
 
-2.2.3. **Fix the Code**: Make the necessary code changes to fix the root cause of the failure.
-2.2.4. **Commit and Push**: Commit the fix with a clear message and push it to the PR branch. This will re-run the checks.
-
-### 2.3. Analyze and Resolve Conversations
-
-2.3.1. **List Unresolved Conversations**: Use the following command to get the ID, author, and content of all unresolved review threads.
+2.2.3. **Fix, Commit, and Push**: Fix the root cause of the error, commit the change with a clear message, and push it to the PR branch.
+2.2.4. **Wait for CI**: You **must** wait for the new checks to complete before restarting the loop.
 
     ```bash
-    gh pr view <PR_URL_OR_ID> --json comments,reviews --jq '.reviews[] | .comments.nodes[] | select(.isResolved | not) |
-      {id: .id, author: .author.login, body: .body}'
+    gh pr checks <PR_URL_OR_ID> --watch
     ```
 
-2.3.2. **Analyze Each Conversation**: For each unresolved conversation:
-    - **If the feedback is correct**: Fix the code as requested. Commit and push the changes.
-    - **If the feedback is incorrect or you disagree**: Post a reply comment explaining your reasoning.
+2.2.5. **Restart the Loop**: Go back to **Step 2.1**.
+
+### 2.3. Triage and Address All Feedback
+
+If the Health Check shows pending reviews or open comments:
+
+2.3.1. **List All Feedback**: Use the following command to get every review and comment.
+
+    ```bash
+    gh pr view <PR_URL_OR_ID> --json reviews,comments --jq '.reviews, .comments'
+    ```
+
+2.3.2. **Address Each Piece of Feedback**:
+    - **If the feedback is correct**: Fix the code, commit, and push. Then, reply to the comment referencing your commit.
+    - **If the feedback is incorrect**: Reply to the comment with a clear explanation.
 
         ```bash
         gh pr comment <PR_URL_OR_ID> --body "Replying to review: [Your explanation here]"
         ```
 
-2.3.3. **Resolve the Conversation**: After addressing the feedback (by pushing a code fix or replying), resolve the thread using its `id`.
+2.3.3. **Resolve Formal Review Threads**: If the feedback was part of a formal review, find the thread ID and resolve it after addressing it.
 
     ```bash
-    gh api graphql -f query='
-      mutation($threadId: ID!) {
-        resolveReviewThread(input: {threadId: $threadId}) {
-          thread {
-            isResolved
-          }
-        }
-      }' -f threadId='<THREAD_ID>'
+    # This command is complex; use it to find unresolved thread IDs
+    gh api graphql -f query='query($owner: String!, $repo: String!, $pr: Int!) { repository(owner: $owner, name: $repo) { pullRequest(number: $pr) { reviewThreads(first: 50) { nodes { id, isResolved } } } } }' -f owner='<OWNER>' -f repo='<REPO>' -F pr=<PR_NUMBER> | jq '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved | not) | .id'
+
+    # Use the ID to resolve the thread
+    gh api graphql -f query='mutation($threadId: ID!) { resolveReviewThread(input: {threadId: $threadId}) { clientMutationId } }' -f threadId='<THREAD_ID>'
     ```
 
-### 2.4. Repeat the Loop
-
-After pushing fixes or resolving conversations, go back to **Step 2.1** and check the status again. Continue this process until the PR is clean.
+2.3.4. **Restart the Loop**: Go back to **Step 2.1**.
 
 ## 3. Final Merge
 
-Once all checks have passed and all conversations are resolved, the PR will merge automatically. No further action is needed.
+Once the "PR Health Check" (Step 2.1) shows that all checks are passing, the PR is mergeable, and all feedback is resolved, the PR will merge automatically. Your work is complete.
