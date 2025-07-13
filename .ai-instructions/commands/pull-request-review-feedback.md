@@ -173,6 +173,11 @@ PR_NUMBER=2                      # Pull request number
 gh api repos/$OWNER/$REPO/pulls/$PR_NUMBER/comments
 ```
 
+**Real Example Used Successfully:**
+```bash
+gh api repos/JacobPEvans/python-template/pulls/2/comments
+```
+
 ### Method 1C: Comprehensive Review Data (Complete Picture)
 
 Get ALL review-related data including reviews, comments, and status.
