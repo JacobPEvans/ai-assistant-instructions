@@ -105,11 +105,54 @@ This returns an array of review comments with:
 
 **Wait 1 Minute After Pushing:** Always wait 1 minute after pushing changes to allow AI reviewers to process updates before checking for new feedback.
 
-### 2.4. Triage and Address All Feedback
+### 2.4. Resolve PR Conversations (Automated)
+
+**CRITICAL:** GitHub requires all conversations to be marked as "resolved" before allowing PR merge. This **must** be automated.
+
+**Step 1: List All Unresolved Conversations**
+
+    ```bash
+    # Get all review threads and their resolution status
+    gh api graphql -f query='{ repository(owner: "OWNER", name: "REPO") { pullRequest(number: PR_NUMBER) { reviewThreads(first: 50) { nodes { id isResolved comments(first: 1) { nodes { body path line } } } } } } }'
+    
+    # Example for this repository:
+    gh api graphql -f query='{ repository(owner: "JacobPEvans", name: "ai-assistant-instructions") { pullRequest(number: 22) { reviewThreads(first: 50) { nodes { id isResolved comments(first: 1) { nodes { body path line } } } } } } }'
+    ```
+
+**Step 2: Resolve Individual Conversations**
+
+After fixing the issues mentioned in unresolved conversations:
+
+    ```bash
+    # Resolve a specific conversation thread
+    gh api graphql -f query='mutation { resolveReviewThread(input: {threadId: "THREAD_ID"}) { clientMutationId } }'
+    
+    # Example:
+    gh api graphql -f query='mutation { resolveReviewThread(input: {threadId: "PRRT_kwDOO1m-OM5UgDfm"}) { clientMutationId } }'
+    ```
+
+**Step 3: Automated Resolution Script (For Multiple Conversations)**
+
+For efficiency when resolving many conversations:
+
+    ```bash
+    # Extract all unresolved thread IDs and resolve them
+    UNRESOLVED_IDS=$(gh api graphql -f query='{ repository(owner: "OWNER", name: "REPO") { pullRequest(number: PR_NUMBER) { reviewThreads(first: 50) { nodes { id isResolved } } } } }' | jq -r '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false) | .id')
+    
+    # Resolve each unresolved thread
+    for thread_id in $UNRESOLVED_IDS; do
+        echo "Resolving thread: $thread_id"
+        gh api graphql -f query="mutation { resolveReviewThread(input: {threadId: \"$thread_id\"}) { clientMutationId } }"
+    done
+    ```
+
+**IMPORTANT:** Only resolve conversations **after** you have actually fixed the underlying issues. Resolving without fixing will cause reviewer confusion.
+
+### 2.5. Triage and Address All Feedback
 
 If the Health Check shows pending reviews or open comments:
 
-2.4.1. **List All Feedback**: Use the following command to get every review and comment.
+2.5.1. **List All Feedback**: Use the following command to get every review and comment.
 
 **TODO:** Ignore GitHub "outdated" comments and conversations.
 
@@ -117,7 +160,7 @@ If the Health Check shows pending reviews or open comments:
     gh pr view <PR_URL_OR_ID> --json reviews,comments --jq '.reviews, .comments'
     ```
 
-2.4.2. **Address Each Piece of Feedback**:
+2.5.2. **Address Each Piece of Feedback**:
     - **If the feedback is correct**: Fix the code, commit, and push. Then, reply to the comment referencing your commit.
     - **If the feedback is incorrect**: Reply to the comment with a clear explanation.
 
@@ -125,21 +168,7 @@ If the Health Check shows pending reviews or open comments:
         gh pr comment <PR_URL_OR_ID> --body "Replying to review: [Your explanation here]"
         ```
 
-2.4.3. **Resolve Formal Review Threads**: If the feedback was part of a formal review, find the thread ID and resolve it after addressing it.
-
-    ```bash
-    # This command is complex; use it to find unresolved thread IDs
-    gh api graphql -f query='query($owner: String!, $repo: String!, $pr: Int!) { repository(owner: $owner, name: $repo) {
-      pullRequest(number: $pr) { reviewThreads(first: 50) { nodes { id, isResolved } } } } }' \
-      -f owner='<OWNER>' -f repo='<REPO>' -F pr=<PR_NUMBER> |
-    jq '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved | not) | .id'
-
-    # Use the ID to resolve the thread
-    gh api graphql -f query='mutation($threadId: ID!) {
-      resolveReviewThread(input: {threadId: $threadId}) { clientMutationId } }' -f threadId='<THREAD_ID>'
-    ```
-
-2.4.4. **Restart the Loop**: Go back to **Step 2.1**.
+2.5.3. **Restart the Loop**: Go back to **Step 2.1**.
 
 ## 3. Final Merge
 
