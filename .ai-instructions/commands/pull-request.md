@@ -55,6 +55,7 @@ After creating the PR and setting auto-merge, you **must** monitor it and resolv
 Automated checks can take time to complete. You must wait for them and ensure they all pass.
 
 **Action:**
+
 - Run `gh pr checks <PR_URL_OR_ID> --watch --interval 30` to monitor the checks.
 - **Do not proceed** until all required checks are completed and have passed successfully. If any check fails, you must analyze the failure, fix the underlying issue, commit the fix, and push the changes. The watcher will automatically pick up the new checks.
 
@@ -63,8 +64,9 @@ Automated checks can take time to complete. You must wait for them and ensure th
 A PR cannot be merged until all conversations are resolved.
 
 **Action:**
-1.  **List Conversations**: Use the following GraphQL query to find all unresolved review threads.
-    <!-- markdownlint-disable-next-line MD013 -->
+
+1. **List Conversations**: Use the following GraphQL query to find all unresolved review threads.
+
     ```bash
     gh api graphql -f query='
       query($owner: String!, $repo: String!, $pr: Int!) {
@@ -78,10 +80,13 @@ A PR cannot be merged until all conversations are resolved.
             }
           }
         }
-      }' -f owner='<OWNER>' -f repo='<REPO>' -F pr=<PR_NUMBER> | jq '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)'
+      }' -f owner='<OWNER>' -f repo='<REPO>' -F pr=<PR_NUMBER> | \
+      jq '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)'
     ```
-2.  **Address Feedback**: For any unresolved threads, you must address the feedback by pushing code changes.
-3.  **Resolve Threads**: After pushing fixes, programmatically resolve the conversation threads using their `id` from the previous query.
+
+2. **Address Feedback**: For any unresolved threads, you must address the feedback by pushing code changes.
+3. **Resolve Threads**: After pushing fixes, programmatically resolve the conversation threads using their `id` from the previous query.
+
     ```bash
     gh api graphql -f query='
       mutation($threadId: ID!) {

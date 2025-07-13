@@ -20,6 +20,7 @@ The repository now follows the DRY principle with a single source of truth in th
 
 ## Next Session Actions & Future Improvements
 
+- **Multi-AI Agent Collaboration**: Develop a system where multiple AI agents can collaborate on a single task, handing off work between them.
 - **Automated Link Checking**: Implement a GitHub Action to regularly check for broken markdown links.
 - **Command Validation**: Explore creating a script that validates the structure of the vendor-specific directories.
 - **Add More Granular Commands**: Consider breaking down the existing commands into even more granular tasks.
