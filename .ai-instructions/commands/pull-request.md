@@ -5,6 +5,28 @@ This task outlines the complete, systematic workflow for creating, monitoring, a
 ## 1. Create the Pull Request
 
 1.1. **Create the PR**: Use the `gh pr create` command with a detailed title and body.
+
+**PR Description Template:**
+
+```markdown
+## Summary
+Brief overview of changes made.
+
+## Related PRD
+Link to the PRD file created in Step 2: `.tmp/prd-<task-name>.md`
+
+## Testing Instructions
+- [ ] Steps to test the changes
+- [ ] Expected behavior
+
+## Changes Made
+- List of key changes
+- Files modified
+
+## Additional Notes
+Any other relevant information for reviewers.
+```
+
 1.2. **Set Auto-Merge**: Immediately after creating the PR, set it to auto-merge. This is a mandatory step.
 
     ```bash

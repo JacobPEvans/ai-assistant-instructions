@@ -83,6 +83,30 @@ All commit messages must follow the [Conventional Commits](https://www.conventio
 - **Body** (optional): A more detailed explanation of the "why" behind the changes.
 - **Footer** (optional): Reference related issues (e.g., `Fixes #123`).
 
+### Examples
+
+**Simple Commit:**
+
+```bash
+feat(auth): implement passwordless login via email links
+```
+
+**Complex Commit:**
+
+```bash
+fix(api): resolve intermittent 502 errors on user-service
+
+The user-service was experiencing connection timeouts to the Redis cache
+during periods of high load. This was caused by an insufficient connection
+pool size.
+
+- Increased the Redis connection pool from 10 to 50.
+- Added exponential backoff for connection retries.
+- Improved logging to capture connection pool metrics.
+
+Refs: #456
+```
+
 ## Finalizing the Commit
 
 After crafting the message, commit the changes using `git commit`. Then, push the changes to the remote branch for the pull request using `git push`.
