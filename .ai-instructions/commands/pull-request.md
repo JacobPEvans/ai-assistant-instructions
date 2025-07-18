@@ -47,7 +47,7 @@ Link to the PRD file created in Step 2: `.tmp/prd-<task-name>.md`
 Any other relevant information for reviewers.
 ```
 
-1.3 **Wait 1 Minute After Pushing:** Always wait 1 minute after pushing changes to allow AI reviewers to process updates before checking for new feedback.
+1.3. **Wait 1 Minute After Pushing:** Always wait 1 minute after pushing changes to allow AI reviewers to process updates before checking for new feedback.
 
 1.4. **Set the PR to Auto-Merge**
 
