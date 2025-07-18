@@ -47,7 +47,9 @@ Link to the PRD file created in Step 2: `.tmp/prd-<task-name>.md`
 Any other relevant information for reviewers.
 ```
 
-1.3. **Set Auto-Merge**: Immediately after creating the PR, set it to auto-merge. This is a mandatory step.
+1.3 **Wait 1 Minute After Pushing:** Always wait 1 minute after pushing changes to allow AI reviewers to process updates before checking for new feedback.
+
+1.4. **Set the PR to Auto-Merge**
 
 ```bash
 gh pr merge <PR_URL_OR_ID> --rebase --auto
@@ -121,12 +123,7 @@ This returns an array of review comments with:
 ```bash
 # Reply to a specific PR comment
 gh pr comment <PR_NUMBER> --body "I have addressed this issue in commit <COMMIT_HASH>."
-
-# Example:
-gh pr comment 22 --body "I have addressed this issue in commit f640821."
 ```
-
-**Wait 1 Minute After Pushing:** Always wait 1 minute after pushing changes to allow AI reviewers to process updates before checking for new feedback.
 
 ### 2.4. Resolve PR Conversations (Automated) ✅ WORKING
 
