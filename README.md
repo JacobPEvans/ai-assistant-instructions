@@ -1,17 +1,17 @@
 # AI Assistant Instructions
 
-Comprehensive AI assistant instructions combining GitHub Copilot and Claude Code workflows for consistent, high-quality development assistance.
+Comprehensive AI assistant instructions combining GitHub Copilot, Claude, and Gemini workflows for consistent, high-quality development assistance.
 
 ## Overview
 
 This repository provides centralized AI instruction management with modular, reusable configurations.
-It is optimized for both GitHub Copilot and Claude Code integration.
-It features dual AI system compatibility with standardized workflows, security scanning, and cost-conscious development practices.
+It is optimized for GitHub Copilot, Claude, and Gemini integration.
+It features multiple AI system compatibility with standardized workflows, security scanning, and cost-conscious development practices.
 
 ## Quick Start
 
 - **Explore the Instructions**: The core instructions are in the `.ai-instructions` directory.
-- **Vendor-Specific Integration**: The `.claude`, `.copilot`, and `.github` directories contain links to these core instructions.
+- **Vendor-Specific Integration**: The `.claude`, `.copilot`, `.gemini`, and `.github` directories contain links to these core instructions.
 - **Use the Commands**: Leverage the standardized commands like `commit` and `review-code` with your AI assistant.
 
 ## Architecture
