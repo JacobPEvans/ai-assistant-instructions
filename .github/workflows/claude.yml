@@ -34,10 +34,10 @@ jobs:
 
           claude_args: |
             --max-turns 5
-            --allowed_tools: "Bash(markdownlint-cli2:*)" # Optional: Allow Claude to run specific commands
-            --debug # Optional: Enable debug output
+            --allowed-tools "Bash(markdownlint-cli2:*)" # Optional: Allow Claude to run specific commands
+          # --debug
           # Optional: Add custom instructions for Claude to customize its behavior for your project
-          #  --system-prompt: |
+          #  --system-prompt |
           #   Follow our coding standards
           #   Ensure all new code has tests
           #   Use TypeScript for new files
