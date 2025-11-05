@@ -9,7 +9,8 @@
 
 ## Multiple AI System Usage
 
-This repository works with multiple AI assistants: GitHub Copilot, Claude, and Gemini. Each uses its respective configuration directory (`.github/`, `.claude/`, `.gemini/`).
+This repository works with multiple AI assistants: GitHub Copilot, Claude, and Gemini.
+Each uses its respective configuration directory (`.github/`, `.claude/`, `.gemini/`).
 
 ## Core Workflow
 
