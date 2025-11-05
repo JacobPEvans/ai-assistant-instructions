@@ -1,31 +1,19 @@
 # AI Assistant Instructions
 
-## Role and Core Principles
-
-You are an expert AI assistant specializing in software engineering, infrastructure, and technical documentation.
-Your primary goal is to assist users by adhering to the highest standards of quality, security, and best practices.
+## Core Principles
 
 - **Accuracy and Truth**: Prioritize correctness and factual accuracy above all else.
 - **Idempotency**: All operations should be repeatable with consistent results.
 - **Best Practices**: Follow established industry and project-specific best practices.
-- **Clarity**: Ask for clarification when a request is ambiguous or incomplete.
 - **No Sycophancy**: Do not cater to bad ideas or prioritize pleasing the user over providing correct and sound advice.
 
 ## Multiple AI System Usage
 
-This repository is designed to work with multiple AI assistants: GitHub Copilot, Claude, and Gemini.
-
-- **GitHub Copilot**: Provides real-time, in-editor code assistance. It uses the `.github/copilot-instructions.md` file for high-level context.
-- **Claude**: Used for more complex, multi-step tasks and workflow automation via its command-line interface.
-  It uses the `.claude/commands` directory to define its available commands.
-- **Gemini**: Also used for complex tasks and workflow automation through its command-line interface. It uses the `.gemini/prompts` directory for its instructions.
-
-The goal is to leverage the strengths of all systems in a unified workflow.
+This repository works with multiple AI assistants: GitHub Copilot, Claude, and Gemini. Each uses its respective configuration directory (`.github/`, `.claude/`, `.gemini/`).
 
 ## Core Workflow
 
-This project follows a strict, 5-step development cycle. All tasks must be executed by following these steps in order.
-This process is designed to be automated and repeatable.
+This project follows a strict, 5-step development cycle:
 
 - **[Step 1: Research and Explore](./workflows/1-research-and-explore.md)**: Read-only phase to understand requirements and codebase
 - **[Step 2: Plan and Document](./workflows/2-plan-and-document.md)**: Create locked PRD with implementation checklist
@@ -41,9 +29,8 @@ If any step fails, the cycle must restart from Step 1 after documenting the fail
 
 - **[Idempotency](./concepts/idempotency.md)**: Operations that can be repeated with consistent results.
 - **[The DRY Principle](./concepts/dry-principle.md)**: The "Don't Repeat Yourself" principle for code and documentation.
-- **[The Memory Bank](./concepts/memory-bank/README.md)**: A set of documents that act as the AI's external brain.
+- **[The Memory Bank](./concepts/memory-bank/README.md)**: A set of documents that provide project context.
 - **[AI Tooling](./concepts/ai-tooling.md)**: Best practices for giving AI assistants access to your development environment.
-- **[Adversarial Testing](./concepts/adversarial-testing.md)**: A method for improving plan robustness by seeking critique from a second AI.
 - **[Vendor-Specific Configuration](./concepts/vendor-config-standards.md)**: Standards for creating vendor-specific AI configuration files.
 - **[Styleguide](./concepts/styleguide.md)**: Comprehensive coding styleguide for AI-assisted development and code reviews.
 - **[Code Standards](./concepts/code-standards.md)**: Guidelines for writing high-quality, secure, and maintainable code.
@@ -53,9 +40,6 @@ If any step fails, the cycle must restart from Step 1 after documenting the fail
 - **[Workspace Management](./concepts/workspace-management.md)**: Guidelines for managing a multi-repository workspace.
 
 ## Commands
-
-This project uses a set of standardized commands. Each AI assistant should have a corresponding reference file in its respective directory
-(e.g., `.claude/commands/`, `.github/prompts/`, `.gemini/prompts/`) that links to the single source of truth in `.ai-instructions/commands/`.
 
 - **[Commit](./commands/commit.md)**: Standardized git commit process with validation checks
 - **[Pull Request](./commands/pull-request.md)**: Complete PR lifecycle management from creation to merge
