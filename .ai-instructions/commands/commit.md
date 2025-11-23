@@ -72,4 +72,3 @@ pool size.
 
 Refs: #456
 ```
-

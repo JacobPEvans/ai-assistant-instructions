@@ -25,4 +25,5 @@ Apply [Code Standards](../concepts/code-standards.md), [Infrastructure Standards
 
 ## Example
 
-> 🟡 **Suggested** (Code Quality): The function `process_data()` on line 72 is doing multiple things. Consider splitting into `validate_data()`, `transform_data()`, and `save_data()` for better testability.
+> 🟡 **Suggested** (Code Quality): The function `process_data()` on line 72 is doing multiple things.
+> Consider splitting into `validate_data()`, `transform_data()`, and `save_data()` for better testability.

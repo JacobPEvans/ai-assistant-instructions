@@ -189,7 +189,7 @@ digraph network {
 ### Core Technologies
 
 | Technology | Decision | Rationale |
-|------------|----------|-----------|
+| ---------- | -------- | --------- |
 | **Infrastructure** | Terraform + Terragrunt | Industry standard, cost management, state isolation |
 | **Cloud Provider** | AWS (primary) | Extensive free tier, mature ecosystem |
 | **Region Preference** | us-east-2 | Cost optimization, latency considerations |

@@ -44,6 +44,7 @@ Repeatedly check and fix the PR until mergeable.
 Check status: `gh pr view <PR_URL_OR_ID> --json state,mergeable,statusCheckRollup,reviews,comments`
 
 Requirements:
+
 - `state`: Must be `OPEN`
 - `mergeable`: Must be `MERGEABLE`
 - `statusCheckRollup.state`: Must be `SUCCESS`
@@ -67,6 +68,7 @@ gh api repos/<OWNER>/<REPO>/pulls/<PR_NUMBER>/comments
 ```
 
 Returns an array of review comments with:
+
 - `body`: The comment text and suggested changes
 - `path`: File path where comment was made
 - `line`: Line number in the file
@@ -119,6 +121,7 @@ mutation {
 **List**: `gh pr view <PR_URL_OR_ID> --json reviews,comments`
 
 **Address**:
+
 - If correct: Fix, commit, push, and reply referencing your commit.
 - If incorrect: Reply with explanation.
 
