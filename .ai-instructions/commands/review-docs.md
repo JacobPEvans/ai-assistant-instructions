@@ -26,7 +26,9 @@ Review the project's documentation files (`.md`) for consistency, completeness, 
     * Check for broken links: `markdown-link-check **/*.md` (if available)
 
 3. **Markdownlint Standards (CRITICAL)**:
-    * **MD013**: Maximum line length is 160 characters (NOT 80)
+    * **MD013**: Maximum line length is 160 characters
+      - Preserve sentence integrity when fixing violations
+      - Never break words mid-character or split natural phrases
     * All other markdownlint rules must pass
     * Fix existing violations before creating pull requests
     * Configuration in `.markdownlint.json` sets MD013 to 160 characters
