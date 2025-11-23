@@ -20,6 +20,7 @@ Follow [Code Standards](../concepts/code-standards.md) for code quality, securit
 - **Python**:
   - Follow PEP 8 style guidelines.
   - Use type hints and docstrings.
+  - Use virtual environments and pin dependencies in `requirements.txt`.
 
 ## Error Handling and Testing
 
