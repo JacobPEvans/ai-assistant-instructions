@@ -2,6 +2,12 @@
 
 Standards for generating high-quality, maintainable, and secure code.
 
+## Before You Start
+
+- Clarify ambiguous requirements
+- Analyze existing code patterns and conventions
+- Prefer existing libraries and frameworks
+
 ## General Principles
 
 Follow [Code Standards](../concepts/code-standards.md) for code quality, security, and documentation requirements.
@@ -14,3 +20,9 @@ Follow [Code Standards](../concepts/code-standards.md) for code quality, securit
 - **Python**:
   - Follow PEP 8 style guidelines.
   - Use type hints and docstrings.
+
+## Error Handling and Testing
+
+- Handle errors gracefully with user-friendly messages
+- Include unit tests for core functionality
+- Run formatters and linters before committing

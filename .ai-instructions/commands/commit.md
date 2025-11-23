@@ -14,6 +14,21 @@ Never commit directly to `main`.
   - `chore/<description>`: For maintenance tasks.
   - `refactor/<description>`: For code restructuring.
 
+## Pre-Commit Validation
+
+Before staging files, run relevant validation checks:
+
+- **Code Formatting**: `terraform fmt`, `prettier --write .`, etc.
+- **Markdown Linting**: **REQUIRED** for all markdown files: `markdownlint-cli2 .`
+- **Linting**: `eslint .`, etc.
+- **Infrastructure**: `terraform validate` and `terragrunt plan`.
+- **Security**: Scan for sensitive data (API keys, secrets).
+
+## Staging and Analysis
+
+1. **Stage Files**: Use `git add <file>` to stage changes. Group files into logical commits.
+2. **Analyze Changes**: Use `git status -v -v` to review staged changes and `git log --oneline -n 5` to understand recent commit history.
+
 ## Commit Message Format
 
 All commit messages must follow the [Conventional Commits](https://www.conventionalcommits.org/) specification.
