@@ -6,6 +6,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/).
 
+## 2025-11-23
+
+### Changed
+
+- **Balanced Documentation Cleanup**: Refined AI instruction documentation to find middle ground between verbosity and conciseness.
+  - Restored critical "Clarity" principle to core principles
+  - Added "automated and repeatable" context to workflow description
+  - Improved Memory Bank description: "AI's external memory" vs "provide context"
+  - Restored pre-commit validation checklist in commit.md
+  - Re-added staging and analysis steps for commits
+  - Restored feedback guidelines and example in review-code.md
+  - Added "Before You Start" checklist to generate-code.md
+  - Enhanced pull-request.md with detailed prerequisites, timing guidance for AI reviewers, and API field explanations
+  - **Net Result**: Removed 257 lines while preserving all critical information (vs original 428 line reduction)
+
+### Removed
+
+- **Adversarial Testing**: Removed unused `adversarial-testing.md` concept file
+
 ## 2025-07-13
 
 ### Added
