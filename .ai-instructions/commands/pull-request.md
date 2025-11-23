@@ -6,7 +6,10 @@ Complete workflow for creating, monitoring, and fixing a pull request (PR) until
 
 ## 1. Create the Pull Request
 
-**Prerequisites**: Ensure working directory is clean and all commits are pushed to remote.
+**Prerequisites**:
+
+1. **Verify Working Directory is Clean**: Run `git status` - output should show `working tree clean`.
+2. **Push Local Branch to Remote**: `git push -u origin $(git branch --show-current)`
 
 **PR Description Template:**
 
@@ -23,7 +26,12 @@ Link to the PRD file: `.tmp/prd-<task-name>.md`
 
 ## Changes Made
 - List of key changes
+
+## Additional Notes
+Any other relevant information for reviewers.
 ```
+
+**Wait 1 Minute After Pushing**: Always wait 1 minute after pushing changes to allow AI reviewers to process updates before checking for feedback.
 
 **Set the PR to Auto-Merge:** `gh pr merge <PR_URL_OR_ID> --rebase --auto`
 
@@ -43,17 +51,26 @@ Requirements:
 
 ### 2.2. Fix Failed Checks
 
-1. **Identify**: `gh pr checks <PR_URL_OR_ID>`
-2. **View Logs**: `gh run view <run_id> --log`
-3. **Fix and Push**: Fix the issue, commit, and push.
-4. **Wait for CI**: `gh pr checks <PR_URL_OR_ID> --watch`
-5. **Restart Loop**: Return to 2.1.
+1. **Identify Failed Checks**: `gh pr checks <PR_URL_OR_ID>`
+2. **Get Run ID**: `gh run list --workflow=<workflow_file.yml> --branch=<branch_name> --limit=1`
+3. **View Logs**: `gh run view <run_id> --log`
+4. **Fix and Push**: Fix the root cause, commit the change with a clear message, and push.
+5. **Wait for CI**: `gh pr checks <PR_URL_OR_ID> --watch` - must wait for checks to complete before restarting loop.
+6. **Restart Loop**: Return to 2.1.
 
 ### 2.3. Read Line-Level Review Comments
 
-Get line-level feedback: `gh api repos/<OWNER>/<REPO>/pulls/<PR_NUMBER>/comments`
+Get line-level feedback:
 
-Returns: `body`, `path`, `line`, `pull_request_review_id`
+```bash
+gh api repos/<OWNER>/<REPO>/pulls/<PR_NUMBER>/comments
+```
+
+Returns an array of review comments with:
+- `body`: The comment text and suggested changes
+- `path`: File path where comment was made
+- `line`: Line number in the file
+- `pull_request_review_id`: ID of the review this comment belongs to
 
 **Respond**: `gh pr comment <PR_NUMBER> --body "Addressed in commit <COMMIT_HASH>."`
 

@@ -5,6 +5,7 @@
 - **Accuracy and Truth**: Prioritize correctness and factual accuracy above all else.
 - **Idempotency**: All operations should be repeatable with consistent results.
 - **Best Practices**: Follow established industry and project-specific best practices.
+- **Clarity**: Ask for clarification when a request is ambiguous or incomplete.
 - **No Sycophancy**: Do not cater to bad ideas or prioritize pleasing the user over providing correct and sound advice.
 
 ## Multiple AI System Usage
@@ -14,7 +15,7 @@ Each uses its respective configuration directory (`.github/`, `.claude/`, `.gemi
 
 ## Core Workflow
 
-This project follows a strict, 5-step development cycle:
+This project follows a strict, 5-step development cycle designed to be automated and repeatable:
 
 - **[Step 1: Research and Explore](./workflows/1-research-and-explore.md)**: Read-only phase to understand requirements and codebase
 - **[Step 2: Plan and Document](./workflows/2-plan-and-document.md)**: Create locked PRD with implementation checklist
@@ -30,7 +31,7 @@ If any step fails, the cycle must restart from Step 1 after documenting the fail
 
 - **[Idempotency](./concepts/idempotency.md)**: Operations that can be repeated with consistent results.
 - **[The DRY Principle](./concepts/dry-principle.md)**: The "Don't Repeat Yourself" principle for code and documentation.
-- **[The Memory Bank](./concepts/memory-bank/README.md)**: A set of documents that provide project context.
+- **[The Memory Bank](./concepts/memory-bank/README.md)**: Documents that act as the AI's external memory for project context.
 - **[AI Tooling](./concepts/ai-tooling.md)**: Best practices for giving AI assistants access to your development environment.
 - **[Vendor-Specific Configuration](./concepts/vendor-config-standards.md)**: Standards for creating vendor-specific AI configuration files.
 - **[Styleguide](./concepts/styleguide.md)**: Comprehensive coding styleguide for AI-assisted development and code reviews.
