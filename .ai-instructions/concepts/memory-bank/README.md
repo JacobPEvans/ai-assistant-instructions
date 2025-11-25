@@ -26,8 +26,25 @@ This enables:
 
 The Memory Bank is a directory containing several key documents. Each document has a specific purpose and should be kept concise and up-to-date.
 
+### Read-Only (Context)
+
 - **[Project Brief](./project-brief.md)**: A one-sentence description of the project.
 - **[Technical Context](./technical-context.md)**: The tech stack, libraries, and versions.
 - **[System Patterns](./system-patterns.md)**: The architecture and design patterns.
+
+### Read-Write (State)
+
 - **[Active Context](./active-context.md)**: The "current memory" of what is being worked on right now.
 - **[Progress Tracking](./progress-tracking.md)**: The overall project progress and what is complete.
+- **[Task Queue](./task-queue.md)**: The orchestrator's input source for [autonomous operation](../autonomous-orchestration.md).
+
+## Autonomous Operation
+
+For fully autonomous AI operation, the Memory Bank serves as the **sole input source**:
+
+1. Orchestrator reads `task-queue.md` for pending work
+2. Orchestrator reads `active-context.md` for current state
+3. Orchestrator writes updates to `progress-tracking.md`
+4. Cycle repeats until task queue is empty
+
+See [Autonomous Orchestration](../autonomous-orchestration.md) for the complete system design.

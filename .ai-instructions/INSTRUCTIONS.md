@@ -45,6 +45,8 @@ If any step fails, the cycle must restart from Step 1 after documenting the fail
 - **[AI Tooling](./concepts/ai-tooling.md)**: Best practices for giving AI assistants access to your development environment.
 - **[Adversarial Testing](./concepts/adversarial-testing.md)**: A method for improving plan robustness by seeking critique from a second AI.
 - **[Multi-Agent Patterns](./concepts/multi-agent-patterns.md)**: Best practices for orchestrator-worker architectures and subagent coordination.
+- **[Autonomous Orchestration](./concepts/autonomous-orchestration.md)**: File-driven autonomous operation with no user interaction.
+- **[Parallelism](./concepts/parallelism.md)**: Force multiplier for AI operations - run independent tasks simultaneously.
 - **[Vendor-Specific Configuration](./concepts/vendor-config-standards.md)**: Standards for creating vendor-specific AI configuration files.
 - **[Styleguide](./concepts/styleguide.md)**: Comprehensive coding styleguide for AI-assisted development and code reviews.
 - **[Code Standards](./concepts/code-standards.md)**: Guidelines for writing high-quality, secure, and maintainable code.
@@ -64,6 +66,21 @@ This project uses a set of standardized commands. Each AI assistant should have 
 - **[Review Code](./commands/review-code.md)**: Structured code review process with priority levels
 - **[Review Documentation](./commands/review-docs.md)**: Markdown validation and documentation quality workflow
 - **[Review Infrastructure](./commands/infrastructure-review.md)**: Terraform/Terragrunt configuration review checklist
+
+## Subagents
+
+Specialized agents for [autonomous orchestration](./concepts/autonomous-orchestration.md). See [Subagents README](./subagents/README.md) for full documentation.
+
+| Subagent | Purpose | Model Tier |
+|----------|---------|------------|
+| [Web Researcher](./subagents/web-researcher.md) | External information gathering | Medium |
+| [Coder](./subagents/coder.md) | Implement code changes | Medium |
+| [Tester](./subagents/tester.md) | Write and execute tests | Medium |
+| [Git Handler](./subagents/git-handler.md) | Manage git operations | Small |
+| [PR Resolver](./subagents/pr-resolver.md) | Handle GitHub PR comments | Medium |
+| [Doc Reviewer](./subagents/doc-reviewer.md) | Validate documentation | Small |
+| [Security Auditor](./subagents/security-auditor.md) | Security review | Medium |
+| [Dependency Manager](./subagents/dependency-manager.md) | Manage dependencies | Small |
 
 ## Maintenance
 
