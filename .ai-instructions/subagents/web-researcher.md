@@ -81,12 +81,16 @@ Research external information from the web to inform implementation decisions, f
 
 ## Failure Modes
 
-| Failure | Recovery |
-|---------|----------|
-| No relevant results | Try alternative queries, report to orchestrator |
-| URL unreachable | Skip URL, note in output |
-| Rate limited | Wait and retry with exponential backoff |
-| Ambiguous query | Request clarification from orchestrator |
+Per [Self-Healing](../concepts/self-healing.md), never request clarification. Resolve autonomously.
+
+| Failure | Autonomous Recovery |
+|---------|---------------------|
+| No relevant results | Try 3 alternative queries, return best partial results |
+| URL unreachable | Skip URL, try archive.org fallback, note in output |
+| Rate limited | Wait 30s, retry 3x max, return cached/partial if exhausted |
+| Ambiguous query | Expand to multiple specific queries, return all findings |
+| All searches fail | Return "insufficient data" with recommendations for manual sources |
+| Timeout (5 min) | Return findings so far with "research incomplete" flag |
 
 ## Example Usage
 

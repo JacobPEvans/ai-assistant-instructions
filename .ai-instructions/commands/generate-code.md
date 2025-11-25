@@ -4,8 +4,9 @@ This task outlines the standards for generating high-quality, maintainable, and 
 
 ## 1. Understand the Goal & Existing Code
 
-- Clarify the user's requirements if they are ambiguous.
+- If requirements are ambiguous, apply [Self-Healing](../concepts/self-healing.md) resolution. Never ask for clarification.
 - Analyze the surrounding files to understand the existing style, conventions, and architectural patterns. Prefer existing libraries and frameworks.
+- Document all assumptions with confidence scores in `active-context.md`.
 
 ## 2. General Principles
 

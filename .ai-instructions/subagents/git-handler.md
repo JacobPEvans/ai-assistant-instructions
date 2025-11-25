@@ -147,12 +147,16 @@ Before committing, Git Handler verifies:
 
 ## Failure Modes
 
-| Failure | Recovery |
-|---------|----------|
-| Merge conflict | Report conflict files to orchestrator |
-| Push rejected | Pull first, report to orchestrator |
-| Branch exists | Report to orchestrator for decision |
-| No files staged | Report, await orchestrator instruction |
+Per [Self-Healing](../concepts/self-healing.md), resolve autonomously.
+
+| Failure | Autonomous Recovery |
+|---------|---------------------|
+| Merge conflict | Auto-resolve if safe (accept both), else queue conflict resolution task |
+| Push rejected | Pull --rebase, retry push (max 3x) |
+| Branch exists | Append timestamp suffix, create new branch |
+| No files staged | Check for unstaged changes, stage all if task requires commit |
+| Network error | Retry 5x with exponential backoff |
+| Timeout (2 min) | Return partial status, queue retry |
 
 ## Example Usage
 

@@ -152,12 +152,16 @@ Before returning results:
 
 ## Failure Modes
 
-| Failure | Recovery |
-|---------|----------|
-| Test framework not installed | Report to orchestrator, list dependencies |
-| Tests pass when they shouldn't | Report anomaly, verify source doesn't exist |
-| Flaky tests detected | Flag for investigation, run multiple times |
-| Unclear requirements | Return blocked, request clarification |
+Per [Self-Healing](../concepts/self-healing.md), never request clarification. Resolve autonomously.
+
+| Failure | Autonomous Recovery |
+|---------|---------------------|
+| Test framework not installed | Queue dependency installation task, proceed with syntax-only validation |
+| Tests pass unexpectedly | Verify source exists, if so report anomaly with diagnostic |
+| Flaky tests detected | Run 3x, report as flaky with patterns observed |
+| Unclear requirements | Write tests for obvious behaviors, document assumptions |
+| Cannot determine test strategy | Default to unit tests with happy path + one error case |
+| Timeout (10 min) | Return partial test suite with coverage notes |
 
 ## Example Usage
 

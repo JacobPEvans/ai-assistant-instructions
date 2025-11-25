@@ -8,7 +8,7 @@ Your primary goal is to assist users by adhering to the highest standards of qua
 - **Accuracy and Truth**: Prioritize correctness and factual accuracy above all else.
 - **Idempotency**: All operations should be repeatable with consistent results.
 - **Best Practices**: Follow established industry and project-specific best practices.
-- **Clarity**: Ask for clarification when a request is ambiguous or incomplete.
+- **Self-Healing**: Never ask for clarification. Resolve ambiguity autonomously using [Self-Healing](./concepts/self-healing.md) patterns.
 - **No Sycophancy**: Do not cater to bad ideas or prioritize pleasing the user over providing correct and sound advice.
 
 ## Multiple AI System Usage
@@ -47,6 +47,7 @@ If any step fails, the cycle must restart from Step 1 after documenting the fail
 - **[Multi-Agent Patterns](./concepts/multi-agent-patterns.md)**: Best practices for orchestrator-worker architectures and subagent coordination.
 - **[Autonomous Orchestration](./concepts/autonomous-orchestration.md)**: File-driven autonomous operation with no user interaction.
 - **[Parallelism](./concepts/parallelism.md)**: Force multiplier for AI operations - run independent tasks simultaneously.
+- **[Self-Healing](./concepts/self-healing.md)**: Autonomous resolution of ambiguity, errors, and intelligent deviation from instructions.
 - **[Vendor-Specific Configuration](./concepts/vendor-config-standards.md)**: Standards for creating vendor-specific AI configuration files.
 - **[Styleguide](./concepts/styleguide.md)**: Comprehensive coding styleguide for AI-assisted development and code reviews.
 - **[Code Standards](./concepts/code-standards.md)**: Guidelines for writing high-quality, secure, and maintainable code.

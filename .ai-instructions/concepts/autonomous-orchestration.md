@@ -199,9 +199,11 @@ On session start, the orchestrator:
 1. Reads `active-context.md` for last checkpoint
 2. Validates current file state matches checkpoint
 3. Resumes from last incomplete step
-4. If state mismatch: flags for human review
+4. If state mismatch: **auto-reconcile** (prefer file system reality, log discrepancy)
 
 ## Error Handling
+
+All errors are handled autonomously per [Self-Healing](./self-healing.md). No human intervention.
 
 ### Subagent Failure
 
@@ -209,12 +211,12 @@ On session start, the orchestrator:
 ## Error Protocol
 
 1. Log error with full context
-2. Determine if retryable:
-   - Network timeout → Retry 3x with backoff
+2. Determine recovery strategy:
+   - Network timeout → Retry 5x with exponential backoff
    - Validation error → Return to orchestrator for re-planning
-   - Permission denied → Flag for human review
+   - Permission denied → Try alternative approach, else queue for next session
 3. Update checkpoint with failure state
-4. If unrecoverable: Write to `errors.md` and halt task
+4. If unrecoverable: Write to `errors.md`, queue retry task, continue other tasks
 ```
 
 ### Context Overflow
@@ -280,22 +282,33 @@ All GitHub operations go through the PR Resolver subagent:
 
 - Execute all tasks in the queue without user intervention
 - Make implementation decisions within defined patterns
-- Retry failed operations with exponential backoff
+- Retry failed operations with exponential backoff (max 5 attempts)
 - Update progress continuously
+- Resolve ambiguity using [Self-Healing](./self-healing.md) patterns
+- Make reasonable architectural decisions when patterns don't exist (document + proceed)
 
 ### The Orchestrator Will Not
 
 - Accept direct user commands during execution
 - Modify files outside its designated scope
-- Continue past unrecoverable errors
-- Make architectural decisions not in `system-patterns.md`
+- Ask for user clarification (ever)
+- Halt without queuing a recovery task
 
-### Human Intervention Points
+### Autonomous Resolution (No Human Needed)
 
-The orchestrator halts and requests human review when:
+| Situation | Autonomous Action |
+|-----------|------------------|
+| Task queue empty | Report completion, enter idle state |
+| Unrecoverable error | Log fully, queue retry task, continue other work |
+| Security-sensitive | Apply conservative defaults, document decision |
+| Ambiguous requirements | Use [Self-Healing](./self-healing.md) resolution hierarchy |
+| Architecture decision needed | Prefer simple, match existing patterns, document assumption |
 
-1. Task queue is empty
-2. Unrecoverable error occurs
-3. Security-sensitive operation detected
-4. Ambiguous requirements found
-5. Architecture decision needed not covered by patterns
+### Hard Stops (Queue for Next Session)
+
+Only these situations cause a hard stop with queued continuation:
+
+1. **Security downgrade detected** - Would remove authentication/authorization
+2. **Data destruction risk** - Would delete production data
+3. **Cost explosion** - Would exceed 10x normal resource usage
+4. **Context exhausted** - Cannot proceed without more context budget

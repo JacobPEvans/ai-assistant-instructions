@@ -110,12 +110,16 @@ Before returning results:
 
 ## Failure Modes
 
-| Failure | Recovery |
-|---------|----------|
-| Unclear requirements | Return blocked status, request clarification |
-| Missing context files | Report to orchestrator, list needed files |
-| Conflicting patterns | Report conflict, await orchestrator decision |
-| Cannot implement without tests | Return blocked, request Tester first |
+Per [Self-Healing](../concepts/self-healing.md), never request clarification. Resolve autonomously.
+
+| Failure | Autonomous Recovery |
+|---------|---------------------|
+| Unclear requirements | Infer from context, implement simplest interpretation, document assumption |
+| Missing context files | Search codebase for alternatives, proceed with available context |
+| Conflicting patterns | Prefer security → existing patterns → simplicity, document choice |
+| No tests exist yet | Implement based on requirements, flag for Tester to write tests after |
+| File doesn't exist | Create it with minimal scaffold |
+| Timeout (10 min) | Return partial implementation with TODO markers |
 
 ## Example Usage
 

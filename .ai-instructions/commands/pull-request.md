@@ -59,6 +59,13 @@ gh pr merge <PR_URL_OR_ID> --rebase --auto
 
 You must now repeatedly check and fix the PR until it is in a mergeable state. This is a mandatory, cyclical process.
 
+### Loop Limits (Per [Self-Healing](../concepts/self-healing.md))
+
+- **Max iterations**: 5 loops through this cycle
+- **CI wait timeout**: 15 minutes per check
+- **Total PR time budget**: 60 minutes
+- **On limit reached**: Mark PR as "needs-attention", document blockers, continue other tasks
+
 ### 2.1. Run the PR Health Check
 
 Start every loop by getting the complete status of the PR.
@@ -91,13 +98,14 @@ gh run view <run_id> --log
 ```
 
 2.2.3. **Fix, Commit, and Push**: Fix the root cause of the error, commit the change with a clear message, and push it to the PR branch.
-2.2.4. **Wait for CI**: You **must** wait for the new checks to complete before restarting the loop.
+2.2.4. **Wait for CI (with timeout)**: Wait for checks, but respect the 15-minute timeout.
 
 ```bash
-gh pr checks <PR_URL_OR_ID> --watch
+# Wait with timeout - if no completion in 15 min, proceed with partial status
+timeout 900 gh pr checks <PR_URL_OR_ID> --watch || echo "CI timeout - proceeding"
 ```
 
-2.2.5. **Restart the Loop**: Go back to **Step 2.1**.
+2.2.5. **Restart the Loop**: Go back to **Step 2.1**. Track iteration count.
 
 ### 2.3. Read Line-Level Review Comments (Simple Method)
 
@@ -180,7 +188,7 @@ If the Health Check shows pending reviews or open comments:
 
 2.5.1. **List All Feedback**: Use the following command to get every review and comment.
 
-**TODO:** Ignore GitHub "outdated" comments and conversations.
+**Note:** Filter out GitHub "outdated" comments using `--jq 'select(.outdated != true)'`.
 
 ```bash
 gh pr view <PR_URL_OR_ID> --json reviews,comments --jq '.reviews, .comments'

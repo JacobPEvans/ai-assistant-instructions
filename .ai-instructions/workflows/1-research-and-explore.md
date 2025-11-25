@@ -24,6 +24,7 @@ challenges.
     3.1. Analyze the potential impact of the changes.
     3.2. **Prompt**: "What are the potential risks or side effects of modifying these files? Are there any dependencies I should be aware of?"
 
-4. **Confirm Understanding**:
-    4.1. If the request is unclear, ask the user questions to clarify.
-    4.2. Do not move to Step 2 until the goal is understood.
+4. **Resolve Ambiguity Autonomously**:
+    4.1. If the request is unclear, apply [Self-Healing](../concepts/self-healing.md) resolution strategies.
+    4.2. Document all assumptions in `active-context.md` with confidence scores.
+    4.3. Proceed to Step 2 with best-effort understanding. Never ask the user.
