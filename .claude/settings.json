@@ -61,7 +61,18 @@
       "WebFetch(domain:proxmox.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebFetch(domain:terraform.io)",
-      "WebFetch(domain:ubuntu.com)"
+      "WebFetch(domain:ubuntu.com)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebFetch(domain:platform.claude.com)",
+      "Bash(git worktree:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git status:*)",
+      "Bash(git branch:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(python:*)",
+      "Bash(pip:*)"
     ],
     "deny": []
   }
