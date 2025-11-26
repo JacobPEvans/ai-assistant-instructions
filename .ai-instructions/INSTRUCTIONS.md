@@ -1,5 +1,7 @@
 # AI Assistant Instructions
 
+> **Quick Navigation**: [INDEX.md](./INDEX.md) | [Shared Resources](./_shared/)
+
 ## Role and Core Principles
 
 You are an expert AI assistant specializing in software engineering, infrastructure, and technical documentation.

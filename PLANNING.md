@@ -1,71 +1,71 @@
-# Project Status & Planning
+# Project Planning
 
-## Current Session Progress
+## Repository Purpose
 
-This session's work is complete. The following tasks were accomplished:
+Standardized, vendor-agnostic AI assistant instructions for consistent AI-assisted development.
 
-- Integrated expert AI best practices into the core instruction set.
-- Introduced the "Memory Bank" concept for improved AI context management.
-- Established and documented standards for workspace management and vendor-specific configuration.
-- Consolidated `TODO.md` into this planning file.
-- Performed a full repository cleanup to enforce DRY principles.
+## Architecture
 
-## Repository Context
+```text
+.ai-instructions/          # Single source of truth
+├── INDEX.md               # AI navigation (START HERE)
+├── INSTRUCTIONS.md        # Main entry point
+├── _shared/               # Reusable components (DRY)
+├── concepts/              # Core patterns
+├── commands/              # Slash commands
+├── subagents/             # Agent specifications
+└── workflows/             # 5-step process
 
-- **Target**: Standardized, vendor-agnostic AI assistant instructions.
-- **Purpose**: To provide a centralized, maintainable, and extensible knowledge base for consistent AI-assisted development workflows.
-- **Tools**: GitHub Actions, Markdown linting, various AI assistants (Claude, Copilot, Gemini, etc.).
+Vendor configs (.claude/, .github/, .copilot/, .gemini/)
+→ Link to .ai-instructions/ (DRY compliant)
+```
 
-### Key Files
+## Recent Changes
 
-- `.ai-instructions/` - The single source of truth for all instructions, commands, and concepts.
-- `.claude/`, `.github/`, `.copilot/`, `.gemini/` - Vendor-specific directories that now contain only links to the files in `.ai-instructions`.
-- `CHANGELOG.md` - Tracks all notable changes to the project.
-- `PLANNING.md` - This file, used for planning future work.
+### Autonomous Operation System (Current)
 
-## ✅ Recently Resolved Issues
+- User presence modes (attended/semi-attended/unattended)
+- Watchdog mechanism with commit-before-guessing
+- Self-healing with 5 Whys analysis
+- Hard protections (never skip validation)
+- 11 specialized subagents including Issue Creator/Resolver
 
-- **✅ SOLVED: PR Conversation Resolution**: The GitHub Pull Request conversation resolution system has been successfully implemented!
-  After extensive investigation and testing, working GraphQL queries have been developed and documented that can:
-  1. Get ALL pull request review threads with resolution status
-  2. Resolve individual conversations after fixing underlying issues
-  3. Handle batch resolution of multiple conversations
+### Repository Optimization
 
-  **Key Achievement**: Created `pull-request-review-feedback.md` with exact, tested, and well-documented GraphQL queries.
-  **Impact**: Enables fully automated PR management workflows and unblocks completion of future PRs.
-  **Date Resolved**: 2025-07-13
+- Created `_shared/` for DRY compliance
+- Added `INDEX.md` for AI navigation
+- Reduced `pull-request-review-feedback.md` from 496 to 99 lines
+- Added `/load-context` command for session startup
+
+## Capabilities
+
+### Implemented
+
+- [x] Autonomous orchestration
+- [x] Self-healing error recovery
+- [x] Parallel issue resolution (up to 5 worktrees)
+- [x] PR conversation resolution via GraphQL
+- [x] Hard protections enforcement
+- [x] User presence mode switching
+- [x] Watchdog timeout handling
+
+### Future
+
+- [ ] MCP server integrations
+- [ ] Automated link checking
+- [ ] Cross-repository coordination
+- [ ] Cost tracking dashboard
 
 ## Known Issues
 
-- **Persistent Markdown Linting Failures**: The `markdownlint-cli2` GitHub Action is consistently failing on pull request #22, citing
-  `MD013/line-length` and `MD046/code-block-style` errors. Multiple attempts to fix these issues by re-writing files and using different tools have failed.
-  The root cause appears to be a discrepancy between the local environment and the CI environment, or a fundamental misunderstanding of how the linter
-  is configured in the action. Future attempts must start by disabling the `MD013` and `MD046` rules entirely in `.markdownlint.json` to establish a
-  passing baseline, then re-introduce them one by one.
+- Markdown linting may require rule adjustments in `.markdownlint.json`
+- Some vendor configs may need sync with latest `.ai-instructions/`
 
-## Next Session Actions & Future Improvements
+## Key Files
 
-### 🚀 Newly Enabled by PR Conversation Resolution Breakthrough
-
-- **Fully Automated PR Workflows**: Now that PR conversation resolution is solved, implement end-to-end automated PR management that can:
-  - Create PRs with auto-merge
-  - Monitor and fix CI failures automatically
-  - Address all review feedback programmatically
-  - Resolve all conversations after fixes
-  - Complete the entire PR lifecycle without human intervention
-
-- **AI Code Review Response System**: Build an automated system that can:
-  - Parse AI reviewer feedback (Copilot, Gemini, etc.)
-  - Implement suggested code changes automatically
-  - Resolve conversations immediately after implementing fixes
-  - Handle complex multi-file refactoring requests from reviewers
-
-### 🔮 Advanced Future Capabilities
-
-- **Multi-AI Agent Collaboration**: Develop a system where multiple AI agents can collaborate on a single task, handing off work between them.
-- **Automated Link Checking**: Implement a GitHub Action to regularly check for broken markdown links.
-- **Command Validation**: Explore creating a script that validates the structure of the vendor-specific directories.
-- **Add More Granular Commands**: Consider breaking down the existing commands into even more granular tasks.
-- **Expand Concepts**: Add more conceptual documents to the `.ai-instructions/concepts` directory.
-- **Re-evaluate Markdown Rules**: Re-visit the disabled markdown rules in `.markdownlint.json` and fix the files to comply.
-- **Create "Kick-off" Prompt**: Develop a new prompt that starts from scratch, reads all relevant instructions, and then kicks off an agent to begin the next task.
+| File | Purpose |
+|------|---------|
+| `.ai-instructions/INDEX.md` | AI navigation |
+| `.ai-instructions/INSTRUCTIONS.md` | Main instructions |
+| `CLAUDE.md` | Claude quick start |
+| `CHANGELOG.md` | Version history |

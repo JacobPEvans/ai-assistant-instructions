@@ -1,12 +1,36 @@
 # Claude Code Instructions
 
-This file provides Claude Code-specific configuration.
+> **Start Here**: [AI Instructions Index](./.ai-instructions/INDEX.md)
 
-For detailed workflow instructions and standards, please refer to the canonical documentation:
-**[AI Assistant Instructions](./.ai-instructions/INSTRUCTIONS.md)**
+## Quick Start
 
-## Claude-Specific Settings
+1. **New session?** Run `/load-context` to load memory-bank state
+2. **Need navigation?** See [INDEX.md](./.ai-instructions/INDEX.md)
+3. **Starting a task?** Follow [5-Step Workflow](./.ai-instructions/INSTRUCTIONS.md#core-workflow)
 
-Claude Code settings are configured in `.claude/settings.json`.
+## Key Commands
 
-See [Multi-Agent Patterns](./.ai-instructions/concepts/multi-agent-patterns.md) for agent coordination strategies applicable to all AI assistants.
+| Command | Purpose |
+|---------|---------|
+| `/load-context` | Load memory-bank state |
+| `/commit` | Standardized commit |
+| `/pull-request` | Create PR |
+| `/review-docs` | Validate markdown |
+
+## Key Concepts
+
+| Concept | When to Use |
+|---------|-------------|
+| [Self-Healing](./.ai-instructions/concepts/self-healing.md) | Error recovery |
+| [User Modes](./.ai-instructions/concepts/user-presence-modes.md) | Attended vs autonomous |
+| [Hard Protections](./.ai-instructions/concepts/hard-protections.md) | Safety constraints |
+
+## Settings
+
+Claude Code settings: `.claude/settings.json`
+
+## See Also
+
+- [Full Instructions](./.ai-instructions/INSTRUCTIONS.md)
+- [Navigation Index](./.ai-instructions/INDEX.md)
+- [Multi-Agent Patterns](./.ai-instructions/concepts/multi-agent-patterns.md)

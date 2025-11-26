@@ -312,3 +312,14 @@ Only these situations cause a hard stop with queued continuation:
 2. **Data destruction risk** - Would delete production data
 3. **Cost explosion** - Would exceed 10x normal resource usage
 4. **Context exhausted** - Cannot proceed without more context budget
+
+## See Also
+
+| Related | Purpose |
+|---------|---------|
+| [Self-Healing](./self-healing.md) | Error recovery and ambiguity resolution |
+| [User Presence Modes](./user-presence-modes.md) | Attended vs unattended operation |
+| [Hard Protections](./hard-protections.md) | Safety constraints |
+| [Parallelism](./parallelism.md) | Running tasks simultaneously |
+| [Subagents](../subagents/README.md) | Specialized agent specifications |
+| [Task Queue](./memory-bank/task-queue.md) | Task queue format |

@@ -330,11 +330,12 @@ All assumptions are logged to `active-context.md`:
 - **Reversible**: Yes (adapter pattern)
 ```
 
-## Integration
+## See Also
 
-This concept must be applied to:
-
-- [Autonomous Orchestration](./autonomous-orchestration.md) - Remove human gates
-- [All Subagents](../subagents/README.md) - Replace "request clarification" with resolution
-- [Workflows](../workflows/1-research-and-explore.md) - Remove "ask user" steps
-- [Commands](../commands/commit.md) - Add timeout handling
+| Related | Purpose |
+|---------|---------|
+| [Autonomous Orchestration](./autonomous-orchestration.md) | Full autonomous workflow |
+| [User Presence Modes](./user-presence-modes.md) | Watchdog integration |
+| [Hard Protections](./hard-protections.md) | Inviolable safety constraints |
+| [Timeout Budgets](../_shared/timeout-budgets.md) | All timeout values |
+| [Subagent Contract](../_shared/subagent-contract.md) | Standard failure recovery |
