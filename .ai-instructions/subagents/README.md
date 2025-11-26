@@ -13,16 +13,19 @@ Per [Self-Healing](../concepts/self-healing.md), subagents **NEVER** request cla
 
 ## Subagent Index
 
-| Subagent | Purpose | Model Tier |
-|----------|---------|------------|
-| [Web Researcher](./web-researcher.md) | Research external information | Medium |
-| [Coder](./coder.md) | Implement code changes | Medium |
-| [Tester](./tester.md) | Write and execute tests | Medium |
-| [Git Handler](./git-handler.md) | Manage git operations | Small |
-| [PR Resolver](./pr-resolver.md) | Handle GitHub PR comments | Medium |
-| [Doc Reviewer](./doc-reviewer.md) | Validate documentation | Small |
-| [Security Auditor](./security-auditor.md) | Security review | Medium |
-| [Dependency Manager](./dependency-manager.md) | Manage project dependencies | Small |
+| Subagent | Purpose | Model Tier | User Interactive |
+|----------|---------|------------|-----------------|
+| [Web Researcher](./web-researcher.md) | Research external information | Medium | No |
+| [Coder](./coder.md) | Implement code changes | Medium | No |
+| [Tester](./tester.md) | Write and execute tests | Medium | No |
+| [Git Handler](./git-handler.md) | Manage git operations | Small | No |
+| [PR Resolver](./pr-resolver.md) | Handle GitHub PR comments | Medium | No |
+| [Doc Reviewer](./doc-reviewer.md) | Validate documentation | Small | No |
+| [Security Auditor](./security-auditor.md) | Security review | Medium | No |
+| [Dependency Manager](./dependency-manager.md) | Manage project dependencies | Small | No |
+| [Issue Creator](./issue-creator.md) | Create GitHub issues from user input | Medium | **Yes** |
+| [Issue Resolver](./issue-resolver.md) | Autonomously resolve GitHub issues | Medium | No |
+| [Commit Reviewer](./commit-reviewer.md) | Review commits for quality/security | Medium | No |
 
 ## Subagent Contract
 
@@ -84,6 +87,9 @@ Every subagent has a maximum execution time:
 | Doc Reviewer | 3 min | Return partial lint results |
 | Security Auditor | 10 min | Return partial audit |
 | Dependency Manager | 5 min | Return partial audit |
+| Issue Creator | 10 min | Create best-effort issue with assumptions |
+| Issue Resolver | 30 min | Return partial resolution, queue remaining |
+| Commit Reviewer | 5 min | Return partial review with warning |
 
 ## Adding New Subagents
 

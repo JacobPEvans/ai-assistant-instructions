@@ -39,22 +39,34 @@ If any step fails, the cycle must restart from Step 1 after documenting the fail
 
 ## Core Concepts
 
-- **[Idempotency](./concepts/idempotency.md)**: Operations that can be repeated with consistent results.
-- **[The DRY Principle](./concepts/dry-principle.md)**: The "Don't Repeat Yourself" principle for code and documentation.
-- **[The Memory Bank](./concepts/memory-bank/README.md)**: A set of documents that act as the AI's external brain.
-- **[AI Tooling](./concepts/ai-tooling.md)**: Best practices for giving AI assistants access to your development environment.
-- **[Adversarial Testing](./concepts/adversarial-testing.md)**: A method for improving plan robustness by seeking critique from a second AI.
-- **[Multi-Agent Patterns](./concepts/multi-agent-patterns.md)**: Best practices for orchestrator-worker architectures and subagent coordination.
-- **[Autonomous Orchestration](./concepts/autonomous-orchestration.md)**: File-driven autonomous operation with no user interaction.
-- **[Parallelism](./concepts/parallelism.md)**: Force multiplier for AI operations - run independent tasks simultaneously.
-- **[Self-Healing](./concepts/self-healing.md)**: Autonomous resolution of ambiguity, errors, and intelligent deviation from instructions.
-- **[Vendor-Specific Configuration](./concepts/vendor-config-standards.md)**: Standards for creating vendor-specific AI configuration files.
-- **[Styleguide](./concepts/styleguide.md)**: Comprehensive coding styleguide for AI-assisted development and code reviews.
-- **[Code Standards](./concepts/code-standards.md)**: Guidelines for writing high-quality, secure, and maintainable code.
-- **[Infrastructure Standards](./concepts/infrastructure-standards.md)**: Best practices for managing Infrastructure as Code (IaC).
-- **[Documentation Standards](./concepts/documentation-standards.md)**: Rules and formats for creating clear and effective documentation.
-- **[Diagramming Standards](./concepts/diagramming-standards.md)**: Best practices for creating diagrams using Mermaid and Graphviz.
-- **[Workspace Management](./concepts/workspace-management.md)**: Guidelines for managing a multi-repository workspace.
+### Autonomy & Orchestration
+- **[Autonomous Orchestration](./concepts/autonomous-orchestration.md)**: File-driven autonomous operation with no user interaction
+- **[User Presence Modes](./concepts/user-presence-modes.md)**: Attended, semi-attended, and unattended operation modes
+- **[Self-Healing](./concepts/self-healing.md)**: Autonomous resolution of ambiguity, errors, and intelligent deviation
+- **[Hard Protections](./concepts/hard-protections.md)**: Inviolable safety constraints that cannot be overridden
+- **[Multi-Agent Patterns](./concepts/multi-agent-patterns.md)**: Orchestrator-worker architectures and subagent coordination
+- **[Parallelism](./concepts/parallelism.md)**: Force multiplier - run independent tasks simultaneously
+
+### Architecture & Visualization
+- **[Architecture Diagrams](./concepts/architecture-diagrams.md)**: Visual diagrams of all key workflows and concepts
+- **[The Memory Bank](./concepts/memory-bank/README.md)**: Documents that act as the AI's external brain
+- **[Diagramming Standards](./concepts/diagramming-standards.md)**: Best practices for Mermaid and Graphviz
+
+### Code Quality
+- **[Code Standards](./concepts/code-standards.md)**: Guidelines for high-quality, secure, maintainable code
+- **[Styleguide](./concepts/styleguide.md)**: Coding styleguide for AI-assisted development
+- **[Idempotency](./concepts/idempotency.md)**: Operations that can be repeated with consistent results
+- **[The DRY Principle](./concepts/dry-principle.md)**: Don't Repeat Yourself principle
+
+### Development Environment
+- **[AI Tooling](./concepts/ai-tooling.md)**: Best practices for AI assistant environment access
+- **[Adversarial Testing](./concepts/adversarial-testing.md)**: Improving plan robustness via second AI critique
+- **[Vendor-Specific Configuration](./concepts/vendor-config-standards.md)**: Standards for vendor-specific AI configs
+- **[Workspace Management](./concepts/workspace-management.md)**: Multi-repository workspace guidelines
+
+### Infrastructure & Documentation
+- **[Infrastructure Standards](./concepts/infrastructure-standards.md)**: Infrastructure as Code (IaC) best practices
+- **[Documentation Standards](./concepts/documentation-standards.md)**: Clear and effective documentation rules
 
 ## Commands
 
@@ -67,21 +79,25 @@ This project uses a set of standardized commands. Each AI assistant should have 
 - **[Review Code](./commands/review-code.md)**: Structured code review process with priority levels
 - **[Review Documentation](./commands/review-docs.md)**: Markdown validation and documentation quality workflow
 - **[Review Infrastructure](./commands/infrastructure-review.md)**: Terraform/Terragrunt configuration review checklist
+- **[Workflow Transitions](./commands/workflow-transitions.md)**: Slash commands for phase transitions (`/research-complete`, `/start-implementation`, etc.)
 
 ## Subagents
 
 Specialized agents for [autonomous orchestration](./concepts/autonomous-orchestration.md). See [Subagents README](./subagents/README.md) for full documentation.
 
-| Subagent | Purpose | Model Tier |
-|----------|---------|------------|
-| [Web Researcher](./subagents/web-researcher.md) | External information gathering | Medium |
-| [Coder](./subagents/coder.md) | Implement code changes | Medium |
-| [Tester](./subagents/tester.md) | Write and execute tests | Medium |
-| [Git Handler](./subagents/git-handler.md) | Manage git operations | Small |
-| [PR Resolver](./subagents/pr-resolver.md) | Handle GitHub PR comments | Medium |
-| [Doc Reviewer](./subagents/doc-reviewer.md) | Validate documentation | Small |
-| [Security Auditor](./subagents/security-auditor.md) | Security review | Medium |
-| [Dependency Manager](./subagents/dependency-manager.md) | Manage dependencies | Small |
+| Subagent | Purpose | Model Tier | User Interactive |
+|----------|---------|------------|-----------------|
+| [Web Researcher](./subagents/web-researcher.md) | External information gathering | Medium | No |
+| [Coder](./subagents/coder.md) | Implement code changes | Medium | No |
+| [Tester](./subagents/tester.md) | Write and execute tests | Medium | No |
+| [Git Handler](./subagents/git-handler.md) | Manage git operations | Small | No |
+| [PR Resolver](./subagents/pr-resolver.md) | Handle GitHub PR comments | Medium | No |
+| [Doc Reviewer](./subagents/doc-reviewer.md) | Validate documentation | Small | No |
+| [Security Auditor](./subagents/security-auditor.md) | Security review | Medium | No |
+| [Dependency Manager](./subagents/dependency-manager.md) | Manage dependencies | Small | No |
+| [Issue Creator](./subagents/issue-creator.md) | Create GitHub issues | Medium | **Yes** |
+| [Issue Resolver](./subagents/issue-resolver.md) | Resolve GitHub issues autonomously | Medium | No |
+| [Commit Reviewer](./subagents/commit-reviewer.md) | Review commits for quality/security | Medium | No |
 
 ## Maintenance
 

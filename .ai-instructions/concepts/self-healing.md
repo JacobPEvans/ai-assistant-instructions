@@ -132,6 +132,116 @@ graph LR
 | API error | Parse error, adjust request, retry | 3 |
 | Context overflow | Compact context, retry with summary | 2 |
 
+### 5 Whys Analysis (After 3 Consecutive Failures)
+
+When the same operation fails 3 consecutive times, trigger a 5 Whys root cause analysis before continuing.
+
+#### When to Invoke
+
+| Trigger | 5 Whys Required |
+|---------|-----------------|
+| Test fails 3 times with same error | Yes |
+| CI fails 3 times on same step | Yes |
+| API call fails 3 times (non-network) | Yes |
+| Build fails 3 times | Yes |
+| Single retry failure | No (continue normal escalation) |
+
+#### 5 Whys Template
+
+```markdown
+## 5 Whys Analysis
+
+**Problem**: [Specific failure description]
+**Consecutive Failures**: 3
+
+### Why Chain
+
+1. **Why did it fail?**
+   [Immediate cause]
+
+2. **Why did that happen?**
+   [One level deeper]
+
+3. **Why did that happen?**
+   [Another level deeper]
+
+4. **Why did that happen?**
+   [Approaching root cause]
+
+5. **Why did that happen?**
+   [Root cause identified]
+
+### Root Cause
+[Clear statement of the underlying issue]
+
+### Resolution Options
+1. [Option A with trade-offs]
+2. [Option B with trade-offs]
+3. [Option C with trade-offs]
+
+### Selected Resolution
+[Chosen option with rationale]
+
+### Confidence
+[X]% that this will resolve the issue
+
+### Fallback if Wrong
+[What to try if this doesn't work]
+```
+
+#### Example 5 Whys
+
+```markdown
+## 5 Whys Analysis
+
+**Problem**: Test `auth.login.test.ts` fails with "timeout exceeded"
+**Consecutive Failures**: 3
+
+### Why Chain
+
+1. **Why did it fail?**
+   Test timed out waiting for response from login endpoint
+
+2. **Why did that happen?**
+   Login endpoint is making a database call that hangs
+
+3. **Why did that happen?**
+   Database connection pool is exhausted
+
+4. **Why did that happen?**
+   Previous tests are not releasing connections
+
+5. **Why did that happen?**
+   Missing `afterEach` cleanup in test setup
+
+### Root Cause
+Test isolation issue - database connections not cleaned up between tests
+
+### Resolution Options
+1. Add `afterEach` to close DB connections (fixes root cause)
+2. Increase connection pool size (band-aid)
+3. Add timeout to DB queries (doesn't fix leak)
+
+### Selected Resolution
+Option 1 - Add `afterEach(() => db.close())` to test setup
+
+### Confidence
+85% that this will resolve the issue
+
+### Fallback if Wrong
+If still failing, investigate for other connection leaks in test dependencies
+```
+
+#### Post-5 Whys Actions
+
+After completing 5 Whys analysis:
+
+1. **Implement resolution** with selected option
+2. **Retry** the failed operation once
+3. **If success**: Document resolution in `active-context.md`
+4. **If failure**: Try next resolution option, max 3 options
+5. **If all options fail**: Queue task for next session with full diagnostic
+
 ## Timeout Budgets
 
 Every operation has a maximum time budget:
