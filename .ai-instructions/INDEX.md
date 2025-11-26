@@ -4,7 +4,7 @@ Quick-reference map for AI agents. Find relevant documentation fast.
 
 ## By Task
 
-### I need to...
+### I need to
 
 | Task | Start Here |
 |------|------------|

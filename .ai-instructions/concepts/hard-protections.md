@@ -38,6 +38,7 @@ When in doubt, PROTECT.
 | Reduce coverage thresholds | Never | Lowering required % |
 
 **Exception:** Tests MAY be modified if:
+
 1. The underlying feature was intentionally removed
 2. The test itself has a bug (fix the test, don't delete)
 3. Test is duplicated (consolidate, don't delete)
@@ -206,6 +207,7 @@ Hard protections can ONLY be overridden when:
 3. **Queued follow-up task** to restore protection
 
 Even with override, some actions are NEVER allowed:
+
 - Force push to main/master without backup
 - Delete all tests in a project
 - Remove all authentication
@@ -215,6 +217,7 @@ Even with override, some actions are NEVER allowed:
 ### With User Presence Modes
 
 Hard protections apply in ALL modes:
+
 - `attended`: User sees warning, must acknowledge
 - `semi-attended`: BLOCK + notify user
 - `unattended`: BLOCK + queue for next session
@@ -226,6 +229,7 @@ Hard protections apply in ALL modes:
 ### With Commit Reviewer
 
 [Commit Reviewer](../subagents/commit-reviewer.md) is the primary enforcer:
+
 - Scans all commits before merge
 - Blocks PRs that violate protections
 - Reports violations to orchestrator

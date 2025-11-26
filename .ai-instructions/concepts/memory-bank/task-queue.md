@@ -27,6 +27,42 @@ Tasks follow a strict format for machine parsing:
 
 <!-- Add new tasks below this line -->
 
+### TASK-001: Implement SessionStart Hook System
+
+- **Status**: pending
+- **Priority**: high
+- **Assigned**: orchestrator
+- **Dependencies**: none
+- **Context Files**:
+  - .claude/commands/load-context.md
+  - .ai-instructions/concepts/memory-bank/active-context.md
+- **Success Criteria**:
+  - [ ] Create `.claude/hooks/session-start.sh` script
+  - [ ] Hook auto-loads memory-bank context on new session
+  - [ ] Hook validates project prerequisites (node, npm, etc.)
+  - [ ] Hook checks for uncommitted changes and alerts
+  - [ ] Document hook installation in CLAUDE.md
+- **Notes**: Replace manual /load-context with automatic session initialization.
+  Research Claude Code hooks API for proper implementation.
+
+### TASK-002: Custom Subagent Model Routing
+
+- **Status**: pending
+- **Priority**: medium
+- **Assigned**: orchestrator
+- **Dependencies**: none
+- **Context Files**:
+  - .ai-instructions/subagents/README.md
+  - .ai-instructions/_shared/subagent-contract.md
+- **Success Criteria**:
+  - [ ] Define model routing rules in `_shared/model-routing.md`
+  - [ ] Map subagent complexity to model tiers (Large/Medium/Small)
+  - [ ] Add cost-awareness guidelines (prefer smaller models when sufficient)
+  - [ ] Document model selection criteria
+  - [ ] Update subagent contract with model routing reference
+- **Notes**: Enable intelligent model selection based on task complexity.
+  Consider: web-researcher→small, coder→medium, security-auditor→large.
+
 ### TASK-000: Example Task (Template)
 
 - **Status**: pending

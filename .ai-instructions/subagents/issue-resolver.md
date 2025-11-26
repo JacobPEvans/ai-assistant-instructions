@@ -7,7 +7,8 @@
 
 ## Purpose
 
-Autonomously fetch, prioritize, and resolve GitHub issues. This subagent operates without user interaction and can process multiple issues in parallel using git worktrees.
+Autonomously fetch, prioritize, and resolve GitHub issues. This subagent operates without user interaction
+and can process multiple issues in parallel using git worktrees.
 
 ## Core Principle: No User Interaction
 
@@ -135,6 +136,7 @@ graph TD
 ### Parallel Mode (5 Issues)
 
 1. **Setup Phase**
+
    ```bash
    # Create worktrees for each issue
    git worktree add ../issue-101 -b fix/issue-101
@@ -156,6 +158,7 @@ graph TD
    - Re-run CI on rebased PRs
 
 4. **Cleanup Phase**
+
    ```bash
    # Remove worktrees after merge
    git worktree remove ../issue-101

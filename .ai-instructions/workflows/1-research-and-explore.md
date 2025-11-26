@@ -56,9 +56,11 @@ If in `attended` mode and requirements are ambiguous:
 ## Phase Completion
 
 ### Attended Mode
+
 - User executes `/research-complete` to transition to Planning
 - AI presents findings and initiates PRD discussion
 
 ### Semi-Attended / Unattended Mode
+
 - Auto-transition when research activities complete
 - Generate PRD autonomously

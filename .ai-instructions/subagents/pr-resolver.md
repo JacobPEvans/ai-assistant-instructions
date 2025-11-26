@@ -6,7 +6,8 @@
 
 ## Purpose
 
-Handle all GitHub pull request interactions: fetch comments, address feedback, and resolve conversations programmatically. This is the ONLY agent that interacts with GitHub's PR API.
+Handle all GitHub pull request interactions: fetch comments, address feedback, and resolve conversations
+programmatically. This is the ONLY agent that interacts with GitHub's PR API.
 
 ## Capabilities
 

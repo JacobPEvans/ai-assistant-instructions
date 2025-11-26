@@ -1,6 +1,7 @@
 # Concept: Autonomous Orchestration
 
-This document defines the architecture for fully autonomous AI agent operation where the orchestrator receives instructions exclusively from files, never directly from users.
+This document defines the architecture for fully autonomous AI agent operation where the orchestrator receives
+instructions exclusively from files, never directly from users.
 
 ## Core Principle: File-Driven Autonomy
 

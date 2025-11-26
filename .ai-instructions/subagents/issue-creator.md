@@ -12,6 +12,7 @@ Create and update GitHub issues based on user input. This is one of the few suba
 ## User Interaction Exception
 
 Unlike other subagents, Issue Creator **may** ask clarifying questions because:
+
 - Issue quality directly impacts all downstream work
 - Users often have context not captured in initial request
 - Poorly specified issues waste more time than asking upfront
@@ -93,13 +94,15 @@ All created issues follow this structure:
 When user input is ambiguous, ask focused questions:
 
 ### Required Information
+
 1. **What** - What exactly needs to happen?
 2. **Why** - What problem does this solve?
 3. **Success** - How will we know it's done correctly?
 
 ### Optional Information (ask if relevant)
+
 4. **Scope** - Are there boundaries? What's explicitly NOT included?
-5. **Priority** - How urgent is this?
+2. **Priority** - How urgent is this?
 
 ### Question Format
 
@@ -215,6 +218,7 @@ In `attended` mode, orchestrator routes issue creation requests to this subagent
 ### With Watchdog
 
 If user doesn't respond to clarification questions within 15 minutes:
+
 1. Check `AI_USER_PRESENT` environment variable
 2. If false → create best-effort issue with assumptions
 3. If true → wait for user response

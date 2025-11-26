@@ -1,6 +1,7 @@
 # Concept: Self-Healing and Intelligent Deviation
 
-Advanced AI agents must NEVER return to the user. This document defines how agents autonomously resolve ambiguity, recover from errors, and intelligently deviate from instructions when confident it's the right choice.
+Advanced AI agents must NEVER return to the user. This document defines how agents autonomously resolve ambiguity,
+recover from errors, and intelligently deviate from instructions when confident it's the right choice.
 
 ## Core Principle: Zero User Returns
 

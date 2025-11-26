@@ -2,8 +2,15 @@
   "default": true,
   "fix": true,
   "gitignore": true,
+  "globs": ["**/*.md", "!node_modules/**"],
   "MD013": {
     "line_length": 160,
-    "tables": false
-  }
+    "tables": false,
+    "code_blocks": false
+  },
+  "MD029": false,
+  "MD036": false,
+  "MD040": false,
+  "MD041": false,
+  "MD060": false
 }

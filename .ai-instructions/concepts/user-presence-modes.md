@@ -17,6 +17,7 @@ This document defines the three operational modes for AI agents based on user av
 User is actively present and engaged with the AI session.
 
 **Behavior:**
+
 - **Research**: May ask clarifying questions at session START only
 - **Planning**: Fully interactive - iterate with user until alignment
 - **Coding/Testing**: Zero user interaction
@@ -31,6 +32,7 @@ User is actively present and engaged with the AI session.
 User is monitoring but not actively engaged. AI should proceed autonomously but flag important decisions.
 
 **Behavior:**
+
 - **Research**: No clarifying questions - resolve autonomously
 - **Planning**: Create PRD autonomously, present for brief review
 - **Coding/Testing**: Zero user interaction
@@ -45,6 +47,7 @@ User is monitoring but not actively engaged. AI should proceed autonomously but 
 AI is running overnight or without any user oversight.
 
 **Behavior:**
+
 - **Research**: Resolve all ambiguity autonomously per [Self-Healing](./self-healing.md)
 - **Planning**: Create PRD autonomously, no user review
 - **Coding/Testing**: Zero user interaction
@@ -69,6 +72,7 @@ export AI_SESSION_MODE=attended|semi-attended|unattended
 
 **Watchdog Auto-Detection:**
 When the 15-minute timeout triggers:
+
 1. AI prompts user for guidance
 2. If no response within 2 minutes → set `AI_USER_PRESENT=false`
 3. Restart session in unattended mode
@@ -97,6 +101,7 @@ User: Run in unattended mode and implement the tasks in prompt.md
 ### Default Behavior
 
 If no mode is specified:
+
 - Single task → `attended` (AI_USER_PRESENT=true)
 - Batch of tasks → `semi-attended` (AI_USER_PRESENT=true)
 - Overnight run explicitly mentioned → `unattended` (AI_USER_PRESENT=false)
@@ -132,6 +137,7 @@ graph TD
 When the watchdog triggers and the path forward is uncertain:
 
 1. **Commit** all current valid work with message:
+
    ```
    checkpoint: work before uncertain decision
 
@@ -143,6 +149,7 @@ When the watchdog triggers and the path forward is uncertain:
 2. **Proceed** with best guess
 
 3. **Document** uncertainty in next commit:
+
    ```
    feat(scope): description
 
@@ -155,11 +162,13 @@ When the watchdog triggers and the path forward is uncertain:
 ### Watchdog Self-Monitoring
 
 The watchdog tracks:
+
 - Time since last progress (file change, commit, API call)
 - Iteration count for loops (PR feedback, test-fix cycles)
 - Context utilization percentage
 
 When thresholds are exceeded:
+
 1. Log current state to `active-context.md`
 2. Attempt checkpoint commit
 3. Make autonomous decision per [Self-Healing](./self-healing.md)
@@ -232,6 +241,7 @@ Mode-aware slash commands:
 ### With Self-Healing
 
 In `unattended` mode, [Self-Healing](./self-healing.md) is the primary decision-making mechanism:
+
 - All ambiguity resolved via decision hierarchy
 - All errors recovered via escalation path
 - All timeouts handled via graceful degradation
@@ -239,6 +249,7 @@ In `unattended` mode, [Self-Healing](./self-healing.md) is the primary decision-
 ### With Autonomous Orchestration
 
 [Autonomous Orchestration](./autonomous-orchestration.md) uses mode to determine:
+
 - Whether to wait for user input
 - How aggressively to timeout
 - Whether to auto-continue after completion

@@ -42,6 +42,7 @@ If any step fails, the cycle must restart from Step 1 after documenting the fail
 ## Core Concepts
 
 ### Autonomy & Orchestration
+
 - **[Autonomous Orchestration](./concepts/autonomous-orchestration.md)**: File-driven autonomous operation with no user interaction
 - **[User Presence Modes](./concepts/user-presence-modes.md)**: Attended, semi-attended, and unattended operation modes
 - **[Self-Healing](./concepts/self-healing.md)**: Autonomous resolution of ambiguity, errors, and intelligent deviation
@@ -50,23 +51,27 @@ If any step fails, the cycle must restart from Step 1 after documenting the fail
 - **[Parallelism](./concepts/parallelism.md)**: Force multiplier - run independent tasks simultaneously
 
 ### Architecture & Visualization
+
 - **[Architecture Diagrams](./concepts/architecture-diagrams.md)**: Visual diagrams of all key workflows and concepts
 - **[The Memory Bank](./concepts/memory-bank/README.md)**: Documents that act as the AI's external brain
 - **[Diagramming Standards](./concepts/diagramming-standards.md)**: Best practices for Mermaid and Graphviz
 
 ### Code Quality
+
 - **[Code Standards](./concepts/code-standards.md)**: Guidelines for high-quality, secure, maintainable code
 - **[Styleguide](./concepts/styleguide.md)**: Coding styleguide for AI-assisted development
 - **[Idempotency](./concepts/idempotency.md)**: Operations that can be repeated with consistent results
 - **[The DRY Principle](./concepts/dry-principle.md)**: Don't Repeat Yourself principle
 
 ### Development Environment
+
 - **[AI Tooling](./concepts/ai-tooling.md)**: Best practices for AI assistant environment access
 - **[Adversarial Testing](./concepts/adversarial-testing.md)**: Improving plan robustness via second AI critique
 - **[Vendor-Specific Configuration](./concepts/vendor-config-standards.md)**: Standards for vendor-specific AI configs
 - **[Workspace Management](./concepts/workspace-management.md)**: Multi-repository workspace guidelines
 
 ### Infrastructure & Documentation
+
 - **[Infrastructure Standards](./concepts/infrastructure-standards.md)**: Infrastructure as Code (IaC) best practices
 - **[Documentation Standards](./concepts/documentation-standards.md)**: Clear and effective documentation rules
 

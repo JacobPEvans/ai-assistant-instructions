@@ -6,6 +6,7 @@ Read and summarize the key context from the memory-bank files to prepare for thi
 4. Summarize what's active, what's pending, and what's next
 
 After loading context, report:
+
 - Current active task (if any)
 - Pending tasks in queue
 - Last completed work

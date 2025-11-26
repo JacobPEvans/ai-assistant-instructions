@@ -51,6 +51,8 @@ Vendor configs (.claude/, .github/, .copilot/, .gemini/)
 
 ### Future
 
+- [ ] SessionStart hooks (auto-load context) - See TASK-001
+- [ ] Custom subagent model routing - See TASK-002
 - [ ] MCP server integrations
 - [ ] Automated link checking
 - [ ] Cross-repository coordination
@@ -58,7 +60,6 @@ Vendor configs (.claude/, .github/, .copilot/, .gemini/)
 
 ## Known Issues
 
-- Markdown linting may require rule adjustments in `.markdownlint.json`
 - Some vendor configs may need sync with latest `.ai-instructions/`
 
 ## Key Files

@@ -66,6 +66,7 @@ export AI_USER_PRESENT=false  # unattended mode
 ```
 
 When watchdog triggers and `AI_USER_PRESENT=false`:
+
 1. Commit all current valid work with checkpoint message
 2. Document uncertainty in commit body
 3. Proceed with best guess per [Self-Healing](../concepts/self-healing.md)

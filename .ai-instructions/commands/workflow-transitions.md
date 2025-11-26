@@ -9,16 +9,19 @@ These slash commands provide hard transitions between workflow phases. They are 
 Signals that the Research phase is complete.
 
 **Effect:**
+
 - Validates research artifacts exist
 - Transitions to Planning phase
 - In attended mode: Initiates PRD discussion with user
 - In other modes: Auto-generates PRD
 
 **Prerequisites:**
+
 - Must have read relevant codebase files
 - Must have documented findings in active-context.md or progress notes
 
 **Usage:**
+
 ```text
 /research-complete
 ```
@@ -30,17 +33,20 @@ Signals that the Research phase is complete.
 Locks the PRD and begins the Implementation phase.
 
 **Effect:**
+
 - Marks PRD as LOCKED (no further changes)
 - Validates PRD completeness
 - Transitions to zero-interaction coding mode
 - AI begins executing Implementation Plan checklist
 
 **Prerequisites:**
+
 - PRD must exist at `.tmp/prd-<task-name>.md`
 - PRD must have all required sections
 - In attended mode: User has reviewed and approved PRD
 
 **Usage:**
+
 ```text
 /start-implementation
 ```
@@ -54,12 +60,14 @@ Locks the PRD and begins the Implementation phase.
 Saves current state and pauses execution.
 
 **Effect:**
+
 - Creates checkpoint in active-context.md
 - Commits any uncommitted valid work
 - Documents current progress
 - Enters idle state
 
 **Usage:**
+
 ```text
 /pause
 ```
@@ -73,12 +81,14 @@ Saves current state and pauses execution.
 Resumes from the last checkpoint.
 
 **Effect:**
+
 - Loads checkpoint from active-context.md
 - Validates file system state matches checkpoint
 - Auto-reconciles if mismatch detected
 - Continues execution from last incomplete step
 
 **Usage:**
+
 ```text
 /resume
 ```
@@ -90,12 +100,14 @@ Resumes from the last checkpoint.
 Aborts current task and rolls back to last clean state.
 
 **Effect:**
+
 - Reverts uncommitted changes
 - Updates task-queue.md to mark task as aborted
 - Documents abort reason
 - Returns to idle state
 
 **Usage:**
+
 ```text
 /abort [reason]
 ```
@@ -109,11 +121,13 @@ Aborts current task and rolls back to last clean state.
 Changes the user presence mode.
 
 **Effect:**
+
 - Updates session mode
 - Adjusts watchdog timeouts
 - Adjusts interaction level
 
 **Usage:**
+
 ```text
 /set-mode attended
 /set-mode semi-attended
@@ -129,12 +143,14 @@ See [User Presence Modes](../concepts/user-presence-modes.md) for mode details.
 Reports current session status.
 
 **Effect:**
+
 - Shows current workflow phase
 - Shows current mode
 - Shows active task and progress
 - Shows pending tasks in queue
 
 **Usage:**
+
 ```text
 /status
 ```
@@ -180,6 +196,7 @@ stateDiagram-v2
 ### Attended Mode
 
 All transitions require explicit user command:
+
 - `/research-complete` - User must execute
 - `/start-implementation` - User must execute
 - Completion - User notified, awaits next task
@@ -187,6 +204,7 @@ All transitions require explicit user command:
 ### Semi-Attended Mode
 
 Soft auto-transitions with grace periods:
+
 - Research → Planning: Auto after 2 min idle
 - Planning → Implementation: Auto after PRD creation + 2 min grace
 - Completion: Auto-continue to next task
@@ -194,6 +212,7 @@ Soft auto-transitions with grace periods:
 ### Unattended Mode
 
 Immediate auto-transitions:
+
 - Research → Planning: Immediate on completion
 - Planning → Implementation: Immediate after PRD generation
 - Completion: Immediate queue next task
@@ -208,6 +227,7 @@ If a transition command fails:
 4. Provide remediation steps
 
 Example failure:
+
 ```text
 ❌ /start-implementation failed
 

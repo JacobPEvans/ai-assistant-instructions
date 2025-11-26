@@ -56,7 +56,9 @@ Perform security reviews on code changes, configuration files, and dependencies.
 - **Description**: [detailed description]
 - **Evidence**:
   ```
+
   [code snippet]
+
   ```
 - **Remediation**: [how to fix]
 - **References**: [CWE/CVE if applicable]
@@ -194,12 +196,14 @@ None
   ```typescript
   const query = `SELECT * FROM users WHERE id = ${userId}`;
   ```
+
 - **Remediation**: Use parameterized queries
 - **References**: CWE-89
 
 ### Medium Findings
 
 #### FINDING-002: Missing Rate Limiting
+
 - **Severity**: 🟡 Medium
 - **File**: src/auth/login.ts:20
 - **Category**: A07:2021 Authentication
@@ -227,4 +231,5 @@ None
 - [x] Output encoding present
 - [x] Authentication checks verified
 - [x] Authorization checks verified
+
 ```

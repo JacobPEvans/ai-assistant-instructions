@@ -22,6 +22,7 @@ Planning is **fully interactive** in attended mode:
 4. User signals completion with `/start-implementation`
 
 **Key:** The AI should actively seek user feedback during this phase. Ask questions like:
+
 - "Does this implementation approach align with your vision?"
 - "Should I add any additional requirements?"
 - "Are there edge cases we should address?"
@@ -70,15 +71,18 @@ Planning is **autonomous**:
 ## Phase Completion
 
 ### Attended Mode
+
 - Present final PRD to user for review
 - User executes `/start-implementation` to lock PRD and begin coding
 - **Critical:** Do not proceed until user explicitly approves
 
 ### Semi-Attended Mode
+
 - Announce PRD completion
 - Wait 2 minutes for user objection
 - Auto-transition if no objection
 
 ### Unattended Mode
+
 - Log PRD creation
 - Immediately transition to implementation

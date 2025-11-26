@@ -1,4 +1,5 @@
 todos/
+node_modules/
 
 .claude/projects/
 .claude/shell-snapshots/

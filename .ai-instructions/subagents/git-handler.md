@@ -52,7 +52,9 @@ Execute all git operations on behalf of the orchestrator. This subagent is the o
 **Operation**: [what was done]
 **Output**:
   ```
+
   [git command output]
+
   ```
 **New State**:
   - Branch: [current branch]
@@ -186,10 +188,12 @@ Per [Self-Healing](../concepts/self-healing.md), resolve autonomously.
 **Operation**: Committed 2 files
 **Output**:
   ```
+
   [feat/result-type abc1234] feat(utils): implement Result<T,E> type with Ok/Err variants
    2 files changed, 95 insertions(+)
    create mode 100644 src/utils/result.ts
    create mode 100644 tests/utils/result.test.ts
+
   ```
 **New State**:
   - Branch: feat/result-type

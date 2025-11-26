@@ -262,7 +262,9 @@ PR has a potential security issue and is missing test coverage.
 #### Critical (Must Fix)
 - Hardcoded API key detected (src/config.ts:12)
   ```
+
   const API_KEY = "sk-1234567890abcdef"  # NEVER commit secrets
+
   ```
 
 #### Errors (Should Fix)
