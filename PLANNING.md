@@ -48,11 +48,15 @@ Vendor configs (.claude/, .github/, .copilot/, .gemini/)
 - [x] Hard protections enforcement
 - [x] User presence mode switching
 - [x] Watchdog timeout handling
+- [x] Cross-session context bridging (progress checkpoints, session initializer)
+- [x] Custom subagent model routing (complexity-based tier selection)
+- [x] Context compaction for long-running agents
+- [x] QA validation subagent for post-implementation checks
+- [x] New slash commands: `/checkpoint`, `/handoff`, `/compact`
 
 ### Future
 
-- [ ] SessionStart hooks (auto-load context) - See TASK-001
-- [ ] Custom subagent model routing - See TASK-002
+- [ ] SessionStart hooks (auto-invoke Session Initializer) - See TASK-003
 - [ ] MCP server integrations
 - [ ] Automated link checking
 - [ ] Cross-repository coordination

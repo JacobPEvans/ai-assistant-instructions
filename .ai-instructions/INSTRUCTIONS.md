@@ -44,6 +44,7 @@ If any step fails, the cycle must restart from Step 1 after documenting the fail
 ### Autonomy & Orchestration
 
 - **[Autonomous Orchestration](./concepts/autonomous-orchestration.md)**: File-driven autonomous operation with no user interaction
+- **[Progress Checkpoint](./concepts/progress-checkpoint.md)**: Cross-session context bridging for long-running agents
 - **[User Presence Modes](./concepts/user-presence-modes.md)**: Attended, semi-attended, and unattended operation modes
 - **[Self-Healing](./concepts/self-healing.md)**: Autonomous resolution of ambiguity, errors, and intelligent deviation
 - **[Hard Protections](./concepts/hard-protections.md)**: Inviolable safety constraints that cannot be overridden
@@ -90,23 +91,50 @@ This project uses a set of standardized commands. Each AI assistant should have 
 
 ## Subagents
 
-Specialized agents for [autonomous orchestration](./concepts/autonomous-orchestration.md). See [Subagents README](./subagents/README.md) for full documentation.
+Specialized agents for [autonomous orchestration](./concepts/autonomous-orchestration.md).
+See [Subagents README](./subagents/README.md) for full documentation
+and [Model Routing](./_shared/model-routing.md) for tier assignment rules.
 
-| Subagent | Purpose | Model Tier | User Interactive |
-|----------|---------|------------|-----------------|
-| [Web Researcher](./subagents/web-researcher.md) | External information gathering | Medium | No |
-| [Coder](./subagents/coder.md) | Implement code changes | Medium | No |
-| [Tester](./subagents/tester.md) | Write and execute tests | Medium | No |
-| [Git Handler](./subagents/git-handler.md) | Manage git operations | Small | No |
+### Session Management
+
+| Subagent | Purpose | Model Tier |
+|----------|---------|------------|
+| [Session Initializer](./subagents/session-initializer.md) | First context window setup | Small |
+| [Context Compactor](./subagents/context-compactor.md) | Intelligent context summarization | Medium |
+
+### Development
+
+| Subagent | Purpose | Model Tier |
+|----------|---------|------------|
+| [Coder](./subagents/coder.md) | Implement code changes | Medium |
+| [Tester](./subagents/tester.md) | Write and execute tests | Medium |
+| [QA Validator](./subagents/qa-validator.md) | Post-implementation quality assurance | Medium |
+| [Git Handler](./subagents/git-handler.md) | Manage git operations | Small |
+
+### Research & Review
+
+| Subagent | Purpose | Model Tier |
+|----------|---------|------------|
+| [Web Researcher](./subagents/web-researcher.md) | External information gathering | Small |
+| [Doc Reviewer](./subagents/doc-reviewer.md) | Validate documentation | Small |
+| [Security Auditor](./subagents/security-auditor.md) | Security review | Medium |
+| [Commit Reviewer](./subagents/commit-reviewer.md) | Review commits for quality/security | Medium |
+
+### GitHub Integration
+
+| Subagent | Purpose | Model Tier | Interactive |
+|----------|---------|------------|-------------|
 | [PR Resolver](./subagents/pr-resolver.md) | Handle GitHub PR comments | Medium | No |
-| [Doc Reviewer](./subagents/doc-reviewer.md) | Validate documentation | Small | No |
-| [Security Auditor](./subagents/security-auditor.md) | Security review | Medium | No |
-| [Dependency Manager](./subagents/dependency-manager.md) | Manage dependencies | Small | No |
 | [Issue Creator](./subagents/issue-creator.md) | Create GitHub issues | Medium | **Yes** |
-| [Issue Resolver](./subagents/issue-resolver.md) | Resolve GitHub issues autonomously | Medium | No |
-| [Commit Reviewer](./subagents/commit-reviewer.md) | Review commits for quality/security | Medium | No |
+| [Issue Resolver](./subagents/issue-resolver.md) | Resolve issues autonomously | Medium | No |
 
-## Maintenance
+### Package Management
+
+| Subagent | Purpose | Model Tier |
+|----------|---------|------------|
+| [Dependency Manager](./subagents/dependency-manager.md) | Manage dependencies | Small |
+
+## Repository Maintenance
 
 - **Weekly**: Review AI instruction effectiveness and prompt template usage.
 - **Monthly**: Validate cross-references, update broken links, and review cost optimization strategies.

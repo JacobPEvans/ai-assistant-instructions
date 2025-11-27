@@ -27,7 +27,7 @@ Tasks follow a strict format for machine parsing:
 
 <!-- Add new tasks below this line -->
 
-### TASK-001: Implement SessionStart Hook System
+### TASK-003: Implement SessionStart Hook System
 
 - **Status**: pending
 - **Priority**: high
@@ -35,33 +35,17 @@ Tasks follow a strict format for machine parsing:
 - **Dependencies**: none
 - **Context Files**:
   - .claude/commands/load-context.md
-  - .ai-instructions/concepts/memory-bank/active-context.md
+  - .ai-instructions/subagents/session-initializer.md
+  - .ai-instructions/concepts/progress-checkpoint.md
 - **Success Criteria**:
   - [ ] Create `.claude/hooks/session-start.sh` script
-  - [ ] Hook auto-loads memory-bank context on new session
+  - [ ] Hook invokes Session Initializer subagent
   - [ ] Hook validates project prerequisites (node, npm, etc.)
   - [ ] Hook checks for uncommitted changes and alerts
   - [ ] Document hook installation in CLAUDE.md
 - **Notes**: Replace manual /load-context with automatic session initialization.
+  Now integrates with new Session Initializer subagent and Progress Checkpoint system.
   Research Claude Code hooks API for proper implementation.
-
-### TASK-002: Custom Subagent Model Routing
-
-- **Status**: pending
-- **Priority**: medium
-- **Assigned**: orchestrator
-- **Dependencies**: none
-- **Context Files**:
-  - .ai-instructions/subagents/README.md
-  - .ai-instructions/_shared/subagent-contract.md
-- **Success Criteria**:
-  - [ ] Define model routing rules in `_shared/model-routing.md`
-  - [ ] Map subagent complexity to model tiers (Large/Medium/Small)
-  - [ ] Add cost-awareness guidelines (prefer smaller models when sufficient)
-  - [ ] Document model selection criteria
-  - [ ] Update subagent contract with model routing reference
-- **Notes**: Enable intelligent model selection based on task complexity.
-  Consider: web-researcher→small, coder→medium, security-auditor→large.
 
 ### TASK-000: Example Task (Template)
 
@@ -78,6 +62,30 @@ Tasks follow a strict format for machine parsing:
 ## Completed Tasks
 
 <!-- Completed tasks are moved here with completion timestamp -->
+
+### TASK-002: Custom Subagent Model Routing
+
+- **Status**: completed
+- **Completed**: 2025-11-27T00:00:00Z
+- **Priority**: medium
+- **Assigned**: orchestrator
+- **Output**: Created `_shared/model-routing.md` with comprehensive model routing rules,
+  complexity scoring (0-100), dynamic routing triggers, and cost optimization guidelines.
+  Updated all subagent model tier assignments including new Web Researcher→Small optimization.
+
+### TASK-001: Cross-Session Context Bridging
+
+- **Status**: completed
+- **Completed**: 2025-11-27T00:00:00Z
+- **Priority**: high
+- **Assigned**: orchestrator
+- **Output**: Implemented Anthropic blog-inspired progress checkpoint system:
+  - Created `concepts/progress-checkpoint.md` with full checkpoint structure
+  - Created `subagents/session-initializer.md` for first context window handling
+  - Created `subagents/context-compactor.md` for intelligent summarization
+  - Created `subagents/qa-validator.md` for post-implementation quality assurance
+  - Added `/checkpoint`, `/handoff`, `/compact` slash commands
+  - Updated INSTRUCTIONS.md and subagents README with new components
 
 ## Task Lifecycle
 

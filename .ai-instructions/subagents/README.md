@@ -13,19 +13,47 @@ Per [Self-Healing](../concepts/self-healing.md), subagents **NEVER** request cla
 
 ## Subagent Index
 
+### Session Management Subagents
+
+These subagents handle cross-session context bridging, inspired by
+[Anthropic's research on long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents).
+
 | Subagent | Purpose | Model Tier | User Interactive |
 |----------|---------|------------|-----------------|
-| [Web Researcher](./web-researcher.md) | Research external information | Medium | No |
+| [Session Initializer](./session-initializer.md) | First context window setup | Small | No |
+| [Context Compactor](./context-compactor.md) | Intelligent context summarization | Medium | No |
+
+### Development Subagents
+
+| Subagent | Purpose | Model Tier | User Interactive |
+|----------|---------|------------|-----------------|
 | [Coder](./coder.md) | Implement code changes | Medium | No |
 | [Tester](./tester.md) | Write and execute tests | Medium | No |
+| [QA Validator](./qa-validator.md) | Post-implementation quality assurance | Medium | No |
 | [Git Handler](./git-handler.md) | Manage git operations | Small | No |
-| [PR Resolver](./pr-resolver.md) | Handle GitHub PR comments | Medium | No |
+
+### Research & Review Subagents
+
+| Subagent | Purpose | Model Tier | User Interactive |
+|----------|---------|------------|-----------------|
+| [Web Researcher](./web-researcher.md) | Research external information | Small | No |
 | [Doc Reviewer](./doc-reviewer.md) | Validate documentation | Small | No |
 | [Security Auditor](./security-auditor.md) | Security review | Medium | No |
-| [Dependency Manager](./dependency-manager.md) | Manage project dependencies | Small | No |
+| [Commit Reviewer](./commit-reviewer.md) | Review commits for quality/security | Medium | No |
+
+### GitHub Integration Subagents
+
+| Subagent | Purpose | Model Tier | User Interactive |
+|----------|---------|------------|-----------------|
+| [PR Resolver](./pr-resolver.md) | Handle GitHub PR comments | Medium | No |
 | [Issue Creator](./issue-creator.md) | Create GitHub issues from user input | Medium | **Yes** |
 | [Issue Resolver](./issue-resolver.md) | Autonomously resolve GitHub issues | Medium | No |
-| [Commit Reviewer](./commit-reviewer.md) | Review commits for quality/security | Medium | No |
+
+### Maintenance Subagents
+
+| Subagent | Purpose | Model Tier | User Interactive |
+|----------|---------|------------|-----------------|
+| [Dependency Manager](./dependency-manager.md) | Manage project dependencies | Small | No |
 
 ## Subagent Contract
 

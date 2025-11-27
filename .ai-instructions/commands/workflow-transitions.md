@@ -168,6 +168,9 @@ All transition commands validate preconditions before executing:
 | `/pause` | Current state is saveable |
 | `/resume` | Checkpoint exists, is valid |
 | `/abort` | Has confirmation or reason |
+| `/checkpoint` | Current state is capturable |
+| `/handoff` | Session has meaningful work to hand off |
+| `/compact` | Context usage > 50% of budget |
 
 ## Phase Transitions
 
@@ -216,6 +219,93 @@ Immediate auto-transitions:
 - Research → Planning: Immediate on completion
 - Planning → Implementation: Immediate after PRD generation
 - Completion: Immediate queue next task
+
+### `/checkpoint`
+
+Creates an explicit progress checkpoint for cross-session context bridging.
+
+**Effect:**
+
+- Creates full checkpoint in `progress-checkpoint.md`
+- Summarizes current context
+- Identifies files that can be skipped on resume
+- Updates git state tracking
+
+**Usage:**
+
+```text
+/checkpoint
+/checkpoint [optional note]
+```
+
+**When to Use:**
+
+- Before complex operations
+- Every 30 minutes of sustained work
+- Before context compaction
+- When stopping for any reason
+
+See [Progress Checkpoint](../concepts/progress-checkpoint.md) for checkpoint format.
+
+---
+
+### `/handoff`
+
+Prepares a comprehensive session handoff for the next context window.
+
+**Effect:**
+
+- Creates full session handoff checkpoint
+- Summarizes all work done this session
+- Lists exact next steps for resuming agent
+- Archives verbose context to `.tmp/`
+- Commits any uncommitted work
+
+**Usage:**
+
+```text
+/handoff
+/handoff [next session notes]
+```
+
+**Handoff Contents:**
+
+- Current task status and completion %
+- Files modified with change summaries
+- Decisions made with rationale
+- Blockers and dependencies
+- Specific first action for next session
+
+**Integration:**
+
+After `/handoff`, the [Session Initializer](../subagents/session-initializer.md) can parse the handoff and immediately resume work.
+
+---
+
+### `/compact`
+
+Triggers manual context compaction.
+
+**Effect:**
+
+- Invokes [Context Compactor](../subagents/context-compactor.md) subagent
+- Summarizes and archives verbose content
+- Reduces context token usage
+- Creates recovery references
+
+**Usage:**
+
+```text
+/compact
+```
+
+**When to Use:**
+
+- When approaching token limits
+- Before spawning multiple subagents
+- When context feels cluttered
+
+---
 
 ## Error Handling
 
