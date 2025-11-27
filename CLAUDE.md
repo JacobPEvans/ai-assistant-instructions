@@ -4,9 +4,10 @@
 
 ## Quick Start
 
-1. **New session?** Run `/load-context` to load memory-bank state
+1. **Session auto-initializes** via SessionStart hook (loads checkpoint + validates environment)
 2. **Need navigation?** See [INDEX.md](./.ai-instructions/INDEX.md)
 3. **Starting a task?** Follow [5-Step Workflow](./.ai-instructions/INSTRUCTIONS.md#core-workflow)
+4. **Manual context load?** Run `/load-context` if needed
 
 ## Key Commands
 
@@ -28,6 +29,18 @@
 ## Settings
 
 Claude Code settings: `.claude/settings.json`
+
+## Hooks
+
+This project uses Claude Code hooks for automatic session initialization:
+
+| Hook | Trigger | Purpose |
+|------|---------|---------|
+| SessionStart | startup, resume, compact | Loads checkpoint, validates environment, shows task queue |
+
+Hook script: `.claude/hooks/session-start.sh`
+
+See [Session Initializer](./.ai-instructions/subagents/session-initializer.md) for the pattern this implements.
 
 ## See Also
 

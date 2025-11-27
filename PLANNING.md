@@ -28,7 +28,7 @@ Vendor configs (.claude/, .github/, .copilot/, .gemini/)
 - Watchdog mechanism with commit-before-guessing
 - Self-healing with 5 Whys analysis
 - Hard protections (never skip validation)
-- 11 specialized subagents including Issue Creator/Resolver
+- 14 specialized subagents including Issue Creator/Resolver, Session Initializer, Context Compactor, QA Validator
 
 ### Repository Optimization
 
@@ -53,10 +53,10 @@ Vendor configs (.claude/, .github/, .copilot/, .gemini/)
 - [x] Context compaction for long-running agents
 - [x] QA validation subagent for post-implementation checks
 - [x] New slash commands: `/checkpoint`, `/handoff`, `/compact`
+- [x] SessionStart hooks (auto-invoke Session Initializer)
 
 ### Future
 
-- [ ] SessionStart hooks (auto-invoke Session Initializer) - See TASK-003
 - [ ] MCP server integrations
 - [ ] Automated link checking
 - [ ] Cross-repository coordination
