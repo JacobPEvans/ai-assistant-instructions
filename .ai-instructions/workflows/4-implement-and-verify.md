@@ -8,6 +8,7 @@
 - **Follow the Plan** from Step 2 exactly.
 - **[Idempotency](../concepts/idempotency.md)**: All operations must be repeatable with consistent results.
 - **One Thing at a Time**: Execute one checklist item at a time.
+- **Improve the Plan, Don't Patch**: If implementation reveals flaws, improve the plan from Step 2 and retry - do not patch via conversation.
 
 ## Tasks
 
