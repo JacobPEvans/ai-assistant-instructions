@@ -6,7 +6,7 @@ Standardized git commit process for creating high-quality commits.
 
 1. **NEVER commit without running local validation first.**
 2. **Markdown files MUST pass `markdownlint-cli2` before committing.**
-3. **All linters and formatters must pass locally before pushing.**
+3. **All linters and formatters must pass locally before committing.**
 4. **Never commit directly to `main`.**
 
 ## Branching Strategy
@@ -60,7 +60,6 @@ flake8 .
 mypy .
 
 # Terraform
-terraform validate
 tflint
 ```
 
