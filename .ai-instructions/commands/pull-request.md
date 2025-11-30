@@ -80,41 +80,27 @@ Returns an array of review comments with:
 
 **CRITICAL:** All conversations must be marked "resolved" before PR merge.
 
-**See [pull-request-review-feedback.md](pull-request-review-feedback.md) for complete instructions.**
-
-#### Step 1: Get ALL Review Conversations
-
 ```bash
-gh api graphql --field query='
-{
-  repository(owner: "$OWNER", name: "$REPO") {
-    pullRequest(number: $PR_NUMBER) {
+# Get all review threads (replace OWNER, REPO, PR_NUMBER)
+gh api graphql -f query='{
+  repository(owner: "OWNER", name: "REPO") {
+    pullRequest(number: 123) {
       reviewThreads(first: 50) {
-        nodes {
-          id
-          isResolved
-          comments(first: 10) {
-            nodes { id body path line }
-          }
-        }
+        nodes { id isResolved comments(first: 5) { nodes { body path line } } }
       }
     }
   }
 }'
-```
 
-#### Step 2: Resolve Individual Conversations (after fixing issues)
-
-```bash
-gh api graphql --field query='
-mutation {
-  resolveReviewThread(input: {threadId: "$THREAD_ID"}) {
-    thread { id isResolved }
+# Resolve a thread (use the PRRT_ id from above)
+gh api graphql -f query='mutation {
+  resolveReviewThread(input: {threadId: "PRRT_xxx"}) {
+    thread { isResolved }
   }
 }'
 ```
 
-**IMPORTANT:** Only resolve conversations after fixing the underlying issues. Never suppress linters - always fix root causes.
+**See [pull-request-review-feedback.md](pull-request-review-feedback.md) for batch scripts and troubleshooting.**
 
 ### 2.5. Address All Feedback
 
