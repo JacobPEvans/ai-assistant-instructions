@@ -108,7 +108,7 @@ Returns an array of review comments with:
 
 > **🚨 STRICT BLOCKER**: ALL conversations must be PHYSICALLY MARKED AS RESOLVED in GitHub before requesting user review. This is not optional. Do NOT return control to the user until every conversation shows `isResolved: true`.
 
-**Step 1: Get all review threads**
+#### Step 1: Get all review threads
 
 ```bash
 gh api graphql -f query='{
@@ -122,7 +122,7 @@ gh api graphql -f query='{
 }'
 ```
 
-**Step 2: For each unresolved thread, fix the issue then resolve it**
+#### Step 2: For each unresolved thread, fix the issue then resolve it
 
 ```bash
 gh api graphql -f query='mutation {
@@ -132,7 +132,7 @@ gh api graphql -f query='mutation {
 }'
 ```
 
-**Step 3: Verify ALL threads are resolved**
+#### Step 3: Verify ALL threads are resolved
 
 ```bash
 # Must return ZERO unresolved threads
