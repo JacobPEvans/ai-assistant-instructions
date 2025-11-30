@@ -4,12 +4,24 @@
 
 Complete workflow for creating, monitoring, and fixing a pull request (PR) until it is ready to merge.
 
+## Critical Rules
+
+1. **NEVER use auto-merge.** Always wait for explicit user approval.
+2. **ALL checks must pass.** Never merge with failed checks, even if they appear to be infrastructure issues.
+3. **ALL review conversations must be resolved.** Address every piece of feedback.
+4. **Run all validation locally before pushing.** This includes linters, formatters, and pre-commit hooks.
+5. **User must approve the merge.** After all checks pass and reviews are addressed, request user review.
+
 ## 1. Create the Pull Request
 
 **Prerequisites**:
 
-1. **Verify Working Directory is Clean**: Run `git status` - output should show `working tree clean`.
-2. **Push Local Branch to Remote**: `git push -u origin $(git branch --show-current)`
+1. **Run Local Validation First**: Before pushing, run all applicable checks locally:
+   - `markdownlint-cli2 .` for markdown files (REQUIRED)
+   - `terraform fmt -check` and `terraform validate` for Terraform
+   - Any project-specific linters or formatters
+2. **Verify Working Directory is Clean**: Run `git status` - output should show `working tree clean`.
+3. **Push Local Branch to Remote**: `git push -u origin $(git branch --show-current)`
 
 **PR Description Template:**
 
@@ -31,33 +43,34 @@ Link to the PRD file: `.tmp/prd-<task-name>.md`
 Any other relevant information for reviewers.
 ```
 
-**Wait 1 Minute After Pushing**: Always wait 1 minute after pushing changes to allow AI reviewers to process updates before checking for feedback.
-
-**Set the PR to Auto-Merge:** `gh pr merge <PR_URL_OR_ID> --rebase --auto`
+**Wait for CI**: After pushing, wait for all CI checks to start: `gh pr checks <PR_URL_OR_ID> --watch`
 
 ## 2. PR Resolution Loop
 
-Repeatedly check and fix the PR until mergeable.
+Repeatedly check and fix the PR until ALL requirements are met.
 
 ### 2.1. PR Health Check
 
 Check status: `gh pr view <PR_URL_OR_ID> --json state,mergeable,statusCheckRollup,reviews,comments`
 
-Requirements:
+**ALL of these must be true:**
 
 - `state`: Must be `OPEN`
 - `mergeable`: Must be `MERGEABLE`
-- `statusCheckRollup.state`: Must be `SUCCESS`
-- No unresolved feedback
+- `statusCheckRollup`: ALL checks must show `SUCCESS` (no exceptions)
+- All review conversations must be resolved
 
 ### 2.2. Fix Failed Checks
 
+**NEVER skip or ignore failed checks.** Even if a check appears to be an infrastructure issue, investigate and fix it.
+
 1. **Identify Failed Checks**: `gh pr checks <PR_URL_OR_ID>`
 2. **View Logs**: `gh run view <run_url> --log`
-   > **Note**: The `gh pr checks` command from the previous step provides the `<run_url>` for each check, which can be used directly.
-3. **Fix and Push**: Fix the root cause, commit the change with a clear message, and push.
-4. **Wait for CI**: `gh pr checks <PR_URL_OR_ID> --watch` - must wait for checks to complete before restarting loop.
-5. **Restart Loop**: Return to 2.1.
+3. **Fix Locally First**: Reproduce and fix the issue locally before pushing.
+4. **Run Local Validation**: Re-run all local checks to verify the fix.
+5. **Commit and Push**: Commit with a clear message describing the fix.
+6. **Wait for CI**: `gh pr checks <PR_URL_OR_ID> --watch` - wait for ALL checks to complete.
+7. **Restart Loop**: Return to 2.1.
 
 ### 2.3. Read Line-Level Review Comments
 
@@ -78,7 +91,7 @@ Returns an array of review comments with:
 
 ### 2.4. Resolve PR Conversations
 
-**CRITICAL:** All conversations must be marked "resolved" before PR merge.
+**CRITICAL:** ALL conversations must be marked "resolved" before requesting merge.
 
 ```bash
 # Get all review threads (replace OWNER, REPO, PR_NUMBER)
@@ -106,13 +119,27 @@ gh api graphql -f query='mutation {
 
 **List**: `gh pr view <PR_URL_OR_ID> --json reviews,comments`
 
-**Address**:
+**Address every piece of feedback**:
 
 - If correct: Fix, commit, push, and reply referencing your commit.
-- If incorrect: Reply with explanation.
+- If incorrect: Reply with detailed explanation of why.
 
 **Restart Loop**: Return to 2.1.
 
-## 3. Final Merge
+## 3. Request User Review and Merge
 
-Once all checks pass and feedback is resolved, the PR will merge automatically.
+**ONLY after ALL of the following are true:**
+
+- [ ] All CI checks pass (no exceptions)
+- [ ] All review conversations resolved
+- [ ] All feedback addressed
+- [ ] PR is in `MERGEABLE` state
+
+**Request user approval:**
+
+> "PR is ready for review. All checks pass and all conversations are resolved. Please review and merge when ready."
+
+**Merge Strategy** (user performs the merge):
+
+- **Squash merge**: For small, single-concept changes (`gh pr merge --squash`)
+- **Rebase merge**: For larger changes or multiple logical commits (`gh pr merge --rebase`)

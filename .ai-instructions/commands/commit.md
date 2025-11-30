@@ -2,9 +2,14 @@
 
 Standardized git commit process for creating high-quality commits.
 
-## Branching Strategy
+## Critical Rules
 
-Never commit directly to `main`.
+1. **NEVER commit without running local validation first.**
+2. **Markdown files MUST pass `markdownlint-cli2` before committing.**
+3. **All linters and formatters must pass locally before pushing.**
+4. **Never commit directly to `main`.**
+
+## Branching Strategy
 
 - **Branch Naming**: Use a descriptive prefix and name, separated by a slash.
   - `test/<description>`: For Step 3 - adding tests before implementation.
@@ -14,20 +19,77 @@ Never commit directly to `main`.
   - `chore/<description>`: For maintenance tasks.
   - `refactor/<description>`: For code restructuring.
 
-## Pre-Commit Validation
+## Pre-Commit Validation (MANDATORY)
 
-Before staging files, run relevant validation checks:
+**Run these checks BEFORE staging files. Do not skip any.**
 
-- **Code Formatting**: `terraform fmt`, `prettier --write .`, etc.
-- **Markdown Linting**: **REQUIRED** for all markdown files: `markdownlint-cli2 .`
-- **Linting**: `eslint .`, etc.
-- **Infrastructure**: `terraform validate` and `terragrunt plan`.
-- **Security**: Scan for sensitive data (API keys, secrets).
+### 1. Markdown Validation (REQUIRED for all markdown changes)
+
+```bash
+# Fix auto-fixable issues first
+markdownlint-cli2 --fix .
+
+# Verify no issues remain
+markdownlint-cli2 .
+```
+
+If `markdownlint-cli2` is not available, install it or use an alternative markdown linter. **Never commit markdown files that fail validation.**
+
+### 2. Code Formatting
+
+```bash
+# Terraform
+terraform fmt -recursive
+
+# JavaScript/TypeScript
+prettier --write .
+
+# Python
+black .
+isort .
+```
+
+### 3. Linting
+
+```bash
+# JavaScript/TypeScript
+eslint .
+
+# Python
+flake8 .
+mypy .
+
+# Terraform
+terraform validate
+tflint
+```
+
+### 4. Infrastructure Validation
+
+```bash
+# Terraform
+terraform validate
+terraform plan
+
+# Terragrunt
+terragrunt validate
+terragrunt plan
+```
+
+### 5. Security Scan
+
+Before committing, verify no sensitive data is staged:
+
+- API keys or tokens
+- Passwords or secrets
+- Private keys
+- `.env` files with real values
 
 ## Staging and Analysis
 
 1. **Stage Files**: Use `git add <file>` to stage changes. Group files into logical commits.
-2. **Analyze Changes**: Use `git status -v -v` to review staged changes and `git log --oneline -n 5` to understand recent commit history.
+2. **Analyze Changes**: Use `git status -v -v` to review staged changes.
+3. **Review History**: Use `git log --oneline -n 5` to understand recent commit style.
 
 ## Commit Message Format
 
@@ -72,3 +134,13 @@ pool size.
 
 Refs: #456
 ```
+
+## Pre-Push Checklist
+
+Before running `git push`, verify:
+
+- [ ] All local validation checks pass
+- [ ] Markdown files pass `markdownlint-cli2`
+- [ ] No sensitive data in staged files
+- [ ] Commit messages follow Conventional Commits format
+- [ ] Changes are on a feature branch (not `main`)
