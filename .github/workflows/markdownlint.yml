@@ -14,6 +14,8 @@ jobs:
       - name: Run markdownlint
         uses: DavidAnson/markdownlint-cli2-action@v20
         with:
-          globs: '**/*.md'
+          globs: |
+            **/*.md
+            !.claude/commands/rok-*.md
           config: '.markdownlint.json'
           fix: true
