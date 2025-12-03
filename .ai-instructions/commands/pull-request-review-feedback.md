@@ -138,6 +138,7 @@ done
 2. **Use `-f query=` not `--field query=`** - Both work, but `-f` is shorter.
 
 3. **Quote escaping in loops** - When using shell variables, use double quotes for the outer query and escape inner quotes:
+
    ```bash
    gh api graphql -f query="mutation { resolveReviewThread(input: {threadId: \"$thread_id\"}) { thread { isResolved } } }"
    ```

@@ -257,6 +257,82 @@ gh api repos/:owner/:repo/pulls/{PR_NUMBER}/comments | jq '
 - **Thread resolution**: Mark threads as resolved after addressing them
 - **Continuous improvement**: Learn from feedback patterns
 
+### Response Strategy for Recurring AI Comments
+
+When responding to automated AI reviewer comments (e.g., Copilot, CodeRabbit), apply these principles:
+
+#### Always Explain Your Reasoning
+
+For EVERY comment, provide a detailed explanation of why you:
+
+- **Agreed**: Explain what was wrong and how you fixed it
+- **Disagreed**: Explain why the comment is not applicable, overly cautious, or incorrect
+
+This creates a learning record for AI reviewers and helps future reviews be more accurate.
+
+#### Add Code Comments to Prevent Recurring Comments
+
+When a legitimate pattern keeps triggering false-positive reviews, add inline comments:
+
+```python
+# NOTE: This permission is intentional - darwin-rebuild is required for Nix development
+"Bash(darwin-rebuild switch:*)"
+
+# NOTE: git push is safe here - branch protection prevents force-push to main
+"Bash(git push:*)"
+```
+
+#### Recognize Overbearing Patterns
+
+Some AI comments are overly cautious and should be addressed firmly:
+
+| Comment Pattern | Response Approach |
+|-----------------|-------------------|
+| "Consider adding to deny list" | Reject if already in "ask" list - ask = user approval required |
+| "Read all files is risky" | Reject - we use secure key management, not plaintext files |
+| "Eval/exec is dangerous" | Reject - still requires user approval, AI cannot run silently |
+| "Inconsistent command formats" | Reject - different sources, common prefix indicates origin |
+| "Add more deny permissions" | Reject - anything not in allow/ask already requires approval |
+| "git push could be destructive" | Reject - branch protection prevents force-push to main |
+| "darwin-rebuild could break system" | Reject - required for Nix development workflow |
+
+#### When to Accept vs. Reject
+
+**ACCEPT when**:
+
+- The comment identifies a genuine security risk (e.g., `rm -rf /` without safeguards)
+- The fix improves code quality without adding unnecessary complexity
+- The suggestion aligns with project standards
+
+**REJECT when**:
+
+- The comment is based on worst-case theoretical scenarios, not likely failures
+- The permission already requires user approval ("ask" list)
+- The command is required for the project's development workflow
+- The reviewer is applying generic security advice that doesn't fit this context
+
+#### Response Template for Rejected Comments
+
+```markdown
+**Acknowledged but not implementing.**
+
+Reason: [Explain why this doesn't apply]
+- [Specific technical justification]
+- [Reference to existing safeguards if applicable]
+
+This pattern is documented in our review guidelines. Resolving thread.
+```
+
+#### Response Template for Accepted Comments
+
+```markdown
+**Fixed in commit: [commit_hash]**
+
+Changed: [What was changed]
+Reason: [Why the reviewer was correct]
+Prevention: [Code comment added to prevent future occurrences, if applicable]
+```
+
 ### Usage Instructions
 
 > **Usage:**
