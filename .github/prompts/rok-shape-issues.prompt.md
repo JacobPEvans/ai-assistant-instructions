@@ -1,0 +1,1 @@
+../../.ai-instructions/commands/rok-shape-issues.md
