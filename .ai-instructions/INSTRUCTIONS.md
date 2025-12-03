@@ -34,12 +34,20 @@ If any step fails, the cycle must restart from Step 1 after documenting the fail
 - **[The Memory Bank](./concepts/memory-bank/README.md)**: Documents that act as the AI's external memory for project context.
 - **[AI Tooling](./concepts/ai-tooling.md)**: Best practices for giving AI assistants access to your development environment.
 - **[Vendor-Specific Configuration](./concepts/vendor-config-standards.md)**: Standards for creating vendor-specific AI configuration files.
-- **[Styleguide](./concepts/styleguide.md)**: Comprehensive coding styleguide for AI-assisted development and code reviews.
 - **[Code Standards](./concepts/code-standards.md)**: Guidelines for writing high-quality, secure, and maintainable code.
 - **[Infrastructure Standards](./concepts/infrastructure-standards.md)**: Best practices for managing Infrastructure as Code (IaC).
 - **[Documentation Standards](./concepts/documentation-standards.md)**: Rules and formats for creating clear and effective documentation.
 - **[Diagramming Standards](./concepts/diagramming-standards.md)**: Best practices for creating diagrams using Mermaid and Graphviz.
 - **[Workspace Management](./concepts/workspace-management.md)**: Guidelines for managing a multi-repository workspace.
+
+## Styleguide
+
+Refer to the **[Styleguide](./concepts/styleguide.md)** for:
+
+- Language-specific coding conventions (JavaScript/TypeScript, Python, Markdown)
+- AI tools integration patterns
+- Code review expectations and focus areas
+- **Pull request review guidelines**, including pragmatic approaches to permission and configuration reviews
 
 ## Commands
 
