@@ -43,8 +43,6 @@
     "Bash(ncat -l:*)",
     "Bash(socat:*)",
     "Bash(rm -fr ~:*)",
-    "Bash(rm --recursive --force ~:*)",
-    "Bash(eval:*)",
-    "Bash(exec:*)"
+    "Bash(rm --recursive --force ~:*)"
   ]
 }

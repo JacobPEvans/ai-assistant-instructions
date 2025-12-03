@@ -319,6 +319,10 @@
     "WebFetch(domain:www.npmjs.com)",
     "WebFetch(domain:gist.github.com)",
     "WebFetch(domain:gist.githubusercontent.com)",
-    "WebFetch(domain:buildermethods.com)"
+    "WebFetch(domain:buildermethods.com)",
+    "Bash(markdownlint-cli2:*)",
+    "WebFetch(domain:code.visualstudio.com)",
+    "Read(//nix/store/g8ia76hsdj8dmrn91iikpc26mpa6jy60-home-manager-files/.claude/commands/**)",
+    "Read(//nix/store/**)"
   ]
 }
