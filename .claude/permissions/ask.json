@@ -37,6 +37,24 @@
     "Bash(aws cloudformation delete-stack:*)",
     "Bash(npx:*)",
     "Bash(sqlite3:*)",
-    "Bash(mongosh:*)"
+    "Bash(mongosh:*)",
+    "Bash(pip install:*)",
+    "Bash(pip install --user:*)",
+    "Bash(pip3 install:*)",
+    "Bash(npm install:*)",
+    "Bash(npm ci:*)",
+    "Bash(yarn install:*)",
+    "Bash(yarn add:*)",
+    "Bash(yarn remove:*)",
+    "Bash(pnpm install:*)",
+    "Bash(pnpm add:*)",
+    "Bash(cargo install:*)",
+    "Bash(cargo uninstall:*)",
+    "Bash(poetry install:*)",
+    "Bash(poetry add:*)",
+    "Bash(poetry remove:*)",
+    "Bash(poetry update:*)",
+    "Bash(pyenv install:*)",
+    "Bash(source:*)"
   ]
 }

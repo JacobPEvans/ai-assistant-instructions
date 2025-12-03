@@ -41,6 +41,10 @@
     "Bash(sudo -s:*)",
     "Bash(nc -l:*)",
     "Bash(ncat -l:*)",
-    "Bash(socat:*)"
+    "Bash(socat:*)",
+    "Bash(rm -fr ~:*)",
+    "Bash(rm --recursive --force ~:*)",
+    "Bash(eval:*)",
+    "Bash(exec:*)"
   ]
 }
