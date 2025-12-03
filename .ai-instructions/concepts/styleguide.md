@@ -91,6 +91,23 @@ When reviewing code, focus on:
 6. **DRY principle violations** and code duplication
 7. **Standards compliance** per the referenced documents above
 
+## Pull Request Review Guidelines
+
+### Permission and Configuration Reviews
+
+When reviewing permissions, configurations, or security-related changes:
+
+- **Focus on likely failures, not theoretical edge cases**: Evaluate whether a permission is likely to cause a catastrophic failure in normal use, not whether it's technically possible in an extreme scenario.
+- **Avoid worst-case scenario thinking**: Do not reject permissions based on ultimate, rare, or contrived edge cases that are unlikely to occur in practice.
+- **Consider the actual risk level**: A permission that could theoretically be abused but practically never will be is acceptable. A permission that routinely leads to problems is not.
+- **Balance security with usability**: Overly restrictive permissions that impede legitimate workflows are themselves a form of failure.
+
+### Review Principles
+
+- **Be pragmatic**: Perfect security that blocks all work is worse than reasonable security that enables productivity.
+- **Trust context**: If a permission is being requested for a legitimate workflow, assume good faith.
+- **Quantify risk**: Ask "how often would this actually cause harm?" not "could this ever cause harm?"
+
 ## Examples of Preferred Code Structure
 
 ### Function Documentation
