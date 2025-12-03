@@ -1,0 +1,3 @@
+# Community commands that use Claude Code-specific HTML elements
+# These are external contributions and shouldn't be modified from their original form
+.claude/commands/rok-*.md
