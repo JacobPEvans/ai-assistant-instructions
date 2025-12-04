@@ -40,4 +40,4 @@ First formal release. This version consolidates all previous development work in
 
 ---
 
-*This changelog consolidates all development work from initial creation through December 2025.*
+*This changelog consolidates all development work from initial creation through December 3, 2025.*

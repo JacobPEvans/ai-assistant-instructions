@@ -13,39 +13,44 @@ basic repository instructions to include comprehensive workspace management.
 ### Primary Instruction Files
 
 ```text
+.ai-instructions/                    # Single source of truth
+├── INSTRUCTIONS.md                  # Main entry point for all AI assistants
+├── commands/                        # Reusable command prompts
+├── concepts/                        # Core principles and architecture
+│   ├── architecture.md              # This file - system design decisions
+│   ├── project-scope.md             # Project scope and boundaries
+│   └── workspace-management.md      # Multi-project workspace guidelines
+└── workflows/                       # Development workflow documentation
+
+.copilot/                            # Symlinks to .ai-instructions/
+├── instructions.md → ../.ai-instructions/INSTRUCTIONS.md
+├── ARCHITECTURE.md → ../.ai-instructions/concepts/architecture.md
+├── PROJECT.md → ../.ai-instructions/concepts/project-scope.md
+└── WORKSPACE.md → ../.ai-instructions/concepts/workspace-management.md
+
 .github/
 ├── copilot-instructions.md          # Main repository-wide AI instructions
-└── prompts/                         # Reusable prompt templates
-    ├── documentation-check.prompt.md # Documentation consistency checks
-    ├── git-workflow.prompt.md       # Git commit and workflow standards
-    ├── infrastructure-review.prompt.md # Infrastructure code reviews
-    └── security-review.prompt.md    # Security assessment prompts
-
-.copilot/
-├── PROJECT.md                       # Project scope and boundaries
-├── ARCHITECTURE.md                  # This file - system design decisions
-└── WORKSPACE.md                     # Multi-project workspace guidelines
+└── .copilot-*.md                    # Symlinks to .ai-instructions/commands/
 ```
 
 ### Design Rationale
 
 #### Separation of Concerns
 
-- **`.github/copilot-instructions.md`**: Repository-wide context only
-  - Short, focused instructions that apply to all conversations
-  - Technology preferences and general best practices
-  - Security and cost management principles
+- **`.ai-instructions/`**: Single source of truth for all AI assistant content
+  - `INSTRUCTIONS.md`: Main entry point referenced by all vendors
+  - `concepts/`: Core principles, architecture, and workspace management
+  - `commands/`: Reusable command prompts for common tasks
+  - `workflows/`: Step-by-step development workflow documentation
 
-- **`.copilot/` Directory**: Detailed context and architecture decisions
-  - PROJECT.md: Scope, boundaries, and change management
-  - ARCHITECTURE.md: Technical implementation details and design decisions
-  - WORKSPACE.md: Multi-repository workspace management
+- **Vendor directories (`.copilot/`, `.claude/`, `.gemini/`)**: Symlinks only
+  - All files are filesystem symlinks to `.ai-instructions/`
+  - Enables vendor-specific discovery while maintaining DRY principle
+  - No duplicate content - single source, multiple consumers
 
-- **`.github/prompts/`**: Task-specific reusable prompts
-  - Documentation consistency validation
-  - Git commit and workflow standards
-  - Infrastructure review workflows
-  - Security assessment checklists
+- **`.github/`**: GitHub-specific integration
+  - `copilot-instructions.md`: Repository-wide AI instructions
+  - `.copilot-*.md`: Symlinks to `.ai-instructions/commands/`
 
 #### AI Optimization Principles
 
@@ -219,19 +224,6 @@ digraph network {
 - Multi-factor authentication for administrative and non-automated access
 
 ## Workflow Integration
-
-### Git Workflow
-
-```mermaid
-graph LR
-    A[Feature Branch] --> B[Local Testing]
-    B --> C[Commit Changes]
-    C --> D[Push to Remote]
-    D --> E[Create PR]
-    E --> F[Automated Checks]
-    F --> G[Merge to Main]
-    G --> H[Deploy/Apply]
-```
 
 ### AI Assistance Integration Points
 

@@ -4,7 +4,7 @@
 
 Preparing v0.8.0 release - first formal GitHub release:
 
-- ✅ Converted 6 pointer markdown files to proper symlinks
+- ✅ Converted 8 pointer markdown files to proper symlinks
 - ✅ Moved `.copilot/ARCHITECTURE.md` and `PROJECT.md` to `.ai-instructions/concepts/`
 - ✅ Created CONTRIBUTING.md, CODE_OF_CONDUCT.md, SECURITY.md
 - ✅ Overhauled README.md (26 lines → ~100 lines)
