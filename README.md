@@ -67,18 +67,26 @@ Full details in [`.ai-instructions/workflows/`](.ai-instructions/workflows/).
 
 ## Key Commands
 
+### Core Commands
+
 | Command | Description |
 |---------|-------------|
 | `/commit` | Generate conventional commit messages |
-| `/generate-code` | Scaffold new code with standards |
 | `/infrastructure-review` | Review Terraform/Terragrunt code |
-| `/pull-request` | Create well-documented PRs |
-| `/review-code` | Structured code review |
 | `/review-docs` | Review and improve documentation |
 
-**Community commands** (rok-* series): `/rok-shape-issues`, `/rok-resolve-issues`, `/rok-review-pr`, `/rok-respond-to-reviews`
+### Community Commands (rok-* series)
 
-All 11 commands live in [`.ai-instructions/commands/`](.ai-instructions/commands/).
+Complete Shape Up development lifecycle:
+
+| Command | Description |
+|---------|-------------|
+| `/rok-shape-issues` | Shape issues with appetite and constraints |
+| `/rok-resolve-issues` | Systematic issue resolution |
+| `/rok-review-pr` | Comprehensive PR review with quality checks |
+| `/rok-respond-to-reviews` | PR feedback resolution with parallel agents |
+
+All 7 commands live in [`.ai-instructions/commands/`](.ai-instructions/commands/).
 
 ## Core Concepts
 
