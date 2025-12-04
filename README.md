@@ -35,9 +35,12 @@ Or just browse the docs and cherry-pick what you need.
 ├── .ai-instructions/          # The single source of truth
 │   ├── INSTRUCTIONS.md        # Main entry point
 │   ├── commands/              # Reusable command prompts
+│   ├── agents/                # Specialized sub-agents
 │   ├── concepts/              # Core principles and standards
 │   └── workflows/             # The 5-step development workflow
 ├── .claude/                   # Claude-specific symlinks
+│   ├── commands/              # Slash commands
+│   └── agents/                # Sub-agents
 ├── .copilot/                  # GitHub Copilot symlinks
 ├── .gemini/                   # Gemini symlinks
 └── .github/                   # GitHub integration (prompts, workflows)
@@ -48,7 +51,7 @@ Everything in `.claude/`, `.copilot/`, and `.gemini/` symlinks back to `.ai-inst
 ## Supported AI Assistants
 
 | Assistant | Integration | Notes |
-|-----------|------------|-------|
+| --------- | ----------- | ----- |
 | **Claude** | `.claude/` directory | Full command support via Claude Code |
 | **GitHub Copilot** | `.github/copilot-instructions.md` + prompts | Works in VS Code, GitHub.com, Visual Studio |
 | **Gemini** | `.gemini/` directory | Style guide and config support |
@@ -68,7 +71,7 @@ Full details in [`.ai-instructions/workflows/`](.ai-instructions/workflows/).
 ## Key Commands
 
 | Command | Description |
-|---------|-------------|
+| ------- | ----------- |
 | `/commit` | Generate conventional commit messages |
 | `/generate-code` | Scaffold new code with standards |
 | `/infrastructure-review` | Review Terraform/Terragrunt code |
@@ -80,6 +83,21 @@ Full details in [`.ai-instructions/workflows/`](.ai-instructions/workflows/).
 
 All 11 commands live in [`.ai-instructions/commands/`](.ai-instructions/commands/).
 
+## Sub-Agents
+
+Specialized AI assistants that execute tasks with focused expertise:
+
+| Sub-Agent | Purpose |
+| --------- | ------- |
+| Code Review Specialist | Security audits, quality checks, standards compliance |
+| Documentation Review Specialist | Markdown validation, technical writing quality |
+| Infrastructure Review Specialist | Terraform/Terragrunt, cloud security, cost optimization |
+| Code Generation Specialist | Scaffolding, patterns, test generation |
+
+Learn more in [`.ai-instructions/agents/`](.ai-instructions/agents/) or read the [Sub-Agents Concept](.ai-instructions/concepts/sub-agents.md).
+
+**Key Difference**: Commands define workflows; sub-agents provide specialized execution.
+
 ## Core Concepts
 
 The documentation covers:
@@ -88,6 +106,7 @@ The documentation covers:
 - **Documentation Standards** - AI-friendly markdown
 - **Infrastructure Standards** - Terraform/Terragrunt patterns
 - **DRY Principle** - Why everything symlinks to one place
+- **Sub-Agents** - Specialized AI assistants for focused tasks
 - **Memory Bank** - Maintaining AI context across sessions
 
 Browse [`.ai-instructions/concepts/`](.ai-instructions/concepts/).

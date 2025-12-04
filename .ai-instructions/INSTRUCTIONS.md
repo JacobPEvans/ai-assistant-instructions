@@ -33,6 +33,7 @@ If any step fails, the cycle must restart from Step 1 after documenting the fail
 - **[The DRY Principle](./concepts/dry-principle.md)**: The "Don't Repeat Yourself" principle for code and documentation.
 - **[The Memory Bank](./concepts/memory-bank/README.md)**: Documents that act as the AI's external memory for project context.
 - **[AI Tooling](./concepts/ai-tooling.md)**: Best practices for giving AI assistants access to your development environment.
+- **[Sub-Agents](./concepts/sub-agents.md)**: Specialized AI assistants for focused, expert-level task execution.
 - **[Vendor-Specific Configuration](./concepts/vendor-config-standards.md)**: Standards for creating vendor-specific AI configuration files.
 - **[Code Standards](./concepts/code-standards.md)**: Guidelines for writing high-quality, secure, and maintainable code.
 - **[Infrastructure Standards](./concepts/infrastructure-standards.md)**: Best practices for managing Infrastructure as Code (IaC).
@@ -57,6 +58,15 @@ Refer to the **[Styleguide](./concepts/styleguide.md)** for:
 - **[Review Code](./commands/review-code.md)**: Structured code review process with priority levels
 - **[Review Documentation](./commands/review-docs.md)**: Markdown validation and documentation quality workflow
 - **[Review Infrastructure](./commands/infrastructure-review.md)**: Terraform/Terragrunt configuration review checklist
+
+## Sub-Agents
+
+Specialized AI assistants for expert-level task execution. See [Sub-Agents Concept](./concepts/sub-agents.md) for details.
+
+- **[Code Review Specialist](./agents/code-reviewer.md)**: Security, quality, and standards review
+- **[Documentation Review Specialist](./agents/doc-reviewer.md)**: Markdown validation and technical writing
+- **[Infrastructure Review Specialist](./agents/infrastructure-reviewer.md)**: Terraform/Terragrunt and cloud security
+- **[Code Generation Specialist](./agents/code-generator.md)**: Scaffolding, patterns, and best practices
 
 ## Maintenance
 
