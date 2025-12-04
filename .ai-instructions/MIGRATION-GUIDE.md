@@ -104,10 +104,12 @@ The `/generate-code` command was too generic and didn't provide enough structure
 # Step 5: Finalize and Commit
 ```
 
-**For external frameworks:**
+**For external frameworks (optional):**
+
+These are optional third-party tools that you may consider for structured development:
 
 - Consider [Agent OS](https://buildermethods.com/agent-os) for spec-driven development
-- Use `implement-tasks` agent for structured implementation
+- Use `implement-tasks` agent for structured implementation (if using Agent OS)
 - Follow the PRD → Tests → Implementation pattern
 
 ## Quick Reference
