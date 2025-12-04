@@ -1,88 +1,47 @@
 # Project Status & Planning
 
-## Current Session Progress (2025-11-23)
+## Current Session Progress (2025-12-03)
 
-Repository audit and documentation refinement completed:
+Preparing v0.8.0 release - first formal GitHub release:
 
-- ✅ Audited repository for open branches, stale work, and cleanup needs
-- ✅ Reviewed and balanced `claude/review-ai-instructions` branch documentation cleanup
-- ✅ Restored critical information removed too aggressively (65 lines of essential guidance)
-- ✅ Updated CHANGELOG.md with balanced documentation improvements
-- ✅ Created middle ground between verbose and overly-concise documentation
-
-## Previous Session Work (2025-07-13)
-
-- Integrated expert AI best practices into the core instruction set.
-- Introduced the "Memory Bank" concept for improved AI context management.
-- Established and documented standards for workspace management and vendor-specific configuration.
-- Consolidated `TODO.md` into this planning file.
-- Performed a full repository cleanup to enforce DRY principles.
+- ✅ Converted 6 pointer markdown files to proper symlinks
+- ✅ Moved `.copilot/ARCHITECTURE.md` and `PROJECT.md` to `.ai-instructions/concepts/`
+- ✅ Created CONTRIBUTING.md, CODE_OF_CONDUCT.md, SECURITY.md
+- ✅ Overhauled README.md (26 lines → ~100 lines)
+- ✅ Consolidated CHANGELOG.md to single v0.8.0 entry
+- ✅ Updated GitHub Actions workflow to use `CLAUDE_CODE_OAUTH_TOKEN`
+- ✅ Staged `.gemini/permissions/` for inclusion in release
+- 🔄 Final lint/cleanup in progress
+- ⏳ GitHub release pending (manual user action)
 
 ## Repository Context
 
-- **Target**: Standardized, vendor-agnostic AI assistant instructions.
-- **Purpose**: To provide a centralized, maintainable, and extensible knowledge base for consistent AI-assisted development workflows.
-- **Tools**: GitHub Actions, Markdown linting, various AI assistants (Claude, Copilot, Gemini, etc.).
+- **Target**: Standardized, vendor-agnostic AI assistant instructions
+- **Purpose**: Centralized, maintainable knowledge base for consistent AI-assisted development workflows
+- **Tools**: GitHub Actions, Markdown linting, Claude, Copilot, Gemini
 
 ### Key Files
 
-- `.ai-instructions/` - The single source of truth for all instructions, commands, and concepts.
-- `.claude/`, `.github/`, `.copilot/`, `.gemini/` - Vendor-specific directories that now contain only links to the files in `.ai-instructions`.
-- `CHANGELOG.md` - Tracks all notable changes to the project.
-- `PLANNING.md` - This file, used for planning future work.
-
-## ✅ Recently Resolved Issues
-
-- **✅ SOLVED: PR Conversation Resolution**: The GitHub Pull Request conversation resolution system has been successfully implemented!
-  After extensive investigation and testing, working GraphQL queries have been developed and documented that can:
-  1. Get ALL pull request review threads with resolution status
-  2. Resolve individual conversations after fixing underlying issues
-  3. Handle batch resolution of multiple conversations
-
-  **Key Achievement**: Created `pull-request-review-feedback.md` with exact, tested, and well-documented GraphQL queries.
-  **Impact**: Enables fully automated PR management workflows and unblocks completion of future PRs.
-  **Date Resolved**: 2025-07-13
+- `.ai-instructions/` - Single source of truth for all instructions, commands, and concepts
+- `.claude/`, `.github/`, `.copilot/`, `.gemini/` - Vendor-specific directories with symlinks
+- `CHANGELOG.md` - Tracks all notable changes to the project
+- `PLANNING.md` - This file, used for planning future work
 
 ## Known Issues
 
-- **Persistent Markdown Linting Failures**: The `markdownlint-cli2` GitHub Action is consistently failing on pull request #22, citing
-  `MD013/line-length` and `MD046/code-block-style` errors. Multiple attempts to fix these issues by re-writing files and using different tools have failed.
-  The root cause appears to be a discrepancy between the local environment and the CI environment, or a fundamental misunderstanding of how the linter
-  is configured in the action. Future attempts must start by disabling the `MD013` and `MD046` rules entirely in `.markdownlint.json` to establish a
-  passing baseline, then re-introduce them one by one.
+None blocking for v0.8.0 release.
 
-## Immediate Next Actions
+## Future Improvements
 
-### 🔧 Repository Cleanup Tasks
+### Post-Release
 
-- **Evaluate feat/update-instructions-with-recent-ai-updates**: Review 9-week-old branch with GitHub Actions version bumps
-- **Verify Documentation Links**: Check all links in `.ai-instructions`, `.claude`, `.copilot`, `.gemini` directories
-- **Review Open Pull Requests**: Check GitHub for any open PRs that need attention
-- **Clean Up Stale Branches**: Delete old session branches and merged feature branches
+- **Automated Link Checking**: GitHub Action for broken markdown link detection
+- **Command Validation**: Script to validate vendor directory structure
+- **Multi-AI Agent Collaboration**: System for AI agents to hand off work
+- **Expand Concepts**: Additional conceptual documents as needed
 
-## Next Session Actions & Future Improvements
+### Enabled by PR Conversation Resolution
 
-### 🚀 Newly Enabled by PR Conversation Resolution Breakthrough
-
-- **Fully Automated PR Workflows**: Now that PR conversation resolution is solved, implement end-to-end automated PR management that can:
-  - Create PRs with auto-merge
-  - Monitor and fix CI failures automatically
-  - Address all review feedback programmatically
-  - Resolve all conversations after fixes
-  - Complete the entire PR lifecycle without human intervention
-
-- **AI Code Review Response System**: Build an automated system that can:
-  - Parse AI reviewer feedback (Copilot, Gemini, etc.)
-  - Implement suggested code changes automatically
-  - Resolve conversations immediately after implementing fixes
-  - Handle complex multi-file refactoring requests from reviewers
-
-### 🔮 Advanced Future Capabilities
-
-- **Multi-AI Agent Collaboration**: Develop a system where multiple AI agents can collaborate on a single task, handing off work between them.
-- **Automated Link Checking**: Implement a GitHub Action to regularly check for broken markdown links.
-- **Command Validation**: Explore creating a script that validates the structure of the vendor-specific directories.
-- **Add More Granular Commands**: Consider breaking down the existing commands into even more granular tasks.
-- **Expand Concepts**: Add more conceptual documents to the `.ai-instructions/concepts` directory.
-- **Re-evaluate Markdown Rules**: Re-visit the disabled markdown rules in `.markdownlint.json` and fix the files to comply.
-- **Create "Kick-off" Prompt**: Develop a new prompt that starts from scratch, reads all relevant instructions, and then kicks off an agent to begin the next task.
+- Fully automated PR workflows with auto-merge
+- AI code review response system
+- End-to-end PR lifecycle automation

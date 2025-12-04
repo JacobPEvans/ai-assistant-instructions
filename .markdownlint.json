@@ -2,6 +2,7 @@
   "default": true,
   "fix": true,
   "gitignore": true,
+  "ignores": ["result/**"],
   "MD013": {
     "line_length": 160,
     "tables": false
