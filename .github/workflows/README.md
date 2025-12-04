@@ -15,7 +15,7 @@ Automated code review using Anthropic's Claude AI on pull requests.
 - `contents: read` - Read repository contents
 - `pull-requests: write` - Comment on pull requests
 - `issues: read` - Read issue information
-- `id-token: write` - Generate OIDC tokens (fallback for OIDC auth)
+- `id-token: write` - Required by action infrastructure (not used with explicit github_token)
 
 **Configuration**:
 
