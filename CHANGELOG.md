@@ -13,7 +13,9 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
   - Removed `pull-request` (workflow covered by rok-* command series)
   - Removed `pull-request-review-feedback` (replaced by `rok-respond-to-reviews` with parallel sub-agents)
   - Removed `generate-code` (too generic, covered by implementation workflows and Agent OS patterns)
-- **Rationale**: The rok-* commands from the Shape Up methodology provide more comprehensive, systematic approaches with better GitHub CLI integration and parallel processing capabilities
+- **Rationale**: The rok-* commands from the Shape Up methodology provide more comprehensive, systematic approaches
+  with better GitHub CLI integration and parallel processing capabilities
+- **Migration Guide**: See [MIGRATION-GUIDE.md](.ai-instructions/MIGRATION-GUIDE.md) for detailed transition instructions
 
 ### Changed
 
