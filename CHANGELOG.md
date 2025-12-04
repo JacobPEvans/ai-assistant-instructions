@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/).
 
+## [Unreleased]
+
+### Removed
+
+- **Consolidated Duplicate Commands**: Removed 4 redundant commands in favor of rok-* series
+  - Removed `review-code` (replaced by `rok-review-pr` which has GitHub CLI integration and systematic workflow)
+  - Removed `pull-request` (workflow covered by rok-* command series)
+  - Removed `pull-request-review-feedback` (replaced by `rok-respond-to-reviews` with parallel sub-agents)
+  - Removed `generate-code` (too generic, covered by implementation workflows and Agent OS patterns)
+- **Rationale**: The rok-* commands from the Shape Up methodology provide more comprehensive, systematic approaches with better GitHub CLI integration and parallel processing capabilities
+
+### Changed
+
+- **Commands Count**: Reduced from 11 to 7 commands (3 core + 4 rok-* community commands)
+- **Documentation**: Updated INSTRUCTIONS.md and README.md to reflect new command structure
+
 ## v0.8.0 - 2025-12-03
 
 First formal release. This version consolidates all previous development work into a stable, documented release.

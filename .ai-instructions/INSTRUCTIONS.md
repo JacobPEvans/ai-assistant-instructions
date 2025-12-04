@@ -51,12 +51,22 @@ Refer to the **[Styleguide](./concepts/styleguide.md)** for:
 
 ## Commands
 
+### Core Commands
+
 - **[Commit](./commands/commit.md)**: Standardized git commit process with validation checks
-- **[Pull Request](./commands/pull-request.md)**: Complete PR lifecycle management from creation to merge
-- **[Generate Code](./commands/generate-code.md)**: Code generation standards and technology-specific guidelines
-- **[Review Code](./commands/review-code.md)**: Structured code review process with priority levels
 - **[Review Documentation](./commands/review-docs.md)**: Markdown validation and documentation quality workflow
 - **[Review Infrastructure](./commands/infrastructure-review.md)**: Terraform/Terragrunt configuration review checklist
+
+### Community Commands (rok-* series)
+
+The rok-* commands implement Shape Up methodology for the complete development lifecycle:
+
+- **[rok-shape-issues](./commands/rok-shape-issues.md)**: Shape Up methodology for issue definition with appetite and constraints
+- **[rok-resolve-issues](./commands/rok-resolve-issues.md)**: Systematic issue resolution with GitHub CLI integration
+- **[rok-review-pr](./commands/rok-review-pr.md)**: Comprehensive PR review with quality checks and structured feedback
+- **[rok-respond-to-reviews](./commands/rok-respond-to-reviews.md)**: Efficient PR feedback resolution with parallel sub-agents and thread resolution
+
+**Complete Development Lifecycle**: `/rok-shape-issues` → `/rok-resolve-issues` → `/rok-review-pr` → `/rok-respond-to-reviews`
 
 ## Maintenance
 
