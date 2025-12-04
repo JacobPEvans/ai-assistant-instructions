@@ -1,0 +1,20 @@
+{
+  "config": {
+    "default": true,
+    "MD013": {
+      "line_length": 160,
+      "tables": false
+    }
+  },
+  "ignores": ["result/**"],
+  "fix": true,
+  "gitignore": true,
+  "overrides": [
+    {
+      "files": ["CHANGELOG.md"],
+      "config": {
+        "MD024": false
+      }
+    }
+  ]
+}

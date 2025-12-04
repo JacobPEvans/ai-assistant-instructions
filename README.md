@@ -1,25 +1,105 @@
 # AI Assistant Instructions
 
-Comprehensive AI assistant instructions combining GitHub Copilot, Claude, and Gemini workflows for consistent, high-quality development assistance.
+> Teaching AI assistants how to help you better. Yes, it's AI instructions written with AI assistance. We've come full circle.
 
-## Overview
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![Markdown Lint](https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/markdownlint.yml/badge.svg)](https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/markdownlint.yml)
 
-This repository provides centralized AI instruction management with modular, reusable configurations.
-It is optimized for GitHub Copilot, Claude, and Gemini integration.
-It features multiple AI system compatibility with standardized workflows, security scanning, and cost-conscious development practices.
+## What Is This?
+
+A centralized collection of instructions, workflows, and configurations for AI coding assistants.
+Drop these into your projects and get consistent, high-quality AI assistance across Claude, Copilot, and Gemini.
+
+Think of it as a style guide, but for your AI pair programmer.
 
 ## Quick Start
 
-- **Explore the Instructions**: The core instructions are in the `.ai-instructions` directory.
-- **Vendor-Specific Integration**: The `.claude`, `.copilot`, `.gemini`, and `.github` directories contain links to these core instructions.
-- **Use the Commands**: Leverage the standardized commands like `commit` and `review-code` with your AI assistant.
+```bash
+# Clone the repo
+git clone https://github.com/JacobPEvans/ai-assistant-instructions.git
 
-## Architecture
+# Copy the .ai-instructions directory to your project
+cp -r ai-assistant-instructions/.ai-instructions your-project/
 
-This project uses a centralized, single-source-of-truth model.
-The `.ai-instructions` directory contains the canonical documentation, which is then referenced by vendor-specific files.
-This adheres to the DRY (Don't Repeat Yourself) principle, making maintenance easier.
-The core of this project is a rigorous, 5-step development workflow designed for automation.
+# Symlink vendor directories as needed
+cd your-project
+ln -s .ai-instructions/INSTRUCTIONS.md CLAUDE.md
+```
 
-For more details, see the main instruction file:
-**[`.ai-instructions/INSTRUCTIONS.md`](.ai-instructions/INSTRUCTIONS.md)**.
+Or just browse the docs and cherry-pick what you need.
+
+## Directory Structure
+
+```text
+.
+├── .ai-instructions/          # The single source of truth
+│   ├── INSTRUCTIONS.md        # Main entry point
+│   ├── commands/              # Reusable command prompts
+│   ├── concepts/              # Core principles and standards
+│   └── workflows/             # The 5-step development workflow
+├── .claude/                   # Claude-specific symlinks
+├── .copilot/                  # GitHub Copilot symlinks
+├── .gemini/                   # Gemini symlinks
+└── .github/                   # GitHub integration (prompts, workflows)
+```
+
+Everything in `.claude/`, `.copilot/`, and `.gemini/` symlinks back to `.ai-instructions/`. One source, multiple consumers. DRY principle in action.
+
+## Supported AI Assistants
+
+| Assistant | Integration | Notes |
+|-----------|------------|-------|
+| **Claude** | `.claude/` directory | Full command support via Claude Code |
+| **GitHub Copilot** | `.github/copilot-instructions.md` + prompts | Works in VS Code, GitHub.com, Visual Studio |
+| **Gemini** | `.gemini/` directory | Style guide and config support |
+
+## The 5-Step Workflow
+
+This repo centers on a rigorous development workflow:
+
+1. **Research & Explore** - Understand before you code
+2. **Plan & Document** - Write the "what" and "why" before the "how"
+3. **Define Success & PR** - Set acceptance criteria upfront
+4. **Implement & Verify** - Build with tests, verify as you go
+5. **Finalize & Commit** - Clean commits, passing CI
+
+Full details in [`.ai-instructions/workflows/`](.ai-instructions/workflows/).
+
+## Key Commands
+
+| Command | Description |
+|---------|-------------|
+| `/commit` | Generate conventional commit messages |
+| `/generate-code` | Scaffold new code with standards |
+| `/infrastructure-review` | Review Terraform/Terragrunt code |
+| `/pull-request` | Create well-documented PRs |
+| `/review-code` | Structured code review |
+| `/review-docs` | Review and improve documentation |
+
+**Community commands** (rok-* series): `/rok-shape-issues`, `/rok-resolve-issues`, `/rok-review-pr`, `/rok-respond-to-reviews`
+
+All 11 commands live in [`.ai-instructions/commands/`](.ai-instructions/commands/).
+
+## Core Concepts
+
+The documentation covers:
+
+- **Code Standards** - Consistency across languages
+- **Documentation Standards** - AI-friendly markdown
+- **Infrastructure Standards** - Terraform/Terragrunt patterns
+- **DRY Principle** - Why everything symlinks to one place
+- **Memory Bank** - Maintaining AI context across sessions
+
+Browse [`.ai-instructions/concepts/`](.ai-instructions/concepts/).
+
+## Contributing
+
+Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the details, though the short version is: open a PR, don't be a jerk, and I'll probably merge it.
+
+## License
+
+[Apache 2.0](LICENSE) - Use it, modify it, just keep the attribution.
+
+---
+
+*Built by a human, refined by AI, used by both.*
