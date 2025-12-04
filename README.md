@@ -70,11 +70,15 @@ Full details in [`.ai-instructions/workflows/`](.ai-instructions/workflows/).
 | Command | Description |
 |---------|-------------|
 | `/commit` | Generate conventional commit messages |
-| `/review-code` | Structured code review |
-| `/pull-request` | Create well-documented PRs |
 | `/generate-code` | Scaffold new code with standards |
+| `/infrastructure-review` | Review Terraform/Terragrunt code |
+| `/pull-request` | Create well-documented PRs |
+| `/review-code` | Structured code review |
+| `/review-docs` | Review and improve documentation |
 
-All commands live in [`.ai-instructions/commands/`](.ai-instructions/commands/).
+**Community commands** (rok-* series): `/rok-shape-issues`, `/rok-resolve-issues`, `/rok-review-pr`, `/rok-respond-to-reviews`
+
+All 11 commands live in [`.ai-instructions/commands/`](.ai-instructions/commands/).
 
 ## Core Concepts
 
