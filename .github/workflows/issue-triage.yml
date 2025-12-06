@@ -12,6 +12,8 @@ jobs:
       id-token: write
     steps:
       - uses: anthropics/claude-code-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
 
@@ -31,8 +33,8 @@ jobs:
             2. Assess priority: critical, high, medium, or low
             3. Check for duplicates using gh search issues
 
-            Apply labels using:
-            gh issue edit ${{ github.event.issue.number }} --add-label "label1,label2"
+            Apply labels using (quote each label separately for labels with spaces):
+            gh issue edit ${{ github.event.issue.number }} --add-label "label1","label2"
 
             Available type labels: bug, enhancement, question, documentation
             Available priority labels: priority: critical, priority: high, priority: medium, priority: low

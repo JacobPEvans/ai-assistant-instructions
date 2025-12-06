@@ -15,9 +15,16 @@ jobs:
       - uses: actions/checkout@v5
         with:
           ref: ${{ github.event.pull_request.head.ref }}
-          fetch-depth: 0
+          fetch-depth: 1
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - uses: anthropics/claude-code-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
 
@@ -53,6 +60,6 @@ jobs:
             - Ensure no stale documentation references
 
             If updates are needed, commit to PR branch with message:
-            "docs: validate and sync documentation"
+            "docs: validate and sync documentation [skip ci]"
 
             If no updates needed, post a brief comment confirming docs are in sync.
