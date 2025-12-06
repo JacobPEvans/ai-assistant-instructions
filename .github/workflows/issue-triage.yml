@@ -7,10 +7,15 @@ on:
 jobs:
   triage:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       issues: write
       id-token: write
     steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
       - uses: anthropics/claude-code-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -33,8 +38,8 @@ jobs:
             2. Assess priority: critical, high, medium, or low
             3. Check for duplicates using gh search issues
 
-            Apply labels using (quote each label separately for labels with spaces):
-            gh issue edit ${{ github.event.issue.number }} --add-label "label1","label2"
+            Apply labels using separate flags for each label:
+            gh issue edit ${{ github.event.issue.number }} --add-label "label1" --add-label "label2"
 
             Available type labels: bug, enhancement, question, documentation
             Available priority labels: priority: critical, priority: high, priority: medium, priority: low

@@ -50,5 +50,5 @@ jobs:
             - 🟡 Suggested: Code quality improvements, optimizations
             - 🟢 Optional: Style preferences, alternative approaches
 
-            Use inline comments for specific code issues.
-            Post summary as a PR comment using gh pr comment.
+            Use the MCP inline comment tool for specific code issues.
+            Use gh pr comment to post an overall summary.
