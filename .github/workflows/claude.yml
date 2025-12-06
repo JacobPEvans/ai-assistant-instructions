@@ -2,13 +2,7 @@ name: Claude Code
 
 on:
   pull_request:
-    types: [opened, synchronize]
-    # Optional: Only run on specific file changes
-    # paths:
-    #   - "src/**/*.ts"
-    #   - "src/**/*.tsx"
-    #   - "src/**/*.js"
-    #   - "src/**/*.jsx"
+    types: [opened, synchronize, ready_for_review, reopened]
 
 jobs:
   claude:
@@ -23,20 +17,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Run Claude Code Review
         id: claude-review
         uses: anthropics/claude-code-action@v1
         timeout-minutes: 3
         with:
-          anthropic_api_key: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          track_progress: true
+          use_sticky_comment: true
 
           claude_args: |
             --max-turns 5
-            --allowed-tools "Bash(markdownlint-cli2:*)"
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(markdownlint-cli2:*),Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
 
           prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
             Review this PR focusing on:
             - Security: Secrets management, input validation, access control
             - Code Quality: Standards compliance, error handling, readability
@@ -46,3 +45,6 @@ jobs:
             - 🔴 Required: Security issues, breaking changes, major bugs
             - 🟡 Suggested: Code quality improvements, optimizations
             - 🟢 Optional: Style preferences, alternative approaches
+
+            Use inline comments for specific code issues.
+            Post summary as a PR comment using gh pr comment.
