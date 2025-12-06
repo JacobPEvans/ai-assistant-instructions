@@ -1,3 +1,9 @@
+---
+description: Complete workflow for creating, monitoring, and fixing pull requests until ready to merge
+allowed-tools: Read, Bash(git:*), Bash(gh:*), Bash(markdownlint-cli2:*)
+author: JacobPEvans
+---
+
 # Task: Pull Request Management
 
 <!-- markdownlint-disable-file MD013 -->

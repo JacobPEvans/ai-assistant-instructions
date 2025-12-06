@@ -3,7 +3,7 @@ title: "Shape Issues"
 description: "Shape raw ideas into actionable GitHub Issues using iterative exploration and appetite-based prioritization"
 type: "command"
 version: "1.0.0"
-tools: ["*"]
+allowed-tools: "*"
 think: true
 author: "roksechs"
 source: "https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3"

@@ -1,3 +1,9 @@
+---
+description: Review Infrastructure as Code (Terraform/Terragrunt) for security, cost-efficiency, and best practices
+allowed-tools: Read, Grep, Glob, Bash(terraform:*), Bash(terragrunt:*)
+author: JacobPEvans
+---
+
 # Prompt: Review Infrastructure
 
 Review the Infrastructure as Code (IaC) files (Terraform/Terragrunt) for security, cost-efficiency, and best practices.

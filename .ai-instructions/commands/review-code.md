@@ -1,3 +1,9 @@
+---
+description: Process for providing thorough, constructive code reviews
+allowed-tools: Read, Grep, Glob
+author: JacobPEvans
+---
+
 # Task: Review Code
 
 Process for providing thorough, constructive code reviews.

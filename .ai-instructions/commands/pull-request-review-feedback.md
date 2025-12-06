@@ -1,3 +1,9 @@
+---
+description: How to programmatically resolve PR review threads using GitHub's GraphQL API
+allowed-tools: Bash(gh:*)
+author: JacobPEvans
+---
+
 # Resolving PR Review Conversations
 
 <!-- markdownlint-disable-file MD013 -->
