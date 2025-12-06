@@ -48,10 +48,12 @@ gh api graphql -f query='...' -f owner="OWNER" -f repo="REPO" -F pr=NUMBER
 ### 3. Implement Fixes
 
 **Parallel resolution** (use Task tool with sub-agents):
+
 - Spawn parallel agents for independent comments in different files
 - Each agent: read context, make fix, report changes
 
 **Sequential resolution**:
+
 - Address dependent comments in priority order
 - Commit after each logical group of fixes
 
@@ -102,14 +104,16 @@ For each addressed comment:
 ### Response Templates
 
 **Accepted**:
-```
+
+```markdown
 **Fixed in commit: [hash]**
 Changed: [description]
 Reason: [why reviewer was correct]
 ```
 
 **Rejected**:
-```
+
+```markdown
 **Acknowledged but not implementing.**
 Reason: [why this doesn't apply]
 - [technical justification]

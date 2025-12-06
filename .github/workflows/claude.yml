@@ -23,11 +23,13 @@ jobs:
 
       - name: Run Claude Code Review
         id: claude-review
+        # Using @v1 for automatic updates of minor and patch versions
         uses: anthropics/claude-code-action@v1
         timeout-minutes: 3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          # OAuth token for Claude Code GitHub App authentication
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           track_progress: true
           use_sticky_comment: true
