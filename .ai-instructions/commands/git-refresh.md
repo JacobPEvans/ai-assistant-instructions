@@ -10,21 +10,13 @@ Sync local repository after a PR was merged externally (GitHub, etc.).
 
 ## Steps
 
-1. Fetch from all remotes and remove references to deleted remote branches
-   - If fetch fails due to network or authentication issues, report the error clearly
-   - Continue with local operations if possible
-
-2. Switch to the default branch:
-   - Check if `main` exists locally or remotely, and switch to it
-   - Otherwise, check if `master` exists and switch to it
-   - If neither exists, report an error and stop
-
-3. Pull the latest changes from origin
-
-4. Find and delete local branches that have been merged into the default branch
-   1. Never delete: main, master, develop, or the current branch
-   2. Before deleting, check if branch has unpushed commits
-      - If unpushed commits exist, skip that branch and warn the user
-   3. Report which branches were cleaned up and which were skipped (with reasons)
+1. Note the current branch name
+2. Fetch from all remotes and prune deleted remote branches
+3. Switch to the default branch (main or master)
+4. Pull the latest changes from origin
+5. Delete local branches that have been merged into the default branch
+   - Never delete: main, master, develop
+   - Report which branches were cleaned up
+6. If the original branch still exists (wasn't merged/deleted), switch back to it
 
 Provide a brief summary of what changed.
