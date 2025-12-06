@@ -1,35 +1,60 @@
 ---
-name: 🐛 Bug Report
+name: Bug Report
 about: Something's not working as expected
 title: "[BUG] "
 labels: bug
 assignees: ''
 ---
 
-## What Happened
+## Problem
 
-<!-- Describe the bug clearly. What did you expect vs. what actually happened? -->
+**What happened**: <!-- Expected vs actual behavior -->
+
+**Current pain**: <!-- Impact on users or workflow -->
+
+**Timebox**: <!-- Small batch (1-2 weeks) | Spike (needs investigation) -->
 
 ## Steps to Reproduce
 
-<!-- How can someone else see this bug? -->
-
-1.
-2.
-3.
+1. Step one
+2. Step two
+3. Step three
 
 ## Context
 
-<!-- Any relevant details: AI assistant you're using, file paths, OS, etc. -->
+- **AI Assistant**: <!-- Claude / Copilot / Gemini / Other -->
+- **Environment**: <!-- VS Code / GitHub.com / CLI / etc. -->
+- **File/Command**: <!-- If applicable -->
 
-- **AI Assistant**: (Claude/Copilot/Gemini/Other)
-- **Environment**: (VS Code/GitHub.com/CLI/etc.)
-- **File/Command**: (if applicable)
+## Rabbit Holes
+
+<!-- Known complexity or scope risks when fixing -->
+
+- [ ] Avoid over-engineering the fix
+- [ ] Don't refactor surrounding code
+
+## Done Looks Like
+
+<!-- Specific criteria for the bug being fixed -->
+
+- [ ] Bug no longer occurs with reproduction steps
+- [ ] No regression in related functionality
+- [ ] Test added to prevent recurrence
+
+## Verification Steps
+
+<!-- How to verify the fix works -->
+
+- [ ] Run reproduction steps - bug does not occur
+- [ ] Run test suite - all tests pass
+- [ ] Manual verification in affected environment
 
 ## Additional Information
 
-<!-- Screenshots, error messages, or anything else that might help -->
+<!-- Screenshots, error messages, logs, or related issues -->
+
+**Related Issues**: <!-- #XX, #YY -->
 
 ---
 
-*Thanks for taking the time to report this. I'll take a look when I can.*
+*Thanks for reporting. See [GitHub Issue Standards](/.ai-instructions/concepts/github-issue-standards.md) for best practices.*
