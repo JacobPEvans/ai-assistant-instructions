@@ -215,7 +215,10 @@ gh label create "ready-for-dev" --color "0099ff" \
 **Assignee**: [GitHub username or unassigned]
 **Milestone**: [Target milestone or none]
 **Project**: [Project board or none]
-**Related Issues**: [#XX blocks this | #YY is blocked by this | #ZZ is related]
+**Related Issues**:
+- Blocks: #XX
+- Blocked by: #YY
+- Related to: #ZZ
 ```
 
 #### Timebox Classification

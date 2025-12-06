@@ -82,7 +82,10 @@ Follow the Shape Up template from `/rok-shape-issues`:
 
 ## Metadata
 
-**Related Issues**: #XX, #YY
+**Related Issues**:
+- Blocks: #XX
+- Blocked by: #YY
+- Related to: #ZZ
 ```
 
 ### Bug Reports
@@ -112,6 +115,13 @@ Follow the Shape Up template from `/rok-shape-issues`:
 
 - [ ] Reproduce steps no longer trigger bug
 - [ ] Run test suite
+
+## Metadata
+
+**Related Issues**:
+- Blocks: #XX
+- Blocked by: #YY
+- Related to: #ZZ
 ```
 
 ## Metadata Best Practices

@@ -26,8 +26,8 @@ assignees: ''
 
 <!-- Complexity traps and scope creep risks to avoid -->
 
-- [ ] Rabbit hole 1
-- [ ] Rabbit hole 2
+- [Potential complexity trap to avoid]
+- [A known scope creep risk]
 
 ## Done Looks Like
 
@@ -47,7 +47,11 @@ assignees: ''
 
 <!-- Related issues, screenshots, links, or anything else helpful -->
 
-**Related Issues**: <!-- #XX, #YY -->
+**Related Issues**:
+
+- Blocks: <!-- #XX -->
+- Blocked by: <!-- #YY -->
+- Related to: <!-- #ZZ -->
 
 ---
 

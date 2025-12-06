@@ -34,8 +34,8 @@ assignees: ''
 
 <!-- Scope risks to avoid -->
 
-- [ ] Don't rewrite entire document if only section needs fixing
-- [ ] Keep changes focused on the specific issue
+- Don't rewrite entire document if only section needs fixing
+- Keep changes focused on the specific issue
 
 ## Done Looks Like
 
@@ -56,7 +56,11 @@ assignees: ''
 
 <!-- Related issues, examples from other docs, or anything helpful -->
 
-**Related Issues**: <!-- #XX, #YY -->
+**Related Issues**:
+
+- Blocks: <!-- #XX -->
+- Blocked by: <!-- #YY -->
+- Related to: <!-- #ZZ -->
 
 ---
 

@@ -30,8 +30,8 @@ assignees: ''
 
 <!-- Known complexity or scope risks when fixing -->
 
-- [ ] Avoid over-engineering the fix
-- [ ] Don't refactor surrounding code
+- Avoid over-engineering the fix
+- Don't refactor surrounding code
 
 ## Done Looks Like
 
@@ -53,7 +53,11 @@ assignees: ''
 
 <!-- Screenshots, error messages, logs, or related issues -->
 
-**Related Issues**: <!-- #XX, #YY -->
+**Related Issues**:
+
+- Blocks: <!-- #XX -->
+- Blocked by: <!-- #YY -->
+- Related to: <!-- #ZZ -->
 
 ---
 
