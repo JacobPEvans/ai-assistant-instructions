@@ -196,7 +196,7 @@ well-tested solutions that address multiple related concerns efficiently.
 **Workflow Integration**:
 
 - **Before implementation**: Use `/rok-shape-issues` for iterative Issue shaping
-  and appetite-based planning
+  and timebox-based planning
 - **After implementation**: Use `/rok-review-pr` for comprehensive PR review,
   then `/rok-respond-to-reviews` for feedback resolution
 

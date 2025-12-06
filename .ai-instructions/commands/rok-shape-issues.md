@@ -1,6 +1,6 @@
 ---
 title: "Shape Issues"
-description: "Shape raw ideas into actionable GitHub Issues using iterative exploration and appetite-based prioritization"
+description: "Shape raw ideas into actionable GitHub Issues using iterative exploration and timebox-based prioritization"
 type: "command"
 version: "1.0.0"
 allowed-tools: "*"
@@ -26,7 +26,7 @@ time-boxed GitHub Issues using Shape Up methodology and continuous discovery pri
 - **Current pain point mapping**: Understand what's actually broken or missing
 - **User journey analysis**: Walk through existing workflows to spot friction
 - **"Jobs to be Done" framing**: What are users really trying to accomplish?
-- **Appetite assessment**: How much time/effort is this problem worth?
+- **Timebox assessment**: How much time/effort is this problem worth?
 
 **Phase 2: Solution Sketching & Boundary Setting** (solution_sketching)
 
@@ -39,14 +39,14 @@ time-boxed GitHub Issues using Shape Up methodology and continuous discovery pri
 **Phase 3: Issue Formation & Shape Definition** (issue_formation)
 
 - **Problem statement**: Clear, specific description of what we're solving
-- **Appetite definition**: Small batch (1-2 weeks) vs. Big batch (6 weeks) vs. Investigation spike
+- **Timebox definition**: Small batch (1-2 weeks) vs. Big batch (6 weeks) vs. Investigation spike
 - **Solution sketch**: Rough mockups, key technical decisions, not detailed specs
 - **Rabbit holes to avoid**: List known complexity traps and scope creep risks
 - **Done looks like**: High-level acceptance criteria, not exhaustive requirements
 
 **Phase 4: Betting Table & Portfolio Balancing** (betting_table)
 
-- **Appetite-based prioritization**: Match problems to available time budgets
+- **Timebox-based prioritization**: Match problems to available time budgets
 - **Portfolio mix**: Balance new features, bug fixes, and technical debt
 - **Cool-down periods**: Plan for bug fixes and small improvements between cycles
 - **Capacity reality check**: What can actually be accomplished this cycle?
@@ -55,7 +55,7 @@ time-boxed GitHub Issues using Shape Up methodology and continuous discovery pri
 **Phase 5: GitHub Issue Crafting & Team Handoff** (issue_crafting)
 
 - **Shaped Issue creation**: Transform shapes into actionable GitHub Issues
-- **Appetite labeling**: Small-batch, big-batch, or spike labels
+- **Timebox labeling**: Small-batch, big-batch, or spike labels
 - **Solution sketch attachment**: Include rough wireframes, technical notes
 - **Rabbit hole documentation**: List known risks and scope boundaries
 - **Ready-for-development**: Clear handoff to `/rok-resolve-issues` phase
@@ -64,13 +64,13 @@ time-boxed GitHub Issues using Shape Up methodology and continuous discovery pri
 
 > **Analysis Frameworks:**
 
-#### Appetite Assessment Framework
+#### Timebox Assessment Framework
 
 ```text
 Small Batch (1-2 weeks): Quick fixes, minor improvements, spikes
 Big Batch (6 weeks): New features, significant changes, major refactors
 Investigation Spike: Unknown complexity, research needed
-No Appetite: Not worth any time investment right now
+No Timebox: Not worth any time investment right now
 ```
 
 #### Circuit Breaker Indicators
@@ -109,7 +109,7 @@ gh pr list --state all --json title,mergedAt,labels
 - **User complaint analysis**: What are people actually struggling with?
 - **Workflow friction mapping**: Where do things get slow or confusing?
 - **"What would good look like?"**: Paint the picture of success without diving into solution details
-- **Appetite check**: How much time is this problem worth?
+- **Timebox check**: How much time is this problem worth?
 
 #### Step 3: Solution Space Sketching
 
@@ -118,7 +118,7 @@ gh pr list --state all --json title,mergedAt,labels
 - **Technical risk identification**: What could go sideways? What are the unknowns?
 - **Rabbit hole mapping**: List the complexity traps to avoid
 
-#### Step 4: Appetite Setting & Betting
+#### Step 4: Timebox Setting & Betting
 
 - **Time boxing**: Is this a 1-week spike, 2-week small batch, or 6-week big batch?
 - **Portfolio balancing**: Mix of new features, bug fixes, and improvements
@@ -130,15 +130,15 @@ gh pr list --state all --json title,mergedAt,labels
 ```bash
 # Create shaped Issues ready for development
 gh issue create --title "[Small Batch] Add user preference validation" \
-  --body "Appetite: 2 weeks
+  --body "Timebox: 2 weeks
 Problem: Users confused by unclear error messages
 Solution sketch: Add client-side validation with clear feedback
 Rabbit holes: Don't rebuild entire form system"
 
-# Label with appetite and readiness
-gh label create "appetite:small-batch" --color "00ff00" \
+# Label with timebox and readiness
+gh label create "timebox:small-batch" --color "00ff00" \
   --description "1-2 week time box"
-gh label create "appetite:big-batch" --color "ff9900" \
+gh label create "timebox:big-batch" --color "ff9900" \
   --description "6 week time box"
 gh label create "ready-for-dev" --color "0099ff" \
   --description "Shaped and ready for /rok-resolve-issues"
@@ -148,17 +148,17 @@ gh label create "ready-for-dev" --color "0099ff" \
 
 > **Best Practices:**
 
-#### Appetite-Driven Development
+#### Timebox-Driven Development
 
 - **Time-boxed thinking**: Fixed time, variable scope instead of fixed scope, variable time
 - **Problem-first approach**: Start with user problems, not solution ideas
-- **Appetite before features**: Set time budget before diving into solution details
+- **Timebox before features**: Set time budget before diving into solution details
 - **Circuit breaker discipline**: Know when to stop and re-evaluate
 
 #### Continuous Shaping
 
 - **Iterative refinement**: Shapes evolve through multiple rounds of exploration
-- **Scope hammering**: Continuously remove features to fit appetite
+- **Scope hammering**: Continuously remove features to fit timebox
 - **Risk de-risking**: Address biggest unknowns early in shaping
 - **Solution diversity**: Explore multiple approaches before settling on one
 
@@ -180,7 +180,7 @@ gh label create "ready-for-dev" --color "0099ff" \
 
 **Raw idea**: [The initial fuzzy idea or user complaint]
 **Current pain**: [What's broken or frustrating users right now]
-**Appetite**: [Small batch: 1-2 weeks | Big batch: 6 weeks | Spike: investigate]
+**Timebox**: [Small batch: 1-2 weeks | Big batch: 6 weeks | Spike: investigate]
 
 ## Solution Sketch
 
@@ -197,7 +197,7 @@ gh label create "ready-for-dev" --color "0099ff" \
 ## No-Gos
 
 - [Things that would kill this project]
-- [Scope that would exceed appetite]
+- [Scope that would exceed timebox]
 
 ## Done Looks Like
 
@@ -205,7 +205,7 @@ gh label create "ready-for-dev" --color "0099ff" \
 - [High-level success indicator 2]
 ```
 
-#### Appetite Classification
+#### Timebox Classification
 
 ```text
 Small Batch (1-2 weeks): Bug fixes, minor improvements, quick wins
@@ -223,7 +223,7 @@ Cool-Down: Small improvements, bug fixes, maintenance tasks
 > **Example Prompts**:
 >
 > - "Shape the user login confusion problem into actionable Issues"
-> - "Explore appetite and solution approaches for mobile performance complaints"
+> - "Explore timebox and solution approaches for mobile performance complaints"
 > - "Transform vague 'improve dashboard' idea into shaped Issues with time boundaries"
 > - "Shape payment integration opportunity with proper scope and rabbit hole identification"
 > - "Take raw user feedback about search and shape it into development-ready Issues"
@@ -238,4 +238,4 @@ Cool-Down: Small improvements, bug fixes, maintenance tasks
 `/rok-shape-issues` -> `/rok-resolve-issues` -> `/rok-review-pr` -> `/rok-respond-to-reviews`
 
 This command transforms raw ideas into actionable, time-bounded Issues using Shape Up principles
-of appetite-driven development and iterative shaping.
+of timebox-driven development and iterative shaping.

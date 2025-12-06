@@ -207,7 +207,7 @@ bun run lint
 
 **Workflow Integration**:
 
-- **Strategic context**: `/rok-shape-issues` establishes appetite-driven Issue shaping and problem definition
+- **Strategic context**: `/rok-shape-issues` establishes timebox-driven Issue shaping and problem definition
 - **Implementation context**: `/rok-resolve-issues` provides Issue resolution and PR creation background
 - **Post-review**: Guide authors to use `/rok-respond-to-reviews` for efficient feedback resolution
 
