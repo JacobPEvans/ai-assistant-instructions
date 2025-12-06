@@ -1,9 +1,7 @@
 ---
-title: "Git Refresh"
-description: "Sync local repo after external merge (fetch, pull, prune merged branches)"
-type: "command"
-version: "1.0.0"
+description: Sync local repo after external merge (fetch, pull, prune merged branches)
 model: haiku
+allowed-tools: Bash(git fetch:*), Bash(git branch:*), Bash(git checkout:*), Bash(git switch:*), Bash(git pull:*), Bash(git log:*)
 ---
 
 # Git Refresh
