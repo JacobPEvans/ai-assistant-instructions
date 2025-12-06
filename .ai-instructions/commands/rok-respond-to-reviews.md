@@ -230,6 +230,7 @@ gh api repos/:owner/:repo/pulls/{PR_NUMBER}/comments | jq '
 - **MANDATORY**: Push to remote branch for GitHub visibility
 - Document final change summary and link commit references
 - **Mark all review threads as resolved** using GraphQL mutation
+- **Optional**: Update PR description if feedback resulted in significant changes to scope or approach (most changes are small and don't require this)
 
 ### Best Practices
 
@@ -259,7 +260,16 @@ gh api repos/:owner/:repo/pulls/{PR_NUMBER}/comments | jq '
 
 ### Response Strategy for Recurring AI Comments
 
-When responding to automated AI reviewer comments (e.g., Copilot, CodeRabbit), apply these principles:
+When responding to automated AI reviewer comments (e.g., Copilot, CodeRabbit, Gemini), apply these principles:
+
+#### Provide Feedback for AI Training
+
+For each AI reviewer comment (Copilot, CodeRabbit, Gemini), provide explicit feedback to help train the model:
+
+1. **Add a reaction** via `gh api` to the comment (`content="+1"` for helpful, `content="-1"` for unhelpful)
+2. **Reply to the comment** with a brief explanation of why you agreed or disagreed
+
+These individual replies are for the AI's benefit. Continue posting a summary comment on the PR for human readers.
 
 #### Always Explain Your Reasoning
 
