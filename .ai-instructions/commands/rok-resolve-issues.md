@@ -3,7 +3,7 @@ title: "Resolve Issues"
 description: "Analyze and resolve GitHub Issues efficiently with intelligent prioritization and batch processing"
 type: "command"
 version: "1.0.0"
-tools: ["*"]
+allowed-tools: "*"
 think: true
 author: "roksechs"
 source: "https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3"

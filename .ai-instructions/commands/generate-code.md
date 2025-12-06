@@ -1,3 +1,9 @@
+---
+description: Standards for generating high-quality, maintainable, and secure code
+allowed-tools: "*"
+author: JacobPEvans
+---
+
 # Task: Generate Code
 
 Standards for generating high-quality, maintainable, and secure code.

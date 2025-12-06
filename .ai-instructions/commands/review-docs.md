@@ -1,3 +1,9 @@
+---
+description: Review documentation files for consistency, completeness, and markdownlint compliance
+allowed-tools: Read, Grep, Glob, Bash(markdownlint-cli2:*)
+author: JacobPEvans
+---
+
 # Prompt: Review Documentation
 
 **CRITICAL**: Documentation review is mandatory before any pull request. All markdownlint issues must be resolved to pass CI/CD.

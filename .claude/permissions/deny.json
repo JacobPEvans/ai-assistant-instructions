@@ -43,6 +43,24 @@
     "Bash(ncat -l:*)",
     "Bash(socat:*)",
     "Bash(rm -fr ~:*)",
-    "Bash(rm --recursive --force ~:*)"
+    "Bash(rm --recursive --force ~:*)",
+    "Bash(git commit --no-verify:*)",
+    "Bash(git commit -n:*)",
+    "Bash(git commit*--no-verify*:*)",
+    "Bash(git commit*-n *:*)",
+    "Bash(git merge --no-verify:*)",
+    "Bash(git cherry-pick --no-verify:*)",
+    "Bash(git rebase --no-verify:*)",
+    "Bash(git config core.hooksPath:*)",
+    "Bash(git -c core.hooksPath:*)",
+    "Bash(git -c core.hooksPath=*:*)",
+    "Bash(git -c core.hooksPath *:*)",
+    "Bash(pre-commit uninstall:*)",
+    "Bash(rm .git/hooks:*)",
+    "Bash(rm -rf .git/hooks:*)",
+    "Bash(rm .git/hooks/*:*)",
+    "Bash(rm -rf .git/hooks/*:*)",
+    "Bash(chmod -x .git/hooks/*:*)",
+    "Bash(chmod * .git/hooks/*:*)"
   ]
 }

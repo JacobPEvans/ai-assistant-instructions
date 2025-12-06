@@ -1,3 +1,9 @@
+---
+description: Standardized git commit process for creating high-quality commits
+allowed-tools: Read, Bash(git:*), Bash(markdownlint-cli2:*)
+author: JacobPEvans
+---
+
 # Task: Commit
 
 Standardized git commit process for creating high-quality commits.
