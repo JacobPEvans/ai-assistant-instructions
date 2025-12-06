@@ -39,6 +39,7 @@ If any step fails, the cycle must restart from Step 1 after documenting the fail
 - **[Documentation Standards](./concepts/documentation-standards.md)**: Rules and formats for creating clear and effective documentation.
 - **[Diagramming Standards](./concepts/diagramming-standards.md)**: Best practices for creating diagrams using Mermaid and Graphviz.
 - **[Workspace Management](./concepts/workspace-management.md)**: Guidelines for managing a multi-repository workspace.
+- **[GitHub Issue Standards](./concepts/github-issue-standards.md)**: Best practices for creating and managing GitHub issues.
 
 ## Styleguide
 
@@ -51,12 +52,39 @@ Refer to the **[Styleguide](./concepts/styleguide.md)** for:
 
 ## Commands
 
+### Core Commands
+
 - **[Commit](./commands/commit.md)**: Standardized git commit process with validation checks
 - **[Pull Request](./commands/pull-request.md)**: Complete PR lifecycle management from creation to merge
 - **[Generate Code](./commands/generate-code.md)**: Code generation standards and technology-specific guidelines
 - **[Review Code](./commands/review-code.md)**: Structured code review process with priority levels
 - **[Review Documentation](./commands/review-docs.md)**: Markdown validation and documentation quality workflow
 - **[Review Infrastructure](./commands/infrastructure-review.md)**: Terraform/Terragrunt configuration review checklist
+
+### Issue & PR Lifecycle (rok-* series)
+
+- **[Shape Issues](./commands/rok-shape-issues.md)**: Transform ideas into well-formed GitHub issues
+- **[Resolve Issues](./commands/rok-resolve-issues.md)**: Implement shaped issues with prioritization
+- **[Review PR](./commands/rok-review-pr.md)**: Comprehensive pull request review
+- **[Respond to Reviews](./commands/rok-respond-to-reviews.md)**: Address PR feedback systematically
+
+## When to Use Which Command
+
+Use this table to identify the correct command for your task:
+
+| User Intent | Command | Notes |
+|-------------|---------|-------|
+| Create a GitHub issue | `/rok-shape-issues` | Always shape before creating |
+| Implement an existing issue | `/rok-resolve-issues` | For shaped, ready-for-dev issues |
+| Review a pull request | `/rok-review-pr` | Systematic review with priorities |
+| Respond to PR feedback | `/rok-respond-to-reviews` | After receiving review comments |
+| Create a git commit | `/commit` | With validation and conventional format |
+| Create/manage a PR | `/pull-request` | Full lifecycle management |
+| Review documentation | `/review-docs` | Markdown linting and validation |
+| Review infrastructure code | `/infrastructure-review` | Terraform/Terragrunt focus |
+
+**Important**: When asked to "create an issue" or "open an issue", always use `/rok-shape-issues`
+to ensure proper formatting, acceptance criteria, and Shape Up methodology.
 
 ## Maintenance
 

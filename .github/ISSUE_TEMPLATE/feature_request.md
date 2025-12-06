@@ -1,31 +1,58 @@
 ---
-name: 🚀 Feature Request
+name: Feature Request
 about: Suggest a new feature or improvement
 title: "[FEATURE] "
 labels: enhancement
 assignees: ''
 ---
 
-## What's the Idea?
+## Problem
 
-<!-- Describe what you'd like to see added or changed -->
+**Raw idea**: <!-- The initial concept or user need -->
 
-## Why Is This Useful?
+**Current pain**: <!-- What's broken or frustrating right now? -->
 
-<!-- What problem does this solve? Who benefits from it? -->
+**Timebox**: <!-- Small batch (1-2 weeks) | Big batch (6 weeks) | Spike (investigation) -->
 
-## Possible Implementation
+## Solution Sketch
 
-<!-- Optional: If you have thoughts on how this could work, share them here -->
+**Core concept**: <!-- High-level approach, not detailed requirements -->
 
-## Alternatives Considered
+**Key elements**: <!-- Main components or workflow changes -->
 
-<!-- Optional: Any other approaches you thought about? -->
+**Out of scope**: <!-- What we're explicitly NOT doing -->
+
+## Rabbit Holes
+
+<!-- Complexity traps and scope creep risks to avoid -->
+
+- [Potential complexity trap to avoid]
+- [A known scope creep risk]
+
+## Done Looks Like
+
+<!-- Specific, measurable acceptance criteria -->
+
+- [ ] Criterion 1
+- [ ] Criterion 2
+
+## Verification Steps
+
+<!-- How to verify the acceptance criteria are met -->
+
+- [ ] Verification step 1
+- [ ] Verification step 2
 
 ## Additional Context
 
-<!-- Anything else that might be helpful -->
+<!-- Related issues, screenshots, links, or anything else helpful -->
+
+**Related Issues**:
+
+- Blocks: <!-- #XX -->
+- Blocked by: <!-- #YY -->
+- Related to: <!-- #ZZ -->
 
 ---
 
-*Feature requests are welcome. No guarantees on timeline, but I read them all.*
+*Feature requests are welcome. See [GitHub Issue Standards](/.ai-instructions/concepts/github-issue-standards.md) for best practices.*

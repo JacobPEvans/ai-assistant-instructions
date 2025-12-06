@@ -201,8 +201,24 @@ gh label create "ready-for-dev" --color "0099ff" \
 
 ## Done Looks Like
 
-- [High-level success indicator 1]
-- [High-level success indicator 2]
+- [ ] [Acceptance criterion 1 - specific and measurable]
+- [ ] [Acceptance criterion 2 - specific and measurable]
+
+## Verification Steps
+
+- [ ] [How to verify criterion 1]
+- [ ] [How to verify criterion 2]
+- [ ] [Manual or automated test to confirm]
+
+## Metadata
+
+**Assignee**: [GitHub username or unassigned]
+**Milestone**: [Target milestone or none]
+**Project**: [Project board or none]
+**Related Issues**:
+- Blocks: #XX
+- Blocked by: #YY
+- Related to: #ZZ
 ```
 
 #### Timebox Classification
@@ -239,3 +255,5 @@ Cool-Down: Small improvements, bug fixes, maintenance tasks
 
 This command transforms raw ideas into actionable, time-bounded Issues using Shape Up principles
 of timebox-driven development and iterative shaping.
+
+**Reference**: See [GitHub Issue Standards](../concepts/github-issue-standards.md) for comprehensive best practices.
