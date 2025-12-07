@@ -69,7 +69,6 @@
     "Bash(gh run rerun:*)",
     "Bash(gh pr ready:*)",
     "Bash(gh label list:*)",
-    "Bash(pre-commit:*)",
     "Bash(nix --version:*)",
     "Bash(nix search:*)",
     "Bash(nix search nixpkgs:*)",
@@ -335,6 +334,7 @@
     "WebFetch(domain:geminicli.com)",
     "Bash(check-jsonschema:*)",
     "Bash(claude doctor:*)",
+    "Bash(pre-commit:*)",
     "SlashCommand(/flake-rebuild)",
     "SlashCommand(/rok-respond-to-reviews)"
   ]
