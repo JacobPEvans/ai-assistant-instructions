@@ -31,6 +31,8 @@ jobs:
         with:
           # OAuth token for Claude Code GitHub App authentication
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # Explicit GitHub token to bypass OIDC exchange (enables Copilot/bot PRs)
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           track_progress: true
           use_sticky_comment: true
 
