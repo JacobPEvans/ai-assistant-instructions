@@ -65,6 +65,11 @@
     "Bash(gh search:*)",
     "Bash(gh gist view:*)",
     "Bash(gh run watch:*)",
+    "Bash(gh issue edit:*)",
+    "Bash(gh run rerun:*)",
+    "Bash(gh pr ready:*)",
+    "Bash(gh label list:*)",
+    "Bash(pre-commit:*)",
     "Bash(nix --version:*)",
     "Bash(nix search:*)",
     "Bash(nix search nixpkgs:*)",
@@ -322,6 +327,15 @@
     "WebFetch(domain:buildermethods.com)",
     "Bash(markdownlint-cli2:*)",
     "WebFetch(domain:code.visualstudio.com)",
-    "Read(//nix/store/**)"
+    "Read(//nix/store/**)",
+    "WebFetch(domain:docs.determinate.systems)",
+    "WebFetch(domain:flakehub.com)",
+    "WebFetch(domain:json.schemastore.org)",
+    "WebFetch(domain:www.schemastore.org)",
+    "WebFetch(domain:geminicli.com)",
+    "Bash(check-jsonschema:*)",
+    "Bash(claude doctor:*)",
+    "SlashCommand(/flake-rebuild)",
+    "SlashCommand(/rok-respond-to-reviews)"
   ]
 }
