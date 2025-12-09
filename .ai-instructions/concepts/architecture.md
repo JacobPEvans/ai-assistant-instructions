@@ -107,7 +107,7 @@ sequenceDiagram
     participant TG as Terragrunt
     participant S3 as S3 Backend
     participant Lock as DynamoDB Lock
-    
+
     Dev->>TG: terragrunt plan
     TG->>Lock: Acquire Lock
     TG->>S3: Download State
@@ -125,17 +125,17 @@ graph TB
         A[VS Code] --> B[GitHub Copilot]
         A --> C[Extensions]
     end
-    
+
     subgraph "Infrastructure"
         D[Terraform] --> E[AWS Resources]
         F[Terragrunt] --> D
     end
-    
+
     subgraph "Documentation"
         G[Markdown] --> H[Mermaid Diagrams]
         G --> I[GitHub Rendering]
     end
-    
+
     A --> F
     G --> A
 ```
@@ -148,14 +148,14 @@ graph TB
 digraph network {
     rankdir=TB;
     node [shape=box, style=filled];
-    
+
     subgraph cluster_public {
         label="Public Subnet";
         color=blue;
         IGW [label="Internet Gateway", fillcolor=lightblue];
         ALB [label="Application Load Balancer", fillcolor=lightgreen];
     }
-    
+
     subgraph cluster_private {
         label="Private Subnet";
         color=red;
@@ -163,14 +163,14 @@ digraph network {
         Web2 [label="Web Server 2", fillcolor=lightyellow];
         DB [label="Database", fillcolor=lightcoral];
     }
-    
+
     subgraph cluster_management {
         label="Management Subnet";
         color=green;
         Bastion [label="Bastion Host", fillcolor=lightgray];
         Monitor [label="Monitoring", fillcolor=lightgray];
     }
-    
+
     IGW -> ALB;
     ALB -> Web1;
     ALB -> Web2;

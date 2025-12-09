@@ -10,6 +10,7 @@
     "Bash(git restore:*)",
     "Bash(git rm:*)",
     "Bash(git cherry-pick:*)",
+    "Bash(git worktree remove:*)",
     "Bash(gpg:*)",
 
     "Bash(chown:*)",
