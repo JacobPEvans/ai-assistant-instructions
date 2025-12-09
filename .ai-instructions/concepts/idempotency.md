@@ -29,6 +29,6 @@ An idempotent operation produces the same result regardless of how many times it
 ## Benefits
 
 - **Reliability**: Operations can be safely retried
-- **Debugging**: Reproducible behavior aids troubleshooting  
+- **Debugging**: Reproducible behavior aids troubleshooting
 - **Automation**: Safe for automated systems and CI/CD
 - **Recovery**: Failed operations can be resumed safely

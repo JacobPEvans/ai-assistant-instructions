@@ -34,7 +34,13 @@
     "Bash(git reflog:*)",
     "Bash(git for-each-ref:*)",
     "Bash(git name-rev:*)",
+    "Bash(git worktree add:*)",
     "Bash(git worktree list:*)",
+    "Bash(git worktree lock:*)",
+    "Bash(git worktree move:*)",
+    "Bash(git worktree prune:*)",
+    "Bash(git worktree repair:*)",
+    "Bash(git worktree unlock:*)",
     "Bash(git tag:*)",
     "Bash(git remote:*)",
     "Bash(git clone:*)",
@@ -77,6 +83,8 @@
 
     "Bash(check-jsonschema:*)",
     "Bash(claude doctor:*)",
+    "Bash(claude config list:*)",
+    "Bash(claude config get:*)",
     "Bash(markdownlint-cli2:*)",
     "Bash(pre-commit:*)",
 
