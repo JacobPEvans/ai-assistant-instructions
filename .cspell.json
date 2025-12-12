@@ -3,31 +3,39 @@
   "version": "0.2",
   "language": "en",
   "words": [
-    "claude",
-    "copilot",
-    "gemini",
     "anthropic",
-    "openai",
-    "terraform",
-    "terragrunt",
-    "markdownlint",
+    "autofix",
+    "autofixes",
+    "bool",
+    "claude",
+    "codebase",
+    "copilot",
     "cspell",
-    "yamllint",
-    "lychee",
     "dependabot",
+    "frontmatter",
+    "gemini",
+    "graphql",
+    "graphviz",
+    "idempotency",
+    "idempotent",
+    "lychee",
+    "markdownlint",
+    "mermaid",
+    "monorepo",
+    "openai",
+    "repo",
     "symlink",
     "symlinks",
-    "frontmatter",
-    "monorepo",
-    "codebase",
-    "autofix",
-    "autofixes"
+    "terraform",
+    "terragrunt",
+    "utils",
+    "yamllint"
+  ],
+  "files": [
+    "**/*.md"
   ],
   "ignorePaths": [
     "node_modules",
-    ".git",
-    "*.json",
-    "*.yml",
-    "*.yaml"
+    ".git"
   ]
 }
