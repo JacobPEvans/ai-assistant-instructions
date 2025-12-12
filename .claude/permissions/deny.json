@@ -53,6 +53,7 @@
     "Bash(git rebase --no-verify:*)",
     "Bash(git config core.hooksPath:*)",
     "Bash(git -c core.hooksPath:*)",
+    "Bash(git -C:*)",
     "Bash(pre-commit uninstall:*)",
     "Bash(rm .git/hooks:*)",
     "Bash(rm -rf .git/hooks:*)",
