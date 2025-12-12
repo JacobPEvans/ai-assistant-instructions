@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   markdownlint-cli2:
+    name: "Lint Markdown Files"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
