@@ -1,0 +1,33 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "claude",
+    "copilot",
+    "gemini",
+    "anthropic",
+    "openai",
+    "terraform",
+    "terragrunt",
+    "markdownlint",
+    "cspell",
+    "yamllint",
+    "lychee",
+    "dependabot",
+    "symlink",
+    "symlinks",
+    "frontmatter",
+    "monorepo",
+    "codebase",
+    "autofix",
+    "autofixes"
+  ],
+  "ignorePaths": [
+    "node_modules",
+    ".git",
+    "*.json",
+    "*.yml",
+    "*.yaml"
+  ]
+}
