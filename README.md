@@ -2,8 +2,10 @@
 
 > Teaching AI assistants how to help you better. Yes, it's AI instructions written with AI assistance. We've come full circle.
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Markdown Lint](https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/markdownlint.yml/badge.svg)](https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/markdownlint.yml)
+[![License][license-badge]][license-url]
+[![Markdown Lint][markdownlint-badge]][markdownlint-url]
+[![Claude Code Review][claude-badge]][claude-url]
+[![pre-commit][precommit-badge]][precommit-url]
 
 ## What Is This?
 
@@ -103,3 +105,12 @@ Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the details, t
 ---
 
 *Built by a human, refined by AI, used by both.*
+
+[license-badge]: https://img.shields.io/badge/License-Apache_2.0-blue.svg
+[license-url]: LICENSE
+[markdownlint-badge]: https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/markdownlint.yml/badge.svg
+[markdownlint-url]: https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/markdownlint.yml
+[claude-badge]: https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/claude.yml/badge.svg
+[claude-url]: https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/claude.yml
+[precommit-badge]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit
+[precommit-url]: https://github.com/pre-commit/pre-commit
