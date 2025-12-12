@@ -13,6 +13,16 @@
 This repository works with multiple AI assistants: GitHub Copilot, Claude, and Gemini.
 Each uses its respective configuration directory (`.github/`, `.claude/`, `.gemini/`).
 
+## Git Commands - NEVER Use -C Flag
+
+**NEVER** use `git -C <path>` - always run git commands directly.
+
+- Bad: `git -C ~/.config/nix status`
+- Good: `git status`
+
+The `-C` flag breaks permission pattern matching and causes unnecessary approval prompts.
+If you need to operate on a different repo, note that your working directory is already set correctly.
+
 ## Core Workflow
 
 This project follows a strict, 5-step development cycle designed to be automated and repeatable:
