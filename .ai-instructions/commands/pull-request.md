@@ -18,7 +18,7 @@ Complete workflow for creating, monitoring, and fixing a pull request (PR) until
 4. **Run all validation locally before pushing.** This includes linters, formatters, and pre-commit hooks.
 5. **User must approve the merge.** Only request user review AFTER all checks pass AND all conversations are resolved.
 6. **ALWAYS commit, push, and create PR when work is complete.** Do not ask the user if they want a PR - create it automatically. This kicks off automated reviews and gives users a single place to view all changes.
-7. **ALWAYS watch CI checks after PR creation.** Run `gh pr checks --watch` as a background task for the first 60 seconds to catch quick failures. Fix any issues before returning to the user.
+7. **ALWAYS watch CI checks after PR creation.** Run `gh pr checks <PR_URL> --watch` as a background task for the first 60 seconds to catch quick failures. Fix any issues before returning to the user.
 
 ## Useful Watch Commands
 
@@ -51,7 +51,7 @@ gh pr checks <PR_NUMBER> --watch --fail-fast
 4. **Link to Related Issue**: If this PR implements a GitHub issue:
    - Ensure branch name includes issue number (e.g., `feature/issue-123-description`)
    - Add `Closes #issue-number` to PR description
-   - After PR creation, comment on the issue: `gh issue comment {issue} --body "Implementation PR: #{pr}"`
+   - After PR creation, comment on the issue: `gh issue comment {issue-number} --body "Implementation PR: #{pr-number}"`
 
 **PR Description Template:**
 
