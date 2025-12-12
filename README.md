@@ -96,7 +96,8 @@ Browse [`.ai-instructions/concepts/`](.ai-instructions/concepts/).
 
 ## Contributing
 
-Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the details, though the short version is: open a PR, don't be a jerk, and I'll probably merge it.
+Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the details, though the short version
+is: open a PR, don't be a jerk, and I'll probably merge it.
 
 ## License
 

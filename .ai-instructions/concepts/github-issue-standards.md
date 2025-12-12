@@ -242,9 +242,9 @@ This allows stakeholders watching the issue to see progress immediately.
 
 ### Workflow Integration
 
-| When             | Action                                           |
-| ---------------- | ------------------------------------------------ |
-| Creating branch  | Include issue number in branch name             |
-| Creating PR      | Add `Closes #<issue-number>` to description      |
-| After PR created | Comment on issue with PR link                    |
-| PR merged        | Issue auto-closes via GitHub                     |
+| When | Action |
+| ---- | ------ |
+| Creating branch | Include issue number in branch name |
+| Creating PR | Add `Closes #<issue-number>` to description |
+| After PR created | Comment on issue with PR link |
+| PR merged | Issue auto-closes via GitHub |
