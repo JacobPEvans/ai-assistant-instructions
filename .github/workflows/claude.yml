@@ -6,6 +6,7 @@ on:
 
 jobs:
   claude:
+    name: "Claude Code Review"
     # Prevent workflow from running on forked PRs to protect secrets
     if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest

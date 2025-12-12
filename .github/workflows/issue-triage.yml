@@ -6,6 +6,7 @@ on:
 
 jobs:
   triage:
+    name: "Triage New Issue"
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
