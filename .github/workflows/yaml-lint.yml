@@ -1,17 +1,15 @@
 name: YAML Lint
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+on: [push, pull_request]
 
 jobs:
   yaml-lint:
     name: "Lint YAML Files"
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v5
+      - name: Checkout repository
+        uses: actions/checkout@v5
 
       - name: Lint YAML files
         uses: ibiqlik/action-yamllint@v3
