@@ -71,8 +71,8 @@ Full details in [`.ai-instructions/workflows/`](.ai-instructions/workflows/).
 
 | Command | Description |
 |---------|-------------|
-| `/commit` | Generate conventional commit messages |
 | `/generate-code` | Scaffold new code with standards |
+| `/git-refresh` | Merge PRs, sync repo, cleanup worktrees |
 | `/infrastructure-review` | Review Terraform/Terragrunt code |
 | `/pull-request` | Create well-documented PRs |
 | `/review-code` | Structured code review |
@@ -80,7 +80,7 @@ Full details in [`.ai-instructions/workflows/`](.ai-instructions/workflows/).
 
 **Community commands** (rok-* series): `/rok-shape-issues`, `/rok-resolve-issues`, `/rok-review-pr`, `/rok-respond-to-reviews`
 
-All 11 commands live in [`.ai-instructions/commands/`](.ai-instructions/commands/).
+All 10 commands live in [`.ai-instructions/commands/`](.ai-instructions/commands/).
 
 ## Core Concepts
 

@@ -50,12 +50,37 @@ Refer to the **[Styleguide](./concepts/styleguide.md)** for:
 - Code review expectations and focus areas
 - **Pull request review guidelines**, including pragmatic approaches to permission and configuration reviews
 
+## Git Worktree Policy
+
+**All new development work MUST be done in a separate git worktree.** This enables parallel work and clean isolation.
+
+### Creating a Worktree
+
+```bash
+# From the main repo directory
+git worktree add ../project-name-feature -b feat/feature-name main
+```
+
+### When to Use Worktrees
+
+| Scenario | Worktree Required? |
+|----------|-------------------|
+| New feature development | Yes |
+| Bug fixes requiring multiple files | Yes |
+| PR review feedback implementation | Yes (use existing worktree) |
+| Quick typo/config fix (1-2 lines) | No - direct on main is acceptable |
+| Documentation updates | Yes, if significant changes |
+
+### Worktree Cleanup
+
+Use `/git-refresh` to automatically clean up worktrees whose branches have been merged or deleted.
+
 ## Commands
 
 ### Core Commands
 
-- **[Commit](./commands/commit.md)**: Standardized git commit process with validation checks
 - **[Pull Request](./commands/pull-request.md)**: Complete PR lifecycle management from creation to merge
+- **[Git Refresh](./commands/git-refresh.md)**: Merge PRs, sync repo, and cleanup stale worktrees
 - **[Generate Code](./commands/generate-code.md)**: Code generation standards and technology-specific guidelines
 - **[Review Code](./commands/review-code.md)**: Structured code review process with priority levels
 - **[Review Documentation](./commands/review-docs.md)**: Markdown validation and documentation quality workflow
@@ -78,7 +103,7 @@ Use this table to identify the correct command for your task:
 | Implement an existing issue | `/rok-resolve-issues` | For shaped, ready-for-dev issues |
 | Review a pull request | `/rok-review-pr` | Systematic review with priorities |
 | Respond to PR feedback | `/rok-respond-to-reviews` | After receiving review comments |
-| Create a git commit | `/commit` | With validation and conventional format |
+| Sync repo and merge PRs | `/git-refresh` | Also cleans up stale worktrees |
 | Create/manage a PR | `/pull-request` | Full lifecycle management |
 | Review documentation | `/review-docs` | Markdown linting and validation |
 | Review infrastructure code | `/infrastructure-review` | Terraform/Terragrunt focus |

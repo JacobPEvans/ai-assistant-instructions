@@ -22,6 +22,31 @@ Each project must maintain:
 - **Commits**: Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
 - **Command Execution**: Run git commands directly from the working directory. Do not use `git -C <path>` as it breaks permission pattern matching.
 
+### Git Worktree Policy
+
+**All new development work MUST be done in a separate git worktree.** This enables parallel work and clean isolation.
+
+#### Creating a Worktree
+
+```bash
+# From the main repo directory
+git worktree add ../project-name-feature -b feat/feature-name main
+```
+
+#### When to Use Worktrees
+
+| Scenario | Worktree Required? |
+|----------|-------------------|
+| New feature development | Yes |
+| Bug fixes requiring multiple files | Yes |
+| PR review feedback implementation | Yes (use existing worktree) |
+| Quick typo/config fix (1-2 lines) | No - direct on main is acceptable |
+| Documentation updates | Yes, if significant changes |
+
+#### Worktree Cleanup
+
+Use `/git-refresh` to automatically clean up worktrees whose branches have been merged or deleted.
+
 ### Security Standards
 
 - **Secrets**: Use `.env` files locally (never committed) and a secure parameter store (like AWS Parameter Store) for cloud resources.
