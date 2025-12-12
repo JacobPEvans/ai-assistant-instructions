@@ -44,7 +44,7 @@ If any step fails, the cycle must restart from Step 1 after documenting the fail
 - **[Documentation Standards](./concepts/documentation-standards.md)**: Rules and formats for creating clear and effective documentation.
 - **[Diagramming Standards](./concepts/diagramming-standards.md)**: Best practices for creating diagrams using Mermaid and Graphviz.
 - **[Workspace Management](./concepts/workspace-management.md)**: Guidelines for managing a multi-repository workspace.
-- **[GitHub Issue Standards](./concepts/github-issue-standards.md)**: Best practices for creating and managing GitHub issues.
+- **[GitHub Issue Standards](./concepts/github-issue-standards.md)**: Best practices for creating, managing, and linking GitHub issues to PRs.
 
 ## Styleguide
 

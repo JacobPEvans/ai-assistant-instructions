@@ -2,9 +2,9 @@
 
 ## Supported Versions
 
-| Version         | Supported   |
-| --------------- | ----------- |
-| main            | Yes         |
+| Version | Supported |
+| ------- | --------- |
+| main | Yes |
 | Everything else | Best effort |
 
 Look, this is a documentation repo with markdown files. The attack surface is pretty small. But if you find something, I want to know.

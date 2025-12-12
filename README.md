@@ -71,9 +71,10 @@ Full details in [`.ai-instructions/workflows/`](.ai-instructions/workflows/).
 
 | Command | Description |
 | ------- | ----------- |
-| `/pull-request` | Create well-documented PRs |
+| `/pull-request` | Complete PR lifecycle management |
 | `/generate-code` | Scaffold new code with standards |
 | `/infrastructure-review` | Review Terraform/Terragrunt code |
+| `/pull-request` | Create well-documented PRs |
 | `/review-code` | Structured code review |
 | `/review-docs` | Review and improve documentation |
 
@@ -95,8 +96,8 @@ Browse [`.ai-instructions/concepts/`](.ai-instructions/concepts/).
 
 ## Contributing
 
-Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the details, though the short version is: open a PR, don't be a jerk, and I'll
-probably merge it.
+Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the details, though the short version
+is: open a PR, don't be a jerk, and I'll probably merge it.
 
 ## License
 
