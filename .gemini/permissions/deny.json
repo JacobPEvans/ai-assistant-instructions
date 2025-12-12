@@ -1,0 +1,5 @@
+{
+  "coreTools": [
+    "ShellTool(git -C *)"
+  ]
+}
