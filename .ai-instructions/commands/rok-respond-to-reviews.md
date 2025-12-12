@@ -65,7 +65,7 @@ For each addressed comment:
 ### Key Endpoints
 
 | Action | Method | Notes |
-|--------|--------|-------|
+| ------ | ------ | ----- |
 | Get review threads | `gh api graphql` | Use `reviewThreads` query; returns thread `id` for resolution |
 | Get PR comments | `gh api repos/.../pulls/NUMBER/comments` | Returns numeric `id` for replies |
 | Reply to comment | `gh api repos/.../pulls/NUMBER/comments -f body="..." -F in_reply_to=ID` | Use **numeric** ID from REST, not GraphQL node ID |

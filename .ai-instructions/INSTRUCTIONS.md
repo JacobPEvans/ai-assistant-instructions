@@ -54,7 +54,6 @@ Refer to the **[Styleguide](./concepts/styleguide.md)** for:
 
 ### Core Commands
 
-- **[Commit](./commands/commit.md)**: Standardized git commit process with validation checks
 - **[Pull Request](./commands/pull-request.md)**: Complete PR lifecycle management from creation to merge
 - **[Generate Code](./commands/generate-code.md)**: Code generation standards and technology-specific guidelines
 - **[Review Code](./commands/review-code.md)**: Structured code review process with priority levels
@@ -73,12 +72,11 @@ Refer to the **[Styleguide](./concepts/styleguide.md)** for:
 Use this table to identify the correct command for your task:
 
 | User Intent | Command | Notes |
-|-------------|---------|-------|
+| ----------- | ------- | ----- |
 | Create a GitHub issue | `/rok-shape-issues` | Always shape before creating |
 | Implement an existing issue | `/rok-resolve-issues` | For shaped, ready-for-dev issues |
 | Review a pull request | `/rok-review-pr` | Systematic review with priorities |
 | Respond to PR feedback | `/rok-respond-to-reviews` | After receiving review comments |
-| Create a git commit | `/commit` | With validation and conventional format |
 | Create/manage a PR | `/pull-request` | Full lifecycle management |
 | Review documentation | `/review-docs` | Markdown linting and validation |
 | Review infrastructure code | `/infrastructure-review` | Terraform/Terragrunt focus |
