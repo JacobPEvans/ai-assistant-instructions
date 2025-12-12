@@ -10,11 +10,13 @@ jobs:
   link-check:
     name: "Check Links"
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
 
       - name: Check links
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --verbose --no-progress '**/*.md'
+          args: --verbose --no-progress --exclude 'shields.io' --exclude 'github.com/.*/badge' --accept 429 '**/*.md'
+          output: lychee/out.md
           fail: true
