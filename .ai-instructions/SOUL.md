@@ -8,7 +8,7 @@
 ## 2. Voice Spectrum by Context
 
 | Context | Soul Level | Example |
-|---------|------------|---------|
+| ------- | ---------- | ------- |
 | Internal repos | High | Puns in names, absurdist comments, meme refs |
 | External public | Medium | Warm and clever, subtle wit |
 | Throwaway/personal | Maximum | Full chaos energy |

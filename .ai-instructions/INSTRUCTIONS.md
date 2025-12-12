@@ -13,15 +13,10 @@
 This repository works with multiple AI assistants: GitHub Copilot, Claude, and Gemini.
 Each uses its respective configuration directory (`.github/`, `.claude/`, `.gemini/`).
 
-## Git Commands - NEVER Use -C Flag
+## Git Command Standards
 
-**NEVER** use `git -C <path>` - always run git commands directly.
-
-- Bad: `git -C ~/.config/nix status`
-- Good: `git status`
-
-The `-C` flag breaks permission pattern matching and causes unnecessary approval prompts.
-If you need to operate on a different repo, note that your working directory is already set correctly.
+See [Git Command Standards](./concepts/styleguide.md#git-command-standards) in the styleguide for requirements on git commands,
+including the prohibition on using the `-C` flag.
 
 ## Core Workflow
 
@@ -64,7 +59,6 @@ Refer to the **[Styleguide](./concepts/styleguide.md)** for:
 
 ### Core Commands
 
-- **[Commit](./commands/commit.md)**: Standardized git commit process with validation checks
 - **[Pull Request](./commands/pull-request.md)**: Complete PR lifecycle management from creation to merge
 - **[Generate Code](./commands/generate-code.md)**: Code generation standards and technology-specific guidelines
 - **[Review Code](./commands/review-code.md)**: Structured code review process with priority levels
@@ -83,12 +77,11 @@ Refer to the **[Styleguide](./concepts/styleguide.md)** for:
 Use this table to identify the correct command for your task:
 
 | User Intent | Command | Notes |
-|-------------|---------|-------|
+| ----------- | ------- | ----- |
 | Create a GitHub issue | `/rok-shape-issues` | Always shape before creating |
 | Implement an existing issue | `/rok-resolve-issues` | For shaped, ready-for-dev issues |
 | Review a pull request | `/rok-review-pr` | Systematic review with priorities |
 | Respond to PR feedback | `/rok-respond-to-reviews` | After receiving review comments |
-| Create a git commit | `/commit` | With validation and conventional format |
 | Create/manage a PR | `/pull-request` | Full lifecycle management |
 | Review documentation | `/review-docs` | Markdown linting and validation |
 | Review infrastructure code | `/infrastructure-review` | Terraform/Terragrunt focus |

@@ -11,7 +11,7 @@ This document defines best practices for creating, managing, and resolving GitHu
 Use prefixes to categorize issues:
 
 | Prefix | Use Case | Example |
-|--------|----------|---------|
+| ------ | -------- | ------- |
 | `[FEATURE]` | New functionality | `[FEATURE] Add dark mode support` |
 | `[BUG]` | Something broken | `[BUG] Login fails on Safari` |
 | `[DOCS]` | Documentation changes | `[DOCS] Update API reference` |
@@ -195,7 +195,7 @@ These are distinct from acceptance criteria - they describe HOW to verify:
 ## Anti-Patterns to Avoid
 
 | Anti-Pattern | Problem | Better Approach |
-|--------------|---------|-----------------|
+| ------------ | ------- | --------------- |
 | Vague titles | "Fix stuff" | "[BUG] Login button unresponsive on mobile" |
 | No acceptance criteria | Can't verify done | Add "Done Looks Like" section |
 | Missing labels | Hard to filter/prioritize | Add type + priority labels |
@@ -205,7 +205,7 @@ These are distinct from acceptance criteria - they describe HOW to verify:
 ## Integration with Commands
 
 | Action | Command |
-|--------|---------|
+| ------ | ------- |
 | Create/shape issues | `/rok-shape-issues` |
 | Implement issues | `/rok-resolve-issues` |
 | Review resulting PR | `/rok-review-pr` |

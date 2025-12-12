@@ -50,7 +50,7 @@ Everything in `.claude/`, `.copilot/`, and `.gemini/` symlinks back to `.ai-inst
 ## Supported AI Assistants
 
 | Assistant | Integration | Notes |
-|-----------|------------|-------|
+| --------- | ----------- | ----- |
 | **Claude** | `.claude/` directory | Full command support via Claude Code |
 | **GitHub Copilot** | `.github/copilot-instructions.md` + prompts | Works in VS Code, GitHub.com, Visual Studio |
 | **Gemini** | `.gemini/` directory | Style guide and config support |
@@ -70,11 +70,10 @@ Full details in [`.ai-instructions/workflows/`](.ai-instructions/workflows/).
 ## Key Commands
 
 | Command | Description |
-|---------|-------------|
-| `/commit` | Generate conventional commit messages |
+| ------- | ----------- |
+| `/pull-request` | Create well-documented PRs |
 | `/generate-code` | Scaffold new code with standards |
 | `/infrastructure-review` | Review Terraform/Terragrunt code |
-| `/pull-request` | Create well-documented PRs |
 | `/review-code` | Structured code review |
 | `/review-docs` | Review and improve documentation |
 
@@ -96,7 +95,8 @@ Browse [`.ai-instructions/concepts/`](.ai-instructions/concepts/).
 
 ## Contributing
 
-Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the details, though the short version is: open a PR, don't be a jerk, and I'll probably merge it.
+Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the details, though the short version is: open a PR, don't be a jerk, and I'll
+probably merge it.
 
 ## License
 

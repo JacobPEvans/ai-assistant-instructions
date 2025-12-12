@@ -43,7 +43,7 @@ For Infrastructure as Code guidelines, see [Infrastructure Standards](./infrastr
 
 ## Git Command Standards
 
-### NEVER Use git -C Flag
+### git -C Flag Usage
 
 **NEVER** use `git -C <path>` - always run git commands directly.
 
