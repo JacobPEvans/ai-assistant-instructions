@@ -50,8 +50,8 @@ gh pr checks <PR_NUMBER> --watch --fail-fast
 3. **Push Local Branch to Remote**: `git push -u origin $(git branch --show-current)`
 4. **Link to Related Issue**: If this PR implements a GitHub issue:
    - Ensure branch name includes issue number (e.g., `feature/issue-123-description`)
-   - Add `Closes #issue-number` to PR description
-   - After PR creation, comment on the issue: `gh issue comment {issue-number} --body "Implementation PR: #{pr-number}"`
+   - Add `Closes #<issue-number>` to PR description
+   - After PR creation, comment on the issue: `gh issue comment {issue-number} --body "Implementation PR: #<pr-number>"`
 
 **PR Description Template:**
 

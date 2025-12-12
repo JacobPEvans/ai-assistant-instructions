@@ -10,13 +10,13 @@ This document defines best practices for creating, managing, and resolving GitHu
 
 Use prefixes to categorize issues:
 
-| Prefix | Use Case | Example |
-|--------|----------|---------|
-| `[FEATURE]` | New functionality | `[FEATURE] Add dark mode support` |
-| `[BUG]` | Something broken | `[BUG] Login fails on Safari` |
-| `[DOCS]` | Documentation changes | `[DOCS] Update API reference` |
-| `[REFACTOR]` | Code improvements | `[REFACTOR] Simplify auth logic` |
-| `[Small Batch]` | Scoped 1-2 week work | `[Small Batch] Improve error messages` |
+| Prefix          | Use Case                | Example                                     |
+| --------------- | ----------------------- | ------------------------------------------- |
+| `[FEATURE]`     | New functionality       | `[FEATURE] Add dark mode support`           |
+| `[BUG]`         | Something broken        | `[BUG] Login fails on Safari`               |
+| `[DOCS]`        | Documentation changes   | `[DOCS] Update API reference`               |
+| `[REFACTOR]`    | Code improvements       | `[REFACTOR] Simplify auth logic`            |
+| `[Small Batch]` | Scoped 1-2 week work    | `[Small Batch] Improve error messages`      |
 
 ## Label Taxonomy
 
@@ -194,22 +194,22 @@ These are distinct from acceptance criteria - they describe HOW to verify:
 
 ## Anti-Patterns to Avoid
 
-| Anti-Pattern | Problem | Better Approach |
-|--------------|---------|-----------------|
-| Vague titles | "Fix stuff" | "[BUG] Login button unresponsive on mobile" |
-| No acceptance criteria | Can't verify done | Add "Done Looks Like" section |
-| Missing labels | Hard to filter/prioritize | Add type + priority labels |
-| Scope creep | Issue grows unbounded | Define "Out of scope" section |
-| No timebox | Work expands indefinitely | Set small/big batch timebox |
+| Anti-Pattern           | Problem                    | Better Approach                              |
+| ---------------------- | -------------------------- | -------------------------------------------- |
+| Vague titles           | "Fix stuff"                | "[BUG] Login button unresponsive on mobile"  |
+| No acceptance criteria | Can't verify done          | Add "Done Looks Like" section                |
+| Missing labels         | Hard to filter/prioritize  | Add type + priority labels                   |
+| Scope creep            | Issue grows unbounded      | Define "Out of scope" section                |
+| No timebox             | Work expands indefinitely  | Set small/big batch timebox                  |
 
 ## Integration with Commands
 
-| Action | Command |
-|--------|---------|
-| Create/shape issues | `/rok-shape-issues` |
-| Implement issues | `/rok-resolve-issues` |
-| Review resulting PR | `/rok-review-pr` |
-| Respond to feedback | `/rok-respond-to-reviews` |
+| Action              | Command                    |
+| ------------------- | -------------------------- |
+| Create/shape issues | `/rok-shape-issues`        |
+| Implement issues    | `/rok-resolve-issues`      |
+| Review resulting PR | `/rok-review-pr`           |
+| Respond to feedback | `/rok-respond-to-reviews`  |
 
 ## PR-Issue Linking
 
@@ -227,7 +227,7 @@ Include the issue number in your branch name:
 
 Always include the issue reference in your PR description:
 
-- Use `Closes #{issue-number}` or `Fixes #{issue-number}` for automatic closure
+- Use `Closes #<issue-number>` or `Fixes #<issue-number>` for automatic closure
 - Fill in the "Related Issue" section of the PR template
 
 ### Issue Comment (Bidirectional Link)
@@ -235,16 +235,16 @@ Always include the issue reference in your PR description:
 After creating the PR, comment on the issue to create visibility:
 
 ```bash
-gh issue comment {issue-number} --body "Implementation PR: #{pr-number}"
+gh issue comment {issue-number} --body "Implementation PR: #<pr-number>"
 ```
 
 This allows stakeholders watching the issue to see progress immediately.
 
 ### Workflow Integration
 
-| When | Action |
-|------|--------|
-| Creating branch | Include issue number in branch name |
-| Creating PR | Add `Closes #{issue-number}` to description |
-| After PR created | Comment on issue with PR link |
-| PR merged | Issue auto-closes via GitHub |
+| When             | Action                                           |
+| ---------------- | ------------------------------------------------ |
+| Creating branch  | Include issue number in branch name             |
+| Creating PR      | Add `Closes #<issue-number>` to description      |
+| After PR created | Comment on issue with PR link                    |
+| PR merged        | Issue auto-closes via GitHub                     |
