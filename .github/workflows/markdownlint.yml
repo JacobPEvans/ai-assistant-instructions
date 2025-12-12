@@ -16,7 +16,7 @@ jobs:
         run: ./scripts/validate-commands.sh
 
       - name: Run markdownlint
-        uses: DavidAnson/markdownlint-cli2-action@v20
+        uses: DavidAnson/markdownlint-cli2-action@v22
         with:
           globs: '**/*.md'
           fix: true
