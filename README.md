@@ -4,6 +4,8 @@
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Markdown Lint](https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/markdownlint.yml/badge.svg)](https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/markdownlint.yml)
+[![Claude Code Review](https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/claude.yml/badge.svg)](https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/claude.yml)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 
 ## What Is This?
 
