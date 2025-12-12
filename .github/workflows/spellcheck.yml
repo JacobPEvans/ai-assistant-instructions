@@ -11,7 +11,7 @@ jobs:
     name: "Check Spelling"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Check spelling
         uses: streetsidesoftware/cspell-action@v6
