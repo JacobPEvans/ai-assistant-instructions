@@ -6,8 +6,7 @@
     "WebSearch",
     "TodoWrite",
     "TodoRead",
-    "SlashCommand(/flake-rebuild)",
-    "SlashCommand(/rok-respond-to-reviews)",
+    "SlashCommand(**)",
 
     "Bash(git status:*)",
     "Bash(git log:*)",
