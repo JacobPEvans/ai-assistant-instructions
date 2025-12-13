@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # Identify .md symlinks and regular files for link checking
 # Outputs to GITHUB_OUTPUT or stdout
 set -euo pipefail

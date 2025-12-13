@@ -16,7 +16,7 @@ jobs:
 
       - name: Identify symlinks
         id: identify
-        run: ./scripts/identify-symlinks.sh
+        run: bash ./scripts/identify-symlinks.sh
 
       - name: Check for broken symlinks
         if: steps.identify.outputs.has_broken_symlinks == 'true'
