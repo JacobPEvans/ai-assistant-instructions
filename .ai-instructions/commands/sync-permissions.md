@@ -1,7 +1,20 @@
 ---
 description: Scan local AI settings and merge safe permissions into repo
 model: sonnet
-allowed-tools: Bash(find:*), Read(**), Glob(**), Grep(**), Write(**), Bash(cat:*), Bash(rm:*)
+allowed-tools:
+  # Core tools (required for all commands)
+  - Task
+  - TaskOutput
+  - TodoWrite
+  # File operations
+  - Read(**)
+  - Write(**)
+  - Glob(**)
+  - Grep(**)
+  # Bash commands
+  - Bash(cat:*)
+  - Bash(find:*)
+  - Bash(rm:*)
 ---
 
 # Sync Permissions

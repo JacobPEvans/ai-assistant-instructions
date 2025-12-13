@@ -1,7 +1,17 @@
 ---
 description: Review documentation files for consistency, completeness, and markdownlint compliance
-allowed-tools: Read, Grep, Glob, Bash(markdownlint-cli2:*)
 author: JacobPEvans
+allowed-tools:
+  # Core tools (required for all commands)
+  - Task
+  - TaskOutput
+  - TodoWrite
+  # File operations
+  - Read
+  - Glob
+  - Grep
+  # Linting
+  - Bash(markdownlint-cli2:*)
 ---
 
 # Prompt: Review Documentation

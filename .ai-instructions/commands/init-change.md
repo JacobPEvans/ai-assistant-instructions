@@ -1,7 +1,29 @@
 ---
 description: Initialize a new change with worktree cleanup and fresh branch
 model: haiku
-allowed-tools: Bash(git worktree list:*), Bash(git worktree remove:*), Bash(git worktree prune:*), Bash(git worktree add:*), Bash(git fetch:*), Bash(git pull:*), Bash(git branch:*), Bash(git switch:*), Bash(git checkout:*), Bash(git status:*), Bash(gh pr list:*), Bash(gh pr view:*), Bash(gh issue view:*), Bash(pwd:*), Bash(ls:*)
+allowed-tools:
+  # Core tools (required for all commands)
+  - Task
+  - TaskOutput
+  - TodoWrite
+  # Git operations
+  - Bash(git branch:*)
+  - Bash(git checkout:*)
+  - Bash(git fetch:*)
+  - Bash(git pull:*)
+  - Bash(git status:*)
+  - Bash(git switch:*)
+  - Bash(git worktree add:*)
+  - Bash(git worktree list:*)
+  - Bash(git worktree prune:*)
+  - Bash(git worktree remove:*)
+  # GitHub CLI
+  - Bash(gh issue view:*)
+  - Bash(gh pr list:*)
+  - Bash(gh pr view:*)
+  # Filesystem
+  - Bash(ls:*)
+  - Bash(pwd:*)
 ---
 
 # Init Change

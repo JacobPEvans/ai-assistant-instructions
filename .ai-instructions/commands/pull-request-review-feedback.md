@@ -1,7 +1,13 @@
 ---
 description: How to programmatically resolve PR review threads using GitHub's GraphQL API
-allowed-tools: Bash(gh:*)
 author: JacobPEvans
+allowed-tools:
+  # Core tools (required for all commands)
+  - Task
+  - TaskOutput
+  - TodoWrite
+  # GitHub CLI
+  - Bash(gh:*)
 ---
 
 # Resolving PR Review Conversations
