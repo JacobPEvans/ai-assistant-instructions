@@ -13,6 +13,11 @@
 This repository works with multiple AI assistants: GitHub Copilot, Claude, and Gemini.
 Each uses its respective configuration directory (`.github/`, `.claude/`, `.gemini/`).
 
+## Git Command Standards
+
+See [Git Command Standards](./concepts/styleguide.md#git-command-standards) in the styleguide for requirements on git commands,
+including the prohibition on using the `-C` flag.
+
 ## Core Workflow
 
 This project follows a strict, 5-step development cycle designed to be automated and repeatable:
