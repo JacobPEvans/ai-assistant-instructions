@@ -22,7 +22,10 @@ By integrating an MCP server, you elevate the AI's capability from simple text g
 
 ### Permission-Aware Execution
 
-On every session start, read `~/.claude/settings.json` to understand which commands are pre-approved.
+On every session start, read the relevant settings file for your AI assistant to understand which commands are pre-approved:
+- **Claude**: `~/.claude/settings.json`
+- **Gemini**: `~/.gemini/settings.json`
+- **Copilot**: `~/.copilot/settings.json`
 Always prefer using allowed commands to maintain automation flow without interrupting the user for confirmation.
 
 ### Handling Blocked Commands
