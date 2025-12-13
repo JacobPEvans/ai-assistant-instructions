@@ -1,0 +1,1 @@
+../../.ai-instructions/commands/sync-permissions.md

@@ -1,0 +1,1 @@
+../../.ai-instructions/commands/init-worktree.md

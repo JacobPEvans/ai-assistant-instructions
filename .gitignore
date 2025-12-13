@@ -1,6 +1,8 @@
 todos/
 result
 
+agent-os
+
 .claude/projects/
 .claude/shell-snapshots/
 .claude/statsig/
