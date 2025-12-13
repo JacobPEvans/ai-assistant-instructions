@@ -73,7 +73,7 @@ gh api graphql -f query='
                 "nodes": [
                   {
                     "body": "Consider adding back Pre-Commit Validation...",
-                    "path": ".ai-instructions/commands/commit.md",
+                    "path": ".ai-instructions/commands/pull-request.md",
                     "line": 16
                   }
                 ]
@@ -183,7 +183,7 @@ done
 ## Troubleshooting
 
 | Problem | Solution |
-|---------|----------|
+| ------- | -------- |
 | Empty response | Check OWNER/REPO/PR_NUMBER are correct |
 | Mutation fails | Verify thread ID starts with `PRRT_` |
 | Permission denied | Run `gh auth status` to verify authentication |

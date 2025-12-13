@@ -41,6 +41,18 @@ For Infrastructure as Code guidelines, see [Infrastructure Standards](./infrastr
 - Security and least privilege principles
 - Cost management practices
 
+## Git Command Standards
+
+### git -C Flag Usage
+
+**NEVER** use `git -C <path>` - always run git commands directly.
+
+- Bad: `git -C ~/.config/nix status`
+- Good: `git status`
+
+The `-C` flag breaks permission pattern matching and causes unnecessary approval prompts.
+If you need to operate on a different repo, note that your working directory is already set correctly.
+
 ## Language-Specific Conventions
 
 ### JavaScript/TypeScript

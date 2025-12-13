@@ -13,6 +13,11 @@
 This repository works with multiple AI assistants: GitHub Copilot, Claude, and Gemini.
 Each uses its respective configuration directory (`.github/`, `.claude/`, `.gemini/`).
 
+## Git Command Standards
+
+See [Git Command Standards](./concepts/styleguide.md#git-command-standards) in the styleguide for requirements on git commands,
+including the prohibition on using the `-C` flag.
+
 ## Core Workflow
 
 This project follows a strict, 5-step development cycle designed to be automated and repeatable:
@@ -39,7 +44,7 @@ If any step fails, the cycle must restart from Step 1 after documenting the fail
 - **[Documentation Standards](./concepts/documentation-standards.md)**: Rules and formats for creating clear and effective documentation.
 - **[Diagramming Standards](./concepts/diagramming-standards.md)**: Best practices for creating diagrams using Mermaid and Graphviz.
 - **[Workspace Management](./concepts/workspace-management.md)**: Guidelines for managing a multi-repository workspace.
-- **[GitHub Issue Standards](./concepts/github-issue-standards.md)**: Best practices for creating and managing GitHub issues.
+- **[GitHub Issue Standards](./concepts/github-issue-standards.md)**: Best practices for creating, managing, and linking GitHub issues to PRs.
 
 ## Styleguide
 
@@ -98,7 +103,7 @@ Use `/git-refresh` to automatically clean up worktrees whose branches have been 
 Use this table to identify the correct command for your task:
 
 | User Intent | Command | Notes |
-|-------------|---------|-------|
+| ----------- | ------- | ----- |
 | Create a GitHub issue | `/rok-shape-issues` | Always shape before creating |
 | Implement an existing issue | `/rok-resolve-issues` | For shaped, ready-for-dev issues |
 | Review a pull request | `/rok-review-pr` | Systematic review with priorities |

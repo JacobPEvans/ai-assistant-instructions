@@ -64,4 +64,4 @@ assignees: ''
 
 ---
 
-*Good documentation is hard. Thanks for helping improve it. See [GitHub Issue Standards](/.ai-instructions/concepts/github-issue-standards.md).*
+*Good documentation is hard. Thanks for helping improve it. See [GitHub Issue Standards](../../.ai-instructions/concepts/github-issue-standards.md).*
