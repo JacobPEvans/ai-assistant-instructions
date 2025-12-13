@@ -32,7 +32,7 @@ jobs:
             --no-progress
             --exclude 'shields.io'
             --exclude 'github.com/.*/badge'
-            --accept 429
+            --exclude 'gist.github.com'
             ${{ steps.identify.outputs.regular_files }}
           output: lychee/out.md
           fail: true
