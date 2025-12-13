@@ -9,8 +9,8 @@ allowed-tools:
   # File operations
   - Read
   # Git & GitHub
-  - Bash(git:*)
   - Bash(gh:*)
+  - Bash(git:*)
   # Linting
   - Bash(markdownlint-cli2:*)
 ---

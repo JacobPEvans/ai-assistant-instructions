@@ -3,26 +3,26 @@ title: "Respond to Reviews"
 description: "Respond to PR review feedback efficiently with systematic resolution, parallel sub-agents, and GitHub thread resolution"
 type: "command"
 version: "1.2.0"
-think: true
-author: "roksechs"
-source: "https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3"
-contributors:
-  - "kieranklaassen (parallel sub-agent patterns): https://gist.github.com/kieranklaassen/0c91cfaaf99ab600e79ba898918cea8a"
 allowed-tools:
   # Core tools (required for all commands)
   - Task
   - TaskOutput
   - TodoWrite
   # File operations
-  - Read
   - Edit
-  - Write
   - Glob
   - Grep
+  - Read
+  - Write
   # Bash (full access)
   - Bash
   # Web
   - WebFetch
+think: true
+author: "roksechs"
+source: "https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3"
+contributors:
+  - "kieranklaassen (parallel sub-agent patterns): https://gist.github.com/kieranklaassen/0c91cfaaf99ab600e79ba898918cea8a"
 ---
 
 ## PR Review Responder

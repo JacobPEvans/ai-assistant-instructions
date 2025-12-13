@@ -130,7 +130,13 @@ git worktree prune
 
 ### 5. Summary
 
-Provide a brief summary including:
+5.1. Verify current state:
+
+```bash
+git status
+```
+
+5.2. Provide a brief summary including:
 
 - PRs merged (if any)
 - Branches cleaned up (if any)

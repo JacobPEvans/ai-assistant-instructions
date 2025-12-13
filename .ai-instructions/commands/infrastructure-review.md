@@ -7,9 +7,9 @@ allowed-tools:
   - TaskOutput
   - TodoWrite
   # File operations
-  - Read
   - Glob
   - Grep
+  - Read
   # IaC tools
   - Bash(terraform:*)
   - Bash(terragrunt:*)

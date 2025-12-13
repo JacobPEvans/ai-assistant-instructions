@@ -7,10 +7,10 @@ allowed-tools:
   - TaskOutput
   - TodoWrite
   # File operations
-  - Read(**)
-  - Write(**)
   - Glob(**)
   - Grep(**)
+  - Read(**)
+  - Write(**)
   # Bash commands
   - Bash(cat:*)
   - Bash(find:*)

@@ -7,9 +7,9 @@ allowed-tools:
   - TaskOutput
   - TodoWrite
   # File operations
-  - Read
   - Glob
   - Grep
+  - Read
 ---
 
 # Task: Review Code
