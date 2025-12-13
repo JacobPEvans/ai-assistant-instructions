@@ -7,7 +7,7 @@ This transforms the AI from a passive code generator into an active participant 
 
 ### Model-Controlled Programmer (MCP) Servers
 
-Tools like [Serena](https://github.com/serenacode/serena) or `zen-mcp` act as a bridge between the AI and your local machine.
+Tools like [Serena](https://github.com/oraios/serena) or `zen-mcp` act as a bridge between the AI and your local machine.
 
 By integrating an MCP server, you elevate the AI's capability from simple text generation to executing complex, multi-step tasks autonomously.
 

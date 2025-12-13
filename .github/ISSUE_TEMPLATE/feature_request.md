@@ -55,4 +55,4 @@ assignees: ''
 
 ---
 
-*Feature requests are welcome. See [GitHub Issue Standards](/.ai-instructions/concepts/github-issue-standards.md) for best practices.*
+*Feature requests are welcome. See [GitHub Issue Standards](../../.ai-instructions/concepts/github-issue-standards.md) for best practices.*
