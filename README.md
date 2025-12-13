@@ -72,7 +72,7 @@ Full details in [`.ai-instructions/workflows/`](.ai-instructions/workflows/).
 | Command | Description |
 | ------- | ----------- |
 | `/generate-code` | Scaffold new code with standards |
-| `/git-refresh` | Merge PRs, sync repo, cleanup worktrees |
+| `/git-refresh` | Merge PRs, sync repo, cleanup stale worktrees |
 | `/infrastructure-review` | Review Terraform/Terragrunt code |
 | `/pull-request` | Complete PR lifecycle management |
 | `/review-code` | Structured code review |

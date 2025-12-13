@@ -1,7 +1,7 @@
 ---
-description: Merge current branch's PR (if mergeable) then sync local repo
+description: Merge current branch's PR (if mergeable), sync local repo, and cleanup stale worktrees
 model: haiku
-allowed-tools: Bash(git fetch:*), Bash(git branch:*), Bash(git checkout:*), Bash(git switch:*), Bash(git pull:*), Bash(git log:*), Bash(gh pr view:*), Bash(gh pr merge:*), Bash(gh pr list:*), Bash(git worktree add:*), Bash(git worktree list:*), Bash(git worktree lock:*), Bash(git worktree move:*), Bash(git worktree prune:*), Bash(git worktree repair:*), Bash(git worktree unlock:*)
+allowed-tools: Bash(git fetch:*), Bash(git branch:*), Bash(git checkout:*), Bash(git switch:*), Bash(git pull:*), Bash(git log:*), Bash(gh pr view:*), Bash(gh pr merge:*), Bash(gh pr list:*), Bash(git worktree list:*), Bash(git worktree prune:*), Bash(git worktree remove:*)
 ---
 
 # Git Refresh
@@ -79,10 +79,20 @@ gh pr merge NUMBER --squash --delete-branch
 git worktree list
 ```
 
-4.2. For each worktree (excluding the main working directory):
+4.2. For each worktree (excluding the main working directory), check if stale:
 
-- Check if its branch still exists locally or remotely
-- Check if its branch has been merged into main
+```bash
+# Check if branch exists locally
+git branch --list <branch-name>
+
+# Check if branch exists on remote
+git branch -r --list origin/<branch-name>
+
+# Check if branch has been merged into main
+git branch --merged main | grep <branch-name>
+```
+
+A worktree is stale if its branch no longer exists or has been merged into main.
 
 4.3. Remove stale worktrees (branch merged or deleted):
 
