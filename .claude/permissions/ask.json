@@ -24,6 +24,20 @@
 
     "Bash(docker exec:*)",
     "Bash(docker run:*)",
+    "Bash(docker context create:*)",
+    "Bash(docker context rm:*)",
+    "Bash(docker context update:*)",
+    "Bash(docker context use:*)",
+    "Bash(docker network connect:*)",
+    "Bash(docker network create:*)",
+    "Bash(docker network disconnect:*)",
+    "Bash(docker network prune:*)",
+    "Bash(docker network rm:*)",
+    "Bash(docker rm:*)",
+    "Bash(docker system prune:*)",
+    "Bash(docker volume create:*)",
+    "Bash(docker volume prune:*)",
+    "Bash(docker volume rm:*)",
 
     "Bash(kubectl apply:*)",
     "Bash(kubectl create:*)",
@@ -65,6 +79,16 @@
     "Bash(poetry update:*)",
     "Bash(pyenv install:*)",
 
-    "Bash(source:*)"
+    "Bash(source:*)",
+
+    "Bash(orb create:*)",
+    "Bash(orb delete:*)",
+    "Bash(orb stop:*)",
+    "Bash(orbctl config set:*)",
+
+    "Bash(ssh-add -d:*)",
+    "Bash(ssh-add -D:*)",
+
+    "Bash(aws-vault exec:*)"
   ]
 }
