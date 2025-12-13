@@ -29,6 +29,8 @@
     "terraform",
     "terragrunt",
     "utils",
+    "worktree",
+    "worktrees",
     "yamllint"
   ],
   "files": [

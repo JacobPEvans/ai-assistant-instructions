@@ -69,7 +69,7 @@ git worktree add ../project-name-feature -b feat/feature-name main
 ### When to Use Worktrees
 
 | Scenario | Worktree Required? |
-|----------|-------------------|
+| -------- | ------------------ |
 | New feature development | Yes |
 | Bug fixes requiring multiple files | Yes |
 | PR review feedback implementation | Yes (use existing worktree) |
