@@ -22,6 +22,10 @@ Each project must maintain:
 - **Commits**: Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
 - **Command Execution**: Run git commands directly from the working directory. Do not use `git -C <path>` as it breaks permission pattern matching.
 
+### Git Worktree Policy
+
+See [Git Worktree Policy](../INSTRUCTIONS.md#git-worktree-policy) in INSTRUCTIONS.md for the authoritative worktree usage guidelines.
+
 ### Security Standards
 
 - **Secrets**: Use `.env` files locally (never committed) and a secure parameter store (like AWS Parameter Store) for cloud resources.

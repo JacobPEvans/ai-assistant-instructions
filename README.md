@@ -71,16 +71,16 @@ Full details in [`.ai-instructions/workflows/`](.ai-instructions/workflows/).
 
 | Command | Description |
 | ------- | ----------- |
-| `/pull-request` | Complete PR lifecycle management |
 | `/generate-code` | Scaffold new code with standards |
+| `/git-refresh` | Merge PRs, sync repo, cleanup stale worktrees |
 | `/infrastructure-review` | Review Terraform/Terragrunt code |
-| `/pull-request` | Create well-documented PRs |
+| `/pull-request` | Complete PR lifecycle management |
 | `/review-code` | Structured code review |
 | `/review-docs` | Review and improve documentation |
 
 **Community commands** (rok-* series): `/rok-shape-issues`, `/rok-resolve-issues`, `/rok-review-pr`, `/rok-respond-to-reviews`
 
-All 11 commands live in [`.ai-instructions/commands/`](.ai-instructions/commands/).
+All 10 commands live in [`.ai-instructions/commands/`](.ai-instructions/commands/).
 
 ## Core Concepts
 

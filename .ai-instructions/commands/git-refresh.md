@@ -1,12 +1,12 @@
 ---
-description: Merge current branch's PR (if mergeable) then sync local repo
+description: Merge current branch's PR (if mergeable), sync local repo, and cleanup stale worktrees
 model: haiku
-allowed-tools: Bash(git fetch:*), Bash(git branch:*), Bash(git checkout:*), Bash(git switch:*), Bash(git pull:*), Bash(git log:*), Bash(gh pr view:*), Bash(gh pr merge:*), Bash(gh pr list:*)
+allowed-tools: Bash(git fetch:*), Bash(git branch:*), Bash(git checkout:*), Bash(git switch:*), Bash(git pull:*), Bash(git log:*), Bash(gh pr view:*), Bash(gh pr merge:*), Bash(gh pr list:*), Bash(git worktree list:*), Bash(git worktree prune:*), Bash(git worktree remove:*)
 ---
 
 # Git Refresh
 
-Merge open PRs (if mergeable), then sync the local repository.
+Merge open PRs (if mergeable), sync the local repository, and cleanup stale worktrees.
 
 ## Steps
 
@@ -71,12 +71,51 @@ gh pr merge NUMBER --squash --delete-branch
 
 3.5. If original branch still exists locally, switch back to it. Otherwise stay on default.
 
-### 4. Summary
+### 4. Worktree Cleanup
+
+4.1. List all worktrees:
+
+```bash
+git worktree list
+```
+
+4.2. For each worktree (excluding the main working directory), check if stale:
+
+```bash
+# Check if branch exists locally
+git branch --list <branch-name>
+
+# Check if branch exists on remote
+git branch -r --list origin/<branch-name>
+
+# Check if branch has been merged into main
+git branch --merged main | grep <branch-name>
+```
+
+A worktree is stale if its branch no longer exists or has been merged into main.
+
+4.3. Remove stale worktrees (branch merged or deleted):
+
+```bash
+git worktree remove /path/to/worktree
+```
+
+4.4. Prune worktree administrative files for any manually deleted directories:
+
+```bash
+git worktree prune
+```
+
+> **Note**: Only remove worktrees whose branches have been merged or deleted.
+> Active development worktrees should be preserved.
+
+### 5. Summary
 
 Provide a brief summary including:
 
 - PRs merged (if any)
 - Branches cleaned up (if any)
+- Worktrees removed (if any)
 - Current branch and sync status
 
 ## Common Mistake to Avoid
