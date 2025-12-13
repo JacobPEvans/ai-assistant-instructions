@@ -12,11 +12,27 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
-      - name: Check links
+      - name: Identify symlinks
+        id: identify
+        run: ./scripts/identify-symlinks.sh
+
+      - name: Check for broken symlinks
+        if: steps.identify.outputs.has_broken_symlinks == 'true'
+        run: |
+          echo "::error::Broken symlinks found: ${{ steps.identify.outputs.broken_symlinks }}"
+          exit 1
+
+      - name: Check links in regular files
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --verbose --no-progress --exclude 'shields.io' --exclude 'github.com/.*/badge' --accept 429 '**/*.md'
+          args: >-
+            --verbose
+            --no-progress
+            --exclude 'shields.io'
+            --exclude 'github.com/.*/badge'
+            --accept 429
+            ${{ steps.identify.outputs.regular_files }}
           output: lychee/out.md
           fail: true
