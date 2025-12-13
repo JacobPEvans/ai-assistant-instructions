@@ -291,7 +291,12 @@ Example ordering:
 
 ```bash
 /quick-add-permission "docker ps" "docker logs" "docker inspect"
-# Converts to: Bash(docker ps:*), Bash(docker logs:*), Bash(docker inspect:*)
+# Converts to three separate JSON array entries:
+# [
+#   "Bash(docker ps:*)",
+#   "Bash(docker logs:*)",
+#   "Bash(docker inspect:*)"
+# ]
 ```
 
 ### Add tool permissions
