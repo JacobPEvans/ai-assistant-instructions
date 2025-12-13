@@ -17,3 +17,18 @@ By integrating an MCP server, you elevate the AI's capability from simple text g
 - **Efficiency**: Allows the AI to directly verify its own work (e.g., run tests after writing code).
 - **Power**: Enables the AI to perform tasks that would be impossible with text output alone, such as scaffolding a new project or refactoring multiple
   files.
+
+## Shell Command Conventions
+
+### Permission-Aware Execution
+
+On every session start, read `~/.claude/settings.json` to understand which commands are pre-approved.
+Always prefer using allowed commands to maintain automation flow without interrupting the user for confirmation.
+
+### Handling Blocked Commands
+
+If a command is blocked or requires confirmation:
+
+1. **Consider why** - The command may be flagged for valid security reasons
+2. **Try alternatives** - Look for simpler, more direct approaches that accomplish the same goal
+3. **Break it down** - Complex piped commands can often be replaced with multiple sequential operations

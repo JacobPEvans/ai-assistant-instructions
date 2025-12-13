@@ -1,5 +1,6 @@
 {
   "coreTools": [
-    "ShellTool(git -C *)"
+    "ShellTool(git -C *)",
+    "ShellTool(xargs *)"
   ]
 }
