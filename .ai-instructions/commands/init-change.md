@@ -130,7 +130,7 @@ If the input was a GitHub issue, detailed spec, or comprehensive change request:
 ## Worktree Naming Convention
 
 | Input | Branch Name | Worktree Directory |
-|-------|-------------|-------------------|
+| ----- | ----------- | ------------------ |
 | `#123` (issue) | `feat/issue-123` | `../<repo>-issue-123` |
 | `#456` (PR) | (existing branch) | `../<repo>-pr-456` |
 | `fix-bug` | `fix/fix-bug` | `../<repo>-fix-bug` |

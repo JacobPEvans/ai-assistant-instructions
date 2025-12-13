@@ -13,7 +13,7 @@ Scan for local AI assistant settings files and merge universally-safe permission
 This command manages permissions for multiple AI assistants:
 
 | Tool | Settings Location | Permission Format |
-|------|-------------------|-------------------|
+| ---- | ----------------- | ----------------- |
 | Claude | `.claude/settings.local.json` | `permissions.allow[]` |
 | Gemini | `.gemini/settings.json` | `permissions.allow[]` |
 | Copilot | `.github/copilot-settings.json` | TBD |
