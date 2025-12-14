@@ -18,10 +18,22 @@ Found a bug? Something unclear? Open an issue. Describe what you expected, what 
 
 ## Pull Requests
 
+For detailed PR workflow guidance, see [PR Review Guidance](.ai-instructions/concepts/pr-review-guidance.md).
+
 ### Before You Start
 
 - Check if there's already an issue or PR for what you're planning
 - For big changes, maybe open an issue first to discuss (or don't, I'm not your boss)
+
+### AI Reviewers
+
+PRs are reviewed by AI assistants. You can also manually summon them:
+
+- **Claude**: Comment `@claude` on the PR
+- **Gemini**: Comment `/gemini review` on the PR
+- **Copilot**: Tag `@copilot` on the PR
+
+AI feedback is suggestions - use your judgment on what to address.
 
 ### Code Style
 
