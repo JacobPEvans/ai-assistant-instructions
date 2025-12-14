@@ -13,6 +13,8 @@
     "terraform"
   ],
   "words": [
+    "PRRC",
+    "PRRT",
     "anthropic",
     "autofix",
     "autofixes",
@@ -39,8 +41,6 @@
     "oneline",
     "openai",
     "paydown",
-    "PRRC",
-    "PRRT",
     "rankdir",
     "roksechs",
     "styleguide",
