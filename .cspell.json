@@ -3,12 +3,13 @@
   "version": "0.2",
   "language": "en",
   "dictionaries": [
-    "softwareTerms",
-    "git",
-    "npm",
-    "node",
+    "data-science",
     "docker",
+    "git",
     "k8s",
+    "node",
+    "npm",
+    "softwareTerms",
     "terraform"
   ],
   "words": [
@@ -57,8 +58,8 @@
     "**/*.md"
   ],
   "ignorePaths": [
-    "node_modules",
     ".git",
-    "agent-os"
+    "agent-os",
+    "node_modules"
   ]
 }
