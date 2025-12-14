@@ -1,5 +1,6 @@
 ---
 description: Process for providing thorough, constructive code reviews
+model: opus
 author: JacobPEvans
 allowed-tools: Task, TaskOutput, TodoWrite, Glob, Grep, Read
 ---

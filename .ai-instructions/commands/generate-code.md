@@ -1,5 +1,6 @@
 ---
 description: Standards for generating high-quality, maintainable, and secure code
+model: opus
 allowed-tools: "*"
 author: JacobPEvans
 ---

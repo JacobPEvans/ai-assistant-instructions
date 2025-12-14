@@ -1,6 +1,7 @@
 ---
 title: "Shape Issues"
 description: "Shape raw ideas into actionable GitHub Issues using iterative exploration and timebox-based prioritization"
+model: opus
 type: "command"
 version: "1.0.0"
 allowed-tools: "*"

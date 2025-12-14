@@ -1,6 +1,7 @@
 ---
 title: "Review PR"
 description: "Conduct comprehensive PR reviews with systematic analysis, quality checks, and constructive feedback"
+model: opus
 type: "command"
 version: "1.0.0"
 allowed-tools: "*"
