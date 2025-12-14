@@ -25,16 +25,6 @@ For detailed PR workflow guidance, see [PR Review Guidance](.ai-instructions/con
 - Check if there's already an issue or PR for what you're planning
 - For big changes, maybe open an issue first to discuss (or don't, I'm not your boss)
 
-### AI Reviewers
-
-PRs are reviewed by AI assistants. You can also manually summon them:
-
-- **Claude**: Comment `@claude` on the PR
-- **Gemini**: Comment `/gemini review` on the PR
-- **Copilot**: Tag `@copilot` on the PR
-
-AI feedback is suggestions - use your judgment on what to address.
-
 ### Code Style
 
 This repo has markdown linting via `markdownlint-cli2`. The pre-commit hooks will catch most issues, but if you want to check locally:

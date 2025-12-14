@@ -22,7 +22,7 @@ or manually summoned via PR comments.
 - **Other commands**:
   - `/gemini summary` - Generate a summary of changes
   - `/gemini help` - Show available commands
-- **Configuration**: Repository settings or `.gemini/` configuration
+- **Configuration**: Repository settings or `.gemini/`
 
 ### GitHub Copilot
 
