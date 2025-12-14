@@ -65,8 +65,6 @@ Keys are NEVER stored in files or environment variables.
 
 ## Core Principles
 
-From [INSTRUCTIONS.md](../.ai-instructions/INSTRUCTIONS.md):
-
 - **Accuracy and Truth**: Prioritize correctness over pleasing the user
 - **Idempotency**: Operations should be repeatable with consistent results
 - **Best Practices**: Follow industry and project-specific standards
