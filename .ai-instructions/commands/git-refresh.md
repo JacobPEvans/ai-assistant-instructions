@@ -1,7 +1,7 @@
 ---
 description: Merge current branch's PR (if mergeable), sync local repo, and cleanup stale worktrees
 model: haiku
-allowed-tools: Bash(git fetch:*), Bash(git branch:*), Bash(git checkout:*), Bash(git switch:*), Bash(git pull:*), Bash(git log:*), Bash(gh pr view:*), Bash(gh pr merge:*), Bash(gh pr list:*), Bash(git worktree list:*), Bash(git worktree prune:*), Bash(git worktree remove:*)
+allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh pr list:*), Bash(gh pr merge:*), Bash(gh pr view:*), Bash(git branch:*), Bash(git checkout:*), Bash(git fetch:*), Bash(git log:*), Bash(git pull:*), Bash(git status:*), Bash(git switch:*), Bash(git worktree list:*), Bash(git worktree prune:*), Bash(git worktree remove:*), Bash(grep:*)
 ---
 
 # Git Refresh
@@ -111,7 +111,13 @@ git worktree prune
 
 ### 5. Summary
 
-Provide a brief summary including:
+5.1. Verify current state:
+
+```bash
+git status
+```
+
+5.2. Provide a brief summary including:
 
 - PRs merged (if any)
 - Branches cleaned up (if any)

@@ -1,7 +1,7 @@
 ---
 description: Scan local AI settings and merge safe permissions into repo
-model: sonnet
-allowed-tools: Bash(find:*), Read(**), Glob(**), Grep(**), Write(**), Bash(cat:*), Bash(rm:*)
+model: opus
+allowed-tools: Task, TaskOutput, TodoWrite, Bash(cat:*), Bash(find:*), Bash(rm:*), Glob(**), Grep(**), Read(**), Write(**)
 ---
 
 # Sync Permissions

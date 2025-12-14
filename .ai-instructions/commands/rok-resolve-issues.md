@@ -1,6 +1,7 @@
 ---
 title: "Resolve Issues"
 description: "Analyze and resolve GitHub Issues efficiently with intelligent prioritization and batch processing"
+model: opus
 type: "command"
 version: "1.0.0"
 allowed-tools: "*"

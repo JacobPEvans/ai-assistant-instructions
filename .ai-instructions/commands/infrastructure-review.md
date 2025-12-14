@@ -1,7 +1,8 @@
 ---
 description: Review Infrastructure as Code (Terraform/Terragrunt) for security, cost-efficiency, and best practices
-allowed-tools: Read, Grep, Glob, Bash(terraform:*), Bash(terragrunt:*)
+model: opus
 author: JacobPEvans
+allowed-tools: Task, TaskOutput, TodoWrite, Bash(terraform:*), Bash(terragrunt:*), Glob, Grep, Read
 ---
 
 # Prompt: Review Infrastructure

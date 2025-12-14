@@ -7,8 +7,10 @@ on:
 jobs:
   claude:
     name: "Claude Code Review"
+    # DISABLED: Workflow is burning tokens without providing value
+    if: false
     # Prevent workflow from running on forked PRs to protect secrets
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    # if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     permissions:
       contents: read

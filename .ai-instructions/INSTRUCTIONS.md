@@ -8,6 +8,21 @@
 - **Clarity**: Ask for clarification when a request is ambiguous or incomplete.
 - **No Sycophancy**: Do not cater to bad ideas or prioritize pleasing the user over providing correct and sound advice.
 
+## Critical Workflow Rule
+
+**ALWAYS run `/init-worktree` before starting any new development work.** This ensures:
+
+- Clean isolation from other concurrent sessions
+- No accidental changes to main branch
+- Automatic cleanup of stale worktrees
+- Fresh workspace based on latest main
+
+**Exceptions** (skip /init-worktree only for):
+
+- 1-line typo/config fixes on main
+- Read-only exploration/research tasks
+- Working in an already-initialized worktree
+
 ## Multiple AI System Usage
 
 This repository works with multiple AI assistants: GitHub Copilot, Claude, and Gemini.
@@ -61,29 +76,45 @@ Refer to the **[Styleguide](./concepts/styleguide.md)** for:
 
 ### Creating a Worktree
 
+**Use `/init-worktree` to automatically set up a clean workspace:**
+
 ```bash
-# From the main repo directory
-git worktree add ../project-name-feature -b feat/feature-name main
+/init-worktree [description]
+```
+
+This command will:
+
+1. Clean up stale worktrees
+2. Sync main branch with remote
+3. Create new worktree in `~/git/worktrees/`
+4. Create and switch to new branch
+5. Switch to the worktree directory
+
+**Manual worktree creation** (for advanced use only):
+
+```bash
+git worktree add ~/git/worktrees/project-name-feature -b feat/feature-name main
 ```
 
 ### When to Use Worktrees
 
-| Scenario | Worktree Required? |
-| -------- | ------------------ |
-| New feature development | Yes |
-| Bug fixes requiring multiple files | Yes |
-| PR review feedback implementation | Yes (use existing worktree) |
-| Quick typo/config fix (1-2 lines) | No - direct on main is acceptable |
-| Documentation updates | Yes, if significant changes |
+| Scenario | Worktree Required? | Command to Use |
+| -------- | ------------------ | -------------- |
+| New feature development | Yes | `/init-worktree` |
+| Bug fixes requiring multiple files | Yes | `/init-worktree` |
+| PR review feedback implementation | Yes (use existing worktree) | Switch to existing worktree |
+| Quick typo/config fix (1-2 lines) | No - direct on main is acceptable | N/A |
+| Documentation updates | Yes, if significant changes | `/init-worktree` |
 
 ### Worktree Cleanup
 
-Use `/git-refresh` to automatically clean up worktrees whose branches have been merged or deleted.
+Use `/git-refresh` or `/init-worktree` to automatically clean up worktrees whose branches have been merged or deleted.
 
 ## Commands
 
 ### Core Commands
 
+- **[Init Worktree](./commands/init-worktree.md)**: Initialize a clean worktree for new development work
 - **[Pull Request](./commands/pull-request.md)**: Complete PR lifecycle management from creation to merge
 - **[Git Refresh](./commands/git-refresh.md)**: Merge PRs, sync repo, and cleanup stale worktrees
 - **[Generate Code](./commands/generate-code.md)**: Code generation standards and technology-specific guidelines

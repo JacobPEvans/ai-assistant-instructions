@@ -1,9 +1,10 @@
 ---
 title: "Respond to Reviews"
 description: "Respond to PR review feedback efficiently with systematic resolution, parallel sub-agents, and GitHub thread resolution"
+model: opus
 type: "command"
 version: "1.2.0"
-allowed-tools: Read, Edit, Write, Glob, Grep, Bash, Task, TodoWrite, WebFetch
+allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Edit, Glob, Grep, Read, WebFetch, Write
 think: true
 author: "roksechs"
 source: "https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3"

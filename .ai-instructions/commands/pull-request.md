@@ -1,7 +1,8 @@
 ---
 description: Complete workflow for creating, monitoring, and fixing pull requests until ready to merge
-allowed-tools: Read, Bash(git:*), Bash(gh:*), Bash(markdownlint-cli2:*)
+model: haiku
 author: JacobPEvans
+allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Bash(markdownlint-cli2:*), Read
 ---
 
 # Task: Pull Request Management

@@ -1,12 +1,17 @@
 ---
-description: Initialize a new change with worktree cleanup and fresh branch
+description: "[DEPRECATED] Use /init-worktree instead"
 model: haiku
-allowed-tools: Bash(git worktree list:*), Bash(git worktree remove:*), Bash(git worktree prune:*), Bash(git worktree add:*), Bash(git fetch:*), Bash(git pull:*), Bash(git branch:*), Bash(git switch:*), Bash(git checkout:*), Bash(git status:*), Bash(gh pr list:*), Bash(gh pr view:*), Bash(gh issue view:*), Bash(pwd:*), Bash(ls:*)
+allowed-tools:
+  - SlashCommand(/init-worktree)
 ---
 
 # Init Change
 
-Initialize a new change by cleaning up stale worktrees, syncing main, and creating a fresh worktree.
+**⚠️ DEPRECATED**: This command is deprecated. Use `/init-worktree` instead.
+
+## Migration
+
+Replace `/init-change` with `/init-worktree` in your workflow.
 
 ## Parameters
 

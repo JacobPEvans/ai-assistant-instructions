@@ -1,7 +1,8 @@
 ---
 description: Review documentation files for consistency, completeness, and markdownlint compliance
-allowed-tools: Read, Grep, Glob, Bash(markdownlint-cli2:*)
+model: haiku
 author: JacobPEvans
+allowed-tools: Task, TaskOutput, TodoWrite, Bash(markdownlint-cli2:*), Glob, Grep, Read
 ---
 
 # Prompt: Review Documentation
