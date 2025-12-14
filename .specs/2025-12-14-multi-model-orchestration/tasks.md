@@ -8,12 +8,12 @@
 
 ### Setup
 
-- [ ] Verify worktree status in `nix-config/` (branch: `feat/ai-orchestration-module`)
-- [ ] Verify worktree status in `ai-assistant-instructions/` (branch: `feat/multi-model-orchestration`)
+- [x] Verify worktree status in `nix-config/` (branch: `feat/ai-orchestration-module`)
+- [x] Verify worktree status in `ai-assistant-instructions/` (branch: `feat/multi-model-orchestration`)
 
 ### Master Module
 
-- [ ] Create `nix-config/modules/ai-orchestration/default.nix` with options:
+- [x] Create `nix-config/modules/ai-orchestration/default.nix` with options:
   - `enable` - Enable multi-model orchestration
   - `localOnlyMode` - Use only Ollama (no cloud APIs)
   - `defaultResearchModel`, `defaultCodingModel`, `defaultFastModel`
@@ -23,30 +23,30 @@
 
 ### agentsmd Directory Structure
 
-- [ ] Create `agentsmd/` directory in ai-assistant-instructions repo
-- [ ] Create `agentsmd/AGENTS.md` with PAL MCP routing rules
-- [ ] Create `agentsmd/rules/` directory (renamed from concepts/)
-- [ ] Create `agentsmd/workflows/` directory
-- [ ] Create `agentsmd/docs/` directory
-- [ ] Move `orchestrator-prompt.txt` to `agentsmd/workflows/`
+- [x] Create `agentsmd/` directory in ai-assistant-instructions repo
+- [x] Create `agentsmd/AGENTS.md` with PAL MCP routing rules
+- [x] Create `agentsmd/rules/` directory (renamed from concepts/)
+- [x] Create `agentsmd/workflows/` directory
+- [x] Create `agentsmd/docs/` directory
+- [ ] Move `orchestrator-prompt.txt` to `agentsmd/workflows/` (skipped - file doesn't exist yet)
 
 ### Symlinks
 
-- [ ] Set up symlink: `agentsmd/.claude/` → `~/.claude/`
-- [ ] Set up symlink: `agentsmd/.gemini/` → `~/.gemini/`
-- [ ] Set up symlink: `agentsmd/.copilot/` → `~/.copilot/`
-- [ ] Set up symlink: `agentsmd/AGENTS.md` → `~/AGENTS.md`
+- [x] Set up symlink: `agentsmd/.claude/` → `~/.claude/`
+- [x] Set up symlink: `agentsmd/.gemini/` → `~/.gemini/`
+- [x] Set up symlink: `agentsmd/.copilot/` → `~/.copilot/`
+- [x] Set up symlink: `agentsmd/AGENTS.md` → `~/AGENTS.md`
 
 ### Documentation
 
-- [ ] Document 'ai-secrets' keychain manual setup in `agentsmd/docs/keychain-setup.md`
-- [ ] Include: `security create-keychain -p "" ai-secrets.keychain-db`
-- [ ] Include: Adding API keys with `security add-generic-password`
+- [x] Document 'ai-secrets' keychain manual setup in `agentsmd/docs/keychain-setup.md`
+- [x] Include: `security create-keychain -p "" ai-secrets.keychain-db`
+- [x] Include: Adding API keys with `security add-generic-password`
 
 ### Validation & PR
 
-- [ ] Test that Nix module imports correctly
-- [ ] Verify all symlinks resolve properly
+- [x] Test that Nix module imports correctly
+- [x] Verify all symlinks resolve properly
 - [ ] Create PR 1: "feat(ai-orchestration): Infrastructure & Structure"
 
 ---
