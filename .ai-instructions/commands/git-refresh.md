@@ -21,6 +21,8 @@ allowed-tools:
   - Bash(gh pr list:*)
   - Bash(gh pr merge:*)
   - Bash(gh pr view:*)
+  # Shell utilities
+  - Bash(grep:*)
 ---
 
 # Git Refresh

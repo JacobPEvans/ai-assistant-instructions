@@ -26,6 +26,12 @@ allowed-tools:
   - Bash(ls:*)
   - Bash(mkdir:*)
   - Bash(pwd:*)
+  # Shell utilities
+  - Bash(awk:*)
+  - Bash(basename:*)
+  - Bash(grep:*)
+  - Bash(head:*)
+  - Bash(tr:*)
 ---
 
 # Init Worktree
