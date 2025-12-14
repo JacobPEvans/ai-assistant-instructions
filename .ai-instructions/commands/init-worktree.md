@@ -1,37 +1,7 @@
 ---
 description: Initialize a clean worktree for new development work
 model: haiku
-allowed-tools:
-  # Core tools (required for all commands)
-  - Task
-  - TaskOutput
-  - TodoWrite
-  # Git operations
-  - Bash(git branch:*)
-  - Bash(git checkout:*)
-  - Bash(git fetch:*)
-  - Bash(git pull:*)
-  - Bash(git rev-parse:*)
-  - Bash(git status:*)
-  - Bash(git switch:*)
-  - Bash(git worktree add:*)
-  - Bash(git worktree list:*)
-  - Bash(git worktree prune:*)
-  - Bash(git worktree remove:*)
-  # GitHub CLI
-  - Bash(gh pr list:*)
-  - Bash(gh pr view:*)
-  # Filesystem
-  - Bash(cd:*)
-  - Bash(ls:*)
-  - Bash(mkdir:*)
-  - Bash(pwd:*)
-  # Shell utilities
-  - Bash(awk:*)
-  - Bash(basename:*)
-  - Bash(grep:*)
-  - Bash(head:*)
-  - Bash(tr:*)
+allowed-tools: Task, TaskOutput, TodoWrite, Bash(awk:*), Bash(basename:*), Bash(cd:*), Bash(gh pr list:*), Bash(gh pr view:*), Bash(git branch:*), Bash(git checkout:*), Bash(git fetch:*), Bash(git pull:*), Bash(git rev-parse:*), Bash(git status:*), Bash(git switch:*), Bash(git worktree add:*), Bash(git worktree list:*), Bash(git worktree prune:*), Bash(git worktree remove:*), Bash(grep:*), Bash(head:*), Bash(ls:*), Bash(mkdir:*), Bash(pwd:*), Bash(tr:*)
 ---
 
 # Init Worktree

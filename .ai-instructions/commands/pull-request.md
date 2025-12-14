@@ -1,18 +1,7 @@
 ---
 description: Complete workflow for creating, monitoring, and fixing pull requests until ready to merge
 author: JacobPEvans
-allowed-tools:
-  # Core tools (required for all commands)
-  - Task
-  - TaskOutput
-  - TodoWrite
-  # File operations
-  - Read
-  # Git & GitHub
-  - Bash(gh:*)
-  - Bash(git:*)
-  # Linting
-  - Bash(markdownlint-cli2:*)
+allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Bash(markdownlint-cli2:*), Read
 ---
 
 # Task: Pull Request Management

@@ -1,15 +1,7 @@
 ---
 description: Process for providing thorough, constructive code reviews
 author: JacobPEvans
-allowed-tools:
-  # Core tools (required for all commands)
-  - Task
-  - TaskOutput
-  - TodoWrite
-  # File operations
-  - Glob
-  - Grep
-  - Read
+allowed-tools: Task, TaskOutput, TodoWrite, Glob, Grep, Read
 ---
 
 # Task: Review Code

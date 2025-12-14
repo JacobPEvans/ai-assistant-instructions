@@ -1,18 +1,7 @@
 ---
 description: Review Infrastructure as Code (Terraform/Terragrunt) for security, cost-efficiency, and best practices
 author: JacobPEvans
-allowed-tools:
-  # Core tools (required for all commands)
-  - Task
-  - TaskOutput
-  - TodoWrite
-  # File operations
-  - Glob
-  - Grep
-  - Read
-  # IaC tools
-  - Bash(terraform:*)
-  - Bash(terragrunt:*)
+allowed-tools: Task, TaskOutput, TodoWrite, Bash(terraform:*), Bash(terragrunt:*), Glob, Grep, Read
 ---
 
 # Prompt: Review Infrastructure
