@@ -47,7 +47,9 @@
 
 - [x] Test that Nix module imports correctly
 - [x] Verify all symlinks resolve properly
-- [ ] Create PR 1: "feat(ai-orchestration): Infrastructure & Structure"
+- [x] Create PR 1: "feat(ai-orchestration): Infrastructure & Structure"
+  - ai-assistant-instructions: <https://github.com/JacobPEvans/ai-assistant-instructions/pull/104>
+  - nix-config: <https://github.com/JacobPEvans/nix/pull/111>
 
 ---
 
