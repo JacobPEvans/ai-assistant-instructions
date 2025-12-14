@@ -7,6 +7,8 @@ on:
 jobs:
   triage:
     name: "Triage New Issue"
+    # DISABLED: Workflow is burning tokens without providing value
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
