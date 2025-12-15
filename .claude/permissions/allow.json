@@ -500,7 +500,6 @@
     "WebFetch(domain:ai.google.dev)",
     "WebFetch(domain:*.apple.com)",
     "WebFetch(domain:*.openai.com)",
-    "WebFetch(domain:developers.openai.com)",
     "WebFetch(domain:nix-community.github.io)",
     "WebFetch(domain:orb.cx)",
     "WebFetch(domain:lychee.cli.rs)",
