@@ -19,7 +19,7 @@
   - `defaultResearchModel`, `defaultCodingModel`, `defaultFastModel`
   - `localResearchModel`, `localCodingModel`
   - `secretsBackend` - "keychain" (macOS Keychain 'ai-secrets')
-  - `ollamaHost` - default "<http://localhost:11434>"
+  - `ollamaHost` - default `http://localhost:11434`
 
 ### agentsmd Directory Structure
 

@@ -1,0 +1,1 @@
+../.ai-instructions/INSTRUCTIONS.md
