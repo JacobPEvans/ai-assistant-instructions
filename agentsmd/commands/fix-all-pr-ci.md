@@ -1,3 +1,10 @@
+---
+description: Orchestrate parallel subagents to fix all CI failures across all open PRs in all repositories
+model: sonnet
+author: JacobPEvans
+allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Read, Grep, Glob
+---
+
 # Fix All PR CI Failures
 
 **Purpose**: Systematically resolve all CI failures across all open pull requests by launching parallel subagents that work autonomously until all PRs are 100% mergeable.
