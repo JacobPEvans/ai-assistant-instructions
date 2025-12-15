@@ -74,13 +74,16 @@ Full details in [`.ai-instructions/workflows/`](.ai-instructions/workflows/).
 | `/generate-code` | Scaffold new code with standards |
 | `/git-refresh` | Merge PRs, sync repo, cleanup stale worktrees |
 | `/infrastructure-review` | Review Terraform/Terragrunt code |
+| `/init-worktree` | Initialize a clean worktree for development |
 | `/pull-request` | Complete PR lifecycle management |
+| `/pull-request-review-feedback` | Resolve PR review threads via GraphQL |
 | `/review-code` | Structured code review |
 | `/review-docs` | Review and improve documentation |
+| `/sync-permissions` | Sync AI assistant permissions to repo |
 
 **Community commands** (rok-* series): `/rok-shape-issues`, `/rok-resolve-issues`, `/rok-review-pr`, `/rok-respond-to-reviews`
 
-All 10 commands live in [`.ai-instructions/commands/`](.ai-instructions/commands/).
+All 13 commands live in [`.ai-instructions/commands/`](.ai-instructions/commands/).
 
 ## Core Concepts
 

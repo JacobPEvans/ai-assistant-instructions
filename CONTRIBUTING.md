@@ -18,6 +18,8 @@ Found a bug? Something unclear? Open an issue. Describe what you expected, what 
 
 ## Pull Requests
 
+For detailed PR workflow guidance, see [PR Review Guidance](.ai-instructions/concepts/pr-review-guidance.md).
+
 ### Before You Start
 
 - Check if there's already an issue or PR for what you're planning
