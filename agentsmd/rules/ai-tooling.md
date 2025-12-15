@@ -26,8 +26,8 @@ On every session start, read the relevant settings file for your AI assistant to
 
 | AI Tool | Settings File | Permission Format |
 | ------- | ------------- | ----------------- |
-| Claude  | `~/.claude/settings.json` | `permissions.allow[]` with `Bash(cmd:*)` syntax |
-| Gemini  | `~/.gemini/settings.json` | `tools.allowed[]` with `run_shell_command(cmd)` syntax |
+| Claude | `~/.claude/settings.json` | `permissions.allow[]` with `Bash(cmd:*)` syntax |
+| Gemini | `~/.gemini/settings.json` | `tools.allowed[]` with `run_shell_command(cmd)` syntax |
 | Copilot | `~/.copilot/settings.json` | TBD |
 
 **Note**: Gemini CLI had a breaking format change in September 2025.
