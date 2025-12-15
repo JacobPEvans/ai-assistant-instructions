@@ -1,4 +1,9 @@
 {
+  // Note: $schema references main branch instead of a specific version because
+  // cclint does not currently publish versioned releases. This tradeoff allows
+  // schema validation against the latest upstream schema, with the understanding
+  // that breaking upstream changes could affect local validation. Consider pinning
+  // to a specific commit if stability becomes a priority.
   "$schema": "https://raw.githubusercontent.com/carlrannaberg/cclint/main/schema.json",
   "description": "cclint configuration for ai-assistant-instructions repository",
   "version": "1.0.0"
