@@ -47,8 +47,8 @@ All configuration managed via Nix with proper modularization.
 ### Models to Add When Ollama Updates
 
 ```bash
-# When available:
-ollama pull devstral-2:latest    # Mistral's latest code model (needs newer Ollama)
+# Not yet available as of December 2025. Check https://ollama.ai/library for updates.
+# ollama pull devstral-2:latest    # Mistral's latest code model
 ```
 
 ### Model Research Protocol (For Future Updates)
