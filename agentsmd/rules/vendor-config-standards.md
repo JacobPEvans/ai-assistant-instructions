@@ -5,7 +5,7 @@
 This repository is designed to work with multiple AI assistants. To avoid duplicating instructions and to maintain a single source of truth, we follow the
 DRY (Don't Repeat Yourself) principle.
 
-- **Canonical Source**: The `.ai-instructions/` directory is the single source of truth for all workflows, concepts, and commands.
+- **Canonical Source**: The `agentsmd/` directory is the single source of truth for all workflows, rules, and commands.
 - **Vendor Directories**: Directories like `.copilot/`, `.claude/`, or `.github/` are for vendor-specific configuration. They should **not** contain duplicated
   content.
 
@@ -22,7 +22,7 @@ canonical documentation.
 This file provides context on <concept>.
 
 For detailed information, please refer to the canonical documentation:
-**[<Link to the relevant file in .ai-instructions>](<relative-path-to-file>)**
+**[<Link to the relevant file in agentsmd>](<relative-path-to-file>)**
 ```
 
 ### Example: `.copilot/WORKSPACE.md`

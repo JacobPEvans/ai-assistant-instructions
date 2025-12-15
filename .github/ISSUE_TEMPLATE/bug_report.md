@@ -61,4 +61,4 @@ assignees: ''
 
 ---
 
-*Thanks for reporting. See [GitHub Issue Standards](../../.ai-instructions/concepts/github-issue-standards.md) for best practices.*
+*Thanks for reporting. See [GitHub Issue Standards](../../agentsmd/rules/github-issue-standards.md) for best practices.*

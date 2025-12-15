@@ -44,9 +44,9 @@ consistent, high-quality assistance across multiple development environments and
    - Changes require validation against GitHub Copilot best practices
    - Must maintain compatibility with VS Code, GitHub web interface, and Visual Studio
 
-2. **`.copilot/` Directory**: Symlinks to `.ai-instructions/` for Copilot integration
-   - All files are symlinks pointing to canonical sources in `.ai-instructions/`
-   - Changes should be made in `.ai-instructions/`, not in vendor directories
+2. **`.copilot/` Directory**: Symlinks to `agentsmd/` for Copilot integration
+   - All files are symlinks pointing to canonical sources in `agentsmd/`
+   - Changes should be made in `agentsmd/`, not in vendor directories
 
 3. **`.github/prompts/`**: Reusable prompt templates
    - New prompts must include clear purpose and usage examples

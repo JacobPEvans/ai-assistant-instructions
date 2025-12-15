@@ -22,7 +22,7 @@ Review the project's documentation files (`.md`) for consistency, completeness, 
     * Run `find . -name "*.md" -type f` to get complete file list
     * Identify documentation gaps by comparing against code structure
     * Reference specific files: "Review @README.md for accuracy"
-    * Check documentation hierarchy: "Analyze @.ai-instructions/ structure"
+    * Check documentation hierarchy: "Analyze @agentsmd/ structure"
 
 2. **Automated Fixes (REQUIRED FIRST STEP)**:
     * **ALWAYS run auto-fix first**: `markdownlint-cli2 --fix .`
@@ -49,10 +49,10 @@ Review the project's documentation files (`.md`) for consistency, completeness, 
     * Test documented commands and workflows (e.g., `make test`, `npm test`, `terraform apply`, etc.)
 
 5. **Project Standards Compliance**:
-    * Follow [Documentation Standards](./../concepts/documentation-standards.md)
+    * Follow [Documentation Standards](./../rules/documentation-standards.md)
     * Use hierarchical numbering (1., 1.1., 1.1.1.) for AI-trackable structure
     * Ensure AI-first writing (concise, structured)
-    * Verify adherence to [DRY Principle](./../concepts/dry-principle.md)
+    * Verify adherence to [DRY Principle](./../rules/dry-principle.md)
     * Link to other documents instead of repeating information
 
 6. **AI-Friendly Formatting**:
@@ -62,9 +62,9 @@ Review the project's documentation files (`.md`) for consistency, completeness, 
     * Structure content for AI consumption with numbered steps and subtasks
 
 7. **Memory Bank Integration**:
-    * Update [Technical Context](./../concepts/memory-bank/technical-context.md) if needed
-    * Sync [Project Brief](./../concepts/memory-bank/project-brief.md) with changes
-    * Maintain [Progress Tracking](./../concepts/memory-bank/progress-tracking.md)
+    * Update [Technical Context](./../rules/memory-bank/technical-context.md) if needed
+    * Sync [Project Brief](./../rules/memory-bank/project-brief.md) with changes
+    * Maintain [Progress Tracking](./../rules/memory-bank/progress-tracking.md)
 
 8. **Link Validation**:
     * Check that all internal and external links are valid and point to the correct location
