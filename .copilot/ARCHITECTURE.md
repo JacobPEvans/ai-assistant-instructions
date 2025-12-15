@@ -1,1 +1,1 @@
-../.ai-instructions/concepts/architecture.md
+../agentsmd/rules/architecture.md
