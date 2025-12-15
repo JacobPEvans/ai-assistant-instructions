@@ -1,1 +1,1 @@
-../../.ai-instructions/commands/rok-shape-issues.md
+../../agentsmd/commands/rok-shape-issues.md

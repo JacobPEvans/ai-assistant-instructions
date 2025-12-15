@@ -1,1 +1,1 @@
-../../.ai-instructions/commands/sync-permissions.md
+../../agentsmd/commands/sync-permissions.md
