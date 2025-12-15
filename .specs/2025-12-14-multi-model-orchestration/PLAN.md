@@ -57,9 +57,9 @@ ollama pull devstral-2:latest    # Mistral's latest code model (needs newer Olla
 ## How to Research Latest Models
 
 1. Check official sources first:
-   - https://ollama.ai/library (sorted by updated)
-   - https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard
-   - https://paperswithcode.com/sota
+   - <https://ollama.ai/library> (sorted by updated)
+   - <https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard>
+   - <https://paperswithcode.com/sota>
 
 2. Search pattern: "[model family] latest December 2025"
 
@@ -208,7 +208,9 @@ def main():
     print(json.dumps(results, indent=2))
 
     # Save to file for tracking over time
-    with open("~/.config/ai-orchestration/model-benchmarks.json", "w") as f:
+    import os
+    config_path = os.path.expanduser("~/.config/ai-orchestration/model-benchmarks.json")
+    with open(config_path, "w") as f:
         json.dump(results, f, indent=2)
 
 if __name__ == "__main__":

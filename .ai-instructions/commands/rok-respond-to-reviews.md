@@ -88,6 +88,7 @@ gh api graphql -f query='
           comments(first: 10) {
             nodes {
               id
+              databaseId
               body
               author { login }
               createdAt
@@ -203,13 +204,13 @@ Does the criticism/suggestion have merit?
 **Action**: Post reply using GitHub CLI.
 
 ```bash
-# Get numeric comment ID for replies
-gh api repos/OWNER/REPO/pulls/PR_NUMBER/comments | jq '.[] | select(.id == NUMERIC_ID)'
+# Use the databaseId from Step 1's GraphQL query result
+# (The databaseId field is now included in the comments.nodes query)
 
-# Reply to comment
+# Reply to comment using the databaseId from Step 1
 gh api repos/OWNER/REPO/pulls/PR_NUMBER/comments \
   -f body="Your reply text" \
-  -F in_reply_to=NUMERIC_COMMENT_ID
+  -F in_reply_to=DATABASE_ID
 ```
 
 **Reply format** (choose template based on action taken):
