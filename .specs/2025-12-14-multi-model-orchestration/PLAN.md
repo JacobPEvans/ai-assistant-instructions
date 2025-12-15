@@ -169,6 +169,7 @@ cd ~/.config/nix && git worktree add \
 #!/usr/bin/env python3
 """Benchmark local Ollama models for token speed and usability."""
 
+import os
 import subprocess
 import time
 import json
@@ -208,7 +209,7 @@ def main():
     print(json.dumps(results, indent=2))
 
     # Save to file for tracking over time
-    with open("~/.config/ai-orchestration/model-benchmarks.json", "w") as f:
+    with open(os.path.expanduser("~/.config/ai-orchestration/model-benchmarks.json"), "w") as f:
         json.dump(results, f, indent=2)
 
 if __name__ == "__main__":
@@ -678,6 +679,20 @@ in {
 **Tasks:**
 
 6.1. Create Python automation script (not shell)
+
+> **SECURITY WARNING**: This script uses `--dangerously-skip-permissions` which bypasses all permission checks and allows the AI agent to
+> execute any command without user confirmation. This is a critical security risk and should ONLY be used in:
+>
+> - Heavily sandboxed environments (e.g., dedicated Docker containers)
+> - Non-production systems with limited access to sensitive data
+> - Environments with proper isolation and rollback mechanisms
+>
+> Even with `--allowedTools` restrictions, this grants significant autonomy. Consider:
+>
+> - Running in a dedicated container with minimal privileges
+> - Implementing audit logging of all executed commands
+> - Regular review of task definitions and allowed tools
+> - Clear documentation of the risk/benefit tradeoff
 
 ```python
 #!/usr/bin/env python3
