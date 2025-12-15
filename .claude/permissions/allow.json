@@ -440,15 +440,13 @@
     "Bash(orbctl version:*)",
 
     "WebFetch(domain:github.com)",
-    "WebFetch(domain:api.github.com)",
-    "WebFetch(domain:docs.github.com)",
-    "WebFetch(domain:raw.githubusercontent.com)",
+    "WebFetch(domain:githubusercontent.com)",
     "WebFetch(domain:anthropic.com)",
-    "WebFetch(domain:docs.anthropic.com)",
     "WebFetch(domain:nixos.org)",
     "WebFetch(domain:hashicorp.com)",
     "WebFetch(domain:terraform.io)",
     "WebFetch(domain:geminicli.com)",
+    "WebFetch(domain:google.dev)",
     "WebFetch(domain:npmjs.com)",
     "WebFetch(domain:docker.com)",
     "WebFetch(domain:kubernetes.io)",
@@ -460,12 +458,11 @@
     "WebFetch(domain:stackoverflow.com)",
     "WebFetch(domain:mozilla.org)",
     "WebFetch(domain:openai.com)",
-    "WebFetch(domain:ai.google.dev)",
 
     "Bash(nixfmt-rfc-style --version:*)",
     "Bash(nixfmt:*)",
     "Bash(nix fmt:*)",
     "Bash(statix check:*)",
-    "Bash(deadnix)"
+    "Bash(deadnix:*)"
   ]
 }

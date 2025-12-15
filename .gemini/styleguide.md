@@ -1,1 +1,1 @@
-../.ai-instructions/concepts/styleguide.md
+../agentsmd/rules/styleguide.md

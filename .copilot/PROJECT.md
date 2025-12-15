@@ -1,1 +1,1 @@
-../.ai-instructions/concepts/project-scope.md
+../agentsmd/rules/project-scope.md

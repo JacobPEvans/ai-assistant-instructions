@@ -1,1 +1,1 @@
-../../.ai-instructions/commands/init-worktree.md
+../../agentsmd/commands/init-worktree.md
