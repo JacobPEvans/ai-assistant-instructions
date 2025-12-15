@@ -28,7 +28,6 @@
 - [x] Create `agentsmd/rules/` directory (renamed from concepts/)
 - [x] Create `agentsmd/workflows/` directory
 - [x] Create `agentsmd/docs/` directory
-- [ ] Move `orchestrator-prompt.txt` to `agentsmd/workflows/` (skipped - file doesn't exist yet)
 
 ### Symlinks
 
