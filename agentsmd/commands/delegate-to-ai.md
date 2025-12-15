@@ -235,7 +235,7 @@ done
 
 ```bash
 # Test connectivity before delegating
-if ! curl -s --max-time 5 <https://generativelanguage.googleapis.com> > /dev/null; then
+if ! curl -s --max-time 5 https://generativelanguage.googleapis.com > /dev/null; then
   echo "Gemini API unreachable, using local Ollama"
   USE_LOCAL=true
 fi
