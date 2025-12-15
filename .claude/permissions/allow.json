@@ -466,6 +466,6 @@
     "Bash(nixfmt:*)",
     "Bash(nix fmt:*)",
     "Bash(statix check:*)",
-    "Bash(deadnix:*)"
+    "Bash(deadnix)"
   ]
 }
