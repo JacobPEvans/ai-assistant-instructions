@@ -13,8 +13,15 @@
     "terraform"
   ],
   "words": [
+    "codereview",
+    "deepseek",
+    "ollama",
+    "openrouter",
     "PRRC",
     "PRRT",
+    "qwen",
+    "svce",
+    "agentsmd",
     "anthropic",
     "autofix",
     "autofixes",
