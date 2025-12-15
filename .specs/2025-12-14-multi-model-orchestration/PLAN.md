@@ -285,7 +285,7 @@ in {
     };
 
     secretsBackend = lib.mkOption {
-      type = lib.types.enum [ "bitwarden" "aws-vault" ];
+      type = lib.types.enum [ "bitwarden" "aws-vault" "keychain" ];
       default = "bitwarden";
       description = "How to retrieve API keys at runtime";
     };
@@ -307,8 +307,11 @@ in {
 
 let
   cfg = config.services.ai-orchestration.pal-mcp;
-  secretsCmd = if config.services.ai-orchestration.secretsBackend == "bitwarden"
+  secretsCmd =
+    if config.services.ai-orchestration.secretsBackend == "bitwarden"
     then "bws secret get"
+    else if config.services.ai-orchestration.secretsBackend == "keychain"
+    then "security find-generic-password -a $USER -s"
     else "aws-vault exec default -- printenv";
 in {
   options.services.ai-orchestration.pal-mcp = {
