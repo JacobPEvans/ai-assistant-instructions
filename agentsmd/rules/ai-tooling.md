@@ -24,9 +24,15 @@ By integrating an MCP server, you elevate the AI's capability from simple text g
 
 On every session start, read the relevant settings file for your AI assistant to understand which commands are pre-approved:
 
-- **Claude**: `~/.claude/settings.json`
-- **Gemini**: `~/.gemini/settings.json`
-- **Copilot**: `~/.copilot/settings.json`
+| AI Tool | Settings File | Permission Format |
+| ------- | ------------- | ----------------- |
+| Claude  | `~/.claude/settings.json` | `permissions.allow[]` with `Bash(cmd:*)` syntax |
+| Gemini  | `~/.gemini/settings.json` | `tools.allowed[]` with `run_shell_command(cmd)` syntax |
+| Copilot | `~/.copilot/settings.json` | TBD |
+
+**Note**: Gemini CLI had a breaking format change in September 2025.
+See [Gemini CLI Configuration](https://geminicli.com/docs/get-started/configuration/#example-settingsjson) for details.
+
 Always prefer using allowed commands to maintain automation flow without interrupting the user for confirmation.
 
 ### Handling Blocked Commands
