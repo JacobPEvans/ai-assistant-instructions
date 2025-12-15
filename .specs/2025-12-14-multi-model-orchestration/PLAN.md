@@ -169,6 +169,7 @@ cd ~/.config/nix && git worktree add \
 #!/usr/bin/env python3
 """Benchmark local Ollama models for token speed and usability."""
 
+import os
 import subprocess
 import time
 import json
@@ -208,7 +209,7 @@ def main():
     print(json.dumps(results, indent=2))
 
     # Save to file for tracking over time
-    with open("~/.config/ai-orchestration/model-benchmarks.json", "w") as f:
+    with open(os.path.expanduser("~/.config/ai-orchestration/model-benchmarks.json"), "w") as f:
         json.dump(results, f, indent=2)
 
 if __name__ == "__main__":
