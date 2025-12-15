@@ -57,9 +57,9 @@ ollama pull devstral-2:latest    # Mistral's latest code model (needs newer Olla
 ## How to Research Latest Models
 
 1. Check official sources first:
-   - https://ollama.ai/library (sorted by updated)
-   - https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard
-   - https://paperswithcode.com/sota
+   - <https://ollama.ai/library> (sorted by updated)
+   - <https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard>
+   - <https://paperswithcode.com/sota>
 
 2. Search pattern: "[model family] latest December 2025"
 
