@@ -60,7 +60,7 @@ security add-generic-password -a "$USER" -s "GEMINI_API_KEY" -w "..." ai-secrets
 security add-generic-password -a "$USER" -s "OPENROUTER_API_KEY" -w "sk-or-..." ai-secrets.keychain-db
 ```
 
-### Grok (xAI)
+### xAI (Grok)
 
 ```bash
 security add-generic-password -a "$USER" -s "XAI_API_KEY" -w "..." ai-secrets.keychain-db
