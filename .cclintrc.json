@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/carlrannaberg/cclint/main/schema.json",
+  "description": "cclint configuration for ai-assistant-instructions repository",
+  "version": "1.0.0"
+}
