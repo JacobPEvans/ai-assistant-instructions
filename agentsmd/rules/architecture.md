@@ -13,44 +13,44 @@ basic repository instructions to include comprehensive workspace management.
 ### Primary Instruction Files
 
 ```text
-.ai-instructions/                    # Single source of truth
-├── INSTRUCTIONS.md                  # Main entry point for all AI assistants
+agentsmd/                            # Single source of truth
+├── AGENTS.md                        # Main entry point for all AI assistants
 ├── commands/                        # Reusable command prompts
-├── concepts/                        # Core principles and architecture
+├── rules/                           # Core principles and architecture
 │   ├── architecture.md              # This file - system design decisions
 │   ├── project-scope.md             # Project scope and boundaries
 │   └── workspace-management.md      # Multi-project workspace guidelines
 └── workflows/                       # Development workflow documentation
 
-.copilot/                            # Symlinks to .ai-instructions/
-├── instructions.md → ../.ai-instructions/INSTRUCTIONS.md
-├── ARCHITECTURE.md → ../.ai-instructions/concepts/architecture.md
-├── PROJECT.md → ../.ai-instructions/concepts/project-scope.md
-└── WORKSPACE.md → ../.ai-instructions/concepts/workspace-management.md
+.copilot/                            # Symlinks to agentsmd/
+├── instructions.md → ../agentsmd/AGENTS.md
+├── ARCHITECTURE.md → ../agentsmd/rules/architecture.md
+├── PROJECT.md → ../agentsmd/rules/project-scope.md
+└── WORKSPACE.md → ../agentsmd/rules/workspace-management.md
 
 .github/
 ├── copilot-instructions.md          # Main repository-wide AI instructions
-└── .copilot-*.md                    # Symlinks to .ai-instructions/commands/
+└── .copilot-*.md                    # Symlinks to agentsmd/commands/
 ```
 
 ### Design Rationale
 
 #### Separation of Concerns
 
-- **`.ai-instructions/`**: Single source of truth for all AI assistant content
-  - `INSTRUCTIONS.md`: Main entry point referenced by all vendors
-  - `concepts/`: Core principles, architecture, and workspace management
+- **`agentsmd/`**: Single source of truth for all AI assistant content
+  - `AGENTS.md`: Main entry point referenced by all vendors
+  - `rules/`: Core principles, architecture, and workspace management
   - `commands/`: Reusable command prompts for common tasks
   - `workflows/`: Step-by-step development workflow documentation
 
 - **Vendor directories (`.copilot/`, `.claude/`, `.gemini/`)**: Symlinks only
-  - All files are filesystem symlinks to `.ai-instructions/`
+  - All files are filesystem symlinks to `agentsmd/`
   - Enables vendor-specific discovery while maintaining DRY principle
   - No duplicate content - single source, multiple consumers
 
 - **`.github/`**: GitHub-specific integration
   - `copilot-instructions.md`: Repository-wide AI instructions
-  - `.copilot-*.md`: Symlinks to `.ai-instructions/commands/`
+  - `.copilot-*.md`: Symlinks to `agentsmd/commands/`
 
 #### AI Optimization Principles
 
