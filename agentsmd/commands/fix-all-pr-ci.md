@@ -1,6 +1,6 @@
 ---
 description: Orchestrate parallel subagents to fix all CI failures across all open PRs in all repositories
-model: sonnet
+model: opus
 author: JacobPEvans
 allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Read, Grep, Glob
 ---
@@ -31,10 +31,14 @@ You are the **orchestrator**. You will:
 OWNER=$(gh api user --jq .login)
 
 # Get all repos
-gh repo list $OWNER --limit 1000 --json name --jq '.[].name'
+gh repo list "$OWNER" --limit 1000 --json name --jq '.[].name'
+```
 
-# For each repo, get PRs with failures
-gh pr list --repo $OWNER/{REPO} --json number,title,statusCheckRollup,mergeable
+For each repo returned, get PRs with failures:
+
+```bash
+# Replace REPO with actual repo name from the list above
+gh pr list --repo "$OWNER/REPO_NAME" --json number,title,statusCheckRollup,mergeable
 ```
 
 Filter for PRs where:
@@ -64,10 +68,15 @@ Your mission:
    b. Replicate failure locally
    c. Fix root cause (NEVER disable checks)
    d. Test fix locally (pre-commit, tests, etc.)
-6. Commit: git add -A && git commit -m "fix: resolve {CHECK_NAME} failures"
+6. Commit changes (sanitize check names to prevent shell injection):
+   - Use a generic message: git commit -m "fix: resolve CI failures"
+   - Or use printf to safely include check name: git commit -m "$(printf 'fix: resolve %s failures' "$CHECK_NAME")"
 7. Push: git push
-8. Wait for CI: sleep 90
-9. Verify mergeable: gh pr view {NUMBER} --json mergeable,statusCheckRollup
+8. Wait for CI to complete using polling:
+   - Run: gh pr checks NUMBER --watch --fail-fast
+   - This waits until all checks complete (times out after 10 min by default)
+   - Alternative: poll every 30s with `gh pr view NUMBER --json statusCheckRollup`
+9. Verify mergeable: gh pr view NUMBER --json mergeable,statusCheckRollup
 
 CRITICAL RULES:
 - Only use approved tools from ~/.claude/settings.json
@@ -87,12 +96,12 @@ Report when complete:
 
 After launching all subagents, check their status:
 
-```bash
-# Wait for agents to complete
-Use TaskOutput with block=true for each agent ID
+Wait for agents to complete using `TaskOutput` with `block=true` for each agent ID returned by the Task tool.
 
-# Verify each PR
-gh pr view {NUMBER} --repo {OWNER}/{REPO} \
+Then verify each PR:
+
+```bash
+gh pr view NUMBER --repo "OWNER/REPO" \
   --json mergeable,statusCheckRollup \
   --jq '{mergeable, checks: [.statusCheckRollup[] | select(.conclusion != null) | {name, conclusion}]}'
 ```
