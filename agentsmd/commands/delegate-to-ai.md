@@ -1,6 +1,8 @@
 ---
 description: Delegate tasks to external AI models (Gemini, Ollama, GPT) for specialized capabilities
 model: sonnet
+# SECURITY: Wildcards required for AI tools (dynamic models/prompts), curl for API checks
+# Following least privilege: limited to specific AI CLIs + connectivity testing only
 allowed-tools: Bash(gemini:*), Bash(ollama:*), Bash(litellm:*), Bash(curl:*), Read, Write, Grep
 author: JacobPEvans
 ---
@@ -121,8 +123,8 @@ echo -e "\n=== DeepSeek R1 (Local) ==="
 ollama run deepseek-r1:70b "$PROMPT"
 EOF
 
-chmod +x /tmp/multi-model-query.sh
-/tmp/multi-model-query.sh "Should we use microservices or monolith for this project?"
+# Note: Execute with bash directly (chmod may require permission)
+bash /tmp/multi-model-query.sh "Should we use microservices or monolith for this project?"
 ```
 
 ## Security: API Key Management
@@ -132,6 +134,9 @@ chmod +x /tmp/multi-model-query.sh
 ### Recommended Approach (macOS Keychain)
 
 ```bash
+# Note: 'security' commands require explicit permission in AI assistant configurations
+# These are macOS system commands and may need to be added to allowed-tools
+
 # Store API key in keychain (one-time setup)
 security add-generic-password \
   -a "$USER" \
@@ -211,6 +216,7 @@ After getting response from external AI:
 
 ```bash
 # Check for rate limit errors and retry with exponential backoff
+# Note: Sequential 'for' loop required here for exponential backoff timing (not parallelizable)
 for i in 1 2 4 8; do
   if gemini chat --model gemini-3-pro --prompt "$TASK" 2>/tmp/gemini-err; then
     break
@@ -229,7 +235,7 @@ done
 
 ```bash
 # Test connectivity before delegating
-if ! curl -s --max-time 5 https://generativelanguage.googleapis.com > /dev/null; then
+if ! curl -s --max-time 5 <https://generativelanguage.googleapis.com> > /dev/null; then
   echo "Gemini API unreachable, using local Ollama"
   USE_LOCAL=true
 fi
