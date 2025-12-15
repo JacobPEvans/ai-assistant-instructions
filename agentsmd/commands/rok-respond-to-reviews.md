@@ -22,13 +22,23 @@ Respond to GitHub PR review feedback with systematic resolution and thread manag
 
 ### 1. Retrieve Unresolved Comments
 
-Use GraphQL to get review threads with resolution status (preferred over REST):
+**IMPORTANT**: Use BOTH methods to catch all comments:
+
+**Method A - GraphQL threads** (use `first: 100` to get all):
 
 ```bash
-gh api graphql -f query='...' -f owner="OWNER" -f repo="REPO" -F pr=NUMBER
+gh api graphql -f query='query { repository(...) { pullRequest(...) {
+  reviewThreads(first: 100) { nodes { id isResolved path line
+    comments(first: 10) { nodes { body } } } } } } }'
 ```
 
-**Key fields**: `reviewThreads.nodes[].id` (thread ID for resolution), `isResolved`, `path`, `line`, `comments.nodes[].body`
+**Method B - REST comments without replies** (catches threads marked resolved but never responded to):
+
+```bash
+gh api repos/OWNER/REPO/pulls/NUMBER/comments | jq '[.[] | select(.in_reply_to_id == null)] | .[] | {id, path, line, body}'
+```
+
+Cross-reference both: a comment needs response if it has no reply in REST, even if GraphQL shows `isResolved: true`.
 
 ### 2. Analyze & Prioritize
 
