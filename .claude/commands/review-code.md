@@ -1,1 +1,1 @@
-../../.ai-instructions/commands/review-code.md
+../../agentsmd/commands/review-code.md

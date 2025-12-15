@@ -1,1 +1,1 @@
-../.ai-instructions/concepts/workspace-management.md
+../agentsmd/rules/workspace-management.md
