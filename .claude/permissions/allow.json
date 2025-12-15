@@ -509,9 +509,9 @@
     "WebFetch(domain:geminicli.com)",
 
     "Bash(nixfmt-rfc-style --version:*)",
-    "Bash(nixfmt:*)",
-    "Bash(nix fmt:*)",
+    "Bash(nixfmt --check:*)",
+    "Bash(nix fmt -- --check:*)",
     "Bash(statix check:*)",
-    "Bash(deadnix:*)"
+    "Bash(deadnix --no-lambda-arg --no-lambda-pattern-names:*)"
   ]
 }
