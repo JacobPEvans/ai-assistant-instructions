@@ -7,7 +7,7 @@ Multi-model AI orchestration configuration for Claude, Gemini, Copilot, and loca
 Route tasks to the best-suited model based on task type:
 
 | Task Type | Cloud Model | Local Model | PAL MCP Tool |
-|-----------|-------------|-------------|--------------|
+| --- | --- | --- | --- |
 | Research & Analysis | Gemini 3 Pro | qwen3-next:80b | `chat`, `clink` |
 | Complex Coding | Claude Opus 4.5 | qwen3-coder:30b | `codereview` |
 | Fast Tasks | Claude Sonnet 4.5 | qwen3-next:latest | `chat` |

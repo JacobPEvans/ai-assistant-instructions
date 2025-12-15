@@ -14,7 +14,7 @@ All configuration managed via Nix with proper modularization.
 ### Latest Frontier Models (as of Dec 2025)
 
 | Model | Strengths | Use Case |
-|-------|-----------|----------|
+| --- | --- | --- |
 | **Claude Opus 4.5** | SWE-bench leader (80.9%), Terminal-bench (59.3%), 30+ hr autonomous | Orchestration, complex coding |
 | **Claude Sonnet 4.5** | Fast coding, cost-effective | Day-to-day development |
 | **Gemini 3 Pro** | LMArena Elo leader (1501), 1M token context, IMO gold | Research, reasoning, large docs |
@@ -25,7 +25,7 @@ All configuration managed via Nix with proper modularization.
 ### Your Current Ollama Models (Audit Needed)
 
 | Model | Size | Status | Recommendation |
-|-------|------|--------|----------------|
+| --- | --- | --- | --- |
 | `qwen3-next:80b-a3b-instruct-q8_0` | 84 GB | KEEP | Latest Qwen3, excellent |
 | `qwen3-next:latest` | 50 GB | KEEP | Good balance |
 | `llama4:latest` / `llama4:scout` | 67 GB | KEEP | Current Llama 4 |
@@ -450,7 +450,7 @@ if __name__ == "__main__":
 When encountering these task types, use PAL MCP tools:
 
 | Task Type | Trigger Keywords | Default Model | PAL Tool |
-|-----------|------------------|---------------|----------|
+| --- | --- | --- | --- |
 | Research | research, investigate, survey | gemini-3-pro | `chat` |
 | Code Review | review, audit | consensus | `codereview` |
 | Planning | plan, design, architect | gemini-3-pro | `planner` |
@@ -755,7 +755,7 @@ ln -sf ~/git/ai-orchestration/agentsmd/.gemini ~/.gemini
 ## Critical Files Summary
 
 | File | Purpose |
-|------|---------|
+| --- | --- |
 | `~/git/ai-orchestration/nix-config/modules/ai-orchestration/default.nix` | Master orchestration module |
 | `~/git/ai-orchestration/nix-config/modules/ai-orchestration/pal-mcp/default.nix` | PAL MCP Nix submodule |
 | `~/git/ai-orchestration/nix-config/modules/ai-orchestration/litellm/default.nix` | LiteLLM Nix submodule |

@@ -289,7 +289,7 @@
 ## Summary
 
 | PR | Title | Key Deliverables |
-|----|-------|------------------|
+| --- | --- | --- |
 | 1 | Infrastructure & Structure | Master module, agentsmd/, symlinks, keychain docs |
 | 2 | PAL MCP Integration | PAL MCP module, secrets wrapper, MCP config |
 | 3 | Anthropic Suite Import | Anthropic module, marketplaces, plugins |
