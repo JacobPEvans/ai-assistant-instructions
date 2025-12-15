@@ -63,6 +63,16 @@ When `localOnlyMode` is enabled or `--local` flag is passed:
 API keys are retrieved at runtime from macOS Keychain (`ai-secrets` keychain).
 Keys are NEVER stored in files or environment variables.
 
+## Critical Workflow Rule
+
+**ALWAYS run `/init-worktree` before starting any new development work.**
+
+Exceptions (skip only for):
+
+- 1-line typo/config fixes on main
+- Read-only exploration/research tasks
+- Working in an already-initialized worktree
+
 ## Core Principles
 
 - **Accuracy and Truth**: Prioritize correctness over pleasing the user
@@ -71,20 +81,28 @@ Keys are NEVER stored in files or environment variables.
 - **Clarity**: Ask for clarification when requests are ambiguous
 - **No Sycophancy**: Provide correct advice, not validation of bad ideas
 
+See [Soul](./rules/soul.md) for personality and voice guidelines.
+
 ## Commands
 
-All commands from `.claude/commands/` are available. Key commands:
+All commands from `commands/` are available. Use this table to select the right one:
 
-- `/ai-go` - One-click autonomous operation (triggers full orchestration)
-- `/init-worktree` - Initialize clean workspace for development
-- `/pull-request` - Full PR lifecycle management
-- `/git-refresh` - Sync repo and cleanup worktrees
+| Intent | Command | Notes |
+| --- | --- | --- |
+| Start new development | `/init-worktree` | Always first for new work |
+| Create a GitHub issue | `/rok-shape-issues` | Shape before creating |
+| Implement an issue | `/rok-resolve-issues` | For shaped issues |
+| Review a PR | `/rok-review-pr` | Systematic review |
+| Respond to PR feedback | `/rok-respond-to-reviews` | After review comments |
+| Create/manage a PR | `/pull-request` | Full lifecycle |
+| Sync repo, merge PRs | `/git-refresh` | Also cleans worktrees |
+| Review documentation | `/review-docs` | Markdown validation |
+| Review infrastructure | `/infrastructure-review` | Terraform/Terragrunt |
 
 ## Related Files
 
-- `rules/` - Concepts and standards (renamed from concepts/)
-- `workflows/` - Development workflow definitions
-- `docs/` - Documentation including keychain setup
-- `.claude/` - Claude Code configuration (symlinked)
-- `.gemini/` - Gemini CLI configuration (symlinked)
-- `.copilot/` - GitHub Copilot configuration (symlinked)
+- `rules/` - Standards and guidelines
+- `workflows/` - 5-step development workflow
+- `commands/` - Slash command definitions
+- `docs/` - Setup documentation
+- `.claude/`, `.gemini/`, `.copilot/` - Vendor configs (symlinked)

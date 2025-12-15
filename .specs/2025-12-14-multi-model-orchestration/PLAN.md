@@ -715,7 +715,7 @@ SCHEDULED_TASKS = [
 def run_task(task: Task):
     """Execute a scheduled task via Claude Code."""
     subprocess.run([
-        "claude", "--print",
+        "claude", "--print", "--dangerously-skip-permissions",
         f"--allowedTools={','.join(task.allowed_tools)}",
         task.prompt
     ])
