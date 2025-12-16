@@ -1,20 +1,12 @@
 ---
 description: Quickly add always-allow permissions to all AI tools
 model: haiku
-allowed-tools:
-  - Bash(git fetch:*)
-  - Bash(git pull:*)
-  - Bash(git switch:*)
-  - Bash(git checkout:*)
-  - Bash(git status:*)
-  - Bash(git worktree add:*)
-  - Bash(git worktree list:*)
-  - Bash(git branch:*)
-  - Read(**)
-  - Glob(**)
-  - Write(./.claude/permissions/*.json)
-  - Write(./.gemini/permissions/*.json)
-  - AskUserQuestion
+allowed-tools: >
+  Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*),
+  Bash(git checkout:*), Bash(git status:*), Bash(git worktree add:*),
+  Bash(git worktree list:*), Bash(git branch:*), Read(**), Glob(**),
+  Write(./.claude/permissions/*.json), Write(./.gemini/permissions/*.json),
+  AskUserQuestion
 ---
 
 # Quick Add Permission
