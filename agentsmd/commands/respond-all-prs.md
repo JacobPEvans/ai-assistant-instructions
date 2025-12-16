@@ -12,8 +12,25 @@ by launching parallel subagents that create worktrees and respond to feedback.
 
 ## Scope
 
-This command operates on the **current repository** (determined from git remote or cwd).
-For cross-repository operations, use `/fix-all-pr-ci` instead.
+**CURRENT REPOSITORY ONLY** - This command operates on the repository you're currently in (determined from `gh repo view` or cwd).
+
+What this command DOES:
+
+- Process all open PRs in the current repository
+- Create worktrees for each PR needing attention
+- Launch parallel subagents per PR
+- Clean up worktrees when done
+
+What this command DOES NOT:
+
+- Cross into other repositories
+- Affect PRs in your other projects
+- Modify the main worktree
+
+## Related Documentation
+
+- [Worktrees](../rules/worktrees.md) - Worktree structure and usage
+- [Subagent Parallelization](../rules/subagent-parallelization.md) - Parallel execution patterns
 
 ## How It Works
 
