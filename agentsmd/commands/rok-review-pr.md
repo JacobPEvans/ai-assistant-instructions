@@ -13,9 +13,12 @@ source: "https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3"
 ## PR Review Conductor
 
 > **Attribution**: This command is from [roksechs](https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3)
-> Part of the development lifecycle: `/rok-shape-issues` -> `/rok-resolve-issues` -> `/rok-review-pr` -> `/rok-respond-to-reviews`
 
 Comprehensive and systematic Pull Request review system focusing on code quality, architectural consistency, and constructive feedback delivery.
+
+## Scope
+
+**SINGLE PR** - This command reviews one PR at a time, specified by argument or determined from current branch.
 
 ### Core Capabilities
 

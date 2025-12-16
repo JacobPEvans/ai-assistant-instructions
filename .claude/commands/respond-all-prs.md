@@ -1,0 +1,1 @@
+../../agentsmd/commands/respond-all-prs.md

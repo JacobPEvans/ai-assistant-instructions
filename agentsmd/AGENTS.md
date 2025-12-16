@@ -82,7 +82,7 @@ All commands from `agentsmd/commands/` are available. Key commands:
 
 ## Related Files
 
-- `rules/` - Concepts and standards
+- `rules/` - Concepts and standards (renamed from concepts/)
 - `workflows/` - Development workflow definitions
 - `docs/` - Documentation including keychain setup
 - `.claude/` - Claude Code configuration (symlinked)
