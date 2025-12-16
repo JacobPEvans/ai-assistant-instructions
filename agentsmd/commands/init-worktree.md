@@ -157,7 +157,7 @@ git branch -d <branch-name>
 **Examples:**
 
 - `~/git/ai-assistant-instructions/feat/add-dark-mode/`
-- `~/git/nix/fix/login-bug/`
+- `~/git/nix-config/fix/login-bug/`
 
 ### 6. Create Worktree
 
@@ -228,7 +228,7 @@ After running this command, your worktrees will be organized:
 │   ├── main/                           # Main branch (read-only for development)
 │   ├── feat/add-dark-mode/             # Feature worktree
 │   └── fix/permissions/                # Fix worktree
-└── nix/
+└── nix-config/
     ├── main/                           # Main branch
     ├── feat/update-packages/           # Feature worktree
     └── fix/homebrew/                   # Fix worktree
