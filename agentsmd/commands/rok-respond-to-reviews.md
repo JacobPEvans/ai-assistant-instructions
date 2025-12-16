@@ -16,7 +16,13 @@ contributors:
 
 Respond to GitHub PR review feedback with systematic resolution and thread management.
 
-**Lifecycle**: `/rok-shape-issues` → `/rok-resolve-issues` → `/rok-review-pr` → `/rok-respond-to-reviews`
+## Scope
+
+**CURRENT PR ONLY** - This command operates on the PR associated with the current branch or worktree.
+
+## Related Documentation
+
+- [Subagent Parallelization](../rules/subagent-parallelization.md) - Parallel execution patterns for independent comments
 
 ## Workflow
 

@@ -67,21 +67,16 @@ Keys are NEVER stored in files or environment variables.
 
 **All changes must be made on a dedicated worktree/branch.** This repo uses worktrees for session isolation.
 
-**Structure after setup:**
+See [Worktrees](./agentsmd/rules/worktrees.md) for structure and usage details.
 
-```text
-~/git/ai-assistant-instructions/
-├── main/                    # Main branch worktree (read-only for development)
-├── feat/add-feature/        # Feature worktree
-└── fix/bug-name/            # Fix worktree
-```
+**Key requirements:**
 
-> **Note:** This structure assumes `main/` is a worktree subdirectory. The root contains only `.git/` and worktree subdirectories.
-> If migrating from a standard setup, the `/init-worktree` command handles the conversion automatically.
+- **ALWAYS run `/init-worktree` before starting any new development work**
+- Create worktrees from a synced main branch
+- Keep main regularly updated: `cd ~/git/<repo>/main && git pull`
+- See [Branch Hygiene](./agentsmd/rules/branch-hygiene.md) for sync rules
 
-**ALWAYS run `/init-worktree` before starting any new development work.**
-
-Exceptions (skip only for):
+**Skip worktrees only for:**
 
 - 1-line typo/config fixes on main
 - Read-only exploration/research tasks
@@ -101,17 +96,22 @@ See [Soul](./agentsmd/rules/soul.md) for personality and voice guidelines.
 
 All commands from `agentsmd/commands/` are available. Use this table to select the right one:
 
-| Intent | Command | Notes |
-| --- | --- | --- |
-| Start new development | `/init-worktree` | Always first for new work |
-| Create a GitHub issue | `/rok-shape-issues` | Shape before creating |
-| Implement an issue | `/rok-resolve-issues` | For shaped issues |
-| Review a PR | `/rok-review-pr` | Systematic review |
-| Respond to PR feedback | `/rok-respond-to-reviews` | After review comments |
-| Create/manage a PR | `/pull-request` | Full lifecycle |
-| Sync repo, merge PRs | `/git-refresh` | Also cleans worktrees |
-| Review documentation | `/review-docs` | Markdown validation |
-| Review infrastructure | `/infrastructure-review` | Terraform/Terragrunt |
+| Intent | Command | Scope | Notes |
+| --- | --- | --- | --- |
+| Start new development | `/init-worktree` | Repo | Always first for new work |
+| Sync PRs with main | `/sync-prs-with-main` | Repo | Merge main into all open PRs |
+| Fix PR CI failures | `/fix-pr-ci` | Repo | Fix CI in current repo |
+| Fix all PR CI failures | `/fix-all-pr-ci` | All repos | Fix CI across all owned repos |
+| Respond to PR reviews | `/respond-all-prs` | Repo | Address review comments |
+| Respond all repos reviews | `/respond-all-prs-all-repos` | All repos | Cross-repo review response |
+| Sync repo, merge PRs | `/git-refresh` | Repo | Also cleans worktrees |
+| Create a GitHub issue | `/rok-shape-issues` | Repo | Shape before creating |
+| Implement an issue | `/rok-resolve-issues` | Repo | For shaped issues |
+| Review a PR | `/rok-review-pr` | Single PR | Systematic review |
+| Respond to PR feedback | `/rok-respond-to-reviews` | Single PR | After review comments |
+| Create/manage a PR | `/pull-request` | Single PR | Full lifecycle |
+| Review documentation | `/review-docs` | Repo | Markdown validation |
+| Review infrastructure | `/infrastructure-review` | Repo | Terraform/Terragrunt |
 
 ## Related Files
 

@@ -10,6 +10,26 @@ allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Read, Grep, Glob
 **Purpose**: Systematically resolve all CI failures across all open pull requests by launching parallel subagents that work
 autonomously until all PRs are 100% mergeable.
 
+## Scope
+
+**ALL OWNED REPOSITORIES** - This command scans all repositories you own for open PRs with failing CI.
+
+What this command DOES:
+
+- List all repositories using `gh repo list`
+- Find PRs with failing CI checks across all repos
+- Clone each repo to /tmp for fixes
+- Launch parallel subagents per PR
+- Verify PRs are mergeable
+
+What this command DOES NOT:
+
+- Use worktrees (clones to /tmp instead)
+
+## Related Documentation
+
+- [Subagent Parallelization](../rules/subagent-parallelization.md) - Parallel execution patterns
+
 ## How It Works
 
 You are the **orchestrator**. You will:
