@@ -9,7 +9,7 @@ allowed-tools: Task, TaskOutput, TodoWrite, Bash(awk:*), Bash(basename:*), Bash(
 **CRITICAL**: All development work MUST be done in a clean worktree. This command ensures isolation between concurrent sessions
 and prevents accidental changes on main.
 
-Initialize a clean worktree in `~/git/worktrees/` for new development work.
+Initialize a clean worktree in `~/git/<repo-name>/<branch-name>/` for new development work.
 
 ## Usage
 
@@ -84,7 +84,7 @@ git branch -r | grep -q "origin/$BRANCH"
 
 - Branch has been merged into main
 - Branch no longer exists on remote
-- Worktree path is in `~/git/worktrees/` AND no active changes (clean working tree)
+- Worktree has no active changes (clean working tree)
 
 3.3. Remove stale worktrees:
 
@@ -152,31 +152,31 @@ git branch -d <branch-name>
 
 5.2. Generate worktree directory name:
 
-**Format**: `~/git/worktrees/<repo-name>-<sanitized-description>`
+**Format**: `~/git/<repo-name>/<branch-name>/`
 
 **Examples:**
 
-- `~/git/worktrees/ai-assistant-instructions-add-dark-mode`
-- `~/git/worktrees/nix-fix-login-bug`
+- `~/git/ai-assistant-instructions/feat/add-dark-mode/`
+- `~/git/nix/fix/login-bug/`
 
 ### 6. Create Worktree
 
-6.1. Ensure worktrees directory exists:
+6.1. Ensure repo directory exists:
 
 ```bash
-mkdir -p ~/git/worktrees
+mkdir -p ~/git/<repo-name>
 ```
 
 6.2. Create the worktree:
 
 ```bash
-git worktree add ~/git/worktrees/<repo-name>-<description> -b <branch-name> main
+git worktree add ~/git/<repo-name>/<branch-name> -b <branch-name> main
 ```
 
 **Example:**
 
 ```bash
-git worktree add ~/git/worktrees/ai-assistant-instructions-add-dark-mode -b feat/add-dark-mode main
+git worktree add ~/git/ai-assistant-instructions/feat/add-dark-mode -b feat/add-dark-mode main
 ```
 
 ### 7. Switch to Worktree
@@ -184,7 +184,7 @@ git worktree add ~/git/worktrees/ai-assistant-instructions-add-dark-mode -b feat
 7.1. Change to the new worktree directory:
 
 ```bash
-cd ~/git/worktrees/<repo-name>-<description>
+cd ~/git/<repo-name>/<branch-name>
 ```
 
 7.2. Verify setup:
@@ -205,11 +205,11 @@ Provide a clear summary including:
 📊 Summary:
 - Previous branch: <original-branch>
 - Stale worktrees cleaned: <count>
-- New worktree: ~/git/worktrees/<name>
+- New worktree: ~/git/<repo-name>/<branch-name>
 - New branch: <branch-name>
 - Based on: main (synced with origin)
 
-📍 Current location: ~/git/worktrees/<name>
+📍 Current location: ~/git/<repo-name>/<branch-name>
 🚀 Ready for development!
 
 Next steps:
@@ -224,13 +224,14 @@ After running this command, your worktrees will be organized:
 
 ```text
 ~/git/
-├── ai-assistant-instructions/          # Main repo
-├── nix/                                # Main repo
-└── worktrees/
-    ├── ai-assistant-instructions-add-dark-mode/
-    ├── ai-assistant-instructions-fix-permissions/
-    ├── nix-update-packages/
-    └── nix-fix-homebrew/
+├── ai-assistant-instructions/
+│   ├── main/                           # Main branch (read-only)
+│   ├── feat/add-dark-mode/             # Feature worktree
+│   └── fix/permissions/                # Fix worktree
+└── nix/
+    ├── main/                           # Main branch
+    ├── feat/update-packages/           # Feature worktree
+    └── fix/homebrew/                   # Fix worktree
 ```
 
 ## Important Notes
