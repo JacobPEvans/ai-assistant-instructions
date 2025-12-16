@@ -1,1 +1,1 @@
-../../.ai-instructions/commands/review-docs.md
+../../agentsmd/commands/review-docs.md

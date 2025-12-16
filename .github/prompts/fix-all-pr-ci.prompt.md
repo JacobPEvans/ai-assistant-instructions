@@ -1,0 +1,1 @@
+../../agentsmd/commands/fix-all-pr-ci.md

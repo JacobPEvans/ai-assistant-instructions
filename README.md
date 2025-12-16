@@ -2,8 +2,10 @@
 
 > Teaching AI assistants how to help you better. Yes, it's AI instructions written with AI assistance. We've come full circle.
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Markdown Lint](https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/markdownlint.yml/badge.svg)](https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/markdownlint.yml)
+[![License][license-badge]][license-url]
+[![Markdown Lint][markdownlint-badge]][markdownlint-url]
+[![Claude Code Review][claude-badge]][claude-url]
+[![pre-commit][precommit-badge]][precommit-url]
 
 ## What Is This?
 
@@ -18,12 +20,12 @@ Think of it as a style guide, but for your AI pair programmer.
 # Clone the repo
 git clone https://github.com/JacobPEvans/ai-assistant-instructions.git
 
-# Copy the .ai-instructions directory to your project
-cp -r ai-assistant-instructions/.ai-instructions your-project/
+# Copy the agentsmd directory to your project
+cp -r ai-assistant-instructions/agentsmd your-project/
 
 # Symlink vendor directories as needed
 cd your-project
-ln -s .ai-instructions/INSTRUCTIONS.md CLAUDE.md
+ln -s AGENTS.md CLAUDE.md
 ```
 
 Or just browse the docs and cherry-pick what you need.
@@ -32,21 +34,18 @@ Or just browse the docs and cherry-pick what you need.
 
 ```text
 .
-├── .ai-instructions/          # The single source of truth
-│   ├── INSTRUCTIONS.md        # Main entry point
+├── AGENTS.md                  # Main AgentsMD entry point
+├── agentsmd/                  # Supporting files
 │   ├── commands/              # Reusable command prompts
-│   ├── agents/                # Specialized sub-agents
-│   ├── concepts/              # Core principles and standards
+│   ├── rules/                 # Core principles and standards
 │   └── workflows/             # The 5-step development workflow
 ├── .claude/                   # Claude-specific symlinks
-│   ├── commands/              # Slash commands
-│   └── agents/                # Sub-agents
 ├── .copilot/                  # GitHub Copilot symlinks
 ├── .gemini/                   # Gemini symlinks
 └── .github/                   # GitHub integration (prompts, workflows)
 ```
 
-Everything in `.claude/`, `.copilot/`, and `.gemini/` symlinks back to `.ai-instructions/`. One source, multiple consumers. DRY principle in action.
+Everything in `.claude/`, `.copilot/`, and `.gemini/` symlinks back to `agentsmd/`. One source, multiple consumers. DRY principle in action.
 
 ## Supported AI Assistants
 
@@ -66,37 +65,25 @@ This repo centers on a rigorous development workflow:
 4. **Implement & Verify** - Build with tests, verify as you go
 5. **Finalize & Commit** - Clean commits, passing CI
 
-Full details in [`.ai-instructions/workflows/`](.ai-instructions/workflows/).
+Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 
 ## Key Commands
 
 | Command | Description |
 | ------- | ----------- |
-| `/commit` | Generate conventional commit messages |
 | `/generate-code` | Scaffold new code with standards |
+| `/git-refresh` | Merge PRs, sync repo, cleanup stale worktrees |
 | `/infrastructure-review` | Review Terraform/Terragrunt code |
-| `/pull-request` | Create well-documented PRs |
+| `/init-worktree` | Initialize a clean worktree for development |
+| `/pull-request` | Complete PR lifecycle management |
+| `/pull-request-review-feedback` | Resolve PR review threads via GraphQL |
 | `/review-code` | Structured code review |
 | `/review-docs` | Review and improve documentation |
+| `/sync-permissions` | Sync AI assistant permissions to repo |
 
 **Community commands** (rok-* series): `/rok-shape-issues`, `/rok-resolve-issues`, `/rok-review-pr`, `/rok-respond-to-reviews`
 
-All 11 commands live in [`.ai-instructions/commands/`](.ai-instructions/commands/).
-
-## Sub-Agents
-
-Specialized AI assistants that execute tasks with focused expertise:
-
-| Sub-Agent | Purpose |
-| --------- | ------- |
-| Code Review Specialist | Security audits, quality checks, standards compliance |
-| Documentation Review Specialist | Markdown validation, technical writing quality |
-| Infrastructure Review Specialist | Terraform/Terragrunt, cloud security, cost optimization |
-| Code Generation Specialist | Scaffolding, patterns, test generation |
-
-Learn more in [`.ai-instructions/agents/`](.ai-instructions/agents/) or read the [Sub-Agents Concept](.ai-instructions/concepts/sub-agents.md).
-
-**Key Difference**: Commands define workflows; sub-agents provide specialized execution.
+All 13 commands live in [`agentsmd/commands/`](agentsmd/commands/).
 
 ## Core Concepts
 
@@ -106,14 +93,14 @@ The documentation covers:
 - **Documentation Standards** - AI-friendly markdown
 - **Infrastructure Standards** - Terraform/Terragrunt patterns
 - **DRY Principle** - Why everything symlinks to one place
-- **Sub-Agents** - Specialized AI assistants for focused tasks
 - **Memory Bank** - Maintaining AI context across sessions
 
-Browse [`.ai-instructions/concepts/`](.ai-instructions/concepts/).
+Browse [`agentsmd/rules/`](agentsmd/rules/).
 
 ## Contributing
 
-Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the details, though the short version is: open a PR, don't be a jerk, and I'll probably merge it.
+Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the details, though the short version
+is: open a PR, don't be a jerk, and I'll probably merge it.
 
 ## License
 
@@ -122,3 +109,12 @@ Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the details, t
 ---
 
 *Built by a human, refined by AI, used by both.*
+
+[license-badge]: https://img.shields.io/badge/License-Apache_2.0-blue.svg
+[license-url]: LICENSE
+[markdownlint-badge]: https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/markdownlint.yml/badge.svg
+[markdownlint-url]: https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/markdownlint.yml
+[claude-badge]: https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/claude.yml/badge.svg
+[claude-url]: https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/claude.yml
+[precommit-badge]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit
+[precommit-url]: https://github.com/pre-commit/pre-commit

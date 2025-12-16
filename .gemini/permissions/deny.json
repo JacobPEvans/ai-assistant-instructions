@@ -1,0 +1,6 @@
+{
+  "excludeTools": [
+    "run_shell_command(git -C)",
+    "run_shell_command(xargs)"
+  ]
+}
