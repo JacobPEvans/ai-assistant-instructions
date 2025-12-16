@@ -166,10 +166,10 @@ PRs processed: {N}
 Worktrees cleaned up: {N}
 ```
 
-## Key Differences from /fix-all-pr-ci
+## Key Differences from /fix-all-pr-ci-all-repos
 
 | Aspect | /fix-pr-ci | /fix-all-pr-ci-all-repos |
-| ------ | ---------- | -------------- |
+| ------ | ---------- | ------------------------ |
 | Scope | Current repo only | All owned repos |
 | Worktrees | Uses worktrees | Clones to /tmp |
 | Cleanup | Cleans worktrees | Removes /tmp clones |
