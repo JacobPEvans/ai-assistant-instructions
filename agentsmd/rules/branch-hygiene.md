@@ -5,6 +5,7 @@ Rules for keeping branches synchronized with main.
 ## Related Documentation
 
 - [Worktrees](./worktrees.md) - Worktree structure and usage
+- [Merge Conflict Resolution](./merge-conflict-resolution.md) - How to resolve conflicts properly
 
 ## Core Principle
 
@@ -29,18 +30,50 @@ The `main` branch must be regularly pulled and kept current. Feature branches sh
 2. If behind, rebase: `git fetch && git rebase origin/main`
 3. Resolve any conflicts before pushing
 
-## Syncing Workflow
+## Syncing Main Worktree
+
+**CRITICAL**: Always sync main before merging into feature branches.
 
 ```bash
-# From any worktree, sync main first
+# Navigate to main worktree
 cd ~/git/<repo>/main
-git pull
 
-# Then in your feature worktree
-cd ~/git/<repo>/feat/my-feature
-git fetch
-git rebase origin/main  # or git merge origin/main
+# Fetch latest from remote
+git fetch origin main
+
+# Pull latest changes
+git pull origin main
+
+# Verify main is current
+git log -1 --oneline
 ```
+
+This ensures all downstream merges use truly current main, not stale data.
+
+## Merging Main Into Feature Branches
+
+After syncing main, update your feature branch:
+
+```bash
+# Switch to feature worktree
+cd ~/git/<repo>/feat/my-feature
+
+# Merge main into your branch
+git merge origin/main --no-edit
+
+# If conflicts occur, see Merge Conflict Resolution guide
+# After resolving conflicts
+git push origin <branch-name>
+```
+
+### Rebase vs Merge
+
+| Method | When to Use |
+| ------ | ----------- |
+| `git merge origin/main` | Default - preserves history, safer |
+| `git rebase origin/main` | Clean linear history - only if you haven't pushed yet |
+
+**Rule**: If your branch has been pushed and reviewed, use merge. Rebase rewrites history and can confuse reviewers.
 
 ## Why This Matters
 
