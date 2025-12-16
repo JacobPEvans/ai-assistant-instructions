@@ -127,7 +127,7 @@ ollama pull devstral-2:latest    # Mistral's latest code model (needs newer Olla
 └── feat/ai-orchestration-module/ # Feature worktree
 
 # Symlink targets (from active worktree's agentsmd/):
-~/AGENTS.md → ~/git/ai-assistant-instructions/<branch>/AGENTS.md
+~/AGENTS.md → ~/git/ai-assistant-instructions/<branch>/agentsmd/AGENTS.md
 ~/.claude/ → ~/git/ai-assistant-instructions/<branch>/agentsmd/.claude/
 ~/.gemini/ → ~/git/ai-assistant-instructions/<branch>/agentsmd/.gemini/
 ~/.github/copilot-instructions.md → ~/git/ai-assistant-instructions/<branch>/agentsmd/.github/copilot-instructions.md
@@ -370,7 +370,7 @@ inputs.pal-mcp-server = {
 **Files to create:**
 
 - `~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/hooks/task_router.py`
-- `~/git/ai-assistant-instructions/feat/multi-model-orchestration/AGENTS.md` (renamed from INSTRUCTIONS.md)
+- `~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/AGENTS.md` (renamed from INSTRUCTIONS.md)
 
 **Tasks:**
 
@@ -738,7 +738,7 @@ if __name__ == "__main__":
 
 ```bash
 # All agent configs point to agentsmd/
-ln -sf ~/git/ai-assistant-instructions/feat/multi-model-orchestration/AGENTS.md ~/AGENTS.md
+ln -sf ~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/AGENTS.md ~/AGENTS.md
 ln -sf ~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/.claude ~/.claude
 ln -sf ~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/.gemini ~/.gemini
 # etc.
@@ -755,7 +755,7 @@ ln -sf ~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/.
 | `~/git/nix-config/feat/ai-orchestration-module/modules/ai-orchestration/default.nix` | Master orchestration module |
 | `~/git/nix-config/feat/ai-orchestration-module/modules/ai-orchestration/pal-mcp/default.nix` | PAL MCP Nix submodule |
 | `~/git/nix-config/feat/ai-orchestration-module/modules/ai-orchestration/litellm/default.nix` | LiteLLM Nix submodule |
-| `~/git/ai-assistant-instructions/feat/multi-model-orchestration/AGENTS.md` | Main instructions (symlinked everywhere) |
+| `~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/AGENTS.md` | Main instructions (symlinked everywhere) |
 | `~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/hooks/task_router.py` | Python task routing |
 | `~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/agents/researcher.md` | Generic researcher agent |
 | `~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/agents/coder.md` | Generic coder agent |
