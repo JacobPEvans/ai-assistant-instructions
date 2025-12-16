@@ -8,13 +8,5 @@
   },
   "ignores": ["result/**"],
   "fix": true,
-  "gitignore": true,
-  "overrides": [
-    {
-      "files": ["CHANGELOG.md"],
-      "config": {
-        "MD024": false
-      }
-    }
-  ]
+  "gitignore": true
 }

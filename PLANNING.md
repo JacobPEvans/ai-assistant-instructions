@@ -8,7 +8,6 @@ Preparing v0.8.0 release - first formal GitHub release:
 - ✅ Moved `.copilot/ARCHITECTURE.md` and `PROJECT.md` to `.ai-instructions/concepts/`
 - ✅ Created CONTRIBUTING.md, CODE_OF_CONDUCT.md, SECURITY.md
 - ✅ Overhauled README.md (26 lines → ~100 lines)
-- ✅ Consolidated CHANGELOG.md to single v0.8.0 entry
 - ✅ Updated GitHub Actions workflow to use `CLAUDE_CODE_OAUTH_TOKEN`
 - ✅ Staged `.gemini/permissions/` for inclusion in release
 - 🔄 Final lint/cleanup in progress
@@ -24,7 +23,6 @@ Preparing v0.8.0 release - first formal GitHub release:
 
 - `agentsmd/` - Single source of truth for all instructions, commands, and rules
 - `.claude/`, `.github/`, `.copilot/`, `.gemini/` - Vendor-specific directories with symlinks
-- `CHANGELOG.md` - Tracks all notable changes to the project
 - `PLANNING.md` - This file, used for planning future work
 
 ## Known Issues

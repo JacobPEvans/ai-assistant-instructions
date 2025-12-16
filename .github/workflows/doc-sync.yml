@@ -45,18 +45,8 @@ jobs:
 
             ## PLANNING.md Validation
             - Verify ONLY contains incomplete/in-progress tasks
-            - Remove any completed tasks (they belong in CHANGELOG.md)
             - If this PR completes a planned task, remove it from PLANNING.md
             - Ensure proper formatting and structure
-
-            ## CHANGELOG.md Validation
-            - Add entry for this PR under appropriate section:
-              - Added: New features
-              - Changed: Updates to existing features
-              - Fixed: Bug fixes
-              - Removed: Removed features
-            - Follow Keep a Changelog format
-            - Include PR number reference
 
             ## General Documentation
             - Verify README.md is accurate if relevant files changed
