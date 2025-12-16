@@ -67,21 +67,15 @@ Keys are NEVER stored in files or environment variables.
 
 **All changes must be made on a dedicated worktree/branch.** This repo uses worktrees for session isolation.
 
-**Structure after setup:**
+See [Worktrees](./agentsmd/rules/worktrees.md) for structure and usage details.
 
-```text
-~/git/ai-assistant-instructions/
-├── main/                    # Main branch worktree (read-only for development)
-├── feat/add-feature/        # Feature worktree
-└── fix/bug-name/            # Fix worktree
-```
+**Key requirements:**
 
-> **Note:** This structure assumes `main/` is a worktree subdirectory. The root contains only `.git/` and worktree subdirectories.
-> If migrating from a standard setup, the `/init-worktree` command handles the conversion automatically.
+- Create worktrees from a synced main branch
+- Keep main regularly updated: `cd ~/git/<repo>/main && git pull`
+- See [Branch Hygiene](./agentsmd/rules/branch-hygiene.md) for sync rules
 
-**ALWAYS run `/init-worktree` before starting any new development work.**
-
-Exceptions (skip only for):
+**Skip worktrees only for:**
 
 - 1-line typo/config fixes on main
 - Read-only exploration/research tasks
