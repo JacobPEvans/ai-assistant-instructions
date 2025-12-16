@@ -75,13 +75,13 @@ Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 | `/git-refresh` | Merge PRs, sync repo, cleanup stale worktrees |
 | `/infrastructure-review` | Review Terraform/Terragrunt code |
 | `/init-worktree` | Initialize a clean worktree for development |
-| `/pull-request` | Complete PR lifecycle management |
-| `/pull-request-review-feedback` | Resolve PR review threads via GraphQL |
+| `/pr` | Complete PR lifecycle management |
+| `/pr-review-feedback` | Resolve PR review threads via GraphQL |
 | `/review-code` | Structured code review |
 | `/review-docs` | Review and improve documentation |
 | `/sync-permissions` | Sync AI assistant permissions to repo |
 
-**Community commands** (rok-* series): `/rok-shape-issues`, `/rok-resolve-issues`, `/rok-review-pr`, `/rok-respond-to-reviews`
+**Community commands** (rok-* series): `/rok-shape-issues`, `/rok-resolve-issues`, `/rok-review-pr`, `/rok-resolve-pr-review-thread`
 
 All 13 commands live in [`agentsmd/commands/`](agentsmd/commands/).
 

@@ -14,7 +14,7 @@ source: "https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3"
 
 > **Attribution**: This command is from [roksechs](https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3)
 > Part of the development lifecycle:
-> `/rok-shape-issues` -> `/rok-resolve-issues` -> `/rok-review-pr` -> `/rok-respond-to-reviews`
+> `/rok-shape-issues` -> `/rok-resolve-issues` -> `/rok-review-pr` -> `/rok-resolve-pr-review-thread`
 
 Iterative Issue exploration and shaping process that transforms rough ideas into well-defined,
 time-boxed GitHub Issues using Shape Up methodology and continuous discovery principles.
@@ -252,7 +252,7 @@ Cool-Down: Small improvements, bug fixes, maintenance tasks
 - **Outputs**: Time-boxed, well-scoped Issues ready for development
 
 **Complete Development Lifecycle**:
-`/rok-shape-issues` -> `/rok-resolve-issues` -> `/rok-review-pr` -> `/rok-respond-to-reviews`
+`/rok-shape-issues` -> `/rok-resolve-issues` -> `/rok-review-pr` -> `/rok-resolve-pr-review-thread`
 
 This command transforms raw ideas into actionable, time-bounded Issues using Shape Up principles
 of timebox-driven development and iterative shaping.

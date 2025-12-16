@@ -1,9 +1,9 @@
 ---
-title: "Respond to Reviews"
-description: "Respond to PR review feedback efficiently with systematic resolution, parallel sub-agents, and GitHub thread resolution"
+title: "Resolve PR Review Thread"
+description: "Resolve PR review threads efficiently with systematic analysis, implementation/response, and mandatory GraphQL thread resolution"
 model: sonnet
 type: "command"
-version: "1.2.0"
+version: "2.0.0"
 allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Edit, Glob, Grep, Read, WebFetch, Write
 think: true
 author: "roksechs"
@@ -12,9 +12,28 @@ contributors:
   - "kieranklaassen (parallel sub-agent patterns): https://gist.github.com/kieranklaassen/0c91cfaaf99ab600e79ba898918cea8a"
 ---
 
-## PR Review Responder
+## PR Review Thread Resolver
 
-Respond to GitHub PR review feedback with systematic resolution and thread management.
+Resolve GitHub PR review threads with systematic analysis, implementation or explanation, and mandatory GraphQL thread resolution.
+
+## CRITICAL REQUIREMENT: ALL Comments Must Be Resolved
+
+**EVERY SINGLE PR comment must be marked as resolved** via `gh api graphql` mutation `resolvePullRequestReviewThread`.
+
+There are exactly **TWO paths** to resolve a comment:
+
+1. **Technical Resolution (with commit)**:
+   - Implement the requested change
+   - Commit the fix
+   - Reply with commit hash and explanation
+   - **Mark thread as resolved via GraphQL**
+
+2. **Response-Only Resolution (without commit)**:
+   - Provide explanation for why change is not being implemented
+   - Reply with clear reasoning
+   - **Mark thread as resolved via GraphQL**
+
+**BOTH paths require marking the thread as resolved.** No comment should remain unresolved after this command completes.
 
 ## Scope
 

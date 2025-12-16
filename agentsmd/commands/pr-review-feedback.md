@@ -80,7 +80,7 @@ gh api graphql -f query='
                 "nodes": [
                   {
                     "body": "Consider adding back Pre-Commit Validation...",
-                    "path": "agentsmd/commands/pull-request.md",
+                    "path": "agentsmd/commands/pr.md",
                     "line": 16
                   }
                 ]
