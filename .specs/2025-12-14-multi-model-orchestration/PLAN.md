@@ -57,9 +57,9 @@ ollama pull devstral-2:latest    # Mistral's latest code model (needs newer Olla
 ## How to Research Latest Models
 
 1. Check official sources first:
-   - <https://ollama.ai/library> (sorted by updated)
-   - <https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard>
-   - <https://paperswithcode.com/sota>
+   - https://ollama.ai/library (sorted by updated)
+   - https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard
+   - https://paperswithcode.com/sota
 
 2. Search pattern: "[model family] latest December 2025"
 
@@ -117,35 +117,31 @@ ollama pull devstral-2:latest    # Mistral's latest code model (needs newer Olla
 ### Directory Structure
 
 ```text
-~/git/ai-orchestration/           # New worktree root for this project
-├── ai-assistant-instructions/    # Worktree: this repo
-├── nix-config/                   # Worktree: ~/.config/nix
-└── agentsmd/                     # Shared agent instructions (source of truth)
-    ├── AGENTS.md                 # Main instructions (symlinked to ~/AGENTS.md)
-    ├── rules/                    # Claude-native folder (renamed from concepts)
-    ├── workflows/
-    ├── commands/
-    └── ...
+~/git/ai-assistant-instructions/
+├── main/                         # Main branch (read-only for development)
+├── feat/multi-model-orchestration/  # This feature worktree
+└── fix/some-bug/                 # Example fix worktree
 
-# Symlink targets (all point to agentsmd/):
-~/AGENTS.md → ~/git/ai-orchestration/agentsmd/AGENTS.md
-~/.claude/ → ~/git/ai-orchestration/agentsmd/.claude/
-~/.gemini/ → ~/git/ai-orchestration/agentsmd/.gemini/
-~/.github/copilot-instructions.md → ~/git/ai-orchestration/agentsmd/.github/copilot-instructions.md
+~/git/nix-config/
+├── main/                         # Main branch
+└── feat/ai-orchestration-module/ # Feature worktree
+
+# Symlink targets (from active worktree's agentsmd/):
+~/AGENTS.md → ~/git/ai-assistant-instructions/<branch>/agentsmd/AGENTS.md
+~/.claude/ → ~/git/ai-assistant-instructions/<branch>/agentsmd/.claude/
+~/.gemini/ → ~/git/ai-assistant-instructions/<branch>/agentsmd/.gemini/
+~/.github/copilot-instructions.md → ~/git/ai-assistant-instructions/<branch>/agentsmd/.github/copilot-instructions.md
 ```
 
 ### Worktree Initialization
 
 ```bash
-# Create orchestration workspace
-mkdir -p ~/git/ai-orchestration
-
-# Create worktrees for each repo we modify (run from repo directory, not with git -C)
+# Create worktrees for each repo we modify (run from main .git location)
 cd ~/git/ai-assistant-instructions && git worktree add \
-  ~/git/ai-orchestration/ai-assistant-instructions -b feat/multi-model-orchestration
+  feat/multi-model-orchestration -b feat/multi-model-orchestration main
 
-cd ~/.config/nix && git worktree add \
-  ~/git/ai-orchestration/nix-config -b feat/ai-orchestration-module
+cd ~/git/nix-config && git worktree add \
+  feat/ai-orchestration-module -b feat/ai-orchestration-module main
 ```
 
 ---
@@ -158,8 +154,8 @@ cd ~/.config/nix && git worktree add \
 
 **Files to create:**
 
-- `~/git/ai-orchestration/nix-config/modules/ai-orchestration/benchmark/default.nix`
-- `~/git/ai-orchestration/nix-config/modules/ai-orchestration/benchmark/benchmark.py`
+- `~/git/nix-config/feat/ai-orchestration-module/modules/ai-orchestration/benchmark/default.nix`
+- `~/git/nix-config/feat/ai-orchestration-module/modules/ai-orchestration/benchmark/benchmark.py`
 
 **Tasks:**
 
@@ -169,6 +165,7 @@ cd ~/.config/nix && git worktree add \
 #!/usr/bin/env python3
 """Benchmark local Ollama models for token speed and usability."""
 
+import os
 import subprocess
 import time
 import json
@@ -208,9 +205,7 @@ def main():
     print(json.dumps(results, indent=2))
 
     # Save to file for tracking over time
-    import os
-    config_path = os.path.expanduser("~/.config/ai-orchestration/model-benchmarks.json")
-    with open(config_path, "w") as f:
+    with open(os.path.expanduser("~/.config/ai-orchestration/model-benchmarks.json"), "w") as f:
         json.dump(results, f, indent=2)
 
 if __name__ == "__main__":
@@ -240,11 +235,11 @@ MAX_AGE_DAYS = 90  # Flag models older than this
 
 **Files to create:**
 
-- `~/git/ai-orchestration/nix-config/modules/ai-orchestration/default.nix`
-- `~/git/ai-orchestration/nix-config/modules/ai-orchestration/pal-mcp/default.nix`
-- `~/git/ai-orchestration/nix-config/modules/ai-orchestration/litellm/default.nix`
-- `~/git/ai-orchestration/nix-config/modules/ai-orchestration/skills/default.nix`
-- `~/git/ai-orchestration/nix-config/modules/ai-orchestration/agents/default.nix`
+- `~/git/nix-config/feat/ai-orchestration-module/modules/ai-orchestration/default.nix`
+- `~/git/nix-config/feat/ai-orchestration-module/modules/ai-orchestration/pal-mcp/default.nix`
+- `~/git/nix-config/feat/ai-orchestration-module/modules/ai-orchestration/litellm/default.nix`
+- `~/git/nix-config/feat/ai-orchestration-module/modules/ai-orchestration/skills/default.nix`
+- `~/git/nix-config/feat/ai-orchestration-module/modules/ai-orchestration/agents/default.nix`
 
 **Tasks:**
 
@@ -374,8 +369,8 @@ inputs.pal-mcp-server = {
 
 **Files to create:**
 
-- `~/git/ai-orchestration/agentsmd/hooks/task_router.py`
-- `~/git/ai-orchestration/agentsmd/AGENTS.md` (renamed from INSTRUCTIONS.md)
+- `~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/hooks/task_router.py`
+- `~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/AGENTS.md` (renamed from INSTRUCTIONS.md)
 
 **Tasks:**
 
@@ -490,8 +485,8 @@ claude plugin marketplace add anthropics/skills
 
 **Files to create:**
 
-- `~/git/ai-orchestration/nix-config/modules/ai-orchestration/skills/default.nix`
-- `~/git/ai-orchestration/agentsmd/skills/multi-model-router/SKILL.md`
+- `~/git/nix-config/feat/ai-orchestration-module/modules/ai-orchestration/skills/default.nix`
+- `~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/skills/multi-model-router/SKILL.md`
 
 **Tasks:**
 
@@ -557,9 +552,9 @@ Set `AI_ORCHESTRATION_LOCAL_ONLY=true` to use only Ollama models.
 
 **Files to create:**
 
-- `~/git/ai-orchestration/agentsmd/agents/researcher.md`
-- `~/git/ai-orchestration/agentsmd/agents/coder.md`
-- `~/git/ai-orchestration/agentsmd/agents/reviewer.md`
+- `~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/agents/researcher.md`
+- `~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/agents/coder.md`
+- `~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/agents/reviewer.md`
 
 **Tasks:**
 
@@ -619,7 +614,7 @@ Explicitly request: "use frontier model for this" to force best available.
 
 **Files to modify:**
 
-- `~/git/ai-orchestration/nix-config/modules/ai-orchestration/litellm/default.nix`
+- `~/git/nix-config/feat/ai-orchestration-module/modules/ai-orchestration/litellm/default.nix`
 
 **Tasks:**
 
@@ -674,7 +669,7 @@ in {
 
 **Files to create:**
 
-- `~/git/ai-orchestration/agentsmd/workflows/autonomous.py`
+- `~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/workflows/autonomous.py`
 - `.github/workflows/claude-autonomous.yml`
 
 **Tasks:**
@@ -743,9 +738,9 @@ if __name__ == "__main__":
 
 ```bash
 # All agent configs point to agentsmd/
-ln -sf ~/git/ai-orchestration/agentsmd/AGENTS.md ~/AGENTS.md
-ln -sf ~/git/ai-orchestration/agentsmd/.claude ~/.claude
-ln -sf ~/git/ai-orchestration/agentsmd/.gemini ~/.gemini
+ln -sf ~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/AGENTS.md ~/AGENTS.md
+ln -sf ~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/.claude ~/.claude
+ln -sf ~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/.gemini ~/.gemini
 # etc.
 ```
 
@@ -757,13 +752,13 @@ ln -sf ~/git/ai-orchestration/agentsmd/.gemini ~/.gemini
 
 | File | Purpose |
 | --- | --- |
-| `~/git/ai-orchestration/nix-config/modules/ai-orchestration/default.nix` | Master orchestration module |
-| `~/git/ai-orchestration/nix-config/modules/ai-orchestration/pal-mcp/default.nix` | PAL MCP Nix submodule |
-| `~/git/ai-orchestration/nix-config/modules/ai-orchestration/litellm/default.nix` | LiteLLM Nix submodule |
-| `~/git/ai-orchestration/agentsmd/AGENTS.md` | Main instructions (symlinked everywhere) |
-| `~/git/ai-orchestration/agentsmd/hooks/task_router.py` | Python task routing |
-| `~/git/ai-orchestration/agentsmd/agents/researcher.md` | Generic researcher agent |
-| `~/git/ai-orchestration/agentsmd/agents/coder.md` | Generic coder agent |
+| `~/git/nix-config/feat/ai-orchestration-module/modules/ai-orchestration/default.nix` | Master orchestration module |
+| `~/git/nix-config/feat/ai-orchestration-module/modules/ai-orchestration/pal-mcp/default.nix` | PAL MCP Nix submodule |
+| `~/git/nix-config/feat/ai-orchestration-module/modules/ai-orchestration/litellm/default.nix` | LiteLLM Nix submodule |
+| `~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/AGENTS.md` | Main instructions (symlinked everywhere) |
+| `~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/hooks/task_router.py` | Python task routing |
+| `~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/agents/researcher.md` | Generic researcher agent |
+| `~/git/ai-assistant-instructions/feat/multi-model-orchestration/agentsmd/agents/coder.md` | Generic coder agent |
 
 ## Related Issues to Close
 

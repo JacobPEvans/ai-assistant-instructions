@@ -17,7 +17,7 @@ Standards for generating high-quality, maintainable, and secure code.
 
 ## General Principles
 
-Follow [Code Standards](../concepts/code-standards.md) for code quality, security, and documentation requirements.
+Follow [Code Standards](../rules/code-standards.md) for code quality, security, and documentation requirements.
 
 ## Technology-Specific Guidelines
 
