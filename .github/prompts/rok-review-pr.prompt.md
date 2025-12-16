@@ -1,1 +1,1 @@
-../../.ai-instructions/commands/rok-review-pr.md
+../../agentsmd/commands/rok-review-pr.md

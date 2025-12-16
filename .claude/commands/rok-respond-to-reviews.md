@@ -1,1 +1,1 @@
-../../.ai-instructions/commands/rok-respond-to-reviews.md
+../../agentsmd/commands/rok-respond-to-reviews.md

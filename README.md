@@ -20,12 +20,12 @@ Think of it as a style guide, but for your AI pair programmer.
 # Clone the repo
 git clone https://github.com/JacobPEvans/ai-assistant-instructions.git
 
-# Copy the .ai-instructions directory to your project
-cp -r ai-assistant-instructions/.ai-instructions your-project/
+# Copy the agentsmd directory to your project
+cp -r ai-assistant-instructions/agentsmd your-project/
 
 # Symlink vendor directories as needed
 cd your-project
-ln -s .ai-instructions/INSTRUCTIONS.md CLAUDE.md
+ln -s AGENTS.md CLAUDE.md
 ```
 
 Or just browse the docs and cherry-pick what you need.
@@ -34,10 +34,10 @@ Or just browse the docs and cherry-pick what you need.
 
 ```text
 .
-├── .ai-instructions/          # The single source of truth
-│   ├── INSTRUCTIONS.md        # Main entry point
+├── AGENTS.md                  # Main AgentsMD entry point
+├── agentsmd/                  # Supporting files
 │   ├── commands/              # Reusable command prompts
-│   ├── concepts/              # Core principles and standards
+│   ├── rules/                 # Core principles and standards
 │   └── workflows/             # The 5-step development workflow
 ├── .claude/                   # Claude-specific symlinks
 ├── .copilot/                  # GitHub Copilot symlinks
@@ -45,7 +45,7 @@ Or just browse the docs and cherry-pick what you need.
 └── .github/                   # GitHub integration (prompts, workflows)
 ```
 
-Everything in `.claude/`, `.copilot/`, and `.gemini/` symlinks back to `.ai-instructions/`. One source, multiple consumers. DRY principle in action.
+Everything in `.claude/`, `.copilot/`, and `.gemini/` symlinks back to `agentsmd/`. One source, multiple consumers. DRY principle in action.
 
 ## Supported AI Assistants
 
@@ -65,7 +65,7 @@ This repo centers on a rigorous development workflow:
 4. **Implement & Verify** - Build with tests, verify as you go
 5. **Finalize & Commit** - Clean commits, passing CI
 
-Full details in [`.ai-instructions/workflows/`](.ai-instructions/workflows/).
+Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 
 ## Key Commands
 
@@ -83,7 +83,7 @@ Full details in [`.ai-instructions/workflows/`](.ai-instructions/workflows/).
 
 **Community commands** (rok-* series): `/rok-shape-issues`, `/rok-resolve-issues`, `/rok-review-pr`, `/rok-respond-to-reviews`
 
-All 13 commands live in [`.ai-instructions/commands/`](.ai-instructions/commands/).
+All 13 commands live in [`agentsmd/commands/`](agentsmd/commands/).
 
 ## Core Concepts
 
@@ -95,7 +95,7 @@ The documentation covers:
 - **DRY Principle** - Why everything symlinks to one place
 - **Memory Bank** - Maintaining AI context across sessions
 
-Browse [`.ai-instructions/concepts/`](.ai-instructions/concepts/).
+Browse [`agentsmd/rules/`](agentsmd/rules/).
 
 ## Contributing
 

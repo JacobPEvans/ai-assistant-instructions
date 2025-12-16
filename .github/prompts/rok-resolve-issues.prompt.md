@@ -1,1 +1,1 @@
-../../.ai-instructions/commands/rok-resolve-issues.md
+../../agentsmd/commands/rok-resolve-issues.md

@@ -22,7 +22,7 @@ Preparing v0.8.0 release - first formal GitHub release:
 
 ### Key Files
 
-- `.ai-instructions/` - Single source of truth for all instructions, commands, and concepts
+- `agentsmd/` - Single source of truth for all instructions, commands, and rules
 - `.claude/`, `.github/`, `.copilot/`, `.gemini/` - Vendor-specific directories with symlinks
 - `CHANGELOG.md` - Tracks all notable changes to the project
 - `PLANNING.md` - This file, used for planning future work

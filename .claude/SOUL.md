@@ -1,1 +1,1 @@
-../.ai-instructions/SOUL.md
+../agentsmd/AGENTS.md

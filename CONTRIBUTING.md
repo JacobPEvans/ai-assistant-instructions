@@ -18,7 +18,7 @@ Found a bug? Something unclear? Open an issue. Describe what you expected, what 
 
 ## Pull Requests
 
-For detailed PR workflow guidance, see [PR Review Guidance](.ai-instructions/concepts/pr-review-guidance.md).
+For detailed PR workflow guidance, see [PR Review Guidance](agentsmd/rules/pr-review-guidance.md).
 
 ### Before You Start
 
@@ -33,7 +33,7 @@ This repo has markdown linting via `markdownlint-cli2`. The pre-commit hooks wil
 markdownlint-cli2 "**/*.md"
 ```
 
-Follow the existing patterns in `.ai-instructions/`. If you're not sure about something, just make your best guess. I can always tweak it during review.
+Follow the existing patterns in `agentsmd/`. If you're not sure about something, just make your best guess. I can always tweak it during review.
 
 ### Commit Messages
 

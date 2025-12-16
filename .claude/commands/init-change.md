@@ -1,1 +1,1 @@
-../../.ai-instructions/commands/init-change.md
+../../agentsmd/commands/init-change.md

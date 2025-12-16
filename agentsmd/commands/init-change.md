@@ -95,8 +95,8 @@ git branch -d <branch-name>
 
 4.2. Determine worktree directory name:
 
-- Use pattern: `../<repo-name>-<identifier>`
-- Example: `../ai-assistant-instructions-issue-123`
+- Use pattern: `~/git/<repo-name>/<branch-name>/`
+- Example: `~/git/ai-assistant-instructions/feat/issue-123/`
 
 4.3. Create the worktree:
 
@@ -136,10 +136,10 @@ If the input was a GitHub issue, detailed spec, or comprehensive change request:
 
 | Input | Branch Name | Worktree Directory |
 | ----- | ----------- | ------------------ |
-| `#123` (issue) | `feat/issue-123` | `../<repo>-issue-123` |
-| `#456` (PR) | (existing branch) | `../<repo>-pr-456` |
-| `fix-bug` | `fix/fix-bug` | `../<repo>-fix-bug` |
-| `add-feature` | `feat/add-feature` | `../<repo>-add-feature` |
+| `#123` (issue) | `feat/issue-123` | `~/git/<repo>/feat/issue-123/` |
+| `#456` (PR) | (existing branch) | `~/git/<repo>/<branch>/` |
+| `fix-bug` | `fix/fix-bug` | `~/git/<repo>/fix/fix-bug/` |
+| `add-feature` | `feat/add-feature` | `~/git/<repo>/feat/add-feature/` |
 
 ## Important Notes
 
