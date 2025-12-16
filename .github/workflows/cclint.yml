@@ -6,7 +6,7 @@ on:
       - '.claude/**'
       - 'agentsmd/**'
       - 'CLAUDE.md'
-      - '.cclintrc.json'
+      - '.cclintrc.jsonc'
   push:
     branches:
       - main
@@ -14,7 +14,7 @@ on:
       - '.claude/**'
       - 'agentsmd/**'
       - 'CLAUDE.md'
-      - '.cclintrc.json'
+      - '.cclintrc.jsonc'
 
 jobs:
   cclint:
