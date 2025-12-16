@@ -33,7 +33,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
 
           claude_args: |
-            --max-turns 5
+            --max-turns 10
             --allowedTools "Read,Write,Edit,Bash(git add:*),Bash(git commit:*),Bash(git push:*),Bash(git status:*),Bash(gh pr:*)"
 
           prompt: |
