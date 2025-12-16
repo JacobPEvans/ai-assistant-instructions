@@ -83,10 +83,10 @@ For each PR with unresolved comments:
 
 ```bash
 # Create worktree for the PR branch
-git worktree add /path/to/repo/BRANCH_PATH BRANCH_NAME
+git worktree add ~/git/<repo-name>/<branch-name> <branch-name>
 ```
 
-Worktree naming convention: `{branch-type}/{branch-name}` (e.g., `feat/issue-42-add-feature`)
+Worktree path convention: `~/git/<repo-name>/<branch-name>` (e.g., `~/git/my-repo/feat/issue-42-add-feature`)
 
 ### Step 5: Launch Parallel Subagents
 
