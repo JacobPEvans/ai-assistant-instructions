@@ -80,6 +80,8 @@ branch_name="chore/add-permissions-$(date +%Y%m%d-%H%M%S)"
 
 ```bash
 repo_name=$(basename $(git rev-parse --show-toplevel))
+# Note: branch_name includes slash (e.g., chore/add-permissions-20251216-143000)
+# This creates nested directory structure: ~/git/repo/chore/add-permissions-TIMESTAMP/
 worktree_path="$HOME/git/$repo_name/$branch_name"
 ```
 

@@ -23,6 +23,27 @@ Initialize a clean worktree in `~/git/<repo-name>/<branch-name>/` for new develo
 
 If no description provided, will prompt for one.
 
+## Prerequisites
+
+This command creates worktrees using the structure:
+
+```text
+~/git/<repo-name>/
+├── main/                    # Main branch worktree
+├── feat/branch-name/        # Feature worktrees
+└── fix/branch-name/         # Fix worktrees
+```
+
+The repository root (`~/git/<repo-name>/`) contains only the `.git` directory and worktree subdirectories. The `main` branch is itself a worktree at `main/`.
+
+**First-time setup:**
+
+If you have an existing repository at `~/git/<repo-name>/` (standard git checkout), this command will handle the conversion
+automatically by detecting the current setup and creating new worktrees alongside your existing checkout. You can then migrate to the
+worktree-only structure when ready.
+
+**Note:** The root `.git` directory can be either a regular git directory or a bare repository - both work with this worktree structure.
+
 ## Steps
 
 ### 1. Validate Git Repository

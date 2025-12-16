@@ -65,14 +65,19 @@ Keys are NEVER stored in files or environment variables.
 
 ## Worktree-Based Development
 
-**All changes must be made on a dedicated worktree/branch.** This repo uses worktrees for session isolation:
+**All changes must be made on a dedicated worktree/branch.** This repo uses worktrees for session isolation.
+
+**Structure after setup:**
 
 ```text
 ~/git/ai-assistant-instructions/
-├── main/                    # Main branch (read-only for development)
+├── main/                    # Main branch worktree (read-only for development)
 ├── feat/add-feature/        # Feature worktree
 └── fix/bug-name/            # Fix worktree
 ```
+
+> **Note:** This structure assumes `main/` is a worktree subdirectory. The root contains only `.git/` and worktree subdirectories.
+> If migrating from a standard setup, the `/init-worktree` command handles the conversion automatically.
 
 **ALWAYS run `/init-worktree` before starting any new development work.**
 
