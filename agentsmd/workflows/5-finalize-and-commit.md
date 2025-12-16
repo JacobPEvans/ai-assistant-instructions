@@ -8,14 +8,12 @@ If Step 4 failed:
 
 1. Do not merge broken code.
 2. Document the failure in detail in the PRD file and `PLANNING.md`.
-3. Update the `CHANGELOG.md` to note the failed attempt.
-4. A new cycle will begin from Step 1.
+3. A new cycle will begin from Step 1.
 
 ## On Success
 
 1. **Update Documentation**
    - Update the `README.md` if your changes affect it.
-   - Add a new entry to the `CHANGELOG.md` describing your changes.
    - Remove the completed task from `PLANNING.md`.
 
 2. **MANDATORY: Documentation Review**

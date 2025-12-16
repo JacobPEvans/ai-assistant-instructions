@@ -5,10 +5,10 @@ author: JacobPEvans
 allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Read, Glob, Grep
 ---
 
-# Respond to All PR Reviews
+# Resolve PR Review Threads - All PRs
 
 **Purpose**: Systematically address all pending review comments across all open PRs in the **current repository only**
-by launching parallel subagents that create worktrees and respond to feedback.
+by launching parallel subagents that create worktrees and resolve feedback.
 
 ## Scope
 
@@ -216,10 +216,10 @@ If subagent fails on a PR:
 - Continue with other PRs
 - Don't let one failure block everything
 
-## Key Differences from /fix-all-pr-ci
+## Key Differences from /fix-all-pr-ci-all-repos
 
-| Aspect | /respond-all-prs | /fix-all-pr-ci |
-| ------ | ---------------- | -------------- |
+| Aspect | /resolve-pr-review-thread-all | /fix-all-pr-ci-all-repos |
+| ------ | ----------------------------- | ------------------------ |
 | Scope | Current repo only | All owned repos |
 | Focus | Review comments | CI failures |
 | Worktrees | Uses worktrees | Clones to /tmp |
@@ -229,7 +229,7 @@ If subagent fails on a PR:
 
 ```bash
 # From any worktree in the repo
-/respond-all-prs
+/resolve-pr-review-thread-all
 ```
 
 The orchestrator will:

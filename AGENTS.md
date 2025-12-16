@@ -101,15 +101,15 @@ All commands from `agentsmd/commands/` are available. Use this table to select t
 | Start new development | `/init-worktree` | Repo | Always first for new work |
 | Sync PRs with main | `/sync-prs-with-main` | Repo | Merge main into all open PRs |
 | Fix PR CI failures | `/fix-pr-ci` | Repo | Fix CI in current repo |
-| Fix all PR CI failures | `/fix-all-pr-ci` | All repos | Fix CI across all owned repos |
-| Respond to PR reviews | `/respond-all-prs` | Repo | Address review comments |
-| Respond all repos reviews | `/respond-all-prs-all-repos` | All repos | Cross-repo review response |
+| Fix all PR CI failures | `/fix-all-pr-ci-all-repos` | All repos | Fix CI across all owned repos |
+| Resolve PR review threads | `/resolve-pr-review-thread-all` | Repo | Address review comments in current repo |
+| Resolve PR reviews (all repos) | `/resolve-pr-review-thread-all-repos` | All repos | Cross-repo review resolution |
 | Sync repo, merge PRs | `/git-refresh` | Repo | Also cleans worktrees |
 | Create a GitHub issue | `/rok-shape-issues` | Repo | Shape before creating |
 | Implement an issue | `/rok-resolve-issues` | Repo | For shaped issues |
 | Review a PR | `/rok-review-pr` | Single PR | Systematic review |
-| Respond to PR feedback | `/rok-respond-to-reviews` | Single PR | After review comments |
-| Create/manage a PR | `/pull-request` | Single PR | Full lifecycle |
+| Resolve PR review feedback | `/rok-resolve-pr-review-thread` | Single PR | After review comments |
+| Create/manage a PR | `/pr` | Single PR | Full lifecycle |
 | Review documentation | `/review-docs` | Repo | Markdown validation |
 | Review infrastructure | `/infrastructure-review` | Repo | Terraform/Terragrunt |
 

@@ -5,7 +5,7 @@ author: JacobPEvans
 allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Read, Grep, Glob
 ---
 
-# Respond to PR Reviews Across All Repositories
+# Resolve PR Review Threads - All Repos
 
 **Purpose**: Systematically address all pending review comments across all open PRs in **all owned repositories** by launching parallel subagents per repository.
 
@@ -17,7 +17,7 @@ What this command DOES:
 
 - List all repositories using `gh repo list`
 - Find repos with open PRs that have unresolved review threads
-- Launch parallel subagents per REPOSITORY (each runs `/respond-all-prs` logic)
+- Launch parallel subagents per REPOSITORY (each runs `/resolve-pr-review-thread-all` logic)
 - Monitor completion across all repos
 - Report aggregated results
 
@@ -26,7 +26,7 @@ What this command DOES NOT:
 - Use worktrees directly (subagents handle that)
 - Operate on a single repository only
 
-For single-repo review response, use `/respond-all-prs` instead.
+For single-repo review response, use `/resolve-pr-review-thread-all` instead.
 
 ## Related Documentation
 
@@ -149,10 +149,10 @@ Total PRs processed: {N}
 ...
 ```
 
-## Key Differences from /respond-all-prs
+## Key Differences from /resolve-pr-review-thread-all
 
-| Aspect | /respond-all-prs | /respond-all-prs-all-repos |
-| ------ | ---------------- | -------------------------- |
+| Aspect | /resolve-pr-review-thread-all | /resolve-pr-review-thread-all-repos |
+| ------ | ----------------------------- | ------------------------------------ |
 | Scope | Current repo only | All owned repos |
 | Parallelism | Per PR | Per REPOSITORY |
 | Subagent task | Handle one PR | Handle all PRs in one repo |
@@ -178,7 +178,7 @@ If subagent fails on a repo:
 ## Example Usage
 
 ```bash
-/respond-all-prs-all-repos
+/resolve-pr-review-thread-all-repos
 ```
 
 The orchestrator will:
