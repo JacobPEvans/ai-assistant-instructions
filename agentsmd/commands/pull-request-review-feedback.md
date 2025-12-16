@@ -80,7 +80,7 @@ gh api graphql -f query='
                 "nodes": [
                   {
                     "body": "Consider adding back Pre-Commit Validation...",
-                    "path": ".ai-instructions/commands/pull-request.md",
+                    "path": "agentsmd/commands/pull-request.md",
                     "line": 16
                   }
                 ]
@@ -93,7 +93,7 @@ gh api graphql -f query='
                 "nodes": [
                   {
                     "body": "The removed 'Review, Don't Chat' rule was important...",
-                    "path": ".ai-instructions/workflows/4-implement-and-verify.md",
+                    "path": "agentsmd/workflows/4-implement-and-verify.md",
                     "line": 10
                   }
                 ]

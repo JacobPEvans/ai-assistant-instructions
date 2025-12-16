@@ -22,7 +22,7 @@ If Step 4 failed:
    - **CRITICAL**: Must be completed before any pull request can be merged.
    - **REQUIRED FIRST STEP**: Run `markdownlint-cli2 --fix .` to auto-fix issues.
    - Run `markdownlint-cli2 .` to check for remaining issues.
-   - Fix all markdownlint violations, especially MD013 (configured max line length: 160 characters).
+   - Fix all markdownlint violations, especially MD013 (max 160 characters).
 
 3. **Final Steps**
    - Ensure all code is committed and pushed to the PR branch.

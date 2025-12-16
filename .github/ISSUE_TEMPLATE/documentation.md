@@ -8,7 +8,7 @@ assignees: ''
 
 ## Problem
 
-**File(s)**: <!-- e.g., `.ai-instructions/commands/commit.md` -->
+**File(s)**: <!-- e.g., `agentsmd/commands/commit.md` -->
 
 **Section**: <!-- If specific -->
 
@@ -64,4 +64,4 @@ assignees: ''
 
 ---
 
-*Good documentation is hard. Thanks for helping improve it. See [GitHub Issue Standards](../../.ai-instructions/concepts/github-issue-standards.md).*
+*Good documentation is hard. Thanks for helping improve it. See [GitHub Issue Standards](../../agentsmd/rules/github-issue-standards.md).*
