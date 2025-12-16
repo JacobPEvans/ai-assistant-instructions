@@ -29,7 +29,7 @@ agentsmd/                            # Single source of truth
 └── WORKSPACE.md → ../agentsmd/rules/workspace-management.md
 
 .github/
-├── copilot-instructions.md          # Main repository-wide AI instructions
+├── copilot-instructions.md          # Main repository-wide AgentsMD config
 └── .copilot-*.md                    # Symlinks to agentsmd/commands/
 ```
 
@@ -49,7 +49,7 @@ agentsmd/                            # Single source of truth
   - No duplicate content - single source, multiple consumers
 
 - **`.github/`**: GitHub-specific integration
-  - `copilot-instructions.md`: Repository-wide AI instructions
+  - `copilot-instructions.md`: Repository-wide AgentsMD config
   - `.copilot-*.md`: Symlinks to `agentsmd/commands/`
 
 #### AI Optimization Principles

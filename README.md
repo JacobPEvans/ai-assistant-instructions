@@ -34,7 +34,7 @@ Or just browse the docs and cherry-pick what you need.
 
 ```text
 .
-├── AGENTS.md                  # Main AI instructions entry point
+├── AGENTS.md                  # Main AgentsMD entry point
 ├── agentsmd/                  # Supporting files
 │   ├── commands/              # Reusable command prompts
 │   ├── rules/                 # Core principles and standards
