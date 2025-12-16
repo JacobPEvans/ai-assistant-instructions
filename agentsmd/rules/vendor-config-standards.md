@@ -1,8 +1,8 @@
 # Concept: Vendor-Specific AI Configuration
 
-## The DRY Principle in AI Instructions
+## The DRY Principle in AgentsMD
 
-This repository is designed to work with multiple AI assistants. To avoid duplicating instructions and to maintain a single source of truth, we follow the
+This repository is designed to work with multiple AI assistants. To avoid duplicating configurations and to maintain a single source of truth, we follow the
 DRY (Don't Repeat Yourself) principle.
 
 - **Canonical Source**: The `agentsmd/` directory is the single source of truth for all workflows, rules, and commands.
