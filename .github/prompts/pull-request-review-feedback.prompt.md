@@ -1,1 +1,1 @@
-../../.ai-instructions/commands/pull-request-review-feedback.md
+../../agentsmd/commands/pull-request-review-feedback.md

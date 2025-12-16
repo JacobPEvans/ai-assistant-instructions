@@ -1,11 +1,11 @@
 # Concept: Vendor-Specific AI Configuration
 
-## The DRY Principle in AI Instructions
+## The DRY Principle in AgentsMD
 
-This repository is designed to work with multiple AI assistants. To avoid duplicating instructions and to maintain a single source of truth, we follow the
+This repository is designed to work with multiple AI assistants. To avoid duplicating configurations and to maintain a single source of truth, we follow the
 DRY (Don't Repeat Yourself) principle.
 
-- **Canonical Source**: The `.ai-instructions/` directory is the single source of truth for all workflows, concepts, and commands.
+- **Canonical Source**: The `agentsmd/` directory is the single source of truth for all workflows, rules, and commands.
 - **Vendor Directories**: Directories like `.copilot/`, `.claude/`, or `.github/` are for vendor-specific configuration. They should **not** contain duplicated
   content.
 
@@ -22,7 +22,7 @@ canonical documentation.
 This file provides context on <concept>.
 
 For detailed information, please refer to the canonical documentation:
-**[<Link to the relevant file in .ai-instructions>](<relative-path-to-file>)**
+**[<Link to the relevant file in agentsmd>](<relative-path-to-file>)**
 ```
 
 ### Example: `.copilot/WORKSPACE.md`
@@ -33,7 +33,7 @@ For detailed information, please refer to the canonical documentation:
 This file provides context on the overall workspace structure and standards.
 
 For detailed information, please refer to the canonical documentation:
-**[Workspace Management Concept](../../.ai-instructions/concepts/workspace-management.md)**
+**[Workspace Management Concept](./workspace-management.md)**
 ```
 
 This approach ensures that all AI assistants are working from the same set of instructions, promoting consistency and making the repository easier to maintain.

@@ -1,7 +1,7 @@
 ---
 title: "Respond to Reviews"
 description: "Respond to PR review feedback efficiently with systematic resolution, parallel sub-agents, and GitHub thread resolution"
-model: opus
+model: sonnet
 type: "command"
 version: "1.2.0"
 allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Edit, Glob, Grep, Read, WebFetch, Write

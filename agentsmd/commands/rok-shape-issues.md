@@ -257,4 +257,4 @@ Cool-Down: Small improvements, bug fixes, maintenance tasks
 This command transforms raw ideas into actionable, time-bounded Issues using Shape Up principles
 of timebox-driven development and iterative shaping.
 
-**Reference**: See [GitHub Issue Standards](../concepts/github-issue-standards.md) for comprehensive best practices.
+**Reference**: See [GitHub Issue Standards](../rules/github-issue-standards.md) for comprehensive best practices.

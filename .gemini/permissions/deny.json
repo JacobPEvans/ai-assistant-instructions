@@ -1,6 +1,6 @@
 {
-  "coreTools": [
-    "ShellTool(git -C *)",
-    "ShellTool(xargs *)"
+  "excludeTools": [
+    "run_shell_command(git -C)",
+    "run_shell_command(xargs)"
   ]
 }

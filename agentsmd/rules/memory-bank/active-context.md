@@ -19,7 +19,7 @@ To provide the AI with a snapshot of the current work, allowing it to instantly 
 **Files Involved**:
 
 - `README.md`
-- `.ai-instructions/INSTRUCTIONS.md`
+- `AGENTS.md`
 
 **Next Step**:
 

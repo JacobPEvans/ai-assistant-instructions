@@ -1,1 +1,1 @@
-../../.ai-instructions/commands/infrastructure-review.md
+../../agentsmd/commands/infrastructure-review.md

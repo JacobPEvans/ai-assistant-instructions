@@ -1,1 +1,1 @@
-../../.ai-instructions/commands/git-refresh.md
+../../agentsmd/commands/git-refresh.md
