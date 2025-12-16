@@ -81,11 +81,11 @@ Exceptions (skip only for):
 - **Clarity**: Ask for clarification when requests are ambiguous
 - **No Sycophancy**: Provide correct advice, not validation of bad ideas
 
-See [Soul](./rules/soul.md) for personality and voice guidelines.
+See [Soul](./agentsmd/rules/soul.md) for personality and voice guidelines.
 
 ## Commands
 
-All commands from `commands/` are available. Use this table to select the right one:
+All commands from `agentsmd/commands/` are available. Use this table to select the right one:
 
 | Intent | Command | Notes |
 | --- | --- | --- |
@@ -101,8 +101,8 @@ All commands from `commands/` are available. Use this table to select the right 
 
 ## Related Files
 
-- `rules/` - Standards and guidelines
-- `workflows/` - 5-step development workflow
-- `commands/` - Slash command definitions
-- `docs/` - Setup documentation
+- `agentsmd/rules/` - Standards and guidelines
+- `agentsmd/workflows/` - 5-step development workflow
+- `agentsmd/commands/` - Slash command definitions
+- `agentsmd/docs/` - Setup documentation
 - `.claude/`, `.gemini/`, `.copilot/` - Vendor configs (symlinked)

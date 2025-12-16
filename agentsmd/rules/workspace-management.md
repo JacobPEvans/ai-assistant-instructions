@@ -24,7 +24,7 @@ Each project must maintain:
 
 ### Git Worktree Policy
 
-See [Git Worktree Policy](../INSTRUCTIONS.md#git-worktree-policy) in INSTRUCTIONS.md for the authoritative worktree usage guidelines.
+See [/init-worktree](../commands/init-worktree.md) for the authoritative worktree usage guidelines.
 
 ### Security Standards
 

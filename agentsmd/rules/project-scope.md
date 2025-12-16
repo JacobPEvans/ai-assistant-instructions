@@ -64,7 +64,7 @@ consistent, high-quality assistance across multiple development environments and
 
 - [Architecture Overview](architecture.md) - High-level system design decisions
 - [Workspace Guidelines](workspace-management.md) - Multi-project workspace management
-- [Main Instructions](../INSTRUCTIONS.md) - Primary AI instruction file
+- [Main Instructions](../../AGENTS.md) - Primary AI instruction file
 
 ### External Dependencies
 
