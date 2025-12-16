@@ -136,12 +136,12 @@ ollama pull devstral-2:latest    # Mistral's latest code model (needs newer Olla
 ### Worktree Initialization
 
 ```bash
-# Create worktrees for each repo we modify (run from repo directory, not with git -C)
-cd ~/git/ai-assistant-instructions/main && git worktree add \
-  ~/git/ai-assistant-instructions/feat/multi-model-orchestration -b feat/multi-model-orchestration main
+# Create worktrees for each repo we modify (run from main .git location)
+cd ~/git/ai-assistant-instructions && git worktree add \
+  feat/multi-model-orchestration -b feat/multi-model-orchestration main
 
-cd ~/git/nix-config/main && git worktree add \
-  ~/git/nix-config/feat/ai-orchestration-module -b feat/ai-orchestration-module main
+cd ~/git/nix-config && git worktree add \
+  feat/ai-orchestration-module -b feat/ai-orchestration-module main
 ```
 
 ---

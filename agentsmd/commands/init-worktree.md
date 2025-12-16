@@ -225,7 +225,7 @@ After running this command, your worktrees will be organized:
 ```text
 ~/git/
 ├── ai-assistant-instructions/
-│   ├── main/                           # Main branch (read-only)
+│   ├── main/                           # Main branch (read-only for development)
 │   ├── feat/add-dark-mode/             # Feature worktree
 │   └── fix/permissions/                # Fix worktree
 └── nix/
