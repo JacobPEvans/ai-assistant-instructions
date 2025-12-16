@@ -25,7 +25,7 @@ cp -r ai-assistant-instructions/agentsmd your-project/
 
 # Symlink vendor directories as needed
 cd your-project
-ln -s agentsmd/INSTRUCTIONS.md CLAUDE.md
+ln -s AGENTS.md CLAUDE.md
 ```
 
 Or just browse the docs and cherry-pick what you need.
@@ -34,8 +34,8 @@ Or just browse the docs and cherry-pick what you need.
 
 ```text
 .
-├── agentsmd/                  # The single source of truth
-│   ├── INSTRUCTIONS.md        # Main entry point
+├── AGENTS.md                  # Main AgentsMD entry point
+├── agentsmd/                  # Supporting files
 │   ├── commands/              # Reusable command prompts
 │   ├── rules/                 # Core principles and standards
 │   └── workflows/             # The 5-step development workflow
