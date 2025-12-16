@@ -63,7 +63,21 @@ When `localOnlyMode` is enabled or `--local` flag is passed:
 API keys are retrieved at runtime from macOS Keychain (`ai-secrets` keychain).
 Keys are NEVER stored in files or environment variables.
 
-## Critical Workflow Rule
+## Worktree-Based Development
+
+**All changes must be made on a dedicated worktree/branch.** This repo uses worktrees for session isolation.
+
+**Structure after setup:**
+
+```text
+~/git/ai-assistant-instructions/
+├── main/                    # Main branch worktree (read-only for development)
+├── feat/add-feature/        # Feature worktree
+└── fix/bug-name/            # Fix worktree
+```
+
+> **Note:** This structure assumes `main/` is a worktree subdirectory. The root contains only `.git/` and worktree subdirectories.
+> If migrating from a standard setup, the `/init-worktree` command handles the conversion automatically.
 
 **ALWAYS run `/init-worktree` before starting any new development work.**
 
@@ -81,11 +95,11 @@ Exceptions (skip only for):
 - **Clarity**: Ask for clarification when requests are ambiguous
 - **No Sycophancy**: Provide correct advice, not validation of bad ideas
 
-See [Soul](./rules/soul.md) for personality and voice guidelines.
+See [Soul](./agentsmd/rules/soul.md) for personality and voice guidelines.
 
 ## Commands
 
-All commands from `commands/` are available. Use this table to select the right one:
+All commands from `agentsmd/commands/` are available. Use this table to select the right one:
 
 | Intent | Command | Notes |
 | --- | --- | --- |
@@ -101,8 +115,8 @@ All commands from `commands/` are available. Use this table to select the right 
 
 ## Related Files
 
-- `rules/` - Standards and guidelines
-- `workflows/` - 5-step development workflow
-- `commands/` - Slash command definitions
-- `docs/` - Setup documentation
+- `agentsmd/rules/` - Standards and guidelines
+- `agentsmd/workflows/` - 5-step development workflow
+- `agentsmd/commands/` - Slash command definitions
+- `agentsmd/docs/` - Setup documentation
 - `.claude/`, `.gemini/`, `.copilot/` - Vendor configs (symlinked)
