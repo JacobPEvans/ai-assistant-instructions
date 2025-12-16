@@ -5,7 +5,7 @@ author: JacobPEvans
 allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Read, Grep, Glob
 ---
 
-# Respond to All PR Reviews (All Repos)
+# Respond to PR Reviews Across All Repositories
 
 **Purpose**: Systematically address all pending review comments across all open PRs in **all owned repositories** by launching parallel subagents per repository.
 
@@ -96,9 +96,10 @@ Repository: {OWNER}/{REPO}
 PRs with unresolved comments: {LIST_OF_PR_NUMBERS}
 
 Your mission:
-1. Clone or navigate to repo: gh repo clone {OWNER}/{REPO} /tmp/respond-{REPO}
-2. For EACH PR with unresolved comments:
-   a. Create worktree: git worktree add /tmp/respond-{REPO}/{BRANCH} {BRANCH}
+1. Generate unique run ID: RUN_ID=$(date +%s)-$RANDOM
+2. Clone repo: gh repo clone {OWNER}/{REPO} /tmp/respond-{REPO}-${RUN_ID}
+3. For EACH PR with unresolved comments:
+   a. Create worktree: git worktree add /tmp/respond-{REPO}-${RUN_ID}/{BRANCH} {BRANCH}
    b. Fetch unresolved review threads via GraphQL
    c. For each thread:
       - Read the file and context

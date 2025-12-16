@@ -45,7 +45,7 @@ For each conflict block:
 | Changes modify same logic | Combine the intent of both |
 | One is a bug fix | Always include the fix |
 | One is a refactor | Apply refactor, then add the other change |
-| Truly incompatible | Prefer branch's changes, add comment |
+| Truly incompatible | Prefer branch's changes, add a code comment explaining the decision |
 
 ### Step 4: Verify Resolution
 

@@ -9,7 +9,7 @@ Rules for keeping branches synchronized with main.
 
 ## Core Principle
 
-The `main` branch must be regularly pulled and kept current. Feature branches should be rebased from main frequently to avoid drift and merge conflicts.
+The `main` branch must be regularly pulled and kept current. Feature branches should be merged with main frequently to avoid drift and merge conflicts.
 
 ## Requirements
 

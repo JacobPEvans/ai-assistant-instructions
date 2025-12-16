@@ -131,28 +131,10 @@ Your mission:
    b. Report success
 5. If merge has conflicts:
    a. List conflicted files: git diff --name-only --diff-filter=U
-   b. For EACH conflicted file, resolve using the conflict resolution process (see below)
+   b. For EACH conflicted file, follow [Merge Conflict Resolution](../rules/merge-conflict-resolution.md)
    c. Stage resolved files: git add <file>
    d. Complete merge: git commit --no-edit
    e. Push: git push origin {BRANCH_NAME}
-
-CONFLICT RESOLUTION PROCESS (for each conflicted file):
-
-1. Read the entire file to understand its purpose
-2. Identify the conflict markers (<<<<<<<, =======, >>>>>>>)
-3. Analyze BOTH versions:
-   - HEAD version: changes from the PR branch
-   - main version: changes from main
-4. DO NOT assume newer is correct. Instead:
-   - Understand what each change is trying to accomplish
-   - Check if both changes can coexist
-   - Look for related code in the repo to understand patterns
-   - If changes conflict semantically, combine the intent of both
-5. Resolve by keeping the BEST combination that:
-   - Preserves the PR's intended changes
-   - Incorporates necessary updates from main
-   - Maintains code consistency
-6. If truly irreconcilable, prefer the PR's changes and add a comment
 
 CRITICAL RULES:
 - NEVER just accept "theirs" or "ours" blindly
@@ -206,51 +188,9 @@ PRs processed: {N}
 Worktrees cleaned up: {N}
 ```
 
-## Conflict Resolution Philosophy
+## Conflict Resolution
 
-**DO NOT assume newer is correct.** This is a common mistake.
-
-When resolving conflicts:
-
-1. **Understand context**: Read surrounding code, understand the file's purpose
-2. **Analyze intent**: What was each change trying to accomplish?
-3. **Check compatibility**: Can both changes coexist?
-4. **Combine intelligently**: Merge the INTENT, not just the lines
-5. **Preserve PR work**: The PR author's work should not be lost
-6. **Incorporate main updates**: Security fixes, dependencies, etc. from main are important
-
-### Example Conflict Resolution
-
-```text
-<<<<<<< HEAD (PR branch)
-function processUser(user) {
-  validateUser(user);
-  return transformUser(user);
-}
-=======
-function processUser(user, options = {}) {
-  if (!user) throw new Error('User required');
-  return transformUser(user);
-}
->>>>>>> main
-```
-
-**Wrong approach**: Just pick one side.
-
-**Correct approach**: Analyze both:
-
-- PR adds `validateUser()` call
-- Main adds `options` parameter and null check
-
-**Resolution**: Combine both improvements:
-
-```javascript
-function processUser(user, options = {}) {
-  if (!user) throw new Error('User required');
-  validateUser(user);
-  return transformUser(user);
-}
-```
+See [Merge Conflict Resolution](../rules/merge-conflict-resolution.md) for detailed guidance on resolving conflicts properly.
 
 ## Batching
 
