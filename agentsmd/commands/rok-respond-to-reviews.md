@@ -114,7 +114,7 @@ gh api graphql -f query='
 
 Read the comment body and classify it:
 
-**A. Suggestion with code** (contains ` ```suggestion` block):
+**A. Suggestion with code** (contains ` ```suggestion ` block):
 
 - GitHub's suggestion syntax for direct code changes
 - Can be applied directly via UI or manually
@@ -137,7 +137,7 @@ Read the comment body and classify it:
 - Examples: "Consider using a map here", "This should be extracted to a helper"
 - **Action required**: Evaluate merit, implement if appropriate, explain decision
 
-**E. Nitpick/Style** (prefixed with "nit:", "minor:", or trivial formatting):
+**E. Nitpick/Style** (prefixed with "nit:", "minor:", or describing trivial formatting):
 
 - Minor style or formatting suggestion
 - **Action required**: Quick fix if easy, explain if skipping
@@ -199,21 +199,31 @@ Does the criticism/suggestion have merit?
 
 - Prepare clear explanation referencing code, docs, or reasoning
 
-#### 6. Reply to Comment
+#### 6. Reply AND Resolve (ALWAYS TOGETHER)
 
-**Action**: Post reply using GitHub CLI.
+> **CRITICAL**: Never reply without resolving. Never resolve without replying. These are ONE atomic action.
+
+**Action**: Post reply via PR comment, then immediately resolve thread via GraphQL.
+
+**Step A - Post a general PR comment** (simplest and most reliable):
 
 ```bash
-# Use the databaseId from Step 1's GraphQL query result
-# (The databaseId field is now included in the comments.nodes query)
+gh pr comment PR_NUMBER --body "**Response to review feedback:**
 
-# Reply to comment using the databaseId from Step 1
-gh api repos/OWNER/REPO/pulls/PR_NUMBER/comments \
-  -f body="Your reply text" \
-  -F in_reply_to=DATABASE_ID
+[Your detailed response here]"
 ```
 
-**Reply format** (choose template based on action taken):
+**Step B - Resolve the thread** (MANDATORY - do this immediately after replying):
+
+```bash
+gh api graphql -f query='mutation {
+  resolveReviewThread(input: {threadId: "PRRT_xxx"}) {
+    thread { id isResolved }
+  }
+}'
+```
+
+**Reply templates** (include in your PR comment):
 
 **If fixed**:
 
@@ -223,54 +233,39 @@ Fixed in commit [hash].
 Changes made:
 - [specific change 1]
 - [specific change 2]
-
-Rationale: [why this addresses the concern]
 ```
 
 **If question answered**:
 
 ```markdown
-Good question! [Answer with technical details]
+[Answer with technical details]
 
 The reason we do it this way is [rationale].
-
-[Optional: code example or reference to docs]
 ```
 
 **If respectfully disagreeing**:
 
 ```markdown
-I appreciate the feedback. After consideration, I'm keeping the current approach because:
-
+Acknowledged but not implementing because:
 1. [Technical reason 1]
 2. [Technical reason 2]
-
-However, I'm open to further discussion if you have concerns about this rationale.
 ```
 
-#### 7. Resolve the Thread
+> **VERIFICATION**: After resolving, confirm with:
+>
+> ```bash
+> gh api graphql -f query='{
+>   repository(owner: "OWNER", name: "REPO") {
+>     pullRequest(number: NUMBER) {
+>       reviewThreads(first: 50) { nodes { isResolved } }
+>     }
+>   }
+> }' | jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)] | length'
+> ```
+>
+> Must return `0` before moving on.
 
-**Action**: Use GraphQL mutation with thread ID.
-
-```bash
-gh api graphql -f query='
-mutation {
-  resolveReviewThread(input: {threadId: "PRRT_xxx"}) {
-    thread {
-      id
-      isResolved
-    }
-  }
-}'
-```
-
-**IMPORTANT**: Only resolve after:
-
-- The issue is genuinely addressed (code fixed or explanation provided)
-- You have replied to the comment
-- You are confident the reviewer's concern is satisfied
-
-#### 8. Commit and Push
+#### 7. Commit and Push
 
 ```bash
 git add <files>
@@ -316,7 +311,7 @@ console.log(`User: ${name} (${email})`);
 
 **Expected Claude Action**:
 
-1. **Identify type**: Suggestion with code (contains ` ```suggestion`)
+1. **Identify type**: Suggestion with code (contains ` ```suggestion ` block)
 2. **Read context**: View lines 40-50 in `src/utils/user-formatter.ts`
 3. **Determine action**: Apply suggested code exactly
 4. **Implement fix**:

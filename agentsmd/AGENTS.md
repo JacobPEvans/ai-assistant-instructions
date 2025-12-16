@@ -73,7 +73,7 @@ Keys are NEVER stored in files or environment variables.
 
 ## Commands
 
-All commands from `.claude/commands/` are available. Key commands:
+All commands from `agentsmd/commands/` are available. Key commands:
 
 - `/ai-go` - One-click autonomous operation (triggers full orchestration)
 - `/init-worktree` - Initialize clean workspace for development
@@ -82,7 +82,7 @@ All commands from `.claude/commands/` are available. Key commands:
 
 ## Related Files
 
-- `rules/` - Concepts and standards (renamed from concepts/)
+- `rules/` - Concepts and standards
 - `workflows/` - Development workflow definitions
 - `docs/` - Documentation including keychain setup
 - `.claude/` - Claude Code configuration (symlinked)
