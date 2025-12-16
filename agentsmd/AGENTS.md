@@ -77,7 +77,7 @@ All commands from `agentsmd/commands/` are available. Key commands:
 
 - `/ai-go` - One-click autonomous operation (triggers full orchestration)
 - `/init-worktree` - Initialize clean workspace for development
-- `/pull-request` - Full PR lifecycle management
+- `/pr` - Full PR lifecycle management
 - `/git-refresh` - Sync repo and cleanup worktrees
 
 ## Related Files

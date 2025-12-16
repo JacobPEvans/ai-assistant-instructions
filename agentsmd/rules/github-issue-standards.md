@@ -204,12 +204,12 @@ These are distinct from acceptance criteria - they describe HOW to verify:
 
 ## Integration with Commands
 
-| Action              | Command                    |
-| ------------------- | -------------------------- |
-| Create/shape issues | `/rok-shape-issues`        |
-| Implement issues    | `/rok-resolve-issues`      |
-| Review resulting PR | `/rok-review-pr`           |
-| Respond to feedback | `/rok-respond-to-reviews`  |
+| Action              | Command                         |
+| ------------------- | ------------------------------- |
+| Create/shape issues | `/rok-shape-issues`             |
+| Implement issues    | `/rok-resolve-issues`           |
+| Review resulting PR | `/rok-review-pr`                |
+| Resolve PR feedback | `/rok-resolve-pr-review-thread` |
 
 ## PR-Issue Linking
 

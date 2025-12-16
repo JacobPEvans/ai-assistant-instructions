@@ -213,8 +213,8 @@ bun run lint
 
 - **Strategic context**: `/rok-shape-issues` establishes timebox-driven Issue shaping and problem definition
 - **Implementation context**: `/rok-resolve-issues` provides Issue resolution and PR creation background
-- **Post-review**: Guide authors to use `/rok-respond-to-reviews` for efficient feedback resolution
+- **Post-review**: Guide authors to use `/rok-resolve-pr-review-thread` for efficient feedback resolution
 
-**Complete Development Lifecycle**: `/rok-shape-issues` -> `/rok-resolve-issues` -> `/rok-review-pr` -> `/rok-respond-to-reviews`
+**Complete Development Lifecycle**: `/rok-shape-issues` -> `/rok-resolve-issues` -> `/rok-review-pr` -> `/rok-resolve-pr-review-thread`
 
 This command ensures thorough, constructive, and educationally valuable PR reviews that strengthen both code quality and team knowledge.
