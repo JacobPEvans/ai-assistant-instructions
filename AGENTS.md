@@ -71,6 +71,7 @@ See [Worktrees](./agentsmd/rules/worktrees.md) for structure and usage details.
 
 **Key requirements:**
 
+- **ALWAYS run `/init-worktree` before starting any new development work**
 - Create worktrees from a synced main branch
 - Keep main regularly updated: `cd ~/git/<repo>/main && git pull`
 - See [Branch Hygiene](./agentsmd/rules/branch-hygiene.md) for sync rules

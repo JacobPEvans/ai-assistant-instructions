@@ -117,10 +117,9 @@ When a subagent fails on one item:
 | ------- | ------ |
 | 1 | Normal execution |
 | 2 | Retry with same parameters |
-| 3 | Retry with simplified approach |
-| 4+ | Mark as failed, move on |
+| 3 | Retry with simplified approach, then mark as "needs human review" |
 
-After 3 failures on the same item, mark as "needs human review" and continue with remaining items. Don't let one failure block everything.
+After 3 attempts on the same item, mark as "needs human review" and continue with remaining items. Don't let one failure block everything.
 
 ## Final Report Template
 

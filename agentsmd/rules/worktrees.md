@@ -36,7 +36,7 @@ All development work MUST be done in a dedicated worktree. This ensures isolatio
 New worktrees branch off `main`:
 
 ```bash
-git worktree add ~/git/<repo>/<branch> -b <branch> main
+git worktree add ~/git/<repo-name>/<branch-name> -b <branch-name> main
 ```
 
 Example:
@@ -64,7 +64,7 @@ Example output:
 Remove when branch is merged or no longer needed:
 
 ```bash
-git worktree remove ~/git/<repo>/<branch>
+git worktree remove ~/git/<repo-name>/<branch-name>
 ```
 
 Clean up stale references:
@@ -110,5 +110,6 @@ The `/init-worktree` command handles this conversion automatically.
 
 **Skip only for:**
 
-- 1-line typo fixes directly on main (rare exception)
+- 1-line documentation typo fixes (e.g., spelling/grammar in comments or markdown) may be on main.
+  All code changes, regardless of size, must use a worktree.
 - Read-only exploration/research tasks

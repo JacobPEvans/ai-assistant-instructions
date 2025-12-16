@@ -25,7 +25,6 @@ What this command DOES:
 What this command DOES NOT:
 
 - Use worktrees (clones to /tmp instead)
-- Operate on a single repository only
 
 ## Related Documentation
 
