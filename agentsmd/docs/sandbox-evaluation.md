@@ -90,7 +90,7 @@ docker sandbox run -w ~/my-project claude
 
 - **Auto-approval enabled by default** - `--dangerously-skip-permissions` not needed
 - **Credential persistence** - API keys stored in Docker volume `docker-claude-sandbox-data`
-- **Pre-configured tools** - Docker CLI, GitHub CLI, Node.js, Go, Python 3, Git, ripgrep, jq
+- **Pre-configured tools** - GitHub CLI, Node.js, Go, Python 3, Git, ripgrep, jq
 - **True isolation** - Complete container separation from host
 
 #### Evaluation Criteria
@@ -100,7 +100,7 @@ docker sandbox run -w ~/my-project claude
 ✓ Official Docker + Anthropic integration
 ✓ Seamless credential management
 
-✗ Requires Docker Desktop (paid for commercial use on macOS)
+✗ Requires Docker Desktop (paid for commercial use in large organizations)
 ✗ Slightly higher setup complexity
 ✗ Docker commands aren't available inside sandbox by design
 ✗ Performance overhead from containerization
@@ -139,6 +139,9 @@ docker run --rm -it \
   claude-sandbox \
   claude --dangerously-skip-permissions
 ```
+
+**Security Warning:** Mounting `~/.ssh` even in read-only mode exposes private keys to the container.
+For untrusted code execution, use SSH agent forwarding instead or configure Git with HTTPS authentication.
 
 **Features:**
 
@@ -205,6 +208,8 @@ devcontainer exec --workspace-folder . claude --dangerously-skip-permissions
 **Not recommended** for this repository given macOS/multiplatform requirements.
 
 ## Comparison Matrix
+
+**Rating Scale:** ⭐ = Poor, ⭐⭐ = Fair, ⭐⭐⭐ = Good, ⭐⭐⭐⭐ = Very Good, ⭐⭐⭐⭐⭐ = Excellent
 
 | Solution | Setup | Isolation | Platform | Credentials | Tools | Recommendation |
 | -------- | ----- | --------- | -------- | ----------- | ----- | --------------- |
@@ -275,18 +280,9 @@ Even with sandboxing, keep explicit deny rules for destructive patterns:
 
 ```json
 {
-  "comment": "Deny destructive commands even in sandbox",
-  "rules": [
-    {
-      "command": "bash",
-      "arguments": ["rm", "-rf", "/"],
-      "effect": "deny"
-    },
-    {
-      "command": "bash",
-      "arguments": ["git", "push", "--force"],
-      "effect": "deny"
-    }
+  "permissions": [
+    "Bash(rm -rf /:*)",
+    "Bash(git push --force:*)"
   ]
 }
 ```
@@ -343,33 +339,17 @@ Even with sandboxing enabled, maintain explicit deny rules for critical operatio
 
 ```json
 {
-  "version": "1.0",
-  "comment": "Defense-in-depth: deny destructive patterns even in sandbox",
-  "rules": [
-    {
-      "type": "command",
-      "pattern": "^rm\\s+(-[fRr]+|--force|--recursive).*/$",
-      "effect": "deny",
-      "reason": "Prevent recursive filesystem deletion at root"
-    },
-    {
-      "type": "command",
-      "pattern": "git\\s+push.*--force",
-      "effect": "deny",
-      "reason": "Prevent force-pushing to repositories"
-    },
-    {
-      "type": "command",
-      "pattern": "dd\\s+if=",
-      "effect": "deny",
-      "reason": "Prevent direct device writes"
-    },
-    {
-      "type": "command",
-      "pattern": ":(){ *: *| *: *;}",
-      "effect": "deny",
-      "reason": "Prevent fork bombs"
-    }
+  "permissions": [
+    "Bash(rm -rf /:*)",
+    "Bash(rm -rf ~:*)",
+    "Bash(rm -fr /:*)",
+    "Bash(rm -fr ~:*)",
+    "Bash(rm --recursive --force /:*)",
+    "Bash(rm --recursive --force ~:*)",
+    "Bash(git push --force:*)",
+    "Bash(git push -f:*)",
+    "Bash(sudo dd:*)",
+    "Bash(dd if=:*)"
   ]
 }
 ```
@@ -380,7 +360,7 @@ Even with sandboxing enabled, maintain explicit deny rules for critical operatio
 
 - Credentials stored in standard locations (`~/.ssh`, `~/.config`)
 - Use OS keychain for sensitive API keys
-- MacOS: Use `security` command with keychain
+- macOS: Use `security` command with keychain
 - Linux: Use `pass` or `secretstorage` packages
 
 ### Docker Sandbox (Integrated)
@@ -394,9 +374,9 @@ Even with sandboxing enabled, maintain explicit deny rules for critical operatio
 Store API keys in system keychain rather than files:
 
 ```bash
-# macOS: Store Claude API key in keychain
+# macOS: Store Claude API key in keychain (prompts for password interactively)
 security add-generic-password -a claude \
-  -s "anthropic-api-key" -w "your-api-key"
+  -s "anthropic-api-key" -w
 
 # Retrieve in shell
 CLAUDE_API_KEY=$(security find-generic-password \
@@ -544,7 +524,9 @@ A: Credentials follow normal file system rules. Use OS keychain for sensitive va
 - [Docker AI Sandboxes - Get Started](https://docs.docker.com/ai/sandboxes/get-started/)
 - [Apple Seatbelt Documentation](https://developer.apple.com/documentation/security/seatbelt)
 - [bubblewrap - Container Isolation](https://github.com/containers/bubblewrap)
-- [Running Claude Code Agents in Docker](https://medium.com/@dan.avila7/running-claude-code-agents-in-docker-containers-for-complete-isolation-63036a2ef6f4)
+- [Running Claude Code Agents in Docker][medium-docker-claude]
+
+[medium-docker-claude]: https://medium.com/@dan.avila7/running-claude-code-agents-in-docker-containers-for-complete-isolation-63036a2ef6f4
 
 ## Next Steps
 
