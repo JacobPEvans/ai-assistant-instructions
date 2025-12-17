@@ -1,1 +1,1 @@
-../../agentsmd/commands/pull-request-review-feedback.md
+../../agentsmd/commands/pr-review-feedback.md
