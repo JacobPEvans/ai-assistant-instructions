@@ -118,7 +118,7 @@ Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 | ------- | ----------- |
 | `/delegate-to-ai` | Delegate tasks to external AI assistants |
 
-All 20 commands live in [`agentsmd/commands/`](agentsmd/commands/). See the [Commands](agentsmd/commands/) reference for detailed documentation on each.
+All 19 active commands live in [`agentsmd/commands/`](agentsmd/commands/). See the [Commands](agentsmd/commands/) reference for detailed documentation on each.
 
 ## Core Concepts
 
