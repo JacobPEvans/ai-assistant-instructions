@@ -207,7 +207,7 @@ devcontainer exec --workspace-folder . claude --dangerously-skip-permissions
 ## Comparison Matrix
 
 | Solution | Setup | Isolation | Platform | Credentials | Tools | Recommendation |
-|----------|-------|-----------|----------|-------------|-------|-----------------|
+| -------- | ----- | --------- | -------- | ----------- | ----- | --------------- |
 | Native Sandbox | ⭐⭐ | ⭐⭐⭐ | macOS/Linux/Win | N/A | Full | **Use for development** |
 | Docker Sandbox | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | All | Built-in | Medium | Use for production |
 | textcortex | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | Docker | Manual | Medium | Experimental only |
