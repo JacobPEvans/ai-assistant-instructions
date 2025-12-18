@@ -44,6 +44,7 @@
     "lychee",
     "markdownlint",
     "mermaid",
+    "mypy",
     "nixpkgs",
     "ollama",
     "oneline",
