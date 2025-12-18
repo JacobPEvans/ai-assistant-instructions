@@ -214,7 +214,7 @@ on:
 ## Comparison: When to Use Each Approach
 
 | Approach | Best For | Pros | Cons |
-|----------|----------|------|------|
+| -------- | -------- | ---- | ---- |
 | **Contents API** | Single file updates | Simple, easy to use | One file only, 1MB limit |
 | **Git Data API** | Multi-file commits | Atomic, full control | More complex, multiple API calls |
 | **Workflow Dispatch** | Automation triggers | Flexible, reusable | Requires workflow definition |
