@@ -76,6 +76,18 @@ Located in `.claude/sub-agents/pr/`:
 - **ci-fixer.md**: Analyzes and fixes CI failures in pull requests without bypassing checks
 - **thread-resolver.md**: Resolves PR review threads through implementation or explanation with GraphQL resolution
 
+### Issue Management Sub-Agents
+
+Located in `.claude/sub-agents/issue/`:
+
+- **issue-resolver.md**: Analyzes GitHub issue requirements, implements solutions, and creates comprehensive tests
+
+### Code Generation Sub-Agents
+
+Located in `.claude/sub-agents/code/`:
+
+- **code-generator.md**: Generates high-quality, maintainable, and secure code following project standards
+
 ## Creating New Sub-Agents
 
 Sub-agents follow this format:
@@ -131,6 +143,10 @@ Practical examples of invoking this sub-agent.
 ├── pr/                                # PR management sub-agents
 │   ├── ci-fixer.md
 │   └── thread-resolver.md
+├── issue/                             # Issue management sub-agents
+│   └── issue-resolver.md
+├── code/                              # Code generation sub-agents
+│   └── code-generator.md
 └── [future categories]/               # Additional sub-agent categories
 ```
 
