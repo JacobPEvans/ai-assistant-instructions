@@ -7,7 +7,7 @@ This directory contains modular permission sets that reduce token overhead and i
 Instead of maintaining a single monolithic `allow.json` with 400+ rules, the modular system organizes permissions into focused, reusable modules:
 
 - **core.json**: Universal tools and commands safe for all contexts
-- **Future modules**: Toolchain-specific permissions (python, rust, nodejs, docker, terraform, etc.)
+- **Toolchain modules**: Language and platform-specific permissions (python, nodejs, rust, docker, kubernetes, terraform, aws, nix)
 
 ## Structure
 
@@ -16,7 +16,15 @@ permissions/
 ├── allow.json                 # Main permissions file (legacy, being phased out)
 ├── modules/
 │   ├── README.md             # This file
-│   └── core.json             # Universal safe commands
+│   ├── core.json             # Universal safe commands
+│   ├── python.json           # Python toolchain
+│   ├── nodejs.json           # Node.js toolchain
+│   ├── rust.json             # Rust toolchain
+│   ├── docker.json           # Docker toolchain
+│   ├── kubernetes.json       # Kubernetes toolchain
+│   ├── terraform.json        # Terraform/Terragrunt
+│   ├── aws.json              # AWS CLI toolchain
+│   └── nix.json              # Nix ecosystem
 ```
 
 ## Available Modules
@@ -35,16 +43,79 @@ Universal commands and tools that should be available in all contexts:
 - **Utilities**: env, type, time, timeout, ssh-add (list only)
 - **WebFetch**: GitHub, Anthropic domains
 
-### Future Modules (Placeholders)
+### python.json
 
-- **python.json**: Python tools, pip, poetry, pytest, pyenv, virtualenv, conda
-- **nodejs.json**: Node.js, npm, yarn, pnpm, nvm, fnm
-- **rust.json**: Cargo, rustc, rustup
-- **docker.json**: Docker, docker-compose, container registry commands
-- **kubernetes.json**: kubectl, helm
-- **terraform.json**: Terraform, terragrunt, infrastructure code
-- **aws.json**: AWS CLI, aws-vault, cloud operations
-- **nix.json**: Nix, nixfmt, direnv, devbox, devenv
+Python development toolchain:
+
+- **Python**: python, python3 version and module execution
+- **Package managers**: pip, pip3 (list, show, freeze)
+- **Poetry**: poetry run, shell, show, version
+- **Version management**: pyenv versions, global, local
+- **Testing**: pytest and variants
+- **Virtual environments**: venv, virtualenv
+- **Conda**: conda, mamba, micromamba (info, list, env list, activate/deactivate)
+
+### nodejs.json
+
+Node.js development toolchain:
+
+- **Node.js**: node version
+- **npm**: version, list, run scripts (test, build, lint, dev, start), outdated, audit, view
+- **Yarn**: version, run scripts
+- **pnpm**: version, run scripts
+
+### rust.json
+
+Rust development toolchain:
+
+- **Cargo**: version, build, test, run, check, fmt, clippy, clean, update, search, tree
+- **Compiler**: rustc version
+- **Toolchain**: rustup version, update, show, default
+
+### docker.json
+
+Docker and container toolchain:
+
+- **Docker**: version, ps, images, logs, inspect
+- **Container operations**: start, stop, restart
+- **Image operations**: build, pull, push, tag
+- **Docker Compose**: compose commands
+- **Docker utilities**: info, cp, context, network, system, volume
+
+### kubernetes.json
+
+Kubernetes toolchain:
+
+- **kubectl**: version, get, describe, logs, port-forward, config, rollout
+- **Helm**: version, list, repo, search
+
+### terraform.json
+
+Infrastructure as Code toolchain:
+
+- **Terraform**: version, init, validate, fmt, plan, show, state, providers, output, graph
+- **Terragrunt**: version, init, validate, plan, show, state, output, graph-dependencies, hclfmt
+
+### aws.json
+
+AWS cloud toolchain:
+
+- **AWS CLI**: version, sts, s3, ec2, lambda, cloudformation, logs, dynamodb
+- **aws-vault**: version, list
+
+### nix.json
+
+Nix ecosystem:
+
+- **Nix**: version, config, search, flake operations, build, develop, shell, run, eval, repl, path-info, why-depends, hash, store operations
+- **Legacy Nix**: nix-env, nix-shell, nix-instantiate, nix-store, nix-collect-garbage, nix-prefetch-url, nix-prefetch-git
+- **Nix utilities**: nix-locate, nix-tree, nix-diff, nixfmt, statix, deadnix
+- **Darwin**: darwin-rebuild (switch, build, list-generations, rollback)
+- **Development tools**: direnv, devbox, devenv, cachix
+- **Read permissions**: /nix/store paths
+
+### Future Modules
+
 - **ruby.json**: rbenv, Bundler, Ruby CLI
 - **system.json**: System-level commands, brew, package managers
 

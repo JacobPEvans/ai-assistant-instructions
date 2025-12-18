@@ -1,0 +1,20 @@
+[
+  "Bash(node --version:*)",
+  "Bash(npm --version:*)",
+  "Bash(npm list:*)",
+  "Bash(npm ls:*)",
+  "Bash(npm run:*)",
+  "Bash(npm test:*)",
+  "Bash(npm run test:*)",
+  "Bash(npm run build:*)",
+  "Bash(npm run lint:*)",
+  "Bash(npm run dev:*)",
+  "Bash(npm run start:*)",
+  "Bash(npm outdated:*)",
+  "Bash(npm audit:*)",
+  "Bash(npm view:*)",
+  "Bash(yarn --version:*)",
+  "Bash(yarn run:*)",
+  "Bash(pnpm --version:*)",
+  "Bash(pnpm run:*)"
+]
