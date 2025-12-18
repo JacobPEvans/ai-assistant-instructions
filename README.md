@@ -94,8 +94,9 @@ The documentation covers:
 - **Infrastructure Standards** - Terraform/Terragrunt patterns
 - **DRY Principle** - Why everything symlinks to one place
 - **Memory Bank** - Maintaining AI context across sessions
+- **Remote Commit Workflow** - Making commits via GitHub API without local clone
 
-Browse [`agentsmd/rules/`](agentsmd/rules/).
+Browse [`agentsmd/rules/`](agentsmd/rules/) and [`agentsmd/docs/`](agentsmd/docs/).
 
 ## Contributing
 
