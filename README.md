@@ -69,21 +69,56 @@ Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 
 ## Key Commands
 
+### Initialization & Setup
+
 | Command | Description |
 | ------- | ----------- |
-| `/generate-code` | Scaffold new code with standards |
-| `/git-refresh` | Merge PRs, sync repo, cleanup stale worktrees |
-| `/infrastructure-review` | Review Terraform/Terragrunt code |
 | `/init-worktree` | Initialize a clean worktree for development |
-| `/pr` | Complete PR lifecycle management |
-| `/pr-review-feedback` | Resolve PR review threads via GraphQL |
-| `/review-code` | Structured code review |
-| `/review-docs` | Review and improve documentation |
+
+### Git & Repository Management
+
+| Command | Description |
+| ------- | ----------- |
+| `/git-refresh` | Merge PRs, sync repo, cleanup stale worktrees |
+| `/sync-prs-with-main` | Sync all open PRs with main branch |
 | `/sync-permissions` | Sync AI assistant permissions to repo |
 
-**Community commands** (rok-* series): `/rok-shape-issues`, `/rok-resolve-issues`, `/rok-review-pr`, `/rok-resolve-pr-review-thread`
+### Code Review & Quality
 
-All 13 commands live in [`agentsmd/commands/`](agentsmd/commands/).
+| Command | Description |
+| ------- | ----------- |
+| `/review-code` | Structured code review with quality checks |
+| `/infrastructure-review` | Review Terraform/Terragrunt infrastructure |
+| `/review-docs` | Review and improve documentation |
+| `/generate-code` | Scaffold new code with standards |
+
+### PR Lifecycle Management
+
+| Command | Description |
+| ------- | ----------- |
+| `/pr` | Complete PR lifecycle management |
+| `/pr-review-feedback` | Resolve PR review threads via GraphQL |
+| `/fix-pr-ci` | Fix CI failures in current repo |
+| `/fix-all-pr-ci-all-repos` | Fix CI failures across all owned repos |
+| `/resolve-pr-review-thread-all` | Address review comments in current repo |
+| `/resolve-pr-review-thread-all-repos` | Address review comments across all repos |
+
+### Issue & Architecture Management
+
+| Command | Description |
+| ------- | ----------- |
+| `/rok-shape-issues` | Shape raw ideas into actionable GitHub issues |
+| `/rok-resolve-issues` | Analyze and implement GitHub issues |
+| `/rok-review-pr` | Comprehensive PR review with systematic analysis |
+| `/rok-resolve-pr-review-thread` | Resolve PR review feedback efficiently |
+
+### Delegation & Integration
+
+| Command | Description |
+| ------- | ----------- |
+| `/delegate-to-ai` | Delegate tasks to external AI assistants |
+
+All 19 active commands live in [`agentsmd/commands/`](agentsmd/commands/). See the [Commands](agentsmd/commands/) reference for detailed documentation on each.
 
 ## Core Concepts
 
