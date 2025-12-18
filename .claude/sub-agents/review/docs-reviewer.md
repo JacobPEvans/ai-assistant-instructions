@@ -9,7 +9,8 @@ allowed-tools: Task, TaskOutput, TodoWrite, Bash(markdownlint-cli2:*), Glob, Gre
 
 ## Purpose
 
-Reviews documentation files for consistency, completeness, clarity, and markdownlint compliance. Ensures documentation meets project standards and passes CI/CD requirements.
+Reviews documentation files for consistency, completeness, clarity, and markdownlint compliance.
+Ensures documentation meets project standards and passes CI/CD requirements.
 
 ## Capabilities
 
