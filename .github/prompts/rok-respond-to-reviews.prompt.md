@@ -1,1 +1,1 @@
-../../agentsmd/commands/rok-respond-to-reviews.md
+../../agentsmd/commands/rok-resolve-pr-review-thread.md
