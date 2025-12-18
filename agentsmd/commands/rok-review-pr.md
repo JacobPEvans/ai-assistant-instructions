@@ -22,6 +22,9 @@ Comprehensive and systematic Pull Request review system focusing on code quality
 
 ### Core Capabilities
 
+Apply [Code Standards](../rules/code-standards.md), [Infrastructure Standards](../rules/infrastructure-standards.md),
+and [Styleguide](../rules/styleguide.md) throughout the review process.
+
 **Phase 1: PR Analysis & Context Understanding** (pr_analysis)
 
 - **Change scope assessment**: Analyze diff size, affected files, and complexity
@@ -168,26 +171,29 @@ bun run lint
 
 > **Review Criteria:**
 
-#### Critical Issues (Block Merge)
+Use emoji-based priority markers to clearly communicate feedback urgency:
+
+#### 🔴 Critical Issues (Block Merge / Required)
 
 - Security vulnerabilities or data exposure risks
 - Breaking changes without proper migration strategy
 - Failed automated tests or build processes
 - Significant performance regressions
 
-#### Major Issues (Request Changes)
+#### 🟡 Major Issues (Request Changes / Suggested)
 
 - Architectural pattern violations
 - Missing or inadequate test coverage
 - Poor error handling or edge case coverage
 - Incomplete documentation for public APIs
+- Code quality improvements and minor optimizations
 
-#### Minor Issues (Suggest Improvements)
+#### 🟢 Minor Issues (Suggest Improvements / Optional)
 
 - Code style inconsistencies
-- Optimization opportunities
 - Better naming conventions
 - Enhanced code comments
+- Alternative approaches and style preferences
 
 #### Enhancements (Optional)
 
@@ -195,6 +201,11 @@ bun run lint
 - Code structure improvements
 - Additional test scenarios
 - Documentation enhancements
+
+#### Feedback Example
+
+> 🟡 **Suggested** (Code Quality): The function `process_data()` on line 72 is doing multiple things.
+> Consider splitting into `validate_data()`, `transform_data()`, and `save_data()` for better testability.
 
 ### Usage Instructions
 
