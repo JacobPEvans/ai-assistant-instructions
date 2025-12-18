@@ -21,7 +21,7 @@ Use external AI models when the task benefits from:
 - **Multi-Model Consensus**: Getting opinions from multiple AIs on critical decisions
 - **Specialized Research**: Gemini's latest web search and reasoning capabilities
 
-See [AGENTS.md](../AGENTS.md) for current model capabilities and routing rules.
+See [AGENTS.md](../../AGENTS.md) for current model capabilities and routing rules.
 
 ## Available External AIs
 
@@ -286,7 +286,7 @@ fi
 
 ## Integration with PAL MCP
 
-If PAL MCP Server is available (see [AGENTS.md](../AGENTS.md)):
+If PAL MCP Server is available (see [AGENTS.md](../../AGENTS.md)):
 
 ```bash
 # Check if PAL MCP is running
@@ -394,11 +394,11 @@ security add-generic-password -a "$USER" -s "GEMINI_API_KEY" -w "your-api-key"
 4. **Privacy first**: Sensitive data must use local-only mode
 5. **Validate outputs**: External AIs can hallucinate; always verify critical information
 6. **Multi-model consensus**: For important decisions, consult multiple models
-7. **Update regularly**: Model capabilities change monthly; review [AGENTS.md](../AGENTS.md)
+7. **Update regularly**: Model capabilities change monthly; review [AGENTS.md](../../AGENTS.md)
 
 ## Related Files
 
-- [AGENTS.md](../AGENTS.md) - Model routing rules and capabilities
+- [AGENTS.md](../../AGENTS.md) - Model routing rules and capabilities
 - [keychain-setup.md](../docs/keychain-setup.md) - API key security setup
 - [.specs/2025-12-14-multi-model-orchestration/PLAN.md](../../.specs/2025-12-14-multi-model-orchestration/PLAN.md) - Full orchestration plan
 

@@ -18,7 +18,7 @@ Found a bug? Something unclear? Open an issue. Describe what you expected, what 
 
 ## Pull Requests
 
-For detailed PR workflow guidance, see [PR Review Guidance](agentsmd/rules/pr-review-guidance.md).
+For detailed PR workflow guidance, see [PR Review Command](agentsmd/commands/rok-review-pr.md).
 
 ### Before You Start
 
