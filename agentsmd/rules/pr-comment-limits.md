@@ -2,7 +2,7 @@
 
 ## Overview
 
-This rule establishes a hard limit of **50 total comments per pull request** to prevent review cycles from becoming unresolvable due to excessive AI-generated feedback.
+This rule sets a hard limit of **50 comments per pull request** to prevent infinite review cycles from excessive AI-generated feedback.
 
 ## Problem Statement
 

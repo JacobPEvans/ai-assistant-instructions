@@ -195,7 +195,7 @@ gh api graphql -f query="
       resolveReviewThread(input: {threadId: \$threadId}) {
         thread { id isResolved }
       }
-    }" 2>/dev/null && echo "✓ Resolved {}"
+    }" && echo "✓ Resolved {}"
   '
 ```
 

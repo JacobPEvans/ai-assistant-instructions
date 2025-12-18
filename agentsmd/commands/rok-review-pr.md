@@ -136,7 +136,7 @@ bun run lint
 - **Test quality**: Ensure comprehensive coverage and meaningful tests
 - **Documentation**: Review inline comments and external documentation
 
-#### Step 3.5: Check Comment Limit (Before Submitting Feedback)
+#### Step 4: Check Comment Limit (Before Submitting Feedback)
 
 Before posting any new comments:
 
@@ -159,9 +159,9 @@ query {
 **Decision Logic**:
 
 - **If comment count >= 50**: Skip feedback submission, log that limit has been reached
-- **If comment count < 50**: Proceed to Step 4
+- **If comment count < 50**: Proceed to Step 5
 
-#### Step 4: Feedback Documentation & Submission
+#### Step 5: Feedback Documentation & Submission
 
 - **Categorize feedback**: Critical -> Major -> Minor -> Enhancement
 - **Provide examples**: Show better approaches where applicable
