@@ -7,6 +7,7 @@ This directory contains modular permission sets that reduce token overhead and i
 Instead of maintaining a single monolithic `allow.json` with 400+ rules, the modular system organizes permissions into focused, reusable modules:
 
 - **core.json**: Universal tools and commands safe for all contexts
+- **webfetch.json**: Domain allowlist for WebFetch tool
 - **Toolchain modules**: Language and platform-specific permissions (python, nodejs, rust, docker, kubernetes, terraform, aws, nix)
 
 ## Structure
@@ -17,6 +18,7 @@ permissions/
 ├── modules/
 │   ├── README.md             # This file
 │   ├── core.json             # Universal safe commands
+│   ├── webfetch.json         # WebFetch domain allowlist
 │   ├── python.json           # Python toolchain
 │   ├── nodejs.json           # Node.js toolchain
 │   ├── rust.json             # Rust toolchain
@@ -41,7 +43,17 @@ Universal commands and tools that should be available in all contexts:
 - **Network (read-only)**: curl (GET only), ping, nslookup, dig, host, netstat, lsof
 - **Development tools**: claude doctor, check-jsonschema, markdownlint-cli2, pre-commit
 - **Utilities**: env, type, time, timeout, ssh-add (list only)
-- **WebFetch**: GitHub, Anthropic domains
+
+### webfetch.json
+
+Domain allowlist for the WebFetch tool:
+
+- **Documentation sites**: github.com, githubusercontent.com, anthropic.com, readthedocs.io, mozilla.org
+- **Package registries**: npmjs.com, pypi.org
+- **Language docs**: python.org, rust-lang.org, typescriptlang.org
+- **Infrastructure**: nixos.org, hashicorp.com, terraform.io, docker.com, kubernetes.io
+- **AI/Dev tools**: openai.com, geminicli.com, google.dev
+- **Community**: stackoverflow.com
 
 ### python.json
 

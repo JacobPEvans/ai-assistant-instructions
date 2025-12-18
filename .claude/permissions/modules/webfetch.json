@@ -1,0 +1,23 @@
+{
+  "permissions": [
+    "WebFetch(domain:github.com)",
+    "WebFetch(domain:githubusercontent.com)",
+    "WebFetch(domain:anthropic.com)",
+    "WebFetch(domain:nixos.org)",
+    "WebFetch(domain:hashicorp.com)",
+    "WebFetch(domain:terraform.io)",
+    "WebFetch(domain:geminicli.com)",
+    "WebFetch(domain:google.dev)",
+    "WebFetch(domain:npmjs.com)",
+    "WebFetch(domain:docker.com)",
+    "WebFetch(domain:kubernetes.io)",
+    "WebFetch(domain:python.org)",
+    "WebFetch(domain:pypi.org)",
+    "WebFetch(domain:readthedocs.io)",
+    "WebFetch(domain:rust-lang.org)",
+    "WebFetch(domain:typescriptlang.org)",
+    "WebFetch(domain:stackoverflow.com)",
+    "WebFetch(domain:mozilla.org)",
+    "WebFetch(domain:openai.com)"
+  ]
+}
