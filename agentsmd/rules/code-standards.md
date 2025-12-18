@@ -2,6 +2,14 @@
 
 This document outlines the universal standards for writing high-quality code.
 
+## Before You Start
+
+Before writing any code, ensure you:
+
+- **Clarify ambiguous requirements**: Ask questions when specifications are unclear
+- **Analyze existing code patterns and conventions**: Study the codebase to match existing style
+- **Prefer existing libraries and frameworks**: Avoid reinventing the wheel
+
 ## General Principles
 
 - **Readability**: Write clear, self-documenting code. Prefer clarity over cleverness.
@@ -24,3 +32,14 @@ This document outlines the universal standards for writing high-quality code.
 - **Robustness**: Implement comprehensive error handling.
 - **Clarity**: Provide meaningful error messages that can help with debugging.
 - **Logging**: Log errors with sufficient context.
+
+## Technology-Specific Guidelines
+
+### Python
+
+- **Follow PEP 8**: Adhere to Python's official style guide
+- **Use type hints**: Add type annotations for function parameters and return values
+- **Write docstrings**: Document all functions, classes, and modules using docstrings
+- **Virtual environments**: Always use virtual environments for dependency isolation
+- **Pin dependencies**: Specify exact versions in `requirements.txt`
+- **Run formatters and linters**: Use tools like `black`, `flake8`, and `mypy` before committing

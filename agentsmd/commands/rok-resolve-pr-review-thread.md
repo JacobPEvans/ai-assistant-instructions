@@ -43,6 +43,30 @@ There are exactly **TWO paths** to resolve a comment:
 
 - [Subagent Parallelization](../rules/subagent-parallelization.md) - Parallel execution patterns for independent comments
 
+## Quick Reference
+
+Essential commands for PR review thread management:
+
+```bash
+# 1. Get all review threads
+gh api graphql -f query='{
+  repository(owner: "OWNER", name: "REPO") {
+    pullRequest(number: 123) {
+      reviewThreads(first: 50) {
+        nodes { id isResolved comments(first: 5) { nodes { body path line } } }
+      }
+    }
+  }
+}'
+
+# 2. Resolve a single thread
+gh api graphql -f query='mutation {
+  resolveReviewThread(input: {threadId: "PRRT_xxx"}) {
+    thread { id isResolved }
+  }
+}'
+```
+
 ## Workflow
 
 ### 1. Retrieve Unresolved Comments
@@ -708,6 +732,24 @@ function processUser(user: User) {
 **Get threads** - Query `repository.pullRequest.reviewThreads` with fields: `id`, `isResolved`, `path`, `line`, `comments.nodes[].body`
 
 **Resolve thread** - Mutation `resolveReviewThread(input: {threadId: $threadId})` where `threadId` is the GraphQL node ID
+
+### Troubleshooting
+
+| Problem | Solution |
+| ------- | -------- |
+| Empty response | Check OWNER/REPO/PR_NUMBER are correct |
+| Mutation fails | Verify thread ID starts with `PRRT_` |
+| Permission denied | Run `gh auth status` to verify authentication |
+| Variables not substituting | Use double quotes and escape inner quotes |
+
+### Why This Matters
+
+GitHub's branch protection can require "all conversations resolved" before merge. Without programmatic resolution,
+autonomous PR management is impossible. This GraphQL approach enables:
+
+- Automated CI/CD pipelines to resolve threads after fixing issues
+- AI assistants to fully manage PRs without human intervention
+- Batch resolution of multiple threads in one operation
 
 ## AI Reviewer Response Strategy
 
