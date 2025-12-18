@@ -69,6 +69,13 @@ Located in `.claude/sub-agents/review/`:
 - **docs-reviewer.md**: Documentation validation including markdownlint compliance and link checking
 - **infrastructure-reviewer.md**: Infrastructure as Code (Terraform/Terragrunt) security and cost review
 
+### PR Management Sub-Agents
+
+Located in `.claude/sub-agents/pr/`:
+
+- **ci-fixer.md**: Analyzes and fixes CI failures in pull requests without bypassing checks
+- **thread-resolver.md**: Resolves PR review threads through implementation or explanation with GraphQL resolution
+
 ## Creating New Sub-Agents
 
 Sub-agents follow this format:
@@ -121,6 +128,9 @@ Practical examples of invoking this sub-agent.
 │   ├── code-reviewer.md
 │   ├── docs-reviewer.md
 │   └── infrastructure-reviewer.md
+├── pr/                                # PR management sub-agents
+│   ├── ci-fixer.md
+│   └── thread-resolver.md
 └── [future categories]/               # Additional sub-agent categories
 ```
 
