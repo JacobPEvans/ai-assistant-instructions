@@ -20,6 +20,10 @@ Comprehensive and systematic Pull Request review system focusing on code quality
 
 **SINGLE PR** - This command reviews one PR at a time, specified by argument or determined from current branch.
 
+> **PR Comment Limit**: This command respects the **50-comment limit per PR** defined in the
+> [PR Comment Limits rule](../rules/pr-comment-limits.md).
+> If a PR has reached 50 comments, this command will not post new comments. See the rule for details.
+
 ### Core Capabilities
 
 **Phase 1: PR Analysis & Context Understanding** (pr_analysis)
@@ -132,12 +136,37 @@ bun run lint
 - **Test quality**: Ensure comprehensive coverage and meaningful tests
 - **Documentation**: Review inline comments and external documentation
 
+#### Step 3.5: Check Comment Limit (Before Submitting Feedback)
+
+Before posting any new comments:
+
+```bash
+# Check current comment count
+gh api graphql -f query='
+query {
+  repository(owner: "OWNER", name: "REPO") {
+    pullRequest(number: PR_NUMBER) {
+      comments(first: 1) { totalCount }
+      reviewThreads(first: 100) { totalCount }
+    }
+  }
+}' --jq '.data.repository.pullRequest.comments.totalCount + .data.repository.pullRequest.reviewThreads.totalCount'
+
+# If >= 50: Do NOT post new comments - exit with message explaining the limit
+# If < 50: Proceed with feedback submission
+```
+
+**Decision Logic**:
+
+- **If comment count >= 50**: Skip feedback submission, log that limit has been reached
+- **If comment count < 50**: Proceed to Step 4
+
 #### Step 4: Feedback Documentation & Submission
 
 - **Categorize feedback**: Critical -> Major -> Minor -> Enhancement
 - **Provide examples**: Show better approaches where applicable
 - **Record decision**: Submit formal review with clear rationale
-- **MANDATORY**: Record all feedback on GitHub for team visibility
+- **MANDATORY**: Record all feedback on GitHub for team visibility (if under 50-comment limit)
 
 ### Review Excellence Standards
 
