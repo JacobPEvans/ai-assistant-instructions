@@ -88,6 +88,13 @@ Located in `.claude/sub-agents/code/`:
 
 - **code-generator.md**: Generates high-quality, maintainable, and secure code following project standards
 
+### Utility Sub-Agents
+
+Located in `.claude/sub-agents/util/`:
+
+- **worktree-manager.md**: Manages git worktrees including creation, cleanup of stale worktrees, and synchronization
+- **test-runner.md**: Executes test suites, analyzes failures, and suggests fixes across multiple test frameworks
+
 ## Creating New Sub-Agents
 
 Sub-agents follow this format:
@@ -147,6 +154,9 @@ Practical examples of invoking this sub-agent.
 │   └── issue-resolver.md
 ├── code/                              # Code generation sub-agents
 │   └── code-generator.md
+├── util/                              # Utility sub-agents
+│   ├── worktree-manager.md
+│   └── test-runner.md
 └── [future categories]/               # Additional sub-agent categories
 ```
 
