@@ -45,7 +45,9 @@ There are exactly **TWO paths** to resolve a comment:
 
 ## Quick Reference
 
-Essential commands for PR review thread management:
+Essential commands for PR review thread management.
+
+**Note**: Replace OWNER, REPO, PR_NUMBER, and thread IDs with actual values from your repository.
 
 ```bash
 # 1. Get all review threads
@@ -53,7 +55,17 @@ gh api graphql -f query='{
   repository(owner: "OWNER", name: "REPO") {
     pullRequest(number: 123) {
       reviewThreads(first: 50) {
-        nodes { id isResolved comments(first: 5) { nodes { body path line } } }
+        nodes {
+          id
+          isResolved
+          comments(first: 5) {
+            nodes {
+              body
+              path
+              line
+            }
+          }
+        }
       }
     }
   }

@@ -41,5 +41,6 @@ Before writing any code, ensure you:
 - **Use type hints**: Add type annotations for function parameters and return values
 - **Write docstrings**: Document all functions, classes, and modules using docstrings
 - **Virtual environments**: Always use virtual environments for dependency isolation
-- **Pin dependencies**: Specify exact versions in `requirements.txt`
+- **Pin dependencies appropriately**: For deployed applications, use a fully pinned requirements/lock file.
+  For libraries, specify compatible version ranges in pyproject.toml instead of pinning exact versions.
 - **Run formatters and linters**: Use tools like `black`, `flake8`, and `mypy` before committing
