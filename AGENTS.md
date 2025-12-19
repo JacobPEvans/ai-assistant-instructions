@@ -99,7 +99,9 @@ All commands from `agentsmd/commands/` are available. Use this table to select t
 | Intent | Command | Scope | Notes |
 | --- | --- | --- | --- |
 | Start new development | `/init-worktree` | Repo | Always first for new work |
-| Sync PRs with main | `/sync-prs-with-main` | Repo | Merge main into all open PRs |
+| Sync current branch with main | `/sync-main` | Branch | Update main, merge into current |
+| Sync all PRs with main | `/sync-main-all` | Repo | Update main, merge into all open PRs |
+| Sync PRs with main | `/sync-prs-with-main` | Repo | Superseded by `/sync-main-all` |
 | Fix PR CI failures | `/fix-pr-ci` | Repo | Fix CI in current repo |
 | Fix all PR CI failures | `/fix-all-pr-ci-all-repos` | All repos | Fix CI across all owned repos |
 | Resolve PR review threads | `/resolve-pr-review-thread-all` | Repo | Address review comments in current repo |
