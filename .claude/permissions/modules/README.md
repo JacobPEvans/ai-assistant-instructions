@@ -8,7 +8,9 @@ Instead of maintaining a single monolithic `allow.json` with 400+ rules, the mod
 
 - **core.json**: Universal tools and commands safe for all contexts
 - **webfetch.json**: Domain allowlist for WebFetch tool
-- **Toolchain modules**: Language and platform-specific permissions (python, nodejs, rust, go, ruby, docker, kubernetes, terraform, aws, nix)
+- **Language modules**: Language-specific toolchains (python, nodejs, rust, go, ruby)
+- **Platform modules**: Platform and infrastructure toolchains (docker, kubernetes, terraform, aws, nix)
+- **System modules**: Package managers and environment tools (system, asdf, redis, orb)
 
 ## Structure
 
@@ -28,7 +30,11 @@ permissions/
 │   ├── kubernetes.json       # Kubernetes toolchain
 │   ├── terraform.json        # Terraform/Terragrunt
 │   ├── aws.json              # AWS CLI toolchain
-│   └── nix.json              # Nix ecosystem
+│   ├── nix.json              # Nix ecosystem
+│   ├── system.json           # System package managers
+│   ├── asdf.json             # Version management
+│   ├── redis.json            # Redis CLI
+│   └── orb.json              # Orbstack toolchain
 ```
 
 ## Available Modules
@@ -138,15 +144,37 @@ Nix ecosystem:
 - **Legacy Nix**: nix-env, nix-shell, nix-instantiate, nix-store, nix-collect-garbage, nix-prefetch-url, nix-prefetch-git
 - **Nix utilities**: nix-locate, nix-tree, nix-diff, nixfmt, statix, deadnix
 - **Darwin**: darwin-rebuild (switch, build, list-generations, rollback)
-- **Development tools**: direnv, devbox, devenv, cachix
 - **Read permissions**: /nix/store paths
 
-### Future Modules
+### system.json
 
-- **system.json**: System-level commands, brew, package managers
-- **asdf.json**: asdf and mise version managers
-- **redis.json**: redis-cli commands
-- **orb.json**: orb and orbctl commands
+System-level package managers and environment tools:
+
+- **Homebrew**: brew (list, search, info, version, doctor, config, outdated, deps)
+- **Devbox**: devbox (info, list, version)
+- **Devenv**: devenv (info, version)
+- **Direnv**: direnv (status, reload)
+- **Cachix**: cachix (list)
+
+### asdf.json
+
+Version management toolchain:
+
+- **asdf**: asdf (version, list, current, info, where, which, plugin list)
+- **mise**: mise (version, list, current, doctor, env, where, which)
+
+### redis.json
+
+Redis database CLI:
+
+- **redis-cli**: redis-cli (version, ping, info, get)
+
+### orb.json
+
+Orbstack container management:
+
+- **orb**: orb (help, list, info)
+- **orbctl**: orbctl (help, doctor, info, config get, version)
 
 ## How to Use
 
@@ -215,7 +243,9 @@ permissions:
 
 1. Phase 1 (Completed): Create core.json with universal commands and initial toolchain modules
 2. Phase 2 (Completed): Standardize all modules to use consistent object format and complete language-specific modules
-3. Phase 3 (Next): Extract remaining toolchain commands (system.json, asdf.json, redis.json, etc.)
+   (python.json, nodejs.json, rust.json, go.json, ruby.json)
+3. Phase 3 (Completed): Extract platform and system toolchains (docker.json, kubernetes.json, terraform.json, aws.json, nix.json,
+   system.json, asdf.json, redis.json, orb.json)
 4. Phase 4: Update tools to load modular permissions
 5. Phase 5: Deprecate monolithic allow.json
 
