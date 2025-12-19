@@ -8,7 +8,7 @@ Instead of maintaining a single monolithic `allow.json` with 400+ rules, the mod
 
 - **core.json**: Universal tools and commands safe for all contexts
 - **webfetch.json**: Domain allowlist for WebFetch tool
-- **Toolchain modules**: Language and platform-specific permissions (python, nodejs, rust, docker, kubernetes, terraform, aws, nix)
+- **Toolchain modules**: Language and platform-specific permissions (python, nodejs, rust, go, ruby, docker, kubernetes, terraform, aws, nix)
 
 ## Structure
 
@@ -22,6 +22,8 @@ permissions/
 │   ├── python.json           # Python toolchain
 │   ├── nodejs.json           # Node.js toolchain
 │   ├── rust.json             # Rust toolchain
+│   ├── go.json               # Go toolchain
+│   ├── ruby.json             # Ruby toolchain
 │   ├── docker.json           # Docker toolchain
 │   ├── kubernetes.json       # Kubernetes toolchain
 │   ├── terraform.json        # Terraform/Terragrunt
@@ -75,6 +77,7 @@ Node.js development toolchain:
 - **npm**: version, list, run scripts (test, build, lint, dev, start), outdated, audit, view
 - **Yarn**: version, run scripts
 - **pnpm**: version, run scripts
+- **Version managers**: nvm, fnm, nodenv (version, list, current, which)
 
 ### rust.json
 
@@ -83,6 +86,18 @@ Rust development toolchain:
 - **Cargo**: version, build, test, run, check, fmt, clippy, clean, update, search, tree
 - **Compiler**: rustc version
 - **Toolchain**: rustup version, update, show, default
+
+### go.json
+
+Go development toolchain:
+
+- **Version management**: goenv versions, version, which
+
+### ruby.json
+
+Ruby development toolchain:
+
+- **Version management**: rbenv versions, version, which
 
 ### docker.json
 
@@ -128,8 +143,10 @@ Nix ecosystem:
 
 ### Future Modules
 
-- **ruby.json**: rbenv, Bundler, Ruby CLI
 - **system.json**: System-level commands, brew, package managers
+- **asdf.json**: asdf and mise version managers
+- **redis.json**: redis-cli commands
+- **orb.json**: orb and orbctl commands
 
 ## How to Use
 
@@ -196,9 +213,9 @@ permissions:
 
 ### Migrating from Monolithic to Modular
 
-1. Phase 1 (Current): Create core.json with universal commands
-2. Phase 2: Extract language-specific commands (python.json, nodejs.json, etc.)
-3. Phase 3: Extract toolchain-specific commands (docker.json, terraform.json, etc.)
+1. Phase 1 (Completed): Create core.json with universal commands and initial toolchain modules
+2. Phase 2 (Completed): Standardize all modules to use consistent object format and complete language-specific modules
+3. Phase 3 (Next): Extract remaining toolchain commands (system.json, asdf.json, redis.json, etc.)
 4. Phase 4: Update tools to load modular permissions
 5. Phase 5: Deprecate monolithic allow.json
 

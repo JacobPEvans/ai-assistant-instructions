@@ -1,0 +1,8 @@
+{
+  "permissions": [
+    "Bash(rbenv --version:*)",
+    "Bash(rbenv versions:*)",
+    "Bash(rbenv version:*)",
+    "Bash(rbenv which:*)"
+  ]
+}
