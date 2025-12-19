@@ -66,31 +66,18 @@ gh pr list --json number,headRefName,title,reviewDecision,reviews
 
 For each PR, fetch unresolved review threads:
 
+<!-- markdownlint-disable MD013 -->
+<!-- Long line required: Claude Code has encoding issues with multi-line GraphQL -->
+
 ```bash
-gh api graphql -f query='
-query($owner: String!, $repo: String!, $pr: Int!) {
-  repository(owner: $owner, name: $repo) {
-    pullRequest(number: $pr) {
-      reviewThreads(first: 100) {
-        nodes {
-          id
-          isResolved
-          path
-          line
-          comments(first: 10) {
-            nodes {
-              id
-              databaseId
-              body
-              author { login }
-            }
-          }
-        }
-      }
-    }
-  }
-}' -f owner="OWNER" -f repo="REPO" -F pr=NUMBER
+# IMPORTANT: Use --raw-field and single-line query to avoid encoding issues
+gh api graphql --raw-field 'query=query { repository(owner: "OWNER", name: "REPO") { pullRequest(number: NUMBER) { reviewThreads(first: 100) { nodes { id isResolved path line comments(first: 10) { nodes { id databaseId body author { login } } } } } } } }'
 ```
+
+> **Technical Requirement**: Multi-line GraphQL queries cause encoding issues in Claude Code.
+> Use `--raw-field` with single-line format (exceeds 160 chars by necessity).
+
+<!-- markdownlint-enable MD013 -->
 
 Filter for PRs with `isResolved: false` threads.
 
@@ -154,9 +141,15 @@ Wait for all agents to complete using `TaskOutput` with `block=true`.
 
 Verify each PR's review threads are resolved:
 
+<!-- markdownlint-disable MD013 -->
+
 ```bash
-gh api graphql -f query='...' | jq '.data.repository.pullRequest.reviewThreads.nodes | map(select(.isResolved == false)) | length'
+# Single-line query format for reliability
+gh api graphql --raw-field 'query=query { repository(owner: "OWNER", name: "REPO") { pullRequest(number: NUMBER) { reviewThreads(first: 100) { nodes { isResolved } } } } }' | jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)] | length'
+# Should return 0 if all resolved
 ```
+
+<!-- markdownlint-enable MD013 -->
 
 ### Step 7: Clean Up Worktrees
 
@@ -195,17 +188,32 @@ Worktrees cleaned up: {N}
 | ----- | ------ | ----------- |
 | 1-3. Discovery | Sequential Bash | 1 (prerequisite) |
 | 4. Create worktrees | Parallel Bash | N (one per PR) |
-| 5. Respond to reviews | Parallel Task agents | N (one per PR) |
+| 5. Respond to reviews | Parallel Task agents | MAX 5 at once |
 | 7. Cleanup worktrees | Parallel Bash | N (one per PR) |
 
-## Batching
+## Subagent Limits
 
-If > 10 PRs need processing:
+**CRITICAL: Maximum 5 subagents running at once.**
 
-- Process first 10
-- Wait for completion
-- Process next batch
-- Avoids overwhelming the system
+This is a hard limit to prevent token exhaustion and ensure each subagent completes successfully.
+
+### Batching Strategy
+
+If > 5 PRs need processing:
+
+1. Launch first 5 subagents in parallel
+2. Wait for ALL 5 to complete using `TaskOutput` with `block=true`
+3. Validate each completed - verify PR has 0 unresolved threads
+4. If any incomplete: retry that PR (max 2 retries)
+5. Only after all 5 are validated, start next batch of 5
+6. Never have more than 5 concurrent subagents
+
+### Why 5?
+
+- Prevents token exhaustion in the parent conversation
+- Ensures each subagent gets enough context
+- Allows proper validation between batches
+- Keeps API rate limits in check
 
 ## Error Handling
 
@@ -216,14 +224,15 @@ If subagent fails on a PR:
 - Continue with other PRs
 - Don't let one failure block everything
 
-## Key Differences from /fix-all-pr-ci-all-repos
+## Related Commands
 
-| Aspect | /resolve-pr-review-thread-all | /fix-all-pr-ci-all-repos |
-| ------ | ----------------------------- | ------------------------ |
-| Scope | Current repo only | All owned repos |
-| Focus | Review comments | CI failures |
-| Worktrees | Uses worktrees | Clones to /tmp |
-| GitHub API | GraphQL for threads | REST for checks |
+| Command | Scope | Purpose |
+| ------- | ----- | ------- |
+| `/resolve-pr-review-thread-all` | Current repo, all PRs | Address all review comments |
+| `/rok-resolve-pr-review-thread` | Current repo, single PR | Address one PR's comments |
+| `/fix-pr-ci` | Current repo, single PR | Fix CI failures |
+
+> **Note**: Cross-repo commands have been removed for safety. Run commands from each repository individually.
 
 ## Example Usage
 
