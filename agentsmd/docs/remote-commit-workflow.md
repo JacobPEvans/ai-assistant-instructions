@@ -247,13 +247,13 @@ GitHub API has rate limits:
 The helper script makes multiple API calls for Git Data API approach:
 
 - Single-file: 2 API calls (get SHA + commit)
-- Multi-file: 5 + N API calls (where N is the number of files):
-  1. Get latest commit SHA
-  2. Get tree SHA
-  3. Create blob per file (N calls total)
-  4. Create tree
-  5. Create commit
-  6. Update ref
+- Multi-file: 5 + N API calls (5 base calls + N blob creations):
+  1. Get latest commit SHA (1 call)
+  2. Get tree SHA (1 call)
+  3. Create blob per file (N calls, one per file)
+  4. Create tree (1 call)
+  5. Create commit (1 call)
+  6. Update ref (1 call)
 
 For bulk operations, consider:
 
@@ -338,7 +338,7 @@ FILE_PATH="VERSION"
 NEW_CONTENT="2.1.0"
 
 # Get current content
-CURRENT=$(gh api "repos/$REPO/contents/$FILE_PATH" --jq '.content' | base64 -d)
+CURRENT=$(gh api "repos/$REPO/contents/$FILE_PATH" --jq '.content' | base64 --decode)
 
 if [[ "$CURRENT" != "$NEW_CONTENT" ]]; then
     echo "$NEW_CONTENT" > /tmp/version.txt

@@ -217,7 +217,7 @@ multi_file_commit() {
 
     for pair in "${file_pairs[@]}"; do
         if [[ "$pair" != *:* ]]; then
-            log_error "Invalid file pair '$pair'. Expected format 'path-in-repo:local-file-path' (e.g., 'docs/guide.md:./guide.md')."
+            log_error "Invalid file pair '$pair'. Expected format 'path-in-repo:local-file-path' (e.g., \"docs/guide.md:./guide.md\")."
             exit 1
         fi
 
@@ -234,11 +234,7 @@ multi_file_commit() {
         # Create blob for file content (use base64 encoding for robustness)
         local blob_content
         # Prefer single-line base64 output; fall back for implementations without -w
-        if blob_content=$(base64 -w0 "$local_file" 2>/dev/null); then
-            :
-        else
-            blob_content=$(base64 "$local_file" | tr -d '\n')
-        fi
+        blob_content="$(base64 -w0 "$local_file" 2>/dev/null || base64 "$local_file" | tr -d '\n')"
 
         local blob_sha
         blob_sha=$(gh api "repos/$repo/git/blobs" \
