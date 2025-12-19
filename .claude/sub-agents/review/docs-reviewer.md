@@ -64,10 +64,10 @@ markdownlint-cli2 .
 cspell "**/*.md"
 
 # Find incomplete sections
-rg "TODO|FIXME|XXX" **/*.md
+rg "TODO|FIXME|XXX" -g "*.md"
 
 # Check for broken links (if available)
-markdown-link-check **/*.md
+find . -name "*.md" -type f -exec markdown-link-check {} \;
 ```
 
 ### 3. Markdownlint Standards (CRITICAL)
@@ -77,7 +77,7 @@ markdown-link-check **/*.md
   - Never break words mid-character or split natural phrases
 - All other markdownlint rules must pass
 - Fix existing violations before creating pull requests
-- Configuration in `.markdownlint.json` sets MD013 to 160 characters
+- Configuration in `.markdownlint-cli2.jsonc` sets MD013 to 160 characters
 
 ### 4. Content Quality Verification
 

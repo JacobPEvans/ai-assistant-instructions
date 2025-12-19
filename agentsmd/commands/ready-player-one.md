@@ -1,14 +1,18 @@
 ---
-description: Orchestrate PR finalization across all repositories and report merge-readiness status
+title: "Ready Player One"
+description: >
+  Orchestrate PR finalization across all repositories and report merge-readiness status
+type: "command"
+version: "1.0.0"
 model: opus
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Read, Grep, Glob, SlashCommand
+allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:api,repo:list,pr:list,pr:view), Read, Grep, Glob, SlashCommand
 ---
 
-# Ready Player One
+## Ready Player One
 
-**Purpose**: Finalize all open PRs across all owned repositories by fixing CI failures, resolving review threads, and reporting which PRs
-are ready to merge versus blocked.
+> **Purpose**: Finalize all open PRs across all owned repositories by fixing CI failures,
+> resolving review threads, and reporting which PRs are ready to merge versus blocked.
 
 ## Scope
 
@@ -30,7 +34,7 @@ What this command DOES NOT:
 
 ## Related Documentation
 
-- [Subagent Parallelization](../rules/subagent-parallelization.md) - Parallel execution patterns
+- [Sub-agent Parallelization](../rules/subagent-parallelization.md) - Parallel execution patterns
 - `/fix-all-pr-ci-all-repos` - CI failure resolution
 - `/resolve-pr-review-thread-all-repos` - Review thread resolution
 
@@ -51,7 +55,7 @@ You are the **orchestrator**. You will:
 
 Execute the CI fix command:
 
-```bash
+```text
 /fix-all-pr-ci-all-repos
 ```
 
@@ -61,7 +65,7 @@ Wait for completion. This command will fix all CI failures across all PRs.
 
 Execute the review resolution command:
 
-```bash
+```text
 /resolve-pr-review-thread-all-repos
 ```
 
@@ -248,7 +252,7 @@ If PR status check fails:
 
 ## Example Usage
 
-```bash
+```text
 /ready-player-one
 ```
 

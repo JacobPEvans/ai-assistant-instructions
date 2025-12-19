@@ -110,7 +110,7 @@ All commands from `agentsmd/commands/` are available. Use this table to select t
 | Review a PR | `/rok-review-pr` | Single PR | Systematic review |
 | Resolve PR review feedback | `/rok-resolve-pr-review-thread` | Single PR | After review comments |
 | Manage your own PR | `/rok-manage-pr` | Single PR | PR author workflow |
-| Create/manage a PR | `/pr` | Single PR | Replaced by `/rok-manage-pr` |
+| Create/manage a PR | `/pr` | Single PR | Deprecated - use `/rok-manage-pr` |
 | Review documentation | `/review-docs` | Repo | Markdown validation |
 | Review infrastructure | `/infrastructure-review` | Repo | Terraform/Terragrunt |
 
