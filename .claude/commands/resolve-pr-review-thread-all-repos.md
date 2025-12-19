@@ -1,1 +1,0 @@
-../../agentsmd/commands/resolve-pr-review-thread-all-repos.md
