@@ -169,7 +169,7 @@ Trigger GitHub Actions workflows remotely.
 ### Workflow Dispatch Usage
 
 ```bash
-scripts/remote-commit.sh workflow <repo> <workflow-id> [inputs-json]
+scripts/remote-commit.sh workflow <repo> <workflow-id> <ref> [inputs-json]
 ```
 
 ### Example: Trigger Deployment
@@ -308,7 +308,7 @@ Use a feature branch and create a PR instead.
 
 ### Batch Multi-Repository Updates
 
-Update multiple repositories in parallel. Note that these updates are not atomic.
+Update multiple repositories in parallel. Each repository update is atomic on its own, but the batch of updates across repositories is not atomic as a group.
 
 ```bash
 #!/bin/bash
