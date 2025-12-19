@@ -1,1 +1,1 @@
-../agentsmd/AGENTS.md
+../agentsmd/rules/soul.md

@@ -1,0 +1,18 @@
+[
+  "Bash(cargo --version:*)",
+  "Bash(cargo build:*)",
+  "Bash(cargo test:*)",
+  "Bash(cargo run:*)",
+  "Bash(cargo check:*)",
+  "Bash(cargo fmt:*)",
+  "Bash(cargo clippy:*)",
+  "Bash(cargo clean:*)",
+  "Bash(cargo update:*)",
+  "Bash(cargo search:*)",
+  "Bash(cargo tree:*)",
+  "Bash(rustc --version:*)",
+  "Bash(rustup --version:*)",
+  "Bash(rustup update:*)",
+  "Bash(rustup show:*)",
+  "Bash(rustup default:*)"
+]

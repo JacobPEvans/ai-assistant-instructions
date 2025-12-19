@@ -2,7 +2,7 @@ name: Claude Code
 
 on:
   pull_request:
-    types: [opened, synchronize, ready_for_review, reopened]
+    types: [opened]
 
 jobs:
   claude:
@@ -24,8 +24,41 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Check PR comment limit
+        id: comment-check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
+        run: |
+          # Query PR for all comments (regular comments + review threads)
+          TOTAL_COMMENTS=$(gh api graphql -f query='
+          query {
+            repository(owner: "'$REPO_OWNER'", name: "'$REPO_NAME'") {
+              pullRequest(number: '$PR_NUMBER') {
+                comments(first: 1) {
+                  totalCount
+                }
+                reviewThreads(first: 100) {
+                  totalCount
+                }
+              }
+            }
+          }' --jq '.data.repository.pullRequest.comments.totalCount + .data.repository.pullRequest.reviewThreads.totalCount')
+
+          echo "total_comments=$TOTAL_COMMENTS" >> $GITHUB_OUTPUT
+          if [ "$TOTAL_COMMENTS" -ge 50 ]; then
+            echo "⚠️ PR has reached 50-comment limit - skipping Claude review"
+            echo "skip_review=true" >> $GITHUB_OUTPUT
+          else
+            echo "✓ Comment count: $TOTAL_COMMENTS (under 50-comment limit)"
+            echo "skip_review=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Run Claude Code Review
         id: claude-review
+        if: ${{ steps.comment-check.outputs.skip_review == 'false' }}
         # Using @v1 for automatic updates of minor and patch versions
         uses: anthropics/claude-code-action@v1
         timeout-minutes: 3
