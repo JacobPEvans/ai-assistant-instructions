@@ -25,7 +25,7 @@ For higher security requirements (untrusted code execution), combine native sand
 
 #### How It Works
 
-- **macOS:** Uses built-in [Seatbelt](https://developer.apple.com/documentation/security/seatbelt) sandbox
+- **macOS:** Uses built-in Seatbelt sandbox
 - **Linux:** Uses [bubblewrap](https://github.com/containers/bubblewrap) for application sandboxing
 - **Windows:** Filesystem virtualization (limited isolation)
 
@@ -522,11 +522,7 @@ A: Credentials follow normal file system rules. Use OS keychain for sensitive va
 
 - [Claude Code Sandboxing Documentation](https://code.claude.com/docs/en/sandboxing)
 - [Docker AI Sandboxes - Get Started](https://docs.docker.com/ai/sandboxes/get-started/)
-- [Apple Seatbelt Documentation](https://developer.apple.com/documentation/security/seatbelt)
 - [bubblewrap - Container Isolation](https://github.com/containers/bubblewrap)
-- [Running Claude Code Agents in Docker][medium-docker-claude]
-
-[medium-docker-claude]: https://medium.com/@dan.avila7/running-claude-code-agents-in-docker-containers-for-complete-isolation-63036a2ef6f4
 
 ## Next Steps
 
