@@ -99,7 +99,7 @@ Launch ONE subagent per PR in a SINGLE message with multiple Task tool calls.
 **Subagent Prompt**:
 
 ```text
-Respond to all review comments for PR #{NUMBER} in {OWNER}/{REPO}
+Resolve all review comments for PR #{NUMBER} in {OWNER}/{REPO}
 
 Branch: {BRANCH_NAME}
 Worktree: {WORKTREE_PATH}
@@ -188,7 +188,7 @@ Worktrees cleaned up: {N}
 | ----- | ------ | ----------- |
 | 1-3. Discovery | Sequential Bash | 1 (prerequisite) |
 | 4. Create worktrees | Parallel Bash | N (one per PR) |
-| 5. Respond to reviews | Parallel Task agents | MAX 5 at once |
+| 5. Resolve reviews | Parallel Task agents | MAX 5 at once |
 | 7. Cleanup worktrees | Parallel Bash | N (one per PR) |
 
 ## Subagent Limits

@@ -85,6 +85,28 @@ Permissions should be denied if they:
 - Add to appropriate section based on category
 - Maintain alphabetical ordering within sections
 
+**WebFetch Domain Deduplication:**
+
+When adding WebFetch domains, always check for existing broader domain patterns:
+
+- If `github.com` exists, skip `api.github.com`, `docs.github.com`, etc.
+- If `docker.com` exists, skip `docs.docker.com`, `hub.docker.com`, etc.
+- For well-known safe vendors (GitHub, Google, Docker, Apple, Microsoft), prefer adding the root domain rather than subdomains
+- `github.io` is separate from `github.com` - GitHub Pages require their own entry
+
+**Preferred Root Domains for Safe Vendors:**
+
+| Subdomain Found | Add Instead |
+| --- | --- |
+| `docs.docker.com` | `docker.com` (if not present) |
+| `api.github.com` | `github.com` (if not present) |
+| `developers.google.com` | `google.com` |
+| `support.apple.com` | `apple.com` |
+| `docs.microsoft.com` | `microsoft.com` |
+| `*.github.io` | `github.io` |
+
+Skip adding subdomains if the root domain is already in the allow list.
+
 3.3. Look for related permissions to add:
 
 - If `docker volume ls` is safe, `docker volume inspect` likely is too
@@ -112,13 +134,21 @@ Permissions should be denied if they:
 
 After all permissions are merged:
 
-6.1. Delete the local settings files that were processed:
+6.1. **Show contents before deletion**: For each local settings file, display its full contents
+to the user before deleting. This allows the user to verify what was processed.
+
+```bash
+echo "=== Contents of <path>/settings.local.json ==="
+cat <path>/settings.local.json
+```
+
+6.2. Delete the local settings files that were processed:
 
 ```bash
 rm <path>/settings.local.json
 ```
 
-6.2. Report which files were cleaned up.
+6.3. Report which files were cleaned up.
 
 ## Safety Guidelines
 
