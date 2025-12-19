@@ -8,7 +8,7 @@ Instead of maintaining a single monolithic `allow.json` with 400+ rules, the mod
 
 - **core.json**: Universal tools and commands safe for all contexts
 - **webfetch.json**: Domain allowlist for WebFetch tool
-- **Language modules**: Language-specific toolchains (python, nodejs, rust)
+- **Language modules**: Language-specific toolchains (python, nodejs, rust, go, ruby)
 - **Platform modules**: Platform and infrastructure toolchains (docker, kubernetes, terraform, aws, nix)
 - **System modules**: Package managers and environment tools (system, asdf, redis, orb)
 
@@ -24,6 +24,8 @@ permissions/
 │   ├── python.json           # Python toolchain
 │   ├── nodejs.json           # Node.js toolchain
 │   ├── rust.json             # Rust toolchain
+│   ├── go.json               # Go toolchain
+│   ├── ruby.json             # Ruby toolchain
 │   ├── docker.json           # Docker toolchain
 │   ├── kubernetes.json       # Kubernetes toolchain
 │   ├── terraform.json        # Terraform/Terragrunt
@@ -81,6 +83,7 @@ Node.js development toolchain:
 - **npm**: version, list, run scripts (test, build, lint, dev, start), outdated, audit, view
 - **Yarn**: version, run scripts
 - **pnpm**: version, run scripts
+- **Version managers**: nvm, fnm, nodenv (version, list, current, which)
 
 ### rust.json
 
@@ -89,6 +92,18 @@ Rust development toolchain:
 - **Cargo**: version, build, test, run, check, fmt, clippy, clean, update, search, tree
 - **Compiler**: rustc version
 - **Toolchain**: rustup version, update, show, default
+
+### go.json
+
+Go development toolchain:
+
+- **Version management**: goenv versions, version, which
+
+### ruby.json
+
+Ruby development toolchain:
+
+- **Version management**: rbenv versions, version, which
 
 ### docker.json
 
@@ -161,11 +176,6 @@ Orbstack container management:
 - **orb**: orb (help, list, info)
 - **orbctl**: orbctl (help, doctor, info, config get, version)
 
-### Future Modules
-
-- **ruby.json**: rbenv, Bundler, Ruby CLI
-- **go.json**: Go toolchain and version management
-
 ## How to Use
 
 ### Option 1: Include in allow.json
@@ -231,10 +241,11 @@ permissions:
 
 ### Migrating from Monolithic to Modular
 
-1. Phase 1 (Complete): Create core.json with universal commands
-2. Phase 2 (Complete): Extract language-specific commands (python.json, nodejs.json, rust.json)
-3. Phase 3 (Complete): Extract platform and system toolchains (docker.json, kubernetes.json, terraform.json, aws.json, nix.json, system.json,
-   asdf.json, redis.json, orb.json)
+1. Phase 1 (Completed): Create core.json with universal commands and initial toolchain modules
+2. Phase 2 (Completed): Standardize all modules to use consistent object format and complete language-specific modules
+   (python.json, nodejs.json, rust.json, go.json, ruby.json)
+3. Phase 3 (Completed): Extract platform and system toolchains (docker.json, kubernetes.json, terraform.json, aws.json, nix.json,
+   system.json, asdf.json, redis.json, orb.json)
 4. Phase 4: Update tools to load modular permissions
 5. Phase 5: Deprecate monolithic allow.json
 
