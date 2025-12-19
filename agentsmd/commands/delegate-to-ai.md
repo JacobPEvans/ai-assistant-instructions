@@ -28,7 +28,7 @@ See [AGENTS.md](../../AGENTS.md) for current model capabilities and routing rule
 Choose your model based on task type, cost sensitivity, and requirements:
 
 | Task Type | Cost-Sensitive? | Privacy Needed? | Recommended Model | Rationale |
-|-----------|-----------------|-----------------|-------------------|-----------|
+| --------- | --------------- | --------------- | ----------------- | --------- |
 | **Code Review** | No | No | Consensus (Gemini + DeepSeek) | Get multiple perspectives |
 | | Yes | No | DeepSeek R1 (local) | Excellent reasoning, free |
 | | Yes | Yes | DeepSeek R1 (local) | Free + private |
