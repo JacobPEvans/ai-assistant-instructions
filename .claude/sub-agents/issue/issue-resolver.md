@@ -33,7 +33,7 @@ Designed to be invoked by orchestration commands for autonomous issue implementa
 
 ### Implementation Quality
 
-- Follow [Code Standards](../../agentsmd/rules/code-standards.md)
+- Follow [Code Standards](../../../agentsmd/rules/code-standards.md)
 - Write clean, maintainable, well-documented code
 - Ensure backward compatibility unless breaking change is required
 - Follow existing patterns and architectural conventions
@@ -169,7 +169,7 @@ npm test
 
 ### Step 6: Implement Solution
 
-Follow [Code Standards](../../agentsmd/rules/code-standards.md):
+Follow [Code Standards](../../../agentsmd/rules/code-standards.md):
 
 - **Clear naming**: Descriptive variable/function names
 - **Modularity**: Single responsibility per module
@@ -415,7 +415,7 @@ If unable to complete after reasonable effort:
 
 ## Related Documentation
 
-- [Code Standards](../../agentsmd/rules/code-standards.md)
-- [Worktrees](../../agentsmd/rules/worktrees.md)
-- [Subagent Parallelization](../../agentsmd/rules/subagent-parallelization.md)
-- [rok-resolve-issues Command](../../agentsmd/commands/rok-resolve-issues.md)
+- [Code Standards](../../../agentsmd/rules/code-standards.md)
+- [Worktrees](../../../agentsmd/rules/worktrees.md)
+- [Subagent Parallelization](../../../agentsmd/rules/subagent-parallelization.md)
+- [rok-resolve-issues Command](../../../agentsmd/commands/rok-resolve-issues.md)

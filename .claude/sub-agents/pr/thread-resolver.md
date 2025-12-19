@@ -468,6 +468,6 @@ If unable to resolve a thread:
 
 ## Related Documentation
 
-- [PR Review Thread Resolver Command](../../agentsmd/commands/rok-resolve-pr-review-thread.md)
-- [Code Standards](../../agentsmd/rules/code-standards.md)
-- [Subagent Parallelization](../../agentsmd/rules/subagent-parallelization.md)
+- [PR Review Thread Resolver Command](../../../agentsmd/commands/rok-resolve-pr-review-thread.md)
+- [Code Standards](../../../agentsmd/rules/code-standards.md)
+- [Subagent Parallelization](../../../agentsmd/rules/subagent-parallelization.md)
