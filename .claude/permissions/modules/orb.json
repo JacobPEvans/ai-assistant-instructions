@@ -1,8 +1,8 @@
 [
-  "Bash(orb --help:*)",
+  "Bash(orb help:*)",
   "Bash(orb list:*)",
   "Bash(orb info:*)",
-  "Bash(orbctl --help:*)",
+  "Bash(orbctl help:*)",
   "Bash(orbctl doctor:*)",
   "Bash(orbctl info:*)",
   "Bash(orbctl config get:*)",

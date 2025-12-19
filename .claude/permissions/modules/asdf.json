@@ -1,5 +1,5 @@
 [
-  "Bash(asdf --version:*)",
+  "Bash(asdf version:*)",
   "Bash(asdf list:*)",
   "Bash(asdf current:*)",
   "Bash(asdf info:*)",
