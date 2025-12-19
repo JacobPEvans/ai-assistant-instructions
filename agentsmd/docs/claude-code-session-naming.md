@@ -324,7 +324,7 @@ If you have many sessions, adopt these strategies:
 ## Related Resources
 
 - [Claude Code Docs - CLI Reference](https://code.claude.com/docs/en/cli-reference)
-- [Worktrees Guide](./worktrees.md) - For managing git worktrees alongside sessions
+- [Worktrees Guide](../rules/worktrees.md) - For managing git worktrees alongside sessions
 - [Branch Hygiene](../rules/branch-hygiene.md) - For syncing branches with sessions
 
 ## Summary
