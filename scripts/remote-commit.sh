@@ -69,12 +69,13 @@ Commands:
             message       Commit message
             file:content  Pairs of repo-path:local-file (e.g., docs/a.md:/tmp/a.txt)
 
-    workflow <repo> <workflow-id> [inputs-json]
+    workflow <repo> <workflow-id> <ref> [inputs-json]
         Trigger a workflow dispatch event
 
         Arguments:
             repo          Repository in format 'owner/repo'
             workflow-id   Workflow file name or ID
+            ref           Branch, tag, or commit SHA to run workflow on
             inputs-json   Optional JSON object of workflow inputs
 
 Examples:
@@ -86,8 +87,8 @@ Examples:
         docs/guide.md:/tmp/guide.txt \\
         docs/api.md:/tmp/api.txt
 
-    # Trigger deployment workflow
-    $(basename "$0") workflow myorg/myrepo deploy.yml '{"environment":"prod"}'
+    # Trigger deployment workflow on main branch
+    $(basename "$0") workflow myorg/myrepo deploy.yml main '{"environment":"prod"}'
 
 EOF
     exit 1
@@ -104,6 +105,12 @@ check_auth() {
     if ! gh auth status &>/dev/null; then
         log_error "Not authenticated with GitHub CLI"
         log_error "Run: gh auth login"
+        exit 1
+    fi
+
+    if ! command -v jq &>/dev/null; then
+        log_error "jq is not installed"
+        log_error "Install it from: https://stedolan.github.io/jq/"
         exit 1
     fi
 
@@ -209,6 +216,11 @@ multi_file_commit() {
     local tree_items=()
 
     for pair in "${file_pairs[@]}"; do
+        if [[ "$pair" != *:* ]]; then
+            log_error "Invalid file pair '$pair'. Expected format 'repo/path:local/file'."
+            exit 1
+        fi
+
         local repo_path="${pair%%:*}"
         local local_file="${pair#*:}"
 
@@ -266,13 +278,14 @@ multi_file_commit() {
 workflow_dispatch() {
     local repo="$1"
     local workflow_id="$2"
-    local inputs_json="${3:-{}}"
+    local ref="$3"
+    local inputs_json="${4:-{}}"
 
-    log_info "Triggering workflow $workflow_id in $repo..."
+    log_info "Triggering workflow $workflow_id in $repo on ref $ref..."
 
     local payload
     payload=$(jq -n \
-        --arg ref "main" \
+        --arg ref "$ref" \
         --argjson inputs "$inputs_json" \
         '{ref: $ref, inputs: $inputs}')
 
@@ -315,7 +328,7 @@ main() {
             multi_file_commit "$@"
             ;;
         workflow)
-            if [[ $# -lt 2 ]]; then
+            if [[ $# -lt 3 ]]; then
                 log_error "Invalid arguments for workflow command"
                 usage
             fi

@@ -245,7 +245,8 @@ GitHub API has rate limits:
 The helper script makes multiple API calls for Git Data API approach:
 
 - Single-file: 2 API calls (get SHA + commit)
-- Multi-file: 4+ API calls (get commit, get tree, create blobs, create tree, create commit, update ref)
+- Multi-file: 5 + N API calls (where N is the number of files: get commit SHA, get tree SHA,
+  create blob per file (N calls), create tree, create commit, update ref)
 
 For bulk operations, consider:
 
@@ -298,9 +299,9 @@ Use a feature branch and create a PR instead.
 
 ## Advanced Usage
 
-### Atomic Multi-Repository Updates
+### Batch Multi-Repository Updates
 
-Update multiple repositories in sequence:
+Update multiple repositories in parallel. Note that these updates are not atomic.
 
 ```bash
 #!/bin/bash
@@ -313,8 +314,10 @@ for repo in "${REPOS[@]}"; do
         main \
         docs/api-version.md \
         /tmp/api-version.md \
-        "$MESSAGE"
+        "$MESSAGE" &  # Run in background for parallel execution
 done
+
+wait  # Wait for all background jobs to finish
 ```
 
 ### Conditional Updates
@@ -415,4 +418,4 @@ gh api rate_limit
 - [Contents API Reference](https://docs.github.com/en/rest/repos/contents)
 - [Git Data API Reference](https://docs.github.com/en/rest/git)
 - [GitHub CLI Documentation](https://cli.github.com/manual/)
-- [Helper Script](../scripts/remote-commit.sh)
+- [Helper Script](../../scripts/remote-commit.sh)
