@@ -1,0 +1,151 @@
+name: PR Comment Limit Check
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  check-comment-limit:
+    name: "Check and Enforce Comment Limit"
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Check PR comment count
+        id: check-count
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
+        run: |
+          # Query PR for all comments (regular comments + review threads)
+          RESPONSE=$(gh api graphql -f query='
+          query {
+            repository(owner: "'$REPO_OWNER'", name: "'$REPO_NAME'") {
+              pullRequest(number: '$PR_NUMBER') {
+                comments(first: 1) {
+                  totalCount
+                }
+                reviewThreads(first: 100) {
+                  totalCount
+                  nodes {
+                    id
+                    isResolved
+                  }
+                }
+              }
+            }
+          }')
+
+          # Extract comment counts
+          TOTAL_COMMENTS=$(echo "$RESPONSE" | gh api graphql --paginate -f query='
+          query {
+            repository(owner: "'$REPO_OWNER'", name: "'$REPO_NAME'") {
+              pullRequest(number: '$PR_NUMBER') {
+                comments(first: 1) {
+                  totalCount
+                }
+                reviewThreads(first: 100) {
+                  totalCount
+                }
+              }
+            }
+          }' --jq '.data.repository.pullRequest.comments.totalCount + .data.repository.pullRequest.reviewThreads.totalCount')
+
+          echo "total_comments=$TOTAL_COMMENTS" >> $GITHUB_OUTPUT
+          echo "PR #$PR_NUMBER has $TOTAL_COMMENTS total comments"
+
+      - name: Get unresolved thread IDs
+        if: ${{ steps.check-count.outputs.total_comments >= 50 }}
+        id: get-threads
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
+        run: |
+          echo "⚠️ PR has reached 50-comment limit, fetching unresolved threads..."
+
+          THREADS_JSON=$(gh api graphql -f query='
+          query {
+            repository(owner: "'$REPO_OWNER'", name: "'$REPO_NAME'") {
+              pullRequest(number: '$PR_NUMBER') {
+                reviewThreads(first: 100) {
+                  nodes {
+                    id
+                    isResolved
+                  }
+                }
+              }
+            }
+          }' --jq '.data.repository.pullRequest.reviewThreads.nodes | map(select(.isResolved == false) | .id)')
+
+          echo "thread_ids=$THREADS_JSON" >> $GITHUB_OUTPUT
+          echo "Unresolved threads: $THREADS_JSON"
+
+      - name: Resolve all unresolved threads
+        if: ${{ steps.check-count.outputs.total_comments >= 50 && steps.get-threads.outputs.thread_ids != '[]' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          THREAD_IDS: ${{ steps.get-threads.outputs.thread_ids }}
+        run: |
+          echo "Resolving unresolved threads..."
+
+          # Use jq to build individual mutations for each thread and resolve them in parallel
+          echo "$THREAD_IDS" | jq -r '.[]' | xargs -I {} bash -c '
+            gh api graphql -f threadId="{}" -f query="
+            mutation(\$threadId: String!) {
+              resolveReviewThread(input: {threadId: \$threadId}) {
+                thread {
+                  id
+                  isResolved
+                }
+              }
+            }" 2>/dev/null && echo "✓ Resolved {}"
+          '
+
+      - name: Post comment about limit
+        if: ${{ steps.check-count.outputs.total_comments >= 50 }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
+        run: |
+          # Check if limit message already exists
+          EXISTING_LIMIT_MESSAGE=$(gh api repos/$REPO_OWNER/$REPO_NAME/issues/$PR_NUMBER/comments --jq '.[] | select(.body | contains("50-comment limit")) | .id' | head -1 2>/dev/null || true)
+
+          if [ -z "$EXISTING_LIMIT_MESSAGE" ]; then
+            echo "Posting comment about 50-comment limit..."
+            printf -v COMMENT_BODY '%s\n\n%s\n\n%s\n%s\n%s\n%s\n\n%s' \
+              "### ⚠️ PR Comment Limit Reached" \
+              "This PR has reached the **50-comment limit**. All subsequent comments are being automatically resolved to allow the PR to be merged." \
+              "**Next steps**:" \
+              "- Address any critical feedback from the comments above" \
+              "- Merge this PR to close the review cycle" \
+              "- Open a follow-up PR if additional changes are needed" \
+              "See the PR Comment Limits rule for more details."
+            gh pr comment "$PR_NUMBER" --body "$COMMENT_BODY"
+          else
+            echo "✓ Limit message already posted"
+          fi
+
+      - name: Log comment count
+        run: |
+          echo "## PR Comment Check" >> $GITHUB_STEP_SUMMARY
+          echo "- **PR Number**: ${{ github.event.pull_request.number }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Total Comments**: ${{ steps.check-count.outputs.total_comments }}" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.check-count.outputs.total_comments }}" -ge 50 ]; then
+            echo "- **Status**: ⚠️ Limit reached - auto-resolution triggered" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- **Status**: ✓ Under limit" >> $GITHUB_STEP_SUMMARY
+          fi
