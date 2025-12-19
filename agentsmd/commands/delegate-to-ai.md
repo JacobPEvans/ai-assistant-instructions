@@ -27,30 +27,29 @@ See [AGENTS.md](../../AGENTS.md) for current model capabilities and routing rule
 
 Choose your model based on task type, cost sensitivity, and requirements:
 
-| Task Type | Cost-Sensitive? | Privacy Needed? | Recommended Model | Rationale |
-| --------- | --------------- | --------------- | ----------------- | --------- |
-| **Code Review** | No | No | Consensus (Gemini + DeepSeek) | Get multiple perspectives |
-| | Yes | No | DeepSeek R1 (local) | Excellent reasoning, free |
-| | Yes | Yes | DeepSeek R1 (local) | Free + private |
+| Task Type | Minimize Cost? | Privacy Needed? | Recommended Model | Rationale |
+| --------- | -------------- | --------------- | ----------------- | --------- |
+| **Code Review** | No | No | Consensus (Gemini + deepseek-r1) | Get multiple perspectives |
+| | Yes | No | deepseek-r1:70b (local) | Excellent reasoning, free |
+| | Yes | Yes | deepseek-r1:70b (local) | Free + private |
 | **Research/Analysis** | No | No | Gemini 3 Pro | 1M context, latest info |
-| | Yes | No | Qwen 3 Next (local) | Fast, free alternative |
-| | Yes | Yes | Qwen 3 Next (local) | Free + stays local |
+| | Yes | No | qwen3-next:80b (local) | Fast, free alternative |
+| | Yes | Yes | qwen3-next:80b (local) | Free + stays local |
 | **Coding/Implementation** | No | No | Claude + Local validation | High quality output |
-| | Yes | No | Qwen-Coder (local) | Specialized, cost-free |
-| | Yes | Yes | Qwen-Coder (local) | Free + secure |
+| | Yes | No | qwen3-coder:30b (local) | Specialized, cost-free |
+| | Yes | Yes | qwen3-coder:30b (local) | Free + secure |
 | **Critical Decision** | Any | No | Multi-Model Consensus | Reduces single-model bias |
-| | Any | Yes | DeepSeek R1 + Qwen local | Best reasoning + privacy |
+| | Any | Yes | deepseek-r1:70b + qwen3-next:80b (local) | Best reasoning + privacy |
 | **Sensitive Data** | Any | **Yes** | Ollama (local only) | Never use cloud APIs |
 
 ### Decision Tree
 
 1. **Is the data sensitive or confidential?** → Use Ollama (local models only)
-2. **Is cost a concern?** → Use local Ollama models (qwen3-next, qwen3-coder, deepseek-r1)
-3. **Do you need the latest information/web search?** → Use Gemini 3 Pro
-4. **Do you need giant context window (1M+ tokens)?** → Use Gemini 3 Pro
-5. **Is this a critical decision?** → Use multi-model consensus (Gemini + DeepSeek local + Claude)
-6. **Need specialized coding?** → Use qwen3-coder:30b locally or Claude
-7. **Default/general tasks** → Start with local Ollama, fall back to cloud if needed
+2. **Is cost a concern?** → Use local Ollama models (qwen3-next:80b, qwen3-coder:30b, deepseek-r1:70b)
+3. **Do you need the latest information/web search or a giant context window (1M+ tokens)?** → Use Gemini 3 Pro
+4. **Is this a critical decision?** → Use multi-model consensus (Gemini + deepseek-r1:70b (local) + Claude)
+5. **Need specialized coding?** → Use qwen3-coder:30b locally or Claude
+6. **Default/general tasks** → Start with local Ollama, fall back to cloud if needed
 
 ## Available External AIs
 
