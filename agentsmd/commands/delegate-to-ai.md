@@ -424,15 +424,40 @@ security add-generic-password -a "$USER" -s "GEMINI_API_KEY" -w "your-api-key"
 6. **Multi-model consensus**: For important decisions, consult multiple models
 7. **Update regularly**: Model capabilities change monthly; review [AGENTS.md](../../AGENTS.md)
 
+## Automated Model Selection
+
+Use `scripts/select-model.sh` for automated model selection based on the decision tree above:
+
+```bash
+# Basic usage
+./scripts/select-model.sh --task-type=coding
+
+# Cost-sensitive research with privacy
+./scripts/select-model.sh --task-type=research --cost-sensitive --private
+
+# Analyze complexity of a prompt or file
+./scripts/select-model.sh --task-type=coding --analyze-complexity="Refactor the authentication system"
+./scripts/select-model.sh --task-type=review --analyze-complexity=/path/to/large-file.py
+
+# Output example:
+# Complexity: high
+# Model: claude-opus-4-5
+# Command: Using Claude directly (current session)
+# Rationale: High-complexity coding task - Claude Opus for superior architecture and reasoning
+```
+
+The script implements the complete decision tree from the "Quick Reference" section.
+It adds complexity analysis to route high-complexity tasks to more capable models.
+
 ## Related Files
 
 - [AGENTS.md](../../AGENTS.md) - Model routing rules and capabilities
+- [select-model.sh](../../scripts/select-model.sh) - Automated model selection script
 - [keychain-setup.md](../docs/keychain-setup.md) - API key security setup
 - [.specs/2025-12-14-multi-model-orchestration/PLAN.md](../../.specs/2025-12-14-multi-model-orchestration/PLAN.md) - Full orchestration plan
 
 ## Future Enhancements
 
 - Integration with PAL MCP Server for automatic routing
-- Python-based task router for intelligent model selection
 - Anthropic Skills for research workflows
 - Automated testing of external AI availability
