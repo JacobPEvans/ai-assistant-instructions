@@ -1,0 +1,16 @@
+[
+  "Bash(asdf --version:*)",
+  "Bash(asdf list:*)",
+  "Bash(asdf current:*)",
+  "Bash(asdf info:*)",
+  "Bash(asdf where:*)",
+  "Bash(asdf which:*)",
+  "Bash(asdf plugin list:*)",
+  "Bash(mise --version:*)",
+  "Bash(mise list:*)",
+  "Bash(mise current:*)",
+  "Bash(mise doctor:*)",
+  "Bash(mise env:*)",
+  "Bash(mise where:*)",
+  "Bash(mise which:*)"
+]
