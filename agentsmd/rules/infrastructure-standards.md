@@ -19,3 +19,10 @@ This document outlines the universal standards for managing Infrastructure as Co
 - **Resource Sizing**: Choose cost-effective resource sizes and instance types.
 - **Tagging**: Tag all resources for cost allocation and tracking.
 - **Monitoring**: Set up budget alerts to monitor spending.
+
+## Technology-Specific Guidelines
+
+### Terraform/Terragrunt
+
+- **Use variables instead of hardcoded values**: Make infrastructure reusable and configurable
+- **Enable state locking**: Use DynamoDB (AWS) or equivalent for state locking to prevent concurrent modifications
