@@ -69,7 +69,10 @@ Filter for PRs where:
 For each PR with failures:
 
 ```bash
-git worktree add ~/git/<repo-name>/<branch-name> <branch-name>
+# Sanitize branch name for safe path usage
+BRANCH_NAME="<branch-name-from-gh>"
+SAFE_BRANCH_DIR="$(printf '%s\n' "$BRANCH_NAME" | tr -c 'A-Za-z0-9._-/' '_')"
+git worktree add "$HOME/git/<repo-name>/$SAFE_BRANCH_DIR" "$BRANCH_NAME"
 ```
 
 ### Step 4: Launch Parallel Subagents
@@ -86,11 +89,12 @@ Failing: {CHECK_NAMES}
 
 Steps:
 1. cd {PATH}
-2. gh run view --log-failed (get failure details)
-3. Fix root cause (NEVER disable checks)
-4. Test locally if possible
-5. git commit -m "fix: resolve CI failure"
-6. git push
+2. gh run list --limit 5 --json databaseId,name,conclusion (identify failing run ID)
+3. gh run view {RUN_ID} --log-failed (use ID from step 2 to get failure details)
+4. Fix root cause (NEVER disable checks)
+5. Test locally if possible
+6. git commit -m "fix: resolve CI failure"
+7. git push
 
 Report: PR#{NUMBER} - FIXED/BLOCKED (reason)
 ```
@@ -114,7 +118,7 @@ PR is complete when `mergeable: "MERGEABLE"` and all checks pass.
 ### Step 6: Clean Up
 
 ```bash
-git worktree remove /path/to/worktree
+git worktree remove ~/git/<repo-name>/<branch-name>
 ```
 
 ### Step 7: Final Report
