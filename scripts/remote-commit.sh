@@ -20,7 +20,7 @@
 #     docs/api.md:/tmp/api.txt
 #
 #   # Trigger a workflow
-#   ./remote-commit.sh workflow owner/repo deploy.yml '{"environment":"production"}'
+#   ./remote-commit.sh workflow owner/repo deploy.yml main '{"environment":"production"}'
 #
 
 set -euo pipefail
@@ -137,9 +137,9 @@ get_file_sha() {
 # Base64 encode content (portable across macOS and Linux)
 base64_encode() {
     if [[ "$(uname)" == "Darwin" ]]; then
-        base64 -i "$1"
+        base64 < "$1"
     else
-        base64 -w 0 "$1"
+        base64 -w 0 < "$1"
     fi
 }
 
@@ -217,7 +217,7 @@ multi_file_commit() {
 
     for pair in "${file_pairs[@]}"; do
         if [[ "$pair" != *:* ]]; then
-            log_error "Invalid file pair '$pair'. Expected format 'repo/path:local/file'."
+            log_error "Invalid file pair '$pair'. Expected format 'path-in-repo:local-file-path' (e.g., 'docs/guide.md:./guide.md')."
             exit 1
         fi
 
@@ -231,12 +231,20 @@ multi_file_commit() {
 
         log_info "  - Processing $repo_path"
 
-        # Create blob for file content
+        # Create blob for file content (use base64 encoding for robustness)
+        local blob_content
+        # Prefer single-line base64 output; fall back for implementations without -w
+        if blob_content=$(base64 -w0 "$local_file" 2>/dev/null); then
+            :
+        else
+            blob_content=$(base64 "$local_file" | tr -d '\n')
+        fi
+
         local blob_sha
         blob_sha=$(gh api "repos/$repo/git/blobs" \
             --method POST \
-            --field content="$(cat "$local_file")" \
-            --field encoding="utf-8" \
+            --field content="$blob_content" \
+            --field encoding="base64" \
             --jq '.sha')
 
         tree_items+=("$(jq -n \
@@ -279,15 +287,21 @@ workflow_dispatch() {
     local repo="$1"
     local workflow_id="$2"
     local ref="$3"
-    local inputs_json="${4:-{}}"
+    local inputs_json="${4:-}"
 
     log_info "Triggering workflow $workflow_id in $repo on ref $ref..."
 
     local payload
-    payload=$(jq -n \
-        --arg ref "$ref" \
-        --argjson inputs "$inputs_json" \
-        '{ref: $ref, inputs: $inputs}')
+    if [[ -n "$inputs_json" ]]; then
+        payload=$(jq -n \
+            --arg ref "$ref" \
+            --argjson inputs "$inputs_json" \
+            '{ref: $ref, inputs: $inputs}')
+    else
+        payload=$(jq -n \
+            --arg ref "$ref" \
+            '{ref: $ref}')
+    fi
 
     if gh api "repos/$repo/actions/workflows/$workflow_id/dispatches" \
         --method POST \

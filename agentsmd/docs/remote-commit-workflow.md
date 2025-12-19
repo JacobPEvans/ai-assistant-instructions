@@ -179,12 +179,14 @@ scripts/remote-commit.sh workflow <repo> <workflow-id> [inputs-json]
 ./scripts/remote-commit.sh workflow \
     myorg/myrepo \
     deploy.yml \
+    main \
     '{"environment":"production","version":"v1.2.3"}'
 
 # Trigger workflow without inputs
 ./scripts/remote-commit.sh workflow \
     myorg/myrepo \
-    build.yml
+    build.yml \
+    main
 ```
 
 ### Workflow Requirements
@@ -245,8 +247,13 @@ GitHub API has rate limits:
 The helper script makes multiple API calls for Git Data API approach:
 
 - Single-file: 2 API calls (get SHA + commit)
-- Multi-file: 5 + N API calls (where N is the number of files: get commit SHA, get tree SHA,
-  create blob per file (N calls), create tree, create commit, update ref)
+- Multi-file: 5 + N API calls (where N is the number of files):
+  1. Get latest commit SHA
+  2. Get tree SHA
+  3. Create blob per file (N calls total)
+  4. Create tree
+  5. Create commit
+  6. Update ref
 
 For bulk operations, consider:
 
