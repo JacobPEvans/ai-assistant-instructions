@@ -25,5 +25,4 @@ This document outlines the universal standards for managing Infrastructure as Co
 ### Terraform/Terragrunt
 
 - **Use variables instead of hardcoded values**: Make infrastructure reusable and configurable
-- **Configure remote state with locking**: Use a backend that supports locking (for example, DynamoDB on AWS)
-  to prevent concurrent modifications and enable safe team collaboration
+- **Enable state locking**: Use DynamoDB (AWS) or equivalent for state locking to prevent concurrent modifications

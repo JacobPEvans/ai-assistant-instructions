@@ -215,11 +215,11 @@ Use emoji-based priority markers to clearly communicate feedback urgency:
 - Missing or inadequate test coverage
 - Poor error handling or edge case coverage
 - Incomplete documentation for public APIs
-- Code quality improvements and minor optimizations
 
 #### 🟢 Minor Issues (Suggest Improvements / Optional)
 
 - Code style inconsistencies
+- Code quality improvements and minor optimizations
 - Better naming conventions
 - Enhanced code comments
 - Alternative approaches and style preferences
