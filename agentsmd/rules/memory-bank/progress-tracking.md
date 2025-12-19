@@ -11,7 +11,7 @@ to be done.
 
 ### Completed
 
-- [x] Consolidate all instructions into the `.ai-instructions` directory.
+- [x] Consolidate all instructions into the `agentsmd` directory.
 - [x] Establish the 5-step development workflow.
 - [x] Create the initial `memory-bank` concept documents.
 

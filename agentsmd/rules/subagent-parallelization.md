@@ -47,21 +47,41 @@ Message 2: Task for item B
 [Sequential - defeats the purpose]
 ```
 
+## Subagent Limits
+
+**CRITICAL: Maximum 5 subagents running at once.**
+
+This is a hard limit enforced across all commands to prevent:
+
+- Token exhaustion in the parent conversation
+- API rate limiting issues
+- Incomplete subagent execution
+- Context overflow
+
 ## Batching Strategy
 
 | Item Count | Approach |
 | ---------- | -------- |
 | 1-5 | Launch all at once |
-| 6-10 | Launch all, monitor closely |
-| 11-20 | Batch of 10, wait for completion, next batch |
-| 21+ | Batch of 10 with explicit rate limiting |
+| 6-10 | Batch of 5, wait for ALL to complete, validate, then next batch |
+| 11+ | Same as above, strict batches of 5 |
 
-### Why Batch?
+### Batch Execution Steps
 
-- System resources are finite
-- Too many concurrent agents can overwhelm APIs
-- Better error isolation in smaller batches
-- Easier to identify which batch caused issues
+1. Launch batch of MAX 5 subagents in parallel
+2. Wait for ALL 5 to complete using `TaskOutput` with `block=true`
+3. Validate each result before proceeding
+4. Retry any incomplete work (max 2 retries per item)
+5. Only after validation, start next batch of 5
+6. **Never exceed 5 concurrent subagents**
+
+### Why 5?
+
+- Prevents token exhaustion in parent conversation
+- Ensures each subagent gets adequate context
+- Allows proper validation between batches
+- Keeps API rate limits in check
+- Based on real-world testing showing higher counts cause failures
 
 ## Subagent Prompt Template
 

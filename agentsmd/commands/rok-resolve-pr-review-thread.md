@@ -39,9 +39,14 @@ There are exactly **TWO paths** to resolve a comment:
 
 **CURRENT PR ONLY** - This command operates on the PR associated with the current branch or worktree.
 
+> **PR Comment Limit**: This command respects the **50-comment limit per PR** defined in the
+> [PR Comment Limits rule](../rules/pr-comment-limits.md).
+> When resolving threads, do not post new comments if a PR has reached 50 comments.
+
 ## Related Documentation
 
 - [Subagent Parallelization](../rules/subagent-parallelization.md) - Parallel execution patterns for independent comments
+- [PR Comment Limits](../rules/pr-comment-limits.md) - 50-comment limit enforcement
 
 ## Quick Reference
 
@@ -134,33 +139,18 @@ Follow these steps in order for each PR comment:
 
 **Action**: Use GraphQL to retrieve all review threads with complete context.
 
+<!-- markdownlint-disable MD013 -->
+<!-- Long line required: Claude Code has encoding issues with multi-line GraphQL -->
+
 ```bash
-gh api graphql -f query='
-{
-  repository(owner: "OWNER", name: "REPO") {
-    pullRequest(number: PR_NUMBER) {
-      reviewThreads(first: 50) {
-        nodes {
-          id
-          isResolved
-          path
-          line
-          startLine
-          comments(first: 10) {
-            nodes {
-              id
-              databaseId
-              body
-              author { login }
-              createdAt
-            }
-          }
-        }
-      }
-    }
-  }
-}' -f owner="OWNER" -f repo="REPO" -F pr=NUMBER
+# IMPORTANT: Use --raw-field and single-line query to avoid encoding issues in Claude Code
+gh api graphql --raw-field 'query=query { repository(owner: "OWNER", name: "REPO") { pullRequest(number: NUMBER) { reviewThreads(first: 50) { nodes { id isResolved path line startLine comments(first: 10) { nodes { id databaseId body author { login } createdAt } } } } } } }'
 ```
+
+> **Technical Requirement**: Multi-line GraphQL queries cause encoding issues in Claude Code.
+> Use `--raw-field` with single-line format (exceeds 160 chars by necessity).
+
+<!-- markdownlint-enable MD013 -->
 
 **Extract these fields**:
 
@@ -277,11 +267,8 @@ gh pr comment PR_NUMBER --body "**Response to review feedback:**
 **Step B - Resolve the thread** (MANDATORY - do this immediately after replying):
 
 ```bash
-gh api graphql -f query='mutation {
-  resolveReviewThread(input: {threadId: "PRRT_xxx"}) {
-    thread { id isResolved }
-  }
-}'
+# Single-line format for reliability
+gh api graphql --raw-field 'query=mutation { resolveReviewThread(input: {threadId: "PRRT_xxx"}) { thread { id isResolved } } }'
 ```
 
 **Reply templates** (include in your PR comment):
@@ -312,19 +299,17 @@ Acknowledged but not implementing because:
 2. [Technical reason 2]
 ```
 
+<!-- markdownlint-disable MD013 -->
+
 > **VERIFICATION**: After resolving, confirm with:
 >
 > ```bash
-> gh api graphql -f query='{
->   repository(owner: "OWNER", name: "REPO") {
->     pullRequest(number: NUMBER) {
->       reviewThreads(first: 50) { nodes { isResolved } }
->     }
->   }
-> }' | jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)] | length'
+> gh api graphql --raw-field 'query=query { repository(owner: "OWNER", name: "REPO") { pullRequest(number: NUMBER) { reviewThreads(first: 50) { nodes { isResolved } } } } }' | jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)] | length'
 > ```
 >
 > Must return `0` before moving on.
+
+<!-- markdownlint-enable MD013 -->
 
 #### 7. Commit and Push
 

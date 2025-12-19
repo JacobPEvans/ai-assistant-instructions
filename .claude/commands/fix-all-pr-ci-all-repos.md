@@ -1,1 +1,0 @@
-../../agentsmd/commands/fix-all-pr-ci-all-repos.md

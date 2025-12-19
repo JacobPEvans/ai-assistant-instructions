@@ -1,18 +1,5 @@
 # Project Status & Planning
 
-## Current Session Progress (2025-12-03)
-
-Preparing v0.8.0 release - first formal GitHub release:
-
-- ✅ Converted 8 pointer markdown files to proper symlinks
-- ✅ Moved `.copilot/ARCHITECTURE.md` and `PROJECT.md` to `.ai-instructions/concepts/`
-- ✅ Created CONTRIBUTING.md, CODE_OF_CONDUCT.md, SECURITY.md
-- ✅ Overhauled README.md (26 lines → ~100 lines)
-- ✅ Updated GitHub Actions workflow to use `CLAUDE_CODE_OAUTH_TOKEN`
-- ✅ Staged `.gemini/permissions/` for inclusion in release
-- 🔄 Final lint/cleanup in progress
-- ⏳ GitHub release pending (manual user action)
-
 ## Repository Context
 
 - **Target**: Standardized, vendor-agnostic AI assistant instructions
