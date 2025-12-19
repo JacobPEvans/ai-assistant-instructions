@@ -9,11 +9,13 @@
 #   --cost-sensitive (flag - prefer free local models)
 #   --private (flag - sensitive data, must use local Ollama)
 #   --large-context (flag - need 1M+ context window)
+#   --analyze-complexity=<prompt|filepath> (optional complexity analysis)
 #
 # Output:
 #   Model: <model-name>
 #   Command: <invocation-command>
 #   Rationale: <explanation>
+#   [Complexity: <low|medium|high>] (when --analyze-complexity is used)
 
 set -euo pipefail
 
@@ -22,6 +24,7 @@ TASK_TYPE="default"
 COST_SENSITIVE=false
 PRIVATE=false
 LARGE_CONTEXT=false
+ANALYZE_COMPLEXITY=""
 
 # Parse command-line arguments
 while [[ $# -gt 0 ]]; do
@@ -42,6 +45,10 @@ while [[ $# -gt 0 ]]; do
       LARGE_CONTEXT=true
       shift
       ;;
+    --analyze-complexity=*)
+      ANALYZE_COMPLEXITY="${1#*=}"
+      shift
+      ;;
     *)
       echo "Unknown option: $1"
       exit 1
@@ -49,12 +56,62 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+# Analyze complexity based on input metrics
+analyze_complexity() {
+  local input="$1"
+  local complexity_score=""
+  local line_count=0
+  local text_length=0
+
+  # Check if input is a file path
+  if [[ -f "$input" ]]; then
+    # File-based analysis
+    line_count=$(wc -l < "$input" | tr -d ' ')
+
+    # Determine complexity by line count
+    if [[ $line_count -lt 50 ]]; then
+      complexity_score="low"
+    elif [[ $line_count -lt 200 ]]; then
+      complexity_score="medium"
+    else
+      complexity_score="high"
+    fi
+  else
+    # Text-based analysis
+    text_length=${#input}
+    local lower_input=$(echo "$input" | tr '[:upper:]' '[:lower:]')
+
+    # Check for complexity keywords
+    local keyword_count=0
+    for keyword in "refactor" "architecture" "security audit" "performance optimization" "system design" "rewrite" "migration"; do
+      [[ "$lower_input" =~ $keyword ]] && ((keyword_count++))
+    done
+
+    # Determine complexity by length and keywords
+    if [[ $text_length -lt 100 && $keyword_count -eq 0 ]]; then
+      complexity_score="low"
+    elif [[ $text_length -lt 500 && $keyword_count -le 1 ]]; then
+      complexity_score="medium"
+    else
+      complexity_score="high"
+    fi
+  fi
+
+  echo "$complexity_score"
+}
+
 # Decision tree implementation based on delegate-to-ai.md routing logic
 select_model() {
   local task_type="$1"
   local cost_sensitive="$2"
   local private="$3"
   local large_context="$4"
+  local complexity="$5"
+
+  # Display complexity if analyzed
+  if [[ -n "$complexity" ]]; then
+    echo "Complexity: $complexity"
+  fi
 
   # Step 1: Is the data sensitive or confidential?
   if [[ "$private" == "true" ]]; then
@@ -120,18 +177,31 @@ select_model() {
 
   # Step 5: Need specialized coding?
   if [[ "$task_type" == "coding" ]]; then
-    echo "Model: claude-opus-4-5"
-    echo "Command: Using Claude directly (current session)"
-    echo "Rationale: Cloud-based, cost-insensitive coding - Claude Opus for highest quality"
+    if [[ "$complexity" == "high" ]]; then
+      echo "Model: claude-opus-4-5"
+      echo "Command: Using Claude directly (current session)"
+      echo "Rationale: High-complexity coding task - Claude Opus for superior architecture and reasoning"
+    else
+      echo "Model: claude-sonnet-4-5"
+      echo "Command: Using Claude directly (current session)"
+      echo "Rationale: Standard coding task - Claude Sonnet for efficient code generation"
+    fi
     return 0
   fi
 
   # Step 6: Code review with cost flexibility
   if [[ "$task_type" == "review" ]]; then
-    echo "Model: consensus"
-    echo "Selected: gemini-3-pro + deepseek-r1:70b (local)"
-    echo "Command: bash /tmp/multi-model-review.sh"
-    echo "Rationale: Code review benefits from multiple perspectives on non-sensitive code"
+    if [[ "$complexity" == "high" ]]; then
+      echo "Model: consensus"
+      echo "Selected: claude-opus-4-5 + gemini-3-pro + deepseek-r1:70b (local)"
+      echo "Command: Multi-model review for high-complexity code"
+      echo "Rationale: High-complexity review requires expert perspectives - adding Opus for deeper analysis"
+    else
+      echo "Model: consensus"
+      echo "Selected: gemini-3-pro + deepseek-r1:70b (local)"
+      echo "Command: bash /tmp/multi-model-review.sh"
+      echo "Rationale: Code review benefits from multiple perspectives on non-sensitive code"
+    fi
     return 0
   fi
 
@@ -152,4 +222,9 @@ select_model() {
 }
 
 # Execute the selection logic and format output
-select_model "$TASK_TYPE" "$COST_SENSITIVE" "$PRIVATE" "$LARGE_CONTEXT"
+COMPLEXITY_SCORE=""
+if [[ -n "$ANALYZE_COMPLEXITY" ]]; then
+  COMPLEXITY_SCORE=$(analyze_complexity "$ANALYZE_COMPLEXITY")
+fi
+
+select_model "$TASK_TYPE" "$COST_SENSITIVE" "$PRIVATE" "$LARGE_CONTEXT" "$COMPLEXITY_SCORE"
