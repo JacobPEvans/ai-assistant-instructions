@@ -39,9 +39,14 @@ There are exactly **TWO paths** to resolve a comment:
 
 **CURRENT PR ONLY** - This command operates on the PR associated with the current branch or worktree.
 
+> **PR Comment Limit**: This command respects the **50-comment limit per PR** defined in the
+> [PR Comment Limits rule](../rules/pr-comment-limits.md).
+> When resolving threads, do not post new comments if a PR has reached 50 comments.
+
 ## Related Documentation
 
 - [Subagent Parallelization](../rules/subagent-parallelization.md) - Parallel execution patterns for independent comments
+- [PR Comment Limits](../rules/pr-comment-limits.md) - 50-comment limit enforcement
 
 ## Workflow
 

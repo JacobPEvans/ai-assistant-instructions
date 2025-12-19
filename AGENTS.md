@@ -113,6 +113,10 @@ All commands from `agentsmd/commands/` are available. Use this table to select t
 | Review documentation | `/review-docs` | Repo | Markdown validation |
 | Review infrastructure | `/infrastructure-review` | Repo | Terraform/Terragrunt |
 
+**PR Comment Limit**: All PR-related commands respect a **50-comment limit per PR** to prevent infinite review cycles.
+See [PR Comment Limits rule](./agentsmd/rules/pr-comment-limits.md) for details.
+When a PR reaches 50 comments, all future comments are automatically resolved.
+
 ## Related Files
 
 - `agentsmd/rules/` - Standards and guidelines
