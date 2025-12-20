@@ -257,3 +257,13 @@ permissions:
 - **Maintainability**: Smaller files are easier to review and update
 - **Scalability**: New toolchains can add modules without cluttering core
 - **Documentation**: Module README serves as discoverable reference
+- **Tool Integration**: Forms the basis for unified permission system with nix-config
+
+## Integration with nix-config
+
+These modular permissions are the **source of truth** for all AI tool permissions. The nix-config
+repository reads these JSON definitions at build time and applies tool-specific formatters to
+generate configurations for Claude, Gemini, Copilot, and other tools.
+
+See [Permission System Integration](../../../agentsmd/docs/permission-system.md) for complete
+documentation on how this integrates with nix-config.

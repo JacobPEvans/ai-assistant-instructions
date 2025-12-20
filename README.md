@@ -127,11 +127,16 @@ The documentation covers:
 - **Code Standards** - Consistency across languages
 - **Documentation Standards** - AI-friendly markdown
 - **Infrastructure Standards** - Terraform/Terragrunt patterns
+- **Permission System** - How AI tool permissions integrate with nix-config
 - **DRY Principle** - Why everything symlinks to one place
 - **Memory Bank** - Maintaining AI context across sessions
 - **Remote Commit Workflow** - Making commits via GitHub API without local clone
 
 Browse [`agentsmd/rules/`](agentsmd/rules/) and [`agentsmd/docs/`](agentsmd/docs/).
+
+**Permission Integration**: See
+[`agentsmd/docs/permission-system.md`](agentsmd/docs/permission-system.md) to understand how
+permissions integrate with [nix-config](https://github.com/JacobPEvans/nix).
 
 ## Contributing
 
