@@ -18,6 +18,20 @@ allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Bash(git wo
 
 **CURRENT REPOSITORY ONLY** - This command never crosses into other repositories.
 
+What this command DOES:
+
+- List all open PRs in the current repository
+- Find PRs with failing CI checks
+- Create worktrees for each PR needing fixes
+- Launch parallel subagents per PR
+- Verify PRs are mergeable
+- Clean up worktrees when done
+
+What this command DOES NOT:
+
+- Cross into other repositories
+- Affect PRs in your other projects
+
 ## Related Documentation
 
 - [Worktrees](../rules/worktrees.md) - Worktree structure and usage
