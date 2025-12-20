@@ -88,19 +88,21 @@ BRANCH_NAME=<assigned-branch>
 PR_NUMBER=<assigned-pr-number>
 
 # Fetch the branch
-git fetch origin $BRANCH_NAME
+git fetch origin "$BRANCH_NAME"
 
 # Check if worktree already exists
-WORKTREE_PATH=~/git/$REPO_NAME/$BRANCH_NAME
+WORKTREE_PATH=~/git/$REPO_NAME/"$BRANCH_NAME"
 if [ -d "$WORKTREE_PATH" ]; then
     echo "Worktree exists: $WORKTREE_PATH"
 else
-    git worktree add $WORKTREE_PATH $BRANCH_NAME
+    git worktree add "$WORKTREE_PATH" "$BRANCH_NAME"
 fi
 ```
 
+### Step 4.2: Navigate to Worktree
+
 ```bash
-cd ~/git/$REPO_NAME/$BRANCH_NAME
+cd ~/git/$REPO_NAME/"$BRANCH_NAME"
 ```
 
 Verify correct branch:
@@ -264,7 +266,7 @@ If there are more than 10 open PRs:
 
 | Error | Cause | Action |
 | ----- | ----- | ------ |
-| "merge conflict" | Divergent changes | Follow Step 5.4 |
+| "merge conflict" | Divergent changes | Follow Step 4.4 |
 | "cannot create worktree" | Branch doesn't exist | Fetch first, then retry |
 | "push rejected" | Remote has newer changes | Pull, re-merge, then push |
 | "permission denied" | Auth issue | Report and skip this PR |

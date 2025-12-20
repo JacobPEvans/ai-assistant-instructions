@@ -60,11 +60,8 @@ git worktree list | grep -E '\[main\]|\[master\]' | awk '{print $1}'
 Navigate to the main worktree and pull the latest:
 
 ```bash
-# Save current directory
-CURRENT_DIR=$(pwd)
-
 # Use a subshell to safely update the main worktree. This is more robust as the
-# directory change is isolated.
+# directory change is isolated and automatically returns to the original directory.
 (
   cd "$MAIN_WORKTREE"
   git fetch origin main
@@ -72,8 +69,6 @@ CURRENT_DIR=$(pwd)
   echo "Main worktree updated. Latest commit:"
   git log -1 --oneline
 )
-
-# Return to original directory is now implicit
 ```
 
 ### Step 4: Merge Main into Current Branch
