@@ -95,6 +95,21 @@ nix-config
 - `run_shell_command(FULL_COMMAND)` - Full shell command specification
 - `web_fetch` - Broad web fetch permission (no domain filtering yet)
 
+**Important Limitation:**
+
+Unlike Claude's `:*` wildcard pattern, Gemini's `run_shell_command()` format does not support
+wildcards or prefix matching. Each command variation with different arguments requires a separate
+permission entry. For example:
+
+- Claude: `"Bash(pip install:*)"` - allows `pip install <any-package>`
+- Gemini: Requires separate entries like:
+  - `"run_shell_command(pip install numpy)"`
+  - `"run_shell_command(pip install pandas)"`
+  - etc.
+
+This means Gemini permissions are more restrictive and require more granular specification. When
+defining permissions, be aware that the permissions are not truly equivalent across tools.
+
 ## Tool-Specific Formatters (in nix-config)
 
 The nix-config repository defines formatters that convert Claude's JSON format to tool-specific formats:
@@ -226,15 +241,21 @@ When nix-config builds (via `darwin-rebuild switch`):
 3. Tool-specific formatters transform the permissions:
 
    ```nix
-   # For Gemini:
+   # For Gemini (simplified example):
    let
      toGeminiFormat = perm:
        if lib.hasPrefix "Bash(" perm
        then lib.replaceStrings ["Bash(" ":*)" ] ["run_shell_command(" ")"] perm
        else if perm == "Read(**)" then "read_file"
+       else if perm == "Glob(**)" then "glob_tool"
+       else if perm == "Grep(**)" then "grep_tool"
+       else if lib.hasPrefix "WebFetch(domain:" perm then "web_fetch"
        else perm;
    in map toGeminiFormat sourcePermissions
    ```
+
+   **Note**: This is a simplified example. The actual implementation in nix-config may include
+   additional logic for handling edge cases and validation.
 
 4. Generated config files are placed in `~/.gemini/`, `~/.claude/`, etc.
 
@@ -280,6 +301,7 @@ Example - adding Python permission:
 1. Add to `.gemini/permissions/allow.json`
 2. **Use Gemini format**: `"run_shell_command(full command)"`
 3. Keep in sync with Claude by translating the command
+4. **Remember**: Gemini doesn't support wildcards, so you may need multiple entries for different command variations
 
 Example:
 
@@ -287,8 +309,15 @@ Example:
 // .gemini/permissions/allow.json
 {
   "allowedTools": [
-    "run_shell_command(python3 -m venv)",  // Corresponds to Claude's "Bash(python3 -m venv:*)"
-    "run_shell_command(pip install)"
+    // Note: These are more restrictive than Claude's wildcard versions
+    // Claude's "Bash(python3 -m venv:*)" allows any venv name
+    // Gemini would need separate entries for each specific venv path
+    "run_shell_command(python3 -m venv .venv)",
+    "run_shell_command(python3 -m venv venv)",
+
+    // Similarly, pip install would need entries for each package
+    "run_shell_command(pip install numpy)",
+    "run_shell_command(pip install pandas)"
   ]
 }
 ```
@@ -300,12 +329,10 @@ After adding a permission to one tool:
 1. **Translate to other tools**: Convert the command to each tool's native format
 2. **Update both Claude and Gemini**: Both should have equivalent permissions
 3. **Commit together**: Keep all permissions synced in one commit
+4. **Manually verify**: Until automated tooling exists, manually check that equivalent permissions are defined for each supported tool
 
-Use the `/sync-permissions` command to help identify mismatches:
-
-```bash
-/sync-permissions
-```
+**Future Enhancement**: A `/sync-permissions` command may be added to automate detection of
+mismatches between tools. Until such tooling exists, manual verification is required.
 
 ## Maintenance Guidelines
 
@@ -375,11 +402,11 @@ Examples of explicitly denied commands:
 ## Related Issues & PRs
 
 - **Issue #135**: Unify permission definitions with nix-config
-- **nix-config Issue #137**: Sister issue (CLOSED) - unified permissions system in Nix
-- **Command**: `/sync-permissions` - Scan and merge permission definitions
+- **[nix-config Issue #137](https://github.com/JacobPEvans/nix-config/issues/137)**: Sister issue (CLOSED) - unified permissions system in Nix
 
 ## Future Improvements
 
+- [ ] Implement `/sync-permissions` command to automate detection of permission mismatches between tools
 - [ ] Migrate Gemini to modular structure (gemini/modules/)
 - [ ] Create unified tool-agnostic schema (Option C)
 - [ ] Add Copilot permission formatting
