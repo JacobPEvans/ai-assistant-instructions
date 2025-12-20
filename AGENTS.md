@@ -103,7 +103,7 @@ All commands from `agentsmd/commands/` are available. Use this table to select t
 | Sync all PRs with main | `/sync-main-all` | Repo | Update main, merge into all open PRs |
 | Sync PRs with main | `/sync-prs-with-main` | Repo | Superseded by `/sync-main-all` |
 | Fix PR CI failures | `/fix-pr-ci` | Repo | Fix CI in current repo |
-| Fix all PR CI failures | `/fix-all-pr-ci` | Repo | Fix all CI failures in current repo |
+| Fix all PR CI failures | `/fix-all-pr-ci` | Repo | Fix CI across all PRs (batches of 5) |
 | Resolve PR review threads | `/resolve-pr-review-thread-all` | Repo | Address review comments in current repo |
 | Sync repo, merge PRs | `/git-refresh` | Repo | Also cleans worktrees |
 | Create a GitHub issue | `/rok-shape-issues` | Repo | Shape before creating |

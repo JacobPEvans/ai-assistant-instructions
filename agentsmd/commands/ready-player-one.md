@@ -16,8 +16,8 @@ are ready to merge versus blocked.
 
 What this command DOES:
 
-- Execute `/fix-all-pr-ci-all-repos` to resolve CI failures
-- Execute `/resolve-pr-review-thread-all-repos` to address review feedback
+- Execute `/fix-all-pr-ci` to resolve CI failures
+- Execute `/resolve-pr-review-thread-all` to address review feedback
 - Scan all repos for open PRs
 - Determine merge-readiness status for each PR
 - Generate JSON report of ready vs blocked PRs
@@ -31,15 +31,15 @@ What this command DOES NOT:
 ## Related Documentation
 
 - [Subagent Parallelization](../rules/subagent-parallelization.md) - Parallel execution patterns
-- `/fix-all-pr-ci-all-repos` - CI failure resolution
-- `/resolve-pr-review-thread-all-repos` - Review thread resolution
+- `/fix-all-pr-ci` - CI failure resolution
+- `/resolve-pr-review-thread-all` - Review thread resolution
 
 ## How It Works
 
 You are the **orchestrator**. You will:
 
-1. Execute `/fix-all-pr-ci-all-repos` to fix CI failures
-2. Execute `/resolve-pr-review-thread-all-repos` to resolve review threads
+1. Execute `/fix-all-pr-ci` to fix CI failures
+2. Execute `/resolve-pr-review-thread-all` to resolve review threads
 3. List all repositories and their open PRs
 4. Check merge-readiness status for each PR
 5. Generate JSON report with ready vs blocked PRs
@@ -52,7 +52,7 @@ You are the **orchestrator**. You will:
 Execute the CI fix command:
 
 ```bash
-/fix-all-pr-ci-all-repos
+/fix-all-pr-ci
 ```
 
 Wait for completion. This command will fix all CI failures across all PRs.
@@ -62,7 +62,7 @@ Wait for completion. This command will fix all CI failures across all PRs.
 Execute the review resolution command:
 
 ```bash
-/resolve-pr-review-thread-all-repos
+/resolve-pr-review-thread-all
 ```
 
 Wait for completion. This command will address all pending review comments.

@@ -28,7 +28,7 @@ What this command DOES NOT:
 - Cross into other repositories
 - Affect PRs in your other projects
 
-For cross-repository CI fixes, use `/fix-all-pr-ci-all-repos` instead.
+To fix CI failures across all open PRs in the current repository, use `/fix-all-pr-ci` instead.
 
 ## Related Documentation
 
@@ -166,13 +166,22 @@ PRs processed: {N}
 Worktrees cleaned up: {N}
 ```
 
-## Key Differences from /fix-all-pr-ci-all-repos
+## Key Differences from /fix-all-pr-ci
 
-| Aspect | /fix-pr-ci | /fix-all-pr-ci-all-repos |
-| ------ | ---------- | ------------------------ |
-| Scope | Current repo only | All owned repos |
-| Worktrees | Uses worktrees | Clones to /tmp |
-| Cleanup | Cleans worktrees | Removes /tmp clones |
+Both `/fix-pr-ci` and `/fix-all-pr-ci` operate on the **current repository only** and use identical worktree-based workflows.
+The primary difference is their batching strategy:
+
+| Aspect | /fix-pr-ci | /fix-all-pr-ci |
+| ------ | ---------- | -------------- |
+| Scope | Current repo only | Current repo only |
+| Batch Size | 10 PRs | 5 PRs (more conservative) |
+| Worktrees | Uses worktrees | Uses worktrees |
+| Cleanup | Cleans worktrees | Cleans worktrees |
+
+**When to use which**:
+
+- Use `/fix-pr-ci` for faster processing when you have confidence in your CI fixes
+- Use `/fix-all-pr-ci` for more careful, conservative processing with tighter resource limits
 
 ## Batching
 
