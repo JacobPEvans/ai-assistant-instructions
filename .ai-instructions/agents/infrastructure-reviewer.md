@@ -165,7 +165,7 @@ variable "environment" {
 # Good: Encrypted storage
 resource "aws_s3_bucket" "data" {
   bucket = "my-data-bucket"
-  
+
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
@@ -183,7 +183,7 @@ resource "aws_s3_bucket" "data" {
 # Good: Specific provider versions
 terraform {
   required_version = "~> 1.5.0"
-  
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"

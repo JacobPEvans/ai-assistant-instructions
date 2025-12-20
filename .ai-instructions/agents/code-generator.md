@@ -167,10 +167,10 @@ export class UserService {
 
     // Business logic
     const user = await this.userRepo.create(userData);
-    
+
     // Logging (structured)
     logger.info('User created', { userId: user.id, email: user.email });
-    
+
     return user;
   }
 
@@ -267,11 +267,11 @@ class Repository(ABC):
     @abstractmethod
     def find_by_id(self, id: int) -> Optional[Entity]:
         pass
-    
+
     @abstractmethod
     def find_all(self) -> List[Entity]:
         pass
-    
+
     @abstractmethod
     def save(self, entity: Entity) -> Entity:
         pass

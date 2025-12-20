@@ -1,44 +1,62 @@
 ---
-description: Orchestrate parallel subagents to fix all CI failures across all open PRs in all repositories
+description: Fix CI failures across all open PRs in the current repository
 model: opus
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Read, Grep, Glob
+allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Read, Glob, Grep
 ---
 
 # Fix All PR CI Failures
 
-**Purpose**: Systematically resolve all CI failures across all open pull requests by launching parallel subagents that work
-autonomously until all PRs are 100% mergeable.
+**Purpose**: Systematically resolve all CI failures across all open pull requests in the **current repository** by launching parallel subagents.
 
-## How It Works
+## Scope
 
-You are the **orchestrator**. You will:
+**CURRENT REPOSITORY ONLY** - This command operates on the repository you're currently in.
 
-1. List all repositories using `gh repo list`
-2. For each repo, get open PRs with `gh pr list`
-3. Launch parallel subagents (Task tool) for each PR with failing checks
-4. Monitor completion with TaskOutput
-5. Verify PRs are 100% mergeable
-6. Relaunch subagents if needed
-7. Report final status
+What this command DOES:
+
+- Find all open PRs with failing CI in the current repo
+- Create worktrees for each failing PR
+- Launch parallel subagents (max 5 at once) per PR
+- Verify PRs are mergeable
+- Clean up worktrees
+
+What this command DOES NOT:
+
+- Cross into other repositories
+- Run more than 5 subagents simultaneously
+
+> **Note**: Cross-repo commands have been removed for safety. Run this from each repository individually.
+
+## Subagent Limits
+
+**CRITICAL: Maximum 5 subagents running at once.**
+
+This is a hard limit to prevent token exhaustion and ensure each subagent completes successfully.
+
+### Batching Strategy
+
+If > 5 PRs need processing:
+
+1. Launch first 5 subagents in parallel
+2. Wait for ALL 5 to complete using `TaskOutput` with `block=true`
+3. Validate each completed - verify PR is mergeable
+4. If any incomplete: retry that PR (max 2 retries)
+5. Only after all 5 are validated, start next batch of 5
+6. Never have more than 5 concurrent subagents
 
 ## Execution Steps
 
-### Step 1: Discovery
+### Step 1: Identify Repository
 
 ```bash
-# Get owner
-OWNER=$(gh api user --jq .login)
-
-# Get all repos
-gh repo list "$OWNER" --limit 1000 --json name --jq '.[].name'
+gh repo view --json nameWithOwner --jq '.nameWithOwner'
 ```
 
-For each repo returned, get PRs with failures:
+### Step 2: Find PRs with CI Failures
 
 ```bash
-# Replace REPO with actual repo name from the list above
-gh pr list --repo "$OWNER/REPO_NAME" --json number,title,statusCheckRollup,mergeable
+gh pr list --json number,headRefName,title,statusCheckRollup,mergeable
 ```
 
 Filter for PRs where:
@@ -46,174 +64,104 @@ Filter for PRs where:
 - Any check has `conclusion: "FAILURE"`
 - OR `mergeable != "MERGEABLE"`
 
-### Step 2: Launch Parallel Subagents
+### Step 3: Create Worktrees
 
-Launch ONE subagent per failing PR in a SINGLE message with multiple Task tool calls.
-
-**Subagent Prompt**:
-
-```text
-Fix all CI failures for {OWNER}/{REPO} PR #{NUMBER}
-
-Title: {TITLE}
-Failing checks: {LIST}
-
-Your mission:
-1. Clone repo: gh repo clone {OWNER}/{REPO} /tmp/fix-{REPO}-{NUMBER}
-2. Enter directory: cd /tmp/fix-{REPO}-{NUMBER}
-3. Checkout PR: gh pr checkout {NUMBER}
-4. Identify failures: gh run list --limit 3
-5. For EACH failing check:
-   a. Get logs: gh run view {RUN_ID} --log-failed
-   b. Replicate failure locally
-   c. Fix root cause (NEVER disable checks)
-   d. Test fix locally (pre-commit, tests, etc.)
-6. Commit changes (sanitize check names to prevent shell injection):
-   - Use a generic message: git commit -m "fix: resolve CI failures"
-   - Or use printf to safely include check name: git commit -m "$(printf 'fix: resolve %s failures' "$CHECK_NAME")"
-7. Push: git push
-8. Wait for CI to complete using polling:
-   - Run: gh pr checks NUMBER --watch --fail-fast
-   - This waits until all checks complete (times out after 10 min by default)
-   - Alternative: poll every 30s with `gh pr view NUMBER --json statusCheckRollup`
-9. Verify mergeable: gh pr view NUMBER --json mergeable,statusCheckRollup
-
-CRITICAL RULES:
-- Only use approved tools from ~/.claude/settings.json
-- NEVER add config to bypass linters/tests/checks
-- ALWAYS fix the actual issue
-- Use simple commands (no complex bash)
-- Verify PR shows mergeable: "MERGEABLE" before reporting done
-
-Report when complete:
-✅ PR: https://github.com/{OWNER}/{REPO}/pull/{NUMBER}
-✅ Mergeable: {YES/NO}
-✅ All checks: {PASS/FAIL for each}
-⚠️  Issues: {list remaining issues or "none"}
-```
-
-### Step 3: Monitor Subagents
-
-After launching all subagents, check their status:
-
-Wait for agents to complete using `TaskOutput` with `block=true` for each agent ID returned by the Task tool.
-
-Then verify each PR:
+For each PR with failures:
 
 ```bash
-gh pr view NUMBER --repo "OWNER/REPO" \
-  --json mergeable,statusCheckRollup \
-  --jq '{mergeable, checks: [.statusCheckRollup[] | select(.conclusion != null) | {name, conclusion}]}'
+# Sanitize branch name for safe path usage
+BRANCH_NAME="<branch-name-from-gh>"
+SAFE_BRANCH_DIR="$(printf '%s\n' "$BRANCH_NAME" | tr -c 'A-Za-z0-9._-/' '_')"
+git worktree add "$HOME/git/<repo-name>/$SAFE_BRANCH_DIR" "$BRANCH_NAME"
 ```
 
-A PR is **100% complete** when:
+### Step 4: Launch Parallel Subagents
 
-- `mergeable: "MERGEABLE"`
-- All required checks show `conclusion: "SUCCESS"`
-- No conflicts
+Launch subagents in batches of MAX 5.
 
-### Step 4: Relaunch for Incomplete Work
+**Subagent Prompt** (keep concise to save tokens):
 
-If subagent reported complete BUT PR still has failures:
+```text
+Fix CI for PR #{NUMBER} in {OWNER}/{REPO}
+Worktree: {PATH}
+Branch: {BRANCH}
+Failing: {CHECK_NAMES}
 
-1. Launch NEW subagent for that PR
-2. Include what the previous agent did
-3. Specify what still needs fixing
-4. Max 3 attempts per PR
+Steps:
+1. cd {PATH}
+2. gh run list --limit 5 --json databaseId,name,conclusion (identify failing run ID)
+3. gh run view {RUN_ID} --log-failed (use ID from step 2 to get failure details)
+4. Fix root cause (NEVER disable checks)
+5. Test locally if possible
+6. git commit -m "fix: resolve CI failure"
+7. git push
 
-### Step 5: Final Report
+Report: PR#{NUMBER} - FIXED/BLOCKED (reason)
+```
+
+### Step 5: Monitor and Validate
+
+Wait for batch completion:
+
+```bash
+# For each subagent, use TaskOutput with block=true
+```
+
+Verify each PR:
+
+```bash
+gh pr view NUMBER --json mergeable,statusCheckRollup
+```
+
+PR is complete when `mergeable: "MERGEABLE"` and all checks pass.
+
+### Step 6: Clean Up
+
+```bash
+git worktree remove ~/git/<repo-name>/<branch-name>
+```
+
+### Step 7: Final Report
 
 ```text
 ## CI Fix Results
 
-Total repos scanned: {N}
-Total PRs processed: {N}
+Repository: {OWNER}/{REPO}
+PRs processed: {N}
 
-✅ FIXED ({N} PRs):
-- {OWNER}/{REPO}#{NUMBER}: {TITLE} - https://github.com/...
-...
-
-⚠️  PARTIAL ({N} PRs):
-- {OWNER}/{REPO}#{NUMBER}: {remaining issues}
-...
-
-❌ FAILED ({N} PRs):
-- {OWNER}/{REPO}#{NUMBER}: {reason}
-...
+FIXED: #{N}, #{N}...
+BLOCKED: #{N} (reason)...
 ```
 
-## Keep It Simple
+## GraphQL Patterns
 
-### For Orchestrator (YOU)
+When using GraphQL, always use single-line format:
 
-- Use `gh` CLI (list, view, etc.)
-- Launch Task tools in parallel
-- Use TodoWrite to track
-- Use TaskOutput to monitor
-- That's it!
+```bash
+# CORRECT: Single-line with --raw-field
+gh api graphql --raw-field 'query=query { repository(owner: "OWNER", name: "REPO") { pullRequest(number: N) { mergeable statusCheckRollup { state } } } }'
 
-### For Subagents
+# INCORRECT: Multi-line causes encoding issues in Claude Code
+# gh api graphql -f query='
+#   query { ... }
+# '
+```
 
-- Use only approved tools
-- Simple bash commands
-- No complex scripts
-- Fix root causes
-- Verify before reporting
+## Related Commands
 
-## Approved Tools Reference
-
-From `~/.claude/settings.json`:
-
-**GitHub**: `gh pr *`, `gh run *`, `gh repo *`, `gh api *`
-**Git**: `git clone`, `git checkout`, `git add`, `git commit`, `git push`, `git status`
-**Validation**: `pre-commit run`
-**Files**: Read, Write, Edit, Glob, Grep tools
-**Shell**: Simple bash commands only
-
-## Priority Order
-
-Process PRs in this order:
-
-1. Simple config fixes (broken links, formatting)
-2. Linting issues
-3. Test failures
-4. Build failures
-5. Flaky tests (lowest priority - may need multiple attempts)
-
-## Batching
-
-If > 20 PRs need fixing:
-
-- Process first 20
-- Wait for completion
-- Process next batch
-- Avoids overwhelming the system
-
-## Error Handling
-
-If subagent fails 3 times on same PR:
-
-- Mark PR as "needs human review"
-- Log the issue
-- Continue with other PRs
-- Don't let one failure block everything
+| Command | Scope | Purpose |
+| ------- | ----- | ------- |
+| `/fix-all-pr-ci` | Current repo, all PRs | Fix all CI failures |
+| `/fix-pr-ci` | Current repo, single PR | Fix one PR's CI |
+| `/resolve-pr-review-thread-all` | Current repo, all PRs | Address review comments |
 
 ## Example Usage
 
 ```bash
+# From the repository directory
 /fix-all-pr-ci
 ```
 
-You will autonomously:
-
-1. Scan all repos
-2. Find all failing PRs
-3. Fix them in parallel
-4. Verify everything
-5. Report results
-
-No user interaction needed - you handle everything!
-
 ---
 
-**Remember**: Simple commands, approved tools only, fix root causes, verify completion, be autonomous.
+**Remember**: Current repo only, max 5 subagents, fix root causes, validate completion.

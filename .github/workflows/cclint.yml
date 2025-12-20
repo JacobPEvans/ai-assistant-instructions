@@ -1,0 +1,35 @@
+name: Claude Code Lint
+
+on:
+  pull_request:
+    paths:
+      - '.claude/**'
+      - 'agentsmd/**'
+      - 'CLAUDE.md'
+      - '.cclintrc.jsonc'
+  push:
+    branches:
+      - main
+    paths:
+      - '.claude/**'
+      - 'agentsmd/**'
+      - 'CLAUDE.md'
+      - '.cclintrc.jsonc'
+
+jobs:
+  cclint:
+    name: "Validate Claude Code Files"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run cclint
+        run: npx @carlrannaberg/cclint --verbose

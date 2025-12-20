@@ -11,6 +11,11 @@ and prevents accidental changes on main.
 
 Initialize a clean worktree in `~/git/<repo-name>/<branch-name>/` for new development work.
 
+## Related Documentation
+
+- [Worktrees](../rules/worktrees.md) - Authoritative worktree structure and principles
+- [Branch Hygiene](../rules/branch-hygiene.md) - Branch synchronization rules
+
 ## Usage
 
 ```bash

@@ -6,6 +6,7 @@
     "Bash(log show:*)",
     "Bash(defaults read:*)",
 
+    "Bash(git merge:*)",
     "Bash(git reset:*)",
     "Bash(git restore:*)",
     "Bash(git rm:*)",
@@ -80,6 +81,9 @@
     "Bash(pyenv install:*)",
 
     "Bash(source:*)",
+
+    "Bash(launchctl start:*)",
+    "Bash(launchctl load:*)",
 
     "Bash(orb create:*)",
     "Bash(orb delete:*)",

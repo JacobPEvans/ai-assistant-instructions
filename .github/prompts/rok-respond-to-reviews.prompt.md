@@ -1,1 +1,0 @@
-../../agentsmd/commands/rok-respond-to-reviews.md

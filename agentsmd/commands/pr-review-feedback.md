@@ -17,6 +17,8 @@ allowed-tools:
 
 How to programmatically resolve PR review threads using GitHub's GraphQL API.
 
+> **PR Comment Limit**: All operations in this guide respect the **50-comment limit per PR** defined in the [PR Comment Limits rule](../rules/pr-comment-limits.md). When resolving threads, if a PR has reached 50 comments, no new comments should be posted.
+
 ## Quick Reference
 
 ```bash
@@ -80,7 +82,7 @@ gh api graphql -f query='
                 "nodes": [
                   {
                     "body": "Consider adding back Pre-Commit Validation...",
-                    "path": "agentsmd/commands/pull-request.md",
+                    "path": "agentsmd/commands/pr.md",
                     "line": 16
                   }
                 ]
@@ -135,13 +137,21 @@ mutation {
 }
 ```
 
-**Multiple threads in a loop:**
+**Multiple threads (use parallel execution or batch queries):**
+
+Instead of sequential loops, use `xargs` with `-P` for parallel execution:
 
 ```bash
-for thread_id in "PRRT_kwDOO1m-OM5gtgeQ" "PRRT_kwDOO1m-OM5gtgtP" "PRRT_kwDOO1m-OM5gtgtb"; do
-  gh api graphql -f query="mutation { resolveReviewThread(input: {threadId: \"$thread_id\"}) { thread { id isResolved } } }"
-  echo "Resolved: $thread_id"
-done
+# Resolve multiple threads in parallel
+echo -e "PRRT_kwDOO1m-OM5gtgeQ\nPRRT_kwDOO1m-OM5gtgtP\nPRRT_kwDOO1m-OM5gtgtb" | \
+  xargs -I {} bash -c '
+    gh api graphql -f threadId="{}" -f query="
+    mutation(\$threadId: String!) {
+      resolveReviewThread(input: {threadId: \$threadId}) {
+        thread { id isResolved }
+      }
+    }" && echo "✓ Resolved {}"
+  '
 ```
 
 ## Key Points
@@ -160,7 +170,7 @@ done
 
 ## Batch Resolution Script
 
-Get unresolved thread IDs and resolve them all:
+Get unresolved thread IDs and resolve them all using parallel execution:
 
 ```bash
 # Set these for your PR
@@ -168,8 +178,8 @@ OWNER="JacobPEvans"
 REPO="ai-assistant-instructions"
 PR_NUMBER=29
 
-# Get unresolved thread IDs
-THREADS=$(gh api graphql -f query="
+# Get unresolved thread IDs and resolve them in parallel
+gh api graphql -f query="
 {
   repository(owner: \"$OWNER\", name: \"$REPO\") {
     pullRequest(number: $PR_NUMBER) {
@@ -178,13 +188,15 @@ THREADS=$(gh api graphql -f query="
       }
     }
   }
-}" | jq -r '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false) | .id')
-
-# Resolve each one
-for thread_id in $THREADS; do
-  gh api graphql -f query="mutation { resolveReviewThread(input: {threadId: \"$thread_id\"}) { thread { isResolved } } }"
-  echo "Resolved: $thread_id"
-done
+}" | jq -r '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false) | .id' | \
+  xargs -I {} bash -c '
+    gh api graphql -f threadId="{}" -f query="
+    mutation(\$threadId: String!) {
+      resolveReviewThread(input: {threadId: \$threadId}) {
+        thread { id isResolved }
+      }
+    }" && echo "✓ Resolved {}"
+  '
 ```
 
 ## Troubleshooting

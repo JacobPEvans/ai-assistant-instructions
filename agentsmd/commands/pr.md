@@ -162,7 +162,7 @@ gh api graphql -f query='{
 
 If the above command returns ANY output, there are still unresolved conversations. **DO NOT proceed to Step 3.**
 
-**See [pull-request-review-feedback.md](pull-request-review-feedback.md) for batch resolution scripts.**
+**See [pr-review-feedback.md](pr-review-feedback.md) for batch resolution scripts.**
 
 ### 2.5. Address All Feedback
 

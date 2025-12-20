@@ -24,7 +24,11 @@ Each project must maintain:
 
 ### Git Worktree Policy
 
-See [/init-worktree](../commands/init-worktree.md) for the authoritative worktree usage guidelines.
+See [Worktrees](./worktrees.md) for the authoritative worktree structure and usage guidelines.
+
+### Branch Hygiene
+
+See [Branch Hygiene](./branch-hygiene.md) for rules on keeping branches synchronized with main.
 
 ### Security Standards
 

@@ -1,0 +1,15 @@
+{
+  "permissions": [
+    "Bash(kubectl version:*)",
+    "Bash(kubectl get:*)",
+    "Bash(kubectl describe:*)",
+    "Bash(kubectl logs:*)",
+    "Bash(kubectl port-forward:*)",
+    "Bash(kubectl config:*)",
+    "Bash(kubectl rollout:*)",
+    "Bash(helm version:*)",
+    "Bash(helm list:*)",
+    "Bash(helm repo:*)",
+    "Bash(helm search:*)"
+  ]
+}

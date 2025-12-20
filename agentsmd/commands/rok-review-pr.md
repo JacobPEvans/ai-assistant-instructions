@@ -13,11 +13,21 @@ source: "https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3"
 ## PR Review Conductor
 
 > **Attribution**: This command is from [roksechs](https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3)
-> Part of the development lifecycle: `/rok-shape-issues` -> `/rok-resolve-issues` -> `/rok-review-pr` -> `/rok-respond-to-reviews`
 
 Comprehensive and systematic Pull Request review system focusing on code quality, architectural consistency, and constructive feedback delivery.
 
+## Scope
+
+**SINGLE PR** - This command reviews one PR at a time, specified by argument or determined from current branch.
+
+> **PR Comment Limit**: This command respects the **50-comment limit per PR** defined in the
+> [PR Comment Limits rule](../rules/pr-comment-limits.md).
+> If a PR has reached 50 comments, this command will not post new comments. See the rule for details.
+
 ### Core Capabilities
+
+Apply [Code Standards](../rules/code-standards.md), [Infrastructure Standards](../rules/infrastructure-standards.md),
+and [Styleguide](../rules/styleguide.md) throughout the review process.
 
 **Phase 1: PR Analysis & Context Understanding** (pr_analysis)
 
@@ -129,12 +139,37 @@ bun run lint
 - **Test quality**: Ensure comprehensive coverage and meaningful tests
 - **Documentation**: Review inline comments and external documentation
 
-#### Step 4: Feedback Documentation & Submission
+#### Step 4: Check Comment Limit (Before Submitting Feedback)
+
+Before posting any new comments:
+
+```bash
+# Check current comment count
+gh api graphql -f query='
+query {
+  repository(owner: "OWNER", name: "REPO") {
+    pullRequest(number: PR_NUMBER) {
+      comments(first: 1) { totalCount }
+      reviewThreads(first: 100) { totalCount }
+    }
+  }
+}' --jq '.data.repository.pullRequest.comments.totalCount + .data.repository.pullRequest.reviewThreads.totalCount'
+
+# If >= 50: Do NOT post new comments - exit with message explaining the limit
+# If < 50: Proceed with feedback submission
+```
+
+**Decision Logic**:
+
+- **If comment count >= 50**: Skip feedback submission, log that limit has been reached
+- **If comment count < 50**: Proceed to Step 5
+
+#### Step 5: Feedback Documentation & Submission
 
 - **Categorize feedback**: Critical -> Major -> Minor -> Enhancement
 - **Provide examples**: Show better approaches where applicable
 - **Record decision**: Submit formal review with clear rationale
-- **MANDATORY**: Record all feedback on GitHub for team visibility
+- **MANDATORY**: Record all feedback on GitHub for team visibility (if under 50-comment limit)
 
 ### Review Excellence Standards
 
@@ -165,26 +200,29 @@ bun run lint
 
 > **Review Criteria:**
 
-#### Critical Issues (Block Merge)
+Use emoji-based priority markers to clearly communicate feedback urgency:
+
+#### 🔴 Critical Issues (Block Merge / Required)
 
 - Security vulnerabilities or data exposure risks
 - Breaking changes without proper migration strategy
 - Failed automated tests or build processes
 - Significant performance regressions
 
-#### Major Issues (Request Changes)
+#### 🟡 Major Issues (Request Changes / Suggested)
 
 - Architectural pattern violations
 - Missing or inadequate test coverage
 - Poor error handling or edge case coverage
 - Incomplete documentation for public APIs
 
-#### Minor Issues (Suggest Improvements)
+#### 🟢 Minor Issues (Suggest Improvements / Optional)
 
 - Code style inconsistencies
-- Optimization opportunities
+- Code quality improvements and minor optimizations
 - Better naming conventions
 - Enhanced code comments
+- Alternative approaches and style preferences
 
 #### Enhancements (Optional)
 
@@ -192,6 +230,11 @@ bun run lint
 - Code structure improvements
 - Additional test scenarios
 - Documentation enhancements
+
+#### Feedback Example
+
+> 🟡 **Suggested** (Code Quality): The function `process_data()` on line 72 is doing multiple things.
+> Consider splitting into `validate_data()`, `transform_data()`, and `save_data()` for better testability.
 
 ### Usage Instructions
 
@@ -210,8 +253,8 @@ bun run lint
 
 - **Strategic context**: `/rok-shape-issues` establishes timebox-driven Issue shaping and problem definition
 - **Implementation context**: `/rok-resolve-issues` provides Issue resolution and PR creation background
-- **Post-review**: Guide authors to use `/rok-respond-to-reviews` for efficient feedback resolution
+- **Post-review**: Guide authors to use `/rok-resolve-pr-review-thread` for efficient feedback resolution
 
-**Complete Development Lifecycle**: `/rok-shape-issues` -> `/rok-resolve-issues` -> `/rok-review-pr` -> `/rok-respond-to-reviews`
+**Complete Development Lifecycle**: `/rok-shape-issues` -> `/rok-resolve-issues` -> `/rok-review-pr` -> `/rok-resolve-pr-review-thread`
 
 This command ensures thorough, constructive, and educationally valuable PR reviews that strengthen both code quality and team knowledge.

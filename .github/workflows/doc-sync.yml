@@ -2,16 +2,17 @@ name: Documentation Sync
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened]
 
 jobs:
   doc-sync:
     name: "Sync Documentation"
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    # DISABLED: Workflow is not production ready, and this is a waste of Claude tokens.
+    if: false && (github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     permissions:
-      contents: write
+      contents: read
       pull-requests: write
       id-token: write
     steps:
@@ -21,11 +22,6 @@ jobs:
           fetch-depth: 1
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Configure Git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
       - uses: anthropics/claude-code-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -34,36 +30,15 @@ jobs:
 
           claude_args: |
             --max-turns 5
-            --allowedTools "Read,Write,Edit,Bash(git add:*),Bash(git commit:*),Bash(git push:*),Bash(git status:*),Bash(gh pr:*)"
+            --allowedTools "Read,Bash(gh pr comment:*)"
 
           prompt: |
             REPO: ${{ github.repository }}
             PR NUMBER: ${{ github.event.pull_request.number }}
-            PR TITLE: ${{ github.event.pull_request.title }}
 
-            Validate and update documentation for this PR:
+            Quick documentation check:
+            1. Read PLANNING.md - note if PR title matches any planned tasks
+            2. If match found, post comment: "Note: This PR may complete task X in PLANNING.md"
+            3. If no match, post: "Docs look good, no conflicts found."
 
-            ## PLANNING.md Validation
-            - Verify ONLY contains incomplete/in-progress tasks
-            - Remove any completed tasks (they belong in CHANGELOG.md)
-            - If this PR completes a planned task, remove it from PLANNING.md
-            - Ensure proper formatting and structure
-
-            ## CHANGELOG.md Validation
-            - Add entry for this PR under appropriate section:
-              - Added: New features
-              - Changed: Updates to existing features
-              - Fixed: Bug fixes
-              - Removed: Removed features
-            - Follow Keep a Changelog format
-            - Include PR number reference
-
-            ## General Documentation
-            - Verify README.md is accurate if relevant files changed
-            - Check CONTRIBUTING.md alignment if workflow files changed
-            - Ensure no stale documentation references
-
-            If updates are needed, commit to PR branch with message:
-            "docs: validate and sync documentation [skip ci]"
-
-            If no updates needed, post a brief comment confirming docs are in sync.
+            Keep it simple - just check and comment. No edits needed.

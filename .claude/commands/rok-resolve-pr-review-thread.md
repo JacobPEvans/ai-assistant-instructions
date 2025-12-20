@@ -1,0 +1,1 @@
+../../agentsmd/commands/rok-resolve-pr-review-thread.md
