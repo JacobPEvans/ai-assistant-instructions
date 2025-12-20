@@ -28,7 +28,7 @@ What this command DOES NOT:
 - Cross into other repositories
 - Affect PRs in your other projects
 
-For cross-repository CI fixes, use `/fix-all-pr-ci-all-repos` instead.
+For cross-repository CI fixes, use `/fix-all-pr-ci` instead.
 
 ## Related Documentation
 
@@ -166,13 +166,13 @@ PRs processed: {N}
 Worktrees cleaned up: {N}
 ```
 
-## Key Differences from /fix-all-pr-ci-all-repos
+## Key Differences from /fix-all-pr-ci
 
-| Aspect | /fix-pr-ci | /fix-all-pr-ci-all-repos |
-| ------ | ---------- | ------------------------ |
-| Scope | Current repo only | All owned repos |
-| Worktrees | Uses worktrees | Clones to /tmp |
-| Cleanup | Cleans worktrees | Removes /tmp clones |
+| Aspect | /fix-pr-ci | /fix-all-pr-ci |
+| ------ | ---------- | -------------- |
+| Scope | Current repo only | Current repo only |
+| Worktrees | Uses worktrees | Uses worktrees |
+| Cleanup | Cleans worktrees | Cleans worktrees |
 
 ## Batching
 

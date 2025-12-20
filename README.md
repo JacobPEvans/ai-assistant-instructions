@@ -99,9 +99,8 @@ Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 | `/pr` | Complete PR lifecycle management |
 | `/pr-review-feedback` | Resolve PR review threads via GraphQL |
 | `/fix-pr-ci` | Fix CI failures in current repo |
-| `/fix-all-pr-ci-all-repos` | Fix CI failures across all owned repos |
+| `/fix-all-pr-ci` | Fix CI failures in current repo |
 | `/resolve-pr-review-thread-all` | Address review comments in current repo |
-| `/resolve-pr-review-thread-all-repos` | Address review comments across all repos |
 
 ### Issue & Architecture Management
 
