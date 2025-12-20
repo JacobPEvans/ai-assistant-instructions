@@ -130,7 +130,9 @@ PR is complete when `mergeable: "MERGEABLE"` and all checks pass.
 ### Step 6: Clean Up
 
 ```bash
-git worktree remove ~/git/<repo-name>/<branch-name>
+# Use sanitized branch directory
+SAFE_BRANCH_DIR="$(printf '%s\n' "$BRANCH_NAME" | tr -c 'A-Za-z0-9._-/' '_')"
+git worktree remove "$HOME/git/<repo-name>/$SAFE_BRANCH_DIR"
 git worktree prune
 ```
 

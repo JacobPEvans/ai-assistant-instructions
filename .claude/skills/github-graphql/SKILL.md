@@ -166,8 +166,10 @@ When resolving review threads requires code changes:
 1. Create or switch to the PR's worktree:
 
    ```bash
-   git worktree add ~/git/{REPO}/{BRANCH} {BRANCH}
-   cd ~/git/{REPO}/{BRANCH}
+   BRANCH="{BRANCH}"
+   SANITIZED_BRANCH="$(printf '%s' "$BRANCH" | tr -c 'A-Za-z0-9._-' '_')"
+   git worktree add "$HOME/git/{REPO}/$SANITIZED_BRANCH" "$BRANCH"
+   cd "$HOME/git/{REPO}/$SANITIZED_BRANCH"
    ```
 
 2. Make changes normally
