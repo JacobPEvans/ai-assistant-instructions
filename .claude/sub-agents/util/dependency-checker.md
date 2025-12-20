@@ -585,8 +585,8 @@ Your mission:
 
 This sub-agent can be invoked by:
 
-- `/rok-resolve-issues` - Verify dependencies as part of issue resolution
-- `/pr` - Check dependencies before creating PR
+- `/resolve-issues` - Verify dependencies as part of issue resolution
+- `/manage-pr` - Check dependencies before creating PR
 - CI/CD pipelines - Automated dependency scanning
 - Scheduled tasks - Weekly/monthly dependency audits
 - Security workflows - Respond to vulnerability alerts

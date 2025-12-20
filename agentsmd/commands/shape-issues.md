@@ -14,7 +14,7 @@ source: "https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3"
 
 > **Attribution**: This command is from [roksechs](https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3)
 > Part of the development lifecycle:
-> `/rok-shape-issues` -> `/rok-resolve-issues` -> `/rok-review-pr` -> `/rok-resolve-pr-review-thread`
+> `/shape-issues` -> `/resolve-issues` -> `/review-pr` -> `/resolve-pr-review-thread`
 
 Iterative Issue exploration and shaping process that transforms rough ideas into well-defined,
 time-boxed GitHub Issues using Shape Up methodology and continuous discovery principles.
@@ -59,7 +59,7 @@ time-boxed GitHub Issues using Shape Up methodology and continuous discovery pri
 - **Timebox labeling**: Small-batch, big-batch, or spike labels
 - **Solution sketch attachment**: Include rough wireframes, technical notes
 - **Rabbit hole documentation**: List known risks and scope boundaries
-- **Ready-for-development**: Clear handoff to `/rok-resolve-issues` phase
+- **Ready-for-development**: Clear handoff to `/resolve-issues` phase
 
 ### Shape Up Frameworks
 
@@ -142,7 +142,7 @@ gh label create "timebox:small-batch" --color "00ff00" \
 gh label create "timebox:big-batch" --color "ff9900" \
   --description "6 week time box"
 gh label create "ready-for-dev" --color "0099ff" \
-  --description "Shaped and ready for /rok-resolve-issues"
+  --description "Shaped and ready for /resolve-issues"
 ```
 
 ### Shape Up Excellence Standards
@@ -235,7 +235,7 @@ Cool-Down: Small improvements, bug fixes, maintenance tasks
 
 > **Usage:**
 >
-> **Command Execution**: `/rok-shape-issues`
+> **Command Execution**: `/shape-issues`
 >
 > **Example Prompts**:
 >
@@ -247,12 +247,12 @@ Cool-Down: Small improvements, bug fixes, maintenance tasks
 
 **Workflow Integration**:
 
-- **Feeds into**: `/rok-resolve-issues` (shaped Issue implementation)
+- **Feeds into**: `/resolve-issues` (shaped Issue implementation)
 - **Iterative process**: Continuously shape and re-shape ideas based on learning
 - **Outputs**: Time-boxed, well-scoped Issues ready for development
 
 **Complete Development Lifecycle**:
-`/rok-shape-issues` -> `/rok-resolve-issues` -> `/rok-review-pr` -> `/rok-resolve-pr-review-thread`
+`/shape-issues` -> `/resolve-issues` -> `/review-pr` -> `/resolve-pr-review-thread`
 
 This command transforms raw ideas into actionable, time-bounded Issues using Shape Up principles
 of timebox-driven development and iterative shaping.

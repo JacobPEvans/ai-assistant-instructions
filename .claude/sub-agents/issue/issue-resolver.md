@@ -368,7 +368,7 @@ for consistency and efficiency.
 ```markdown
 @.claude/sub-agents/issue/issue-resolver.md
 
-Resolve Issue #89 from rok-resolve-issues workflow
+Resolve Issue #89 from resolve-issues workflow
 
 Repository: owner/repo
 Working Directory: /path/to/worktree
@@ -398,8 +398,8 @@ Your mission:
 
 This sub-agent can be invoked by:
 
-- `/rok-resolve-issues` - For batch issue resolution
-- `/pr` - During PR creation workflow
+- `/resolve-issues` - For batch issue resolution
+- `/manage-pr` - During PR creation workflow
 - Custom commands - Any workflow needing issue implementation
 
 ## Error Handling
@@ -418,4 +418,4 @@ If unable to complete after reasonable effort:
 - [Code Standards](../../../agentsmd/rules/code-standards.md)
 - [Worktrees](../../../agentsmd/rules/worktrees.md)
 - [Subagent Parallelization](../../../agentsmd/rules/subagent-parallelization.md)
-- [rok-resolve-issues Command](../../../agentsmd/commands/rok-resolve-issues.md)
+- [resolve-issues Command](../../../agentsmd/commands/resolve-issues.md)

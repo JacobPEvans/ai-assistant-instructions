@@ -4,7 +4,7 @@ This document defines best practices for creating, managing, and resolving GitHu
 
 ## Issue Creation Command
 
-**Always use `/rok-shape-issues`** when creating GitHub issues. This command implements Shape Up methodology and ensures issues are well-formed before creation.
+**Always use `/shape-issues`** when creating GitHub issues. This command implements Shape Up methodology and ensures issues are well-formed before creation.
 
 ## Title Conventions
 
@@ -36,7 +36,7 @@ Use prefixes to categorize issues:
 
 ### Status Labels (add as appropriate)
 
-- `ready-for-dev` - Shaped and ready for `/rok-resolve-issues`
+- `ready-for-dev` - Shaped and ready for `/resolve-issues`
 - `help wanted` - Open for contributors
 - `good first issue` - Suitable for newcomers
 
@@ -50,7 +50,7 @@ Use prefixes to categorize issues:
 
 ### Feature Requests
 
-Follow the Shape Up template from `/rok-shape-issues`:
+Follow the Shape Up template from `/shape-issues`:
 
 ```markdown
 ## Problem
@@ -204,12 +204,12 @@ These are distinct from acceptance criteria - they describe HOW to verify:
 
 ## Integration with Commands
 
-| Action              | Command                              |
-| ------------------- | ------------------------------------ |
-| Create/shape issues | `/rok-shape-issues`                  |
-| Implement issues    | `/rok-resolve-issues`                |
-| Review resulting PR | `/rok-review-pr`                     |
-| Resolve PR feedback | `/rok-resolve-pr-review-thread`      |
+| Action | Command |
+| ------ | ------- |
+| Create/shape issues | `/shape-issues` |
+| Implement issues | `/resolve-issues` |
+| Review resulting PR | `/review-pr` |
+| Resolve PR feedback | `/resolve-pr-review-thread` |
 
 ## PR-Issue Linking
 

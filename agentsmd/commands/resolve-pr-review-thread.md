@@ -4,13 +4,15 @@ description: "Resolve PR review threads efficiently with systematic analysis, im
 model: sonnet
 type: "command"
 version: "2.0.0"
-allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Edit, Glob, Grep, Read, WebFetch, Write
+allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Bash(git worktree remove:*), Edit, Glob, Grep, Read, WebFetch, Write
 think: true
 author: "roksechs"
 source: "https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3"
 contributors:
   - "kieranklaassen (parallel sub-agent patterns): https://gist.github.com/kieranklaassen/0c91cfaaf99ab600e79ba898918cea8a"
 ---
+
+<!-- markdownlint-disable-file MD013 -->
 
 ## PR Review Thread Resolver
 
@@ -35,9 +37,14 @@ There are exactly **TWO paths** to resolve a comment:
 
 **BOTH paths require marking the thread as resolved.** No comment should remain unresolved after this command completes.
 
-## Scope
+## Scope Parameter
 
-**CURRENT PR ONLY** - This command operates on the PR associated with the current branch or worktree.
+| Usage | Scope | Batch Size |
+| ----- | ----- | ---------- |
+| `/resolve-pr-review-thread` | Current PR only | 1 |
+| `/resolve-pr-review-thread all` | All open PRs with unresolved comments | 5 |
+
+**CURRENT REPOSITORY ONLY** - This command never crosses into other repositories.
 
 > **PR Comment Limit**: This command respects the **50-comment limit per PR** defined in the
 > [PR Comment Limits rule](../rules/pr-comment-limits.md).
@@ -45,7 +52,8 @@ There are exactly **TWO paths** to resolve a comment:
 
 ## Related Documentation
 
-- [Subagent Parallelization](../rules/subagent-parallelization.md) - Parallel execution patterns for independent comments
+- [Worktrees](../rules/worktrees.md) - Worktree structure and usage
+- [Subagent Parallelization](../rules/subagent-parallelization.md) - Parallel execution patterns
 - [PR Comment Limits](../rules/pr-comment-limits.md) - 50-comment limit enforcement
 
 ## Quick Reference
@@ -139,7 +147,6 @@ Follow these steps in order for each PR comment:
 
 **Action**: Use GraphQL to retrieve all review threads with complete context.
 
-<!-- markdownlint-disable MD013 -->
 <!-- Long line required: Claude Code has encoding issues with multi-line GraphQL -->
 
 ```bash
@@ -149,8 +156,6 @@ gh api graphql --raw-field 'query=query { repository(owner: "OWNER", name: "REPO
 
 > **Technical Requirement**: Multi-line GraphQL queries cause encoding issues in Claude Code.
 > Use `--raw-field` with single-line format (exceeds 160 chars by necessity).
-
-<!-- markdownlint-enable MD013 -->
 
 **Extract these fields**:
 
@@ -299,8 +304,6 @@ Acknowledged but not implementing because:
 2. [Technical reason 2]
 ```
 
-<!-- markdownlint-disable MD013 -->
-
 > **VERIFICATION**: After resolving, confirm with:
 >
 > ```bash
@@ -308,8 +311,6 @@ Acknowledged but not implementing because:
 > ```
 >
 > Must return `0` before moving on.
-
-<!-- markdownlint-enable MD013 -->
 
 #### 7. Commit and Push
 
@@ -777,3 +778,122 @@ Reason: [why this doesn't apply]
 ### Provide AI Feedback
 
 Reply to each AI comment explaining agreement/disagreement - this creates a learning record for future reviews.
+
+---
+
+## All Mode Orchestration
+
+When invoked with the `all` parameter, this command becomes an orchestrator that processes all open PRs
+with unresolved review comments in the current repository.
+
+### How All Mode Works
+
+You are the **orchestrator**. You will:
+
+1. Identify the current repository from `gh repo view`
+2. List all open PRs with `gh pr list`
+3. Get review comments for each PR
+4. Create worktrees for PRs with unresolved comments
+5. Launch parallel subagents (Task tool) for each PR
+6. Monitor completion with TaskOutput
+7. Verify all comments are addressed
+8. Clean up worktrees
+9. Report final status
+
+### Step 1: List Open PRs with Unresolved Comments
+
+```bash
+gh pr list --json number,headRefName,title,reviewDecision
+```
+
+For each PR, check for unresolved threads:
+
+```bash
+gh api graphql --raw-field 'query=query { repository(owner: "OWNER", name: "REPO") { pullRequest(number: NUMBER) { reviewThreads(last: 100) { nodes { id isResolved } } } } }' | jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)] | length'
+```
+
+### Step 2: Create Worktrees
+
+For each PR with unresolved comments:
+
+```bash
+# Sanitize branch name for safe path usage
+BRANCH_NAME="<branch-name-from-gh>"
+SAFE_BRANCH_DIR="$(printf '%s\n' "$BRANCH_NAME" | tr -c 'A-Za-z0-9._-/' '_')"
+git worktree add "$HOME/git/<repo-name>/$SAFE_BRANCH_DIR" "$BRANCH_NAME"
+```
+
+### Step 3: Launch Parallel Subagents
+
+Launch ONE subagent per PR in a SINGLE message with multiple Task tool calls (max 5 at once).
+
+**Subagent Prompt**:
+
+```text
+Resolve all review comments for PR #{NUMBER} in {OWNER}/{REPO}
+
+Branch: {BRANCH_NAME}
+Worktree: {WORKTREE_PATH}
+
+Your mission:
+1. Navigate to the worktree: cd {WORKTREE_PATH}
+2. For EACH unresolved comment:
+   a. Read the file and understand context
+   b. Analyze the feedback (is it valid? actionable?)
+   c. If actionable: make the fix, commit with descriptive message
+   d. If not actionable: prepare explanation why
+3. Push changes: git push origin {BRANCH_NAME}
+4. Reply to each comment and resolve thread via GraphQL
+
+CRITICAL RULES:
+- Work ONLY in the provided worktree
+- NEVER disable linters/tests/checks
+- Reply to EVERY comment
+- Resolve ALL threads via GraphQL mutation
+
+Report: PR#{NUMBER} - FIXED/BLOCKED (reason)
+```
+
+### Batching Strategy
+
+**CRITICAL: Maximum 5 subagents running at once.**
+
+If > 5 PRs need processing:
+
+1. Launch first 5 subagents in parallel
+2. Wait for ALL 5 to complete using `TaskOutput` with `block=true`
+3. Validate each completed - verify PR has 0 unresolved threads
+4. Only after all 5 are validated, start next batch of 5
+5. Never have more than 5 concurrent subagents
+
+### Step 4: Clean Up
+
+```bash
+git worktree remove ~/git/<repo-name>/<branch-name>
+git worktree prune
+```
+
+### Final Report
+
+```text
+## PR Review Response Results
+
+Repository: {OWNER}/{REPO}
+PRs processed: {N}
+
+FULLY ADDRESSED: #{N}, #{N}...
+PARTIAL: #{N} ({reason})...
+FAILED: #{N} ({reason})...
+
+Worktrees cleaned up: {N}
+```
+
+## Example Usage
+
+```bash
+# Resolve comments on current PR only
+/resolve-pr-review-thread
+
+# Resolve comments on all open PRs in current repo
+/resolve-pr-review-thread all
+```

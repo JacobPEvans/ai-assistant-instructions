@@ -25,7 +25,7 @@ A "comment" includes:
 
 The 50-comment limit applies to:
 
-- All PR creation and review commands (`/rok-review-pr`, `/pr`, etc.)
+- All PR creation and review commands (`/review-pr`, `/manage-pr`, etc.)
 - All PR comment resolution workflows
 - All AI-generated review mechanisms
 - Manual command execution by users on PRs
@@ -126,8 +126,8 @@ GitHub Actions workflows enforce this limit:
 ## References
 
 - **Related Rule**: `subagent-parallelization.md` for batching strategies
-- **Related Command**: `rok-review-pr.md` - References this rule
-- **Related Command**: `rok-resolve-pr-review-thread.md` - Respects this limit
+- **Related Command**: `review-pr.md` - References this rule
+- **Related Command**: `resolve-pr-review-thread.md` - Respects this limit
 - **Related Workflow**: `pr-comment-limit-check.yml` - Enforces this rule
 
 ## Examples

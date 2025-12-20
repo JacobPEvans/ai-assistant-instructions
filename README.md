@@ -80,7 +80,7 @@ Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 | Command | Description |
 | ------- | ----------- |
 | `/git-refresh` | Merge PRs, sync repo, cleanup stale worktrees |
-| `/sync-prs-with-main` | Sync all open PRs with main branch |
+| `/sync-main` | Sync current branch with main (use `all` for all PRs) |
 | `/sync-permissions` | Sync AI assistant permissions to repo |
 
 ### Code Review & Quality
@@ -96,20 +96,18 @@ Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 
 | Command | Description |
 | ------- | ----------- |
-| `/pr` | Complete PR lifecycle management |
-| `/pr-review-feedback` | Resolve PR review threads via GraphQL |
-| `/fix-pr-ci` | Fix CI failures in current repo |
-| `/fix-all-pr-ci` | Fix CI failures across all PRs in current repo |
-| `/resolve-pr-review-thread-all` | Address review comments in current repo |
+| `/manage-pr` | Complete PR lifecycle management |
+| `/fix-pr-ci` | Fix CI failures (use `all` for all PRs) |
+| `/resolve-pr-review-thread` | Resolve review threads (use `all` for all PRs) |
+| `/pr-review-feedback` | GraphQL patterns for PR thread resolution |
 
 ### Issue & Architecture Management
 
 | Command | Description |
 | ------- | ----------- |
-| `/rok-shape-issues` | Shape raw ideas into actionable GitHub issues |
-| `/rok-resolve-issues` | Analyze and implement GitHub issues |
-| `/rok-review-pr` | Comprehensive PR review with systematic analysis |
-| `/rok-resolve-pr-review-thread` | Resolve PR review feedback efficiently |
+| `/shape-issues` | Shape raw ideas into actionable GitHub issues |
+| `/resolve-issues` | Analyze and implement GitHub issues |
+| `/review-pr` | Comprehensive PR review with systematic analysis |
 
 ### Delegation & Integration
 
@@ -117,7 +115,7 @@ Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 | ------- | ----------- |
 | `/delegate-to-ai` | Delegate tasks to external AI assistants |
 
-All 19 active commands live in [`agentsmd/commands/`](agentsmd/commands/). See the [Commands](agentsmd/commands/) reference for detailed documentation on each.
+All commands live in [`agentsmd/commands/`](agentsmd/commands/). See the [Commands](agentsmd/commands/) reference for detailed documentation on each.
 
 ## Core Concepts
 

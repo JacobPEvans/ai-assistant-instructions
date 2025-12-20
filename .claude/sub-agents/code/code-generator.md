@@ -535,8 +535,8 @@ Integration: Part of existing API infrastructure
 
 This sub-agent can be invoked by:
 
-- `/rok-resolve-issues` - For implementing issue solutions
-- `/pr` - During PR creation workflow
+- `/resolve-issues` - For implementing issue solutions
+- `/manage-pr` - During PR creation workflow
 - Custom commands - Any workflow needing code generation
 
 ## Error Handling

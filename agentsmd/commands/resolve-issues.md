@@ -13,7 +13,7 @@ source: "https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3"
 ## GitHub Issue Resolver
 
 > **Attribution**: This command is from [roksechs](https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3)
-> Part of the development lifecycle: `/rok-shape-issues` -> `/rok-resolve-issues` -> `/rok-review-pr` -> `/rok-resolve-pr-review-thread`
+> Part of the development lifecycle: `/shape-issues` -> `/resolve-issues` -> `/review-pr` -> `/resolve-pr-review-thread`
 
 **IMPORTANT: Use thinking mode throughout this entire workflow to analyze, plan, and execute efficiently.**
 
@@ -196,10 +196,10 @@ well-tested solutions that address multiple related concerns efficiently.
 
 **Workflow Integration**:
 
-- **Before implementation**: Use `/rok-shape-issues` for iterative Issue shaping
+- **Before implementation**: Use `/shape-issues` for iterative Issue shaping
   and timebox-based planning
-- **After implementation**: Use `/rok-review-pr` for comprehensive PR review,
-  then `/rok-resolve-pr-review-thread` for feedback resolution
+- **After implementation**: Use `/review-pr` for comprehensive PR review,
+  then `/resolve-pr-review-thread` for feedback resolution
 
 **Complete Development Lifecycle**:
-`/rok-shape-issues` -> `/rok-resolve-issues` -> `/rok-review-pr` -> `/rok-resolve-pr-review-thread`
+`/shape-issues` -> `/resolve-issues` -> `/review-pr` -> `/resolve-pr-review-thread`
