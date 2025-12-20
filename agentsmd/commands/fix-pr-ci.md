@@ -171,6 +171,7 @@ Worktrees cleaned up: {N}
 | Aspect | /fix-pr-ci | /fix-all-pr-ci |
 | ------ | ---------- | -------------- |
 | Scope | Current repo only | Current repo only |
+| Batch Size | 10 PRs | 5 PRs |
 | Worktrees | Uses worktrees | Uses worktrees |
 | Cleanup | Cleans worktrees | Cleans worktrees |
 
