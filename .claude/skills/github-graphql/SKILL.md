@@ -23,6 +23,13 @@ Multi-line GraphQL queries cause encoding issues. Use this pattern:
 gh api graphql --raw-field 'query=query { repository(owner: "{OWNER}", name: "{REPO}") { pullRequest(number: {NUMBER}) { reviewThreads(last: 100) { nodes { id isResolved } } } } }'
 ```
 
+**Shell Quoting Notes:**
+
+- **Single quotes** (as above) prevent shell variable expansion - use when query contains literal placeholders like `{OWNER}`
+- **Double quotes** needed only for shell variable substitution (e.g., `$OWNER`) - must escape inner quotes with `\"`
+- **Single-line** refers to the GraphQL query itself (no newlines), not shell quoting style
+- **Placeholders** like `{OWNER}`, `{REPO}`, `{NUMBER}` are documentation notation - replace with actual values before running
+
 ### 2. Always Use `last: 100` Not `first: ##`
 
 **NEVER use `first: ##` in GraphQL queries.** Always use `last: 100` to ensure you get ALL recent
@@ -198,13 +205,15 @@ git push origin {BRANCH}
 
 ## Placeholder Reference
 
+**NOTE**: Placeholders below use `{CURLY_BRACES}` notation for documentation clarity. These are NOT bash variables and will NOT be expanded by the shell. You must manually replace them with actual values before running commands.
+
 | Placeholder | Description | Example |
 | ----------- | ----------- | ------- |
-| `{OWNER}` | Repository owner | `JacobPEvans` |
-| `{REPO}` | Repository name | `ai-assistant-instructions` |
-| `{NUMBER}` | PR number (integer) | `123` |
-| `{THREAD_ID}` | Thread ID from query | `PRRT_kwDOO1m-OM5gtgeQ` |
-| `{BRANCH}` | Branch name | `fix/my-feature` |
+| `{OWNER}` | Repository owner (replace with actual value) | `JacobPEvans` |
+| `{REPO}` | Repository name (replace with actual value) | `ai-assistant-instructions` |
+| `{NUMBER}` | PR number integer (replace with actual value) | `123` |
+| `{THREAD_ID}` | Thread ID from GraphQL query (replace with actual value) | `PRRT_kwDOO1m-OM5gtgeQ` |
+| `{BRANCH}` | Branch name (replace with actual value) | `fix/my-feature` |
 
 ## Common Errors and Solutions
 
