@@ -240,7 +240,7 @@ Use emoji-based priority markers to clearly communicate feedback urgency:
 
 > **Usage:**
 >
-> **Command Execution**: `/rok-review-pr`
+> **Command Execution**: `/review-pr`
 >
 > **Example Prompts**:
 >
@@ -251,10 +251,10 @@ Use emoji-based priority markers to clearly communicate feedback urgency:
 
 **Workflow Integration**:
 
-- **Strategic context**: `/rok-shape-issues` establishes timebox-driven Issue shaping and problem definition
-- **Implementation context**: `/rok-resolve-issues` provides Issue resolution and PR creation background
-- **Post-review**: Guide authors to use `/rok-resolve-pr-review-thread` for efficient feedback resolution
+- **Strategic context**: `/shape-issues` establishes timebox-driven Issue shaping and problem definition
+- **Implementation context**: `/resolve-issues` provides Issue resolution and PR creation background
+- **Post-review**: Guide authors to use `/resolve-pr-review-thread` for efficient feedback resolution
 
-**Complete Development Lifecycle**: `/rok-shape-issues` -> `/rok-resolve-issues` -> `/rok-review-pr` -> `/rok-resolve-pr-review-thread`
+**Complete Development Lifecycle**: `/shape-issues` -> `/resolve-issues` -> `/review-pr` -> `/resolve-pr-review-thread`
 
 This command ensures thorough, constructive, and educationally valuable PR reviews that strengthen both code quality and team knowledge.

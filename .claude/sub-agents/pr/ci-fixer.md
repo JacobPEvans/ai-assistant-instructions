@@ -335,9 +335,9 @@ Your mission:
 
 This sub-agent can be invoked by:
 
-- `/fix-pr-ci` - Fix CI failures in current repository
-- `/fix-all-pr-ci` - Fix CI in current repo
-- `/pr` - During PR creation workflow if CI fails
+- `/fix-pr-ci` - Fix CI failures on current PR
+- `/fix-pr-ci all` - Fix CI across all PRs in current repo
+- `/manage-pr` - During PR creation workflow if CI fails
 - Custom commands - Any workflow needing CI failure resolution
 
 ## Error Handling

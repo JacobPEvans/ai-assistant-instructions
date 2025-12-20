@@ -471,8 +471,8 @@ Your mission:
 This sub-agent can be invoked by:
 
 - CI Fixer sub-agent - Fix linting failures in CI
-- `/pr` - Lint code before creating PR
-- `/rok-resolve-issues` - Ensure code quality in issue resolution
+- `/manage-pr` - Lint code before creating PR
+- `/resolve-issues` - Ensure code quality in issue resolution
 - Code Generator sub-agent - Validate generated code
 - Pre-commit hooks - Automatic linting before commits
 - Custom workflows - Any scenario requiring code quality checks

@@ -154,7 +154,7 @@ Focus: Resource optimization, cost efficiency, security groups
 
 This sub-agent can be invoked by:
 
-- `/rok-review-pr` - For comprehensive PR reviews
-- `/pr` - During PR creation workflow
+- `/review-pr` - For comprehensive PR reviews
+- `/manage-pr` - During PR creation workflow
 - `/review-code` - For standalone code reviews
 - Custom commands - Any command needing code analysis

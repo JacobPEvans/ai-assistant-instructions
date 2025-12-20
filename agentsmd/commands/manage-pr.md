@@ -1,15 +1,25 @@
 ---
-description: Complete workflow for creating, monitoring, and fixing pull requests until ready to merge
+title: "Manage PR"
+description: "Complete workflow for creating, monitoring, and fixing pull requests until ready to merge"
 model: haiku
-author: JacobPEvans
+type: "command"
+version: "1.0.0"
 allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Bash(markdownlint-cli2:*), Read
+think: false
+author: "JacobPEvans"
 ---
 
-# Task: Pull Request Management
+## PR Management Conductor
+
+> **Purpose**: This command manages YOUR pull requests as the PR AUTHOR - creating, monitoring, fixing, and preparing them for merge. For reviewing OTHER people's PRs, use `/review-pr`.
+
+Comprehensive workflow for managing a pull request from creation through to merge-ready state, including automated CI monitoring, review conversation resolution, and strict quality gates.
+
+## Scope
+
+**SINGLE PR** - This command manages one PR at a time, either specified by argument or determined from the current branch.
 
 <!-- markdownlint-disable-file MD013 -->
-
-Complete workflow for creating, monitoring, and fixing a pull request (PR) until it is ready to merge.
 
 ## Critical Rules
 
@@ -39,7 +49,7 @@ gh pr checks <PR_NUMBER> --watch --interval 5
 gh pr checks <PR_NUMBER> --watch --fail-fast
 ```
 
-## 1. Create the Pull Request
+## Phase 1: Create the Pull Request
 
 **Prerequisites**:
 
@@ -76,7 +86,7 @@ Any other relevant information for reviewers.
 
 **Wait for CI**: `gh pr checks <PR_NUMBER> --watch`
 
-## 2. PR Resolution Loop
+## Phase 2: PR Resolution Loop
 
 Repeatedly check and fix the PR until ALL requirements are met.
 
@@ -119,7 +129,7 @@ Returns an array of review comments with:
 
 ### 2.4. Resolve PR Conversations
 
-> **🚨 STRICT BLOCKER**: ALL conversations must be PHYSICALLY MARKED AS RESOLVED in GitHub before requesting user review. This is not optional. Do NOT return control to the user until every conversation shows `isResolved: true`.
+> **STRICT BLOCKER**: ALL conversations must be PHYSICALLY MARKED AS RESOLVED in GitHub before requesting user review. This is not optional. Do NOT return control to the user until every conversation shows `isResolved: true`.
 
 #### Step 1: Get all review threads
 
@@ -160,7 +170,7 @@ gh api graphql -f query='{
 }' | jq '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)'
 ```
 
-If the above command returns ANY output, there are still unresolved conversations. **DO NOT proceed to Step 3.**
+If the above command returns ANY output, there are still unresolved conversations. **DO NOT proceed to Phase 3.**
 
 **See [pr-review-feedback.md](pr-review-feedback.md) for batch resolution scripts.**
 
@@ -175,7 +185,7 @@ If the above command returns ANY output, there are still unresolved conversation
 
 **Restart Loop**: Return to 2.1.
 
-## 3. Pre-Handoff Verification
+## Phase 3: Pre-Handoff Verification
 
 **Before requesting user review, verify ALL of the following:**
 
@@ -205,9 +215,83 @@ gh pr view <PR_NUMBER> --json mergeable
 
 > "PR #XX is ready for your review. All checks pass, all conversations are resolved, and the PR is mergeable. Please review and merge when ready."
 
-## 4. Merge (User Action)
+## Phase 4: Merge (User Action)
 
 The user performs the merge:
 
 - **Squash merge**: For small, single-concept changes (`gh pr merge --squash`)
 - **Rebase merge**: For larger changes or multiple logical commits (`gh pr merge --rebase`)
+
+## GitHub CLI Mastery
+
+> **Command Patterns:**
+
+### PR Creation & Monitoring
+
+```bash
+# Create PR with description
+gh pr create --title "Title" --body "Description"
+
+# Watch PR checks in real-time (RECOMMENDED after PR creation)
+gh pr checks <PR_NUMBER> --watch
+
+# Get comprehensive PR details
+gh pr view <PR_NUMBER> --json title,body,commits,files,reviews,labels
+
+# Check CI/CD status
+gh pr checks <PR_NUMBER>
+gh pr view <PR_NUMBER> --json statusCheckRollup
+```
+
+### Quality Verification
+
+```bash
+# Run local validation before pushing
+markdownlint-cli2 .
+terraform fmt -check
+terraform validate
+
+# Check for security vulnerabilities
+npm audit --audit-level moderate
+```
+
+### Review Management
+
+```bash
+# List all review comments
+gh pr view <PR_NUMBER> --json reviews,comments
+
+# Get line-level comments via API
+gh api repos/<OWNER>/<REPO>/pulls/<PR_NUMBER>/comments
+
+# Resolve review thread via GraphQL
+gh api graphql -f query='mutation {
+  resolveReviewThread(input: {threadId: "PRRT_xxx"}) {
+    thread { isResolved }
+  }
+}'
+```
+
+## Usage Instructions
+
+> **Usage:**
+>
+> **Command Execution**: `/manage-pr`
+>
+> **Example Prompts**:
+>
+> - "Create a PR for my current branch and monitor until all checks pass"
+> - "Fix all failing checks on PR #42 and resolve review conversations"
+> - "Prepare PR #15 for merge by ensuring all checks pass and conversations are resolved"
+> - "Monitor and fix my PR until it's merge-ready"
+
+**Workflow Integration**:
+
+- **Pre-work context**: `/init-worktree` establishes clean branch for development
+- **Issue context**: `/shape-issues` and `/resolve-issues` provide background for PR creation
+- **Review phase**: Others use `/review-pr` to review your PR
+- **Feedback resolution**: Use `/resolve-pr-review-thread` for efficient review thread resolution
+
+**Complete Development Lifecycle**: `/init-worktree` -> `/resolve-issues` -> `/manage-pr` -> (reviewer uses `/review-pr`) -> `/resolve-pr-review-thread` -> merge
+
+This command ensures PRs are created properly, monitored continuously, and meet all quality gates before requesting human review.

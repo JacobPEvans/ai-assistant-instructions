@@ -1,1 +1,0 @@
-../../agentsmd/commands/rok-manage-pr.md

@@ -1,0 +1,1 @@
+../../agentsmd/commands/shape-issues.md

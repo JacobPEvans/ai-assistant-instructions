@@ -450,9 +450,9 @@ If one comment lists multiple issues:
 
 This sub-agent can be invoked by:
 
-- `/rok-resolve-pr-review-thread` - Single PR thread resolution
-- `/resolve-pr-review-thread-all` - All PRs in current repo
-- `/pr` - During PR workflow if reviews come in
+- `/resolve-pr-review-thread` - Single PR thread resolution
+- `/resolve-pr-review-thread all` - All PRs in current repo
+- `/manage-pr` - During PR workflow if reviews come in
 - Custom commands - Any workflow needing review response
 
 ## Error Handling
@@ -467,6 +467,6 @@ If unable to resolve a thread:
 
 ## Related Documentation
 
-- [PR Review Thread Resolver Command](../../../agentsmd/commands/rok-resolve-pr-review-thread.md)
+- [PR Review Thread Resolver Command](../../../agentsmd/commands/resolve-pr-review-thread.md)
 - [Code Standards](../../../agentsmd/rules/code-standards.md)
 - [Subagent Parallelization](../../../agentsmd/rules/subagent-parallelization.md)
