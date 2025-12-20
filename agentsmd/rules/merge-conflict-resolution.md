@@ -223,6 +223,8 @@ Mark for human review when:
 
 Several commands reference this guide:
 
-- `/sync-prs-with-main` - Merges main into all open PRs
+- `/sync-main` - Merges main into current branch
+- `/sync-main-all` - Merges main into all open PRs
+- `/sync-prs-with-main` - Merges main into all open PRs (superseded by `/sync-main-all`)
 - `/fix-pr-ci` - May need to resolve conflicts when fixing CI
 - `/init-worktree` - Starts from synced main to avoid conflicts

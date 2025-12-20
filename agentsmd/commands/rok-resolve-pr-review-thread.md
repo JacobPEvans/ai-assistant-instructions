@@ -115,7 +115,7 @@ gh api graphql -f query='...' -f owner="OWNER" -f repo="REPO" -F pr=NUMBER
 - Address dependent comments in priority order
 - Commit after each logical group of fixes
 
-### 4. Respond & Resolve
+### 4. Address & Resolve
 
 For each addressed comment:
 

@@ -45,6 +45,8 @@
     "run_shell_command(git gc)",
     "run_shell_command(git prune)",
     "run_shell_command(git fsck)",
+    "run_shell_command(git rev-list)",
+    "run_shell_command(git show-ref)",
     "run_shell_command(gh auth status)",
     "run_shell_command(gh pr list)",
     "run_shell_command(gh pr view)",
@@ -61,6 +63,7 @@
     "run_shell_command(gh issue comment)",
     "run_shell_command(gh repo view)",
     "run_shell_command(gh repo clone)",
+    "run_shell_command(gh repo list)",
     "run_shell_command(gh api)",
     "run_shell_command(gh api graphql)",
     "run_shell_command(gh run list)",
@@ -393,6 +396,7 @@
     "run_shell_command(host)",
     "run_shell_command(netstat)",
     "run_shell_command(lsof -i)",
+    "run_shell_command(pgrep)",
     "run_shell_command(whoami)",
     "run_shell_command(hostname)",
     "run_shell_command(uname)",
@@ -441,6 +445,9 @@
     "run_shell_command(nix fmt)",
     "run_shell_command(statix check)",
     "run_shell_command(deadnix)",
+
+    "run_shell_command(ollama list)",
+    "run_shell_command(shellcheck)",
 
     "web_fetch"
   ]

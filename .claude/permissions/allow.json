@@ -48,6 +48,8 @@
     "Bash(git gc:*)",
     "Bash(git prune:*)",
     "Bash(git fsck:*)",
+    "Bash(git rev-list:*)",
+    "Bash(git show-ref:*)",
 
     "Bash(gh api:*)",
     "Bash(gh api graphql:*)",
@@ -80,6 +82,7 @@
     "Bash(gh gist view:*)",
     "Bash(gh label list:*)",
     "Bash(gh auth status:*)",
+    "Bash(gh repo list:*)",
 
     "Bash(check-jsonschema:*)",
     "Bash(claude doctor:*)",
@@ -171,6 +174,7 @@
     "Bash(host:*)",
     "Bash(netstat:*)",
     "Bash(lsof -i:*)",
+    "Bash(pgrep:*)",
 
     "Bash(python --version:*)",
     "Bash(python3 --version:*)",
@@ -439,6 +443,9 @@
     "Bash(orbctl config get:*)",
     "Bash(orbctl version:*)",
 
+    "Bash(ollama list:*)",
+    "Bash(shellcheck:*)",
+
     "WebFetch(domain:github.com)",
     "WebFetch(domain:githubusercontent.com)",
     "WebFetch(domain:anthropic.com)",
@@ -458,6 +465,10 @@
     "WebFetch(domain:stackoverflow.com)",
     "WebFetch(domain:mozilla.org)",
     "WebFetch(domain:openai.com)",
+    "WebFetch(domain:raycast.com)",
+    "WebFetch(domain:apple.com)",
+    "WebFetch(domain:google.com)",
+    "WebFetch(domain:github.io)",
 
     "Bash(nixfmt-rfc-style --version:*)",
     "Bash(nixfmt:*)",
