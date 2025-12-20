@@ -157,12 +157,12 @@ Repository: {REPO_NAME}
 Steps:
 1. Fetch and create worktree if needed:
    SAFE_BRANCH="$(printf '%s\n' "{BRANCH_NAME}" | tr -c 'A-Za-z0-9._-/' '_')"
-   git fetch origin {BRANCH_NAME}
-   git worktree add "$HOME/git/{REPO_NAME}/$SAFE_BRANCH" {BRANCH_NAME}
+   git fetch origin "{BRANCH_NAME}"
+   git worktree add "$HOME/git/{REPO_NAME}/$SAFE_BRANCH" "{BRANCH_NAME}"
 2. Navigate to worktree: cd "$HOME/git/{REPO_NAME}/$SAFE_BRANCH"
 3. Merge: git merge origin/main --no-edit
 4. If conflicts: resolve intelligently (combine both sides)
-5. Push: git push origin {BRANCH_NAME}
+5. Push: git push origin "{BRANCH_NAME}"
 
 Report: PR#{NUMBER} - CLEAN/CONFLICTS_RESOLVED/FAILED
 ```

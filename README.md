@@ -108,7 +108,6 @@ Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 | `/shape-issues` | Shape raw ideas into actionable GitHub issues |
 | `/resolve-issues` | Analyze and implement GitHub issues |
 | `/review-pr` | Comprehensive PR review with systematic analysis |
-| `/resolve-pr-review-thread` | Resolve PR review feedback efficiently |
 
 ### Delegation & Integration
 
