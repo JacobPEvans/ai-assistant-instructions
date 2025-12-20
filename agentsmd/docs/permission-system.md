@@ -245,7 +245,7 @@ When nix-config builds (via `darwin-rebuild switch`):
    let
      toGeminiFormat = perm:
        if lib.hasPrefix "Bash(" perm
-       then lib.replaceStrings ["Bash(" ":*)" ] ["run_shell_command(" ")"] perm
+       then lib.replaceStrings ["Bash(" ":*)"] ["run_shell_command(" ")"] perm
        else if perm == "Read(**)" then "read_file"
        else if perm == "Glob(**)" then "glob_tool"
        else if perm == "Grep(**)" then "grep_tool"
