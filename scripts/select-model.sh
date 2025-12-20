@@ -79,7 +79,8 @@ analyze_complexity() {
   else
     # Text-based analysis
     text_length=${#input}
-    local lower_input=$(echo "$input" | tr '[:upper:]' '[:lower:]')
+    local lower_input
+    lower_input=$(echo "$input" | tr '[:upper:]' '[:lower:]')
 
     # Check for complexity keywords
     local keyword_count=0
@@ -145,7 +146,7 @@ select_model() {
         ;;
       decision)
         echo "Model: deepseek-r1:70b + qwen3-next:80b"
-        echo "Command: bash -c 'echo \"Model 1 (DeepSeek R1):\" && ollama run deepseek-r1:70b && echo -e \"\\nModel 2 (Qwen):\\\" && ollama run qwen3-next:80b'"
+        printf "Command: bash -c 'echo \"Model 1 (DeepSeek R1):\" && ollama run deepseek-r1:70b && echo -e \"\\\\nModel 2 (Qwen):\\\" && ollama run qwen3-next:80b'\n"
         echo "Rationale: Cost-sensitive critical decision - using best-reasoning + general local models"
         return 0
         ;;
