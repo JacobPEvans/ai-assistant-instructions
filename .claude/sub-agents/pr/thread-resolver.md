@@ -452,7 +452,6 @@ This sub-agent can be invoked by:
 
 - `/rok-resolve-pr-review-thread` - Single PR thread resolution
 - `/resolve-pr-review-thread-all` - All PRs in current repo
-- `/resolve-pr-review-thread-all-repos` - Cross-repo resolution
 - `/pr` - During PR workflow if reviews come in
 - Custom commands - Any workflow needing review response
 

@@ -1,0 +1,163 @@
+# GitHub Issue Labels - Conventional Commits + Size/Priority
+
+# Type labels (conventional commits - replaces bug/enhancement/documentation)
+- name: "type:feature"
+  color: "0075ca"
+  description: "New feature or request (semver: MINOR)"
+
+- name: "type:bug"
+  color: "d73a4a"
+  description: "Something isn't working (semver: PATCH)"
+
+- name: "type:docs"
+  color: "0075ca"
+  description: "Documentation only changes"
+
+- name: "type:refactor"
+  color: "fbca04"
+  description: "Code change that neither fixes a bug nor adds a feature"
+
+- name: "type:perf"
+  color: "ff9800"
+  description: "Performance improvements"
+
+- name: "type:test"
+  color: "00ff00"
+  description: "Adding or correcting tests"
+
+- name: "type:ci"
+  color: "1d76db"
+  description: "CI/CD pipeline changes"
+
+- name: "type:chore"
+  color: "fef2c0"
+  description: "Maintenance tasks, dependencies, tooling"
+
+- name: "type:breaking"
+  color: "b60205"
+  description: "Breaking changes (semver: MAJOR)"
+
+# Size labels (T-shirt sizing for effort/complexity)
+- name: "size:xs"
+  color: "c2e0c6"
+  description: "Extra small - trivial change, <1 hour"
+
+- name: "size:s"
+  color: "a2d9a2"
+  description: "Small - simple change, 1-4 hours"
+
+- name: "size:m"
+  color: "7ec87e"
+  description: "Medium - moderate effort, 1-2 days"
+
+- name: "size:l"
+  color: "5cb85c"
+  description: "Large - significant work, 3-5 days"
+
+- name: "size:xl"
+  color: "3d8b3d"
+  description: "Extra large - major effort, 1+ weeks"
+
+# Workflow labels
+- name: "human-reviewed"
+  color: "00ff7f"
+  description: "Human has reviewed this AI-generated issue"
+
+- name: "ready-for-dev"
+  color: "0099ff"
+  description: "Shaped and ready for /rok-resolve-issues"
+
+- name: "ai-created"
+  color: "fbca04"
+  description: "Issue created by AI agent - requires human review"
+
+# Priority labels (no spaces)
+- name: "priority:critical"
+  color: "b60205"
+  description: "Urgent - requires immediate attention"
+
+- name: "priority:high"
+  color: "d93f0b"
+  description: "High priority - should be addressed soon"
+
+- name: "priority:medium"
+  color: "fbca04"
+  description: "Medium priority - normal workflow"
+
+- name: "priority:low"
+  color: "0e8a16"
+  description: "Low priority - address when time permits"
+
+# Other labels
+- name: "question"
+  color: "d876e3"
+  description: "Further information is requested"
+
+- name: "duplicate"
+  color: "cfd3d7"
+  description: "This issue or pull request already exists"
+
+- name: "wontfix"
+  color: "ffffff"
+  description: "This will not be worked on"
+
+- name: "invalid"
+  color: "e4e669"
+  description: "This doesn't seem right"
+
+- name: "good-first-issue"
+  color: "7057ff"
+  description: "Good for newcomers"
+
+- name: "help-wanted"
+  color: "008672"
+  description: "Extra attention is needed"
+
+# Legacy labels (DEPRECATED - keep for migration)
+- name: "bug"
+  color: "d73a4a"
+  description: "DEPRECATED: Use 'type:bug' instead"
+
+- name: "enhancement"
+  color: "a2eeef"
+  description: "DEPRECATED: Use 'type:feature' instead"
+
+- name: "documentation"
+  color: "0075ca"
+  description: "DEPRECATED: Use 'type:docs' instead"
+
+- name: "priority: critical"
+  color: "b60205"
+  description: "DEPRECATED: Use 'priority:critical' instead"
+
+- name: "priority: high"
+  color: "d93f0b"
+  description: "DEPRECATED: Use 'priority:high' instead"
+
+- name: "priority: medium"
+  color: "fbca04"
+  description: "DEPRECATED: Use 'priority:medium' instead"
+
+- name: "priority: low"
+  color: "0e8a16"
+  description: "DEPRECATED: Use 'priority:low' instead"
+
+- name: "good first issue"
+  color: "7057ff"
+  description: "DEPRECATED: Use 'good-first-issue' instead"
+
+- name: "help wanted"
+  color: "008672"
+  description: "DEPRECATED: Use 'help-wanted' instead"
+
+- name: "timebox:small-batch"
+  color: "00ff00"
+  description: "DEPRECATED: Use 'size:s' or 'size:m' instead"
+
+- name: "timebox:big-batch"
+  color: "ff9900"
+  description: "DEPRECATED: Use 'size:l' or 'size:xl' instead"
+
+- name: "timebox:spike"
+  color: "9933ff"
+  description: "DEPRECATED: Use 'size:xs' for research spikes"
