@@ -62,14 +62,30 @@ gh pr list --state open --json number,headRefName,title
 
 Save this list. You will process each PR.
 
-### Step 4: Create Worktrees for Each PR
+### Step 4: Process PRs in Parallel (Recommended)
 
-For EACH open PR, create a worktree if one doesn't exist:
+**IMPORTANT**: Use parallel execution to process all PRs simultaneously for maximum efficiency.
+
+Launch one Task subagent per PR (maximum 5 concurrent to prevent resource exhaustion):
 
 ```bash
-# For each PR branch
-BRANCH_NAME=<branch-from-step-3>
-PR_NUMBER=<number-from-step-3>
+# Use the Task tool with multiple invocations in a single message
+# Each subagent processes one PR following Steps 4.1-4.6 below
+```
+
+Each subagent receives:
+
+- PR number
+- Branch name
+- Repository name
+
+Each subagent executes Steps 4.1-4.6 independently:
+
+### Step 4.1: Create Worktree (If Needed)
+
+```bash
+BRANCH_NAME=<assigned-branch>
+PR_NUMBER=<assigned-pr-number>
 
 # Fetch the branch
 git fetch origin $BRANCH_NAME
@@ -83,24 +99,18 @@ else
 fi
 ```
 
-### Step 5: Merge Main into Each PR Branch
-
-For EACH PR, follow these sub-steps:
-
-#### 5.1: Navigate to the PR's Worktree
-
 ```bash
 cd ~/git/$REPO_NAME/$BRANCH_NAME
 ```
 
-#### 5.2: Verify Correct Branch
+Verify correct branch:
 
 ```bash
 git branch --show-current
 # Must match the PR's branch name
 ```
 
-#### 5.3: Attempt the Merge
+### Step 4.3: Attempt the Merge
 
 ```bash
 git merge origin/main --no-edit
@@ -108,19 +118,19 @@ git merge origin/main --no-edit
 
 **Three possible outcomes:**
 
-1. **"Already up to date"**: No changes needed. Record as CLEAN. Go to next PR.
-2. **Clean merge (no conflicts)**: Go to Step 5.5.
-3. **Merge conflict**: Go to Step 5.4.
+1. **"Already up to date"**: No changes needed. Record as CLEAN. Done.
+2. **Clean merge (no conflicts)**: Go to Step 4.5.
+3. **Merge conflict**: Go to Step 4.4.
 
-#### 5.4: Resolve Conflicts (If Any)
+### Step 4.4: Resolve Conflicts (If Any)
 
-**5.4.1: List conflicted files:**
+List conflicted files:
 
 ```bash
 git diff --name-only --diff-filter=U
 ```
 
-**5.4.2: For EACH conflicted file, resolve it:**
+For each conflicted file, resolve it:
 
 1. Read the file to see conflict markers:
 
@@ -152,28 +162,37 @@ git diff --name-only --diff-filter=U
    git add <filename>
    ```
 
-**5.4.3: After ALL conflicts resolved:**
+After all conflicts resolved:
 
 ```bash
 git commit --no-edit
 ```
 
-Record which files were resolved for the final report.
+Record which files were resolved for the subagent's report.
 
-#### 5.5: Push the Updated Branch
+### Step 4.5: Push the Updated Branch
 
 ```bash
 git push origin $BRANCH_NAME
 ```
 
-#### 5.6: Record Result for This PR
+### Step 4.6: Report Result
 
-Track the outcome:
+Each subagent returns:
 
 - PR number
 - Branch name
 - Status: CLEAN / CONFLICTS_RESOLVED / FAILED
 - Files with conflicts (if any)
+
+### Step 5: Wait for All Subagents
+
+Use TaskOutput to wait for all subagents to complete:
+
+```bash
+# For each launched subagent, use TaskOutput with the task ID
+# Collect all results for final report compilation
+```
 
 ### Step 6: Clean Up Worktrees (Optional)
 
@@ -257,15 +276,23 @@ If a PR fails completely:
 - Continue with other PRs
 - Do NOT let one failure block everything
 
-## Parallel Execution (Advanced)
+## Sequential Execution (Fallback)
 
-For faster processing with subagents:
+Use sequential execution ONLY when parallel execution is not possible:
 
-- Launch ONE subagent per PR using the Task tool
-- Maximum 5 subagents at once to prevent resource exhaustion
-- Each subagent follows Steps 5.1-5.6 for its assigned PR
-- Orchestrator waits for all to complete with TaskOutput
-- Orchestrator compiles final report
+**When to use sequential:**
+
+- Debugging a specific PR merge issue
+- Limited system resources
+- Explicit user request
+
+**Sequential approach:**
+
+- Process PRs one at a time following Steps 4.1-4.6
+- Complete each PR fully before moving to the next
+- Slower but uses less resources
+
+**Note**: Parallel execution (Step 4) is the recommended default approach per the repository style guide.
 
 ## Example Usage
 

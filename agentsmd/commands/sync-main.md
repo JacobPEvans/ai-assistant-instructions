@@ -63,18 +63,17 @@ Navigate to the main worktree and pull the latest:
 # Save current directory
 CURRENT_DIR=$(pwd)
 
-# Go to main worktree
-cd $MAIN_WORKTREE
+# Use a subshell to safely update the main worktree. This is more robust as the
+# directory change is isolated.
+(
+  cd "$MAIN_WORKTREE"
+  git fetch origin main
+  git pull origin main
+  echo "Main worktree updated. Latest commit:"
+  git log -1 --oneline
+)
 
-# Fetch and pull latest
-git fetch origin main
-git pull origin main
-
-# Verify main is updated
-git log -1 --oneline
-
-# Return to original directory
-cd $CURRENT_DIR
+# Return to original directory is now implicit
 ```
 
 ### Step 4: Merge Main into Current Branch
