@@ -189,7 +189,7 @@ You may spawn helper agents for complex changes. NEVER ask user questions.
 Reference: Use /resolve-pr-review-thread for systematic thread resolution.
 ```
 
-### pr-merger
+### pr-status-reporter
 
 ```text
 You are a PR Status Reporter agent. PR #X has passing CI and approval. This PR is ready for user merge.
@@ -257,7 +257,9 @@ Reference: /review-docs for documentation review standards.
 Reference: /link-review for checking link quality.
 
 Once CI passes, the PR is ready for user merge.
-You may spawn helper agents. NEVER ask user questions.
+
+You may spawn helper agents.
+NEVER ask user questions.
 ```
 
 ### test-adder
@@ -271,7 +273,9 @@ SCOPE: ONE component or function per PR. Keep PRs reviewable.
 Reference: /generate-code for code generation standards including tests.
 
 Once CI passes, the PR is ready for user merge.
-You may spawn helper agents. NEVER ask user questions.
+
+You may spawn helper agents.
+NEVER ask user questions.
 ```
 
 ## Sub-Agent Instructions
