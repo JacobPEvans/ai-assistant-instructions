@@ -1,16 +1,34 @@
-name: Documentation Sync
+name: Documentation Sync (Reusable)
 
 on:
-  pull_request:
-    types: [opened]
+  workflow_call:
+    inputs:
+      max-turns:
+        description: 'Maximum turns for Claude Code'
+        required: false
+        type: number
+        default: 5
+      timeout-minutes:
+        description: 'Timeout for the doc sync action'
+        required: false
+        type: number
+        default: 5
+      planning-file:
+        description: 'Path to planning file to check'
+        required: false
+        type: string
+        default: 'PLANNING.md'
+    secrets:
+      CLAUDE_CODE_OAUTH_TOKEN:
+        required: true
+      GITHUB_TOKEN:
+        required: true
 
 jobs:
   doc-sync:
     name: "Sync Documentation"
-    # DISABLED: Workflow is not production ready, and this is a waste of Claude tokens.
-    if: false && (github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: ${{ inputs.timeout-minutes }}
     permissions:
       contents: read
       pull-requests: write
@@ -27,18 +45,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-
           claude_args: |
-            --max-turns 5
+            --max-turns ${{ inputs.max-turns }}
             --allowedTools "Read,Bash(gh pr comment:*)"
-
           prompt: |
             REPO: ${{ github.repository }}
             PR NUMBER: ${{ github.event.pull_request.number }}
 
             Quick documentation check:
-            1. Read PLANNING.md - note if PR title matches any planned tasks
-            2. If match found, post comment: "Note: This PR may complete task X in PLANNING.md"
+            1. Read ${{ inputs.planning-file }} - note if PR title matches any planned tasks
+            2. If match found, post comment: "Note: This PR may complete task X in ${{ inputs.planning-file }}"
             3. If no match, post: "Docs look good, no conflicts found."
 
             Keep it simple - just check and comment. No edits needed.

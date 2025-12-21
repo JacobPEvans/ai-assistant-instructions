@@ -1,16 +1,29 @@
-name: Issue Triage
+name: Issue Triage (Reusable)
 
 on:
-  issues:
-    types: [opened]
+  workflow_call:
+    inputs:
+      max-turns:
+        description: 'Maximum turns for Claude Code'
+        required: false
+        type: number
+        default: 3
+      timeout-minutes:
+        description: 'Timeout for the triage action'
+        required: false
+        type: number
+        default: 5
+    secrets:
+      CLAUDE_CODE_OAUTH_TOKEN:
+        required: true
+      GITHUB_TOKEN:
+        required: true
 
 jobs:
   triage:
     name: "Triage New Issue"
-    # DISABLED: Workflow is burning tokens without providing value
-    if: false
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: ${{ inputs.timeout-minutes }}
     permissions:
       issues: write
       id-token: write
@@ -24,11 +37,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-
           claude_args: |
-            --max-turns 3
+            --max-turns ${{ inputs.max-turns }}
             --allowedTools "Bash(gh issue:*),Bash(gh search:*)"
-
           prompt: |
             REPO: ${{ github.repository }}
             ISSUE NUMBER: ${{ github.event.issue.number }}

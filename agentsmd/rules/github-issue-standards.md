@@ -215,36 +215,10 @@ These are distinct from acceptance criteria - they describe HOW to verify:
 
 When implementing work for a GitHub issue, bidirectional linking is required.
 
-### Branch Naming
+See [Issue Linking Guidelines](../../docs/guidelines/issue-linking.md) for complete documentation on:
 
-Include the issue number in your branch name:
-
-- Feature: `feature/issue-{number}-{brief-description}`
-- Bug fix: `fix/issue-{number}-{brief-description}`
-- Docs: `docs/issue-{number}-{brief-description}`
-
-### PR Description
-
-Always include the issue reference in your PR description:
-
-- Use `Closes #<issue-number>` or `Fixes #<issue-number>` for automatic closure
-- Fill in the "Related Issue" section of the PR template
-
-### Issue Comment (Bidirectional Link)
-
-After creating the PR, comment on the issue to create visibility:
-
-```bash
-gh issue comment {issue-number} --body "Implementation PR: #<pr-number>"
-```
-
-This allows stakeholders watching the issue to see progress immediately.
-
-### Workflow Integration
-
-| When | Action |
-| ---- | ------ |
-| Creating branch | Include issue number in branch name |
-| Creating PR | Add `Closes #<issue-number>` to description |
-| After PR created | Comment on issue with PR link |
-| PR merged | Issue auto-closes via GitHub |
+- Branch naming conventions
+- PR description keywords
+- Commit message format
+- Bidirectional linking with issue comments
+- Complete workflow and examples
