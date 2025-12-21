@@ -1,0 +1,71 @@
+name: Sync Command Symlinks
+
+on:
+  push:
+    branches: [main]
+    paths: ['agentsmd/commands/**']
+  workflow_dispatch:
+
+jobs:
+  sync-symlinks:
+    name: "Sync Command Symlinks"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Sync symlinks
+        run: |
+          #!/bin/bash
+          set -e
+
+          CHANGED=0
+
+          # Create .claude/commands if it doesn't exist
+          mkdir -p .claude/commands
+
+          # Scan agentsmd/commands for .md files and create symlinks
+          for file in agentsmd/commands/*.md; do
+            basename=$(basename "$file")
+            symlink_path=".claude/commands/$basename"
+            target="../../agentsmd/commands/$basename"
+
+            # Skip if symlink already exists
+            if [ -L "$symlink_path" ]; then
+              continue
+            fi
+
+            # Skip if regular file exists
+            if [ -f "$symlink_path" ] && [ ! -L "$symlink_path" ]; then
+              continue
+            fi
+
+            # Create the symlink
+            ln -s "$target" "$symlink_path"
+            CHANGED=1
+            echo "Created symlink: $symlink_path -> $target"
+          done
+
+          if [ $CHANGED -eq 1 ]; then
+            echo "New symlinks created"
+            exit 0
+          else
+            echo "No new symlinks needed"
+            exit 0
+          fi
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if [ -n "$(git status --porcelain .claude/commands)" ]; then
+            git add .claude/commands
+            git commit -m "ci: auto-sync command symlinks"
+            git push
+          fi

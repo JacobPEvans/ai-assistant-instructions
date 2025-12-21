@@ -1,1 +1,0 @@
-../../agentsmd/commands/sync-prs-with-main.md
