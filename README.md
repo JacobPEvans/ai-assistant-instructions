@@ -100,7 +100,7 @@ Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 | `/fix-pr-ci` | Fix CI failures (use `all` for all PRs) |
 | `/resolve-pr-review-thread` | Resolve review threads (use `all` for all PRs) |
 | `/pr-review-feedback` | GraphQL patterns for PR thread resolution |
-| `/ready-player-one` | Orchestrate PR finalization across all owned repositories |
+| `/ready-player-one` | Orchestrate PR finalization across all repositories and report merge-readiness status |
 
 ### Issue & Architecture Management
 
