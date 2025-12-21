@@ -1,0 +1,6 @@
+{
+  "commands": [
+    "python -m",
+    "python3 -m"
+  ]
+}

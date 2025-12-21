@@ -2,8 +2,6 @@
   "commands": [
     "python --version",
     "python3 --version",
-    "python -m",
-    "python3 -m",
     "pip list",
     "pip show",
     "pip freeze",

@@ -24,6 +24,9 @@ permissions/
 │   ├── network.json
 │   ├── shell.json
 │   └── git.json
+├── ask/            # Commands that require explicit user confirmation
+│   ├── python.json
+│   └── gh.json
 └── domains/        # Allowed domains for web fetching
     └── webfetch.json
 ```

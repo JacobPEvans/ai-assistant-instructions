@@ -6,7 +6,6 @@
     "gh pr view",
     "gh pr create",
     "gh pr checkout",
-    "gh pr merge",
     "gh pr diff",
     "gh pr comment",
     "gh pr checks",
