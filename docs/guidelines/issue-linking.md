@@ -10,9 +10,9 @@ When implementing work for a GitHub issue, bidirectional linking is required to 
 
 Include the issue number in your branch name:
 
-- **Feature**: `feature/issue-{number}-{brief-description}`
-- **Bug fix**: `fix/issue-{number}-{brief-description}`
-- **Docs**: `docs/issue-{number}-{brief-description}`
+- **Feature**: `feature/issue-<number>-<brief-description>`
+- **Bug fix**: `fix/issue-<number>-<brief-description>`
+- **Docs**: `docs/issue-<number>-<brief-description>`
 
 **Examples**:
 
@@ -60,7 +60,7 @@ Use conventional commit prefixes:
 After creating the PR, comment on the issue to create visibility:
 
 ```bash
-gh issue comment {issue-number} --body "Implementation PR: #{pr-number}"
+gh issue comment <issue-number> --body "Implementation PR: #<pr-number>"
 ```
 
 **Why this matters**: This allows stakeholders watching the issue to see progress immediately without navigating to the PR list.
