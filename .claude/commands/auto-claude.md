@@ -106,7 +106,7 @@ Execute this loop continuously until budget exhaustion forces termination:
       Or use: gh api -X PUT repos/{owner}/{repo}/pulls/{num}/update-branch
    2. Failing CI on open PRs (blocks all progress)
    3. PR review comments awaiting response (use /resolve-pr-review-thread)
-   4. PRs ready to merge (CI passing, approved) - enable auto-merge
+   4. PRs ready to merge (CI passing, approved) - ready for user merge
    ─── BELOW THIS LINE: BLOCKED IN PR-FOCUS MODE ───
    5. Issues labeled: bug, critical (EXCLUDE ai-created label)
    6. Issues labeled: good-first-issue (EXCLUDE ai-created label)
@@ -127,7 +127,6 @@ Execute this loop continuously until budget exhaustion forces termination:
        - Permission to spawn helper sub-agents if needed
        - Required output format for tracking
        - Reminder: NEVER ask user questions
-       - Reminder: Enable auto-merge after CI passes
 
 4. AWAIT
    Wait for sub-agent(s) to complete.
@@ -175,8 +174,7 @@ NEVER ask user questions. Report merge conflicts if unresolvable.
 ```text
 You are a CI Fixer agent. Analyze the failing CI check on PR #X, identify
 the root cause, implement a fix, and push. You may spawn helper agents for
-complex fixes. NEVER ask user questions. After CI passes and PR is approved,
-enable auto-merge: gh pr merge #X --auto --squash. Report results when complete.
+complex fixes. NEVER ask user questions. Report results when complete.
 
 Reference: /manage-pr command handles full PR lifecycle including CI monitoring.
 ```
@@ -187,8 +185,6 @@ Reference: /manage-pr command handles full PR lifecycle including CI monitoring.
 You are a PR Thread Resolver agent. Resolve the review threads on PR #X. For each
 thread: understand the feedback, implement the requested change, and push.
 You may spawn helper agents for complex changes. NEVER ask user questions.
-After all threads resolved and CI passes, enable auto-merge:
-gh pr merge #X --auto --squash
 
 Reference: Use /resolve-pr-review-thread for systematic thread resolution.
 ```
@@ -196,11 +192,10 @@ Reference: Use /resolve-pr-review-thread for systematic thread resolution.
 ### pr-merger
 
 ```text
-You are a PR Merger agent. PR #X has passing CI and approval. Enable auto-merge:
-gh pr merge #X --auto --squash
-If auto-merge fails (e.g., branch protection), report the blocker. NEVER force merge.
+You are a PR Merger agent. PR #X has passing CI and approval. This PR is ready for user merge.
+Report the PR details and merge-ready status. NEVER force merge.
 
-Reference: /git-refresh can merge eligible PRs and sync repos.
+Reference: /git-refresh can sync repos and check PR merge status.
 ```
 
 ### issue-resolver
@@ -219,7 +214,7 @@ WORKFLOW:
 3. Make the minimal fix needed - no scope creep
 4. Write tests if applicable
 5. Create a PR with clear description
-6. Enable auto-merge: gh pr merge --auto --squash
+6. Once CI passes, the PR is ready for review and merge
 
 Reference: /resolve-issues for comprehensive issue resolution workflow.
 You may spawn helper agents. NEVER ask user questions.
@@ -261,8 +256,7 @@ SCOPE: ONE documentation fix per PR. Keep changes focused.
 Reference: /review-docs for documentation review standards.
 Reference: /link-review for checking link quality.
 
-After creating PR, enable auto-merge: gh pr merge --auto --squash
-You may spawn helper agents. NEVER ask user questions.
+Once PR CI passes, the documentation update is ready for review and merge. You may spawn helper agents. NEVER ask user questions.
 ```
 
 ### test-adder
@@ -275,8 +269,7 @@ SCOPE: ONE component or function per PR. Keep PRs reviewable.
 
 Reference: /generate-code for code generation standards including tests.
 
-After creating PR, enable auto-merge: gh pr merge --auto --squash
-You may spawn helper agents. NEVER ask user questions.
+Once PR CI passes, the test coverage is ready for review and merge. You may spawn helper agents. NEVER ask user questions.
 ```
 
 ## Sub-Agent Instructions
@@ -294,7 +287,7 @@ When dispatching any sub-agent, always include:
 
 4. **AUTONOMY**: "You are running unattended. NEVER ask user questions. If truly blocked, report the blocker and return so the orchestrator can move on."
 
-5. **AUTO-MERGE**: "After CI passes and PR is approved, enable auto-merge: gh pr merge --auto --squash"
+5. **MERGE-READY**: "Once CI passes and PR is approved, the PR is ready for user merge. Do not enable auto-merge - this is reserved for user action only."
 
 6. **ISSUE LABELS**: When creating issues, ALWAYS add 'ai-created' label:
 
@@ -312,7 +305,7 @@ You must NEVER:
 - Return early ("I've completed my tasks" or "There's nothing left to do")
 - Force-push to any branch
 - Delete branches
-- Force merge PRs - only enable auto-merge (gh pr merge --auto)
+- Force merge PRs or enable auto-merge (merge is reserved for user action only)
 - Make direct code changes (always delegate to sub-agents)
 - Claim budget exhaustion before the API actually terminates you
 - Work on issues that have the 'ai-created' label (human must review first)
@@ -348,7 +341,7 @@ You must NEVER:
 - Always create feature branches for changes
 - Never force-push (use regular push only)
 - Never delete remote branches
-- Never force merge PRs - only enable auto-merge (gh pr merge --auto --squash)
+- Never force merge PRs or enable auto-merge (merge is reserved for user action only)
 - Never modify .env, secrets, or credential files
 - If unsure about a change's safety, skip it and move on
 - Never create PRs when open PR count >= 10 (clear backlog first)

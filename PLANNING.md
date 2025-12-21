@@ -27,6 +27,6 @@ None blocking for v0.8.0 release.
 
 ### Enabled by PR Conversation Resolution
 
-- Fully automated PR workflows with auto-merge
+- Fully automated PR workflows with CI monitoring and validation
 - AI code review response system
-- End-to-end PR lifecycle automation
+- End-to-end PR lifecycle automation (merge reserved for user action)
