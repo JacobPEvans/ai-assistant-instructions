@@ -125,7 +125,6 @@ get_merged_remote_branches() {
 # Main cleanup logic
 main() {
   local branches_to_delete=()
-  local branches_preserved=()
   local branches_with_open_prs=()
 
   echo "Analyzing branches for safe deletion..."
