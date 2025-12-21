@@ -1,0 +1,55 @@
+name: Issue Labeler
+
+on:
+  issues:
+    types: [opened, edited, reopened]
+
+jobs:
+  resolve:
+    name: Analyze Issue
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      issues: write
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Analyze issue with Claude
+        id: analyze
+        uses: anthropics/claude-code-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: |
+            --max-turns 2
+            --allowedTools "Bash(gh issue:*)"
+
+          prompt: |
+            Analyze this GitHub issue and apply appropriate labels directly.
+
+            ISSUE #: ${ISSUE_NUMBER}
+            TITLE: ${ISSUE_TITLE}
+            BODY: ${ISSUE_BODY}
+            AUTHOR: ${ISSUE_AUTHOR}
+
+            Determine the issue type and priority.
+            Available type labels: type:feature, type:bug, type:docs, type:question
+            Available priority labels: priority:critical, priority:high, priority:medium, priority:low
+
+            Apply labels using: gh issue edit ${ISSUE_NUMBER} --add-label "label1" --add-label "label2"
+
+      - name: Verify completion
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          echo "Issue #$ISSUE_NUMBER has been analyzed and labeled by Claude."
