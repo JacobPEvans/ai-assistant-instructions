@@ -10,6 +10,7 @@ jobs:
   spellcheck:
     name: "Check Spelling"
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v6
 
