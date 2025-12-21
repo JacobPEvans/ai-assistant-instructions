@@ -1,0 +1,27 @@
+{
+  "domains": [
+    "github.com",
+    "githubusercontent.com",
+    "anthropic.com",
+    "nixos.org",
+    "hashicorp.com",
+    "terraform.io",
+    "geminicli.com",
+    "google.dev",
+    "npmjs.com",
+    "docker.com",
+    "kubernetes.io",
+    "python.org",
+    "pypi.org",
+    "readthedocs.io",
+    "rust-lang.org",
+    "typescriptlang.org",
+    "stackoverflow.com",
+    "mozilla.org",
+    "openai.com",
+    "raycast.com",
+    "apple.com",
+    "google.com",
+    "github.io"
+  ]
+}

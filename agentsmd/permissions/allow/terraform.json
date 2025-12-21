@@ -1,0 +1,27 @@
+{
+  "commands": [
+    "terraform --version",
+    "terraform version",
+    "terraform init",
+    "terraform validate",
+    "terraform fmt",
+    "terraform plan",
+    "terraform show",
+    "terraform state list",
+    "terraform state show",
+    "terraform providers",
+    "terraform output",
+    "terraform graph",
+    "terragrunt --version",
+    "terragrunt version",
+    "terragrunt init",
+    "terragrunt validate",
+    "terragrunt plan",
+    "terragrunt show",
+    "terragrunt state list",
+    "terragrunt state show",
+    "terragrunt output",
+    "terragrunt graph-dependencies",
+    "terragrunt hclfmt"
+  ]
+}
