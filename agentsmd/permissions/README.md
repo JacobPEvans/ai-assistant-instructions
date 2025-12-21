@@ -24,7 +24,6 @@ permissions/
 │   ├── network.json
 │   ├── shell.json
 │   └── git.json
-├── ask/            # Commands that require explicit user confirmation
 └── domains/        # Allowed domains for web fetching
     └── webfetch.json
 ```
@@ -40,6 +39,15 @@ permissions/
     "command-name arg",
     ...
   ]
+}
+```
+
+**Note**: The `dangerous.json` file in `deny/` may also include a `patterns` field for file path patterns (e.g., for Claude's Read tool deny list):
+
+```json
+{
+  "commands": ["rm -rf", "sudo rm", ...],
+  "patterns": ["~/.ssh/*", "~/.aws/*", ...]
 }
 ```
 
