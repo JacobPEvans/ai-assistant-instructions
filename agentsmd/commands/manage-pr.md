@@ -59,10 +59,7 @@ gh pr checks <PR_NUMBER> --watch --fail-fast
    - Any project-specific linters or formatters
 2. **Verify Working Directory is Clean**: Run `git status` - output should show `working tree clean`.
 3. **Push Local Branch to Remote**: `git push -u origin $(git branch --show-current)`
-4. **Link to Related Issue**: If this PR implements a GitHub issue:
-   - Ensure branch name includes issue number (e.g., `feature/issue-123-description`)
-   - Add `Closes #<issue-number>` to PR description
-   - After PR creation, comment on the issue: `gh issue comment {issue-number} --body "Implementation PR: #<pr-number>"`
+4. **Link to Related Issue**: If this PR implements a GitHub issue, follow the [Issue Linking Guidelines](../../docs/guidelines/issue-linking.md) for branch naming, PR description keywords, and bidirectional linking.
 
 **PR Description Template:**
 

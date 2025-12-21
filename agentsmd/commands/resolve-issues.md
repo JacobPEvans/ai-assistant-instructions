@@ -100,14 +100,16 @@ npm run lint || bun run lint
 **7.** **Commit & PR Creation**
 
 - Create meaningful commit messages following conventional patterns
-- Use `Closes #issue-number` for automatic issue closure
+- Follow [Issue Linking Guidelines](../../docs/guidelines/issue-linking.md) for:
+  - Automatic issue closure with `Closes #issue-number`
+  - Branch naming conventions
+  - Bidirectional linking
 - Write comprehensive PR descriptions including:
   - Executive summary of changes
   - Complete list of issues addressed
   - Testing performed and results
   - Breaking changes (if any)
   - Future considerations and next steps
-- Link all related issues with proper references
 
 **8.** **Final Quality Validation**
 
