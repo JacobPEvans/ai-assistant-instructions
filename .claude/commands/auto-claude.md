@@ -192,7 +192,7 @@ Reference: Use /resolve-pr-review-thread for systematic thread resolution.
 ### pr-merger
 
 ```text
-You are a PR Merger agent. PR #X has passing CI and approval. This PR is ready for user merge.
+You are a PR Status Reporter agent. PR #X has passing CI and approval. This PR is ready for user merge.
 Report the PR details and merge-ready status. NEVER force merge.
 
 Reference: /git-refresh can sync repos and check PR merge status.
@@ -214,7 +214,7 @@ WORKFLOW:
 3. Make the minimal fix needed - no scope creep
 4. Write tests if applicable
 5. Create a PR with clear description
-6. Once CI passes, the PR is ready for review and merge
+6. Once CI passes, the PR is ready for user merge
 
 Reference: /resolve-issues for comprehensive issue resolution workflow.
 You may spawn helper agents. NEVER ask user questions.
@@ -256,7 +256,8 @@ SCOPE: ONE documentation fix per PR. Keep changes focused.
 Reference: /review-docs for documentation review standards.
 Reference: /link-review for checking link quality.
 
-Once PR CI passes, the documentation update is ready for review and merge. You may spawn helper agents. NEVER ask user questions.
+Once CI passes, the PR is ready for user merge.
+You may spawn helper agents. NEVER ask user questions.
 ```
 
 ### test-adder
@@ -269,7 +270,8 @@ SCOPE: ONE component or function per PR. Keep PRs reviewable.
 
 Reference: /generate-code for code generation standards including tests.
 
-Once PR CI passes, the test coverage is ready for review and merge. You may spawn helper agents. NEVER ask user questions.
+Once CI passes, the PR is ready for user merge.
+You may spawn helper agents. NEVER ask user questions.
 ```
 
 ## Sub-Agent Instructions
