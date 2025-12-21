@@ -44,3 +44,12 @@ Before writing any code, ensure you:
 - **Pin dependencies appropriately**: For deployed applications, use a fully pinned requirements/lock file.
   For libraries, specify compatible version ranges in pyproject.toml instead of pinning exact versions.
 - **Run formatters and linters**: Use tools like `black`, `flake8`, and `mypy` before committing
+
+### Bash / Shell
+
+- **NEVER use `for` loops**: For loops break permission matching and force sequential execution. This is a hard ban.
+  - Instead: Run multiple simple commands in parallel
+  - Instead: Use tool-native batch operations (e.g., `git add file1 file2 file3`)
+  - Instead: Use find with -exec (when appropriate)
+- **No `git -C <path>`**: This breaks permission patterns. Run git commands from the correct directory.
+- **Prefer parallel execution**: Multiple independent commands should run in parallel, not chained with `&&`
