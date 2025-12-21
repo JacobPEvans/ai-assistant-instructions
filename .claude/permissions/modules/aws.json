@@ -1,0 +1,17 @@
+{
+  "permissions": [
+    "Bash(aws --version:*)",
+    "Bash(aws-vault --version:*)",
+    "Bash(aws-vault list:*)",
+    "Bash(aws sts get-caller-identity:*)",
+    "Bash(aws s3 ls:*)",
+    "Bash(aws ec2 describe-instances:*)",
+    "Bash(aws lambda list-functions:*)",
+    "Bash(aws cloudformation list-stacks:*)",
+    "Bash(aws cloudformation describe-stacks:*)",
+    "Bash(aws logs tail:*)",
+    "Bash(aws dynamodb list-tables:*)",
+    "Bash(aws dynamodb scan:*)",
+    "Bash(aws dynamodb describe-table:*)"
+  ]
+}

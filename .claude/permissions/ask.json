@@ -1,0 +1,103 @@
+{
+  "permissions": [
+    "Bash(osascript:*)",
+    "Bash(osascript -e:*)",
+    "Bash(system_profiler:*)",
+    "Bash(log show:*)",
+    "Bash(defaults read:*)",
+
+    "Bash(git merge:*)",
+    "Bash(git reset:*)",
+    "Bash(git restore:*)",
+    "Bash(git rm:*)",
+    "Bash(git cherry-pick:*)",
+    "Bash(git worktree remove:*)",
+    "Bash(gpg:*)",
+    "Bash(git gc:*)",
+    "Bash(git prune:*)",
+
+    "Bash(chown:*)",
+    "Bash(chmod:*)",
+    "Bash(rm:*)",
+    "Bash(rmdir:*)",
+    "Bash(cp:*)",
+    "Bash(mv:*)",
+    "Bash(sed:*)",
+    "Bash(awk:*)",
+
+    "Bash(docker exec:*)",
+    "Bash(docker run:*)",
+    "Bash(docker context create:*)",
+    "Bash(docker context rm:*)",
+    "Bash(docker context update:*)",
+    "Bash(docker context use:*)",
+    "Bash(docker network connect:*)",
+    "Bash(docker network create:*)",
+    "Bash(docker network disconnect:*)",
+    "Bash(docker network prune:*)",
+    "Bash(docker network rm:*)",
+    "Bash(docker rm:*)",
+    "Bash(docker system prune:*)",
+    "Bash(docker volume create:*)",
+    "Bash(docker volume prune:*)",
+    "Bash(docker volume rm:*)",
+
+    "Bash(kubectl apply:*)",
+    "Bash(kubectl create:*)",
+    "Bash(kubectl delete:*)",
+    "Bash(kubectl set:*)",
+    "Bash(kubectl patch:*)",
+
+    "Bash(helm install:*)",
+    "Bash(helm upgrade:*)",
+    "Bash(helm uninstall:*)",
+
+    "Bash(aws s3 cp:*)",
+    "Bash(aws s3 sync:*)",
+    "Bash(aws s3 rm:*)",
+    "Bash(aws ec2 run-instances:*)",
+    "Bash(aws ec2 terminate-instances:*)",
+    "Bash(aws lambda invoke:*)",
+    "Bash(aws cloudformation delete-stack:*)",
+
+    "Bash(npx:*)",
+    "Bash(sqlite3:*)",
+    "Bash(mongosh:*)",
+
+    "Bash(pip install:*)",
+    "Bash(pip install --user:*)",
+    "Bash(pip3 install:*)",
+    "Bash(npm install:*)",
+    "Bash(npm ci:*)",
+    "Bash(yarn install:*)",
+    "Bash(yarn add:*)",
+    "Bash(yarn remove:*)",
+    "Bash(pnpm install:*)",
+    "Bash(pnpm add:*)",
+    "Bash(cargo install:*)",
+    "Bash(cargo uninstall:*)",
+    "Bash(poetry install:*)",
+    "Bash(poetry add:*)",
+    "Bash(poetry remove:*)",
+    "Bash(poetry update:*)",
+    "Bash(pyenv install:*)",
+
+    "Bash(source:*)",
+
+    "Bash(launchctl start:*)",
+    "Bash(launchctl load:*)",
+
+    "Bash(orb create:*)",
+    "Bash(orb delete:*)",
+    "Bash(orb stop:*)",
+    "Bash(orbctl config set:*)",
+
+    "Bash(ssh-add -d:*)",
+    "Bash(ssh-add -D:*)",
+
+    "Bash(aws-vault exec:*)",
+
+    "Bash(nix-store --gc:*)",
+    "Bash(nix-collect-garbage:*)"
+  ]
+}
