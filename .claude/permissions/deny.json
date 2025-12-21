@@ -62,6 +62,6 @@
     "Bash(chmod -x .git/hooks/:*)",
 
     "Bash(xargs:*)",
-    "Bash(for :*)"
+    "Bash(for:*)"
   ]
 }

@@ -45,8 +45,6 @@
     "Bash(git clone:*)",
     "Bash(git mv:*)",
     "Bash(git config:*)",
-    "Bash(git gc:*)",
-    "Bash(git prune:*)",
     "Bash(git fsck:*)",
 
     "Bash(gh api:*)",
