@@ -22,7 +22,7 @@ The workflow triggers on issue events (opened, edited, reopened) and:
 
 ## Workflow Location
 
-See [`.github/workflows/issue-resolver.yml`](../../.github/workflows/issue-resolver.yml) for the complete workflow definition.
+The workflow definition is currently being added in PR #214. Once merged, see `.github/workflows/issue-resolver.yml` for the complete workflow definition.
 
 ## Configuration
 
