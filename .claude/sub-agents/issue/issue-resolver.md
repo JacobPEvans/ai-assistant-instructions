@@ -208,6 +208,8 @@ Update relevant documentation:
 
 ### Step 9: Commit Changes
 
+Follow the [Issue Linking Guidelines](../../../docs/guidelines/issue-linking.md) for proper commit formatting and issue references.
+
 ```bash
 git add {files}
 git commit -m "feat: implement {feature-name}
@@ -228,8 +230,6 @@ Use conventional commit format:
 - `docs:` for documentation
 - `refactor:` for code improvements
 - `test:` for test additions
-
-Always include `Closes #NUMBER` to auto-close issue.
 
 ### Step 10: Verify Completion
 

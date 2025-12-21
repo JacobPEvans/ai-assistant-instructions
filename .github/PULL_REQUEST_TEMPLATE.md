@@ -32,6 +32,7 @@
 ## Related Issue
 
 <!-- Link to the issue that this pull request addresses -->
+<!-- Follow the Issue Linking Guidelines: docs/guidelines/issue-linking.md -->
 <!-- Example: Closes #123 or Fixes #456 -->
 
 ## Testing and Validation
