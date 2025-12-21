@@ -130,7 +130,7 @@ git status
 
 - Switched to main after pushing a feature branch
 - Multiple open PRs from different branches
-- Auto-merge enabled but not yet merged
+- Open PRs that are ready to merge
 
 Always run `gh pr list --author @me --state open` to find work that needs merging.
 
