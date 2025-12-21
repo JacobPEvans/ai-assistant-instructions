@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -39,7 +39,7 @@ jobs:
         run: ${{ inputs.validation-script }}
 
       - name: Run markdownlint
-        uses: DavidAnson/markdownlint-cli2-action@v22
+        uses: DavidAnson/markdownlint-cli2-action@v16
         with:
           globs: ${{ inputs.globs }}
           fix: ${{ inputs.fix }}

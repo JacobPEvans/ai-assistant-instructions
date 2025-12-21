@@ -182,5 +182,5 @@ uses: JacobPEvans/.github/.github/workflows/claude-review.yml@v1.0.0
 
 ## References
 
-- [GitHub Reusable Workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows)
-- [Sharing workflows with your organization](https://docs.github.com/en/actions/using-workflows/sharing-workflows-secrets-and-runners-with-your-organization)
+- [GitHub Reusable Workflows](<https://docs.github.com/en/actions/using-workflows/reusing-workflows>)
+- [Sharing workflows with your organization](<https://docs.github.com/en/actions/using-workflows/sharing-workflows-secrets-and-runners-with-your-organization>)
