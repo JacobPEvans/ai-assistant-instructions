@@ -441,7 +441,7 @@ git worktree list
 ```
 
 | Worktree State | Action |
-|----------------|--------|
+| -------------- | ------ |
 | Has commits, no PR | CREATE PR IMMEDIATELY: `gh pr create --fill` |
 | Has PR with failing CI | Fix CI, wait for 60s quiet period, merge when clean (complete full lifecycle before new work) |
 | Has PR with unresolved comments | Resolve using `/resolve-pr-review-thread` patterns |
