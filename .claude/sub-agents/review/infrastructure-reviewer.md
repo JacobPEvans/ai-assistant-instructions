@@ -253,8 +253,8 @@ This sub-agent applies:
 This sub-agent can be invoked by:
 
 - `/infrastructure-review` - Standalone infrastructure reviews
-- `/rok-review-pr` - As part of comprehensive PR reviews
-- `/pr` - During PR creation for IaC changes
+- `/review-pr` - As part of comprehensive PR reviews
+- `/manage-pr` - During PR creation for IaC changes
 - `/review-code` - For infrastructure code analysis
 - Custom commands - Any command needing infrastructure validation
 

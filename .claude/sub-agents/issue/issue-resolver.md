@@ -208,6 +208,8 @@ Update relevant documentation:
 
 ### Step 9: Commit Changes
 
+Follow the [Issue Linking Guidelines](../../../docs/guidelines/issue-linking.md) for proper commit formatting and issue references.
+
 ```bash
 git add {files}
 git commit -m "feat: implement {feature-name}
@@ -228,8 +230,6 @@ Use conventional commit format:
 - `docs:` for documentation
 - `refactor:` for code improvements
 - `test:` for test additions
-
-Always include `Closes #NUMBER` to auto-close issue.
 
 ### Step 10: Verify Completion
 
@@ -368,7 +368,7 @@ for consistency and efficiency.
 ```markdown
 @.claude/sub-agents/issue/issue-resolver.md
 
-Resolve Issue #89 from rok-resolve-issues workflow
+Resolve Issue #89 from resolve-issues workflow
 
 Repository: owner/repo
 Working Directory: /path/to/worktree
@@ -398,8 +398,8 @@ Your mission:
 
 This sub-agent can be invoked by:
 
-- `/rok-resolve-issues` - For batch issue resolution
-- `/pr` - During PR creation workflow
+- `/resolve-issues` - For batch issue resolution
+- `/manage-pr` - During PR creation workflow
 - Custom commands - Any workflow needing issue implementation
 
 ## Error Handling
@@ -418,4 +418,4 @@ If unable to complete after reasonable effort:
 - [Code Standards](../../../agentsmd/rules/code-standards.md)
 - [Worktrees](../../../agentsmd/rules/worktrees.md)
 - [Subagent Parallelization](../../../agentsmd/rules/subagent-parallelization.md)
-- [rok-resolve-issues Command](../../../agentsmd/commands/rok-resolve-issues.md)
+- [resolve-issues Command](../../../agentsmd/commands/resolve-issues.md)

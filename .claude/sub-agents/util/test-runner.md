@@ -554,8 +554,8 @@ Your mission:
 
 This sub-agent can be invoked by:
 
-- `/pr` - Run tests before creating PR
-- `/rok-resolve-issues` - Verify issue resolution with tests
+- `/manage-pr` - Run tests before creating PR
+- `/resolve-issues` - Verify issue resolution with tests
 - CI Fixer sub-agent - Diagnose test failures in CI
 - Code Generator sub-agent - Validate generated code
 - Custom workflows - Any scenario requiring test execution

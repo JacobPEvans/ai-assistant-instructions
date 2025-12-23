@@ -100,18 +100,16 @@ All commands from `agentsmd/commands/` are available. Use this table to select t
 | --- | --- | --- | --- |
 | Start new development | `/init-worktree` | Repo | Always first for new work |
 | Sync current branch with main | `/sync-main` | Branch | Update main, merge into current |
-| Sync all PRs with main | `/sync-main-all` | Repo | Update main, merge into all open PRs |
-| Sync PRs with main | `/sync-prs-with-main` | Repo | Superseded by `/sync-main-all` |
-| Fix PR CI failures | `/fix-pr-ci` | Repo | Fix CI in current repo |
-| Fix all PR CI failures | `/fix-all-pr-ci` | Repo | Fix CI across all PRs (batches of 5) |
-| Resolve PR review threads | `/resolve-pr-review-thread-all` | Repo | Address review comments in current repo |
+| Sync all PRs with main | `/sync-main all` | Repo | Update main, merge into all open PRs |
+| Fix current PR CI failures | `/fix-pr-ci` | Single PR | Fix CI on current PR |
+| Fix all PR CI failures | `/fix-pr-ci all` | Repo | Fix CI across all PRs (batches of 5) |
 | Sync repo, merge PRs | `/git-refresh` | Repo | Also cleans worktrees |
-| Create a GitHub issue | `/rok-shape-issues` | Repo | Shape before creating |
-| Implement an issue | `/rok-resolve-issues` | Repo | For shaped issues |
-| Review a PR | `/rok-review-pr` | Single PR | Systematic review |
-| Resolve PR review feedback | `/rok-resolve-pr-review-thread` | Single PR | After review comments |
-| Manage your own PR | `/rok-manage-pr` | Single PR | PR author workflow |
-| Create/manage a PR | `/pr` | Single PR | Replaced by `/rok-manage-pr` |
+| Create a GitHub issue | `/shape-issues` | Repo | Shape before creating |
+| Implement an issue | `/resolve-issues` | Repo | For shaped issues |
+| Review a PR | `/review-pr` | Single PR | Systematic review |
+| Resolve PR review feedback | `/resolve-pr-review-thread` | Single PR | After review comments |
+| Resolve all PR review threads | `/resolve-pr-review-thread all` | Repo | Address comments on all PRs |
+| Manage your own PR | `/manage-pr` | Single PR | PR author workflow |
 | Review documentation | `/review-docs` | Repo | Markdown validation |
 | Review infrastructure | `/infrastructure-review` | Repo | Terraform/Terragrunt |
 

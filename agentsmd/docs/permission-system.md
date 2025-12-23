@@ -402,7 +402,6 @@ Examples of explicitly denied commands:
 ## Related Issues & PRs
 
 - **Issue #135**: Unify permission definitions with nix-config
-- **[nix-config Issue #137](https://github.com/JacobPEvans/nix-config/issues/137)**: Sister issue (CLOSED) - unified permissions system in Nix
 
 ## Future Improvements
 

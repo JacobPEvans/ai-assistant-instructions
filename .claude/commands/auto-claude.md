@@ -105,7 +105,7 @@ Execute this loop continuously until budget exhaustion forces termination:
       If behind: clone locally, merge main, push (for signed commits)
       Or use: gh api -X PUT repos/{owner}/{repo}/pulls/{num}/update-branch
    2. Failing CI on open PRs (blocks all progress)
-   3. PR review comments awaiting response (use /rok-resolve-pr-review-thread)
+   3. PR review comments awaiting response (use /resolve-pr-review-thread)
    4. PRs ready to merge (CI passing, approved) - enable auto-merge
    ─── BELOW THIS LINE: BLOCKED IN PR-FOCUS MODE ───
    5. Issues labeled: bug, critical (EXCLUDE ai-created label)
@@ -178,19 +178,19 @@ the root cause, implement a fix, and push. You may spawn helper agents for
 complex fixes. NEVER ask user questions. After CI passes and PR is approved,
 enable auto-merge: gh pr merge #X --auto --squash. Report results when complete.
 
-Reference: /pr command handles full PR lifecycle including CI monitoring.
+Reference: /manage-pr command handles full PR lifecycle including CI monitoring.
 ```
 
-### pr-responder
+### pr-thread-resolver
 
 ```text
-You are a PR Responder agent. Address the review comments on PR #X. For each
-comment: understand the feedback, implement the requested change, and push.
+You are a PR Thread Resolver agent. Resolve the review threads on PR #X. For each
+thread: understand the feedback, implement the requested change, and push.
 You may spawn helper agents for complex changes. NEVER ask user questions.
-After all comments addressed and CI passes, enable auto-merge:
+After all threads resolved and CI passes, enable auto-merge:
 gh pr merge #X --auto --squash
 
-Reference: Use /rok-resolve-pr-review-thread for systematic thread resolution.
+Reference: Use /resolve-pr-review-thread for systematic thread resolution.
 ```
 
 ### pr-merger
@@ -221,7 +221,7 @@ WORKFLOW:
 5. Create a PR with clear description
 6. Enable auto-merge: gh pr merge --auto --squash
 
-Reference: /rok-resolve-issues for comprehensive issue resolution workflow.
+Reference: /resolve-issues for comprehensive issue resolution workflow.
 You may spawn helper agents. NEVER ask user questions.
 ```
 
@@ -246,7 +246,7 @@ For each finding:
 Human will review and remove 'ai-created' label before AI can work on it.
 
 Reference: /review-code for thorough code review patterns.
-Reference: /rok-shape-issues for shaping findings into actionable issues.
+Reference: /shape-issues for shaping findings into actionable issues.
 NEVER ask user questions.
 ```
 

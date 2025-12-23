@@ -30,8 +30,6 @@
     "Bash(nix-store -q:*)",
     "Bash(nix-store --query:*)",
     "Bash(nix-store --verify:*)",
-    "Bash(nix-store --gc:*)",
-    "Bash(nix-collect-garbage:*)",
     "Bash(nix-prefetch-url:*)",
     "Bash(nix-prefetch-git:*)",
     "Bash(nix-locate:*)",

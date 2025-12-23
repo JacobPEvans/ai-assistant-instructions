@@ -13,6 +13,8 @@
     "Bash(git cherry-pick:*)",
     "Bash(git worktree remove:*)",
     "Bash(gpg:*)",
+    "Bash(git gc:*)",
+    "Bash(git prune:*)",
 
     "Bash(chown:*)",
     "Bash(chmod:*)",
@@ -93,6 +95,9 @@
     "Bash(ssh-add -d:*)",
     "Bash(ssh-add -D:*)",
 
-    "Bash(aws-vault exec:*)"
+    "Bash(aws-vault exec:*)",
+
+    "Bash(nix-store --gc:*)",
+    "Bash(nix-collect-garbage:*)"
   ]
 }

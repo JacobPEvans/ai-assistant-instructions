@@ -210,7 +210,7 @@ Focus: Content quality, markdownlint, AI-friendly formatting
 This sub-agent can be invoked by:
 
 - `/review-docs` - Standalone documentation reviews
-- `/rok-review-pr` - As part of comprehensive PR reviews
-- `/pr` - During PR creation workflow
+- `/review-pr` - As part of comprehensive PR reviews
+- `/manage-pr` - During PR creation workflow
 - Pre-commit hooks - Automated validation
 - Custom commands - Any command needing docs validation

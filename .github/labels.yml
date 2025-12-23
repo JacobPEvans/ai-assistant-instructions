@@ -65,7 +65,7 @@
 
 - name: "ready-for-dev"
   color: "0099ff"
-  description: "Shaped and ready for /rok-resolve-issues"
+  description: "Shaped and ready for /resolve-issues"
 
 - name: "ai-created"
   color: "fbca04"
