@@ -241,7 +241,12 @@ Provide a clear summary including:
 Next steps:
 1. Make your changes
 2. Commit your work
-3. Push and create PR: gh pr create
+3. Create PR immediately: gh pr create --fill
+4. Monitor PR: fix CI failures, resolve review comments
+5. Wait 60 seconds after last fix, verify clean
+6. Merge: rebase on main, fast-forward merge, push (PR auto-closes)
+7. Remove this worktree: git worktree remove $(pwd)
+   (The PR is now the source of truth - you don't need the local copy)
 ```
 
 ## Directory Structure

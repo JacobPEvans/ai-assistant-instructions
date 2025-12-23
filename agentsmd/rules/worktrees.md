@@ -81,6 +81,39 @@ A worktree is stale if ANY of these are true:
 - Branch no longer exists on remote
 - Worktree has no uncommitted changes and PR is merged
 
+## PR Requirement
+
+Every worktree/branch with commits must have an associated PR.
+
+This is required for auto-claude and all automated workflows:
+
+1. Create worktree with `/init-worktree`
+2. Make changes and commit
+3. Create PR immediately (before more work)
+4. Monitor PR until CI passes and comments resolved
+5. Remove worktree after PR is merged
+
+Work is tracked via PRs on GitHub, not local worktrees.
+
+### Why This Matters
+
+- PRs are visible and trackable - branches without PRs are invisible
+- PRs can be reviewed, discussed, and approved - branches cannot
+- PRs auto-close linked issues - branches do nothing
+- Worktrees consume disk space and create confusion
+
+### Verification
+
+A branch is orphaned if:
+
+- It has commits beyond main
+- It does NOT have an associated PR
+
+Orphaned branches should be either:
+
+- Have a PR created immediately, OR
+- Be deleted (if work is abandoned)
+
 ## Why Worktrees
 
 - **Isolation**: Each worktree is independent - no accidental cross-contamination
