@@ -226,8 +226,8 @@ Lifecycle (follow exactly):
    - Resolve all review comments using /resolve-pr-review-thread patterns
 8. Wait 60 seconds after last fix, then verify still clean
    - If new issues appear: fix them, restart 60s timer
-9. Remove local worktree: git worktree remove $(pwd)
-10. When ready: rebase on main, fast-forward merge into main, push (PR auto-closes)
+9. When ready: rebase on main, fast-forward merge into main, push (PR auto-closes)
+10. Remove local worktree: git worktree remove <worktree-path>
 
 Completion requirements (all must be true):
 - PR must exist before returning
@@ -276,7 +276,7 @@ SCOPE: ONE documentation fix per PR. Keep changes focused.
 Reference: /review-docs for documentation review standards.
 Reference: /link-review for checking link quality.
 
-When ready to merge: rebase on main locally, fast-forward merge, push. PR auto-closes.
+When ready to merge: rebase on main locally, fast-forward merge into main, push. PR auto-closes.
 You may spawn helper agents. Never ask user questions.
 ```
 
@@ -290,7 +290,7 @@ SCOPE: ONE component or function per PR. Keep PRs reviewable.
 
 Reference: /generate-code for code generation standards including tests.
 
-When ready to merge: rebase on main locally, fast-forward merge, push. PR auto-closes.
+When ready to merge: rebase on main locally, fast-forward merge into main, push. PR auto-closes.
 You may spawn helper agents. Never ask user questions.
 ```
 
@@ -309,7 +309,7 @@ When dispatching any sub-agent, always include:
 
 4. **AUTONOMY**: "You are running unattended. NEVER ask user questions. If truly blocked, report the blocker and return so the orchestrator can move on."
 
-5. **Merge**: "After CI passes and PR is approved: rebase on main locally, fast-forward merge, push. PR auto-closes."
+5. **Merge**: "After CI passes and PR is approved: rebase on main locally, fast-forward merge into main, push. PR auto-closes."
 
 6. **ISSUE LABELS**: When creating issues, ALWAYS add 'ai-created' label:
 
@@ -443,7 +443,7 @@ git worktree list
 | Worktree State | Action |
 |----------------|--------|
 | Has commits, no PR | CREATE PR IMMEDIATELY: `gh pr create --fill` |
-| Has PR with failing CI | Fix CI using `/fix-pr-ci` patterns, then continue monitoring |
+| Has PR with failing CI | Fix CI, wait for 60s quiet period, merge when clean (complete full lifecycle before new work) |
 | Has PR with unresolved comments | Resolve using `/resolve-pr-review-thread` patterns |
 | PR is merged | REMOVE worktree: `git worktree remove <path>` |
 | PR is closed (abandoned) | REMOVE worktree: `git worktree remove <path>` |
@@ -491,10 +491,10 @@ After 60-second quiet period passes clean:
    git rebase origin/main
    ```
 
-2. Fast-forward merge into main and push:
+2. Navigate to main worktree, merge, and push:
 
    ```bash
-   git checkout main
+   cd ~/git/<repo-name>/main
    git merge --ff-only <your-branch>
    git push origin main
    ```

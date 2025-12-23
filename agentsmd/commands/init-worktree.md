@@ -245,7 +245,7 @@ Next steps:
 4. Monitor PR: fix CI failures, resolve review comments
 5. Wait 60 seconds after last fix, verify clean
 6. Merge: rebase on main, fast-forward merge, push (PR auto-closes)
-7. Remove this worktree: git worktree remove $(pwd)
+7. Remove this worktree: git worktree remove ~/git/<repo-name>/<branch-name>
    (The PR is now the source of truth - you don't need the local copy)
 ```
 
