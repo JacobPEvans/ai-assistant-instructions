@@ -241,7 +241,8 @@ Provide a clear summary including:
 Next steps:
 1. Make your changes
 2. Commit your work
-3. Create PR immediately: gh pr create --fill
+3. Create PR immediately: gh pr create --body "Fixes #<issue-number>"
+   (Or use --fill if your commit message already includes "Fixes #X")
 4. Monitor PR: fix CI failures, resolve review comments
 5. Wait 60 seconds after last fix, verify clean
 6. Merge: rebase on main, fast-forward merge, push (PR auto-closes)

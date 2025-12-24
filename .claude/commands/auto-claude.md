@@ -196,7 +196,7 @@ Reference: Use /resolve-pr-review-thread for systematic thread resolution.
 ### pr-merger
 
 ```text
-You are a PR Merger agent. PR #X has passing CI and approval. Enable auto-merge:
+You are a PR Merger agent. PR #X has passing CI and approval. Merge the PR:
 rebase on main locally, fast-forward merge into main, push. The PR will auto-close.
 If merge fails (e.g., conflicts), report the blocker. Never force merge.
 
@@ -218,8 +218,9 @@ Lifecycle (follow exactly):
 2. Use /init-worktree to create a clean worktree for this work
 3. Make the minimal fix needed - no scope creep
 4. Write tests if applicable
-5. Commit changes
+5. Commit changes (include "Fixes #X" in commit message so it appears in PR body)
 6. Create PR immediately (before any more work): gh pr create --fill
+   - OR use: gh pr create --body "Fixes #X" to explicitly set the body
    - PR body must include "Fixes #X" to link to the issue
 7. Monitor PR until clean:
    - Fix all CI failures using /fix-pr-ci patterns
@@ -237,7 +238,7 @@ Completion requirements (all must be true):
 - Worktree must be removed
 
 Reference: /resolve-issues for comprehensive issue resolution workflow.
-You may spawn helper agents. Never ask user questions.
+You may spawn helper agents. NEVER ask user questions.
 ```
 
 ### code-analyzer
@@ -277,7 +278,7 @@ Reference: /review-docs for documentation review standards.
 Reference: /link-review for checking link quality.
 
 When ready to merge: rebase on main locally, fast-forward merge into main, push. PR auto-closes.
-You may spawn helper agents. Never ask user questions.
+You may spawn helper agents. NEVER ask user questions.
 ```
 
 ### test-adder
@@ -291,7 +292,7 @@ SCOPE: ONE component or function per PR. Keep PRs reviewable.
 Reference: /generate-code for code generation standards including tests.
 
 When ready to merge: rebase on main locally, fast-forward merge into main, push. PR auto-closes.
-You may spawn helper agents. Never ask user questions.
+You may spawn helper agents. NEVER ask user questions.
 ```
 
 ## Sub-Agent Instructions
@@ -325,7 +326,8 @@ You must NEVER:
 
 - Ask user questions (you are unattended, no one will answer)
 - Return early ("I've completed my tasks" or "There's nothing left to do")
-- Force-push to any branch
+- Force-push to protected/shared branches (e.g., `main`, `release/*`).
+  You MAY force-push your own feature branches when required by the rebase + fast-forward merge workflow.
 - Delete branches
 - Force merge PRs - use local rebase + fast-forward merge workflow instead
 - Make direct code changes (always delegate to sub-agents)
@@ -334,9 +336,9 @@ You must NEVER:
 - Create new branches/PRs when open PR count >= 10 (PR-FOCUS MODE)
 - Create PRs with multiple unrelated changes (ONE concept per PR)
 - Create issues without the 'ai-created' label
-- Leave a branch without a PR (every branch with commits MUST have a PR)
+- Leave a branch without a PR (never leave a branch with commits without a PR; every branch with commits MUST have a PR)
 - Return from a task without creating a PR (if commits were made)
-- Keep worktrees after PR is created and clean (remove them - PR is source of truth)
+- Leave worktrees around after PRs are merged (once merged, remove associated worktrees – the PR/target branch is the source of truth)
 - Return before CI passes (must fix all CI failures first)
 - Return with unresolved review comments (must resolve all threads)
 - Return without waiting the 60-second quiet period after last fix
@@ -368,7 +370,7 @@ You must NEVER:
 
 - Never work directly on main/master branch
 - Always create feature branches for changes
-- Never force-push (use regular push only)
+- Never force-push to protected branches (main, release/*). You may force-push feature branches after rebase using --force-with-lease
 - Never delete remote branches
 - Never force merge PRs - use local rebase + fast-forward merge workflow
 - Never modify .env, secrets, or credential files
@@ -443,7 +445,7 @@ git worktree list
 | Worktree State | Action |
 | -------------- | ------ |
 | Has commits, no PR | CREATE PR IMMEDIATELY: `gh pr create --fill` |
-| Has PR with failing CI | Fix CI, wait for 60s quiet period, merge when clean (complete full lifecycle before new work) |
+| Has PR with failing CI | Fix CI, wait for 60-second quiet period, merge when clean (complete full lifecycle before new work) |
 | Has PR with unresolved comments | Resolve using `/resolve-pr-review-thread` patterns |
 | PR is merged | REMOVE worktree: `git worktree remove <path>` |
 | PR is closed (abandoned) | REMOVE worktree: `git worktree remove <path>` |
@@ -491,7 +493,13 @@ After 60-second quiet period passes clean:
    git rebase origin/main
    ```
 
-2. Navigate to main worktree, merge, and push:
+2. Push the rebased branch to GitHub so the PR reflects the new commits:
+
+   ```bash
+   git push --force-with-lease origin <your-branch>
+   ```
+
+3. Navigate to main worktree, merge, and push:
 
    ```bash
    cd ~/git/<repo-name>/main
@@ -499,9 +507,9 @@ After 60-second quiet period passes clean:
    git push origin main
    ```
 
-3. The PR will auto-close when main contains the commits
-4. Remove the worktree: `git worktree remove <path>`
-5. Prune: `git worktree prune`
+4. GitHub will normally auto-close the PR once it detects that its head branch has been merged into main; if it does not, close the PR manually
+5. Remove the worktree: `git worktree remove <path>`
+6. Prune: `git worktree prune`
 
 ### Sub-Agent Completion Checklist
 
