@@ -10,11 +10,8 @@
 
 set -euo pipefail
 
-# Read hook input from stdin
-hook_input=$(cat)
-
-# Extract the file path from tool_input
-file_path=$(echo "$hook_input" | jq -r '.tool_input.file_path // empty')
+# Extract the file path from stdin, which contains the hook input JSON
+file_path=$(jq -r '.tool_input.file_path // empty')
 
 # Exit silently if no file path
 if [[ -z "$file_path" ]]; then
