@@ -105,7 +105,7 @@ gh api graphql -f query='
 query($owner: String!, $repo: String!, $pr: Int!) {
   repository(owner: $owner, name: $repo) {
     pullRequest(number: $pr) {
-      reviewThreads(first: 100) {
+      reviewThreads(last: 100) {
         nodes {
           isResolved
         }

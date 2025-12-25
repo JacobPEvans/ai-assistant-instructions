@@ -134,8 +134,8 @@ Returns an array of review comments with:
 gh api graphql -f query='{
   repository(owner: "OWNER", name: "REPO") {
     pullRequest(number: 123) {
-      reviewThreads(first: 50) {
-        nodes { id isResolved comments(first: 5) { nodes { body path line } } }
+      reviewThreads(last: 100) {
+        nodes { id isResolved comments(last: 100) { nodes { body path line } } }
       }
     }
   }
@@ -159,7 +159,7 @@ gh api graphql -f query='mutation {
 gh api graphql -f query='{
   repository(owner: "OWNER", name: "REPO") {
     pullRequest(number: 123) {
-      reviewThreads(first: 50) {
+      reviewThreads(last: 100) {
         nodes { id isResolved }
       }
     }
@@ -195,7 +195,7 @@ gh pr checks <PR_NUMBER>
 gh api graphql -f query='{
   repository(owner: "OWNER", name: "REPO") {
     pullRequest(number: 123) {
-      reviewThreads(first: 50) {
+      reviewThreads(last: 100) {
         nodes { isResolved }
       }
     }

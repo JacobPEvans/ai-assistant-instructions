@@ -33,7 +33,7 @@ Unlike slash commands (which orchestrate workflows), sub-agents are workers that
 You can reference a sub-agent in your prompt to Claude:
 
 ```text
-@.claude/agents/review/code-reviewer.md
+@.claude/agents/code-reviewer.md
 Please review the authentication module for security issues.
 ```
 
@@ -45,7 +45,7 @@ Slash commands can delegate to sub-agents:
 ## Step 2: Code Review
 
 Invoke the code-reviewer sub-agent:
-@.claude/agents/review/code-reviewer.md
+@.claude/agents/code-reviewer.md
 
 Focus areas:
 - Security validation
@@ -57,42 +57,29 @@ Focus areas:
 Sub-agents can invoke other sub-agents for specialized tasks:
 
 ```markdown
-For infrastructure concerns, delegate to:
-@.claude/agents/review/infrastructure-reviewer.md
+For documentation concerns, delegate to:
+@.claude/agents/docs-reviewer.md
 ```
 
 ## Available Sub-Agents
 
-### Review Sub-Agents
+All sub-agents are located directly in `.claude/agents/`:
 
-Located in `.claude/agents/review/`:
+### Review Sub-Agents
 
 - **code-reviewer.md**: Comprehensive code review with security, quality, and maintainability checks
 - **docs-reviewer.md**: Documentation validation including markdownlint compliance and link checking
-- **infrastructure-reviewer.md**: Infrastructure as Code (Terraform/Terragrunt) security and cost review
 
 ### PR Management Sub-Agents
-
-Located in `.claude/agents/pr/`:
 
 - **ci-fixer.md**: Analyzes and fixes CI failures in pull requests without bypassing checks
 - **thread-resolver.md**: Resolves PR review threads through implementation or explanation with GraphQL resolution
 
 ### Issue Management Sub-Agents
 
-Located in `.claude/agents/issue/`:
-
 - **issue-resolver.md**: Analyzes GitHub issue requirements, implements solutions, and creates comprehensive tests
 
-### Code Generation Sub-Agents
-
-Located in `.claude/agents/code/`:
-
-- **code-generator.md**: Generates high-quality, maintainable, and secure code following project standards
-
 ### Utility Sub-Agents
-
-Located in `.claude/agents/util/`:
 
 - **worktree-manager.md**: Manages git worktrees including creation, cleanup of stale worktrees, and synchronization
 - **test-runner.md**: Executes test suites, analyzes failures, and suggests fixes across multiple test frameworks
@@ -147,24 +134,16 @@ Practical examples of invoking this sub-agent.
 
 ```text
 .claude/agents/
-├── README.md                          # This file
-├── review/                            # Review-focused sub-agents
-│   ├── code-reviewer.md
-│   ├── docs-reviewer.md
-│   └── infrastructure-reviewer.md
-├── pr/                                # PR management sub-agents
-│   ├── ci-fixer.md
-│   └── thread-resolver.md
-├── issue/                             # Issue management sub-agents
-│   └── issue-resolver.md
-├── code/                              # Code generation sub-agents
-│   └── code-generator.md
-├── util/                              # Utility sub-agents
-│   ├── worktree-manager.md
-│   ├── test-runner.md
-│   ├── linter-fixer.md
-│   └── dependency-checker.md
-└── [future categories]/               # Additional sub-agent categories
+├── README.md             # This file
+├── ci-fixer.md           # PR CI failure fixer
+├── code-reviewer.md      # Code review agent
+├── dependency-checker.md # Dependency security checker
+├── docs-reviewer.md      # Documentation reviewer
+├── issue-resolver.md     # GitHub issue resolver
+├── linter-fixer.md       # Linting fixer
+├── test-runner.md        # Test execution agent
+├── thread-resolver.md    # PR thread resolver
+└── worktree-manager.md   # Git worktree manager
 ```
 
 ## Related Documentation

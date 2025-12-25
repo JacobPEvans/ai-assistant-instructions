@@ -74,14 +74,14 @@ gh api graphql -f query='
 {
   repository(owner: "OWNER", name: "REPO") {
     pullRequest(number: PR_NUMBER) {
-      reviewThreads(first: 50) {
+      reviewThreads(last: 100) {
         nodes {
           id
           isResolved
           path
           line
           startLine
-          comments(first: 10) {
+          comments(last: 100) {
             nodes {
               id
               databaseId
@@ -274,7 +274,7 @@ After resolving all threads, verify none remain:
 gh api graphql -f query='{
   repository(owner: "OWNER", name: "REPO") {
     pullRequest(number: NUMBER) {
-      reviewThreads(first: 50) { nodes { isResolved } }
+      reviewThreads(last: 100) { nodes { isResolved } }
     }
   }
 }' | jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)] | length'

@@ -50,10 +50,10 @@ gh api graphql -f query='
 query {
   repository(owner: "OWNER", name: "REPO") {
     pullRequest(number: PR_NUMBER) {
-      comments(first: 1) {
+      comments(last: 100) {
         totalCount
       }
-      reviewThreads(first: 100) {
+      reviewThreads(last: 100) {
         totalCount
         nodes {
           id

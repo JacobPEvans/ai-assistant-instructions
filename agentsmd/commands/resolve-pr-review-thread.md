@@ -67,11 +67,11 @@ Essential commands for PR review thread management.
 gh api graphql -f query='{
   repository(owner: "OWNER", name: "REPO") {
     pullRequest(number: 123) {
-      reviewThreads(first: 50) {
+      reviewThreads(last: 100) {
         nodes {
           id
           isResolved
-          comments(first: 5) {
+          comments(last: 100) {
             nodes {
               body
               path
@@ -151,7 +151,7 @@ Follow these steps in order for each PR comment:
 
 ```bash
 # IMPORTANT: Use --raw-field and single-line query to avoid encoding issues in Claude Code
-gh api graphql --raw-field 'query=query { repository(owner: "OWNER", name: "REPO") { pullRequest(number: NUMBER) { reviewThreads(first: 50) { nodes { id isResolved path line startLine comments(first: 10) { nodes { id databaseId body author { login } createdAt } } } } } } }'
+gh api graphql --raw-field 'query=query { repository(owner: "OWNER", name: "REPO") { pullRequest(number: NUMBER) { reviewThreads(last: 100) { nodes { id isResolved path line startLine comments(last: 100) { nodes { id databaseId body author { login } createdAt } } } } } } }'
 ```
 
 > **Technical Requirement**: Multi-line GraphQL queries cause encoding issues in Claude Code.
@@ -307,7 +307,7 @@ Acknowledged but not implementing because:
 > **VERIFICATION**: After resolving, confirm with:
 >
 > ```bash
-> gh api graphql --raw-field 'query=query { repository(owner: "OWNER", name: "REPO") { pullRequest(number: NUMBER) { reviewThreads(first: 50) { nodes { isResolved } } } } }' | jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)] | length'
+> gh api graphql --raw-field 'query=query { repository(owner: "OWNER", name: "REPO") { pullRequest(number: NUMBER) { reviewThreads(last: 100) { nodes { isResolved } } } } }' | jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)] | length'
 > ```
 >
 > Must return `0` before moving on.
@@ -809,7 +809,7 @@ gh pr list --json number,headRefName,title,reviewDecision
 For each PR, check for unresolved threads:
 
 ```bash
-gh api graphql --raw-field 'query=query { repository(owner: "OWNER", name: "REPO") { pullRequest(number: NUMBER) { reviewThreads(last: 100) { nodes { id isResolved } } } } }' | jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)] | length'
+gh api graphql --raw-field 'query=query { repository(owner: "OWNER", name: "REPO") { pullRequest(number: NUMBER) { reviewThreads(last: 100) { nodes { isResolved } } } } }' | jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)] | length'
 ```
 
 ### Step 2: Create Worktrees

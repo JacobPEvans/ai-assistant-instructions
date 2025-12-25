@@ -149,8 +149,8 @@ gh api graphql -f query='
 query {
   repository(owner: "OWNER", name: "REPO") {
     pullRequest(number: PR_NUMBER) {
-      comments(first: 1) { totalCount }
-      reviewThreads(first: 100) { totalCount }
+      comments(last: 100) { totalCount }
+      reviewThreads(last: 100) { totalCount }
     }
   }
 }' --jq '.data.repository.pullRequest.comments.totalCount + .data.repository.pullRequest.reviewThreads.totalCount'

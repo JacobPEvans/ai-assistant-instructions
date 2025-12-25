@@ -19,8 +19,8 @@ How to programmatically resolve PR review threads using GitHub's GraphQL API.
 gh api graphql -f query='{
   repository(owner: "OWNER", name: "REPO") {
     pullRequest(number: 123) {
-      reviewThreads(first: 50) {
-        nodes { id isResolved comments(first: 5) { nodes { body path line } } }
+      reviewThreads(last: 100) {
+        nodes { id isResolved comments(last: 100) { nodes { body path line } } }
       }
     }
   }
@@ -45,11 +45,11 @@ gh api graphql -f query='
 {
   repository(owner: "JacobPEvans", name: "ai-assistant-instructions") {
     pullRequest(number: 29) {
-      reviewThreads(first: 50) {
+      reviewThreads(last: 100) {
         nodes {
           id
           isResolved
-          comments(first: 5) {
+          comments(last: 100) {
             nodes { body path line }
           }
         }
@@ -176,7 +176,7 @@ gh api graphql -f query="
 {
   repository(owner: \"$OWNER\", name: \"$REPO\") {
     pullRequest(number: $PR_NUMBER) {
-      reviewThreads(first: 50) {
+      reviewThreads(last: 100) {
         nodes { id isResolved }
       }
     }

@@ -37,10 +37,10 @@ jobs:
           query {
             repository(owner: "'$REPO_OWNER'", name: "'$REPO_NAME'") {
               pullRequest(number: '$PR_NUMBER') {
-                comments(first: 1) {
+                comments(last: 100) {
                   totalCount
                 }
-                reviewThreads(first: 100) {
+                reviewThreads(last: 100) {
                   totalCount
                 }
               }
