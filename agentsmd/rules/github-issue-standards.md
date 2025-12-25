@@ -40,11 +40,13 @@ Use prefixes to categorize issues:
 - `help wanted` - Open for contributors
 - `good first issue` - Suitable for newcomers
 
-### Timebox Labels (for shaped issues)
+### Size Labels (for shaped issues)
 
-- `timebox:small-batch` - 1-2 week scope
-- `timebox:big-batch` - 6 week scope
-- `timebox:spike` - Investigation/research
+- `size:xs` - Extra small (spike/research, < 1 day)
+- `size:s` - Small (1-3 days)
+- `size:m` - Medium (3-5 days)
+- `size:l` - Large (1-2 weeks)
+- `size:xl` - Extra large (2+ weeks)
 
 ## Issue Body Structure
 
@@ -57,7 +59,7 @@ Follow the Shape Up template from `/shape-issues`:
 
 **Raw idea**: [Initial concept or user complaint]
 **Current pain**: [What's broken or frustrating]
-**Timebox**: [Small batch | Big batch | Spike]
+**Size**: [xs | s | m | l | xl]
 
 ## Solution Sketch
 
@@ -200,7 +202,7 @@ These are distinct from acceptance criteria - they describe HOW to verify:
 | No acceptance criteria | Can't verify done          | Add "Done Looks Like" section                |
 | Missing labels         | Hard to filter/prioritize  | Add type + priority labels                   |
 | Scope creep            | Issue grows unbounded      | Define "Out of scope" section                |
-| No timebox             | Work expands indefinitely  | Set small/big batch timebox                  |
+| No size estimate       | Work expands indefinitely  | Add size label (xs/s/m/l/xl)                 |
 
 ## Integration with Commands
 

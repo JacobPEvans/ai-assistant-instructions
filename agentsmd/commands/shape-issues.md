@@ -56,7 +56,7 @@ time-boxed GitHub Issues using Shape Up methodology and continuous discovery pri
 **Phase 5: GitHub Issue Crafting & Team Handoff** (issue_crafting)
 
 - **Shaped Issue creation**: Transform shapes into actionable GitHub Issues
-- **Timebox labeling**: Small-batch, big-batch, or spike labels
+- **Size labeling**: xs/s/m/l/xl labels for scope estimation
 - **Solution sketch attachment**: Include rough wireframes, technical notes
 - **Rabbit hole documentation**: List known risks and scope boundaries
 - **Ready-for-development**: Clear handoff to `/resolve-issues` phase
@@ -131,16 +131,16 @@ gh pr list --state all --json title,mergedAt,labels
 ```bash
 # Create shaped Issues ready for development
 gh issue create --title "[Small Batch] Add user preference validation" \
-  --body "Timebox: 2 weeks
+  --body "Size: m (3-5 days)
 Problem: Users confused by unclear error messages
 Solution sketch: Add client-side validation with clear feedback
 Rabbit holes: Don't rebuild entire form system"
 
-# Label with timebox and readiness
-gh label create "timebox:small-batch" --color "00ff00" \
-  --description "1-2 week time box"
-gh label create "timebox:big-batch" --color "ff9900" \
-  --description "6 week time box"
+# Label with size and readiness
+gh label create "size:m" --color "00ff00" \
+  --description "Medium (3-5 days)"
+gh label create "size:l" --color "ff9900" \
+  --description "Large (1-2 weeks)"
 gh label create "ready-for-dev" --color "0099ff" \
   --description "Shaped and ready for /resolve-issues"
 ```
@@ -181,7 +181,7 @@ gh label create "ready-for-dev" --color "0099ff" \
 
 **Raw idea**: [The initial fuzzy idea or user complaint]
 **Current pain**: [What's broken or frustrating users right now]
-**Timebox**: [Small batch: 1-2 weeks | Big batch: 6 weeks | Spike: investigate]
+**Size**: [xs | s | m | l | xl]
 
 ## Solution Sketch
 
@@ -222,13 +222,14 @@ gh label create "ready-for-dev" --color "0099ff" \
 - Related to: #ZZ
 ```
 
-#### Timebox Classification
+#### Size Classification
 
 ```text
-Small Batch (1-2 weeks): Bug fixes, minor improvements, quick wins
-Big Batch (6 weeks): New features, significant changes, major refactors
-Spike (timebox): Research unknowns, technical investigation, feasibility study
-Cool-Down: Small improvements, bug fixes, maintenance tasks
+size:xs - Extra small (< 1 day): Spikes, research, investigation
+size:s  - Small (1-3 days): Bug fixes, minor improvements, quick wins
+size:m  - Medium (3-5 days): Standard features, moderate changes
+size:l  - Large (1-2 weeks): New features, significant changes
+size:xl - Extra large (2+ weeks): Major refactors, complex systems
 ```
 
 ### Usage Instructions
