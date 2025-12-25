@@ -1,14 +1,7 @@
 ---
 description: How to programmatically resolve PR review threads using GitHub's GraphQL API
 model: haiku
-author: JacobPEvans
-allowed-tools:
-  # Core tools (required for all commands)
-  - Task
-  - TaskOutput
-  - TodoWrite
-  # GitHub CLI
-  - Bash(gh:*)
+allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*)
 ---
 
 # Resolving PR Review Conversations

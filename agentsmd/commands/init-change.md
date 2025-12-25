@@ -1,8 +1,7 @@
 ---
 description: "[DEPRECATED] Use /init-worktree instead"
 model: haiku
-allowed-tools:
-  - SlashCommand(/init-worktree)
+allowed-tools: SlashCommand(/init-worktree)
 ---
 
 # Init Change
