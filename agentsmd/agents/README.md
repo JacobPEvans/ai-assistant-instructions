@@ -86,6 +86,15 @@ All sub-agents are located directly in `.claude/agents/`:
 - **linter-fixer.md**: Runs linters and automatically fixes code quality issues without bypassing checks
 - **dependency-checker.md**: Checks for outdated dependencies and security vulnerabilities across multiple ecosystems
 
+### Orchestrator Sub-Agents
+
+These agents support multi-model orchestration and task routing via PAL MCP:
+
+- **researcher.md**: Research tasks using Gemini 3 Pro (cloud) or qwen3-next:80b (local) for large context analysis
+- **coder.md**: Coding tasks with automatic tier selection (Opus for complex, Sonnet for standard, local for private)
+- **reviewer.md**: Multi-model consensus code review synthesizing perspectives from multiple models
+- **planner.md**: Architecture and design specialist using strong reasoning models for system planning
+
 ## Creating New Sub-Agents
 
 Sub-agents follow this format:
@@ -137,10 +146,14 @@ Practical examples of invoking this sub-agent.
 ├── README.md             # This file
 ├── ci-fixer.md           # PR CI failure fixer
 ├── code-reviewer.md      # Code review agent
+├── coder.md              # Multi-tier coding specialist
 ├── dependency-checker.md # Dependency security checker
 ├── docs-reviewer.md      # Documentation reviewer
 ├── issue-resolver.md     # GitHub issue resolver
 ├── linter-fixer.md       # Linting fixer
+├── planner.md            # Architecture/design specialist
+├── researcher.md         # Research specialist
+├── reviewer.md           # Multi-model consensus reviewer
 ├── test-runner.md        # Test execution agent
 ├── thread-resolver.md    # PR thread resolver
 └── worktree-manager.md   # Git worktree manager
