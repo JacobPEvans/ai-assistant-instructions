@@ -16,6 +16,8 @@ assignees: ''
 
 **Timebox**: <!-- Small batch (1-2 weeks) - docs are usually quick -->
 
+**Priority**: <!-- priority:low | priority:medium | priority:high | priority:critical -->
+
 ## What's the Issue?
 
 <!-- Is it unclear, incorrect, missing, or something else? -->

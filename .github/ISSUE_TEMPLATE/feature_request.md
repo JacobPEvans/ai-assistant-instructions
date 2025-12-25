@@ -14,6 +14,8 @@ assignees: ''
 
 **Timebox**: <!-- Small batch (1-2 weeks) | Big batch (6 weeks) | Spike (investigation) -->
 
+**Priority**: <!-- priority:low | priority:medium | priority:high | priority:critical -->
+
 ## Solution Sketch
 
 **Core concept**: <!-- High-level approach, not detailed requirements -->

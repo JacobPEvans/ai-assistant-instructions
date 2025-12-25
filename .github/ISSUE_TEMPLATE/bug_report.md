@@ -14,6 +14,8 @@ assignees: ''
 
 **Timebox**: <!-- Small batch (1-2 weeks) | Spike (needs investigation) -->
 
+**Priority**: <!-- priority:low | priority:medium | priority:high | priority:critical -->
+
 ## Steps to Reproduce
 
 1. Step one
