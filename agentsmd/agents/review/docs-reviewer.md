@@ -92,10 +92,10 @@ Check:
 
 ### 5. Project Standards Compliance
 
-- Follow [Documentation Standards](../../../agentsmd/rules/documentation-standards.md)
+- Follow [Documentation Standards](../../rules/documentation-standards.md)
 - Use hierarchical numbering (1., 1.1., 1.1.1.) for AI-trackable structure
 - Ensure AI-first writing (concise, structured)
-- Verify adherence to [DRY Principle](../../../agentsmd/rules/dry-principle.md)
+- Verify adherence to [DRY Principle](../../rules/dry-principle.md)
 - Link to other documents instead of repeating information
 
 ### 6. AI-Friendly Formatting
@@ -109,9 +109,9 @@ Check:
 
 Update if needed:
 
-- [Technical Context](../../../agentsmd/rules/memory-bank/technical-context.md)
-- [Project Brief](../../../agentsmd/rules/memory-bank/project-brief.md)
-- [Progress Tracking](../../../agentsmd/rules/memory-bank/progress-tracking.md)
+- [Technical Context](../../rules/memory-bank/technical-context.md)
+- [Project Brief](../../rules/memory-bank/project-brief.md)
+- [Progress Tracking](../../rules/memory-bank/progress-tracking.md)
 
 ### 8. Link Validation
 

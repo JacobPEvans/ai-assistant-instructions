@@ -1,7 +1,7 @@
 ---
 description: Autonomous Maintenance Orchestrator that continuously finds work and dispatches sub-agents
 model: opus
-allowed-tools: "*"
+allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Read, Glob, Grep
 author: JacobPEvans
 ---
 
@@ -107,7 +107,7 @@ Execute this loop continuously until budget exhaustion forces termination:
    2. Failing CI on open PRs (blocks all progress)
    3. PR review comments awaiting response (use /resolve-pr-review-thread)
    4. PRs ready to merge (CI passing, approved) - enable auto-merge
-   ─── BELOW THIS LINE: BLOCKED IN PR-FOCUS MODE ───
+   --- BELOW THIS LINE: BLOCKED IN PR-FOCUS MODE ---
    5. Issues labeled: bug, critical (EXCLUDE ai-created label)
    6. Issues labeled: good-first-issue (EXCLUDE ai-created label)
    7. Code analysis: identify bugs, security issues, improvements
@@ -148,7 +148,7 @@ Execute this loop continuously until budget exhaustion forces termination:
 ## Sub-Agent Types
 
 Use the Task tool with subagent_type="general-purpose" and these specialized prompts.
-Where applicable, leverage existing slash commands from ~/.claude/commands/.
+Where applicable, leverage existing slash commands from agentsmd/commands/.
 
 ### branch-updater (HIGHEST PRIORITY)
 

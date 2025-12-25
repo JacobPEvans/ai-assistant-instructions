@@ -1,6 +1,6 @@
 ---
 description: Review documentation files for consistency, completeness, and markdownlint compliance
-model: haiku
+model: sonnet
 author: JacobPEvans
 allowed-tools: Task, TaskOutput, TodoWrite, Bash(markdownlint-cli2:*), Glob, Grep, Read
 ---

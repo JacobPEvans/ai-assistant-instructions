@@ -25,7 +25,7 @@ Designed to be invoked by other commands or agents for focused code generation t
 
 ### Quality Standards
 
-Follow [Code Standards](../../../agentsmd/rules/code-standards.md):
+Follow [Code Standards](../../rules/code-standards.md):
 
 - **Readability**: Clear, self-documenting code
 - **Naming**: Descriptive, concise names for all identifiers
@@ -551,7 +551,7 @@ If requirements are unclear or ambiguous:
 
 ## Related Documentation
 
-- [Code Standards](../../../agentsmd/rules/code-standards.md)
-- [DRY Principle](../../../agentsmd/rules/dry-principle.md)
-- [Styleguide](../../../agentsmd/rules/styleguide.md)
-- [generate-code Command](../../../agentsmd/commands/generate-code.md)
+- [Code Standards](../../rules/code-standards.md)
+- [DRY Principle](../../rules/dry-principle.md)
+- [Styleguide](../../rules/styleguide.md)
+- [generate-code Command](../../commands/generate-code.md)

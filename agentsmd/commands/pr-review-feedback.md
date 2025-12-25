@@ -1,6 +1,6 @@
 ---
 description: How to programmatically resolve PR review threads using GitHub's GraphQL API
-model: opus
+model: haiku
 author: JacobPEvans
 allowed-tools:
   # Core tools (required for all commands)

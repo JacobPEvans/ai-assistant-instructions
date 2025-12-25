@@ -1,7 +1,7 @@
 ---
 title: "Manage PR"
 description: "Complete workflow for creating, monitoring, and fixing pull requests until ready to merge"
-model: haiku
+model: sonnet
 type: "command"
 version: "1.0.0"
 allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Bash(markdownlint-cli2:*), Read

@@ -467,6 +467,6 @@ If unable to resolve a thread:
 
 ## Related Documentation
 
-- [PR Review Thread Resolver Command](../../../agentsmd/commands/resolve-pr-review-thread.md)
-- [Code Standards](../../../agentsmd/rules/code-standards.md)
-- [Subagent Parallelization](../../../agentsmd/rules/subagent-parallelization.md)
+- [PR Review Thread Resolver Command](../../commands/resolve-pr-review-thread.md)
+- [Code Standards](../../rules/code-standards.md)
+- [Subagent Parallelization](../../rules/subagent-parallelization.md)

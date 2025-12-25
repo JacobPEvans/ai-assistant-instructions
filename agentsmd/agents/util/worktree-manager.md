@@ -426,6 +426,6 @@ This sub-agent can be invoked by:
 
 ## Related Documentation
 
-- [Worktrees](../../../agentsmd/rules/worktrees.md) - Authoritative worktree structure
-- [Branch Hygiene](../../../agentsmd/rules/branch-hygiene.md) - Branch management rules
-- [Init Worktree Command](../../../agentsmd/commands/init-worktree.md) - User-facing command
+- [Worktrees](../../rules/worktrees.md) - Authoritative worktree structure
+- [Branch Hygiene](../../rules/branch-hygiene.md) - Branch management rules
+- [Init Worktree Command](../../commands/init-worktree.md) - User-facing command

@@ -1,6 +1,6 @@
 ---
 description: Delegate tasks to external AI models (Gemini, Ollama, GPT) for specialized capabilities
-model: sonnet
+model: haiku
 # SECURITY: Wildcards required for AI tools (dynamic models/prompts), curl for API checks
 # Following least privilege: limited to specific AI CLIs + connectivity testing only
 allowed-tools: Bash(gemini:*), Bash(ollama:*), Bash(litellm:*), Bash(curl:*), Read, Write, Grep

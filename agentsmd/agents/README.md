@@ -1,7 +1,9 @@
 # Claude Sub-Agents
 
-Sub-agents are specialized, reusable AI assistants that can be invoked by slash commands or other agents to perform focused tasks.
+Sub-agents are specialized, reusable AI assistants that can be invoked by slash commands or other sub-agents to perform focused tasks.
 They provide modular capabilities that can be composed together for complex workflows.
+
+> **Note:** Per [Claude Code docs](https://code.claude.com/docs/en/sub-agents), the folder is named `agents/` but we refer to them as "sub-agents" in documentation.
 
 ## What Are Sub-Agents?
 
@@ -31,7 +33,7 @@ Unlike slash commands (which orchestrate workflows), sub-agents are workers that
 You can reference a sub-agent in your prompt to Claude:
 
 ```text
-@.claude/sub-agents/review/code-reviewer.md
+@.claude/agents/review/code-reviewer.md
 Please review the authentication module for security issues.
 ```
 
@@ -43,7 +45,7 @@ Slash commands can delegate to sub-agents:
 ## Step 2: Code Review
 
 Invoke the code-reviewer sub-agent:
-@.claude/sub-agents/review/code-reviewer.md
+@.claude/agents/review/code-reviewer.md
 
 Focus areas:
 - Security validation
@@ -56,14 +58,14 @@ Sub-agents can invoke other sub-agents for specialized tasks:
 
 ```markdown
 For infrastructure concerns, delegate to:
-@.claude/sub-agents/review/infrastructure-reviewer.md
+@.claude/agents/review/infrastructure-reviewer.md
 ```
 
 ## Available Sub-Agents
 
 ### Review Sub-Agents
 
-Located in `.claude/sub-agents/review/`:
+Located in `.claude/agents/review/`:
 
 - **code-reviewer.md**: Comprehensive code review with security, quality, and maintainability checks
 - **docs-reviewer.md**: Documentation validation including markdownlint compliance and link checking
@@ -71,26 +73,26 @@ Located in `.claude/sub-agents/review/`:
 
 ### PR Management Sub-Agents
 
-Located in `.claude/sub-agents/pr/`:
+Located in `.claude/agents/pr/`:
 
 - **ci-fixer.md**: Analyzes and fixes CI failures in pull requests without bypassing checks
 - **thread-resolver.md**: Resolves PR review threads through implementation or explanation with GraphQL resolution
 
 ### Issue Management Sub-Agents
 
-Located in `.claude/sub-agents/issue/`:
+Located in `.claude/agents/issue/`:
 
 - **issue-resolver.md**: Analyzes GitHub issue requirements, implements solutions, and creates comprehensive tests
 
 ### Code Generation Sub-Agents
 
-Located in `.claude/sub-agents/code/`:
+Located in `.claude/agents/code/`:
 
 - **code-generator.md**: Generates high-quality, maintainable, and secure code following project standards
 
 ### Utility Sub-Agents
 
-Located in `.claude/sub-agents/util/`:
+Located in `.claude/agents/util/`:
 
 - **worktree-manager.md**: Manages git worktrees including creation, cleanup of stale worktrees, and synchronization
 - **test-runner.md**: Executes test suites, analyzes failures, and suggests fixes across multiple test frameworks
@@ -106,7 +108,7 @@ Sub-agents follow this format:
 name: my-sub-agent
 description: Brief description of what this sub-agent does
 author: YourName
-allowed-tools: Tool1, Tool2, Tool3
+allowed-tools: Task, TaskOutput, Bash(git status:*), Read(**)
 ---
 
 # Sub-Agent Name
@@ -139,11 +141,12 @@ Practical examples of invoking this sub-agent.
 3. **Clear Interfaces**: Define expected inputs and outputs
 4. **Reusability**: Make sub-agents general enough to be reused
 5. **Documentation**: Provide usage examples and constraints
+6. **Explicit Tools**: Always specify allowed-tools explicitly (never use `*`)
 
 ## Directory Structure
 
 ```text
-.claude/sub-agents/
+.claude/agents/
 ├── README.md                          # This file
 ├── review/                            # Review-focused sub-agents
 │   ├── code-reviewer.md
@@ -167,5 +170,5 @@ Practical examples of invoking this sub-agent.
 ## Related Documentation
 
 - [Slash Commands](../commands/) - User-facing workflow commands
-- [Rules](../../agentsmd/rules/) - Project standards and guidelines
-- [Workflows](../../agentsmd/workflows/) - Multi-step development processes
+- [Rules](../rules/) - Project standards and guidelines
+- [Workflows](../workflows/) - Multi-step development processes

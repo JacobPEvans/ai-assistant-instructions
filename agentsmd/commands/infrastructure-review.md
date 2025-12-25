@@ -1,6 +1,6 @@
 ---
 description: Review Infrastructure as Code (Terraform/Terragrunt) for security, cost-efficiency, and best practices
-model: opus
+model: sonnet
 author: JacobPEvans
 allowed-tools: Task, TaskOutput, TodoWrite, Bash(terraform:*), Bash(terragrunt:*), Glob, Grep, Read
 ---

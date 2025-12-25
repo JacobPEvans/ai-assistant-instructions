@@ -1,6 +1,6 @@
 ---
 description: Fix CI failures on open PRs in the current repository
-model: opus
+model: sonnet
 author: JacobPEvans
 allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Bash(git worktree remove:*), Read, Glob, Grep
 ---

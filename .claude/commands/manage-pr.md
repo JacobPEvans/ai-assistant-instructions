@@ -1,1 +1,0 @@
-../../agentsmd/commands/manage-pr.md

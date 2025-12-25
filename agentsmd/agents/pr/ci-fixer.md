@@ -352,6 +352,6 @@ If unable to fix after 3 attempts:
 
 ## Related Documentation
 
-- [Code Standards](../../../agentsmd/rules/code-standards.md)
-- [Worktrees](../../../agentsmd/rules/worktrees.md)
-- [Subagent Parallelization](../../../agentsmd/rules/subagent-parallelization.md)
+- [Code Standards](../../rules/code-standards.md)
+- [Worktrees](../../rules/worktrees.md)
+- [Subagent Parallelization](../../rules/subagent-parallelization.md)

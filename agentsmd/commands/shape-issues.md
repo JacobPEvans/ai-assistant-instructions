@@ -4,7 +4,7 @@ description: "Shape raw ideas into actionable GitHub Issues using iterative expl
 model: opus
 type: "command"
 version: "1.0.0"
-allowed-tools: "*"
+allowed-tools: Task, TaskOutput, TodoWrite, AskUserQuestion, Bash(gh:*), Read, Glob, Grep, WebSearch, WebFetch
 think: true
 author: "roksechs"
 source: "https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3"

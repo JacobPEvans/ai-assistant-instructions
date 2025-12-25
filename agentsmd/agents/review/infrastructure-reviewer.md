@@ -243,7 +243,7 @@ Focus: Modularity, tagging, documentation
 
 This sub-agent applies:
 
-- [Infrastructure Standards](../../../agentsmd/rules/infrastructure-standards.md)
+- [Infrastructure Standards](../../rules/infrastructure-standards.md)
 - AWS Well-Architected Framework
 - Terraform best practices
 - Terragrunt conventions

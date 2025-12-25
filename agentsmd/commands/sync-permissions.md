@@ -1,6 +1,6 @@
 ---
 description: Scan local AI settings and merge safe permissions into repo
-model: opus
+model: haiku
 allowed-tools: Task, TaskOutput, TodoWrite, Bash(cat:*), Bash(find:*), Bash(rm:*), Glob(**), Grep(**), Read(**), Write(**)
 ---
 
