@@ -88,9 +88,7 @@ Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 | Command | Description |
 | ------- | ----------- |
 | `/review-code` | Structured code review with quality checks |
-| `/infrastructure-review` | Review Terraform/Terragrunt infrastructure |
 | `/review-docs` | Review and improve documentation |
-| `/generate-code` | Scaffold new code with standards |
 
 ### PR Lifecycle Management
 

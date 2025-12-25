@@ -289,8 +289,6 @@ existing test patterns, write comprehensive tests, and create a PR.
 
 SCOPE: ONE component or function per PR. Keep PRs reviewable.
 
-Reference: /generate-code for code generation standards including tests.
-
 When ready to merge: rebase on main locally, fast-forward merge into main, push. PR auto-closes.
 You may spawn helper agents. NEVER ask user questions.
 ```
