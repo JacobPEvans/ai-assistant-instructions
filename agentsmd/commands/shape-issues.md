@@ -131,7 +131,7 @@ gh pr list --state all --json title,mergedAt,labels
 ```bash
 # Create shaped Issues ready for development
 gh issue create --title "[Small Batch] Add user preference validation" \
-  --body "Size: m (3-5 days)
+  --body "Size: l (1-2 weeks)
 Problem: Users confused by unclear error messages
 Solution sketch: Add client-side validation with clear feedback
 Rabbit holes: Don't rebuild entire form system"
