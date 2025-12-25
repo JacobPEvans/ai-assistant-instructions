@@ -2,7 +2,7 @@
 name: reviewer
 description: Code review using multi-model consensus for thorough analysis
 model: sonnet
-allowed-tools: Task, TaskOutput, Read, Glob, Grep, Bash(git:*), Bash(gh:*)
+allowed-tools: Task, TaskOutput, Read, Glob, Grep, Bash(git status:*), Bash(git diff:*), Bash(git show:*), Bash(git log:*), Bash(git branch:*), Bash(git describe:*), Bash(git blame:*), Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh pr list:*), Bash(gh pr checks:*), Bash(gh issue view:*), Bash(gh repo view:*)
 author: JacobPEvans
 ---
 

@@ -1,7 +1,7 @@
 ---
 name: researcher
 description: Research tasks delegated to current best research model (Gemini 3 Pro cloud, qwen3-next:80b local)
-model: haiku
+model: sonnet
 allowed-tools: Task, TaskOutput, Read, Glob, Grep, WebSearch, WebFetch
 author: JacobPEvans
 ---
@@ -10,6 +10,9 @@ author: JacobPEvans
 
 Research specialist using the best available model for research tasks.
 Routes to Gemini 3 Pro (cloud) or qwen3-next:80b (local) via PAL MCP.
+
+**Note**: This agent uses Sonnet for orchestration and task coordination, while delegating
+actual research work to specialized models (Gemini 3 Pro or qwen3-next:80b) via PAL MCP.
 
 ## Model Selection
 
