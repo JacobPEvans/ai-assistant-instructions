@@ -2,7 +2,9 @@
   "domains": [
     "github.com",
     "githubusercontent.com",
+    "raw.githubusercontent.com",
     "anthropic.com",
+    "claude.com",
     "nixos.org",
     "hashicorp.com",
     "terraform.io",

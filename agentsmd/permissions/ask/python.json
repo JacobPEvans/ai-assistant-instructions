@@ -1,6 +1,6 @@
 {
   "commands": [
-    "python -m",
-    "python3 -m"
+    "python",
+    "python3"
   ]
 }

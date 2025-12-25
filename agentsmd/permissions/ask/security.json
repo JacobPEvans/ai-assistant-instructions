@@ -1,0 +1,5 @@
+{
+  "commands": [
+    "security unlock-keychain"
+  ]
+}

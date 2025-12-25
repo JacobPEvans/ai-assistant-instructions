@@ -73,6 +73,10 @@
     "type",
     "time",
     "timeout",
-    "hash"
+    "hash",
+    "plutil",
+    "security find-generic-password",
+    "security list-keychains",
+    "security show-keychain-info"
   ]
 }
