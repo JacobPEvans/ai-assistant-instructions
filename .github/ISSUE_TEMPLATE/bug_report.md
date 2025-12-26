@@ -12,8 +12,6 @@ assignees: ''
 
 **Current pain**: <!-- Impact on users or workflow -->
 
-**Timebox**: <!-- Small batch (1-2 weeks) | Spike (needs investigation) -->
-
 **Priority**: <!-- priority:low | priority:medium | priority:high | priority:critical -->
 
 ## Steps to Reproduce
