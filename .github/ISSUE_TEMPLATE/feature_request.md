@@ -12,7 +12,7 @@ assignees: ''
 
 **Current pain**: <!-- What's broken or frustrating right now? -->
 
-**Timebox**: <!-- Small batch (1-2 weeks) | Big batch (6 weeks) | Spike (investigation) -->
+**Priority**: <!-- priority:low | priority:medium | priority:high | priority:critical -->
 
 ## Solution Sketch
 
