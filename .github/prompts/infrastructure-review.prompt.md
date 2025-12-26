@@ -1,1 +1,0 @@
-../../agentsmd/commands/infrastructure-review.md
