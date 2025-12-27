@@ -24,12 +24,27 @@ def find_markdown_files(root_dir: Path) -> Generator[Path, None, None]:
                 yield Path(root) / file
 
 def extract_file_links(content: str) -> Generator[str, None, None]:
-    """Extract file links from markdown content (not URLs)."""
-    # Pattern: ]( ... ) but not http:// or https:// or mailto:
-    pattern = r'\]\(([^)#]+)\)'
+    """Extract file links from markdown content (not URLs).
 
-    for match in re.finditer(pattern, content):
+    Handles both inline links [text](link) and reference-style links [text][ref].
+    """
+    # First, extract reference-style link definitions: [ref]: path
+    ref_definitions = {}
+    ref_pattern = r'^\[([^\]]+)\]:\s*(.+)$'
+    for match in re.finditer(ref_pattern, content, re.MULTILINE):
+        ref_id = match.group(1).strip()
+        ref_target = match.group(2).strip()
+        # Remove fragment identifier from definition
+        ref_target = ref_target.split('#')[0].strip()
+        ref_definitions[ref_id] = ref_target
+
+    # Extract inline links: [text](link)
+    # Fixed pattern to handle parentheses in filenames
+    inline_pattern = r'\]\(([^)]+)\)'
+    for match in re.finditer(inline_pattern, content):
         link = match.group(1).strip()
+        # Remove fragment identifier
+        link = link.split('#')[0].strip()
 
         # Skip empty links
         if not link:
@@ -45,6 +60,31 @@ def extract_file_links(content: str) -> Generator[str, None, None]:
             continue
 
         yield link
+
+    # Extract reference-style link usages: [text][ref] or [text][]
+    ref_usage_pattern = r'\[([^\]]+)\]\[([^\]]*)\]'
+    for match in re.finditer(ref_usage_pattern, content):
+        ref_text = match.group(1).strip()
+        ref_id = match.group(2).strip()
+
+        # If ref_id is empty, use the text as the reference ID
+        if not ref_id:
+            ref_id = ref_text
+
+        # Look up the reference
+        if ref_id in ref_definitions:
+            link = ref_definitions[ref_id]
+
+            # Skip URLs
+            if link.startswith(('http://', 'https://', 'mailto:')):
+                continue
+
+            # Skip placeholders and template variables
+            if (link.startswith('<') and link.endswith('>')) or \
+               (link.startswith('{') and link.endswith('}')):
+                continue
+
+            yield link
 
 def check_links() -> int:
     """Check all markdown files for broken links."""
