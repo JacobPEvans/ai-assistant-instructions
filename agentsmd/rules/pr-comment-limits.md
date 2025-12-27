@@ -41,46 +41,12 @@ When a PR reaches 50 comments:
 
 ## Implementation Details
 
-### GraphQL Query: Count PR Comments
+### GraphQL Patterns
 
-Use this query to check the total comment count on a PR:
+See **[GitHub GraphQL Skill](../skills/github-graphql/SKILL.md)** for:
 
-```bash
-gh api graphql -f query='
-query {
-  repository(owner: "OWNER", name: "REPO") {
-    pullRequest(number: PR_NUMBER) {
-      comments(last: 100) {
-        totalCount
-      }
-      reviewThreads(last: 100) {
-        totalCount
-        nodes {
-          id
-          isResolved
-        }
-      }
-    }
-  }
-}
-' --jq '.data.repository.pullRequest.comments.totalCount + .data.repository.pullRequest.reviewThreads.totalCount'
-```
-
-### GraphQL Mutation: Resolve Review Thread
-
-Use this mutation to resolve review threads when comment limit is reached:
-
-```bash
-gh api graphql -f query='
-mutation {
-  resolveReviewThread(input: {threadId: "THREAD_ID"}) {
-    thread {
-      id
-      isResolved
-    }
-  }
-}'
-```
+- **Count PR comments**: Query `comments.totalCount` + `reviewThreads.totalCount`
+- **Resolve threads**: Use `resolveReviewThread` mutation with thread's node ID
 
 ## Auto-Resolution Message Template
 

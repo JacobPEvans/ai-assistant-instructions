@@ -67,37 +67,11 @@ Scope: All unresolved threads
 
 ### Step 1: Retrieve Unresolved Threads
 
-Use GraphQL to get review threads with full context:
+Use the **[GitHub GraphQL Skill](../skills/github-graphql/SKILL.md)** patterns for retrieving review threads.
 
-```bash
-gh api graphql -f query='
-{
-  repository(owner: "OWNER", name: "REPO") {
-    pullRequest(number: PR_NUMBER) {
-      reviewThreads(last: 100) {
-        nodes {
-          id
-          isResolved
-          path
-          line
-          startLine
-          comments(last: 100) {
-            nodes {
-              id
-              databaseId
-              body
-              author { login }
-              createdAt
-            }
-          }
-        }
-      }
-    }
-  }
-}' -f owner="OWNER" -f repo="REPO" -F pr=NUMBER
-```
+**Query**: `reviewThreads` with `last: 100` to get all threads.
 
-Extract:
+**Extract**:
 
 - `id`: Thread ID (starts with `PRRT_`) for resolution
 - `isResolved`: Skip if true, process if false
@@ -254,33 +228,15 @@ Acknowledged but not implementing because:
 
 ### Step 8: Resolve Thread
 
-IMMEDIATELY after replying, resolve via GraphQL:
+IMMEDIATELY after replying, resolve via GraphQL using the **[GitHub GraphQL Skill](../skills/github-graphql/SKILL.md)** mutation patterns.
 
-```bash
-gh api graphql -f query='mutation {
-  resolveReviewThread(input: {threadId: "PRRT_xxx"}) {
-    thread { id isResolved }
-  }
-}'
-```
-
-Use the thread's GraphQL node ID (from Step 1).
+**Mutation**: `resolveReviewThread` with the thread's GraphQL node ID (starts with `PRRT_`) from Step 1.
 
 ### Step 9: Verify Resolution
 
-After resolving all threads, verify none remain:
+After resolving all threads, verify none remain using the **[GitHub GraphQL Skill](../skills/github-graphql/SKILL.md)** verification patterns.
 
-```bash
-gh api graphql -f query='{
-  repository(owner: "OWNER", name: "REPO") {
-    pullRequest(number: NUMBER) {
-      reviewThreads(last: 100) { nodes { isResolved } }
-    }
-  }
-}' | jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)] | length'
-```
-
-Must return `0` before reporting completion.
+Query `reviewThreads` and filter for `isResolved == false`. Must return `0` unresolved threads before reporting completion.
 
 ### Step 10: Commit and Push
 
@@ -467,6 +423,6 @@ If unable to resolve a thread:
 
 ## Related Documentation
 
-- [PR Review Thread Resolver Command](../../commands/resolve-pr-review-thread.md)
-- [Code Standards](../../rules/code-standards.md)
-- [Subagent Parallelization](../../rules/subagent-parallelization.md)
+- [GitHub GraphQL Skill](../skills/github-graphql/SKILL.md) - Canonical GraphQL patterns for all PR operations
+- [PR Review Thread Resolver Command](../commands/resolve-pr-review-thread.md)
+- [Subagent Parallelization](../rules/subagent-parallelization.md)

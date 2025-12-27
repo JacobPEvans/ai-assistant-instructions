@@ -141,23 +141,9 @@ bun run lint
 
 #### Step 4: Check Comment Limit (Before Submitting Feedback)
 
-Before posting any new comments:
+Before posting any new comments, check the current comment count using the **[GitHub GraphQL Skill](../skills/github-graphql/SKILL.md)** patterns.
 
-```bash
-# Check current comment count
-gh api graphql -f query='
-query {
-  repository(owner: "OWNER", name: "REPO") {
-    pullRequest(number: PR_NUMBER) {
-      comments(last: 100) { totalCount }
-      reviewThreads(last: 100) { totalCount }
-    }
-  }
-}' --jq '.data.repository.pullRequest.comments.totalCount + .data.repository.pullRequest.reviewThreads.totalCount'
-
-# If >= 50: Do NOT post new comments - exit with message explaining the limit
-# If < 50: Proceed with feedback submission
-```
+Query `comments.totalCount` + `reviewThreads.totalCount` for the PR. See also [PR Comment Limits rule](../rules/pr-comment-limits.md).
 
 **Decision Logic**:
 

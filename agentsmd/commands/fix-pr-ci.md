@@ -172,12 +172,7 @@ If subagent fails 3 times on same PR:
 
 ## GraphQL Patterns
 
-When using GraphQL, always use single-line format:
-
-```bash
-# CORRECT: Single-line with --raw-field
-gh api graphql --raw-field 'query=query { repository(owner: "OWNER", name: "REPO") { pullRequest(number: N) { mergeable statusCheckRollup { state } } } }'
-```
+See **[GitHub GraphQL Skill](../skills/github-graphql/SKILL.md)** for query patterns and format requirements.
 
 ## Example Usage
 

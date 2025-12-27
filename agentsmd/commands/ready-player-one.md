@@ -98,23 +98,9 @@ For each PR, check:
 3. **Review status**: Check for unresolved review threads via GraphQL
 4. **Conflicts**: Must have no merge conflicts
 
-Get unresolved review threads:
+Get unresolved review threads using the **[GitHub GraphQL Skill](../skills/github-graphql/SKILL.md)** patterns.
 
-```bash
-gh api graphql -f query='
-query($owner: String!, $repo: String!, $pr: Int!) {
-  repository(owner: $owner, name: $repo) {
-    pullRequest(number: $pr) {
-      reviewThreads(last: 100) {
-        nodes {
-          isResolved
-        }
-      }
-    }
-  }
-}' -f owner="$OWNER" -f repo="$REPO" -F pr=$PR_NUMBER \
-  --jq '.data.repository.pullRequest.reviewThreads.nodes | map(select(.isResolved == false)) | length'
-```
+Query `reviewThreads` and filter for `isResolved == false`.
 
 A PR is **READY TO MERGE** when:
 
