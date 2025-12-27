@@ -30,7 +30,7 @@ See **[GitHub GraphQL Skill](../../.claude/skills/github-graphql/SKILL.md)** for
 ## Key Fields
 
 | Operation | GraphQL Field | Purpose |
-|-----------|---------------|---------|
+| --------- | ------------- | ------- |
 | Get threads | `reviewThreads.nodes[].id` | Thread ID for resolution |
 | Check status | `isResolved` | Skip resolved threads |
 | Find comment | `path`, `line` | Where to find code |
