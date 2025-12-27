@@ -1,3 +1,8 @@
+---
+name: agents
+description: Directory of Claude sub-agents for specialized task execution
+---
+
 # Claude Sub-Agents
 
 Sub-agents are specialized, reusable AI assistants that can be invoked by slash commands or other sub-agents to perform focused tasks.
