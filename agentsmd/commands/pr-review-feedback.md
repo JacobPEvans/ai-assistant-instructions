@@ -41,4 +41,4 @@ See **[GitHub GraphQL Skill](../../.claude/skills/github-graphql/SKILL.md)** for
 
 - **Skill**: [GitHub GraphQL API](../../.claude/skills/github-graphql/SKILL.md) - Canonical patterns
 - **Rule**: [PR Comment Limits](../rules/pr-comment-limits.md) - 50-comment limit
-- **Agent**: [thread-resolver](../agents/thread-resolver.md) - Detailed comment interpretation
+- **Agent**: [pr-thread-resolver](../agents/pr-thread-resolver.md) - Detailed comment interpretation

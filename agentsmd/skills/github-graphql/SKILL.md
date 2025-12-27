@@ -1,6 +1,6 @@
 ---
 title: "GitHub GraphQL API Patterns"
-description: "Standardized GraphQL query and mutation patterns for GitHub PR and review thread operations"
+description: "Standardized GraphQL query and mutation patterns for GitHub PR, review thread, and comment operations"
 version: "1.0.0"
 author: "JacobPEvans"
 ---

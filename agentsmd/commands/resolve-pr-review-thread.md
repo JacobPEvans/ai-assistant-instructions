@@ -30,7 +30,7 @@ Orchestrates resolution of GitHub PR review comments by delegating to the specia
 
 1. Get current PR number from context
 2. Check for unresolved review threads
-3. Launch `thread-resolver` subagent for this PR
+3. Launch `pr-thread-resolver` subagent for this PR
 4. Monitor completion and verify all threads marked resolved
 
 ### All Mode
@@ -43,6 +43,6 @@ Orchestrates resolution of GitHub PR review comments by delegating to the specia
 
 ## Related
 
-- **Agent**: [`thread-resolver`](../agents/thread-resolver.md) - Detailed comment interpretation and resolution logic
+- **Agent**: [`pr-thread-resolver`](../agents/pr-thread-resolver.md) - Detailed comment interpretation and resolution logic
 - **Rules**: [PR Comment Limits](../rules/pr-comment-limits.md) - 50-comment limit enforcement
 - **Principles**: [Subagent Parallelization](../rules/subagent-parallelization.md) - Batching strategy

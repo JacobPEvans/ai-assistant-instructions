@@ -1,5 +1,5 @@
 ---
-name: thread-resolver
+name: pr-thread-resolver
 description: Specialized sub-agent for resolving PR review threads through implementation or explanation
 author: JacobPEvans
 allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Edit, Glob, Grep, Read, WebFetch

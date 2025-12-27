@@ -78,7 +78,7 @@ All sub-agents are located directly in `.claude/agents/`:
 ### PR Management Sub-Agents
 
 - **ci-fixer.md**: Analyzes and fixes CI failures in pull requests without bypassing checks
-- **thread-resolver.md**: Resolves PR review threads through implementation or explanation with GraphQL resolution
+- **pr-thread-resolver.md**: Resolves PR review threads through implementation or explanation with GraphQL resolution
 
 ### Issue Management Sub-Agents
 
@@ -160,7 +160,7 @@ Practical examples of invoking this sub-agent.
 ├── researcher.md         # Research specialist
 ├── reviewer.md           # Multi-model consensus reviewer
 ├── test-runner.md        # Test execution agent
-├── thread-resolver.md    # PR thread resolver
+├── pr-thread-resolver.md # PR thread resolver
 └── worktree-manager.md   # Git worktree manager
 ```
 

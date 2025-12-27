@@ -147,7 +147,7 @@ See [GitHub GraphQL Skill](../../.claude/skills/github-graphql/SKILL.md) for:
 gh pr view <PR_NUMBER> --json reviews,comments
 ```
 
-**For batch resolution**: Use `/resolve-pr-review-thread` command which orchestrates the `thread-resolver` agent.
+**For batch resolution**: Use `/resolve-pr-review-thread` command which orchestrates the `pr-thread-resolver` agent.
 
 ### 2.5. Address All Feedback
 
