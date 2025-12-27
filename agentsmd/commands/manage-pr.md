@@ -126,50 +126,28 @@ Returns an array of review comments with:
 
 ### 2.4. Resolve PR Conversations
 
-> **STRICT BLOCKER**: ALL conversations must be PHYSICALLY MARKED AS RESOLVED in GitHub before requesting user review. This is not optional. Do NOT return control to the user until every conversation shows `isResolved: true`.
+> **STRICT BLOCKER**: ALL conversations must be PHYSICALLY MARKED AS RESOLVED in GitHub before requesting user review.
 
-#### Step 1: Get all review threads
+**Workflow**:
 
-```bash
-gh api graphql -f query='{
-  repository(owner: "OWNER", name: "REPO") {
-    pullRequest(number: 123) {
-      reviewThreads(last: 100) {
-        nodes { id isResolved comments(last: 100) { nodes { body path line } } }
-      }
-    }
-  }
-}'
-```
+1. Get all unresolved review threads
+2. For each: fix the issue, reply with details, mark as resolved
+3. Verify ALL conversations show `isResolved: true`
 
-#### Step 2: For each unresolved thread, fix the issue then resolve it
+**GraphQL Queries**:
+See [GitHub GraphQL Skill](../../.claude/skills/github-graphql/SKILL.md) for:
 
-```bash
-gh api graphql -f query='mutation {
-  resolveReviewThread(input: {threadId: "PRRT_xxx"}) {
-    thread { isResolved }
-  }
-}'
-```
+- Fetching review threads with `reviewThreads` query
+- Resolving threads with `resolveReviewThread` mutation
+- Verifying resolution status
 
-#### Step 3: Verify ALL threads are resolved
+**Quick Check**:
 
 ```bash
-# Must return ZERO unresolved threads
-gh api graphql -f query='{
-  repository(owner: "OWNER", name: "REPO") {
-    pullRequest(number: 123) {
-      reviewThreads(last: 100) {
-        nodes { id isResolved }
-      }
-    }
-  }
-}' | jq '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)'
+gh pr view <PR_NUMBER> --json reviews,comments
 ```
 
-If the above command returns ANY output, there are still unresolved conversations. **DO NOT proceed to Phase 3.**
-
-**See [pr-review-feedback.md](pr-review-feedback.md) for batch resolution scripts.**
+**For batch resolution**: Use `/resolve-pr-review-thread` command which orchestrates the `thread-resolver` agent.
 
 ### 2.5. Address All Feedback
 
@@ -189,23 +167,12 @@ If the above command returns ANY output, there are still unresolved conversation
 ```bash
 # 1. All checks pass
 gh pr checks <PR_NUMBER>
-# Must show ALL checks as "pass"
 
-# 2. All conversations resolved
-gh api graphql -f query='{
-  repository(owner: "OWNER", name: "REPO") {
-    pullRequest(number: 123) {
-      reviewThreads(last: 100) {
-        nodes { isResolved }
-      }
-    }
-  }
-}' | jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)] | length'
-# Must return 0
-
-# 3. PR is mergeable
+# 2. PR is mergeable
 gh pr view <PR_NUMBER> --json mergeable
-# Must show "MERGEABLE"
+
+# 3. All conversations resolved
+# (Use GitHub GraphQL Skill queries to verify isResolved: true for all threads)
 ```
 
 **Only if ALL three verifications pass**, request user review:
@@ -261,12 +228,7 @@ gh pr view <PR_NUMBER> --json reviews,comments
 # Get line-level comments via API
 gh api repos/<OWNER>/<REPO>/pulls/<PR_NUMBER>/comments
 
-# Resolve review thread via GraphQL
-gh api graphql -f query='mutation {
-  resolveReviewThread(input: {threadId: "PRRT_xxx"}) {
-    thread { isResolved }
-  }
-}'
+# Resolve review thread - See GitHub GraphQL Skill for mutation patterns
 ```
 
 ## Usage Instructions

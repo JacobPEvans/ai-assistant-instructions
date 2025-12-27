@@ -1,0 +1,8 @@
+- id: check-token-limits
+  name: Check token limits with atc
+  entry: atc
+  language: python
+  files: '(\.md|\.py|\.ts|\.tsx|\.js)$'
+  additional_dependencies: ['anthropic-token-counter']
+  require_serial: true
+  stages: [commit]

@@ -1,0 +1,59 @@
+# Token Limit Configuration
+# Enforces maximum token counts for files to prevent context bloat
+# Hard blocks at commit and merge time
+
+# Global defaults
+defaults:
+  max_tokens: 2000
+
+# File-specific limits
+limits:
+  # Commands - keep these thin (orchestrators only)
+  agentsmd/commands/*.md: 1000
+
+  # Agents - can be larger but should still be focused
+  agentsmd/agents/*.md: 2500
+
+  # Rules and documentation
+  agentsmd/rules/*.md: 2000
+  agentsmd/docs/*.md: 3000
+
+  # Workflows
+  agentsmd/workflows/*.md: 2000
+
+  # Skills are individual tools - keep focused
+  .claude/skills/**/*.md: 1500
+
+# Violation policy
+policy:
+  # Hard block at commit time
+  pre_commit: hard_block
+
+  # Hard block at PR merge time
+  pr_merge: hard_block
+
+  # Warning threshold (warn but don't block)
+  warning_threshold: 0.9  # Warn when file is 90% of limit
+
+# Refactoring strategy for violations
+# When a file violates the limit, use this strategy:
+refactoring:
+  resolve-pr-review-thread:
+    current_tokens: 6300
+    strategy: "Extract detailed workflows and examples to subagent, keep command as thin orchestrator"
+    target_tokens: 800
+
+  delegate-to-ai:
+    current_tokens: 3500
+    strategy: "Delegate routing logic to subagent PAL MCP tool, keep command as simple wrapper"
+    target_tokens: 600
+
+  respond-all-prs:
+    current_tokens: 3100
+    strategy: "Move PR orchestration logic to subagent, command becomes simple task launcher"
+    target_tokens: 500
+
+  auto-claude:
+    current_tokens: 5800
+    strategy: "Extract state machine logic to subagent, keep command as coordinator"
+    target_tokens: 1000
