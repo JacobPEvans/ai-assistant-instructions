@@ -5,13 +5,14 @@ import os
 import re
 import sys
 from pathlib import Path
+from typing import Generator
 
 # ANSI colors
 RED = '\033[0;31m'
 GREEN = '\033[0;32m'
 NC = '\033[0m'
 
-def find_markdown_files(root_dir):
+def find_markdown_files(root_dir: Path) -> Generator[Path, None, None]:
     """Find all markdown files excluding .git directory."""
     for root, dirs, files in os.walk(root_dir):
         # Skip .git directory
@@ -22,7 +23,7 @@ def find_markdown_files(root_dir):
             if file.endswith('.md'):
                 yield Path(root) / file
 
-def extract_file_links(content):
+def extract_file_links(content: str) -> Generator[str, None, None]:
     """Extract file links from markdown content (not URLs)."""
     # Pattern: ]( ... ) but not http:// or https:// or mailto:
     pattern = r'\]\(([^)#]+)\)'
@@ -45,7 +46,7 @@ def extract_file_links(content):
 
         yield link
 
-def check_links():
+def check_links() -> int:
     """Check all markdown files for broken links."""
     errors = 0
     root_dir = Path.cwd()
