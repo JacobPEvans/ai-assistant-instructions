@@ -29,16 +29,16 @@ Use prefixes to categorize issues:
 
 ### Priority Labels (required - pick one)
 
-- `priority: critical` - Urgent, blocks other work
-- `priority: high` - Important, address soon
-- `priority: medium` - Normal priority
-- `priority: low` - Address when time permits
+- `priority:critical` - Urgent, blocks other work
+- `priority:high` - Important, address soon
+- `priority:medium` - Normal priority
+- `priority:low` - Address when time permits
 
 ### Status Labels (add as appropriate)
 
 - `ready-for-dev` - Shaped and ready for `/resolve-issues`
-- `help wanted` - Open for contributors
-- `good first issue` - Suitable for newcomers
+- `help-wanted` - Open for contributors
+- `good-first-issue` - Suitable for newcomers
 
 ### Size Labels (for shaped issues)
 
