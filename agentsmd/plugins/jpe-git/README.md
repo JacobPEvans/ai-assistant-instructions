@@ -4,7 +4,7 @@ Claude Code plugin providing a local rebase-merge workflow for maintaining linea
 
 ## Overview
 
-This plugin provides the `/rebase-merge` command for merging PRs using a local rebase workflow. Unlike `gh pr merge`, this approach:
+This plugin provides the `/git-rebase-pr` command for merging PRs using a local rebase workflow. Unlike `gh pr merge`, this approach:
 
 - Maintains completely linear history (no merge commits)
 - Keeps control local (no GitHub merge button)
@@ -29,7 +29,7 @@ ln -s /path/to/this/repo/.claude/plugins/jpe-git ~/.claude/plugins/jpe-git
 
 ## Commands
 
-### `/rebase-merge`
+### `/git-rebase-pr`
 
 Merge the current feature branch into main using a local rebase workflow:
 
@@ -43,7 +43,7 @@ Merge the current feature branch into main using a local rebase workflow:
 **Usage**:
 
 ```bash
-/rebase-merge
+/git-rebase-pr
 ```
 
 **Prerequisites**:
@@ -77,8 +77,8 @@ See [skills/git-rebase-workflow/SKILL.md](skills/git-rebase-workflow/SKILL.md) f
 
 ### vs `gh pr merge`
 
-| Feature | `/rebase-merge` (this plugin) | `gh pr merge` |
-| ------- | ----------------------------- | ------------- |
+| Feature | `/git-rebase-pr` (this plugin) | `gh pr merge` |
+| ------- | ------------------------------ | ------------- |
 | History | Completely linear | Merge commit (squash optional) |
 | Control | Local validation and execution | GitHub API handles merge |
 | Conflict handling | Manual resolution before merge | GitHub blocks if conflicts |
@@ -86,8 +86,8 @@ See [skills/git-rebase-workflow/SKILL.md](skills/git-rebase-workflow/SKILL.md) f
 
 ### vs Manual Rebase
 
-| Feature | `/rebase-merge` (this plugin) | Manual rebase |
-| ------- | ----------------------------- | ------------- |
+| Feature | `/git-rebase-pr` (this plugin) | Manual rebase |
+| ------- | ------------------------------ | ------------- |
 | PR validation | Automatic (CI, reviews, threads) | Manual checks |
 | Main sync | Automatic | Remember to pull |
 | Fast-forward check | Automatic with clear errors | Easy to miss |
@@ -186,7 +186,7 @@ This plugin is part of the ai-assistant-instructions repository.
 To modify:
 
 1. Edit files in `.claude/plugins/jpe-git/`
-2. Test with `/rebase-merge` on a real PR
+2. Test with `/git-rebase-pr` on a real PR
 3. Verify merge-readiness criteria work with `/ready-player-one`
 4. Create PR with your changes
 

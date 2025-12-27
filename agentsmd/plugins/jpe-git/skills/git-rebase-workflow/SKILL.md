@@ -5,13 +5,13 @@ version: "1.0.0"
 author: "JacobPEvans"
 ---
 
-<!-- markdownlint-disable-file MD013 -->
-
-Local rebase workflow for merging pull requests that maintains linear history with signed commits by rebasing PR branches onto main and pushing directly to origin/main (auto-closing the pull request).
+Local rebase workflow for merging pull requests that maintains linear history with signed commits by rebasing PR branches onto main and
+pushing directly to origin/main (auto-closing the pull request).
 
 ## Why This Workflow?
 
-GitHub's `gh pr merge` command **does not sign commits**, making it incompatible with repositories requiring commit signatures. This workflow uses local git operations to preserve commit signing throughout the entire merge process.
+GitHub's `gh pr merge` command **does not sign commits**, making it incompatible with repositories requiring commit signatures.
+This workflow uses local git operations to preserve commit signing throughout the entire merge process.
 
 ## When to Use
 
@@ -86,6 +86,7 @@ REPO=$(gh repo view --json name --jq '.name')
 Use the **[GitHub GraphQL Skill](../../../../skills/github-graphql/SKILL.md)** patterns:
 
 ```bash
+<!-- markdownlint-disable-next-line MD013 -->
 gh api graphql --raw-field 'query=query { repository(owner: "'"$OWNER"'", name: "'"$REPO"'") { pullRequest(number: '"$PR_NUMBER"') { state mergeable statusCheckRollup { state } reviewDecision reviewThreads(last: 100) { nodes { isResolved } } } } }'
 ```
 
@@ -102,6 +103,7 @@ gh api graphql --raw-field 'query=query { repository(owner: "'"$OWNER"'", name: 
 ### 1.4 Verify Unresolved Threads Count
 
 ```bash
+<!-- markdownlint-disable-next-line MD013 -->
 gh api graphql --raw-field 'query=query { repository(owner: "'"$OWNER"'", name: "'"$REPO"'") { pullRequest(number: '"$PR_NUMBER"') { reviewThreads(last: 100) { nodes { isResolved } } } } }' | jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)] | length'
 ```
 
@@ -289,7 +291,8 @@ git push origin main
 
 **This automatically closes the pull request** because the PR's commits (with signatures) are now on main.
 
-**Note on Commit Signing**: All commits retain their signatures through the rebase process. This is critical for repositories with signing requirements and is why we use this local workflow instead of `gh pr merge`.
+**Note on Commit Signing**: All commits retain their signatures through the rebase process.
+This is critical for repositories with signing requirements and is why we use this local workflow instead of `gh pr merge`.
 
 ### 5.2 Verify Push Success
 
@@ -332,7 +335,6 @@ FEATURE_WORKTREE="$HOME/git/$REPO_NAME/$SAFE_BRANCH"
 From main worktree:
 
 ```bash
-cd "$MAIN_WORKTREE"
 git branch -d "$BRANCH"
 ```
 
@@ -367,7 +369,6 @@ git worktree prune
 ### 6.5 Final Status
 
 ```bash
-cd "$MAIN_WORKTREE"
 git status
 git log -5 --oneline origin/main
 ```
