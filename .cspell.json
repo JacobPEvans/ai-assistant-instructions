@@ -122,6 +122,7 @@
     "govulncheck",
     "gpgsign",
     "kwDO",
+    "kwDOxxxxx",
     "noqa",
     "Pipfile",
     "signingkey",
