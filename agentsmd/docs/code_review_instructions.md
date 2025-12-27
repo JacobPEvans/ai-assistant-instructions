@@ -141,4 +141,4 @@ Before merging any change:
 
 - [Code Standards](../rules/code-standards.md) - Universal coding standards
 - [Styleguide](../rules/styleguide.md) - Coding style and conventions
-- [Code Reviewer Sub-Agent](../../.claude/sub-agents/review/code-reviewer.md) - Claude Code review details
+- [Code Reviewer Sub-Agent](../agents/code-reviewer.md) - Claude Code review details

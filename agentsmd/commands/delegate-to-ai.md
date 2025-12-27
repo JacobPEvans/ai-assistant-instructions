@@ -21,7 +21,7 @@ Delegate when Claude is not the best tool:
 
 ## PAL MCP Tools
 
-Your project has **PAL MCP** configured for multi-model orchestration. See [CLAUDE.md](/CLAUDE.md) for:
+Your project has **PAL MCP** configured for multi-model orchestration. See [CLAUDE.md](../../CLAUDE.md) for:
 
 - **`chat`** - Single model for straightforward tasks
 - **`clink`** - Parallel queries across multiple models
@@ -51,6 +51,6 @@ Your project has **PAL MCP** configured for multi-model orchestration. See [CLAU
 
 ## References
 
-- [CLAUDE.md](/CLAUDE.md) - Model routing rules and PAL MCP setup
-- [AGENTS.md](/AGENTS.md) - Subagent types and capabilities
-- [Worktree rules](./rules/worktrees.md) - Session isolation for delegated work
+- [CLAUDE.md](../../CLAUDE.md) - Model routing rules and PAL MCP setup
+- [AGENTS.md](../../AGENTS.md) - Subagent types and capabilities
+- [Worktree rules](../rules/worktrees.md) - Session isolation for delegated work

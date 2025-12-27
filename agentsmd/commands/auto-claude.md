@@ -83,8 +83,8 @@ Execute this loop continuously until budget exhaustion forces termination:
     - For each open PR: gh pr checks <number>
     - For each open PR: check if behind main (mergeable_state, behind_by)
     - For PRs with reviews: gh pr view <number> --comments
-    - gh issue list --limit 20 --state open (EXCLUDE label:ai-created)
-      Command: gh issue list --state open --limit 20 --search "-label:ai-created"
+    - gh issue list --limit 20 --state open (EXCLUDE label:ai:created)
+      Command: gh issue list --state open --limit 20 --search "-label:ai:created"
     - Analyze codebase for bugs/improvements (if no urgent PR/issue work)
 
 1b. SCAN (PR-FOCUS MODE - PRs >= 10)
@@ -108,8 +108,8 @@ Execute this loop continuously until budget exhaustion forces termination:
    3. PR review comments awaiting response (use /resolve-pr-review-thread)
    4. PRs ready to merge (CI passing, approved) - enable auto-merge
    --- BELOW THIS LINE: BLOCKED IN PR-FOCUS MODE ---
-   5. Issues labeled: bug, critical (EXCLUDE ai-created label)
-   6. Issues labeled: good-first-issue (EXCLUDE ai-created label)
+   5. Issues labeled: type:bug, priority:critical (EXCLUDE ai:created label)
+   6. Issues labeled: good-first-issue (EXCLUDE ai:created label)
    7. Code analysis: identify bugs, security issues, improvements
    8. Documentation with broken links or outdated info
    9. Low test coverage in critical paths
@@ -254,12 +254,12 @@ You are a Code Analyzer agent. Scan the codebase to identify:
 
 For each finding:
 1. Assess severity (critical, high, medium, low)
-2. Create a GitHub issue with the 'ai-created' label:
-   gh issue create --title '[title]' --body '[description]' --label 'ai-created'
+2. Create a GitHub issue with the 'ai:created' label:
+   gh issue create --title '[title]' --body '[description]' --label 'ai:created'
 3. Include reproduction steps or code references
 4. DO NOT fix the issues yourself - only report them
 
-Human will review and remove 'ai-created' label before AI can work on it.
+Human will review and remove 'ai:created' label before AI can work on it.
 
 Reference: /review-code for thorough code review patterns.
 Reference: /shape-issues for shaping findings into actionable issues.
@@ -312,10 +312,10 @@ When dispatching any sub-agent, always include:
 
 5. **Merge**: "After CI passes and PR is approved: rebase on main locally, fast-forward merge into main, push. PR auto-closes."
 
-6. **ISSUE LABELS**: When creating issues, ALWAYS add 'ai-created' label:
+6. **ISSUE LABELS**: When creating issues, ALWAYS add 'ai:created' label:
 
    ```bash
-   gh issue create --label 'ai-created' ...
+   gh issue create --label 'ai:created' ...
    ```
 
    AI can only work on issues WITHOUT this label (human must review first)
@@ -332,10 +332,10 @@ You must NEVER:
 - Force merge PRs - use local rebase + fast-forward merge workflow instead
 - Make direct code changes (always delegate to sub-agents)
 - Claim budget exhaustion before the API actually terminates you
-- Work on issues that have the 'ai-created' label (human must review first)
+- Work on issues that have the 'ai:created' label (human must review first)
 - Create new branches/PRs when open PR count >= 10 (PR-FOCUS MODE)
 - Create PRs with multiple unrelated changes (ONE concept per PR)
-- Create issues without the 'ai-created' label
+- Create issues without the 'ai:created' label
 - Leave a branch without a PR (never leave a branch with commits without a PR; every branch with commits MUST have a PR)
 - Return from a task without creating a PR (if commits were made)
 - Leave worktrees around after PRs are merged (once merged, remove associated worktrees – the PR/target branch is the source of truth)
@@ -376,23 +376,23 @@ You must NEVER:
 - Never modify .env, secrets, or credential files
 - If unsure about a change's safety, skip it and move on
 - Never create PRs when open PR count >= 10 (clear backlog first)
-- Never work on issues with 'ai-created' label (human review required)
+- Never work on issues with 'ai:created' label (human review required)
 
 ## AI-Created Issue Workflow
 
 Issues created by AI agents require human review before work begins:
 
-1. **AI creates issue** → MUST include 'ai-created' label
+1. **AI creates issue** → MUST include 'ai:created' label
 
    ```bash
-   gh issue create --title "..." --body "..." --label "ai-created"
+   gh issue create --title "..." --body "..." --label "ai:created"
    ```
 
-2. **Human reviews issue** → removes 'ai-created' label if approved
+2. **Human reviews issue** → removes 'ai:created' label if approved
    (This happens outside of auto-claude, by repository maintainers)
 
 3. **AI can now work on issue** → label no longer present
-   When scanning: `gh issue list --search "-label:ai-created"`
+   When scanning: `gh issue list --search "-label:ai:created"`
 
 This prevents AI from creating and immediately working on low-quality issues.
 
@@ -542,7 +542,7 @@ Maintain internal state of:
 - `total_cost`: Running sum of sub-agent costs
 - `prs_created`: List of PR numbers created this run
 - `prs_merged`: List of PR numbers that auto-merged this run
-- `issues_created`: List of issues created with 'ai-created' label
+- `issues_created`: List of issues created with 'ai:created' label
 
 This state helps you avoid duplicate work and provides data for the summary.
 

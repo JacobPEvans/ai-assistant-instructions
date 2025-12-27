@@ -92,10 +92,10 @@ Check:
 
 ### 5. Project Standards Compliance
 
-- Follow [Documentation Standards](../../rules/documentation-standards.md)
+- Follow [Documentation Standards](../rules/documentation-standards.md)
 - Use hierarchical numbering (1., 1.1., 1.1.1.) for AI-trackable structure
 - Ensure AI-first writing (concise, structured)
-- Verify adherence to [DRY Principle](../../rules/dry-principle.md)
+- Verify adherence to [DRY Principle](../rules/dry-principle.md)
 - Link to other documents instead of repeating information
 
 ### 6. AI-Friendly Formatting
@@ -109,9 +109,9 @@ Check:
 
 Update if needed:
 
-- [Technical Context](../../rules/memory-bank/technical-context.md)
-- [Project Brief](../../rules/memory-bank/project-brief.md)
-- [Progress Tracking](../../rules/memory-bank/progress-tracking.md)
+- [Technical Context](../rules/memory-bank/technical-context.md)
+- [Project Brief](../rules/memory-bank/project-brief.md)
+- [Progress Tracking](../rules/memory-bank/progress-tracking.md)
 
 ### 8. Link Validation
 
@@ -172,7 +172,7 @@ Suggested: Update to ../rules/existing-file.md
 ### Example 1: Pre-PR Documentation Check
 
 ```markdown
-@.claude/sub-agents/review/docs-reviewer.md
+@agentsmd/agents/docs-reviewer.md
 
 Review all markdown files before creating PR.
 Run auto-fix and report remaining issues.
@@ -181,7 +181,7 @@ Run auto-fix and report remaining issues.
 ### Example 2: Focused Link Validation
 
 ```markdown
-@.claude/sub-agents/review/docs-reviewer.md
+@agentsmd/agents/docs-reviewer.md
 
 Validate all links in agentsmd/commands/ directory.
 Focus: Internal link accuracy
@@ -190,7 +190,7 @@ Focus: Internal link accuracy
 ### Example 3: New Documentation Review
 
 ```markdown
-@.claude/sub-agents/review/docs-reviewer.md
+@agentsmd/agents/docs-reviewer.md
 
 Review newly created feature documentation.
 Files: docs/new-feature.md

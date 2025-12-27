@@ -291,7 +291,7 @@ Recommendation: {human intervention needed / additional context required}
 ### Example 1: Single PR CI Fix
 
 ```markdown
-@.claude/sub-agents/pr/ci-fixer.md
+@agentsmd/agents/ci-fixer.md
 
 Fix CI failures for PR #142
 Repository: JacobPEvans/ai-assistant-instructions
@@ -305,7 +305,7 @@ Failing checks:
 ### Example 2: Invoked by Orchestrator
 
 ```markdown
-@.claude/sub-agents/pr/ci-fixer.md
+@agentsmd/agents/ci-fixer.md
 
 Fix all CI failures for PR #89 in owner/repo
 
@@ -352,6 +352,6 @@ If unable to fix after 3 attempts:
 
 ## Related Documentation
 
-- [Code Standards](../../rules/code-standards.md)
-- [Worktrees](../../rules/worktrees.md)
-- [Subagent Parallelization](../../rules/subagent-parallelization.md)
+- [Code Standards](../rules/code-standards.md)
+- [Worktrees](../rules/worktrees.md)
+- [Subagent Parallelization](../rules/subagent-parallelization.md)

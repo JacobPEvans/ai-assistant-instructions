@@ -23,9 +23,9 @@ Can be invoked by other commands or agents for focused code analysis.
 
 This sub-agent applies:
 
-- [Code Standards](../../rules/code-standards.md)
-- [Infrastructure Standards](../../rules/infrastructure-standards.md)
-- [Styleguide](../../rules/styleguide.md)
+- [Code Standards](../rules/code-standards.md)
+- [Infrastructure Standards](../rules/infrastructure-standards.md)
+- [Styleguide](../rules/styleguide.md)
 
 ## Review Focus Areas
 
@@ -116,7 +116,7 @@ Solution: Use constant-time comparison: `crypto.timingSafeEqual(Buffer.from(hash
 ### Example 1: Full PR Review
 
 ```markdown
-@.claude/sub-agents/review/code-reviewer.md
+@agentsmd/agents/code-reviewer.md
 
 Review PR #123 for merge readiness.
 Scope: Full review (security, quality, infrastructure, maintainability)
@@ -125,7 +125,7 @@ Scope: Full review (security, quality, infrastructure, maintainability)
 ### Example 2: Focused Security Review
 
 ```markdown
-@.claude/sub-agents/review/code-reviewer.md
+@agentsmd/agents/code-reviewer.md
 
 Focus on security issues only.
 Files: src/api/**/*.ts
@@ -135,7 +135,7 @@ Areas: Input validation, authentication, secrets management
 ### Example 3: Infrastructure Review
 
 ```markdown
-@.claude/sub-agents/review/code-reviewer.md
+@agentsmd/agents/code-reviewer.md
 
 Review infrastructure changes.
 Files: terraform/**/*.tf

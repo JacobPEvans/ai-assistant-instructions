@@ -516,7 +516,7 @@ UPDATE COMMANDS
 ### Example 1: Full Dependency Audit
 
 ```markdown
-@.claude/sub-agents/util/dependency-checker.md
+@agentsmd/agents/dependency-checker.md
 
 Action: check-all
 Directory: /Users/name/git/my-app
@@ -526,7 +526,7 @@ Include-dev: true
 ### Example 2: Security Check Only
 
 ```markdown
-@.claude/sub-agents/util/dependency-checker.md
+@agentsmd/agents/dependency-checker.md
 
 Action: check-security
 Directory: /Users/name/git/my-app
@@ -536,7 +536,7 @@ Severity: high
 ### Example 3: Suggest Conservative Updates
 
 ```markdown
-@.claude/sub-agents/util/dependency-checker.md
+@agentsmd/agents/dependency-checker.md
 
 Action: suggest-updates
 Directory: /Users/name/git/my-app
@@ -546,7 +546,7 @@ Strategy: conservative
 ### Example 4: Check Specific Package
 
 ```markdown
-@.claude/sub-agents/util/dependency-checker.md
+@agentsmd/agents/dependency-checker.md
 
 Action: check-package
 Directory: /Users/name/git/my-app
@@ -557,7 +557,7 @@ Ecosystem: npm
 ### Example 5: Invoked by CI Workflow
 
 ```markdown
-@.claude/sub-agents/util/dependency-checker.md
+@agentsmd/agents/dependency-checker.md
 
 Action: check-security
 Directory: {worktree-path}
@@ -671,5 +671,5 @@ Try:
 
 ## Related Documentation
 
-- [Code Standards](../../rules/code-standards.md) - Dependency management standards and security practices
-- [CI Fixer Sub-Agent](../pr/ci-fixer.md) - Automated CI failure resolution
+- [Code Standards](../rules/code-standards.md) - Dependency management standards and security practices
+- [CI Fixer Sub-Agent](ci-fixer.md) - Automated CI failure resolution

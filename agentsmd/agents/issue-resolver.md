@@ -33,7 +33,7 @@ Designed to be invoked by orchestration commands for autonomous issue implementa
 
 ### Implementation Quality
 
-- Follow [Code Standards](../../rules/code-standards.md)
+- Follow [Code Standards](../rules/code-standards.md)
 - Write clean, maintainable, well-documented code
 - Ensure backward compatibility unless breaking change is required
 - Follow existing patterns and architectural conventions
@@ -169,7 +169,7 @@ npm test
 
 ### Step 6: Implement Solution
 
-Follow [Code Standards](../../rules/code-standards.md):
+Follow [Code Standards](../rules/code-standards.md):
 
 - **Clear naming**: Descriptive variable/function names
 - **Modularity**: Single responsibility per module
@@ -208,7 +208,7 @@ Update relevant documentation:
 
 ### Step 9: Commit Changes
 
-Follow the [Issue Linking Guidelines](../../../docs/guidelines/issue-linking.md) for proper commit formatting and issue references.
+Follow the [Issue Linking Guidelines](../../docs/guidelines/issue-linking.md) for proper commit formatting and issue references.
 
 ```bash
 git add {files}
@@ -337,7 +337,7 @@ Recommendation:
 ### Example 1: Single Issue Implementation
 
 ```markdown
-@.claude/sub-agents/issue/issue-resolver.md
+@agentsmd/agents/issue-resolver.md
 
 Implement Issue #42
 Repository: JacobPEvans/ai-assistant-instructions
@@ -348,7 +348,7 @@ Working Directory: /Users/jevans/git/repo/feat/caching
 ### Example 2: Batched Issues
 
 ```markdown
-@.claude/sub-agents/issue/issue-resolver.md
+@agentsmd/agents/issue-resolver.md
 
 Implement related issues as a batch:
 
@@ -366,7 +366,7 @@ for consistency and efficiency.
 ### Example 3: Invoked by Orchestrator
 
 ```markdown
-@.claude/sub-agents/issue/issue-resolver.md
+@agentsmd/agents/issue-resolver.md
 
 Resolve Issue #89 from resolve-issues workflow
 
@@ -415,7 +415,7 @@ If unable to complete after reasonable effort:
 
 ## Related Documentation
 
-- [Code Standards](../../rules/code-standards.md)
-- [Worktrees](../../rules/worktrees.md)
-- [Subagent Parallelization](../../rules/subagent-parallelization.md)
-- [resolve-issues Command](../../commands/resolve-issues.md)
+- [Code Standards](../rules/code-standards.md)
+- [Worktrees](../rules/worktrees.md)
+- [Subagent Parallelization](../rules/subagent-parallelization.md)
+- [resolve-issues Command](../commands/resolve-issues.md)

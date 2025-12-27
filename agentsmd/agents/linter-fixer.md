@@ -400,7 +400,7 @@ Overall:
 ### Example 1: Fix All Linting Issues
 
 ```markdown
-@.claude/sub-agents/util/linter-fixer.md
+@agentsmd/agents/linter-fixer.md
 
 Action: lint-all
 Directory: /Users/name/git/my-app
@@ -410,7 +410,7 @@ Auto-fix: true
 ### Example 2: Run Specific Linter
 
 ```markdown
-@.claude/sub-agents/util/linter-fixer.md
+@agentsmd/agents/linter-fixer.md
 
 Action: lint-specific
 Directory: /Users/name/git/my-app
@@ -421,7 +421,7 @@ Auto-fix: true
 ### Example 3: Report Only (No Fixes)
 
 ```markdown
-@.claude/sub-agents/util/linter-fixer.md
+@agentsmd/agents/linter-fixer.md
 
 Action: report
 Directory: /Users/name/git/my-app
@@ -431,7 +431,7 @@ Severity: error
 ### Example 4: Fix Specific Files
 
 ```markdown
-@.claude/sub-agents/util/linter-fixer.md
+@agentsmd/agents/linter-fixer.md
 
 Action: fix-files
 Directory: /Users/name/git/my-app
@@ -442,7 +442,7 @@ Linter: eslint
 ### Example 5: Invoked by CI Fixer
 
 ```markdown
-@.claude/sub-agents/util/linter-fixer.md
+@agentsmd/agents/linter-fixer.md
 
 Action: lint-all
 Directory: {worktree-path}
@@ -556,6 +556,6 @@ Or run: npx eslint --init
 
 ## Related Documentation
 
-- [Code Standards](../../rules/code-standards.md) - Project code quality standards
-- [CI Fixer Sub-Agent](../pr/ci-fixer.md) - Automated CI failure resolution
-- [Code Generator Sub-Agent](../code/code-generator.md) - Code generation standards
+- [Code Standards](../rules/code-standards.md) - Project code quality standards
+- [CI Fixer Sub-Agent](ci-fixer.md) - Automated CI failure resolution
+- [Code Generator Sub-Agent](coder.md) - Code generation standards

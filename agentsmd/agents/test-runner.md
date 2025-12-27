@@ -485,7 +485,7 @@ Low coverage files:
 ### Example 1: Run All Tests in Project
 
 ```markdown
-@.claude/sub-agents/util/test-runner.md
+@agentsmd/agents/test-runner.md
 
 Action: run-all
 Directory: /Users/name/git/my-app
@@ -495,7 +495,7 @@ Framework: jest
 ### Example 2: Run Specific Test Pattern
 
 ```markdown
-@.claude/sub-agents/util/test-runner.md
+@agentsmd/agents/test-runner.md
 
 Action: run-specific
 Directory: /Users/name/git/my-app
@@ -506,7 +506,7 @@ Pattern: test_auth
 ### Example 3: Analyze Test Failures
 
 ```markdown
-@.claude/sub-agents/util/test-runner.md
+@agentsmd/agents/test-runner.md
 
 Action: analyze
 Directory: /Users/name/git/my-app
@@ -516,7 +516,7 @@ Test Output: {paste-failure-output}
 ### Example 4: Run with Coverage Requirement
 
 ```markdown
-@.claude/sub-agents/util/test-runner.md
+@agentsmd/agents/test-runner.md
 
 Action: run-coverage
 Directory: /Users/name/git/my-app
@@ -527,7 +527,7 @@ Threshold: 85
 ### Example 5: Invoked by CI Fixer
 
 ```markdown
-@.claude/sub-agents/util/test-runner.md
+@agentsmd/agents/test-runner.md
 
 Action: run-all
 Directory: {worktree-path}
@@ -593,6 +593,6 @@ Manual action required: {instructions}
 
 ## Related Documentation
 
-- [Code Standards](../../rules/code-standards.md) - Testing standards
-- [CI Fixer Sub-Agent](../pr/ci-fixer.md) - Automated CI failure resolution
-- [Code Generator Sub-Agent](../code/code-generator.md) - Test generation
+- [Code Standards](../rules/code-standards.md) - Testing standards
+- [CI Fixer Sub-Agent](ci-fixer.md) - Automated CI failure resolution
+- [Code Generator Sub-Agent](coder.md) - Test generation

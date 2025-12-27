@@ -2,7 +2,7 @@
 name: Documentation Improvement
 about: Help make the docs better
 title: "[DOCS] "
-labels: documentation
+labels: type:docs
 assignees: ''
 ---
 

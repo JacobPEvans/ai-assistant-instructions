@@ -348,7 +348,7 @@ Recommendation: {next-steps}
 ### Example 1: Create Feature Worktree
 
 ```markdown
-@.claude/sub-agents/util/worktree-manager.md
+@agentsmd/agents/worktree-manager.md
 
 Action: create
 Description: add user authentication
@@ -358,7 +358,7 @@ Repository: /Users/name/git/my-app
 ### Example 2: Clean Up Stale Worktrees
 
 ```markdown
-@.claude/sub-agents/util/worktree-manager.md
+@agentsmd/agents/worktree-manager.md
 
 Action: clean
 Repository: /Users/name/git/my-app
@@ -367,7 +367,7 @@ Repository: /Users/name/git/my-app
 ### Example 3: List All Worktrees with Status
 
 ```markdown
-@.claude/sub-agents/util/worktree-manager.md
+@agentsmd/agents/worktree-manager.md
 
 Action: list
 Repository: /Users/name/git/my-app
@@ -376,7 +376,7 @@ Repository: /Users/name/git/my-app
 ### Example 4: Invoked by Init Worktree Command
 
 ```markdown
-@.claude/sub-agents/util/worktree-manager.md
+@agentsmd/agents/worktree-manager.md
 
 Action: create
 Description: {user-provided-description}
@@ -426,6 +426,6 @@ This sub-agent can be invoked by:
 
 ## Related Documentation
 
-- [Worktrees](../../rules/worktrees.md) - Authoritative worktree structure
-- [Branch Hygiene](../../rules/branch-hygiene.md) - Branch management rules
-- [Init Worktree Command](../../commands/init-worktree.md) - User-facing command
+- [Worktrees](../rules/worktrees.md) - Authoritative worktree structure
+- [Branch Hygiene](../rules/branch-hygiene.md) - Branch management rules
+- [Init Worktree Command](../commands/init-worktree.md) - User-facing command

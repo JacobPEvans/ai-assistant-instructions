@@ -55,8 +55,8 @@ jobs:
             Apply labels using separate flags for each label:
             gh issue edit ${{ github.event.issue.number }} --add-label "label1" --add-label "label2"
 
-            Available type labels: bug, enhancement, question, documentation
-            Available priority labels: priority: critical, priority: high, priority: medium, priority: low
+            Available type labels: type:bug, type:feature, type:docs, question
+            Available priority labels: priority:critical, priority:high, priority:medium, priority:low
 
             If duplicate found, comment with the original issue number.
             For first-time contributors, add a welcoming comment.

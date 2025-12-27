@@ -59,17 +59,17 @@
   description: "Extra large - major effort, 1+ weeks"
 
 # Workflow labels
-- name: "human-reviewed"
-  color: "00ff7f"
-  description: "Human has reviewed this AI-generated issue"
+- name: "ai:ready"
+  color: "0099ff"
+  description: "Human-approved and ready for any AI agent to implement"
 
 - name: "ready-for-dev"
   color: "0099ff"
   description: "Shaped and ready for /resolve-issues"
 
-- name: "ai-created"
+- name: "ai:created"
   color: "fbca04"
-  description: "Issue created by AI agent - requires human review"
+  description: "AI-generated issue - requires human approval (no ai:ready = not approved)"
 
 # Priority labels (no spaces)
 - name: "priority:critical"

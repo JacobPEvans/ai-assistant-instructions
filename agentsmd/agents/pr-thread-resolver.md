@@ -311,7 +311,7 @@ Next steps:
 ### Example 1: Resolve All Threads
 
 ```markdown
-@.claude/sub-agents/pr/thread-resolver.md
+@agentsmd/agents/thread-resolver.md
 
 Resolve all review threads for PR #142
 Repository: JacobPEvans/ai-assistant-instructions
@@ -322,7 +322,7 @@ Working directory: /Users/jevans/git/ai-assistant-instructions/feat/new-feature
 ### Example 2: Resolve Specific File
 
 ```markdown
-@.claude/sub-agents/pr/thread-resolver.md
+@agentsmd/agents/thread-resolver.md
 
 Resolve review comments for PR #89
 Repository: owner/repo
@@ -333,7 +333,7 @@ Focus: src/auth/*.ts files only
 ### Example 3: Invoked by Orchestrator
 
 ```markdown
-@.claude/sub-agents/pr/thread-resolver.md
+@agentsmd/agents/thread-resolver.md
 
 Address review feedback for PR #67 in owner/repo
 
