@@ -1,12 +1,6 @@
 {
   "permissions": [
-    "Read(**)",
-    "Glob(**)",
-    "Grep(**)",
-    "WebSearch",
-    "TodoWrite",
-    "TodoRead",
-    "SlashCommand(**)",
+    "SlashCommand(/:*)",
 
     "Bash(git status:*)",
     "Bash(git log:*)",

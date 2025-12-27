@@ -40,7 +40,7 @@
     "Bash(darwin-rebuild --list-generations:*)",
     "Bash(darwin-rebuild --rollback:*)",
     "Bash(sudo darwin-rebuild:*)",
-    "Read(//nix/store/**)",
+    "Read(/nix/store/**)",
     "Bash(nixfmt-rfc-style --version:*)",
     "Bash(nixfmt:*)",
     "Bash(nix fmt:*)",

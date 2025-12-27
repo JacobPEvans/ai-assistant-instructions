@@ -1,12 +1,6 @@
 {
   "permissions": [
-    "Read(**)",
-    "Glob(**)",
-    "Grep(**)",
-    "WebSearch",
-    "TodoWrite",
-    "TodoRead",
-    "SlashCommand(**)",
+    "SlashCommand(/:*)",
 
     "Bash(git status:*)",
     "Bash(git log:*)",
@@ -343,7 +337,7 @@
     "Bash(darwin-rebuild --list-generations:*)",
     "Bash(darwin-rebuild --rollback:*)",
     "Bash(sudo darwin-rebuild:*)",
-    "Read(//nix/store/**)",
+    "Read(/nix/store/**)",
 
     "Bash(direnv status:*)",
     "Bash(direnv reload:*)",
