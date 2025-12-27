@@ -5,12 +5,16 @@ Blocks file modifications (Write/Edit tools) that would exceed token limits.
 
 Configuration: .token-limits.yaml
 """
+import fnmatch
 import json
-import sys
+import re
 import subprocess
+import sys
 from pathlib import Path
+from typing import Optional
 
-def load_config():
+
+def load_config() -> tuple[dict[str, int], int]:
     """Load token limits from .token-limits.yaml"""
     config_path = Path('.token-limits.yaml')
     if not config_path.exists():
@@ -23,20 +27,19 @@ def load_config():
         limits = config.get('limits', {})
         default = config.get('defaults', {}).get('max_tokens', 2000)
         return limits, default
-    except:
+    except Exception:
         return {}, 2000
 
 
-def get_file_limit(file_path, limits, default_limit):
+def get_file_limit(file_path: str, limits: dict[str, int], default_limit: int) -> int:
     """Find applicable token limit for file"""
-    import fnmatch
     for pattern, limit in limits.items():
         if fnmatch.fnmatch(file_path, pattern):
             return limit
     return default_limit
 
 
-def count_tokens(content):
+def count_tokens(content: str) -> Optional[int]:
     """Count tokens in content using atc"""
     try:
         result = subprocess.run(
@@ -51,7 +54,6 @@ def count_tokens(content):
         # Extract token count
         for line in output.split('\n'):
             if 'token' in line.lower():
-                import re
                 match = re.search(r'(\d+)\s+token', line)
                 if match:
                     return int(match.group(1))
@@ -59,13 +61,13 @@ def count_tokens(content):
         # Try parsing first number
         try:
             return int(output.strip().split()[0])
-        except:
+        except (ValueError, IndexError):
             return None
-    except:
+    except (subprocess.TimeoutExpired, subprocess.SubprocessError, OSError):
         return None
 
 
-def validate_file(file_path, content):
+def validate_file(file_path: str, content: str) -> Optional[dict[str, int | str]]:
     """Check if file would violate token limits"""
     limits, default_limit = load_config()
     file_limit = get_file_limit(file_path, limits, default_limit)
@@ -91,10 +93,10 @@ def validate_file(file_path, content):
     return None
 
 
-def main():
+def main() -> None:
     try:
         hook_input = json.load(sys.stdin)
-    except:
+    except (json.JSONDecodeError, ValueError):
         sys.exit(0)  # Invalid input, allow
 
     tool_name = hook_input.get('tool_name', '')

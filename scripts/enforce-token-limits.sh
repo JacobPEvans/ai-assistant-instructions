@@ -20,6 +20,23 @@ fi
 
 DEFAULT_LIMIT=$(python3 -c "import yaml; f=open('.token-limits.yaml'); c=yaml.safe_load(f); print(c.get('defaults',{}).get('max_tokens', 2000))" 2>/dev/null || echo "2000")
 
+# Get file-specific limit using fnmatch pattern matching
+get_file_limit() {
+    local file="$1"
+    python3 -c "
+import yaml, fnmatch, sys
+with open('.token-limits.yaml') as f:
+    c = yaml.safe_load(f) or {}
+limits = c.get('limits', {})
+default = c.get('defaults', {}).get('max_tokens', 2000)
+for pattern, limit in limits.items():
+    if fnmatch.fnmatch('$file', pattern):
+        print(limit)
+        sys.exit(0)
+print(default)
+" 2>/dev/null || echo "$DEFAULT_LIMIT"
+}
+
 VIOLATIONS=0
 VIOLATIONS_FILE="/tmp/token_violations.json"
 
@@ -36,8 +53,8 @@ while IFS= read -r file; do
         *.png|*.jpg|*.gif|*.pdf|*.bin|*.zip|*.tar|*.gz) continue ;;
     esac
 
-    # Get file limit (simplified - just use default)
-    FILE_LIMIT=$DEFAULT_LIMIT
+    # Get file-specific limit using pattern matching
+    FILE_LIMIT=$(get_file_limit "$file")
 
     # Count tokens with atc
     TOKEN_COUNT=$(atc "$file" -m sonnet 2>/dev/null | grep -oE '[0-9]+' | head -1 || echo "0")
