@@ -91,30 +91,22 @@ gh pr list --repo "$OWNER/$REPO" \
 
 ### Step 4: Determine Merge-Readiness
 
-For each PR, check:
-
-1. **Mergeable status**: Must be `"MERGEABLE"`
-2. **CI status**: All required checks must have `conclusion: "SUCCESS"`
-3. **Review status**: Check for unresolved review threads via GraphQL
-4. **Conflicts**: Must have no merge conflicts
+For each PR, use the
+**[Git Rebase Workflow Skill](../../.claude/plugins/jpe-git/skills/git-rebase-workflow/SKILL.md#merge-readiness-criteria)**
+for canonical validation criteria.
 
 Get unresolved review threads using the **[GitHub GraphQL Skill](../skills/github-graphql/SKILL.md)** patterns.
 
 Query `reviewThreads` and filter for `isResolved == false`.
 
-A PR is **READY TO MERGE** when:
+Quick summary - a PR is **READY TO MERGE** when:
 
 - `mergeable == "MERGEABLE"`
-- All required checks have `conclusion == "SUCCESS"`
-- No unresolved review threads (count == 0)
-- `reviewDecision == "APPROVED"` or no review required
+- All required checks SUCCESS
+- No unresolved review threads
+- `reviewDecision` APPROVED or not required
 
-A PR is **BLOCKED** when any of:
-
-- `mergeable != "MERGEABLE"` (reason: "merge conflicts")
-- Any check has `conclusion != "SUCCESS"` (reason: "CI failing: {check names}")
-- Unresolved review threads exist (reason: "unresolved review comments")
-- `reviewDecision == "CHANGES_REQUESTED"` (reason: "changes requested")
+A PR is **BLOCKED** when failing any of the above (see skill for full details and abort messages)
 
 ### Step 5: Generate JSON Report
 

@@ -38,26 +38,23 @@ For each open PR found:
 gh pr view NUMBER --json state,mergeable,statusCheckRollup
 ```
 
-2.2. **Mergeable criteria**:
+2.2. **Mergeable criteria** - See
+**[Git Rebase Workflow Skill](../../.claude/plugins/jpe-git/skills/git-rebase-workflow/SKILL.md#merge-readiness-criteria)**
+for canonical validation rules.
+
+Quick summary:
 
 - State is OPEN
-- Mergeable is MERGEABLE (not CONFLICTING or UNKNOWN)
-- Status checks: All completed successfully (ignore skipped checks)
+- Mergeable is MERGEABLE
+- All status checks SUCCESS
+- All review threads resolved
+- Review decision APPROVED or not required
 
-2.3. If mergeable, choose merge strategy:
+2.3. If mergeable, use the **[Git Rebase Workflow Skill](../../.claude/plugins/jpe-git/skills/git-rebase-workflow/SKILL.md)** to merge the PR with signed commits.
 
-- **Squash**: Simple changes describable in 1-2 release note lines (default)
-- **Rebase**: Complex changes with multiple meaningful commits to preserve
+2.4. If not mergeable, report why and continue to next PR or sync.
 
-2.4. Merge and delete the remote branch:
-
-```bash
-gh pr merge NUMBER --squash --delete-branch
-```
-
-2.5. If not mergeable, report why and continue to next PR or sync.
-
-> **Note**: Project policy requires all changes go through a PR for audit trail and CI validation.
+> **Note**: All PR merges must use the git rebase workflow to ensure commit signatures are preserved. GitHub's `gh pr merge` does not sign commits.
 
 ### 3. Sync Workflow
 
@@ -134,7 +131,7 @@ git status
 
 Always run `gh pr list --author @me --state open` to find work that needs merging.
 
-## Merge Messages
+## Merge Process
 
-Squash merge messages should follow Conventional Commits format and focus on the outcome.
-The PR title becomes the merge message, so ensure it reads well as a release note.
+All merges follow the local rebase workflow to preserve commit signatures.
+See **[Git Rebase Workflow Skill](../../.claude/plugins/jpe-git/skills/git-rebase-workflow/SKILL.md)** for the complete merge process.
