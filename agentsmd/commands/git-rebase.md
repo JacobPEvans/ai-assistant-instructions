@@ -76,7 +76,8 @@ fi
 # Update main worktree from origin
 (
   cd "$MAIN_WORKTREE"
-  git pull origin main
+  git fetch origin
+  git reset --hard origin/main
   MAIN_SHA=$(git rev-parse --short HEAD)
   echo "Main updated to: $MAIN_SHA"
 )
@@ -98,7 +99,8 @@ else
   # Fetch the branch from origin if not local
   git fetch origin "$SOURCE_BRANCH:$SOURCE_BRANCH" 2>/dev/null || true
 
-  # Create worktree
+  # Create parent directory if it doesn't exist, then create worktree
+  mkdir -p "$(dirname "$SOURCE_WORKTREE")"
   git worktree add "$SOURCE_WORKTREE" "$SOURCE_BRANCH"
 fi
 ```
@@ -116,9 +118,6 @@ fi
     echo "Error: uncommitted changes in $SOURCE_BRANCH. Commit or stash them first."
     exit 1
   fi
-
-  # Get commit count
-  BEFORE_COUNT=$(git log --oneline origin/main.."$SOURCE_BRANCH" | wc -l)
 
   # Attempt rebase
   if git rebase main; then
@@ -305,7 +304,7 @@ git log origin/main..main
 
 - Do NOT use `git rebase -i` (interactive rebase) - this requires manual intervention
 - Do NOT rebase directly on to arbitrary branches - only onto main
-- Do NOT force push (`--force`) - the command uses fast-forward only
+- Do NOT use `--force` without lease - the command uses `--force-with-lease` for feature branches and fast-forward only for merging to main
 - Do NOT run while there are uncommitted changes
 
 ## Example Usage
