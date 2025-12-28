@@ -39,8 +39,6 @@
     "git show-ref",
     "git revert",
     "git rebase",
-    "git rebase -i",
-    "git rebase --interactive",
     "git rebase --continue",
     "git rebase --abort"
   ]
