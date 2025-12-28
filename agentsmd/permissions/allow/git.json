@@ -37,6 +37,11 @@
     "git fsck",
     "git rev-list",
     "git show-ref",
-    "git revert"
+    "git revert",
+    "git rebase",
+    "git rebase -i",
+    "git rebase --interactive",
+    "git rebase --continue",
+    "git rebase --abort"
   ]
 }
