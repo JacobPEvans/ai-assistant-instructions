@@ -13,10 +13,10 @@ Look, this is a documentation repo with markdown files. The attack surface is pr
 
 **Please don't open a public issue for security vulnerabilities.**
 
-Instead:
+Instead, use one of these methods:
 
-1. Email the maintainer directly (check the git log for contact info)
-2. Or use GitHub's private vulnerability reporting feature
+1. **GitHub Security Advisory** (Recommended): [Report a security vulnerability](https://github.com/JacobPEvans/ai-assistant-instructions/security/advisories/new)
+2. **Email**: Check the git log for maintainer contact info, or reach out through GitHub
 
 ### What to Include
 

@@ -14,21 +14,31 @@ Drop these into your projects and get consistent, high-quality AI assistance acr
 
 Think of it as a style guide, but for your AI pair programmer.
 
+## Prerequisites
+
+- **Git 2.30+** (for worktree support)
+- **GitHub CLI** (`gh`) 2.0+ (for PR/issue management)
+- **(Optional) Python 3.8+** for validation hooks
+- **(Optional) Node.js 18+** for markdown linting
+
 ## Quick Start
 
 ```bash
-# Clone the repo
+# 1. Clone the repo
 git clone https://github.com/JacobPEvans/ai-assistant-instructions.git
 
-# Copy the agentsmd directory to your project
+# 2. Copy agentsmd to your project
 cp -r ai-assistant-instructions/agentsmd your-project/
 
-# Symlink vendor directories as needed
+# 3. Create vendor symlinks
 cd your-project
 ln -s AGENTS.md CLAUDE.md
+
+# 4. Verify setup (if using Claude Code)
+claude doctor
 ```
 
-Or just browse the docs and cherry-pick what you need.
+Or just browse the [documentation](docs/) and cherry-pick what you need.
 
 ## Directory Structure
 
@@ -132,14 +142,26 @@ The documentation covers:
 
 Browse [`agentsmd/rules/`](agentsmd/rules/) and [`agentsmd/docs/`](agentsmd/docs/).
 
-**Permission Integration**: See
-[`agentsmd/docs/permission-system.md`](agentsmd/docs/permission-system.md) to understand how
-permissions integrate with [nix-config](https://github.com/JacobPEvans/nix).
+**Advanced**: This repo integrates with
+[nix-config](https://github.com/JacobPEvans/nix) for unified permission
+management across AI tools. This is **optional** - the basic setup works
+standalone. See [`agentsmd/docs/permission-system.md`](agentsmd/docs/permission-system.md)
+for details.
+
+## Need Help?
+
+- 📖 [Documentation Home](docs/) - Getting started guides and references
+- 🐛 [Issues](https://github.com/JacobPEvans/ai-assistant-instructions/issues) - Report bugs or request features
+- 💬 [Discussions](https://github.com/JacobPEvans/ai-assistant-instructions/discussions) - Ask questions and share ideas
 
 ## Contributing
 
 Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the details, though the short version
 is: open a PR, don't be a jerk, and I'll probably merge it.
+
+## Security
+
+Found a vulnerability? Please report it responsibly. See [SECURITY.md](SECURITY.md) for details.
 
 ## License
 

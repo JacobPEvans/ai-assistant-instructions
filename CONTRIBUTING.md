@@ -4,11 +4,15 @@ First off, thanks for considering contributing to this project. It's just me her
 
 ## The Short Version
 
-1. Fork it
-2. Create your feature branch (`git checkout -b feature/cool-thing`)
-3. Commit your changes (`git commit -m 'Add some cool thing'`)
+**This repo uses git worktrees for session isolation.** Always start here:
+
+1. Run `/init-worktree feat "description"` to create a clean worktree
+2. Make your changes in the worktree
+3. Commit your changes (`git commit -m 'feat: add some cool thing'`)
 4. Push to the branch (`git push origin feature/cool-thing`)
 5. Open a Pull Request
+
+For more details, see [Worktree Workflow](agentsmd/rules/worktrees.md).
 
 That's it. I'm not picky.
 
