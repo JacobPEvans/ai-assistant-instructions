@@ -99,19 +99,29 @@ jobs:
           THREAD_IDS: ${{ steps.get-threads.outputs.thread_ids }}
         run: |
           echo "Resolving unresolved threads..."
+          echo "$THREAD_IDS" | jq -r '.[]' > /tmp/thread_ids.txt
 
-          # Use jq to build individual mutations for each thread and resolve them in parallel
-          echo "$THREAD_IDS" | jq -r '.[]' | xargs -I {} bash -c '
-            gh api graphql -f threadId="{}" -f query="
-            mutation(\$threadId: String!) {
-              resolveReviewThread(input: {threadId: \$threadId}) {
-                thread {
+          # Read thread IDs safely without loops - one per line
+          if [ -s /tmp/thread_ids.txt ]; then
+            gh api graphql -f query='
+            query {
+              nodes(ids: ['"$(jq -R -s -c 'split("\n") | map(select(length > 0)) | map("\"" + . + "\"") | join(", ")' /tmp/thread_ids.txt)"']) {
+                ... on PullRequestReviewThread {
                   id
                   isResolved
                 }
               }
-            }" 2>/dev/null && echo "✓ Resolved {}"
-          '
+            }'
+
+            # Resolve using mutation with pre-built array
+            gh api graphql -f threadIds="$(jq -R -s -c 'split("\n") | map(select(length > 0))' /tmp/thread_ids.txt)" -f query='
+            mutation($threadIds: [ID!]!) {
+              resolveReviewThreads: resolveMultipleReviewThreads(input: {threadIds: $threadIds}) {
+                clientMutationId
+              }
+            }' 2>/dev/null && echo "✓ Resolved threads" || echo "✗ Failed to resolve threads"
+          fi
+          rm -f /tmp/thread_ids.txt
 
       - name: Post comment about limit
         if: ${{ steps.check-count.outputs.total_comments >= 50 }}

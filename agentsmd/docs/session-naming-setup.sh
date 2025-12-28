@@ -63,6 +63,17 @@ get_git_branch() {
     git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "no-repo"
 }
 
+# Validate branch name for safety
+validate_branch_name() {
+    local name="$1"
+    # Only allow alphanumeric, hyphens, slashes, and underscores
+    if [[ ! "$name" =~ ^[a-zA-Z0-9/_-]+$ ]]; then
+        print_error "Invalid branch name. Only alphanumeric, -, _, / allowed."
+        return 1
+    fi
+    return 0
+}
+
 # Sanitize name for Claude Code session naming
 sanitize_name() {
     local name="$1"
@@ -130,6 +141,12 @@ cmd_branch() {
     fi
 
     local branch=$(get_git_branch)
+    # Validate branch name before using it
+    if ! validate_branch_name "$branch"; then
+        print_error "Branch name contains invalid characters"
+        return 1
+    fi
+
     local session_name=$(sanitize_name "$branch")
 
     print_header "Git Branch Session"

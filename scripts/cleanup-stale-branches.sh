@@ -55,13 +55,7 @@ done
 # Helper function to check if branch is in excluded list
 is_excluded() {
   local branch="$1"
-  IFS=',' read -ra EXCLUDED <<< "$EXCLUDED_BRANCHES"
-  for excluded in "${EXCLUDED[@]}"; do
-    if [[ "$branch" == "$excluded" ]]; then
-      return 0
-    fi
-  done
-  return 1
+  echo "$EXCLUDED_BRANCHES" | tr ',' '\n' | grep -q "^$branch$"
 }
 
 # Get list of merged PR branches (branches that have been merged via PR)
@@ -156,17 +150,15 @@ main() {
 
   # Also check for any local-only merged branches (from git)
   if [[ "$REMOTE_ONLY" != "true" ]]; then
+    # Create temp files for comparison
+    printf '%s\n' "${branches_to_delete[@]}" > /tmp/to_delete.txt 2>/dev/null || true
+    printf '%s\n' "${branches_with_open_prs[@]}" > /tmp/with_open_prs.txt 2>/dev/null || true
+
     while IFS= read -r branch; do
       # Skip if already in one of our lists
-      local already_included=false
-      for existing in "${branches_to_delete[@]}" "${branches_with_open_prs[@]}"; do
-        if [[ "$existing" == "$branch" ]]; then
-          already_included=true
-          break
-        fi
-      done
-
-      if [[ "$already_included" != "true" ]] && ! is_excluded "$branch"; then
+      if ! grep -q "^$branch$" /tmp/to_delete.txt 2>/dev/null && \
+         ! grep -q "^$branch$" /tmp/with_open_prs.txt 2>/dev/null && \
+         ! is_excluded "$branch"; then
         if echo "$open_branches" | grep -q "^$branch$"; then
           branches_with_open_prs+=("$branch")
         else
@@ -174,6 +166,8 @@ main() {
         fi
       fi
     done < <(get_merged_local_branches)
+
+    rm -f /tmp/to_delete.txt /tmp/with_open_prs.txt
   fi
 
   # Display results
@@ -204,39 +198,21 @@ main() {
     echo "Deleting $total_to_delete branches..."
     echo ""
 
-    local deleted_count=0
-    local failed_count=0
+    if [[ ${#branches_to_delete[@]} -gt 0 ]]; then
+      # Delete all local branches in one single command with all parameters
+      echo "Deleting local branches..."
+      git branch -d "${branches_to_delete[@]}" 2>/dev/null && echo "  ✓ Deleted local branches" || echo "  ℹ Processed local branches (some may not exist locally)"
 
-    for branch in "${branches_to_delete[@]}"; do
-      # Try to delete local branch
-      if git show-ref --quiet "refs/heads/$branch"; then
-        if git branch -d "$branch" 2>/dev/null; then
-          echo "  ✓ Deleted local: $branch"
-          ((deleted_count++))
-        else
-          echo "  ✗ Failed to delete local: $branch"
-          ((failed_count++))
-        fi
+      # Delete all remote branches in one single command with all parameters
+      if [[ "$LOCAL_ONLY" != "true" ]]; then
+        echo "Deleting remote branches..."
+        git push origin --delete "${branches_to_delete[@]}" 2>/dev/null && echo "  ✓ Deleted remote branches" || echo "  ℹ Processed remote branches (some may not exist on remote)"
       fi
-
-      # Try to delete remote branch
-      if [[ "$LOCAL_ONLY" != "true" ]] && git show-ref --quiet "refs/remotes/origin/$branch"; then
-        if git push origin --delete "$branch" 2>/dev/null; then
-          echo "  ✓ Deleted remote: origin/$branch"
-          ((deleted_count++))
-        else
-          echo "  ✗ Failed to delete remote: origin/$branch"
-          ((failed_count++))
-        fi
-      fi
-    done
+    fi
 
     echo ""
     echo "Cleanup summary:"
-    echo "  Successfully deleted: $deleted_count branches"
-    if [[ $failed_count -gt 0 ]]; then
-      echo "  Failed to delete: $failed_count branches"
-    fi
+    echo "  Branches processed: $total_to_delete"
   else
     if [[ $total_to_delete -gt 0 ]]; then
       echo "To apply these deletions, run:"
