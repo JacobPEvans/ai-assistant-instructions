@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8  # v6.0.0
 
       - name: Identify symlinks
         id: identify
@@ -23,7 +23,7 @@ jobs:
           exit 1
 
       - name: Check links in regular files
-        uses: lycheeverse/lychee-action@v2
+        uses: lycheeverse/lychee-action@a8c4c7cb88f0c7386610c35eb25108e448569cb0  # v2.0.2
         with:
           args: >-
             --verbose

@@ -20,7 +20,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8  # v6.0.0
         with:
           fetch-depth: 1
 
@@ -60,7 +60,7 @@ jobs:
         id: claude-review
         if: ${{ steps.comment-check.outputs.skip_review == 'false' }}
         # Using @v1 for automatic updates of minor and patch versions
-        uses: anthropics/claude-code-action@v1
+        uses: anthropics/claude-code-action@0a2593483e318c6693adcb04af942367df7157f0  # v1.0.0
         timeout-minutes: 3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
