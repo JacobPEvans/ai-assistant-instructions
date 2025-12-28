@@ -4,6 +4,10 @@ on:
   issues:
     types: [opened, edited, reopened]
 
+concurrency:
+  group: issue-resolver-${{ github.event.issue.node_id }}
+  cancel-in-progress: true
+
 jobs:
   resolve:
     name: Analyze Issue
