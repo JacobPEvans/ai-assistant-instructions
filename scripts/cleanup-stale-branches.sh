@@ -121,6 +121,13 @@ main() {
   local branches_to_delete=()
   local branches_with_open_prs=()
 
+  # Create unique temporary files and ensure cleanup on exit
+  local TO_DELETE_FILE
+  local WITH_OPEN_PRS_FILE
+  TO_DELETE_FILE=$(mktemp)
+  WITH_OPEN_PRS_FILE=$(mktemp)
+  trap 'rm -f "$TO_DELETE_FILE" "$WITH_OPEN_PRS_FILE"' EXIT
+
   echo "Analyzing branches for safe deletion..."
   echo ""
 
@@ -150,14 +157,14 @@ main() {
 
   # Also check for any local-only merged branches (from git)
   if [[ "$REMOTE_ONLY" != "true" ]]; then
-    # Create temp files for comparison
-    printf '%s\n' "${branches_to_delete[@]}" > /tmp/to_delete.txt 2>/dev/null || true
-    printf '%s\n' "${branches_with_open_prs[@]}" > /tmp/with_open_prs.txt 2>/dev/null || true
+    # Write existing lists to temp files for comparison
+    printf '%s\n' "${branches_to_delete[@]}" > "$TO_DELETE_FILE" 2>/dev/null || true
+    printf '%s\n' "${branches_with_open_prs[@]}" > "$WITH_OPEN_PRS_FILE" 2>/dev/null || true
 
     while IFS= read -r branch; do
       # Skip if already in one of our lists
-      if ! grep -q "^$branch$" /tmp/to_delete.txt 2>/dev/null && \
-         ! grep -q "^$branch$" /tmp/with_open_prs.txt 2>/dev/null && \
+      if ! grep -q "^$branch$" "$TO_DELETE_FILE" 2>/dev/null && \
+         ! grep -q "^$branch$" "$WITH_OPEN_PRS_FILE" 2>/dev/null && \
          ! is_excluded "$branch"; then
         if echo "$open_branches" | grep -q "^$branch$"; then
           branches_with_open_prs+=("$branch")
@@ -166,8 +173,6 @@ main() {
         fi
       fi
     done < <(get_merged_local_branches)
-
-    rm -f /tmp/to_delete.txt /tmp/with_open_prs.txt
   fi
 
   # Display results
