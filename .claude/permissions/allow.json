@@ -42,6 +42,9 @@
     "Bash(git fsck:*)",
     "Bash(git rev-list:*)",
     "Bash(git show-ref:*)",
+    "Bash(git rebase --abort:*)",
+    "Bash(git rebase --continue:*)",
+    "Bash(git rebase --skip:*)",
 
     "Bash(gh api:*)",
     "Bash(gh api graphql:*)",
