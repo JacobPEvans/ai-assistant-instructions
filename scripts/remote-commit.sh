@@ -206,11 +206,19 @@ multi_file_commit() {
 
     log_info "Getting current commit SHA for branch $branch..."
     local base_commit
-    base_commit=$(gh api "repos/$repo/git/refs/heads/$branch" --jq '.object.sha')
+    base_commit=$(gh api "repos/$repo/git/refs/heads/$branch" --jq '.object.sha' 2>&1) || {
+        log_error "Failed to fetch commit SHA for branch $branch"
+        log_error "$base_commit"
+        exit 1
+    }
 
     log_info "Getting base tree SHA..."
     local base_tree
-    base_tree=$(gh api "repos/$repo/git/commits/$base_commit" --jq '.tree.sha')
+    base_tree=$(gh api "repos/$repo/git/commits/$base_commit" --jq '.tree.sha' 2>&1) || {
+        log_error "Failed to fetch tree SHA for commit $base_commit"
+        log_error "$base_tree"
+        exit 1
+    }
 
     log_info "Creating tree with ${#file_pairs[@]} file(s)..."
 
@@ -244,7 +252,11 @@ multi_file_commit() {
             --method POST \
             --field content="$blob_content" \
             --field encoding="base64" \
-            --jq '.sha')
+            --jq '.sha' 2>&1) || {
+            log_error "Failed to create blob for $repo_path"
+            log_error "$blob_sha"
+            exit 1
+        }
 
         jq -n \
             --arg path "$repo_path" \
@@ -265,7 +277,11 @@ multi_file_commit() {
         --method POST \
         --field base_tree="$base_tree" \
         --raw-field tree="$tree_json" \
-        --jq '.sha')
+        --jq '.sha' 2>&1) || {
+        log_error "Failed to create tree with ${#file_pairs[@]} file(s)"
+        log_error "$new_tree"
+        exit 1
+    }
 
     log_info "Creating commit..."
     local new_commit
@@ -274,12 +290,19 @@ multi_file_commit() {
         --field message="$message" \
         --field tree="$new_tree" \
         --raw-field parents="[\"$base_commit\"]" \
-        --jq '.sha')
+        --jq '.sha' 2>&1) || {
+        log_error "Failed to create commit with message: $message"
+        log_error "$new_commit"
+        exit 1
+    }
 
     log_info "Updating branch reference..."
-    gh api "repos/$repo/git/refs/heads/$branch" \
+    if ! gh api "repos/$repo/git/refs/heads/$branch" \
         --method PATCH \
-        --field sha="$new_commit" >/dev/null
+        --field sha="$new_commit" >/dev/null 2>&1; then
+        log_error "Failed to update branch $branch reference to commit $new_commit"
+        exit 1
+    fi
 
     log_info "Successfully committed ${#file_pairs[@]} file(s) to $repo on branch $branch"
     echo "https://github.com/$repo/commit/$new_commit"
@@ -308,12 +331,12 @@ workflow_dispatch() {
 
     if gh api "repos/$repo/actions/workflows/$workflow_id/dispatches" \
         --method POST \
-        --input - <<< "$payload" &>/dev/null; then
+        --input - <<< "$payload" 2>&1 >/dev/null; then
         log_info "Successfully triggered workflow $workflow_id"
         log_info "View runs at: https://github.com/$repo/actions/workflows/$workflow_id"
         return 0
     else
-        log_error "Failed to trigger workflow"
+        log_error "Failed to trigger workflow $workflow_id in $repo on ref $ref"
         exit 1
     fi
 }
