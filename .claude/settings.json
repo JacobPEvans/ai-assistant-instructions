@@ -1,5 +1,16 @@
 {
   "hooks": {
-    "PreToolUse": []
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/validate-token-limits.py",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
   }
 }
