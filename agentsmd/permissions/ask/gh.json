@@ -1,5 +1,3 @@
 {
-  "commands": [
-    "gh pr merge"
-  ]
+  "commands": []
 }

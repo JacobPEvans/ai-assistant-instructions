@@ -11,6 +11,7 @@
     "gh pr checks",
     "gh pr edit",
     "gh pr ready",
+    "gh pr merge",
     "gh issue",
     "gh repo view",
     "gh repo clone",
