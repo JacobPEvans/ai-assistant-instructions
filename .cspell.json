@@ -115,6 +115,7 @@
     "worktree",
     "worktrees",
     "xkcd",
+    "xtype",
     "yamllint",
     "gofmt",
     "goimports",
