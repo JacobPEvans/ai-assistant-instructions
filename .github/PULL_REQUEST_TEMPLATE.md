@@ -50,7 +50,7 @@
 
 - [ ] I have read the project documentation and guidelines
 - [ ] My commit message follows the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification
-- [ ] I have removed completed tasks from [**PLANNING.md**](../PLANNING.md) and added new tasks as needed
+- [ ] I have verified related [GitHub Issues](https://github.com/JacobPEvans/ai-assistant-instructions/issues) are updated as needed
 - [ ] I have performed a self-review of my own code/documentation
 - [ ] I have added or updated tests to cover my changes (if applicable)
 - [ ] All security scanning and validation checks pass
