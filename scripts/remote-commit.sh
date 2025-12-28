@@ -213,9 +213,12 @@ multi_file_commit() {
     base_tree=$(gh api "repos/$repo/git/commits/$base_commit" --jq '.tree.sha')
 
     log_info "Creating tree with ${#file_pairs[@]} file(s)..."
-    local tree_items=()
 
-    for pair in "${file_pairs[@]}"; do
+    # Helper function to process a single file pair and output tree item JSON
+    process_file_pair_helper() {
+        local repo="$1"
+        local pair="$2"
+
         if [[ "$pair" != *:* ]]; then
             log_error "Invalid file pair '$pair'. Expected format 'path-in-repo:local-file-path' (e.g., \"docs/guide.md:./guide.md\")."
             exit 1
@@ -243,11 +246,15 @@ multi_file_commit() {
             --field encoding="base64" \
             --jq '.sha')
 
-        tree_items+=("$(jq -n \
+        jq -n \
             --arg path "$repo_path" \
             --arg sha "$blob_sha" \
-            '{path: $path, mode: "100644", type: "blob", sha: $sha}')")
-    done
+            '{path: $path, mode: "100644", type: "blob", sha: $sha}'
+    }
+
+    # Process all file pairs using xargs to avoid for loop
+    local tree_items=()
+    mapfile -t tree_items < <(printf '%s\n' "${file_pairs[@]}" | xargs -I {} bash -c 'process_file_pair_helper "$@"' _ "$repo" {})
 
     # Create tree with all blobs
     local tree_json
