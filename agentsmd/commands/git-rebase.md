@@ -47,8 +47,8 @@ if [ -z "$SOURCE_BRANCH" ]; then
   exit 1
 fi
 
-# Check if branch exists locally or remotely
-if ! git branch -a | grep -q "$SOURCE_BRANCH"; then
+# Check if branch exists locally or remotely (exact match)
+if ! git for-each-ref --format='%(refname:short)' refs/heads refs/remotes/origin | grep -Fxq "$SOURCE_BRANCH"; then
   echo "Error: branch '$SOURCE_BRANCH' not found"
   exit 1
 fi
@@ -76,7 +76,6 @@ fi
 # Update main worktree from origin
 (
   cd "$MAIN_WORKTREE"
-  git fetch origin main
   git pull origin main
   MAIN_SHA=$(git rev-parse --short HEAD)
   echo "Main updated to: $MAIN_SHA"
@@ -126,6 +125,12 @@ fi
     AFTER_COUNT=$(git log --oneline main.."$SOURCE_BRANCH" | wc -l)
     echo "Rebase successful"
     echo "Commits to push: $AFTER_COUNT"
+
+    echo "Pushing rebased branch to origin to update PR..."
+    if ! git push --force-with-lease origin "$SOURCE_BRANCH"; then
+      echo "Error: Failed to push rebased branch. The PR on GitHub will not be updated."
+      exit 1
+    fi
   else
     echo "Rebase conflict detected"
     # Exit with special code to indicate conflicts
@@ -145,7 +150,8 @@ if [ $REBASE_EXIT -eq 42 ]; then
   echo "2. Review conflicts and resolve them"
   echo "3. Stage resolved files: git add <file>"
   echo "4. Continue rebase: git rebase --continue"
-  echo "5. Once done, push from main: cd $MAIN_WORKTREE && git merge $SOURCE_BRANCH && git push origin main"
+  echo "5. Force-push the rebased branch: git push --force-with-lease origin $SOURCE_BRANCH"
+  echo "6. Re-run the command: /git-rebase $SOURCE_BRANCH"
   exit 1
 fi
 ```
@@ -160,11 +166,8 @@ fi
 (
   cd "$MAIN_WORKTREE"
 
-  # Fetch the source branch
-  git fetch origin "$SOURCE_BRANCH"
-
-  # Merge (should be fast-forward)
-  if git merge --ff-only "origin/$SOURCE_BRANCH"; then
+  # Merge the locally rebased branch (should be fast-forward)
+  if git merge --ff-only "$SOURCE_BRANCH"; then
     NEW_SHA=$(git rev-parse --short HEAD)
     echo "Main updated with $SOURCE_BRANCH: $NEW_SHA"
   else
@@ -188,9 +191,11 @@ fi
     exit 0
   fi
 
+  # Count commits to push
+  COMMIT_COUNT=$(git rev-list --count origin/main..main)
+
   # Push to origin
   if git push origin main; then
-    COMMIT_COUNT=$(git log --oneline origin/main~$(git log --oneline origin/main..main | wc -l)..origin/main | wc -l)
     echo "Successfully pushed $COMMIT_COUNT new commits to origin/main"
   else
     echo "Error: Failed to push main to origin"
