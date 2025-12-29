@@ -6,6 +6,22 @@ This directory contains reusable GitHub Actions workflows that can be centralize
 
 These workflows are designed to be moved to a dedicated repository (either `JacobPEvans/.github` or `JacobPEvans/shared-workflows`) for organization-wide reuse.
 
+## Workflows Status
+
+⚠️ **Important:** Not all workflows in this directory are currently production-ready.
+
+The following workflows are intentionally **disabled** in the reference implementation using `if: false` and will **not run unless manually enabled** by the user:
+
+| Workflow | Status | Notes |
+|--------|--------|------|
+| `claude-review.yml` | Disabled | Placeholder for future enablement |
+| `issue-triage.yml` | Disabled | Requires additional permissions and tuning |
+| `doc-sync.yml` | Disabled | Depends on external documentation infrastructure |
+| `markdownlint.yml` | Enabled | Fully functional and safe to use |
+
+Users using these workflows should review, modify, and explicitly enable them as appropriate for their environment.
+
+
 ## Available Workflows
 
 ### 1. Claude Code Review (`claude-review.yml`)
