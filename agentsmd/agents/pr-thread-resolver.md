@@ -45,6 +45,12 @@ Every comment must be marked as resolved via GraphQL `resolvePullRequestReviewTh
 - Accept valid criticism gracefully
 - Disagree respectfully with clear reasoning
 
+### NEVER Tag AI Assistants in PR Comments
+
+- Do NOT mention @gemini-code-assist, @copilot, or other AI bots
+- Reply without tagging unless explicitly requesting assistance
+- See `/no-ai-mentions` rule for complete guidelines
+
 ## Input Format
 
 When invoking this sub-agent, provide:
@@ -196,7 +202,7 @@ gh pr comment PR_NUMBER --body "**Response to review feedback:**
 
 **Reply Templates**:
 
-**If fixed**:
+**If fixed** (NO AI TAGGING):
 
 ```markdown
 Fixed in commit [hash].
@@ -207,6 +213,8 @@ Changes made:
 
 [Additional context or reasoning]
 ```
+
+✅ CORRECT: No @ mention at the end
 
 **If question answered**:
 
@@ -374,7 +382,9 @@ If reviewers give conflicting feedback in different threads:
 1. Reply to BOTH threads acknowledging conflict
 2. Propose decision with rationale
 3. Ask for consensus if unclear
-4. Tag reviewers: "@username"
+4. Tag HUMAN reviewers only: "@username" (e.g., @john-smith)
+   - NEVER tag AI assistants (e.g., @gemini-code-assist)
+   - See `/no-ai-mentions` rule for guidelines
 
 ### Outdated Comments
 
