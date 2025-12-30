@@ -65,6 +65,7 @@
     "pyproject",
     "PRRC",
     "PRRT",
+    "pushable",
     "qwen",
     "rankdir",
     "reflog",
