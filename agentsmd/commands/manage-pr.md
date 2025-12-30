@@ -25,7 +25,7 @@ Comprehensive workflow for managing a pull request from creation through to merg
 
 1. **NEVER use auto-merge.** Always wait for explicit user approval.
 2. **ALL checks must pass.** Never merge with failed checks, even if they appear to be infrastructure issues.
-3. **ALL review conversations must be PHYSICALLY RESOLVED.** Not just addressed - marked as resolved in GitHub.
+3. **ALL review conversations must be PHYSICALLY RESOLVED.** Not just addressed - marked as resolved in GitHub. Use [PR Thread Resolution Enforcement Skill](../skills/pr-thread-resolution-enforcement/SKILL.md) to verify.
 4. **Run all validation locally before pushing.** This includes linters, formatters, and pre-commit hooks.
 5. **User must approve the merge.** Only request user review AFTER all checks pass AND all conversations are resolved.
 6. **ALWAYS commit, push, and create PR when work is complete.** Do not ask the user if they want a PR - create it automatically. This kicks off automated reviews and gives users a single place to view all changes.
@@ -127,19 +127,28 @@ Returns an array of review comments with:
 ### 2.4. Resolve PR Conversations
 
 > **STRICT BLOCKER**: ALL conversations must be PHYSICALLY MARKED AS RESOLVED in GitHub before requesting user review.
+> Use [PR Thread Resolution Enforcement Skill](../skills/pr-thread-resolution-enforcement/SKILL.md) to enforce verification.
 
 **Workflow**:
 
-1. Get all unresolved review threads
-2. For each: fix the issue, reply with details, mark as resolved
-3. Verify ALL conversations show `isResolved: true`
+1. Get all unresolved review threads using [GitHub GraphQL Skill](../skills/github-graphql/SKILL.md) patterns
+2. For each: fix the issue, reply with details, mark as resolved (atomic action per skill)
+3. Verify ALL conversations show `isResolved: true` using skill verification query
+4. Verification MUST return 0 unresolved threads before Phase 3
 
-**GraphQL Queries**:
-See [GitHub GraphQL Skill](../../.claude/skills/github-graphql/SKILL.md) for:
+**Resolution Patterns**:
+See [PR Thread Resolution Enforcement Skill](../skills/pr-thread-resolution-enforcement/SKILL.md) for:
+
+- Verification query (returns count of unresolved threads)
+- Resolution workflow (reply → resolve → verify)
+- Success/failure criteria (must equal 0)
+
+**GraphQL Operations**:
+See [GitHub GraphQL Skill](../skills/github-graphql/SKILL.md) for:
 
 - Fetching review threads with `reviewThreads` query
 - Resolving threads with `resolveReviewThread` mutation
-- Verifying resolution status
+- Full command patterns and error handling
 
 **Quick Check**:
 
@@ -171,13 +180,22 @@ gh pr checks <PR_NUMBER>
 # 2. PR is mergeable
 gh pr view <PR_NUMBER> --json mergeable
 
-# 3. All conversations resolved
-# (Use GitHub GraphQL Skill queries to verify isResolved: true for all threads)
+# 3. All conversations resolved (MANDATORY VERIFICATION)
+# Use PR Thread Resolution Enforcement Skill verification query
+# Must return 0 unresolved threads - commands abort if verification fails
+gh api graphql --raw-field 'query=query { repository(owner: "{OWNER}", name: "{REPO}") { pullRequest(number: {NUMBER}) { reviewThreads(last: 100) { nodes { isResolved } } } } }' | jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)] | length'
 ```
 
-**Only if ALL three verifications pass**, request user review:
+**CRITICAL**: The last command MUST return `0`. If it returns any number > 0, conversations are not fully resolved and you MUST:
 
-> "PR #XX is ready for your review. All checks pass, all conversations are resolved, and the PR is mergeable. Please review and merge when ready."
+1. Return to Phase 2.4 (Resolve PR Conversations)
+2. Address remaining threads
+3. Re-run verification until it returns 0
+4. NEVER request user review if verification fails
+
+**Only if ALL three verifications pass** (especially verification returning 0), request user review:
+
+> "PR #XX is ready for your review. All checks pass, all conversations are resolved and verified, and the PR is mergeable. Please review and merge when ready."
 
 ## Phase 4: Merge (User Action)
 

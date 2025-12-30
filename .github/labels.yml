@@ -1,118 +1,148 @@
-# GitHub Issue Labels - Conventional Commits + Size/Priority
+# =============================================================================
+# JacobPEvans Standard Labels
+# =============================================================================
+# Canonical label set for all repositories.
+# Synced via EndBug/label-sync GitHub Action.
+#
+# Categories:
+#   type:*     - What kind of change (aligns with semantic versioning)
+#   priority:* - Urgency level
+#   size:*     - Effort estimation
+#   ai:*       - AI workflow state
+#   (ungrouped) - Triage/admin labels
+#
+# Requirements (enforced via issue templates):
+#   - At least one type:* label
+#   - Exactly one priority:* label
+#   - Exactly one size:* label
+# =============================================================================
 
-# Type labels (conventional commits - replaces bug/enhancement/documentation)
-- name: "type:feature"
-  color: "0075ca"
-  description: "New feature or request (semver: MINOR)"
-
+# =============================================================================
+# TYPE LABELS - What kind of change is this? (Categorical, distinct colors)
+# Each type has a unique color for easy visual identification. No overlap with priority/size.
+# =============================================================================
 - name: "type:bug"
-  color: "d73a4a"
-  description: "Something isn't working (semver: PATCH)"
+  color: "DC2626"
+  description: "Bug - Something isn't working (semver: PATCH)"
 
-- name: "type:docs"
-  color: "0075ca"
-  description: "Documentation only changes"
-
-- name: "type:refactor"
-  color: "fbca04"
-  description: "Code change that neither fixes a bug nor adds a feature"
-
-- name: "type:perf"
-  color: "ff9800"
-  description: "Performance improvements"
-
-- name: "type:test"
-  color: "00ff00"
-  description: "Adding or correcting tests"
-
-- name: "type:ci"
-  color: "1d76db"
-  description: "CI/CD pipeline changes"
-
-- name: "type:chore"
-  color: "fef2c0"
-  description: "Maintenance tasks, dependencies, tooling"
+- name: "type:feature"
+  color: "3B82F6"
+  description: "Feature - New feature or request (semver: MINOR)"
 
 - name: "type:breaking"
-  color: "b60205"
-  description: "Breaking changes (semver: MAJOR)"
+  color: "7C2D12"
+  description: "Breaking - Breaking changes (semver: MAJOR)"
 
-# Size labels (T-shirt sizing for effort/complexity)
-- name: "size:xs"
-  color: "c2e0c6"
-  description: "Extra small - trivial change, <1 hour"
+- name: "type:docs"
+  color: "8B5CF6"
+  description: "Docs - Documentation only changes"
 
-- name: "size:s"
-  color: "a2d9a2"
-  description: "Small - simple change, 1-4 hours"
+- name: "type:chore"
+  color: "64748B"
+  description: "Chore - Maintenance tasks, dependencies, tooling"
 
-- name: "size:m"
-  color: "7ec87e"
-  description: "Medium - moderate effort, 1-2 days"
+- name: "type:ci"
+  color: "0EA5E9"
+  description: "CI - CI/CD pipeline changes"
 
-- name: "size:l"
-  color: "5cb85c"
-  description: "Large - significant work, 3-5 days"
+- name: "type:test"
+  color: "22C55E"
+  description: "Test - Adding or correcting tests"
 
-- name: "size:xl"
-  color: "3d8b3d"
-  description: "Extra large - major effort, 1+ weeks"
+- name: "type:refactor"
+  color: "EAB308"
+  description: "Refactor - Code change with no functional change"
 
-# Workflow labels
-- name: "ai:ready"
-  color: "0099ff"
-  description: "Human-approved and ready for any AI agent to implement"
+- name: "type:perf"
+  color: "F97316"
+  description: "Perf - Performance improvements"
 
-- name: "ready-for-dev"
-  color: "0099ff"
-  description: "Shaped and ready for /resolve-issues"
-
-- name: "ai:created"
-  color: "fbca04"
-  description: "AI-generated issue - requires human approval (no ai:ready = not approved)"
-
-# Priority labels (no spaces)
+# =============================================================================
+# PRIORITY LABELS - How urgent is this? (Heat map: Red → Orange → Yellow → Green)
+# Critical = hot red, Low = cool green (intuitive urgency indicator)
+# =============================================================================
 - name: "priority:critical"
-  color: "b60205"
-  description: "Urgent - requires immediate attention"
+  color: "B91C1C"
+  description: "Critical - Requires immediate attention (semver: emergency)"
 
 - name: "priority:high"
-  color: "d93f0b"
-  description: "High priority - should be addressed soon"
+  color: "EA580C"
+  description: "High - Should be addressed soon (semver: priority)"
 
 - name: "priority:medium"
-  color: "fbca04"
-  description: "Medium priority - normal workflow"
+  color: "F59E0B"
+  description: "Medium - Normal workflow (semver: standard)"
 
 - name: "priority:low"
-  color: "0e8a16"
-  description: "Low priority - address when time permits"
+  color: "059669"
+  description: "Low - Address when time permits (semver: backlog)"
 
-# Other labels
-- name: "question"
-  color: "d876e3"
-  description: "Further information is requested"
+# =============================================================================
+# SIZE LABELS - How much effort is this? (Green intensity: Light → Dark)
+# XS = very light, XL = dark (effort intensity gradient)
+# =============================================================================
+- name: "size:xs"
+  color: "D1FAE5"
+  description: "XS - Trivial change, <1 hour"
 
-- name: "duplicate"
-  color: "cfd3d7"
-  description: "This issue or pull request already exists"
+- name: "size:s"
+  color: "A7F3D0"
+  description: "S - Simple change, 1-4 hours"
 
-- name: "wontfix"
-  color: "ffffff"
-  description: "This will not be worked on"
+- name: "size:m"
+  color: "6EE7B7"
+  description: "M - Moderate effort, 1-2 days"
 
-- name: "invalid"
-  color: "e4e669"
-  description: "This doesn't seem right"
+- name: "size:l"
+  color: "34D399"
+  description: "L - Significant work, 3-5 days"
+
+- name: "size:xl"
+  color: "047857"
+  description: "XL - Major effort, 1+ weeks"
+
+# =============================================================================
+# WORKFLOW LABELS - Issue and PR lifecycle management
+# =============================================================================
+- name: "ready-for-dev"
+  color: "10B981"
+  description: "Ready - Shaped, requirements clear, ready for development"
 
 - name: "good-first-issue"
-  color: "7057ff"
-  description: "Good for newcomers"
+  color: "7C3AED"
+  description: "Good for newcomers - Well-scoped, documented, beginner-friendly"
 
-- name: "help-wanted"
-  color: "008672"
-  description: "Extra attention is needed"
+- name: "ai:created"
+  color: "FCD34D"
+  description: "AI-generated - Requires human approval before implementation"
 
+- name: "ai:ready"
+  color: "06B6D4"
+  description: "AI-ready - Human-approved and ready for AI agent implementation"
+
+# -----------------------------------------------------------------------------
+# TRIAGE LABELS - Administrative
+# -----------------------------------------------------------------------------
+- name: "duplicate"
+  color: "CBD5E1"
+  description: "Duplicate - This issue or pull request already exists"
+
+- name: "invalid"
+  color: "FDE047"
+  description: "Invalid - This doesn't seem right"
+
+- name: "wontfix"
+  color: "FFFFFF"
+  description: "Wontfix - This will not be worked on"
+
+- name: "question"
+  color: "E879F9"
+  description: "Question - Further information is requested"
+
+# =============================================================================
+# DEPRECATED LABELS - Keep for migration tracking
+# =============================================================================
+# Legacy labels (DEPRECATED - keep for migration)
 # Legacy labels (DEPRECATED - keep for migration)
 - name: "bug"
   color: "d73a4a"

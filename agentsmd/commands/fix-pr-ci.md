@@ -69,10 +69,14 @@ gh pr list --json number,headRefName,title,statusCheckRollup,mergeable
 
 ### Step 2: Filter for Failing CI
 
+Use [PR Health Check Skill](../skills/pr-health-check/SKILL.md) patterns to identify PRs needing fixes.
+
 PRs need fixing when:
 
 - Any check has `conclusion: "FAILURE"`
 - OR `mergeable != "MERGEABLE"`
+
+See skill for detailed health check queries and interpretation.
 
 ### Step 3: Create Worktrees
 
@@ -150,16 +154,25 @@ BLOCKED: #{N} (reason)...
 
 ## Batching Strategy (All Mode)
 
-**CRITICAL: Maximum 5 subagents running at once.**
+Use [Subagent Batching Skill](../skills/subagent-batching/SKILL.md) for parallel execution patterns.
+
+**CRITICAL: Maximum 5 subagents running at once** (see skill for rationale).
 
 If > 5 PRs need processing:
 
-1. Launch first 5 subagents in parallel
+1. Launch first 5 subagents in parallel (single message)
 2. Wait for ALL 5 to complete using `TaskOutput` with `block=true`
-3. Validate each completed - verify PR is mergeable
-4. If any incomplete: retry that PR (max 2 retries)
+3. Validate each completed using [PR Health Check Skill](../skills/pr-health-check/SKILL.md)
+4. If any incomplete: retry that PR (max 2 retries per skill guidance)
 5. Only after all 5 are validated, start next batch of 5
 6. Never have more than 5 concurrent subagents
+
+See [Subagent Batching Skill](../skills/subagent-batching/SKILL.md) for:
+
+- Launch patterns
+- Monitoring completion
+- Error handling
+- Final report template
 
 ## Error Handling
 

@@ -141,14 +141,19 @@ bun run lint
 
 #### Step 4: Check Comment Limit (Before Submitting Feedback)
 
-Before posting any new comments, check the current comment count using the **[GitHub GraphQL Skill](../skills/github-graphql/SKILL.md)** patterns.
+**MANDATORY**: Use [PR Comment Limit Enforcement Skill](../skills/pr-comment-limit-enforcement/SKILL.md) before posting comments.
 
-Query `comments.totalCount` + `reviewThreads.totalCount` for the PR. See also [PR Comment Limits rule](../rules/pr-comment-limits.md).
+**Pre-Comment Check Pattern** (from skill):
 
-**Decision Logic**:
+1. Count total comments (review threads + PR comments)
+2. If >= 50: Skip feedback submission, log limit reached, exit gracefully
+3. If < 50: Proceed to Step 5
 
-- **If comment count >= 50**: Skip feedback submission, log that limit has been reached
-- **If comment count < 50**: Proceed to Step 5
+See skill for:
+
+- Comment counting query
+- Limit check logic
+- Auto-resolution patterns
 
 #### Step 5: Feedback Documentation & Submission
 

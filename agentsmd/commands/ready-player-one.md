@@ -91,22 +91,20 @@ gh pr list --repo "$OWNER/$REPO" \
 
 ### Step 4: Determine Merge-Readiness
 
-For each PR, use the
-**[Git Rebase Workflow Skill](../../.claude/plugins/jpe-git/skills/git-rebase-workflow/SKILL.md#merge-readiness-criteria)**
-for canonical validation criteria.
+For each PR, use [PR Health Check Skill](../skills/pr-health-check/SKILL.md) for comprehensive merge-readiness validation.
 
-Get unresolved review threads using the **[GitHub GraphQL Skill](../skills/github-graphql/SKILL.md)** patterns.
+Get unresolved review threads using [GitHub GraphQL Skill](../skills/github-graphql/SKILL.md) patterns.
+Also verify thread resolution using [PR Thread Resolution Enforcement Skill](../skills/pr-thread-resolution-enforcement/SKILL.md).
 
-Query `reviewThreads` and filter for `isResolved == false`.
+Quick summary - a PR is **READY TO MERGE** when (see PR Health Check Skill for details):
 
-Quick summary - a PR is **READY TO MERGE** when:
-
+- `state == "OPEN"`
 - `mergeable == "MERGEABLE"`
-- All required checks SUCCESS
-- No unresolved review threads
+- All required checks `SUCCESS`
+- No unresolved review threads (verified via Thread Resolution Enforcement Skill)
 - `reviewDecision` APPROVED or not required
 
-A PR is **BLOCKED** when failing any of the above (see skill for full details and abort messages)
+A PR is **BLOCKED** when failing any of the above (see PR Health Check Skill for detailed criteria)
 
 ### Step 5: Generate JSON Report
 

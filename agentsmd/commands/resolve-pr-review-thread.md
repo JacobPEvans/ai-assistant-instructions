@@ -31,7 +31,8 @@ Orchestrates resolution of GitHub PR review comments by delegating to the specia
 1. Get current PR number from context
 2. Check for unresolved review threads
 3. Launch `pr-thread-resolver` subagent for this PR
-4. Monitor completion and verify all threads marked resolved
+4. **VERIFY** using [PR Thread Resolution Enforcement Skill](../skills/pr-thread-resolution-enforcement/SKILL.md)
+5. Only report completion if verification returns 0 unresolved threads
 
 ### All Mode
 
@@ -39,10 +40,27 @@ Orchestrates resolution of GitHub PR review comments by delegating to the specia
 2. Filter PRs with unresolved threads
 3. Launch parallel subagents in batches of 5
 4. Wait for batch completion before starting next batch
-5. Verify all threads marked resolved across all PRs
+5. **VERIFY EACH BATCH** using [PR Thread Resolution Enforcement Skill](../skills/pr-thread-resolution-enforcement/SKILL.md)
+6. Only proceed to next batch if all PRs in current batch verify to 0 unresolved threads
+
+## Verification Requirement
+
+After `pr-thread-resolver` agent completes (single or batch), MUST verify using [PR Thread Resolution Enforcement Skill](../skills/pr-thread-resolution-enforcement/SKILL.md):
+
+```bash
+# Verification query (must return 0)
+gh api graphql --raw-field \
+  'query=query { repository(owner: "{OWNER}", name: "{REPO}") { pullRequest(number: {NUMBER}) { reviewThreads(last: 100) { nodes { isResolved } } } } }' \
+  | jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)] | length'
+```
+
+**Success**: Verification returns `0` → Report completion
+**Failure**: Verification returns > `0` → Abort with error message listing remaining threads
 
 ## Related
 
+- **Skill**: [PR Thread Resolution Enforcement](../skills/pr-thread-resolution-enforcement/SKILL.md) - Canonical enforcement patterns (REQUIRED)
+- **Skill**: [GitHub GraphQL](../skills/github-graphql/SKILL.md) - GraphQL mutation patterns
 - **Agent**: [`pr-thread-resolver`](../agents/pr-thread-resolver.md) - Detailed comment interpretation and resolution logic
 - **Rules**: [PR Comment Limits](../rules/pr-comment-limits.md) - 50-comment limit enforcement
 - **Principles**: [Subagent Parallelization](../rules/subagent-parallelization.md) - Batching strategy
