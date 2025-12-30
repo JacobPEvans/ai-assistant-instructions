@@ -45,7 +45,7 @@ git worktree list
 From the output:
 
 - **MAIN_PATH**: Line ending with `[main]` - first column is the path
-- **BRANCH_PATH**: Line ending with `[<your-branch>]` - first column is the path
+- **BRANCH_PATH**: Line ending with `[<branch>]` - first column is the path
 
 Use these discovered paths in all commands below.
 
@@ -74,9 +74,9 @@ git worktree list | grep '\[main\]'
 **Diagnosis:**
 
 ```bash
-git branch -a | grep -i "<branch-name>"
+git branch -a | grep -i "<branch>"
 git fetch origin
-git branch -a | grep -i "<branch-name>"
+git branch -a | grep -i "<branch>"
 ```
 
 **Resolution:** Check spelling, fetch from origin, or create the branch.
@@ -183,7 +183,7 @@ Update main and re-run rebase.
 
 ```bash
 # Ensure you're on the feature branch
-git push --force-with-lease origin <branch-name>
+git push --force-with-lease origin <branch>
 ```
 
 ---
@@ -211,7 +211,7 @@ Then reset:
 ```bash
 # Reset feature branch to remote (from branch worktree)
 git fetch origin
-git reset --hard origin/<branch-name>
+git reset --hard origin/<branch>
 
 # Reset main to remote (from main worktree)
 cd "<MAIN_PATH>"
@@ -232,7 +232,7 @@ git worktree remove "<path-to-worktree>" --force
 
 # Re-create from origin
 git fetch origin
-git worktree add "<new-path>" "<branch-name>"
+git worktree add "<new-path>" "<branch>"
 ```
 
 ---

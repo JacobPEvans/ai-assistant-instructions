@@ -1,7 +1,7 @@
 ---
 description: Rebase a feature branch onto main and push updated main to origin
 model: haiku
-allowed-tools: Bash(git:*), Bash(gh pr view:*), Bash(gh pr list:*)
+allowed-tools: Bash(git:*), Bash(gh pr view:*), Bash(gh pr list:*), Bash(gh pr create:*)
 ---
 
 # Git Rebase
