@@ -27,8 +27,9 @@ Single line indicating success or failure:
 
 ```bash
 # Execute GraphQL mutation
+# The agent receives threadId from the prompt and uses it here
 gh api graphql --raw-field "query=mutation {
-  resolveReviewThread(input: {threadId: \"$THREAD_ID\"}) {
+  resolveReviewThread(input: {threadId: \"$threadId\"}) {
     thread {
       id
       isResolved
