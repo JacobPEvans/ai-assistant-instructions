@@ -144,18 +144,25 @@ If that still fails, origin/main was updated while you were working. Start over 
 
 ### Error: "Repository rule violations" or "Changes must be made through a pull request"
 
-**Cause:** GitHub branch protection prevents direct pushes to main.
+**Cause:** Some other GitHub rule is being violated (not branch protection for reviewed commits).
 
-**This skill CANNOT complete if branch protection blocks direct pushes.**
+**Why this happens:** The commits you're pushing ARE on the open PR, so they've been reviewed and
+should be pushable. If you get this error, check:
 
-The `/git-rebase` workflow requires pushing signed commits directly to main. GitHub's merge
-button does NOT preserve commit signatures from local rebases.
+1. **Status checks passing**: `gh pr view <branch> --json checks`
+2. **All required reviews approved**: `gh pr view <branch> --json reviews`
+3. **No conflicts with main**: You already rebased, so this shouldn't happen
 
-**Options:**
+**If status checks are failing:**
 
-1. **Adjust repository rules** to allow signed commits from authorized users
-2. **Use GitHub's merge button** (but this is NOT a rebase and loses commit signatures)
-3. **Contact repository admin** to temporarily allow the push
+```bash
+cd <BRANCH_PATH>
+git push --force-with-lease origin <branch>
+# Wait for checks to pass in the PR
+cd <MAIN_PATH>
+git merge --ff-only <branch>
+git push origin main
+```
 
 **DO NOT use `gh pr merge`** - that bypasses commit signing and is not a true rebase.
 
