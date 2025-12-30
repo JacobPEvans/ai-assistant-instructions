@@ -174,10 +174,13 @@ gh pr comment 123 --body "This PR has reached the 50-comment limit..."
 # Get unresolved threads
 THREAD_IDS=$(... GraphQL query ...)
 
-# Resolve each thread
-for THREAD_ID in $THREAD_IDS; do
-  gh api graphql --raw-field "query=mutation { resolveReviewThread(input: {threadId: \"$THREAD_ID\"}) { thread { id } } }"
-done
+# Resolve each thread in parallel using the resolve-pr-thread-graphql agent
+# Launch one agent per thread ID
+Task(subagent_type='resolve-pr-thread-graphql', prompt='Resolve thread: thread_id_1', run_in_background=true)
+Task(subagent_type='resolve-pr-thread-graphql', prompt='Resolve thread: thread_id_2', run_in_background=true)
+Task(subagent_type='resolve-pr-thread-graphql', prompt='Resolve thread: thread_id_3', run_in_background=true)
+# ... (continue for all thread IDs)
+# Wait for all agents to complete using TaskOutput
 ```
 
 Result: All threads resolved, message posted

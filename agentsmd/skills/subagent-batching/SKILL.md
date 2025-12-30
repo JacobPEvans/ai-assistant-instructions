@@ -95,11 +95,11 @@ After launching subagents:
 # 1. Launch batch (collect agent IDs from response)
 agent_ids=("a1b2c3d" "e4f5g6h" "i7j8k9l")
 
-# 2. Wait for each to complete
-for agent_id in "${agent_ids[@]}"; do
-  # Use TaskOutput with block=true to wait for completion
-  echo "Waiting for agent $agent_id..."
-done
+# 2. Wait for all agents to complete in parallel
+# Use multiple TaskOutput calls in a single message
+TaskOutput(task_id="a1b2c3d", block=true)
+TaskOutput(task_id="e4f5g6h", block=true)
+TaskOutput(task_id="i7j8k9l", block=true)
 
 # 3. Validate all results
 # 4. Proceed to next batch only if all succeeded
