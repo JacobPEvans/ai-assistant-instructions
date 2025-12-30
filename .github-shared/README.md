@@ -13,7 +13,7 @@ These workflows are designed to be moved to a dedicated repository (either `Jaco
 The following workflows are intentionally **disabled** in the reference implementation using `if: false` and will **not run unless manually enabled** by the user:
 
 | Workflow | Status | Notes |
-|--------|--------|------|
+| -------- | -------- | ------ |
 | `claude-review.yml` | Disabled | Placeholder for future enablement |
 | `issue-triage.yml` | Disabled | Requires additional permissions and tuning |
 | `doc-sync.yml` | Disabled | Depends on external documentation infrastructure |
