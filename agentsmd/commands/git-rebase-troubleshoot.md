@@ -143,6 +143,7 @@ git log --oneline main..origin/main
 ### Fixing Diverged Branches
 
 ```bash
+MAIN_PATH=$(git worktree list | grep '\[main\]' | awk '{print $1}')
 cd "$MAIN_PATH"
 git fetch origin
 git rebase origin/main
