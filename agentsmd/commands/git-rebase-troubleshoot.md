@@ -1,7 +1,7 @@
 ---
 description: Troubleshoot and recover from git rebase failures
 model: sonnet
-allowed-tools: Bash(git:*), Bash(gh pr:*), Read, Glob, Grep
+allowed-tools: Bash(git:*), Bash(gh pr view:*), Bash(gh pr list:*), Read, Glob, Grep
 ---
 
 # Git Rebase Troubleshoot
@@ -165,33 +165,29 @@ remote: - 2 of 2 required status checks are expected.
 ```
 
 The repository has branch protection rules that prevent direct pushes to main.
-All changes must go through a pull request.
 
-### Fixing Branch Protection Error
+### This Skill Cannot Complete With Branch Protection
 
-Since you can't push directly, merge the PR through GitHub:
+The `/git-rebase` workflow requires pushing **signed commits** directly to main.
+GitHub's merge button does NOT preserve commit signatures from local rebases.
 
-```bash
-gh pr merge <branch> --squash --admin
-```
+**DO NOT use `gh pr merge`** - that bypasses commit signing and is not a true rebase.
 
-**Note:** `--squash` is often required because rebase merges can't be auto-signed.
-If squash fails, try `--merge`:
+### Options
 
-```bash
-gh pr merge <branch> --merge --admin
-```
+1. **Adjust repository rules** to allow signed commits from authorized users
+2. **Contact repository admin** to temporarily allow the push
+3. **Use GitHub's merge button** as a last resort (loses commit signatures)
 
-If that also fails (merge commits not allowed), you may need to adjust repository settings
-or use the GitHub web interface.
+### Why This Matters
 
-### Verifying PR Merged
+The whole point of `/git-rebase` is to:
 
-```bash
-gh pr view <branch> --json state
-```
+1. Rebase commits locally (where they get signed)
+2. Push signed commits to main
+3. PR auto-closes because commits are now in main
 
-Should show `"state":"MERGED"`.
+Using `gh pr merge` skips step 1-2 and creates unsigned commits on GitHub's servers.
 
 ---
 
@@ -460,6 +456,7 @@ If these don't resolve the issue:
 ## DO NOT
 
 - Do NOT use `--force` (use `--force-with-lease`)
+- Do NOT use `gh pr merge` - this bypasses commit signing and is NOT a rebase
 - Do NOT reset main without checking for unique commits
 - Do NOT delete branches without confirming they're merged
 - Do NOT run interactive rebase (`git rebase -i`)

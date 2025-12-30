@@ -1,7 +1,7 @@
 ---
 description: Rebase a feature branch onto main and push updated main to origin
 model: haiku
-allowed-tools: Bash(git:*), Bash(gh pr view:*), Bash(gh pr list:*), Bash(gh pr create:*), Bash(gh pr merge:*)
+allowed-tools: Bash(git:*), Bash(gh pr view:*), Bash(gh pr list:*), Bash(gh pr create:*)
 ---
 
 # Git Rebase
@@ -146,19 +146,18 @@ If that still fails, origin/main was updated while you were working. Start over 
 
 **Cause:** GitHub branch protection prevents direct pushes to main.
 
-**Fix:** Merge the PR through GitHub instead:
+**This skill CANNOT complete if branch protection blocks direct pushes.**
 
-```bash
-gh pr merge <branch> --squash --admin
-```
+The `/git-rebase` workflow requires pushing signed commits directly to main. GitHub's merge
+button does NOT preserve commit signatures from local rebases.
 
-Then verify:
+**Options:**
 
-```bash
-gh pr view <branch> --json state
-```
+1. **Adjust repository rules** to allow signed commits from authorized users
+2. **Use GitHub's merge button** (but this is NOT a rebase and loses commit signatures)
+3. **Contact repository admin** to temporarily allow the push
 
-The PR should show `"state":"MERGED"`.
+**DO NOT use `gh pr merge`** - that bypasses commit signing and is not a true rebase.
 
 ### Error: Pre-commit hooks modified files
 
@@ -231,9 +230,10 @@ Run `/git-rebase-troubleshoot` for detailed diagnosis and recovery.
 
 ## DO NOT
 
-- Stop after "Rebase successful" - you must also push main
-- Stop when you see an error - READ IT and FIX IT
-- Use `git rebase -i` (interactive)
-- Use `--force` (use `--force-with-lease`)
-- Report success until origin/main is updated AND PR is merged
-- Assume any folder naming conventions
+- Do NOT stop after "Rebase successful" - you must also push main
+- Do NOT stop when you see an error - READ IT and FIX IT
+- Do NOT use `git rebase -i` (interactive)
+- Do NOT use `--force` (use `--force-with-lease`)
+- Do NOT use `gh pr merge` - this bypasses commit signing and is NOT a rebase
+- Do NOT report success until origin/main is updated AND PR is merged
+- Do NOT assume any folder naming conventions
