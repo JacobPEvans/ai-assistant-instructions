@@ -1,6 +1,6 @@
 ---
 description: Troubleshoot and recover from git rebase failures
-model: sonnet
+model: haiku
 allowed-tools: Bash(git:*), Bash(gh pr view:*), Bash(gh pr list:*), Read, Glob, Grep
 ---
 
@@ -9,6 +9,11 @@ allowed-tools: Bash(git:*), Bash(gh pr view:*), Bash(gh pr list:*), Read, Glob, 
 Diagnose and recover from `/git-rebase` failures. Only invoke this skill when the primary
 `/git-rebase` command encounters errors that the main skill's "EXPECTED ERRORS" section
 cannot resolve.
+
+**For generic git/worktree issues**, see:
+
+- `/git-worktree-troubleshooting` - Worktree paths, branch issues, ambiguous refnames
+- `/git-precommit-troubleshooting` - Pre-commit hook auto-fixes
 
 ---
 
@@ -27,89 +32,16 @@ git branch --show-current
 # Is a rebase in progress?
 ls -la .git/rebase-{merge,apply} 2>/dev/null || echo "No rebase in progress"
 
-# Check for ambiguous refnames (COMMON PROBLEM)
-git show-ref origin/main | wc -l
-
 # What's the relationship to main?
 git log --oneline main..HEAD 2>/dev/null | head -5
 git log --oneline HEAD..main 2>/dev/null | head -5
 
-# List all worktrees to find paths
+# List all worktrees
 git worktree list
 
 # Check PR state
 gh pr view <branch> --json state,number 2>/dev/null || echo "No PR found"
 ```
-
----
-
-## CRITICAL: Understanding the Ambiguous Refname Warning
-
-If you see this warning:
-
-```text
-warning: refname 'origin/main' is ambiguous.
-```
-
-**This means you have TWO things named `origin/main`:**
-
-1. `refs/heads/origin/main` - A LOCAL branch someone accidentally named `origin/main`
-2. `refs/remotes/origin/main` - The actual remote tracking branch for origin's main
-
-**This is extremely confusing** because git doesn't know which one you mean when you type
-`origin/main`. Commands will behave unpredictably.
-
-### Diagnosing Ambiguous Refname
-
-```bash
-git show-ref origin/main
-```
-
-**Normal output (1 line):**
-
-```text
-abc1234 refs/remotes/origin/main
-```
-
-**Problem output (2 lines):**
-
-```text
-def5678 refs/heads/origin/main        <-- LOCAL BRANCH (DELETE THIS)
-abc1234 refs/remotes/origin/main      <-- REMOTE TRACKING (KEEP THIS)
-```
-
-### Fixing Ambiguous Refname
-
-Delete the local branch that's causing confusion:
-
-```bash
-git branch -D origin/main
-```
-
-Then verify:
-
-```bash
-git show-ref origin/main
-```
-
-Should now show only ONE line with `refs/remotes/origin/main`.
-
----
-
-## Discovering Worktree Paths
-
-**IMPORTANT**: Never assume folder names or paths. Always discover them:
-
-```bash
-git worktree list
-```
-
-From the output:
-
-- **MAIN_PATH**: Line ending with `[main]` - first column is the path
-- **BRANCH_PATH**: Line ending with `[<branch>]` - first column is the path
-
-Use these discovered paths in all commands below.
 
 ---
 
@@ -151,7 +83,7 @@ git push origin main
 ```
 
 If this still fails, origin/main was updated AGAIN while you were rebasing.
-You need to restart the entire `/git-rebase` process from Step 1.
+Start over from Step 1 of `/git-rebase`.
 
 ---
 
@@ -207,42 +139,6 @@ If checks are failing, fix the code, commit, push to feature branch, and wait fo
 
 ---
 
-## Error: Pre-Commit Hooks Modified Files
-
-This error looks like:
-
-```text
-trim trailing whitespace.................................................Passed
-fix end of files.........................................................Passed
-markdownlint-cli2........................................................Failed
-- hook id: markdownlint-cli2
-- files were modified by this hook
-```
-
-Pre-commit hooks auto-corrected formatting issues (trailing whitespace, end of file
-newlines, markdown formatting, etc.). The modified files aren't committed.
-
-### Fixing Pre-Commit Hook Modifications
-
-```bash
-MAIN_PATH=$(git worktree list | grep '\[main\]' | awk '{print $1}')
-cd "$MAIN_PATH"
-
-# Stage the auto-fixed files
-git add -A
-
-# Amend the previous commit to include the fixes
-git commit --amend --no-edit
-
-# Try pushing again
-git push origin main
-```
-
-If the hooks keep modifying files in a loop, there may be a formatting issue
-the hook can't fully resolve. Check `git diff` to see what's being changed.
-
----
-
 ## Error: Embedded Git Repository Warning
 
 This error looks like:
@@ -267,7 +163,7 @@ Remove the embedded repository from staging:
 git rm --cached some-folder
 ```
 
-If you want to completely remove it:
+Or completely remove it:
 
 ```bash
 rm -rf some-folder
@@ -278,52 +174,6 @@ Or add it to `.gitignore`:
 ```bash
 echo "some-folder/" >> .gitignore
 ```
-
----
-
-## Error: Main Worktree Not Found
-
-No worktree exists for main branch.
-
-**Diagnosis:**
-
-```bash
-git worktree list | grep '\[main\]'
-```
-
-**Resolution:** Create a main worktree:
-
-```bash
-git worktree add /path/to/main main
-```
-
----
-
-## Error: Branch Not Found
-
-Branch doesn't exist locally or remotely.
-
-**Diagnosis:**
-
-```bash
-git branch -a | grep -i "<branch>"
-git fetch origin
-git branch -a | grep -i "<branch>"
-```
-
-**Resolution:** Check spelling, fetch from origin, or create the branch.
-
----
-
-## Error: Uncommitted Changes
-
-Working directory has uncommitted changes.
-
-**Options:**
-
-1. Commit changes: `git add . && git commit -m "WIP"`
-2. Stash changes: `git stash push -m "before rebase"`
-3. Discard changes: `git checkout -- .` (DESTRUCTIVE)
 
 ---
 
@@ -390,41 +240,13 @@ git push --force-with-lease origin <branch>
 
 ---
 
-## Recovery Procedures
+## Recovery: Aborting In-Progress Rebase
 
-### Aborting In-Progress Rebase
+If rebase is stuck and you need to start over:
 
 ```bash
 git rebase --abort
 git status
-```
-
-### Resetting to Clean State
-
-```bash
-# Find paths
-git worktree list
-
-# Reset feature branch to remote (from branch worktree)
-cd "<BRANCH_PATH>"
-git fetch origin
-git reset --hard origin/<branch>
-
-# Reset main to remote (from main worktree)
-cd "<MAIN_PATH>"
-git fetch origin
-git reset --hard origin/main
-```
-
-### Starting Fresh with New Worktree
-
-If worktree is corrupted:
-
-```bash
-git worktree list
-git worktree remove "<path-to-worktree>" --force
-git fetch origin
-git worktree add "<new-path>" "<branch>"
 ```
 
 ---
@@ -437,9 +259,6 @@ After recovery, verify state before retrying:
 # Discover paths
 MAIN_PATH=$(git worktree list | grep '\[main\]' | awk '{print $1}')
 BRANCH_PATH=$(git worktree list | grep '\[<branch>\]' | awk '{print $1}')
-
-# Check for ambiguous refnames
-git show-ref origin/main | wc -l  # Should be 1
 
 # Main is synced with origin
 cd "$MAIN_PATH"
@@ -476,5 +295,4 @@ If these don't resolve the issue:
 - Do NOT reset main without checking for unique commits
 - Do NOT delete branches without confirming they're merged
 - Do NOT run interactive rebase (`git rebase -i`)
-- Do NOT assume folder names or paths - always use `git worktree list`
 - Do NOT give up when you see an error - diagnose and fix it

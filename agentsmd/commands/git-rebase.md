@@ -47,37 +47,33 @@ gh pr view <branch> --json number,state
 - If no PR exists: STOP. Run `/commit-commands:commit-push-pr` or `gh pr create` first
 - If PR is closed/merged: STOP. Nothing to rebase
 
-### 2. Clean Up Ambiguous References
+### 2. Check for Ambiguous References
 
-**IMPORTANT**: Check for a common problem that causes confusing errors:
+If you see this warning during operations: `warning: refname 'origin/main' is ambiguous.`
+
+This means you have a local branch named `origin/main` conflicting with the remote tracking
+branch. See `/git-worktree-troubleshooting` for diagnosis and fix.
+
+Quick check:
 
 ```bash
 git show-ref origin/main
 ```
 
-If you see TWO lines (one with `refs/heads/origin/main` and one with `refs/remotes/origin/main`),
-you have a LOCAL branch named `origin/main` that conflicts with the remote tracking branch.
-
-**Fix it immediately:**
-
-```bash
-git branch -D origin/main
-```
-
-This error looks like: `warning: refname 'origin/main' is ambiguous.`
+If TWO lines appear, run `/git-worktree-troubleshooting` to fix it.
 
 ### 3. Discover Worktree Paths
+
+See `/git-worktree-troubleshooting` for detailed instructions. Quick discovery:
 
 ```bash
 git worktree list
 ```
 
-Find these two paths from the output:
+- **MAIN_PATH**: Line ending with `[main]` - first column is the path
+- **BRANCH_PATH**: Line ending with `[<branch>]` - first column is the path
 
-- **MAIN_PATH**: The line ending with `[main]` - use the first column (the path)
-- **BRANCH_PATH**: The line ending with `[<branch>]` - use the first column
-
-If BRANCH_PATH not found: You need to create a worktree or run from a worktree with that branch.
+If BRANCH_PATH not found: See `/git-worktree-troubleshooting` for how to create it.
 
 ---
 
@@ -170,7 +166,9 @@ git push origin main
 
 **Cause:** Pre-commit hooks (markdownlint, etc.) auto-fixed files.
 
-**Fix:**
+See `/git-precommit-troubleshooting` for detailed diagnosis and recovery steps.
+
+**Quick fix:**
 
 ```bash
 cd <MAIN_PATH>
@@ -181,15 +179,12 @@ git push origin main
 
 ### Error: "warning: refname 'origin/main' is ambiguous"
 
-**Cause:** You have a LOCAL branch named `origin/main` that conflicts with the remote.
-
-**Fix:**
+See `/git-worktree-troubleshooting` under "CRITICAL: Understanding Ambiguous Refname Warning"
+for full explanation and fix. Quick command:
 
 ```bash
 git branch -D origin/main
 ```
-
-Then retry the push.
 
 ---
 
