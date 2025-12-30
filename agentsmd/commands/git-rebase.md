@@ -1,318 +1,135 @@
 ---
 description: Rebase a feature branch onto main and push updated main to origin
 model: haiku
-allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Bash(git worktree remove:*), Bash(git rebase --abort:*), Bash(git rebase --continue:*), Bash(git rebase --skip:*), Read, Edit, Glob, Grep
+allowed-tools: Bash(git:*), Bash(gh pr view:*), Bash(gh pr list:*), Bash(gh pr create:*)
 ---
 
 # Git Rebase
 
-Rebase a feature branch onto the latest `main`, then push the updated `main` to `origin/main`.
+## GOAL
 
-This command orchestrates the standard workflow for integrating feature branch commits into main while keeping linear history.
+Push `<branch>` commits to `origin/main`.
 
-## Related Documentation
+## SUCCESS CRITERIA
 
-- [Worktrees](../rules/worktrees.md) - Worktree structure and principles
-- [Branch Hygiene](../rules/branch-hygiene.md) - Branch synchronization rules
-- [Merge Conflict Resolution](../rules/merge-conflict-resolution.md) - How to resolve conflicts
+**YOU ARE NOT DONE** until `git push origin main` completes successfully.
 
 ## Usage
 
-```bash
-/git-rebase <source-branch>
-```
-
-**Parameters:**
-
-- `source-branch` (required): The feature branch to rebase onto main (e.g., `feat/deploy-containers`, `fix/auth-bug`)
-
-## Prerequisites
-
-- The source branch must exist locally or on the remote
-- The current repository must have a main worktree at `~/git/<repo-name>/main`
-- No uncommitted changes in the current working directory
-
----
-
-## Step 1: Validate Prerequisites
-
-### 1.1 Parse and validate source branch name
-
-```bash
-SOURCE_BRANCH="$1"
-
-# Validate branch name was provided
-if [ -z "$SOURCE_BRANCH" ]; then
-  echo "Error: branch name required. Usage: /git-rebase <source-branch>"
-  exit 1
-fi
-
-# Check if branch exists locally or remotely (exact match)
-if ! git for-each-ref --format='%(refname:short)' refs/heads refs/remotes/origin | grep -Fxq "$SOURCE_BRANCH"; then
-  echo "Error: branch '$SOURCE_BRANCH' not found"
-  exit 1
-fi
-```
-
-### 1.2 Find main worktree
-
-```bash
-# Get repo name from remote
-REPO_NAME=$(basename -s .git $(git config --get remote.origin.url))
-MAIN_WORKTREE=~/git/$REPO_NAME/main
-
-# Verify it exists
-if [ ! -d "$MAIN_WORKTREE" ]; then
-  echo "Error: main worktree not found at $MAIN_WORKTREE"
-  exit 1
-fi
+```text
+/git-rebase <branch>
 ```
 
 ---
 
-## Step 2: Update Main from Remote
+## Prerequisites Check
+
+Before executing, verify these conditions. If any fail, STOP and follow the guidance.
+
+### 1. PR Must Exist
 
 ```bash
-# Update main worktree from origin
-(
-  cd "$MAIN_WORKTREE"
-  git fetch origin
-  git reset --hard origin/main
-  MAIN_SHA=$(git rev-parse --short HEAD)
-  echo "Main updated to: $MAIN_SHA"
-)
+gh pr view <branch> --json number,state
+```
+
+- If PR exists and is open: Continue
+- If no PR exists: STOP. Run `/commit-commands:commit-push-pr` or `gh pr create` first
+- If PR is closed/merged: STOP. Nothing to rebase
+
+### 2. Discover Worktree Paths
+
+```bash
+git worktree list
+```
+
+Find these two paths from the output:
+
+- **MAIN_PATH**: The line ending with `[main]` - use the first column (the path)
+- **BRANCH_PATH**: The line ending with `[<branch>]` - use the first column
+
+If BRANCH_PATH not found: You need to create a worktree or run from a worktree with that branch.
+
+---
+
+## Execute These Four Steps
+
+### Step 1: Update main from origin
+
+Navigate to the main worktree (use MAIN_PATH from discovery) and sync:
+
+```bash
+cd <MAIN_PATH>
+git fetch origin
+git reset --hard origin/main
+```
+
+### Step 2: Rebase branch onto main
+
+Navigate to the branch worktree (use BRANCH_PATH from discovery):
+
+```bash
+cd <BRANCH_PATH>
+git rebase main
+```
+
+If rebase fails with conflicts: Run `/git-rebase-troubleshoot`
+
+### Step 3: Push rebased branch and merge into main
+
+```bash
+cd <BRANCH_PATH>
+git push --force-with-lease origin <branch>
+
+cd <MAIN_PATH>
+git merge --ff-only <branch>
+```
+
+### Step 4: PUSH MAIN TO ORIGIN (THIS IS THE WHOLE POINT)
+
+```bash
+cd <MAIN_PATH>
+git push origin main
 ```
 
 ---
 
-## Step 3: Find or Create Source Branch Worktree
-
-### 3.1 Check if worktree exists
+## Verify Completion
 
 ```bash
-SOURCE_WORKTREE=~/git/$REPO_NAME/$SOURCE_BRANCH
-
-if [ -d "$SOURCE_WORKTREE" ]; then
-  echo "Using existing worktree: $SOURCE_WORKTREE"
-else
-  echo "Creating worktree for $SOURCE_BRANCH..."
-  # Fetch the branch from origin if not local
-  git fetch origin "$SOURCE_BRANCH:$SOURCE_BRANCH" 2>/dev/null || true
-
-  # Create parent directory if it doesn't exist, then create worktree
-  mkdir -p "$(dirname "$SOURCE_WORKTREE")"
-  git worktree add "$SOURCE_WORKTREE" "$SOURCE_BRANCH"
-fi
+cd <MAIN_PATH>
+git fetch origin
+git rev-parse HEAD
+git rev-parse origin/main
 ```
+
+**Task is complete ONLY if both SHAs match.**
 
 ---
 
-## Step 4: Perform Rebase
-
-```bash
-(
-  cd "$SOURCE_WORKTREE"
-
-  # Check for uncommitted changes
-  if ! git diff-index --quiet HEAD --; then
-    echo "Error: uncommitted changes in $SOURCE_BRANCH. Commit or stash them first."
-    exit 1
-  fi
-
-  # Attempt rebase
-  if git rebase main; then
-    AFTER_COUNT=$(git log --oneline main.."$SOURCE_BRANCH" | wc -l)
-    echo "Rebase successful"
-    echo "Commits to push: $AFTER_COUNT"
-
-    echo "Pushing rebased branch to origin to update PR..."
-    if ! git push --force-with-lease origin "$SOURCE_BRANCH"; then
-      echo "Error: Failed to push rebased branch. The PR on GitHub will not be updated."
-      exit 1
-    fi
-  else
-    echo "Rebase conflict detected"
-    # Exit with special code to indicate conflicts
-    exit 42
-  fi
-)
-
-REBASE_EXIT=$?
-
-# Handle rebase conflicts
-if [ $REBASE_EXIT -eq 42 ]; then
-  echo ""
-  echo "## Rebase Conflict Detected"
-  echo ""
-  echo "The rebase encountered conflicts. Resolve them using:"
-  echo "1. Navigate to the worktree: cd $SOURCE_WORKTREE"
-  echo "2. Review conflicts and resolve them"
-  echo "3. Stage resolved files: git add <file>"
-  echo "4. Continue rebase: git rebase --continue"
-  echo "5. Force-push the rebased branch: git push --force-with-lease origin $SOURCE_BRANCH"
-  echo "6. Re-run the command: /git-rebase $SOURCE_BRANCH"
-  exit 1
-fi
-```
-
----
-
-## Step 5: Update Main with Rebased Branch
-
-### 5.1 Merge rebased branch into main
-
-```bash
-(
-  cd "$MAIN_WORKTREE"
-
-  # Merge the locally rebased branch (should be fast-forward)
-  if git merge --ff-only "$SOURCE_BRANCH"; then
-    NEW_SHA=$(git rev-parse --short HEAD)
-    echo "Main updated with $SOURCE_BRANCH: $NEW_SHA"
-  else
-    echo "Warning: Could not fast-forward merge. Manual review needed."
-    exit 1
-  fi
-)
-```
-
----
-
-## Step 6: Push Main to Origin
-
-```bash
-(
-  cd "$MAIN_WORKTREE"
-
-  # Verify we have commits to push
-  if git diff --quiet origin/main..main; then
-    echo "No new commits to push"
-    exit 0
-  fi
-
-  # Count commits to push
-  COMMIT_COUNT=$(git rev-list --count origin/main..main)
-
-  # Push to origin
-  if git push origin main; then
-    echo "Successfully pushed $COMMIT_COUNT new commits to origin/main"
-  else
-    echo "Error: Failed to push main to origin"
-    exit 1
-  fi
-)
-```
-
----
-
-## Step 7: Report Results
+## Report Format
 
 ```text
 ## Git Rebase Complete
 
-Source Branch: <source-branch>
-Main Updated: <commit-sha>
-Commits Integrated: <count>
-Status: SUCCESS
+Branch: <branch>
+Commits pushed: <count>
+Main SHA: <sha>
 
-Next Steps:
-1. Verify on GitHub that your PR is updated
-2. If desired, delete the source branch: git branch -d <source-branch>
-3. Clean up worktree if no longer needed: git worktree remove <worktree-path>
+✓ origin/main updated
 ```
 
 ---
 
-## Handling Rebase Conflicts
+## If Any Step Fails
 
-If a rebase conflict occurs:
-
-### Manual Resolution Steps
-
-1. **Navigate to the source worktree**:
-
-   ```bash
-   cd ~/git/<repo-name>/<source-branch>
-   ```
-
-2. **View conflicted files**:
-
-   ```bash
-   git status
-   ```
-
-3. **For each conflicted file**:
-   - Read the file to understand both versions
-   - Manually resolve the conflicts (remove conflict markers)
-   - Stage the resolved file: `git add <file>`
-
-4. **Continue the rebase**:
-
-   ```bash
-   git rebase --continue
-   ```
-
-5. **If you need to abort**:
-
-   ```bash
-   git rebase --abort
-   ```
-
-6. **Once rebase is complete**, merge into main and push:
-
-   ```bash
-   cd ~/git/<repo-name>/main
-   git merge --ff-only <source-branch>
-   git push origin main
-   ```
-
----
-
-## Troubleshooting
-
-### "Main worktree not found"
-
-Ensure your repository uses the worktree structure. The main branch should be at `~/git/<repo-name>/main`:
-
-```bash
-ls -d ~/git/<repo-name>/main
-```
-
-### "Branch not found"
-
-The branch doesn't exist locally or on remote. Verify:
-
-```bash
-git branch -a | grep <branch-name>
-```
-
-### "Fast-forward merge failed"
-
-Main was updated between the rebase and merge. Run `/git-rebase <branch>` again.
-
-### "Push rejected"
-
-Your local main has commits that remote doesn't. This shouldn't happen if the rebase was clean. Check:
-
-```bash
-git log origin/main..main
-```
+Run `/git-rebase-troubleshoot` for diagnosis and recovery.
 
 ---
 
 ## DO NOT
 
-- Do NOT use `git rebase -i` (interactive rebase) - this requires manual intervention
-- Do NOT rebase directly on to arbitrary branches - only onto main
-- Do NOT use `--force` without lease - the command uses `--force-with-lease` for feature branches and fast-forward only for merging to main
-- Do NOT run while there are uncommitted changes
-
-## Example Usage
-
-```bash
-# Rebase feat/deploy-containers onto main
-/git-rebase feat/deploy-containers
-
-# Rebase fix/auth-bug onto main
-/git-rebase fix/auth-bug
-```
+- Stop after "Rebase successful" - you must also push main
+- Use `git rebase -i` (interactive)
+- Use `--force` (use `--force-with-lease`)
+- Report success until origin/main is updated
+- Assume any folder naming conventions
