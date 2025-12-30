@@ -21,7 +21,6 @@ The following workflows are intentionally **disabled** in the reference implemen
 
 Users using these workflows should review, modify, and explicitly enable them as appropriate for their environment.
 
-
 ## Available Workflows
 
 ### 1. Claude Code Review (`claude-review.yml`)
