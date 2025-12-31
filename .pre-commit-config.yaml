@@ -18,7 +18,7 @@ repos:
         language: node
         files: \.md$
         require_serial: true
-        args: ["--fix"]
+        args: ["--config", ".markdownlint-cli2.jsonc", "--fix"]
   - repo: local
     hooks:
       - id: check-markdown-links

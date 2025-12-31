@@ -1,8 +1,0 @@
-{
-  "permissions": [
-    "Bash(redis-cli --version:*)",
-    "Bash(redis-cli ping:*)",
-    "Bash(redis-cli info:*)",
-    "Bash(redis-cli get:*)"
-  ]
-}

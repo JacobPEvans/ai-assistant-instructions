@@ -1,7 +1,0 @@
-{
-  "permissions": [
-    "Bash(goenv --version:*)",
-    "Bash(goenv versions:*)",
-    "Bash(goenv version:*)"
-  ]
-}
