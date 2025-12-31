@@ -2,100 +2,82 @@
 
 These are the minimum required tools and versions for using this repository.
 
-**Nix-First Approach**: All tools can be installed via Nix. Traditional package managers (npm, pip, etc.) are
-discouraged to avoid system pollution and ensure reproducibility.
+## Installing Tools with Nix
+
+All tools below can be installed using Nix:
+
+- **Temporary use**: `nix-shell -p <package-name>` - Creates a temporary shell with the tool available
+- **Permanent install**: Add `<package-name>` to your `environment.systemPackages` (NixOS) or
+  `home.packages` (home-manager)
+
+For each tool below, the Nix package name links to its official page on the Nix package repository.
 
 ## Required Tools
 
 ### GitHub CLI
 
-- Required for PR management, issue operations, and workflow automation
-- Minimum version: 2.0.0
-- **Temporary use**: `nix-shell -p gh`
-- **Permanent install**: Add `gh` to nixpkgs
-- Verification: `gh --version`
+Required for PR management, issue operations, and workflow automation.
 
-```text
-gh>=2.0.0
-```
+- **Minimum version**: 2.0.0
+- **Nix package**: [`gh`](https://search.nixos.org/packages?query=gh)
+- **Alternative**: `brew install gh`
+- **Verify**: `gh --version`
 
 ### Git
 
-- Required for version control and worktree management
-- Minimum version: 2.30.0 (for worktree support)
-- **Temporary use**: `nix-shell -p git`
-- **Permanent install**: Add `git` to nixpkgs
-- Verification: `git --version`
+Required for version control and worktree management.
 
-```text
-git>=2.30.0
-```
+- **Minimum version**: 2.30.0
+- **Nix package**: [`git`](https://search.nixos.org/packages?query=git)
+- **Alternative**: `brew install git`
+- **Verify**: `git --version`
 
 ### jq
 
-- Required for JSON parsing and manipulation in shell scripts
-- Minimum version: 1.6
-- **Temporary use**: `nix-shell -p jq`
-- **Permanent install**: Add `jq` to nixpkgs
-- Verification: `jq --version`
+Required for JSON parsing and manipulation in shell scripts.
 
-```text
-jq>=1.6
-```
+- **Minimum version**: 1.6
+- **Nix package**: [`jq`](https://search.nixos.org/packages?query=jq)
+- **Alternative**: `brew install jq`
+- **Verify**: `jq --version`
 
 ## Optional Tools for Development
 
 ### Pre-commit
 
-- For local hook validation
-- Minimum version: 2.20.0
-- **Temporary use**: `nix-shell -p pre-commit`
-- **Permanent install**: Add `pre-commit` to nixpkgs
-- Alternative (not recommended): `pip install pre-commit`
-- Verification: `pre-commit --version`
+For local hook validation.
 
-```text
-pre-commit>=2.20.0
-```
+- **Minimum version**: 2.20.0
+- **Nix package**: [`pre-commit`](https://search.nixos.org/packages?query=pre-commit)
+- **Alternative**: `pip install pre-commit`
+- **Verify**: `pre-commit --version`
 
 ### markdownlint-cli2
 
-- For markdown linting validation
-- Minimum version: 0.11.0
-- **Temporary use**: `nix-shell -p markdownlint-cli2`
-- **Permanent install**: Add `markdownlint-cli2` to nixpkgs
-- Alternative (not recommended): `npm install -g @markdownlint/cli2`
-- Verification: `markdownlint-cli2 --version`
+For markdown linting validation.
 
-```text
-markdownlint-cli2>=0.11.0
-```
+- **Minimum version**: 0.11.0
+- **Nix package**: [`markdownlint-cli2`](https://search.nixos.org/packages?query=markdownlint-cli2)
+- **Alternative**: `npm install -g markdownlint-cli2`
+- **Verify**: `markdownlint-cli2 --version`
 
 ### shellcheck
 
-- For shell script validation (recommended)
-- Minimum version: 0.8.0
-- **Temporary use**: `nix-shell -p shellcheck`
-- **Permanent install**: Add `shellcheck` to nixpkgs
-- Alternative (not recommended): `brew install shellcheck` (macOS) or `apt-get install shellcheck` (Linux)
-- Verification: `shellcheck --version`
+For shell script validation.
 
-```text
-shellcheck>=0.8.0
-```
+- **Minimum version**: 0.8.0
+- **Nix package**: [`shellcheck`](https://search.nixos.org/packages?query=shellcheck)
+- **Alternative**: `brew install shellcheck`
+- **Verify**: `shellcheck --version`
 
 ### yamllint
 
-- For YAML validation
-- Minimum version: 1.26.0
-- **Temporary use**: `nix-shell -p yamllint`
-- **Permanent install**: Add `yamllint` to nixpkgs
-- Alternative (not recommended): `pip install yamllint`
-- Verification: `yamllint --version`
+For YAML validation.
 
-```text
-yamllint>=1.26.0
-```
+- **Minimum version**: 1.26.0
+- **Nix package**: [`yamllint`](https://search.nixos.org/packages?query=yamllint)
+- **Alternative**: `pip install yamllint`
+- **Verify**: `yamllint --version`
 
 ## Why Nix?
 
