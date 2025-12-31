@@ -146,7 +146,8 @@
     "noqa",
     "Pipfile",
     "signingkey",
-    "subnetting"
+    "subnetting",
+    "pkill"
   ],
   "files": [
     "**/*.md"

@@ -1,6 +1,6 @@
 {
   "commands": [
-    "pkill",
-    "zsh"
+    "pkill:*",
+    "zsh:*"
   ]
 }

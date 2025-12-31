@@ -70,9 +70,9 @@ Permissions should be denied if they:
 
 **Claude:**
 
-- `.claude/permissions/allow.json`
-- `.claude/permissions/ask.json`
-- `.claude/permissions/deny.json`
+- `agentsmd/permissions/allow.json`
+- `agentsmd/permissions/ask.json`
+- `agentsmd/permissions/deny.json`
 
 **Gemini:**
 

@@ -19,7 +19,6 @@
     "launchctl stop:*",
     "launchctl remove:*",
     "softwareupdate:*",
-    "npx:*",
     "sqlite3:*",
     "mongosh:*",
     "psql:*",

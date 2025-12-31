@@ -108,25 +108,37 @@ When AI executes commands:
 ```text
 agentsmd/permissions/
 ├── allow/
-│   ├── core.json              # Essential tools: git, gh, standard utilities
-│   ├── languages.json         # Language tooling: cargo, go, ruby, nodejs, python, rust
-│   ├── infrastructure.json    # Infrastructure: docker, kubernetes, terraform, aws
-│   ├── tools.json             # Development tools: brew, nix, asdf, mise, etc.
-│   └── services.json          # Services: redis, server tools
+│   ├── core.json              # Essential tool wildcards: git:*, docker:*, aws:*, etc.
+│   ├── git.json               # Specific git commands
+│   ├── gh.json                # GitHub CLI commands
+│   ├── docker.json            # Docker read operations
+│   ├── aws.json               # AWS CLI commands
+│   ├── terraform.json         # Terraform/Terragrunt commands
+│   ├── nix.json               # Nix ecosystem tools
+│   ├── nodejs.json            # Node.js toolchain (read-only)
+│   ├── python.json            # Python toolchain (read-only)
+│   ├── rust.json              # Rust toolchain
+│   ├── network.json           # Network utilities (curl, ping, dig)
+│   ├── system.json            # System info commands
+│   └── tools.json             # Development tools: brew, asdf, mise, etc.
 │
 ├── ask/
 │   ├── git.json               # Git: merge, reset, rebase, cherry-pick, worktree remove
 │   ├── dangerous-operations.json  # rm, mv, cp, chmod, chown, sed, awk
-│   ├── package-managers.json  # npm install, pip install, poetry install, cargo install
-│   ├── containers.json        # docker exec, docker run, docker context create
-│   ├── cloud.json             # AWS: ec2 terminate, s3 cp, etc.
-│   └── system.json            # osascript, system_profiler, defaults write
+│   ├── package-managers.json  # npm:*, pip:*, cargo:* (blanket wildcards)
+│   ├── containers.json        # docker exec, docker run, kubectl apply/delete
+│   ├── cloud.json             # AWS: ec2 terminate, s3 rm, RDS delete, etc.
+│   ├── system.json            # osascript, defaults, launchctl, ssh-keygen
+│   ├── python.json            # Python executable operations
+│   ├── security.json          # Keychain unlock operations
+│   ├── shell.json             # pkill, zsh
+│   └── gh.json                # (Empty placeholder for future GitHub CLI patterns)
 │
 ├── deny/
-│   ├── sensitive-files.json   # .env*, .ssh/*, .aws/credentials, .kube/config
-│   ├── destructive.json       # rm -rf /, sudo rm, mkfs, fdisk, dd
-│   ├── privilege-escalation.json  # sudo -i, sudo su, sudo bash
-│   └── git-hook-bypass.json   # git commit --no-verify, removing hooks
+│   ├── dangerous.json         # rm -rf /, sudo rm, mkfs, fdisk, sensitive file reads
+│   ├── git.json               # git commit --no-verify, hook bypass
+│   ├── network.json           # curl POST/PUT/DELETE, nc -l, socat
+│   └── shell.json             # xargs, for loops
 │
 └── domains/
     └── webfetch.json          # Allowed fetch domains for WebFetch tool

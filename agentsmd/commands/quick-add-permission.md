@@ -5,7 +5,7 @@ allowed-tools: >
   Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*),
   Bash(git checkout:*), Bash(git status:*), Bash(git worktree add:*),
   Bash(git worktree list:*), Bash(git branch:*), Read(**), Glob(**),
-  Write(./.claude/permissions/*.json), Write(./.gemini/permissions/*.json),
+  Write(./agentsmd/permissions/*.json), Write(./.gemini/permissions/*.json),
   AskUserQuestion
 ---
 
@@ -143,9 +143,9 @@ find . -type d -name "permissions" | grep -E "\.(claude|gemini)/"
 
 Expected structure:
 
-- `.claude/permissions/allow.json`
-- `.claude/permissions/ask.json`
-- `.claude/permissions/deny.json`
+- `agentsmd/permissions/allow.json`
+- `agentsmd/permissions/ask.json`
+- `agentsmd/permissions/deny.json`
 - `.gemini/permissions/allow.json`
 - `.gemini/permissions/deny.json`
 
@@ -155,7 +155,7 @@ Expected structure:
 
 ```bash
 # Example for Claude allow list
-cat .claude/permissions/allow.json
+cat agentsmd/permissions/allow.json
 ```
 
 **Parse JSON and check for duplicates:**
@@ -178,7 +178,7 @@ cat .claude/permissions/allow.json
 
 4.3. Sync across all tools:
 
-- If permission added to `.claude/permissions/allow.json`, also add to `.gemini/permissions/allow.json`
+- If permission added to `agentsmd/permissions/allow.json`, also add to `.gemini/permissions/allow.json`
 - Translate any tool-specific syntax if needed
 - Maintain consistency across all AI tools
 
@@ -194,7 +194,7 @@ git diff
 
 ```bash
 # For each modified JSON file
-cat .claude/permissions/allow.json | jq empty
+cat agentsmd/permissions/allow.json | jq empty
 ```
 
 5.3. Count additions:
