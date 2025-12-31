@@ -19,6 +19,14 @@ repos:
         files: \.md$
         require_serial: true
         args: ["--config", ".markdownlint-cli2.jsonc", "--fix"]
+  - repo: https://github.com/streetsidesoftware/cspell-cli
+    rev: v8.16.1
+    hooks:
+      - id: cspell
+        name: cspell
+        description: "Spell checker for code"
+        args: ["--config", ".cspell.json"]
+        files: \.md$
   - repo: local
     hooks:
       - id: check-markdown-links
