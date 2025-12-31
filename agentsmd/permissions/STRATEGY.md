@@ -132,6 +132,39 @@ agentsmd/permissions/
     └── webfetch.json          # Allowed fetch domains for WebFetch tool
 ```
 
+## Nix-First Philosophy
+
+**All package managers require confirmation (Ask) - NO exceptions.**
+
+This repository uses **Nix as the primary package manager**. Traditional package managers
+(npm, pip, cargo, etc.) should NEVER be auto-approved because:
+
+1. **Nix provides everything** - All tools should be installed via `nix-shell`, `nix develop`, or nixpkgs
+2. **Prevents system pollution** - No node_modules, site-packages, or ~/.cargo cluttering the system
+3. **Reproducibility** - Nix ensures consistent environments across machines
+4. **Declarative** - Dependencies are declared in flake.nix or shell.nix, not installed imperatively
+
+**Package managers in Ask list** (blanket wildcards - ALL commands require confirmation):
+
+```text
+npm:*        # Never auto-approve npm commands
+npx:*        # Never auto-approve npx commands
+yarn:*       # Never auto-approve yarn commands
+pnpm:*       # Never auto-approve pnpm commands
+pip:*        # Never auto-approve pip commands
+pip3:*       # Never auto-approve pip3 commands
+poetry:*     # Never auto-approve poetry commands
+cargo:*      # Never auto-approve cargo commands
+gem:*        # Never auto-approve Ruby gem commands
+bundle:*     # Never auto-approve bundler commands
+go install:* # Never auto-approve go install
+go get:*     # Never auto-approve go get
+composer:*   # Never auto-approve PHP composer
+```
+
+**Preferred approach**: Use `nix-shell -p <package>` for temporary tools, or add to flake.nix/shell.nix
+for project dependencies.
+
 ## Common Ask Patterns
 
 These commands are consistently placed in the Ask list because they're powerful but potentially dangerous:
@@ -143,13 +176,6 @@ These commands are consistently placed in the Ask list because they're powerful 
 - `git rebase:*` - Rewrites history, dangerous if not careful
 - `git cherry-pick:*` - Can create conflicts or duplicate commits
 - `git worktree remove:*` - Can delete working tree if wrong path given
-
-### Package Management
-
-- `npm install:*` - Modifies package.json and node_modules
-- `pip install:*` - Modifies site-packages and Python environment
-- `poetry install:*` - Modifies poetry.lock
-- `cargo install:*` - Modifies ~/.cargo/bin
 
 ### File Operations
 
