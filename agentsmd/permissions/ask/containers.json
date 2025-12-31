@@ -22,6 +22,7 @@
     "kubectl apply:*",
     "kubectl create:*",
     "kubectl delete:*",
+    "kubectl exec:*",
     "kubectl set:*",
     "kubectl patch:*",
     "kubectl rollout:*",

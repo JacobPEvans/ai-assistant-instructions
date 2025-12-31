@@ -147,7 +147,8 @@
     "Pipfile",
     "signingkey",
     "subnetting",
-    "pkill"
+    "pkill",
+    "plutil"
   ],
   "files": [
     "**/*.md"

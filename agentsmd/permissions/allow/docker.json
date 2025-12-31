@@ -1,7 +1,0 @@
-{
-  "commands": [
-    "docker",
-    "kubectl",
-    "helm"
-  ]
-}

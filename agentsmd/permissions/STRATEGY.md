@@ -108,25 +108,20 @@ When AI executes commands:
 ```text
 agentsmd/permissions/
 ├── allow/
-│   ├── core.json              # Essential tool wildcards: git:*, docker:*, aws:*, etc.
-│   ├── git.json               # Specific git commands
-│   ├── gh.json                # GitHub CLI commands
-│   ├── docker.json            # Docker read operations
-│   ├── aws.json               # AWS CLI commands
-│   ├── terraform.json         # Terraform/Terragrunt commands
-│   ├── nix.json               # Nix ecosystem tools
-│   ├── nodejs.json            # Node.js toolchain (read-only)
-│   ├── python.json            # Python toolchain (read-only)
-│   ├── rust.json              # Rust toolchain
-│   ├── network.json           # Network utilities (curl, ping, dig)
-│   ├── system.json            # System info commands
-│   └── tools.json             # Development tools: brew, asdf, mise, etc.
+│   ├── core.json              # Coarse wildcards: git:*, gh:*, docker:*, aws:*, terraform:*, etc.
+│   ├── nix.json               # Nix ecosystem: darwin-rebuild, direnv, devbox, devenv, etc.
+│   ├── nodejs.json            # Node.js toolchain: npm, yarn, pnpm, nvm, fnm, nodenv
+│   ├── python.json            # Python toolchain: pip, poetry, pyenv, pytest, conda, etc.
+│   ├── rust.json              # Rust toolchain: cargo (rustc/rustup covered in core.json)
+│   ├── network.json           # Network utilities: ping, dig, host, netstat, lsof, pgrep
+│   ├── system.json            # System utilities: ln, readlink, htop, launchctl, plutil, etc.
+│   └── tools.json             # Dev tools: rbenv, goenv, redis-cli, ollama, shellcheck, etc.
 │
 ├── ask/
 │   ├── git.json               # Git: merge, reset, rebase, cherry-pick, worktree remove
 │   ├── dangerous-operations.json  # rm, mv, cp, chmod, chown, sed, awk
 │   ├── package-managers.json  # npm:*, pip:*, cargo:* (blanket wildcards)
-│   ├── containers.json        # docker exec, docker run, kubectl apply/delete
+│   ├── containers.json        # docker exec, docker run, kubectl exec/apply/delete
 │   ├── cloud.json             # AWS: ec2 terminate, s3 rm, RDS delete, etc.
 │   ├── system.json            # osascript, defaults, launchctl, ssh-keygen
 │   ├── python.json            # Python executable operations
@@ -143,6 +138,10 @@ agentsmd/permissions/
 └── domains/
     └── webfetch.json          # Allowed fetch domains for WebFetch tool
 ```
+
+**Note**: The allow/ directory uses coarse wildcards in `core.json` (e.g., `git:*`, `docker:*`, `aws:*`)
+which cover entire command families. Separate files only exist for tool families that have unique
+commands NOT covered by core.json wildcards.
 
 ## Nix-First Philosophy
 
