@@ -2,7 +2,13 @@
 name: coder
 description: Coding tasks using current best coding model with automatic tier selection
 model: sonnet
-allowed-tools: Task, TaskOutput, Bash(git status:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(git pull:*), Bash(git fetch:*), Bash(git diff:*), Bash(git log:*), Bash(git show:*), Bash(git branch:*), Bash(git checkout:*), Bash(npm install:*), Bash(npm ci:*), Bash(npm test:*), Bash(npm run:*), Bash(npm list:*), Bash(cargo build:*), Bash(cargo test:*), Bash(cargo run:*), Bash(cargo check:*), Bash(python -m venv:*)
+allowed-tools: >
+  Task, TaskOutput, Bash(git status:*), Bash(git add:*), Bash(git commit:*),
+  Bash(git push:*), Bash(git pull:*), Bash(git fetch:*), Bash(git diff:*),
+  Bash(git log:*), Bash(git show:*), Bash(git branch:*), Bash(git checkout:*),
+  Bash(npm install:*), Bash(npm ci:*), Bash(npm test:*), Bash(npm run:*),
+  Bash(npm list:*), Bash(cargo build:*), Bash(cargo test:*), Bash(cargo run:*),
+  Bash(cargo check:*), Bash(python -m venv:*)
 author: JacobPEvans
 ---
 
