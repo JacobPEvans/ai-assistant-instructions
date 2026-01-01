@@ -102,7 +102,6 @@ Common issues and solutions for using this repository.
 ## Getting Help
 
 - 🐛 [Open an Issue](https://github.com/JacobPEvans/ai-assistant-instructions/issues)
-- 💬 [Start a Discussion](https://github.com/JacobPEvans/ai-assistant-instructions/discussions)
 - 📖 [Read the Full Docs](README.md)
 - 🔒 [Security Issues](../SECURITY.md)
 

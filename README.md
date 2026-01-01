@@ -152,7 +152,6 @@ for details.
 
 - 📖 [Documentation Home](docs/) - Getting started guides and references
 - 🐛 [Issues](https://github.com/JacobPEvans/ai-assistant-instructions/issues) - Report bugs or request features
-- 💬 [Discussions](https://github.com/JacobPEvans/ai-assistant-instructions/discussions) - Ask questions and share ideas
 
 ## Contributing
 

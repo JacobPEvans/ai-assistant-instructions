@@ -7,7 +7,7 @@
 >
 > - [agentsmd/permissions/STRATEGY.md](../permissions/STRATEGY.md) - Current hierarchical
 >   permission architecture
-> - [nix-config/modules/home-manager/ai-cli/common/permissions.nix](https://github.com/jevans/nix-config) -
+> - [nix-config/modules/home-manager/ai-cli/common/permissions.nix](https://github.com/JacobPEvans/nix) -
 >   Current nix-config integration
 >
 > The permission system was refactored in PR #372 (Dec 2025) to use a unified structure at
