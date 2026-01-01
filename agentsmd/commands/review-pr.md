@@ -4,7 +4,7 @@ description: "Conduct comprehensive PR reviews with systematic analysis, quality
 model: sonnet
 type: "command"
 version: "1.0.0"
-allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Bash(npm:*), Read, Glob, Grep
+allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), Bash(npm:*)
 think: true
 author: "roksechs"
 source: "https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3"

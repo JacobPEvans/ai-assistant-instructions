@@ -1,7 +1,7 @@
 ---
 description: Scan local AI settings and merge safe permissions into repo
 model: haiku
-allowed-tools: Task, TaskOutput, TodoWrite, Bash(cat:*), Bash(find:*), Bash(rm:*), Glob(**), Grep(**), Read(**), Write(**)
+allowed-tools: Task, TaskOutput, Bash(cat:*), Bash(find:*), Bash(rm:*)
 ---
 
 # Sync Permissions
