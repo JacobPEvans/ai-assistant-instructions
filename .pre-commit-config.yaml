@@ -28,7 +28,7 @@ repos:
         args: ["--config", ".cspell.json"]
         files: \.md$
   - repo: https://github.com/lycheeverse/lychee
-    rev: lychee-v0.18.1
+    rev: v0.15.1
     hooks:
       - id: lychee
         name: lychee-link-check
