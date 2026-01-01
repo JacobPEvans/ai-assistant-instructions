@@ -1,7 +1,6 @@
 ---
 description: "[DEPRECATED] Use /init-worktree instead"
 model: haiku
-allowed-tools:
 ---
 
 # Init Change

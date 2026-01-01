@@ -51,3 +51,11 @@ repos:
         language: system
         files: \.md$
         pass_filenames: false
+      - id: cclint
+        name: cclint
+        description: "Validate Claude Code instruction files"
+        entry: bash -c 'command -v cclint >/dev/null 2>&1 && cclint || npx @carlrannaberg/cclint'
+        language: system
+        files: ^\.claude/
+        pass_filenames: false
+        stages: [pre-push]
