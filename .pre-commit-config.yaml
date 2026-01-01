@@ -27,6 +27,21 @@ repos:
         description: "Spell checker for code"
         args: ["--config", ".cspell.json"]
         files: \.md$
+  - repo: https://github.com/lycheeverse/lychee
+    rev: lychee-v0.18.1
+    hooks:
+      - id: lychee
+        name: lychee-link-check
+        description: "Check for broken links in markdown files"
+        args:
+          - "--no-progress"
+          - "--exclude"
+          - "shields.io"
+          - "--exclude"
+          - "github.com/.*/badge"
+          - "--exclude"
+          - "gist.github.com"
+        files: \.md$
   - repo: local
     hooks:
       - id: check-markdown-links
