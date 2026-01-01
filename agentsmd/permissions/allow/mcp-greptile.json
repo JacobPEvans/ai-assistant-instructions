@@ -1,0 +1,17 @@
+{
+  "mcp": [
+    "mcp__plugin_greptile_greptile__*",
+    "mcp__plugin_greptile_greptile__list_custom_context",
+    "mcp__plugin_greptile_greptile__get_custom_context",
+    "mcp__plugin_greptile_greptile__search_custom_context",
+    "mcp__plugin_greptile_greptile__list_merge_requests",
+    "mcp__plugin_greptile_greptile__list_pull_requests",
+    "mcp__plugin_greptile_greptile__get_merge_request",
+    "mcp__plugin_greptile_greptile__list_merge_request_comments",
+    "mcp__plugin_greptile_greptile__list_code_reviews",
+    "mcp__plugin_greptile_greptile__get_code_review",
+    "mcp__plugin_greptile_greptile__trigger_code_review",
+    "mcp__plugin_greptile_greptile__search_greptile_comments",
+    "mcp__plugin_greptile_greptile__create_custom_context"
+  ]
+}
