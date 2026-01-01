@@ -1,7 +1,7 @@
 ---
 description: Rebase pull request onto main and push to origin/main (auto-closes PR with signed commits)
 model: sonnet
-allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Read
+allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*)
 ---
 
 # Git Rebase Pull Request

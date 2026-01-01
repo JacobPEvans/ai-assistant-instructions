@@ -2,7 +2,7 @@
 description: Orchestrate PR finalization across all repositories and report merge-readiness status
 model: opus
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Read, Grep, Glob, SlashCommand
+allowed-tools: Task, TaskOutput, Bash(gh:*)
 ---
 
 # Ready Player One
@@ -168,7 +168,6 @@ JSON output saved to: /tmp/ready-player-one-{TIMESTAMP}.json
 
 ### For Orchestrator (YOU)
 
-- Use `SlashCommand` tool to invoke sub-commands
 - Use `gh` CLI for PR scanning
 - Generate JSON report with structured data
 - Verify merge-readiness using multiple signals

@@ -2,7 +2,7 @@
 description: Process for providing thorough, constructive code reviews
 model: sonnet
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, TodoWrite, Glob, Grep, Read
+allowed-tools: Task, TaskOutput
 ---
 
 # Task: Review Code

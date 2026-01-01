@@ -109,7 +109,7 @@ Sub-agents follow this format:
 name: my-sub-agent
 description: Brief description of what this sub-agent does
 author: YourName
-allowed-tools: Task, TaskOutput, Bash(git status:*), Read(**)
+allowed-tools: Task, TaskOutput, Bash(git status:*)
 ---
 
 # Sub-Agent Name
