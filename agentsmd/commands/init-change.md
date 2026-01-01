@@ -1,6 +1,7 @@
 ---
 description: "[DEPRECATED] Use /init-worktree instead"
 model: haiku
+allowed-tools: Task
 ---
 
 # Init Change
