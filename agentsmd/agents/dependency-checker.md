@@ -2,8 +2,10 @@
 name: dependency-checker
 description: Specialized sub-agent for checking outdated dependencies and security vulnerabilities
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Bash(npm:*), Bash(yarn:*), Bash(pnpm:*), Bash(pip:*), Bash(cargo:*),
-  Bash(go get:*), Bash(go mod:*), Bash(bundle:*), Bash(cd:*), Bash(pwd:*)
+allowed-tools: >
+  Task, TaskOutput, Bash(npm:*), Bash(yarn:*), Bash(pnpm:*), Bash(pip:*),
+  Bash(cargo:*), Bash(go get:*), Bash(go mod:*), Bash(bundle:*), Bash(cd:*),
+  Bash(pwd:*)
 ---
 
 # Dependency Checker Sub-Agent
