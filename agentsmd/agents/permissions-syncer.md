@@ -56,11 +56,15 @@ CLAUDE_ALLOW=$(jq -S '.allow' agentsmd/permissions/allow.json)
 GEMINI_ALLOW=$(jq -S '.allow' .gemini/permissions/allow.json)
 if [ "$CLAUDE_ALLOW" != "$GEMINI_ALLOW" ]; then
   # Sync required - merge both lists and sort
-  MERGED_FILE=$(mktemp)
-  jq -s 'map(.allow) | add | sort | unique' \
-    agentsmd/permissions/allow.json .gemini/permissions/allow.json > "$MERGED_FILE"
+  MERGED_ALLOW=$(jq -s 'map(.allow) | add | sort | unique' \
+    agentsmd/permissions/allow.json .gemini/permissions/allow.json)
+
   # Apply merged results back to both files
-  rm "$MERGED_FILE"
+  TEMP_FILE=$(mktemp)
+  jq ".allow = $MERGED_ALLOW" agentsmd/permissions/allow.json > "$TEMP_FILE" && mv "$TEMP_FILE" agentsmd/permissions/allow.json
+
+  TEMP_FILE=$(mktemp)
+  jq ".allow = $MERGED_ALLOW" .gemini/permissions/allow.json > "$TEMP_FILE" && mv "$TEMP_FILE" .gemini/permissions/allow.json
 fi
 ```
 
