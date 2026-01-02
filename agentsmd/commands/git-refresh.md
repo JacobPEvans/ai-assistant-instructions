@@ -38,9 +38,7 @@ For each open PR found:
 gh pr view NUMBER --json state,mergeable,statusCheckRollup
 ```
 
-2.2. **Mergeable criteria** - See
-**[Git Rebase Workflow Skill](../../.claude/plugins/jpe-git/skills/git-rebase-workflow/SKILL.md#merge-readiness-criteria)**
-for canonical validation rules.
+2.2. **Mergeable criteria**:
 
 Quick summary:
 
@@ -50,7 +48,7 @@ Quick summary:
 - All review threads resolved
 - Review decision APPROVED or not required
 
-2.3. If mergeable, use the **[Git Rebase Workflow Skill](../../.claude/plugins/jpe-git/skills/git-rebase-workflow/SKILL.md)** to merge the PR with signed commits.
+2.3. If mergeable, merge the PR using the local rebase workflow to preserve commit signatures.
 
 2.4. If not mergeable, report why and continue to next PR or sync.
 
@@ -134,4 +132,3 @@ Always run `gh pr list --author @me --state open` to find work that needs mergin
 ## Merge Process
 
 All merges follow the local rebase workflow to preserve commit signatures.
-See **[Git Rebase Workflow Skill](../../.claude/plugins/jpe-git/skills/git-rebase-workflow/SKILL.md)** for the complete merge process.
