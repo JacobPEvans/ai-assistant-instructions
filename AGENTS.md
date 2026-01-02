@@ -92,6 +92,16 @@ See [Worktrees](./agentsmd/rules/worktrees.md) for structure and usage details.
 
 See [Soul](./agentsmd/rules/soul.md) for personality and voice guidelines.
 
+## Architecture
+
+Commands, sub-agents, and skills follow a **three-tier architecture** for maintainability:
+
+- **Commands** (`agentsmd/commands/`) - Orchestrate user-facing workflows
+- **Sub-Agents** (`.claude/agents/`) - Execute specialized tasks
+- **Skills** (`agentsmd/skills/`) - Canonical patterns referenced by commands and agents
+
+See [Command-Agent-Skill Architecture](./agentsmd/rules/command-agent-skill-architecture.md) for the complete pattern.
+
 ## Commands
 
 All commands from `agentsmd/commands/` are available. Use this table to select the right one:
@@ -99,6 +109,7 @@ All commands from `agentsmd/commands/` are available. Use this table to select t
 | Intent | Command | Scope | Notes |
 | --- | --- | --- | --- |
 | Start new development | `/init-worktree` | Repo | Always first for new work |
+| Sync permissions across repos | `/sync-permissions` | Repo | Merge local settings to repo permissions |
 | Sync current branch with main | `/sync-main` | Branch | Update main, merge into current |
 | Sync all PRs with main | `/sync-main all` | Repo | Update main, merge into all open PRs |
 | Fix current PR CI failures | `/fix-pr-ci` | Single PR | Fix CI on current PR |
