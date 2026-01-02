@@ -2,7 +2,7 @@
 name: ci-fixer
 description: Specialized sub-agent for analyzing and fixing CI failures in pull requests
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*)
+allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), Read, Grep, Glob, TodoWrite, Edit
 ---
 
 # CI Fixer Sub-Agent

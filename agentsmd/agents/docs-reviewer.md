@@ -2,7 +2,7 @@
 name: docs-reviewer
 description: Documentation validation sub-agent for markdownlint compliance, consistency, and completeness
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Bash(markdownlint-cli2:*)
+allowed-tools: Task, TaskOutput, Bash(markdownlint-cli2:*), Read, Grep, Glob, TodoWrite
 ---
 
 # Documentation Reviewer Sub-Agent

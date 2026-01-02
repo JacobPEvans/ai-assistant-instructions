@@ -2,7 +2,7 @@
 description: Review documentation files for consistency, completeness, and markdownlint compliance
 model: sonnet
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Bash(markdownlint-cli2:*)
+allowed-tools: Task, TaskOutput, Bash(markdownlint-cli2:*), Read, Grep, Glob, TodoWrite
 ---
 
 # Prompt: Review Documentation

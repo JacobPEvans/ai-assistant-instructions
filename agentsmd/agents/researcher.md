@@ -2,7 +2,7 @@
 name: researcher
 description: Research tasks delegated to current best research model (Gemini 3 Pro cloud, qwen3-next:80b local)
 model: sonnet
-allowed-tools: Task, TaskOutput, WebFetch
+allowed-tools: Task, TaskOutput, WebFetch, Read, Grep, Glob, WebSearch
 author: JacobPEvans
 ---
 

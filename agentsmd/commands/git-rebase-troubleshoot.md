@@ -1,7 +1,7 @@
 ---
 description: Troubleshoot and recover from git rebase failures
 model: haiku
-allowed-tools: Bash(git:*), Bash(gh pr view:*), Bash(gh pr list:*)
+allowed-tools: Bash(git:*), Bash(gh pr view:*), Bash(gh pr list:*), Read, Grep, Glob
 ---
 
 # Git Rebase Troubleshoot

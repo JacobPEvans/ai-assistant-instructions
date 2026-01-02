@@ -1,7 +1,7 @@
 ---
 description: Autonomous Maintenance Orchestrator that continuously finds work and dispatches sub-agents
 model: opus
-allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*)
+allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), Read, Grep, Glob, TodoWrite
 author: JacobPEvans
 ---
 

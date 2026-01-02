@@ -4,7 +4,7 @@ description: "Complete workflow for creating, monitoring, and fixing pull reques
 model: sonnet
 type: "command"
 version: "1.0.0"
-allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), Bash(markdownlint-cli2:*)
+allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), Bash(markdownlint-cli2:*), Read, TodoWrite
 think: false
 author: "JacobPEvans"
 ---

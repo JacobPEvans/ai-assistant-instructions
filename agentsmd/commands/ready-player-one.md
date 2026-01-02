@@ -2,7 +2,7 @@
 description: Orchestrate PR finalization across all repositories and report merge-readiness status
 model: opus
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Bash(gh:*)
+allowed-tools: Task, TaskOutput, Bash(gh:*), Read, Grep, Glob, TodoWrite
 ---
 
 # Ready Player One

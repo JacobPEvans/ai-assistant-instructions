@@ -2,7 +2,7 @@
 name: test-runner
 description: Specialized sub-agent for running test suites, analyzing failures, and suggesting fixes
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Bash(npm:*), Bash(yarn:*), Bash(pnpm:*), Bash(pytest:*), Bash(jest:*), Bash(vitest:*), Bash(cargo test:*), Bash(go test:*), Bash(mvn test:*), Bash(gradle test:*), Bash(cd:*), Bash(pwd:*)
+allowed-tools: Task, TaskOutput, Bash(npm:*), Bash(yarn:*), Bash(pnpm:*), Bash(pytest:*), Bash(jest:*), Bash(vitest:*), Bash(cargo test:*), Bash(go test:*), Bash(mvn test:*), Bash(gradle test:*), Bash(cd:*), Bash(pwd:*), Read, Grep, Glob, TodoWrite
 ---
 
 # Test Runner Sub-Agent

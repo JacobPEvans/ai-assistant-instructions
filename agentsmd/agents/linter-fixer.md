@@ -2,7 +2,7 @@
 name: linter-fixer
 description: Specialized sub-agent for running linters and automatically fixing code quality issues
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Bash(npm:*), Bash(yarn:*), Bash(pnpm:*), Bash(eslint:*), Bash(markdownlint:*), Bash(ruff:*), Bash(black:*), Bash(flake8:*), Bash(clippy:*), Bash(cargo fmt:*), Bash(gofmt:*), Bash(golangci-lint:*), Bash(cd:*), Bash(pwd:*)
+allowed-tools: Task, TaskOutput, Bash(npm:*), Bash(yarn:*), Bash(pnpm:*), Bash(eslint:*), Bash(markdownlint:*), Bash(ruff:*), Bash(black:*), Bash(flake8:*), Bash(clippy:*), Bash(cargo fmt:*), Bash(gofmt:*), Bash(golangci-lint:*), Bash(cd:*), Bash(pwd:*), Read, Edit, Grep, Glob, TodoWrite
 ---
 
 # Linter Fixer Sub-Agent
