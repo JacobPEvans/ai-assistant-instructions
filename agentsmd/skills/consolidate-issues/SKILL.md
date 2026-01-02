@@ -1,11 +1,13 @@
 ---
-name: consolidate-issues
-description: Reduce GitHub issue backlog through deduplication, linking, and closure. Use before creating new issues, when enforcement_mode is CONSOLIDATION, when issue:PR ratio exceeds 3:1, when AI-created issues reach 25, or when total issues approach 50.
+title: consolidate-issues
+description: >
+  Reduce GitHub issue backlog through deduplication, linking, and closure. Use
+  before creating new issues, when enforcement_mode is CONSOLIDATION, when
+  issue:PR ratio exceeds 3:1, when AI-created issues reach 25, or when total
+  issues approach 50.
 ---
 
 <!-- markdownlint-disable-file MD013 -->
-
-# Consolidate Issues
 
 Reduces issue backlog to prevent AI-created issue spam and maintain healthy project hygiene.
 
@@ -43,7 +45,7 @@ Reduces issue backlog to prevent AI-created issue spam and maintain healthy proj
 TOTAL=$(gh issue list --state open --json number | jq length)
 AI=$(gh issue list --state open --label ai-created --json number | jq length)
 PRS=$(gh pr list --state open --json number | jq length)
-RATIO=$((TOTAL / (PRS + 1)))
+RATIO=$(echo "scale=1; $TOTAL / ($PRS + 1)" | bc)
 echo "Total: $TOTAL, AI: $AI, PRs: $PRS, Ratio: $RATIO:1"
 ```
 
@@ -55,12 +57,22 @@ gh issue list --state open --limit 100 --json number,title,body,labels,createdAt
 
 ### Step 3: Close Duplicates
 
-For each duplicate found:
+Identify duplicate issues. For each duplicate issue number, run the following commands as separate tool calls:
+
+**For issue #123:**
 
 ```bash
-gh issue edit <NUMBER> --add-label duplicate
-gh issue close <NUMBER> --reason "not planned" \
-  --comment "Duplicate of #<CANONICAL>. Closing."
+gh issue edit 123 --add-label duplicate
+gh issue close 123 --reason "not planned" \
+  --comment "Duplicate of #456. Closing."
+```
+
+**For issue #124:**
+
+```bash
+gh issue edit 124 --add-label duplicate
+gh issue close 124 --reason "not planned" \
+  --comment "Duplicate of #456. Closing."
 ```
 
 ### Step 4: Close Resolved Issues
@@ -69,47 +81,32 @@ Search for issues fixed by merged PRs:
 
 ```bash
 gh pr list --state merged --limit 50 --json number,title,body
-gh issue close <NUMBER> --reason completed \
-  --comment "Resolved by PR #<PR>."
+```
+
+For each issue resolved by a merged PR, run the following command as a separate tool call:
+
+```bash
+gh issue close 456 --reason completed \
+  --comment "Resolved by PR #789."
 ```
 
 ### Step 5: Link Related Issues
 
-For related (non-duplicate) issues:
+For related (non-duplicate) issues, run the following command as a separate tool call for each related issue pair:
 
 ```bash
-gh issue comment <NUMBER> --body "Related to #<OTHER>."
+gh issue comment 123 --body "Related to #456."
 ```
 
-For 3+ related issues, create an umbrella issue.
+For 3+ related issues, create an umbrella issue as a separate tool call.
 
-### Step 6: Report to Slack
+### Step 6: Report Summary
 
-Post summary to Slack, not GitHub:
+Document consolidation results:
 
-```bash
-python3 scripts/auto-claude-notify.py cross_issue_update \
-  --message "Consolidation: Closed N duplicates, K resolved by PRs"
-```
-
-## Pre-Issue Creation Check
-
-Before ANY `gh issue create`:
-
-```bash
-TOTAL=$(gh issue list --state open --json number | jq length)
-AI=$(gh issue list --state open --label ai-created --json number | jq length)
-
-if [ "$TOTAL" -ge 50 ]; then
-  echo "BLOCKED: Total issues ($TOTAL) >= 50"
-  exit 1
-fi
-
-if [ "$AI" -ge 25 ]; then
-  echo "BLOCKED: AI-created ($AI) >= 25. Run /consolidate-issues"
-  exit 1
-fi
-```
+- Duplicates closed: N
+- Issues resolved by merged PRs: K
+- Related issues linked: M
 
 ## Best Practices
 
