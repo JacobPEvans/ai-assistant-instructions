@@ -2,7 +2,7 @@
 name: planner
 description: Planning and architecture tasks using strong reasoning models
 model: opus
-allowed-tools: Task, TaskOutput, Read, Glob, Grep, WebSearch, WebFetch, TodoWrite
+allowed-tools: Task, TaskOutput, WebFetch, Read, Grep, Glob, TodoWrite, WebSearch
 author: JacobPEvans
 ---
 

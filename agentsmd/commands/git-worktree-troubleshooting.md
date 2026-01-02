@@ -1,7 +1,7 @@
 ---
 description: Troubleshoot git worktree, branch, and refname issues
 model: haiku
-allowed-tools: Bash(git:*), Bash(gh pr view:*), Read, Glob, Grep
+allowed-tools: Bash(git:*), Bash(gh pr view:*), Read, Grep, Glob
 ---
 
 # Git Worktree Troubleshooting

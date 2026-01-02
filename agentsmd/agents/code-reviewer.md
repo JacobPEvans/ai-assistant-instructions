@@ -2,7 +2,7 @@
 name: code-reviewer
 description: Specialized code review sub-agent for security, quality, and maintainability analysis
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, TodoWrite, Glob, Grep, Read
+allowed-tools: Task, TaskOutput, Read, Grep, Glob, TodoWrite
 ---
 
 # Code Reviewer Sub-Agent

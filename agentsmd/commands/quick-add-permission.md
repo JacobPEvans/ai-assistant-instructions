@@ -1,12 +1,7 @@
 ---
 description: Quickly add always-allow permissions to all AI tools
 model: haiku
-allowed-tools: >
-  Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*),
-  Bash(git checkout:*), Bash(git status:*), Bash(git worktree add:*),
-  Bash(git worktree list:*), Bash(git branch:*), Read(**), Glob(**),
-  Write(./agentsmd/permissions/*.json), Write(./.gemini/permissions/*.json),
-  AskUserQuestion
+allowed-tools: Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*), Bash(git checkout:*), Bash(git status:*), Bash(git worktree add:*), Bash(git worktree list:*), Bash(git branch:*), AskUserQuestion, Read, Glob, Write
 ---
 
 # Quick Add Permission
@@ -33,8 +28,6 @@ The command intelligently converts simple inputs to proper permission format:
 - `"docker ps"` → `"Bash(docker ps:*)"`
 - `"git status"` → `"Bash(git status:*)"`
 - `"kubectl get pods"` → `"Bash(kubectl get pods:*)"`
-- `"Read"` → `"Read(**)"`
-- `"SlashCommand"` → `"SlashCommand(**)"`
 - `"Bash(docker ps:*)"` → Used as-is (already formatted)
 - `"WebFetch domain:*.example.com"` → `"WebFetch(domain:*.example.com)"`
 
@@ -118,13 +111,6 @@ For each input, detect the type and convert:
 - Output: `"Bash(docker ps:*)"`
 - Input: `"kubectl get pods"`
 - Output: `"Bash(kubectl get pods:*)"`
-
-**Tool names (Read, Glob, Grep, Write, etc.):**
-
-- Input: `"Read"`
-- Output: `"Read(**)"`
-- Input: `"SlashCommand"`
-- Output: `"SlashCommand(**)"`
 
 **Special formats (WebFetch, etc.):**
 
@@ -221,40 +207,22 @@ Provide a summary including:
 - `Bash(command subcommand:*)` - e.g., `Bash(docker ps:*)`
 - `Bash(command:*)` - e.g., `Bash(ls:*)`
 
-**File operations:**
-
-- `Read(**)` - Read any file
-- `Glob(**)` - Search for files
-- `Grep(**)` - Search file contents
-- `Write(**)` - Write any file
-
 **Web operations:**
 
 - `WebFetch(domain:*.example.com)` - Fetch from domain
-- `WebSearch` - Search the web
-
-**Tool operations:**
-
-- `TodoWrite`, `TodoRead`
-- `SlashCommand(/command-name)`
 
 ### Alphabetical Ordering
 
 Permissions should be ordered:
 
-1. By tool type (Read, Glob, Grep, WebSearch, Bash, etc.)
-2. Within Bash, by command name alphabetically
-3. Within each command, by subcommand alphabetically
+1. By command name alphabetically
+2. Within each command, by subcommand alphabetically
 
 Example ordering:
 
 ```json
 {
   "permissions": [
-    "Read(**)",
-    "Glob(**)",
-    "Grep(**)",
-    "WebSearch",
     "Bash(docker inspect:*)",
     "Bash(docker logs:*)",
     "Bash(docker ps:*)",
@@ -292,16 +260,6 @@ Example ordering:
 #   "Bash(docker logs:*)",
 #   "Bash(docker inspect:*)"
 # ]
-```
-
-### Add tool permissions
-
-```bash
-/quick-add-permission "Read"
-# Converts to: Read(**)
-
-/quick-add-permission "SlashCommand"
-# Converts to: SlashCommand(**)
 ```
 
 ### Add using full format (advanced)

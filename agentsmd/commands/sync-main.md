@@ -1,7 +1,7 @@
 ---
 description: Update main from remote and merge into current or all PR branches
 model: haiku
-allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Bash(git worktree remove:*), Read, Edit, Glob, Grep
+allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), Bash(git worktree remove:*), Read, Grep, Glob, TodoWrite
 ---
 
 # Sync Main

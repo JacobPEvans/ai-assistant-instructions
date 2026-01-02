@@ -2,7 +2,7 @@
 name: issue-resolver
 description: Specialized sub-agent for analyzing and implementing GitHub issue solutions
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, TodoWrite, Bash(gh:*), Bash(git:*), Read, Grep, Glob, Edit, Write
+allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), Read, Write, Edit, Grep, Glob, TodoWrite
 ---
 
 # Issue Resolver Sub-Agent
