@@ -22,7 +22,7 @@ Currently, only Claude and Gemini permissions are discovered and synced. Copilot
 
 ### Phase 1: Discovery & Analysis
 
-Invoke `permissions-analyzer` agent to scan home directory, classify permissions, and deduplicate against existing patterns.
+Invoke `permissions-analyzer` agent (`.claude/agents/permissions-analyzer.md`) to scan home directory, classify permissions, and deduplicate against existing patterns.
 
 **Currently scans:**
 
@@ -35,7 +35,7 @@ Review analysis report. Ask user to approve, modify, or cancel.
 
 ### Phase 3: Execution
 
-**Only after approval**, invoke `permissions-syncer` agent to apply changes, sync across tools, and cleanup local files.
+**Only after approval**, invoke `permissions-syncer` agent (`.claude/agents/permissions-syncer.md`) to apply changes, sync across tools, and cleanup local files.
 
 **Sync strategy:**
 

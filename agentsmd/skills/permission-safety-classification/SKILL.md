@@ -51,14 +51,24 @@ Local/private addresses always DENY:
 
 ## Bash Permission Format
 
-Bash permission patterns use colon-separated argument positions where `*` matches any single argument at that position:
+Bash permission patterns use colon-separated positions. Each segment after the tool name corresponds to one whitespace-separated argument in the shell command. A `*` in any position matches exactly one argument at that position.
 
-- **Wildcard `*`**: Matches any single argument at that position
-  - `git:*:*` matches `git` with exactly two arguments (both can be anything)
-  - More general than `git:*` (which matches `git` with exactly one argument)
+- **Wildcard `*` by position**:
+  - Pattern `git:*` matches `git` with exactly one argument (any value)
+    - Matches: `git status`, `git branch`, `git log`
+    - Does NOT match: `git` (no arguments), `git status -sb` (two arguments)
+  - Pattern `git:*:*` matches `git` with exactly two arguments (both can be anything)
+    - Matches: `git status -sb`, `git branch -a`, `git log --oneline`
+    - Does NOT match: `git`, `git status`, `git status -sb --decorate` (three arguments)
 
-- **Command-specific patterns**:
-  - `Bash(git status:*)` - `git status` with exactly one additional argument (any)
-  - `Bash(git:*:*)` - `git` with exactly two arguments (any)
-  - `Bash(npm list:*)` - `npm list` with exactly one additional argument
-  - `Bash(npm:*:*)` - `npm` with exactly two arguments (any)
+- **Command-specific patterns** (literals plus wildcards):
+  - Pattern `git:status:*` (written as `Bash(git status:*)`) matches `git status` with exactly one additional argument
+    - Matches: `git status -sb`, `git status --short`
+    - Does NOT match: `git status` (no extra argument), `git branch -a`
+  - Pattern `git:*:*` (written as `Bash(git:*:*)`) matches any `git <subcommand> <arg>`
+    - Matches: `git status -sb`, `git branch -a`, `git log --oneline`
+  - Pattern `npm:list:*` (written as `Bash(npm list:*)`) matches `npm list` with exactly one additional argument
+    - Matches: `npm list --depth=0`
+    - Does NOT match: `npm list` (no extra argument), `npm install express`
+  - Pattern `npm:*:*` (written as `Bash(npm:*:*)`) matches any `npm <subcommand> <arg>`
+    - Matches: `npm list --depth=0`, `npm install express`

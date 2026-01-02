@@ -35,8 +35,9 @@ Update permission files with approved changes from Phase 1 analysis:
 Maintain alphabetical ordering and valid JSON structure. Example single permission addition:
 
 ```bash
+TEMP_FILE=$(mktemp)
 jq '.allow += ["Bash(docker volume ls:*)"] | .allow = (.allow | sort)' \
-  agentsmd/permissions/allow.json > temp.json && mv temp.json agentsmd/permissions/allow.json
+  agentsmd/permissions/allow.json > "$TEMP_FILE" && mv "$TEMP_FILE" agentsmd/permissions/allow.json
 ```
 
 ### 3. Cross-Tool Sync
@@ -55,8 +56,11 @@ CLAUDE_ALLOW=$(jq -S '.allow' agentsmd/permissions/allow.json)
 GEMINI_ALLOW=$(jq -S '.allow' .gemini/permissions/allow.json)
 if [ "$CLAUDE_ALLOW" != "$GEMINI_ALLOW" ]; then
   # Sync required - merge both lists and sort
+  MERGED_FILE=$(mktemp)
   jq -s 'map(.allow) | add | sort | unique' \
-    agentsmd/permissions/allow.json .gemini/permissions/allow.json > merged.json
+    agentsmd/permissions/allow.json .gemini/permissions/allow.json > "$MERGED_FILE"
+  # Apply merged results back to both files
+  rm "$MERGED_FILE"
 fi
 ```
 
@@ -66,16 +70,24 @@ Run `jq` to format JSON files and validate structure. Process each permission fi
 
 ```bash
 # Claude permissions
-jq '.' agentsmd/permissions/allow.json > temp.json && mv temp.json agentsmd/permissions/allow.json
-jq '.' agentsmd/permissions/ask.json > temp.json && mv temp.json agentsmd/permissions/ask.json
-jq '.' agentsmd/permissions/deny.json > temp.json && mv temp.json agentsmd/permissions/deny.json
+TEMP_FILE=$(mktemp)
+jq '.' agentsmd/permissions/allow.json > "$TEMP_FILE" && mv "$TEMP_FILE" agentsmd/permissions/allow.json
+
+TEMP_FILE=$(mktemp)
+jq '.' agentsmd/permissions/ask.json > "$TEMP_FILE" && mv "$TEMP_FILE" agentsmd/permissions/ask.json
+
+TEMP_FILE=$(mktemp)
+jq '.' agentsmd/permissions/deny.json > "$TEMP_FILE" && mv "$TEMP_FILE" agentsmd/permissions/deny.json
 
 # Gemini permissions
-jq '.' .gemini/permissions/allow.json > temp.json && mv temp.json .gemini/permissions/allow.json
-jq '.' .gemini/permissions/deny.json > temp.json && mv temp.json .gemini/permissions/deny.json
+TEMP_FILE=$(mktemp)
+jq '.' .gemini/permissions/allow.json > "$TEMP_FILE" && mv "$TEMP_FILE" .gemini/permissions/allow.json
+
+TEMP_FILE=$(mktemp)
+jq '.' .gemini/permissions/deny.json > "$TEMP_FILE" && mv "$TEMP_FILE" .gemini/permissions/deny.json
 ```
 
-Note: The temp file pattern is necessary because jq cannot safely write to the same file it's reading from.
+Note: The temp file pattern using mktemp is necessary because jq cannot safely write to the same file it's reading from.
 
 ### 5. Cleanup Local Files
 
@@ -120,20 +132,21 @@ Verify no discrepancies remain between Claude and Gemini.
 If any step fails, rollback to backups and exit with error:
 
 ```bash
-# Rollback function
-rollback() {
-  if [ -f agentsmd/permissions/allow.json.backup ]; then
-    cp agentsmd/permissions/allow.json.backup agentsmd/permissions/allow.json
-    cp agentsmd/permissions/ask.json.backup agentsmd/permissions/ask.json
-    cp agentsmd/permissions/deny.json.backup agentsmd/permissions/deny.json
-    cp .gemini/permissions/allow.json.backup .gemini/permissions/allow.json
-    cp .gemini/permissions/deny.json.backup .gemini/permissions/deny.json
-    echo "Rollback complete"
-  fi
-}
+# Rollback: restore permission files from backups created in Step 1
+cp agentsmd/permissions/allow.json.backup agentsmd/permissions/allow.json
+cp agentsmd/permissions/ask.json.backup agentsmd/permissions/ask.json
+cp agentsmd/permissions/deny.json.backup agentsmd/permissions/deny.json
+cp .gemini/permissions/allow.json.backup .gemini/permissions/allow.json
+cp .gemini/permissions/deny.json.backup .gemini/permissions/deny.json
+echo "Rollback complete"
 ```
 
 Do not delete local files if execution failed. Return to Phase 1 for analysis.
+
+## Integration Points
+
+Invoked by: `/sync-permissions` command (Phase 3)
+Phase: Execution (write operations after user approval)
 
 ## Output
 

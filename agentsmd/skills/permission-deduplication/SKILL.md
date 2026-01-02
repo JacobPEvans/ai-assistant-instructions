@@ -106,3 +106,8 @@ When discovering a safe permission, suggest related safe commands in the same fa
 - `docker volume ls` → suggest `docker volume inspect`
 - `aws s3 ls` → suggest `aws s3 sync --dryrun`
 - `npm list` → suggest `npm outdated`, `npm audit`
+
+## Commands Using This Skill
+
+- `.claude/agents/permissions-analyzer.md` - Uses deduplication to filter redundant permissions during discovery
+- `/sync-permissions` command - Indirectly uses this skill through the permissions-analyzer agent

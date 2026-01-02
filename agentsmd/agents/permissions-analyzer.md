@@ -46,6 +46,11 @@ Structure findings in three sections:
 
 Include source file paths and suggest related permissions for discovered safe commands.
 
+## Integration Points
+
+Invoked by: `/sync-permissions` command (Phase 1)
+Phase: Discovery & Analysis (read-only)
+
 ## Output
 
 Return analysis report with recommendation summary. NO file modifications.
