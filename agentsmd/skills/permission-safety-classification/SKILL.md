@@ -51,15 +51,14 @@ Local/private addresses always DENY:
 
 ## Bash Permission Format
 
-Bash permission patterns use colon-separated argument positions where `*` matches any single argument:
+Bash permission patterns use colon-separated argument positions where `*` matches any single argument at that position:
 
-- **`git:*:*`** matches `git` with exactly **two** arguments (both can be anything)
-  - Covers: `git status:*`, `git log:*`, `git diff:*`
-- **`git:*`** matches `git` with exactly **one** argument
-  - Covers: `git branch:*` but NOT `git status:*` (which has more arguments)
-- **`git status:*`** matches the specific command `git status` plus one additional argument
-  - More specific than `git:*:*`
+- **Wildcard `*`**: Matches any single argument at that position
+  - `git:*:*` matches `git` with exactly two arguments (both can be anything)
+  - More general than `git:*` (which matches `git` with exactly one argument)
 
-The `Bash()` wrapper notation doesn't change pattern matching:
-
-- `Bash(git:*:*)` and `git:*:*` match identically (both require exactly two arguments)
+- **Command-specific patterns**:
+  - `Bash(git status:*)` - `git status` with exactly one additional argument (any)
+  - `Bash(git:*:*)` - `git` with exactly two arguments (any)
+  - `Bash(npm list:*)` - `npm list` with exactly one additional argument
+  - `Bash(npm:*:*)` - `npm` with exactly two arguments (any)
