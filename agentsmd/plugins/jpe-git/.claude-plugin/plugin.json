@@ -1,9 +1,0 @@
-{
-  "name": "jpe-git",
-  "description": "Local rebase-merge workflow for linear git history with canonical merge-readiness validation",
-  "version": "1.0.0",
-  "author": {
-    "name": "JacobPEvans"
-  },
-  "keywords": ["git", "rebase", "merge", "linear-history"]
-}

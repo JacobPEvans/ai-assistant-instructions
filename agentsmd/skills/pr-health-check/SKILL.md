@@ -154,7 +154,6 @@ gh pr list --state open --json number,title,state,mergeable,statusCheckRollup
 
 - [GitHub GraphQL Skill](../github-graphql/SKILL.md) - Detailed GraphQL queries for PR fields
 - [PR Thread Resolution Enforcement Skill](../pr-thread-resolution-enforcement/SKILL.md) - Review conversation validation
-- [Git Rebase Workflow Skill](../../plugins/jpe-git/skills/git-rebase-workflow/SKILL.md) - Conflict resolution patterns (if mergeable fails)
 
 ## Integration Points
 
