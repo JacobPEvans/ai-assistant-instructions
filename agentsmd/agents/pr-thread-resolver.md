@@ -2,7 +2,7 @@
 name: pr-thread-resolver
 description: Specialized sub-agent for resolving PR review threads through implementation or explanation
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), WebFetch, Read, Edit, Grep, Glob, TodoWrite
+allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), WebFetch, Read, Edit, Grep, Glob, TodoWrite, Write, mcp__plugin_greptile_greptile__*
 ---
 
 # Thread Resolver Sub-Agent
