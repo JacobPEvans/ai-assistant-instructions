@@ -38,6 +38,28 @@ Local addresses: `localhost`, `127.0.0.1`, private IP ranges
 
 ## Domain Coverage
 
-- Root domains cover subdomains: `github.com` includes `api.github.com`
-- Different roots are separate: `githubusercontent.com` ≠ `github.com`
-- Local/private addresses always DENY
+Root domains cover their subdomains, but different root domains or TLDs are separate:
+
+- **`github.com`** covers: `api.github.com`, `docs.github.com`, `status.github.com`
+- **`github.io`** is a separate root domain (different TLD), does NOT cover `github.com` and vice versa
+- **`github.com`** does NOT cover `githubusercontent.com` (separate root domain)
+- **`localhost`** is separate from `localhost:3000` (ports are distinct entities, not subdomains)
+
+Local/private addresses always DENY:
+
+- `localhost`, `127.0.0.1`, `192.168.x.x`, `10.x.x.x` ranges
+
+## Bash Permission Format
+
+Bash permission patterns use colon-separated argument positions where `*` matches any single argument:
+
+- **`git:*:*`** matches `git` with exactly **two** arguments (both can be anything)
+  - Covers: `git status:*`, `git log:*`, `git diff:*`
+- **`git:*`** matches `git` with exactly **one** argument
+  - Covers: `git branch:*` but NOT `git status:*` (which has more arguments)
+- **`git status:*`** matches the specific command `git status` plus one additional argument
+  - More specific than `git:*:*`
+
+The `Bash()` wrapper notation doesn't change pattern matching:
+
+- `Bash(git:*:*)` and `git:*:*` match identically (both require exactly two arguments)

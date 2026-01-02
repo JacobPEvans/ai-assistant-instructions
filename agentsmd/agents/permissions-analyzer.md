@@ -13,14 +13,18 @@ Scan home directory for local AI settings, classify discovered permissions, and 
 
 ### 1. Discover Local Settings
 
-Find all local AI settings files across entire home directory:
+Find all local AI settings files across entire home directory. Error suppression (2>/dev/null) filters
+expected "Permission denied" errors when scanning the home directory, but preserve other error types.
 
 ```bash
+# Scan for Claude settings
 find ~ -name "settings.local.json" -path "*/.claude/*" 2>/dev/null
+
+# Scan for Gemini settings
 find ~ -name "settings.json" -path "*/.gemini/*" 2>/dev/null
 ```
 
-Extract permissions from each file, tracking source paths.
+For each discovered file, extract permissions and track source paths.
 
 ### 2. Classify Permissions
 
