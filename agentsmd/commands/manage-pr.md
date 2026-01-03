@@ -89,14 +89,9 @@ Repeatedly check and fix the PR until ALL requirements are met.
 
 ### 2.1. PR Health Check
 
-Check status: `gh pr view <PR_NUMBER> --json state,mergeable,statusCheckRollup,reviews,comments`
+Use [PR Health Check Skill](../skills/pr-health-check/SKILL.md) for merge-readiness criteria.
 
-**ALL of these must be true:**
-
-- `state`: Must be `OPEN`
-- `mergeable`: Must be `MERGEABLE`
-- `statusCheckRollup`: ALL checks must show `SUCCESS` (no exceptions)
-- All review conversations must be resolved (verified via GraphQL)
+**Quick check**: `gh pr view <PR_NUMBER> --json state,mergeable,statusCheckRollup,reviews`
 
 ### 2.2. Fix Failed Checks
 
@@ -112,51 +107,18 @@ Check status: `gh pr view <PR_NUMBER> --json state,mergeable,statusCheckRollup,r
 
 ### 2.3. Read Line-Level Review Comments
 
-Get line-level feedback:
-
-```bash
-gh api repos/<OWNER>/<REPO>/pulls/<PR_NUMBER>/comments
-```
-
-Returns an array of review comments with:
-
-- `body`: The comment text and suggested changes
-- `path`: File path where comment was made
-- `line`: Line number in the file
+See [GitHub CLI Patterns](../skills/github-cli-patterns/SKILL.md) for line-level comment API patterns.
 
 ### 2.4. Resolve PR Conversations
 
-> **STRICT BLOCKER**: ALL conversations must be PHYSICALLY MARKED AS RESOLVED in GitHub before requesting user review.
-> Use [PR Thread Resolution Enforcement Skill](../skills/pr-thread-resolution-enforcement/SKILL.md) to enforce verification.
+> **STRICT BLOCKER**: ALL conversations must be PHYSICALLY MARKED AS RESOLVED before requesting user review.
 
-**Workflow**:
+Use [PR Thread Resolution Enforcement Skill](../skills/pr-thread-resolution-enforcement/SKILL.md) for:
+- Verification query (must return 0 unresolved threads)
+- Resolution workflow (reply AND resolve atomically)
+- GraphQL operations via [GitHub GraphQL Skill](../skills/github-graphql/SKILL.md)
 
-1. Get all unresolved review threads using [GitHub GraphQL Skill](../skills/github-graphql/SKILL.md) patterns
-2. For each: fix the issue, reply with details, mark as resolved (atomic action per skill)
-3. Verify ALL conversations show `isResolved: true` using skill verification query
-4. Verification MUST return 0 unresolved threads before Phase 3
-
-**Resolution Patterns**:
-See [PR Thread Resolution Enforcement Skill](../skills/pr-thread-resolution-enforcement/SKILL.md) for:
-
-- Verification query (returns count of unresolved threads)
-- Resolution workflow (reply → resolve → verify)
-- Success/failure criteria (must equal 0)
-
-**GraphQL Operations**:
-See [GitHub GraphQL Skill](../skills/github-graphql/SKILL.md) for:
-
-- Fetching review threads with `reviewThreads` query
-- Resolving threads with `resolveReviewThread` mutation
-- Full command patterns and error handling
-
-**Quick Check**:
-
-```bash
-gh pr view <PR_NUMBER> --json reviews,comments
-```
-
-**For batch resolution**: Use `/resolve-pr-review-thread` command which orchestrates the `pr-thread-resolver` agent.
+**For batch resolution**: Use `/resolve-pr-review-thread` command
 
 ### 2.5. Address All Feedback
 
@@ -204,50 +166,13 @@ The user performs the merge:
 - **Squash merge**: For small, single-concept changes (`gh pr merge --squash`)
 - **Rebase merge**: For larger changes or multiple logical commits (`gh pr merge --rebase`)
 
-## GitHub CLI Mastery
+## Common Commands
 
-> **Command Patterns:**
+See [GitHub CLI Patterns](../skills/github-cli-patterns/SKILL.md) for all `gh` commands.
 
-### PR Creation & Monitoring
+**Key operations**: PR creation, `gh pr checks --watch`, JSON queries, line comments
 
-```bash
-# Create PR with description
-gh pr create --title "Title" --body "Description"
-
-# Watch PR checks in real-time (RECOMMENDED after PR creation)
-gh pr checks <PR_NUMBER> --watch
-
-# Get comprehensive PR details
-gh pr view <PR_NUMBER> --json title,body,commits,files,reviews,labels
-
-# Check CI/CD status
-gh pr checks <PR_NUMBER>
-gh pr view <PR_NUMBER> --json statusCheckRollup
-```
-
-### Quality Verification
-
-```bash
-# Run local validation before pushing
-markdownlint-cli2 .
-terraform fmt -check
-terraform validate
-
-# Check for security vulnerabilities
-npm audit --audit-level moderate
-```
-
-### Review Management
-
-```bash
-# List all review comments
-gh pr view <PR_NUMBER> --json reviews,comments
-
-# Get line-level comments via API
-gh api repos/<OWNER>/<REPO>/pulls/<PR_NUMBER>/comments
-
-# Resolve review thread - See GitHub GraphQL Skill for mutation patterns
-```
+**Local validation**: `markdownlint-cli2 .`, `terraform validate`, `npm audit`
 
 ## Usage Instructions
 
