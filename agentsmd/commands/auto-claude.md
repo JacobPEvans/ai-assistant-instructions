@@ -75,59 +75,34 @@ Execute this loop continuously until budget exhaustion forces termination:
    If OPEN_PR_COUNT < 10: NORMAL MODE (proceed to step 1a)
 
 1a. SCAN (NORMAL MODE - PRs < 10)
-    Run these commands to gather current state:
-    - git status
-    - git log --oneline -10
-    - git branch -a
-    - gh pr list --state open --author @me
-    - For each open PR: gh pr checks <number>
-    - For each open PR: check if behind main (mergeable_state, behind_by)
-    - For PRs with reviews: gh pr view <number> --comments
-    - gh issue list --limit 20 --state open (EXCLUDE label:ai:created)
-      Command: gh issue list --state open --limit 20 --search "-label:ai:created"
-    - Analyze codebase for bugs/improvements (if no urgent PR/issue work)
+    See [GitHub CLI Patterns](../skills/github-cli-patterns/SKILL.md) for command syntax.
+    Gather: git status, PRs, CI status, reviews, issues (exclude ai:created), codebase issues
 
 1b. SCAN (PR-FOCUS MODE - PRs >= 10)
-    ONLY gather PR state - ignore issues and new work:
-    - gh pr list --state open --author @me
-    - For each open PR: gh pr checks <number>
-    - For each open PR: check if behind main (mergeable_state, behind_by)
-    - For PRs with reviews: gh pr view <number> --comments
-    - gh api repos/{owner}/{repo}/pulls/{number}/reviews for review status
+    Only gather PR state: PR list, CI checks, merge status, reviews
 
 2. PRIORITIZE
    IN PR-FOCUS MODE (PRs >= 10): ONLY priorities 1-4 apply
    IN NORMAL MODE (PRs < 10): All priorities apply
 
    Priority order (highest first):
-   1. PRs behind main - merge main into branch (CRITICAL - do this first!)
-      Check: gh pr view <num> --json mergeStateStatus,baseRefName
-      If behind: clone locally, merge main, push (for signed commits)
-      Or use: gh api -X PUT repos/{owner}/{repo}/pulls/{num}/update-branch
-   2. Failing CI on open PRs (blocks all progress)
-   3. PR review comments awaiting response (use /resolve-pr-review-thread)
-   4. PRs ready to merge (CI passing, approved) - enable auto-merge
-   --- BELOW THIS LINE: BLOCKED IN PR-FOCUS MODE ---
-   5. Issues labeled: type:bug, priority:critical (EXCLUDE ai:created label)
-   6. Issues labeled: good-first-issue (EXCLUDE ai:created label)
-   7. Code analysis: identify bugs, security issues, improvements
-   8. Documentation with broken links or outdated info
-   9. Low test coverage in critical paths
+   1. PRs behind main - use branch-updater agent (CRITICAL)
+   2. Failing CI - use ci-fixer agent or /fix-pr-ci
+   3. PR review comments - use /resolve-pr-review-thread
+   4. PRs ready to merge - use pr-merger agent or /git-refresh
+   --- BELOW: BLOCKED IN PR-FOCUS MODE ---
+   5. Critical bugs (EXCLUDE ai:created)
+   6. Good-first-issues (EXCLUDE ai:created)
+   7. Code analysis - use code-reviewer agent
+   8. Documentation - use docs-reviewer agent
+   9. Test coverage - use test-runner agent
    10. Dependency updates (minor/patch only)
 
 3. DISPATCH
-   IN PR-FOCUS MODE: Spawn UP TO 5 sub-agents IN PARALLEL for PR work
-     - Each sub-agent handles exactly ONE PR
-     - Use multiple Task tool calls in a single response
-     - Sub-agents work independently and concurrently
-
-   IN NORMAL MODE: Spawn sub-agents sequentially (one at a time)
-     - Include in the sub-agent prompt:
-       - Specific task scope (ONE bug, ONE feature, ONE concept per PR)
-       - Permission to spawn helper sub-agents if needed
-       - Required output format for tracking
-       - Reminder: NEVER ask user questions
-       - Reminder: Enable auto-merge after CI passes
+   **Use [Subagent Batching Skill](../skills/subagent-batching/SKILL.md) patterns:**
+   - PR-FOCUS MODE: Max 5 agents IN PARALLEL (one message, multiple Task calls)
+   - NORMAL MODE: Sequential (one at a time)
+   - Each agent: ONE task, may spawn helpers, NEVER ask questions
 
 4. AWAIT
    Wait for sub-agent(s) to complete.
@@ -147,153 +122,62 @@ Execute this loop continuously until budget exhaustion forces termination:
 
 ## Sub-Agent Types
 
-Use the Task tool with subagent_type="general-purpose" and these specialized prompts.
-Where applicable, leverage existing slash commands from agentsmd/commands/.
+Use Task tool with existing agents from `.claude/agents/` or invoke commands directly.
 
-### branch-updater (HIGHEST PRIORITY)
+### Branch Updater (HIGHEST PRIORITY)
 
-```text
-You are a Branch Updater agent. PR #X is behind the base branch (main/master).
+**Agent**: [worktree-manager.md](../agents/worktree-manager.md)
 
-FOR SIGNED COMMITS (preferred):
-1. Create local worktree: git worktree add ../pr-X-update pr-X-branch
-2. cd into worktree
-3. git fetch origin main && git merge origin/main
-4. Resolve any conflicts (spawn helper if complex)
-5. git push (commits will be signed with local GPG key)
-6. Clean up: git worktree remove ../pr-X-update
+**Skills**: [Worktree Management](../skills/worktree-management/SKILL.md), [GitHub CLI](../skills/github-cli-patterns/SKILL.md)
 
-ALTERNATIVE (unsigned, GitHub web-flow):
-gh api -X PUT repos/{owner}/{repo}/pulls/{number}/update-branch
+**Workflow**: Create worktree → merge main → resolve conflicts → push → cleanup
 
-Prefer local worktree method for signed commits.
-NEVER ask user questions. Report merge conflicts if unresolvable.
-```
+### CI Fixer
 
-### ci-fixer
+**Agent**: [ci-fixer.md](../agents/ci-fixer.md)
 
-```text
-You are a CI Fixer agent. Analyze the failing CI check on PR #X, identify
-the root cause, implement a fix, and push. You may spawn helper agents for
-complex fixes. NEVER ask user questions. After CI passes and PR is approved,
-when ready to merge: rebase on main locally, fast-forward merge into main, push. The PR will auto-close.
+**Commands**: `/fix-pr-ci` for full workflow
 
-Reference: /manage-pr command handles full PR lifecycle including CI monitoring.
-```
+### PR Thread Resolver
 
-### pr-thread-resolver
+**Agent**: [pr-thread-resolver.md](../agents/pr-thread-resolver.md)
 
-```text
-You are a PR Thread Resolver agent. Resolve the review threads on PR #X. For each
-thread: understand the feedback, implement the requested change, and push.
-You may spawn helper agents for complex changes. NEVER ask user questions.
-After all threads resolved and CI passes:
-rebase on main locally, fast-forward merge into main, push. The PR will auto-close.
+**Skills**: [PR Thread Resolution](../skills/pr-thread-resolution-enforcement/SKILL.md), [GitHub GraphQL](../skills/github-graphql/SKILL.md)
 
-Reference: Use /resolve-pr-review-thread for systematic thread resolution.
-```
+**Commands**: `/resolve-pr-review-thread` for systematic resolution
 
-### pr-merger
+### PR Merger
 
-```text
-You are a PR Merger agent. PR #X has passing CI and approval. Merge the PR:
-rebase on main locally, fast-forward merge into main, push. The PR will auto-close.
-If merge fails (e.g., conflicts), report the blocker. Never force merge.
+**Skills**: [PR Health Check](../skills/pr-health-check/SKILL.md)
 
-Reference: /git-refresh can merge eligible PRs and sync repos.
-```
+**Commands**: `/git-refresh` merges eligible PRs
 
-### issue-resolver
+### Issue Resolver
 
-```text
-You are an Issue Resolver agent. Implement a fix for Issue #X.
+**Agent**: [issue-resolver.md](../agents/issue-resolver.md)
 
-Scope rules:
-- One bug fix, one feature, or one small concept per PR
-- If the issue is too large, break it into smaller issues first
-- Create focused, reviewable PRs (ideally <200 lines changed)
+**Commands**: `/resolve-issues` for full workflow
 
-Lifecycle (follow exactly):
-1. Worktree hygiene: check existing worktrees, resolve any with pending work first
-2. Use /init-worktree to create a clean worktree for this work
-3. Make the minimal fix needed - no scope creep
-4. Write tests if applicable
-5. Commit changes (include "Fixes #X" in commit message so it appears in PR body)
-6. Create PR immediately (before any more work): gh pr create --fill
-   - OR use: gh pr create --body "Fixes #X" to explicitly set the body
-   - PR body must include "Fixes #X" to link to the issue
-7. Monitor PR until clean:
-   - Fix all CI failures using /fix-pr-ci patterns
-   - Resolve all review comments using /resolve-pr-review-thread patterns
-8. Wait 60 seconds after last fix, then verify still clean
-   - If new issues appear: fix them, restart 60s timer
-9. When ready: rebase on main, fast-forward merge into main, push (PR auto-closes)
-10. Remove local worktree: git worktree remove <worktree-path>
+**Key Steps**: Use `/init-worktree` → implement fix (ONE concept, <200 lines) → create PR with "Fixes #X" →
+monitor until clean → merge → remove worktree
 
-Completion requirements (all must be true):
-- PR must exist before returning
-- CI must be passing
-- All review comments must be resolved
-- 60-second quiet period must pass clean
-- Worktree must be removed
+### Code Analyzer
 
-Reference: /resolve-issues for comprehensive issue resolution workflow.
-You may spawn helper agents. NEVER ask user questions.
-```
+**Commands**: `/review-code`, `/shape-issues`
 
-### code-analyzer
+**Output**: Create issues with `ai:created` label (human review required)
 
-```text
-You are a Code Analyzer agent. Scan the codebase to identify:
-- Potential bugs or logic errors
-- Security vulnerabilities (OWASP top 10)
-- Performance issues
-- Code quality improvements
-- Missing error handling
-- Feature opportunities based on patterns
+### Doc Updater
 
-For each finding:
-1. Assess severity (critical, high, medium, low)
-2. Create a GitHub issue with the 'ai:created' label:
-   gh issue create --title '[title]' --body '[description]' --label 'ai:created'
-3. Include reproduction steps or code references
-4. DO NOT fix the issues yourself - only report them
+**Commands**: `/review-docs` for standards
 
-Human will review and remove 'ai:created' label before AI can work on it.
+**Scope**: ONE doc fix per PR
 
-Reference: /review-code for thorough code review patterns.
-Reference: /shape-issues for shaping findings into actionable issues.
-NEVER ask user questions.
-```
+### Test Adder
 
-### doc-updater
+**Commands**: `/generate-code` for standards
 
-```text
-You are a Documentation Updater agent. Fix the documentation issue: [desc].
-Update the relevant files, ensure links work, and create a PR.
-
-SCOPE: ONE documentation fix per PR. Keep changes focused.
-
-Reference: /review-docs for documentation review standards.
-Reference: /link-review for checking link quality.
-
-When ready to merge: rebase on main locally, fast-forward merge into main, push. PR auto-closes.
-You may spawn helper agents. NEVER ask user questions.
-```
-
-### test-adder
-
-```text
-You are a Test Coverage agent. Add tests for [component/function]. Analyze
-existing test patterns, write comprehensive tests, and create a PR.
-
-SCOPE: ONE component or function per PR. Keep PRs reviewable.
-
-Reference: /generate-code for code generation standards including tests.
-
-When ready to merge: rebase on main locally, fast-forward merge into main, push. PR auto-closes.
-You may spawn helper agents. NEVER ask user questions.
-```
+**Scope**: ONE component per PR
 
 ## Sub-Agent Instructions
 
@@ -421,114 +305,24 @@ Every PR must contain exactly ONE of:
 
 ## PR-First Lifecycle
 
-**When making code changes**: every branch with commits must have a PR within 60 seconds of first commit.
+**Code changes require PR within 60 seconds** of first commit. Complete lifecycle: PR exists → CI passes → reviews resolved → worktree removed.
 
-This applies to agents that modify code, fix bugs, update documentation files, etc.
-Work with code changes is not complete until: PR exists, CI passes, comments resolved, and worktree removed.
+### Worktree Hygiene
 
-**When NOT making code changes** (creating issues, analyzing code, etc.): no PR is needed.
+Use [Worktree Management Skill](../skills/worktree-management/SKILL.md) for cleanup before creating new work.
 
-### Step 0: Worktree hygiene (before creating new work)
+### PR Lifecycle Steps
 
-Before creating any new worktree/branch, clean up existing ones:
+1. **Create PR**: `gh pr create --fill` or `--body "Fixes #X"` immediately after first commit
+2. **Monitor**: Fix CI (`/fix-pr-ci`), resolve threads (`/resolve-pr-review-thread`)
+3. **60s Quiet Period**: Wait after last fix, re-check, restart timer if issues appear
+4. **Merge & Cleanup**: Rebase on main → merge to main → remove worktree
 
-```bash
-# List all worktrees
-git worktree list
+See [GitHub CLI Patterns](../skills/github-cli-patterns/SKILL.md) for command syntax.
 
-# For each worktree (excluding main):
-#   1. Check if it has commits beyond main
-#   2. If yes, check if PR exists: gh pr list --head <branch> --state all
-#   3. Take action based on state (see table below)
-```
+### Sub-Agent Completion Requirements
 
-| Worktree State | Action |
-| -------------- | ------ |
-| Has commits, no PR | CREATE PR IMMEDIATELY: `gh pr create --fill` |
-| Has PR with failing CI | Fix CI, wait for 60-second quiet period, merge when clean (complete full lifecycle before new work) |
-| Has PR with unresolved comments | Resolve using `/resolve-pr-review-thread` patterns |
-| PR is merged | REMOVE worktree: `git worktree remove <path>` |
-| PR is closed (abandoned) | REMOVE worktree: `git worktree remove <path>` |
-
-**Do NOT create new worktrees until existing ones are resolved.**
-
-### Step 1: PR Creation (IMMEDIATELY after first commit)
-
-1. After FIRST commit, create PR immediately: `gh pr create --fill`
-2. Do NOT make additional commits before creating PR
-3. Draft PRs are acceptable for work-in-progress
-4. PR body MUST include "Fixes #X" linking to the issue being resolved
-
-### Step 2: PR Completion (Monitor and Fix)
-
-After PR is created, monitor until CLEAN:
-
-1. Check CI status: `gh pr checks <number>`
-2. If failing: fix using `/fix-pr-ci` patterns, commit, push
-3. Check review comments: `gh api repos/{owner}/{repo}/pulls/{number}/reviews`
-4. If unresolved threads: resolve using `/resolve-pr-review-thread` patterns
-5. Repeat steps 1-4 until ALL green
-
-### Step 3: 60-Second Quiet Period
-
-After the LAST fix commit (CI or review comment):
-
-1. `sleep 60` - wait for CI to fully propagate and reviewers to respond
-2. Re-check CI: `gh pr checks <number>`
-3. Re-check comments: `gh api repos/{owner}/{repo}/pulls/{number}/reviews`
-4. If ANY new issues appeared: fix them and restart the 60-second timer
-5. Only when 60 seconds passes CLEAN, proceed to cleanup
-
-**Why 60 seconds?** CI pipelines take time to start/finish. Reviewers may add follow-up comments.
-This ensures the PR is truly stable before cleanup.
-
-### Step 4: Merge and Cleanup
-
-After 60-second quiet period passes clean:
-
-1. Rebase your branch on main (for signed commits):
-
-   ```bash
-   git fetch origin main
-   git rebase origin/main
-   ```
-
-2. Push the rebased branch to GitHub so the PR reflects the new commits:
-
-   ```bash
-   git push --force-with-lease origin <your-branch>
-   ```
-
-3. Navigate to main worktree, merge, and push:
-
-   ```bash
-   cd ~/git/<repo-name>/main
-   git merge --ff-only <your-branch>
-   git push origin main
-   ```
-
-4. GitHub will normally auto-close the PR once it detects that its head branch has been merged into main; if it does not, close the PR manually
-5. Remove the worktree: `git worktree remove <path>`
-6. Prune: `git worktree prune`
-
-### Sub-Agent Completion Checklist
-
-Sub-agents should report these before returning:
-
-```text
-- Branch name: <branch>
-- PR number: #<number>
-- PR URL: <url>
-- CI status: passing
-- Review comments: all resolved (or none)
-- 60-second quiet period: clean
-- Merged to main: yes (via local rebase + ff merge)
-- Worktree removed: yes
-```
-
-If any of these are missing or failed, the sub-agent did not complete its mission.
-
-The orchestrator MUST NOT mark the task as "completed" unless all checklist items pass.
+**MUST** report before returning: branch, PR#, URL, CI status (passing), reviews (resolved), quiet period (clean), merged (yes), worktree (removed)
 
 ## Progress Tracking
 
