@@ -2,7 +2,10 @@
 
 ## Executive Summary
 
-Analysis of the 20 custom commands reveals significant token usage due to duplication of patterns, workflows, and examples. The top 10 commands consume **67,615 bytes** (approx. 16,900 words). By applying DRY principles and leveraging existing Claude Code features (Task tool, skills, agents), we can reduce token usage by an estimated **40-60%**.
+Analysis of the 20 custom commands reveals significant token usage due to duplication of patterns,
+workflows, and examples. The top 10 commands consume **67,615 bytes** (approx. 16,900 words). By
+applying DRY principles and leveraging existing Claude Code features (Task tool, skills, agents), we
+can reduce token usage by an estimated **40-60%**.
 
 ## Analysis Results
 
@@ -35,17 +38,20 @@ Analysis of the 20 custom commands reveals significant token usage due to duplic
 ### 1. GitHub GraphQL Patterns (HIGH IMPACT)
 
 **Current State:**
+
 - 4 commands reference GitHub GraphQL skill
 - 2 commands still duplicate GraphQL query patterns inline
 - Total duplicated content: ~800 words
 
 **Commands Affected:**
+
 - manage-pr.md (3 inline GraphQL examples)
 - review-pr.md (2 inline GraphQL examples)
 - ready-player-one.md (references skill but duplicates examples)
 - auto-claude.md (duplicates thread resolution logic)
 
 **Optimization:**
+
 - **Action:** Remove all inline GraphQL examples from commands
 - **Replace with:** Single reference to `github-graphql` skill
 - **Token Savings:** ~600-800 words (~15-20% reduction in affected commands)
@@ -53,11 +59,13 @@ Analysis of the 20 custom commands reveals significant token usage due to duplic
 ### 2. PR Thread Resolution Workflow (HIGH IMPACT)
 
 **Current State:**
+
 - 5 commands duplicate the PR thread resolution workflow
 - Each explains: reply → resolve → verify atomicity
 - Total duplicated content: ~1,200 words
 
 **Commands Affected:**
+
 - manage-pr.md (full workflow in Phase 2.4)
 - auto-claude.md (pr-thread-resolver sub-agent section)
 - ready-player-one.md (references but duplicates)
@@ -65,18 +73,21 @@ Analysis of the 20 custom commands reveals significant token usage due to duplic
 - resolve-pr-review-thread.md (likely duplicates - not in top 10)
 
 **Optimization:**
-- **Action:** Replace all workflow sections with: "See [PR Thread Resolution Enforcement Skill](../skills/pr-thread-resolution-enforcement/SKILL.md)"
+
+- **Action:** Replace all workflow sections with: "See [PR Thread Resolution Enforcement Skill](../agentsmd/skills/pr-thread-resolution-enforcement/SKILL.md)"
 - **Replace with:** Task tool invocation pattern to skill
 - **Token Savings:** ~1,000 words (~25-30% in affected commands)
 
 ### 3. Worktree Management Patterns (VERY HIGH IMPACT)
 
 **Current State:**
+
 - 13 commands mention worktrees
 - 6 commands duplicate full worktree setup/cleanup instructions
 - Total duplicated content: ~1,500 words
 
 **Commands Affected:**
+
 - init-worktree.md (full workflow - THIS IS THE CANONICAL SOURCE)
 - sync-main.md (duplicates worktree creation and cleanup)
 - auto-claude.md (duplicates in branch-updater and pr-merger sub-agents)
@@ -85,6 +96,7 @@ Analysis of the 20 custom commands reveals significant token usage due to duplic
 - git-worktree-troubleshooting.md (specialized troubleshooting)
 
 **Optimization:**
+
 - **Action:** Create worktree-management skill (already exists at 936 words!)
 - **Action:** Remove all duplicated worktree instructions from commands
 - **Replace with:** Reference to worktree-management skill + /init-worktree command
@@ -93,32 +105,38 @@ Analysis of the 20 custom commands reveals significant token usage due to duplic
 ### 4. Subagent Batching Patterns (MEDIUM IMPACT)
 
 **Current State:**
+
 - 4 commands duplicate the 5-agent limit and batching strategy
 - Total duplicated content: ~600 words
 
 **Commands Affected:**
+
 - auto-claude.md (full batching logic in PR-FOCUS MODE)
 - sync-main.md (batching strategy section)
 - ready-player-one.md (references skill but duplicates)
 - fix-pr-ci.md (likely duplicates)
 
 **Optimization:**
+
 - **Action:** Remove all batching explanations
-- **Replace with:** "Use [Subagent Batching Skill](../skills/subagent-batching/SKILL.md) for parallel execution"
+- **Replace with:** "Use [Subagent Batching Skill](../agentsmd/skills/subagent-batching/SKILL.md) for parallel execution"
 - **Token Savings:** ~500 words (~20% in affected commands)
 
 ### 5. PR Health Check Patterns (MEDIUM IMPACT)
 
 **Current State:**
+
 - 3 commands duplicate PR merge-readiness criteria
 - Total duplicated content: ~400 words
 
 **Commands Affected:**
+
 - manage-pr.md (Phase 2.1 health check)
 - ready-player-one.md (Step 4 merge-readiness)
 - auto-claude.md (pr-merger sub-agent criteria)
 
 **Optimization:**
+
 - **Action:** Remove all health check criteria explanations
 - **Replace with:** Reference to pr-health-check skill
 - **Token Savings:** ~300 words (~10-15% in affected commands)
@@ -126,10 +144,12 @@ Analysis of the 20 custom commands reveals significant token usage due to duplic
 ### 6. GitHub CLI Examples (MEDIUM IMPACT)
 
 **Current State:**
+
 - 8 commands duplicate gh CLI usage examples
 - Total duplicated content: ~800 words
 
 **Commands Affected:**
+
 - manage-pr.md (extensive gh CLI examples)
 - review-pr.md (gh CLI mastery section)
 - shape-issues.md (gh issue commands)
@@ -139,6 +159,7 @@ Analysis of the 20 custom commands reveals significant token usage due to duplic
 - sync-main.md (gh pr commands)
 
 **Optimization:**
+
 - **Action:** Create a "github-cli-patterns" skill with common examples
 - **Action:** Remove duplicated examples from commands
 - **Replace with:** Reference to skill + specific command only
@@ -147,15 +168,18 @@ Analysis of the 20 custom commands reveals significant token usage due to duplic
 ### 7. Issue Shaping/Resolution Workflow (MEDIUM IMPACT)
 
 **Current State:**
+
 - 3 commands duplicate issue workflow patterns
 - Total duplicated content: ~500 words
 
 **Commands Affected:**
+
 - shape-issues.md (full shaping workflow)
 - resolve-issues.md (resolution workflow)
 - auto-claude.md (issue-resolver sub-agent)
 
 **Optimization:**
+
 - **Action:** Keep shape-issues.md and resolve-issues.md as-is (they ARE the workflow)
 - **Action:** In auto-claude.md, replace with Task tool invocation to /shape-issues and /resolve-issues
 - **Token Savings:** ~200-300 words in auto-claude.md only
@@ -170,6 +194,7 @@ Analysis of the 20 custom commands reveals significant token usage due to duplic
 **Estimated Token Savings:** 600-800 words across 8 commands
 
 **Content:**
+
 ```markdown
 # GitHub CLI Patterns
 
@@ -196,6 +221,7 @@ Common gh CLI patterns used across commands.
 ```
 
 **Commands to Update:**
+
 - manage-pr.md
 - review-pr.md
 - shape-issues.md
@@ -210,11 +236,13 @@ Common gh CLI patterns used across commands.
 **Estimated Token Savings:** 1,200+ words across 6 commands
 
 **Enhancement:**
+
 - Already exists at 936 words
 - Ensure it covers all patterns from init-worktree.md
 - Add troubleshooting section from git-worktree-troubleshooting.md
 
 **Commands to Update:**
+
 - sync-main.md (remove Steps 1-2, reference skill)
 - auto-claude.md (remove branch-updater worktree logic, reference skill)
 - quick-add-permission.md (remove Steps 1-2, reference skill + /init-worktree)
@@ -248,6 +276,7 @@ Common gh CLI patterns used across commands.
    - Replace with: "See github-cli-patterns skill"
 
 **After Refactoring:**
+
 ```markdown
 ## Core Loop
 
@@ -305,6 +334,7 @@ Common gh CLI patterns used across commands.
 #### 3.1 `review-pr.md` (1,079 words → ~750 words)
 
 **Changes:**
+
 - Remove GitHub CLI Mastery section (200 words) → github-cli-patterns skill
 - Remove thread resolution explanation (100 words) → pr-thread-resolution-enforcement skill
 - Consolidate review criteria (29 words saved by removing duplicated emoji system)
@@ -314,6 +344,7 @@ Common gh CLI patterns used across commands.
 #### 3.2 `git-rebase-troubleshoot.md` (1,013 words → ~850 words)
 
 **Changes:**
+
 - Reference worktree-management skill for worktree patterns (100 words)
 - Consolidate error sections (reduce verbosity by 63 words)
 
@@ -322,6 +353,7 @@ Common gh CLI patterns used across commands.
 #### 3.3 `init-worktree.md` (948 words → ~700 words)
 
 **Changes:**
+
 - This IS the canonical worktree source
 - BUT: Can reference worktree-management skill for common patterns (150 words)
 - Reduce verbosity in examples (98 words)
@@ -331,6 +363,7 @@ Common gh CLI patterns used across commands.
 #### 3.4 `resolve-issues.md` (922 words → ~700 words)
 
 **Changes:**
+
 - Remove GitHub CLI examples (100 words) → github-cli-patterns skill
 - Simplify workflow steps (reduce verbosity) (122 words)
 
@@ -339,6 +372,7 @@ Common gh CLI patterns used across commands.
 #### 3.5 `ready-player-one.md` (910 words → ~650 words)
 
 **Changes:**
+
 - Remove inline merge-readiness criteria (100 words) → pr-health-check skill
 - Remove GraphQL examples (60 words) → github-graphql skill
 - Reference subagent-batching skill (50 words)
@@ -349,6 +383,7 @@ Common gh CLI patterns used across commands.
 #### 3.6 `sync-main.md` (850 words → ~600 words)
 
 **Changes:**
+
 - Remove worktree creation/cleanup steps (150 words) → worktree-management skill
 - Remove batching strategy section (50 words) → subagent-batching skill
 - Simplify conflict resolution section (50 words)
@@ -358,6 +393,7 @@ Common gh CLI patterns used across commands.
 #### 3.7 `quick-add-permission.md` (825 words → ~600 words)
 
 **Changes:**
+
 - Remove worktree creation Steps 1-2 (150 words) → reference /init-worktree command
 - Consolidate permission format examples (75 words)
 
@@ -426,11 +462,13 @@ For each refactored command:
 **Current State:** Some commands duplicate agent logic inline
 
 **Recommendation:**
+
 - Move all sub-agent prompts to `.claude/agents/` directory
 - Commands reference agents via Task tool
 - Agents reference skills for common patterns
 
 **Example:**
+
 ```markdown
 <!-- In auto-claude.md -->
 ## Dispatch
@@ -448,18 +486,19 @@ Use Task tool with these agents:
 **Location:** `agentsmd/skills/INDEX.md`
 
 **Content:**
+
 ```markdown
 # Skills Index
 
 Quick reference for all available skills:
 
-- [GitHub GraphQL](github-graphql/SKILL.md) - GraphQL query patterns
-- [PR Thread Resolution](pr-thread-resolution-enforcement/SKILL.md) - Thread resolution workflow
-- [Subagent Batching](subagent-batching/SKILL.md) - Parallel execution patterns
-- [Worktree Management](worktree-management/SKILL.md) - Worktree lifecycle
-- [PR Health Check](pr-health-check/SKILL.md) - Merge-readiness criteria
-- [PR Comment Limits](pr-comment-limit-enforcement/SKILL.md) - 50-comment limit enforcement
-- [GitHub CLI Patterns](github-cli-patterns/SKILL.md) - Common gh commands
+- [GitHub GraphQL](../agentsmd/skills/github-graphql/SKILL.md) - GraphQL query patterns
+- [PR Thread Resolution](../agentsmd/skills/pr-thread-resolution-enforcement/SKILL.md) - Thread resolution workflow
+- [Subagent Batching](../agentsmd/skills/subagent-batching/SKILL.md) - Parallel execution patterns
+- [Worktree Management](../agentsmd/skills/worktree-management/SKILL.md) - Worktree lifecycle
+- [PR Health Check](../agentsmd/skills/pr-health-check/SKILL.md) - Merge-readiness criteria
+- [PR Comment Limits](../agentsmd/skills/pr-comment-limit-enforcement/SKILL.md) - 50-comment limit enforcement
+- [GitHub CLI Patterns](../agentsmd/skills/github-cli-patterns/SKILL.md) - Common gh commands
 ```
 
 ### 3. Automated Token Measurement

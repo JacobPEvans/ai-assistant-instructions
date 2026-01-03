@@ -93,9 +93,9 @@ Execute this loop continuously until budget exhaustion forces termination:
    --- BELOW: BLOCKED IN PR-FOCUS MODE ---
    5. Critical bugs (EXCLUDE ai:created)
    6. Good-first-issues (EXCLUDE ai:created)
-   7. Code analysis - use code-analyzer agent
-   8. Documentation - use doc-updater agent
-   9. Test coverage - use test-adder agent
+   7. Code analysis - use code-reviewer agent
+   8. Documentation - use docs-reviewer agent
+   9. Test coverage - use test-runner agent
    10. Dependency updates (minor/patch only)
 
 3. DISPATCH
@@ -126,7 +126,7 @@ Use Task tool with existing agents from `.claude/agents/` or invoke commands dir
 
 ### Branch Updater (HIGHEST PRIORITY)
 
-**Agent**: `.claude/agents/worktree-manager.md`
+**Agent**: [worktree-manager.md](../agents/worktree-manager.md)
 
 **Skills**: [Worktree Management](../skills/worktree-management/SKILL.md), [GitHub CLI](../skills/github-cli-patterns/SKILL.md)
 
@@ -134,13 +134,13 @@ Use Task tool with existing agents from `.claude/agents/` or invoke commands dir
 
 ### CI Fixer
 
-**Agent**: `.claude/agents/ci-fixer.md`
+**Agent**: [ci-fixer.md](../agents/ci-fixer.md)
 
 **Commands**: `/fix-pr-ci` for full workflow
 
 ### PR Thread Resolver
 
-**Agent**: `.claude/agents/pr-thread-resolver.md`
+**Agent**: [pr-thread-resolver.md](../agents/pr-thread-resolver.md)
 
 **Skills**: [PR Thread Resolution](../skills/pr-thread-resolution-enforcement/SKILL.md), [GitHub GraphQL](../skills/github-graphql/SKILL.md)
 
@@ -154,7 +154,7 @@ Use Task tool with existing agents from `.claude/agents/` or invoke commands dir
 
 ### Issue Resolver
 
-**Agent**: `.claude/agents/issue-resolver.md`
+**Agent**: [issue-resolver.md](../agents/issue-resolver.md)
 
 **Commands**: `/resolve-issues` for full workflow
 

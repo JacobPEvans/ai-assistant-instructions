@@ -5,8 +5,6 @@ version: "1.0.0"
 author: "JacobPEvans"
 ---
 
-<!-- markdownlint-disable-file MD013 -->
-
 Common GitHub CLI (gh) command patterns used across commands and agents. Single source of truth for gh CLI usage to reduce duplication.
 
 ## Purpose
@@ -337,11 +335,14 @@ gh pr view <PR_NUMBER> --json author --jq '.author.login'
 ### List PRs by State
 
 ```bash
-# All states
-for state in OPEN CLOSED MERGED; do
-  count=$(gh pr list --state $state --json number --jq '. | length')
-  echo "$state: $count PRs"
-done
+# Count open PRs
+gh pr list --state open --json number --jq '. | length'
+
+# Count closed PRs
+gh pr list --state closed --json number --jq '. | length'
+
+# Count merged PRs
+gh pr list --state merged --json number --jq '. | length'
 ```
 
 ### Watch CI Until Complete
@@ -392,17 +393,6 @@ gh auth logout
 | `HTTP 403: Forbidden` | Insufficient permissions | Check repo access |
 | `Resource not found` | Invalid owner/repo | Verify repository name |
 | `GraphQL error` | Invalid query | Check query syntax |
-
-### Retry Pattern
-
-```bash
-# Retry on failure
-for i in {1..3}; do
-  gh pr checks <PR_NUMBER> && break
-  echo "Attempt $i failed, retrying..."
-  sleep 2
-done
-```
 
 ## Commands Using This Skill
 
