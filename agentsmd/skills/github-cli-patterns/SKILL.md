@@ -365,11 +365,11 @@ fi
 ### Check Auth Status
 
 ```bash
-# Verify authentication
+# Verify authentication (safe to use in automated agents)
 gh auth status
 
-# Check scopes
-gh auth status --show-token
+# Check authentication status with scopes (for manual inspection only)
+gh auth status --show-token  # WARNING: Exposes token - never use in automation/logs
 ```
 
 ### Login/Logout
@@ -415,7 +415,7 @@ This skill is referenced by:
 2. **Use jq for extraction** instead of parsing text output
 3. **Check auth before operations** with `gh auth status`
 4. **Use specific field queries** to reduce data transfer
-5. **Watch commands for long-running ops** like `gh pr checks --watch`
+5. Watch commands for long-running ops like `gh pr checks --watch`
 6. **Handle errors gracefully** with proper exit code checking
 7. **Use `--limit`** when listing to control result size
 8. **Filter at query time** rather than post-processing when possible

@@ -3,7 +3,7 @@
 ## Executive Summary
 
 Analysis of the 20 custom commands reveals significant token usage due to duplication of patterns,
-workflows, and examples. The top 10 commands consume **67,615 bytes** (approx. 16,900 words). By
+workflows, and examples. The top 10 commands consume **89,434 bytes** (approx. 12,600 words). By
 applying DRY principles and leveraging existing Claude Code features (Task tool, skills, agents), we
 can reduce token usage by an estimated **40-60%**.
 
