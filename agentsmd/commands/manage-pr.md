@@ -120,6 +120,7 @@ See [GitHub CLI Patterns](../skills/github-cli-patterns/SKILL.md) for line-level
 > **STRICT BLOCKER**: ALL conversations must be PHYSICALLY MARKED AS RESOLVED before requesting user review.
 
 Use [PR Thread Resolution Enforcement Skill](../skills/pr-thread-resolution-enforcement/SKILL.md) for:
+
 - Verification query (must return 0 unresolved threads)
 - Resolution workflow (reply AND resolve atomically)
 - GraphQL operations via [GitHub GraphQL Skill](../skills/github-graphql/SKILL.md)

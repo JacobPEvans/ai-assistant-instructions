@@ -404,7 +404,7 @@ Common gh CLI patterns used across commands.
 ### By Phase
 
 | Phase | Commands | Current Words | After Words | Savings | % Reduction |
-|-------|----------|---------------|-------------|---------|-------------|
+| ------- | ---------- | --------------- | ------------- | --------- | ------------- |
 | Phase 1 (Skills) | - | - | - | 1,000 | - |
 | Phase 2 (Top 3) | 3 | 6,081 | 4,000 | 2,081 | 34% |
 | Phase 3 (Remaining 7) | 7 | 6,547 | 4,850 | 1,697 | 26% |
@@ -413,7 +413,7 @@ Common gh CLI patterns used across commands.
 ### By Pattern Type
 
 | Pattern | Commands Affected | Token Savings |
-|---------|-------------------|---------------|
+| --------- | ------------------- | --------------- |
 | Worktree Management | 6 | 1,200 |
 | PR Thread Resolution | 5 | 1,000 |
 | GitHub CLI Examples | 8 | 800 |
@@ -537,7 +537,7 @@ Run before/after refactoring to verify savings.
 ## Risks and Mitigations
 
 | Risk | Mitigation |
-|------|------------|
+| ------ | ------------ |
 | Breaking existing commands | Thorough functional testing before/after |
 | Skill references become stale | Automated link checking in CI |
 | Users confused by indirection | Clear skill references with context |
