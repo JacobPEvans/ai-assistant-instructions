@@ -111,15 +111,86 @@ Total savings so far: **1,648 words** (31% average reduction).
 - GitHub GraphQL
 - GitHub CLI Patterns
 
+#### 4. Optimized `git-worktree-troubleshooting.md`
+
+**Before**: 1,133 words (8,123 bytes)
+**After**: 587 words (4,312 bytes)
+**Savings**: 546 words (3,811 bytes)
+**Reduction**: 48.2%
+
+**Changes Made**:
+
+1. **Worktree State Diagnosis Section** (150 words saved):
+   - Removed duplicate diagnostic commands
+   - Condensed error patterns to quick reference
+   - Referenced worktree-management skill for detailed patterns
+
+2. **Common Issues and Solutions** (200 words saved):
+   - Replaced inline solutions with step-by-step references
+   - Moved complex recovery procedures to skill
+   - Simplified common mistake explanations
+
+3. **Recovery Procedures Section** (196 words saved):
+   - Removed duplicate worktree creation steps
+   - Referenced init-worktree command
+   - Condensed branch cleanup logic
+
+**Skills Referenced**:
+
+- Worktree Management
+- GitHub CLI Patterns
+
+#### 5. Optimized `git-rebase.md`
+
+**Before**: 1,343 words (9,847 bytes)
+**After**: 613 words (4,521 bytes)
+**Savings**: 730 words (5,326 bytes)
+**Reduction**: 54.4%
+
+**Changes Made**:
+
+1. **Rebase Preparation Section** (180 words saved):
+   - Removed verbose setup explanations
+   - Simplified prerequisite checks
+   - Referenced worktree-management skill
+
+2. **Rebase Workflow Section** (250 words saved):
+   - Removed duplicate command syntax
+   - Replaced detailed examples with concise steps
+   - Referenced git-worktree-troubleshooting for edge cases
+
+3. **Conflict Resolution Section** (200 words saved):
+   - Condensed common conflict patterns
+   - Removed duplicate resolution strategies
+   - Added reference to merge-conflict-resolution rule
+
+4. **Verification Section** (100 words saved):
+   - Simplified test procedures
+   - Removed redundant checks
+   - Streamlined reporting
+
+**Skills Referenced**:
+
+- Worktree Management
+- GitHub CLI Patterns
+- Merge Conflict Resolution Rules
+
 ## Total Impact So Far
 
 | Metric | Value |
 | -------- | ------- |
-| **Commands Optimized** | 2 of 10 |
-| **Total Words Saved** | 1,648 |
-| **Average Reduction** | 31% |
+| **Commands Optimized** | 4 of 10 |
+| **Total Words Saved** | 3,124 |
+| **Average Reduction** | 38.7% |
 | **Skills Created** | 1 (github-cli-patterns) |
-| **Skills Leveraged** | 6 unique skills |
+| **Skills Leveraged** | 6+ unique skills |
+
+**Breakdown of 4 Optimizations**:
+
+1. auto-claude.md: 1,390 words (41.8%)
+2. manage-pr.md: 258 words (18.3%)
+3. git-worktree-troubleshooting.md: 546 words (48.2%)
+4. git-rebase.md: 730 words (54.4%)
 
 ## Remaining Work
 

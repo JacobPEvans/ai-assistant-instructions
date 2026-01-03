@@ -65,4 +65,5 @@ repos:
         entry: bash scripts/check-command-tokens.sh
         language: system
         files: ^agentsmd/commands/.*\.md$
-        pass_filenames: false
+        pass_filenames: true
+        stages: [pre-commit]

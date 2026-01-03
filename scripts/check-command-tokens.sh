@@ -18,8 +18,23 @@ echo "Checking command token limits..."
 echo "Maximum allowed: ${MAX_TOKENS} tokens per command"
 echo ""
 
+# When run as a pre-commit hook, check only staged files
+# Otherwise, check all command files
+FILES_TO_CHECK=()
+if [[ $# -gt 0 ]]; then
+    # Files passed as arguments (from pre-commit hook)
+    for file in "$@"; do
+        [[ -f "$file" ]] && FILES_TO_CHECK+=("$file")
+    done
+else
+    # Check all command files
+    for file in ${COMMANDS_DIR}/*.md; do
+        [[ -f "$file" ]] && FILES_TO_CHECK+=("$file")
+    done
+fi
+
 # Check each command file
-for file in ${COMMANDS_DIR}/*.md; do
+for file in "${FILES_TO_CHECK[@]}"; do
     [[ ! -f "$file" ]] && continue
 
     # Calculate approximate token count (chars / 4)
@@ -49,7 +64,7 @@ if [[ $VIOLATIONS -gt 0 ]]; then
     echo "  3. Remove content Claude already knows"
     echo "  4. Follow command-agent-skill hierarchy"
     echo ""
-    echo "See: /Users/jevans/.claude/plans/replicated-weaving-puppy.md"
+    echo "See: ${HOME}/.claude/plans/replicated-weaving-puppy.md"
     echo ""
     exit 1
 else
