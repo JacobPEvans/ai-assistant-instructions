@@ -59,3 +59,10 @@ repos:
         files: ^\.claude/
         pass_filenames: false
         stages: [pre-push]
+      - id: command-token-limit
+        name: command-token-limit
+        description: "Enforce 1k token limit on command files (NO BYPASS)"
+        entry: bash scripts/check-command-tokens.sh
+        language: system
+        files: ^agentsmd/commands/.*\.md$
+        pass_filenames: false
