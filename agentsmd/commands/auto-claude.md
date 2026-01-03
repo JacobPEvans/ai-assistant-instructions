@@ -158,7 +158,8 @@ Use Task tool with existing agents from `.claude/agents/` or invoke commands dir
 
 **Commands**: `/resolve-issues` for full workflow
 
-**Key Steps**: Use `/init-worktree` → implement fix (ONE concept, <200 lines) → create PR with "Fixes #X" → monitor until clean → merge → remove worktree
+**Key Steps**: Use `/init-worktree` → implement fix (ONE concept, <200 lines) → create PR with "Fixes #X" →
+monitor until clean → merge → remove worktree
 
 ### Code Analyzer
 

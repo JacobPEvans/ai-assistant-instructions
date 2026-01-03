@@ -11,9 +11,11 @@ author: "JacobPEvans"
 
 ## PR Management Conductor
 
-> **Purpose**: This command manages YOUR pull requests as the PR AUTHOR - creating, monitoring, fixing, and preparing them for merge. For reviewing OTHER people's PRs, use `/review-pr`.
+> **Purpose**: This command manages YOUR pull requests as the PR AUTHOR - creating, monitoring, fixing, and preparing them for merge.
+> For reviewing OTHER people's PRs, use `/review-pr`.
 
-Comprehensive workflow for managing a pull request from creation through to merge-ready state, including automated CI monitoring, review conversation resolution, and strict quality gates.
+Comprehensive workflow for managing a pull request from creation through to merge-ready state, including automated CI monitoring,
+review conversation resolution, and strict quality gates.
 
 ## Scope
 
@@ -25,11 +27,14 @@ Comprehensive workflow for managing a pull request from creation through to merg
 
 1. **NEVER use auto-merge.** Always wait for explicit user approval.
 2. **ALL checks must pass.** Never merge with failed checks, even if they appear to be infrastructure issues.
-3. **ALL review conversations must be PHYSICALLY RESOLVED.** Not just addressed - marked as resolved in GitHub. Use [PR Thread Resolution Enforcement Skill](../skills/pr-thread-resolution-enforcement/SKILL.md) to verify.
+3. **ALL review conversations must be PHYSICALLY RESOLVED.** Not just addressed - marked as resolved in GitHub.
+   Use [PR Thread Resolution Enforcement Skill](../skills/pr-thread-resolution-enforcement/SKILL.md) to verify.
 4. **Run all validation locally before pushing.** This includes linters, formatters, and pre-commit hooks.
 5. **User must approve the merge.** Only request user review AFTER all checks pass AND all conversations are resolved.
-6. **ALWAYS commit, push, and create PR when work is complete.** Do not ask the user if they want a PR - create it automatically. This kicks off automated reviews and gives users a single place to view all changes.
-7. **ALWAYS watch CI checks after PR creation.** Run `gh pr checks <PR_URL> --watch` as a background task for the first 60 seconds to catch quick failures. Fix any issues before returning to the user.
+6. **ALWAYS commit, push, and create PR when work is complete.** Do not ask the user if they want a PR - create it automatically.
+   This kicks off automated reviews and gives users a single place to view all changes.
+7. **ALWAYS watch CI checks after PR creation.** Run `gh pr checks <PR_URL> --watch` as a background task for the first 60 seconds
+   to catch quick failures. Fix any issues before returning to the user.
 
 ## Useful Watch Commands
 
@@ -59,7 +64,8 @@ gh pr checks <PR_NUMBER> --watch --fail-fast
    - Any project-specific linters or formatters
 2. **Verify Working Directory is Clean**: Run `git status` - output should show `working tree clean`.
 3. **Push Local Branch to Remote**: `git push -u origin $(git branch --show-current)`
-4. **Link to Related Issue**: If this PR implements a GitHub issue, follow the [Issue Linking Guidelines](../../docs/guidelines/issue-linking.md) for branch naming, PR description keywords, and bidirectional linking.
+4. **Link to Related Issue**: If this PR implements a GitHub issue, follow the [Issue Linking Guidelines](../../docs/guidelines/issue-linking.md)
+   for branch naming, PR description keywords, and bidirectional linking.
 
 **PR Description Template:**
 
@@ -145,7 +151,9 @@ gh pr view <PR_NUMBER> --json mergeable
 # 3. All conversations resolved (MANDATORY VERIFICATION)
 # Use PR Thread Resolution Enforcement Skill verification query
 # Must return 0 unresolved threads - commands abort if verification fails
-gh api graphql --raw-field 'query=query { repository(owner: "{OWNER}", name: "{REPO}") { pullRequest(number: {NUMBER}) { reviewThreads(last: 100) { nodes { isResolved } } } } }' | jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)] | length'
+gh api graphql --raw-field 'query=query { repository(owner: "{OWNER}", name: "{REPO}") { pullRequest(number: {NUMBER}) \
+  { reviewThreads(last: 100) { nodes { isResolved } } } } }' | \
+  jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)] | length'
 ```
 
 **CRITICAL**: The last command MUST return `0`. If it returns any number > 0, conversations are not fully resolved and you MUST:
@@ -194,6 +202,7 @@ See [GitHub CLI Patterns](../skills/github-cli-patterns/SKILL.md) for all `gh` c
 - **Review phase**: Others use `/review-pr` to review your PR
 - **Feedback resolution**: Use `/resolve-pr-review-thread` for efficient review thread resolution
 
-**Complete Development Lifecycle**: `/init-worktree` -> `/resolve-issues` -> `/manage-pr` -> (reviewer uses `/review-pr`) -> `/resolve-pr-review-thread` -> merge
+**Complete Development Lifecycle**: `/init-worktree` -> `/resolve-issues` -> `/manage-pr` -> (reviewer uses `/review-pr`) ->
+`/resolve-pr-review-thread` -> merge
 
 This command ensures PRs are created properly, monitored continuously, and meet all quality gates before requesting human review.
