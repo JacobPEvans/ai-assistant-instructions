@@ -13,7 +13,7 @@ AI code review systems to ensure consistent, high-quality code reviews.
 2. **AI-First Development**: All code and documentation optimized for AI consumption.
 3. **Security by Default**: Follow defensive security practices in all code.
 4. **[DRY Principle](./dry-principle.md)**: Eliminate duplication across code and documentation.
-5. **Systematic Workflows**: Use the [5-step development workflow](../workflows/1-research-and-explore.md).
+5. **Systematic Workflows**: Use the 5-step development workflow.
 
 ## Code Standards
 

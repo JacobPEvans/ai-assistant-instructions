@@ -32,7 +32,7 @@ Comprehensive automation for resolving GitHub Issues through strategic analysis,
 
 **With thinking mode, perform comprehensive analysis:**
 
-**1.** **Fetch Issues**: Use `gh issue list` and `gh issue view`. See [GitHub CLI Patterns](../skills/github-cli-patterns/SKILL.md).
+**1.** **Fetch Issues**: Use `gh issue list` and `gh issue view`. Use the github-cli-patterns skill.
 
 - **Prioritize**: P0 → P1 → P2 → bug → enhancement → documentation
 - **Analyze**: creation date, assignees, complexity, dependencies
@@ -51,7 +51,7 @@ Comprehensive automation for resolving GitHub Issues through strategic analysis,
 
 #### Phase 3: Professional PR Creation & Finalization
 
-**7.** **Commit & PR Creation**: Follow [Issue Linking Guidelines](../../docs/guidelines/issue-linking.md).
+**7.** **Commit & PR Creation**: Follow the issue-linking guidelines.
 Use `Closes #issue-number`. Include summary, issues addressed, testing results.
 
 **8.** **Final Validation**: Verify all issues addressed, quality checks pass, PR description complete.

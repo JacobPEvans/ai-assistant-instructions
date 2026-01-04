@@ -670,5 +670,5 @@ Try:
 
 ## Related Documentation
 
-- [Code Standards](../rules/code-standards.md) - Dependency management standards and security practices
-- [CI Fixer Sub-Agent](ci-fixer.md) - Automated CI failure resolution
+- code-standards rule - Dependency management standards and security practices
+- ci-fixer agent - Automated CI failure resolution

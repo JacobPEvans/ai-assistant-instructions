@@ -33,7 +33,7 @@ time-boxed GitHub Issues using Shape Up methodology and continuous discovery pri
 
 ### Workflow
 
-1. Gather context: `gh issue list`, `gh pr list` - see [GitHub CLI Patterns](../skills/github-cli-patterns/SKILL.md)
+1. Gather context: `gh issue list`, `gh pr list` - use the github-cli-patterns skill
 2. Explore problem: user complaints, workflow friction, timebox check
 3. Sketch solutions: 2-3 approaches, scope boundaries, rabbit holes
 4. Set timebox: spike vs small batch vs big batch
@@ -41,7 +41,7 @@ time-boxed GitHub Issues using Shape Up methodology and continuous discovery pri
 
 ### Issue Template
 
-See [GitHub Issue Standards](../rules/github-issue-standards.md) for full template.
+See the github-issue-standards rule for full template.
 
 Key sections: Problem (raw idea, pain, size), Solution Sketch (concept, out of scope),
 Rabbit Holes (complexity traps), Done Looks Like (acceptance criteria).
@@ -52,4 +52,4 @@ Rabbit Holes (complexity traps), Done Looks Like (acceptance criteria).
 
 **Workflow**: `/shape-issues` → `/resolve-issues` → `/review-pr` → `/resolve-pr-review-thread`
 
-**Reference**: [GitHub Issue Standards](../rules/github-issue-standards.md)
+**Reference**: github-issue-standards rule

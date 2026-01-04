@@ -244,8 +244,8 @@ Final:
 
 ## Related Resources
 
-- [Subagent Parallelization Rule](../../rules/subagent-parallelization.md) - Policy and rationale
-- [Task Tool Documentation](https://docs.anthropic.com/claude/docs/tool-use) - Official Task tool reference
+- subagent-parallelization rule - Policy and rationale
+- Task Tool Documentation (Anthropic docs) - Official Task tool reference
 
 ## Troubleshooting
 

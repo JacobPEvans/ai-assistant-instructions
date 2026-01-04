@@ -592,6 +592,6 @@ Manual action required: {instructions}
 
 ## Related Documentation
 
-- [Code Standards](../rules/code-standards.md) - Testing standards
-- [CI Fixer Sub-Agent](ci-fixer.md) - Automated CI failure resolution
-- [Code Generator Sub-Agent](coder.md) - Test generation
+- code-standards rule - Testing standards
+- ci-fixer agent - Automated CI failure resolution
+- coder agent - Test generation

@@ -18,7 +18,7 @@ feature-branch ──rebase──> main ──push──> origin/main → PR aut
 
 1. PR exists: `gh pr view <branch> --json state`
 2. No ambiguous refs: `git show-ref origin/main` (1 line only)
-3. Discover paths via `git worktree list` (see [Worktree Management Skill](../skills/worktree-management/SKILL.md))
+3. Discover paths via `git worktree list` (use the worktree-management skill)
 
 ## Four Steps
 

@@ -246,9 +246,9 @@ git rev-parse --is-inside-work-tree
 
 ## Related Resources
 
-- [Worktree Manager Agent](../../agents/worktree-manager.md) - Full automation for worktree operations
-- [Worktrees Rule](../../rules/worktrees.md) - Policy and structure documentation
-- [Branch Hygiene Rule](../../rules/branch-hygiene.md) - Branch management best practices
+- worktree-manager agent - Full automation for worktree operations
+- worktrees rule - Policy and structure documentation
+- branch-hygiene rule - Branch management best practices
 
 ## Troubleshooting
 

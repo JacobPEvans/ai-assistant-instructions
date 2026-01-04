@@ -73,7 +73,7 @@ Scope: All unresolved threads
 
 ### Step 1: Retrieve Unresolved Threads
 
-Use the **[GitHub GraphQL Skill](../skills/github-graphql/SKILL.md)** patterns for retrieving review threads.
+Use the github-graphql skill patterns for retrieving review threads.
 
 **Query**: `reviewThreads` with `last: 100` to get all threads.
 
@@ -236,13 +236,13 @@ Acknowledged but not implementing because:
 
 ### Step 8: Resolve Thread
 
-IMMEDIATELY after replying, resolve via GraphQL using the **[GitHub GraphQL Skill](../skills/github-graphql/SKILL.md)** mutation patterns.
+IMMEDIATELY after replying, resolve via GraphQL using the github-graphql skill mutation patterns.
 
 **Mutation**: `resolveReviewThread` with the thread's GraphQL node ID (starts with `PRRT_`) from Step 1.
 
 ### Step 9: Verify Resolution
 
-After resolving all threads, verify none remain using the **[GitHub GraphQL Skill](../skills/github-graphql/SKILL.md)** verification patterns.
+After resolving all threads, verify none remain using the github-graphql skill verification patterns.
 
 Query `reviewThreads` and filter for `isResolved == false`. Must return `0` unresolved threads before reporting completion.
 
@@ -433,6 +433,6 @@ If unable to resolve a thread:
 
 ## Related Documentation
 
-- [GitHub GraphQL Skill](../skills/github-graphql/SKILL.md) - Canonical GraphQL patterns for all PR operations
-- [PR Review Thread Resolver Command](../commands/resolve-pr-review-thread.md)
-- [Subagent Parallelization](../rules/subagent-parallelization.md)
+- github-graphql skill - Canonical GraphQL patterns for all PR operations
+- /resolve-pr-review-thread command
+- subagent-parallelization rule

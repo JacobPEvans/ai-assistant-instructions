@@ -43,7 +43,7 @@ When a PR reaches 50 comments:
 
 ### GraphQL Patterns
 
-See **[GitHub GraphQL Skill](../skills/github-graphql/SKILL.md)** for:
+See the github-graphql skill for:
 
 - **Count PR comments**: Query `comments.totalCount` + `reviewThreads.totalCount`
 - **Resolve threads**: Use `resolveReviewThread` mutation with thread's node ID

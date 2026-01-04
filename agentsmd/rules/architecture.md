@@ -1,6 +1,6 @@
 # Architecture Overview
 
-> **Navigation**: [Project Overview](../../README.md) → [Project Scope](project-scope.md) → **Architecture Details**
+> **Navigation**: README.md → project-scope rule → **Architecture Details**
 
 ## System Design Philosophy
 

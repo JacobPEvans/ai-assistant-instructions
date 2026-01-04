@@ -102,6 +102,13 @@ Commands, sub-agents, and skills follow a **three-tier architecture** for mainta
 
 See [Command-Agent-Skill Architecture](./agentsmd/rules/command-agent-skill-architecture.md) for the complete pattern.
 
+## Cross-Referencing Convention
+
+**Within commands, agents, skills, and rules**: Reference by name only (e.g., "the github-cli-patterns skill").
+Claude has all names loaded at startup - file links waste tokens.
+
+**In docs, workflows, and other files**: Use normal markdown links. These aren't Claude Code features.
+
 ## Commands
 
 All commands from `agentsmd/commands/` are available. Use this table to select the right one:

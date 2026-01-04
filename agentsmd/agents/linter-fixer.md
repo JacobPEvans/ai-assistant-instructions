@@ -554,6 +554,6 @@ Or run: npx eslint --init
 
 ## Related Documentation
 
-- [Code Standards](../rules/code-standards.md) - Project code quality standards
-- [CI Fixer Sub-Agent](ci-fixer.md) - Automated CI failure resolution
-- [Code Generator Sub-Agent](coder.md) - Code generation standards
+- code-standards rule - Project code quality standards
+- ci-fixer agent - Automated CI failure resolution
+- coder agent - Code generation standards

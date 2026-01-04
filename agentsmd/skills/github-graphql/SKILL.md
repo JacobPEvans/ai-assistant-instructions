@@ -231,7 +231,7 @@ All GraphQL operations must respect the **50-comment limit per PR** rule:
 
 1. Before posting new comments, check total comment count
 2. When limit is reached, resolve threads without posting new comments
-3. See [PR Comment Limits](../../../agentsmd/rules/pr-comment-limits.md) for details
+3. See the pr-comment-limits rule for details
 
 ## Commands Using This Skill
 

@@ -51,4 +51,4 @@ Command → Agent → Skill pattern:
 - Agents: `permissions-analyzer`, `permissions-syncer`
 - Skills: `permission-safety-classification`, `permission-deduplication`
 
-See [Command/Agent/Skill Architecture](../rules/command-agent-skill-architecture.md).
+See the command-agent-skill-architecture rule.

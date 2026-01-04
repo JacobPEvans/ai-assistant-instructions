@@ -21,8 +21,8 @@ cannot resolve.
 
 Check: `pwd`, `git status`, `git branch --show-current`, `git worktree list`, `gh pr view`.
 
-For worktree path discovery, see [Worktree Management](../skills/worktree-management/SKILL.md).
-For PR commands, see [GitHub CLI Patterns](../skills/github-cli-patterns/SKILL.md).
+For worktree path discovery, use the worktree-management skill.
+For PR commands, use the github-cli-patterns skill.
 
 ---
 
@@ -63,7 +63,7 @@ Resolve: edit files, `git add <file>`, then `git rebase --continue` (or `--abort
 ## Error: Fast-Forward Merge Failed
 
 Main was updated between rebase and merge.
-Get main path (see [Worktree Management](../skills/worktree-management/SKILL.md)).
+Get main path (use the worktree-management skill).
 Run `git fetch origin && git reset --hard origin/main`, then re-run `/git-rebase`.
 
 ---

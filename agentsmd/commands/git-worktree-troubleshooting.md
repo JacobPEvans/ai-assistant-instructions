@@ -29,7 +29,7 @@ git worktree list
 # Branch: line with [<branch>] - first column is path
 ```
 
-See [Worktree Management Skill](../skills/worktree-management/SKILL.md) for patterns.
+Use the worktree-management skill for patterns.
 
 ## Critical: Ambiguous Refname
 
@@ -113,4 +113,4 @@ git worktree add "<new-path>" "<branch>"
 
 ## Reference
 
-- [Worktree Management Skill](../skills/worktree-management/SKILL.md) - Discovery, cleanup, naming
+- worktree-management skill - Discovery, cleanup, naming

@@ -92,10 +92,10 @@ Check:
 
 ### 5. Project Standards Compliance
 
-- Follow [Documentation Standards](../rules/documentation-standards.md)
+- Follow the documentation-standards rule
 - Use hierarchical numbering (1., 1.1., 1.1.1.) for AI-trackable structure
 - Ensure AI-first writing (concise, structured)
-- Verify adherence to [DRY Principle](../rules/dry-principle.md)
+- Verify adherence to the dry-principle rule
 - Link to other documents instead of repeating information
 
 ### 6. AI-Friendly Formatting
@@ -109,9 +109,9 @@ Check:
 
 Update if needed:
 
-- [Technical Context](../rules/memory-bank/technical-context.md)
-- [Project Brief](../rules/memory-bank/project-brief.md)
-- [Progress Tracking](../rules/memory-bank/progress-tracking.md)
+- technical-context memory-bank
+- project-brief memory-bank
+- progress-tracking memory-bank
 
 ### 8. Link Validation
 

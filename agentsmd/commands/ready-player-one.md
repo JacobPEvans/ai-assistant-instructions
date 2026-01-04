@@ -28,9 +28,9 @@ What this command DOES NOT:
 - Create new PRs
 - Close or archive PRs
 
-## Related Documentation
+## Related
 
-- [Subagent Parallelization](../rules/subagent-parallelization.md) - Parallel execution patterns
+- subagent-parallelization rule - Parallel execution patterns
 - `/fix-pr-ci all` - CI failure resolution
 - `/resolve-pr-review-thread all` - Review thread resolution
 
@@ -69,12 +69,12 @@ Wait for completion. This command will resolve all pending review threads.
 
 ### Step 3: Scan All Open PRs
 
-Use [GitHub CLI Patterns](../skills/github-cli-patterns/SKILL.md) for `gh repo list` and `gh pr list`.
+Use the github-cli-patterns skill for `gh repo list` and `gh pr list`.
 
 ### Step 4: Determine Merge-Readiness
 
-Use [PR Health Check Skill](../skills/pr-health-check/SKILL.md) for merge-readiness criteria.
-Use [PR Thread Resolution Enforcement Skill](../skills/pr-thread-resolution-enforcement/SKILL.md) for thread verification.
+Use the pr-health-check skill for merge-readiness criteria.
+Use the pr-thread-resolution-enforcement skill for thread verification.
 
 **Ready to merge**: OPEN, MERGEABLE, all checks SUCCESS, no unresolved threads, approved.
 **Blocked**: Failing any of the above.

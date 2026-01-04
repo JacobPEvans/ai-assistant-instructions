@@ -127,9 +127,9 @@ Commands that resolve comments (`/resolve-pr-review-thread`) SHOULD:
 
 ## Related Resources
 
-- [PR Comment Limits Rule](../../rules/pr-comment-limits.md) - Policy and rationale
-- [GitHub GraphQL Skill](../github-graphql/SKILL.md) - Query patterns for comment counting
-- [PR Thread Resolution Enforcement Skill](../pr-thread-resolution-enforcement/SKILL.md) - Thread resolution patterns
+- pr-comment-limits rule - Policy and rationale
+- github-graphql skill - Query patterns for comment counting
+- pr-thread-resolution-enforcement skill - Thread resolution patterns
 
 ## Examples
 

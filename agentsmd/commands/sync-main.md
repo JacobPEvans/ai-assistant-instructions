@@ -18,10 +18,10 @@ or all open PR branches when using the `all` parameter.
 
 **CURRENT REPOSITORY ONLY** - This command never crosses into other repositories.
 
-## Related Documentation
+## Related
 
-- [Merge Conflict Resolution](../rules/merge-conflict-resolution.md) - How to resolve conflicts
-- [Subagent Parallelization](../rules/subagent-parallelization.md) - Parallel execution patterns
+- merge-conflict-resolution rule - How to resolve conflicts
+- subagent-parallelization rule - Parallel execution patterns
 
 ## Prerequisites
 
@@ -36,7 +36,7 @@ or all open PR branches when using the `all` parameter.
 
 1. **Verify state**: `git branch --show-current`, `git status --porcelain`
    - STOP if on main or uncommitted changes
-2. **Find main worktree**: See [Worktree Management](../skills/worktree-management/SKILL.md)
+2. **Find main worktree**: Use the worktree-management skill
 3. **Update main**: `cd "$MAIN_WORKTREE" && git fetch origin main && git pull origin main`
 4. **Merge**: `git merge origin/main --no-edit`
 5. **Push**: `git push origin $(git branch --show-current)`
@@ -46,7 +46,7 @@ or all open PR branches when using the `all` parameter.
 
 ## All Branches Mode (Orchestrator)
 
-Process all open PR branches. See [Subagent Batching](../skills/subagent-batching/SKILL.md) for parallel patterns.
+Process all open PR branches. Use the subagent-batching skill for parallel patterns.
 
 ### Steps
 
@@ -61,7 +61,7 @@ Process all open PR branches. See [Subagent Batching](../skills/subagent-batchin
 
 ## Conflict Resolution
 
-See [Merge Conflict Resolution](../rules/merge-conflict-resolution.md).
+Use the merge-conflict-resolution rule.
 
 Key: Read files, understand both versions, combine intelligently, stage resolved files, commit.
 

@@ -23,9 +23,9 @@ Can be invoked by other commands or agents for focused code analysis.
 
 This sub-agent applies:
 
-- [Code Standards](../rules/code-standards.md)
-- [Infrastructure Standards](../rules/infrastructure-standards.md)
-- [Styleguide](../rules/styleguide.md)
+- code-standards rule
+- infrastructure-standards rule
+- styleguide rule
 
 ## Review Focus Areas
 

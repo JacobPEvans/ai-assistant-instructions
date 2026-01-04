@@ -166,6 +166,6 @@ Practical examples of invoking this sub-agent.
 
 ## Related Documentation
 
-- [Slash Commands](../commands/) - User-facing workflow commands
-- [Rules](../rules/) - Project standards and guidelines
-- [Workflows](../workflows/) - Multi-step development processes
+- commands directory - User-facing workflow commands
+- rules directory - Project standards and guidelines
+- workflows directory - Multi-step development processes

@@ -35,7 +35,7 @@ The command intelligently converts simple inputs to proper permission format:
 
 ### 1. Sync Main and Create Worktree
 
-See [Worktree Management](../skills/worktree-management/SKILL.md).
+Use the worktree-management skill.
 
 1. Sync main: `git fetch --all --prune && git switch main && git pull`
 2. Create branch: `chore/add-permissions-$(date +%Y%m%d-%H%M%S)`

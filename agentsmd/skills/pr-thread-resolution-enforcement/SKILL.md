@@ -91,7 +91,7 @@ Before verification passes, follow this workflow for each unresolved thread:
 
 ## Integration with GitHub GraphQL Skill
 
-This skill works with [GitHub GraphQL Skill](../github-graphql/SKILL.md) for:
+This skill works with the github-graphql skill for:
 
 - **Thread resolution mutation**: `resolveReviewThread` patterns
 - **Commit operations**: Signed commits for code changes
@@ -197,11 +197,11 @@ Next steps: Author needs to respond to blocking feedback on line 89
 
 ## Related Resources
 
-- [GitHub GraphQL Skill](../github-graphql/SKILL.md) - Mutation patterns, node ID handling
-- [PR Thread Resolver Agent](../../agents/pr-thread-resolver.md) - Full implementation patterns
-- [PR Review Thread Command](../../commands/resolve-pr-review-thread.md) - Orchestrator using this skill
-- [Manage PR Command](../../commands/manage-pr.md) - Uses verification pattern
-- [PR Comment Limits Rule](../../rules/pr-comment-limits.md) - Works with verification
+- github-graphql skill - Mutation patterns, node ID handling
+- pr-thread-resolver agent - Full implementation patterns
+- /resolve-pr-review-thread command - Orchestrator using this skill
+- /manage-pr command - Uses verification pattern
+- pr-comment-limits rule - Works with verification
 
 ## Troubleshooting
 

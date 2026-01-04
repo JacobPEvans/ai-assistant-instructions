@@ -11,10 +11,9 @@ and prevents accidental changes on main.
 
 Initialize a clean worktree in `~/git/<repo-name>/<branch-name>/` for new development work.
 
-## Related Documentation
+## Related
 
-- [Worktrees](../rules/worktrees.md) - Authoritative worktree structure and principles
-- [Branch Hygiene](../rules/branch-hygiene.md) - Branch synchronization rules
+Use the worktrees rule and branch-hygiene rule.
 
 ## Usage
 
@@ -40,7 +39,7 @@ Note current branch and directory for reporting.
 
 ### 3. Clean Stale Worktrees
 
-Use [Worktree Management](../skills/worktree-management/SKILL.md). Remove if merged/deleted/clean. Run `git worktree prune`.
+Use the worktree-management skill. Remove if merged/deleted/clean. Run `git worktree prune`.
 
 ### 4. Switch to Main and Sync
 

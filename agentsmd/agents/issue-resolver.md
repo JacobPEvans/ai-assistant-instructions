@@ -33,7 +33,7 @@ Designed to be invoked by orchestration commands for autonomous issue implementa
 
 ### Implementation Quality
 
-- Follow [Code Standards](../rules/code-standards.md)
+- Follow the code-standards rule
 - Write clean, maintainable, well-documented code
 - Ensure backward compatibility unless breaking change is required
 - Follow existing patterns and architectural conventions
@@ -169,7 +169,7 @@ npm test
 
 ### Step 6: Implement Solution
 
-Follow [Code Standards](../rules/code-standards.md):
+Follow the code-standards rule:
 
 - **Clear naming**: Descriptive variable/function names
 - **Modularity**: Single responsibility per module
@@ -208,7 +208,7 @@ Update relevant documentation:
 
 ### Step 9: Commit Changes
 
-Follow the [Issue Linking Guidelines](../../docs/guidelines/issue-linking.md) for proper commit formatting and issue references.
+Follow the issue-linking guidelines for proper commit formatting and issue references.
 
 ```bash
 git add {files}
@@ -415,7 +415,7 @@ If unable to complete after reasonable effort:
 
 ## Related Documentation
 
-- [Code Standards](../rules/code-standards.md)
-- [Worktrees](../rules/worktrees.md)
-- [Subagent Parallelization](../rules/subagent-parallelization.md)
-- [resolve-issues Command](../commands/resolve-issues.md)
+- code-standards rule
+- worktrees rule
+- subagent-parallelization rule
+- /resolve-issues command

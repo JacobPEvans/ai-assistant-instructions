@@ -252,8 +252,8 @@ Apply pattern-name rules:
 ```markdown
 ## Related Skills
 
-- [Permission Safety Classification](../skills/permission-safety-classification/SKILL.md) - Classification patterns
-- [Permission Deduplication](../skills/permission-deduplication/SKILL.md) - Deduplication patterns
+- permission-safety-classification skill - Classification patterns
+- permission-deduplication skill - Deduplication patterns
 ```
 
 ## Directory Structure
@@ -374,6 +374,6 @@ Well-architected commands following this pattern:
 
 ## Related Documentation
 
-- [Skills Documentation](https://code.claude.com/docs/en/skills) - Official Anthropic docs
-- [Sub-Agents Documentation](https://code.claude.com/docs/en/sub-agents) - Official Anthropic docs
-- [Worktree Management Skill](../skills/worktree-management/SKILL.md) - Example skill
+- Skills Documentation (code.claude.com) - Official Anthropic docs
+- Sub-Agents Documentation (code.claude.com) - Official Anthropic docs
+- worktree-management skill - Example skill

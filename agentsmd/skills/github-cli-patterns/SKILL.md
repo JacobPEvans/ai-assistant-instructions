@@ -278,7 +278,7 @@ gh run rerun <RUN_ID>
 
 ### GraphQL Queries
 
-For GraphQL operations, see [GitHub GraphQL Skill](../github-graphql/SKILL.md).
+For GraphQL operations, use the github-graphql skill.
 
 Quick reference:
 
@@ -422,6 +422,6 @@ This skill is referenced by:
 
 ## Related Skills
 
-- [GitHub GraphQL Skill](../github-graphql/SKILL.md) - GraphQL query patterns
-- [PR Health Check Skill](../pr-health-check/SKILL.md) - PR status validation
-- [PR Thread Resolution Enforcement Skill](../pr-thread-resolution-enforcement/SKILL.md) - Review thread resolution
+- github-graphql skill - GraphQL query patterns
+- pr-health-check skill - PR status validation
+- pr-thread-resolution-enforcement skill - Review thread resolution

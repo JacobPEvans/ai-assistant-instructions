@@ -21,7 +21,7 @@ Comprehensive and systematic Pull Request review system focusing on code quality
 **SINGLE PR** - This command reviews one PR at a time, specified by argument or determined from current branch.
 
 > **PR Comment Limit**: This command respects the **50-comment limit per PR** defined in the
-> [PR Comment Limits rule](../rules/pr-comment-limits.md).
+> the pr-comment-limits rule.
 > If a PR has reached 50 comments, this command will not post new comments. See the rule for details.
 
 ### Review Phases
@@ -31,11 +31,11 @@ Comprehensive and systematic Pull Request review system focusing on code quality
 3. **Review**: Logic, architecture, tests, docs
 4. **Feedback**: Categorize and deliver constructive comments
 
-Apply [Code Standards](../rules/code-standards.md) and [Styleguide](../rules/styleguide.md).
+Apply the code-standards and styleguide rules.
 
 ### GitHub CLI Reference
 
-See [GitHub CLI Patterns](../skills/github-cli-patterns/SKILL.md) for:
+See the github-cli-patterns skill for:
 
 - **PR Information**: `gh pr view`, `gh pr diff`, `gh pr checks`
 - **Review Submission**: `gh pr review --approve`, `--request-changes`
@@ -45,10 +45,10 @@ For local quality checks: `bun run typecheck && bun run test:run && bun run buil
 
 ### Review Workflow
 
-1. **Context**: Gather PR details via `gh pr view` (see [GitHub CLI Patterns](../skills/github-cli-patterns/SKILL.md))
+1. **Context**: Gather PR details via `gh pr view` (use the github-cli-patterns skill)
 2. **Quality**: Checkout with `gh pr checkout`, run local quality checks
 3. **Code Review**: Check architecture, code quality, tests, documentation
-4. **Comment Limit**: Check 50-comment limit per [PR Comment Limit Enforcement](../skills/pr-comment-limit-enforcement/SKILL.md)
+4. **Comment Limit**: Check 50-comment limit per the pr-comment-limit-enforcement skill
 5. **Submit**: Categorize feedback (Critical → Major → Minor → Enhancement), record decision
 
 ### Feedback Categories

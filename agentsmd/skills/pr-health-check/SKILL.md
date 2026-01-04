@@ -21,7 +21,7 @@ A PR is ready to merge when ALL of the following are true:
 2. **Mergeable**: `MERGEABLE` (no conflicts)
 3. **Status Checks**: ALL must be `SUCCESS` (no failures, no pending)
 4. **Reviews**: All required reviews must be `APPROVED`
-5. **Conversations**: ALL review threads must be `isResolved: true` (see [PR Thread Resolution Enforcement Skill](../pr-thread-resolution-enforcement/SKILL.md))
+5. **Conversations**: ALL review threads must be `isResolved: true` (use the pr-thread-resolution-enforcement skill)
 
 ## Quick Health Check Query
 
@@ -152,8 +152,8 @@ gh pr list --state open --json number,title,state,mergeable,statusCheckRollup
 
 ## Related Resources
 
-- [GitHub GraphQL Skill](../github-graphql/SKILL.md) - Detailed GraphQL queries for PR fields
-- [PR Thread Resolution Enforcement Skill](../pr-thread-resolution-enforcement/SKILL.md) - Review conversation validation
+- github-graphql skill - Detailed GraphQL queries for PR fields
+- pr-thread-resolution-enforcement skill - Review conversation validation
 
 ## Integration Points
 
