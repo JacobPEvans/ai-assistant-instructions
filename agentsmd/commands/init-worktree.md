@@ -28,262 +28,39 @@ Initialize a clean worktree in `~/git/<repo-name>/<branch-name>/` for new develo
 
 If no description provided, will prompt for one.
 
-## Prerequisites
-
-This command creates worktrees using the structure:
-
-```text
-~/git/<repo-name>/
-├── main/                    # Main branch worktree
-├── feat/branch-name/        # Feature worktrees
-└── fix/branch-name/         # Fix worktrees
-```
-
-The repository root (`~/git/<repo-name>/`) contains only the `.git` directory and worktree subdirectories. The `main` branch is itself a worktree at `main/`.
-
-**First-time setup:**
-
-If you have an existing repository at `~/git/<repo-name>/` (standard git checkout), this command will handle the conversion
-automatically by detecting the current setup and creating new worktrees alongside your existing checkout. You can then migrate to the
-worktree-only structure when ready.
-
-**Note:** The root `.git` directory can be either a regular git directory or a bare repository - both work with this worktree structure.
-
 ## Steps
 
-### 1. Validate Git Repository
+### 1. Validate
 
-1.1. Verify current directory is a git repository:
+Verify git repo: `git rev-parse --is-inside-work-tree`. Get repo name: `basename $(git rev-parse --show-toplevel)`.
 
-```bash
-git rev-parse --is-inside-work-tree
-```
+### 2. Remember State
 
-If not a git repo, error and exit.
+Note current branch and directory for reporting.
 
-1.2. Get repository name:
+### 3. Clean Stale Worktrees
 
-```bash
-basename $(git rev-parse --show-toplevel)
-```
-
-### 2. Remember Current State
-
-2.1. Note current branch:
-
-```bash
-git rev-parse --abbrev-ref HEAD
-```
-
-2.2. Note current working directory:
-
-```bash
-pwd
-```
-
-**Purpose**: So user knows what branch they were on before cleanup/switch.
-
-### 3. Clean Up Stale Worktrees
-
-3.1. List all existing worktrees:
-
-```bash
-git worktree list
-```
-
-3.2. For each worktree (excluding main repository):
-
-**Check if stale:**
-
-```bash
-# Get branch name from worktree
-BRANCH=$(git worktree list | grep <path> | awk '{print $3}' | tr -d '[]')
-
-# Check if branch is merged
-git branch --merged main | grep -q "^  $BRANCH$"
-
-# Check if remote branch exists
-git branch -r | grep -q "origin/$BRANCH"
-```
-
-**Stale criteria** (remove if ANY true):
-
-- Branch has been merged into main
-- Branch no longer exists on remote
-- Worktree has no active changes (clean working tree)
-
-3.3. Remove stale worktrees:
-
-```bash
-git worktree remove <path>
-```
-
-3.4. Prune administrative files:
-
-```bash
-git worktree prune
-```
-
-**Report**: Number of worktrees cleaned up.
+Use [Worktree Management](../skills/worktree-management/SKILL.md). Remove if merged/deleted/clean. Run `git worktree prune`.
 
 ### 4. Switch to Main and Sync
 
-4.1. Ensure we're in the main repository (not a worktree):
-
-```bash
-# Get main worktree path
-MAIN_PATH=$(git worktree list | head -1 | awk '{print $1}')
-cd "$MAIN_PATH"
-```
-
-4.2. Switch to main branch:
-
-```bash
-git switch main
-```
-
-4.3. Fetch and sync:
-
-```bash
-git fetch --all --prune
-git pull
-```
-
-4.4. Clean up local merged branches:
-
-```bash
-# List merged branches (excluding main/master/develop)
-git branch --merged main | grep -v -E "main|master|develop" | grep -v "^\*"
-
-# Delete each one
-git branch -d <branch-name>
-```
+1. Get main path: `MAIN_PATH=$(git worktree list | head -1 | awk '{print $1}')`
+2. Switch: `cd "$MAIN_PATH" && git switch main`
+3. Sync: `git fetch --all --prune && git pull`
+4. Clean merged branches: `git branch --merged main` (exclude main/master/develop), delete with `git branch -d`
 
 ### 5. Generate Branch and Worktree Names
 
-5.1. Convert description to branch name:
+**Branch naming**: lowercase, spaces→hyphens, prefix `feat/` (default) or `fix/` (if contains "fix"/"bug").
 
-**Naming rules:**
+**Worktree path**: `~/git/<repo-name>/<branch-name>/`
 
-- Lowercase
-- Replace spaces with hyphens
-- Remove special characters
-- Prefix with `feat/` (default) or `fix/` if description contains "fix"/"bug"
-
-**Examples:**
-
-- "add dark mode" → `feat/add-dark-mode`
-- "fix login bug" → `fix/login-bug`
-- "Update README" → `feat/update-readme`
-
-5.2. Generate worktree directory name:
-
-**Format**: `~/git/<repo-name>/<branch-name>/`
-
-**Examples:**
-
-- `~/git/ai-assistant-instructions/feat/add-dark-mode/`
-- `~/git/nix-config/fix/login-bug/`
+Examples: "add dark mode" → `feat/add-dark-mode`, "fix login bug" → `fix/login-bug`
 
 ### 6. Create Worktree
 
-6.1. Ensure repo directory exists:
+`git worktree add ~/git/<repo-name>/<branch-name> -b <branch-name> main`
 
-```bash
-mkdir -p ~/git/<repo-name>
-```
+### 7. Verify and Report
 
-6.2. Create the worktree:
-
-```bash
-git worktree add ~/git/<repo-name>/<branch-name> -b <branch-name> main
-```
-
-**Example:**
-
-```bash
-git worktree add ~/git/ai-assistant-instructions/feat/add-dark-mode -b feat/add-dark-mode main
-```
-
-### 7. Switch to Worktree
-
-7.1. Change to the new worktree directory:
-
-```bash
-cd ~/git/<repo-name>/<branch-name>
-```
-
-7.2. Verify setup:
-
-```bash
-pwd
-git status
-git branch
-```
-
-### 8. Summary Report
-
-Provide a clear summary including:
-
-```text
-✅ Worktree initialized successfully!
-
-📊 Summary:
-- Previous branch: <original-branch>
-- Stale worktrees cleaned: <count>
-- New worktree: ~/git/<repo-name>/<branch-name>
-- New branch: <branch-name>
-- Based on: main (synced with origin)
-
-📍 Current location: ~/git/<repo-name>/<branch-name>
-🚀 Ready for development!
-
-Next steps:
-1. Make your changes
-2. Commit your work
-3. Create PR immediately: gh pr create --body "Fixes #<issue-number>"
-   (Or use --fill if your commit message already includes "Fixes #X")
-4. Monitor PR: fix CI failures, resolve review comments
-5. Wait 60 seconds after last fix, verify clean
-6. Merge: rebase on main, fast-forward merge, push (PR auto-closes)
-7. Remove this worktree: git worktree remove ~/git/<repo-name>/<branch-name>
-   (The PR is now the source of truth - you don't need the local copy)
-```
-
-## Directory Structure
-
-After running this command, your worktrees will be organized:
-
-```text
-~/git/
-├── ai-assistant-instructions/
-│   ├── main/                           # Main branch (read-only for development)
-│   ├── feat/add-dark-mode/             # Feature worktree
-│   └── fix/permissions/                # Fix worktree
-└── nix-config/
-    ├── main/                           # Main branch
-    ├── feat/update-packages/           # Feature worktree
-    └── fix/homebrew/                   # Fix worktree
-```
-
-## Important Notes
-
-- **Isolation**: Each worktree is completely isolated - changes in one don't affect others
-- **Shared git**: All worktrees share the same `.git` directory - commits are immediately visible
-- **Clean slate**: Always starts from latest `main`, ensuring no conflicts with other sessions
-- **Automatic cleanup**: Removes old worktrees whose branches are merged/deleted
-
-## When to Use
-
-**Always use `/init-worktree` when starting new work:**
-
-- New features
-- Bug fixes
-- Refactoring
-- Documentation updates
-- Any changes requiring commits
-
-**Skip only for:**
-
-- 1-line typo fixes directly on main (rare exception)
-- Reading/exploring code (no changes)
+Switch to worktree, verify with `git status`. Report: previous branch, worktrees cleaned, new location.

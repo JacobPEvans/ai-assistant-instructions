@@ -33,245 +33,39 @@ The command intelligently converts simple inputs to proper permission format:
 
 ## Steps
 
-### 1. Sync Main Repository
+### 1. Sync Main and Create Worktree
 
-**CRITICAL**: Ensure working from the latest main before creating worktree.
+See [Worktree Management](../skills/worktree-management/SKILL.md).
 
-1.1. Check current location:
+1. Sync main: `git fetch --all --prune && git switch main && git pull`
+2. Create branch: `chore/add-permissions-$(date +%Y%m%d-%H%M%S)`
+3. Create worktree: `git worktree add "$worktree_path" -b "$branch_name" main`
 
-```bash
-git worktree list
-```
+### 2. Gather and Format Permission Input
 
-1.2. Switch to main repository directory (not a worktree) if needed.
+- Parse arguments or prompt interactively
+- Convert plain text to `Bash(command:*)` format
+- Use as-is if already formatted with parentheses
+- Confirm format with user
 
-1.3. Fetch and pull latest main:
+### 3. Update Permission Files
 
-```bash
-git fetch --all --prune
-git switch main
-git pull
-```
+Files: `agentsmd/permissions/{allow,ask,deny}.json`, `.gemini/permissions/{allow,deny}.json`
 
-### 2. Create Worktree
+For each permission:
 
-2.1. Determine branch name using timestamp:
+1. Read existing JSON, check for duplicates
+2. Add new permission, maintain alphabetical order
+3. Sync across all AI tools
+4. Verify JSON validity with `jq empty`
 
-```bash
-branch_name="chore/add-permissions-$(date +%Y%m%d-%H%M%S)"
-```
+### 4. Summary
 
-2.2. Determine worktree directory:
+Report: worktree, branch, permissions added, files modified, next steps.
 
-```bash
-repo_name=$(basename $(git rev-parse --show-toplevel))
-# Note: branch_name includes slash (e.g., chore/add-permissions-20251216-143000)
-# This creates nested directory structure: ~/git/repo/chore/add-permissions-TIMESTAMP/
-worktree_path="$HOME/git/$repo_name/$branch_name"
-```
+## Notes
 
-2.3. Create the worktree:
-
-```bash
-git worktree add "$worktree_path" -b "$branch_name" main
-```
-
-2.4. Change to worktree directory:
-
-```bash
-cd "$worktree_path"
-```
-
-### 3. Gather and Format Permission Input
-
-3.1. If arguments were provided:
-
-- Parse each argument
-- Convert to proper permission format (see conversion rules below)
-- Ask which list(s) to add to: allow, ask, or deny
-
-3.2. If no arguments provided, prompt interactively:
-
-- Ask for permission string(s) (one or more, newline-separated)
-- Convert to proper permission format
-- Ask which list(s) to add to: allow, ask, or deny
-
-3.3. **Permission Format Conversion Rules:**
-
-For each input, detect the type and convert:
-
-**Already formatted (contains parentheses):**
-
-- Input: `"Bash(docker ps:*)"`
-- Output: `"Bash(docker ps:*)"` (use as-is)
-
-**Bash commands (default for plain text):**
-
-- Input: `"docker ps"`
-- Output: `"Bash(docker ps:*)"`
-- Input: `"kubectl get pods"`
-- Output: `"Bash(kubectl get pods:*)"`
-
-**Special formats (WebFetch, etc.):**
-
-- Input: `"WebFetch domain:*.example.com"`
-- Output: `"WebFetch(domain:*.example.com)"`
-
-3.4. Display the converted format to user for confirmation before proceeding
-
-### 4. Update Permission Files
-
-4.1. Identify all AI tool permission directories:
-
-```bash
-find . -type d -name "permissions" | grep -E "\.(claude|gemini)/"
-```
-
-Expected structure:
-
-- `agentsmd/permissions/allow.json`
-- `agentsmd/permissions/ask.json`
-- `agentsmd/permissions/deny.json`
-- `.gemini/permissions/allow.json`
-- `.gemini/permissions/deny.json`
-
-4.2. For each permission to add:
-
-**Read existing file:**
-
-```bash
-# Example for Claude allow list
-cat agentsmd/permissions/allow.json
-```
-
-**Parse JSON and check for duplicates:**
-
-- Extract existing permissions array
-- Check if permission already exists
-- Skip if duplicate
-
-**Add new permission:**
-
-- Insert into permissions array
-- Maintain alphabetical ordering within logical sections
-- Preserve JSON formatting
-
-**Write updated file:**
-
-```bash
-# Write updated JSON back to file
-```
-
-4.3. Sync across all tools:
-
-- If permission added to `agentsmd/permissions/allow.json`, also add to `.gemini/permissions/allow.json`
-- Translate any tool-specific syntax if needed
-- Maintain consistency across all AI tools
-
-### 5. Verify Changes
-
-5.1. Show diff of changes:
-
-```bash
-git diff
-```
-
-5.2. Verify JSON validity:
-
-```bash
-# For each modified JSON file
-cat agentsmd/permissions/allow.json | jq empty
-```
-
-5.3. Count additions:
-
-- Report how many permissions added to each file
-- Report any skipped duplicates
-
-### 6. Summary
-
-Provide a summary including:
-
-- Worktree location
-- Branch name
-- Permissions added (with list type)
-- Files modified
-- Next steps: "Ready to review changes, commit, and create PR"
-
-## Permission Format Guidelines
-
-### Common Permission Patterns
-
-**Bash commands:**
-
-- `Bash(command subcommand:*)` - e.g., `Bash(docker ps:*)`
-- `Bash(command:*)` - e.g., `Bash(ls:*)`
-
-**Web operations:**
-
-- `WebFetch(domain:*.example.com)` - Fetch from domain
-
-### Alphabetical Ordering
-
-Permissions should be ordered:
-
-1. By command name alphabetically
-2. Within each command, by subcommand alphabetically
-
-Example ordering:
-
-```json
-{
-  "permissions": [
-    "Bash(docker inspect:*)",
-    "Bash(docker logs:*)",
-    "Bash(docker ps:*)",
-    "Bash(git status:*)",
-    "Bash(npm list:*)"
-  ]
-}
-```
-
-## Important Notes
-
-- Always create a fresh worktree from latest main
-- Sync permissions across all AI tools automatically
-- Maintain alphabetical ordering for readability
-- Skip duplicates but report them
-- Verify JSON validity before committing
-- Leave worktree ready for user to review and commit
-
-## Example Usage
-
-### Add single permission via simple format
-
-```bash
-/quick-add-permission "docker ps"
-# Converts to: Bash(docker ps:*)
-```
-
-### Add multiple bash commands
-
-```bash
-/quick-add-permission "docker ps" "docker logs" "docker inspect"
-# Converts to three separate JSON array entries:
-# [
-#   "Bash(docker ps:*)",
-#   "Bash(docker logs:*)",
-#   "Bash(docker inspect:*)"
-# ]
-```
-
-### Add using full format (advanced)
-
-```bash
-/quick-add-permission "Bash(kubectl get:*)" "WebFetch(domain:*.k8s.io)"
-# Uses as-is
-```
-
-### Add interactively (no arguments)
-
-```bash
-/quick-add-permission
-# Then answer prompts for permission(s) and list type
-```
+- Fresh worktree from latest main
+- Sync across all AI tools
+- Maintain alphabetical ordering
+- Skip duplicates, verify JSON
