@@ -38,7 +38,7 @@ Then follow the [Worktree Workflow](../agentsmd/rules/worktrees.md) guide.
 
 Planning documents for major initiatives:
 
-- [Multi-Model Orchestration](projects/multi-model-orchestration/) - Hybrid AI orchestration system design
+- [Multi-Model Orchestration](projects/multi-model-orchestration/PLAN.md) - Hybrid AI orchestration system design
 
 ## Optimization
 
