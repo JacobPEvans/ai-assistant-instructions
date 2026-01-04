@@ -9,201 +9,60 @@ think: false
 author: "JacobPEvans"
 ---
 
-## PR Management Conductor
-
-> **Purpose**: This command manages YOUR pull requests as the PR AUTHOR - creating, monitoring, fixing, and preparing them for merge.
-> For reviewing OTHER people's PRs, use `/review-pr`.
-
-Comprehensive workflow for managing a pull request from creation through to merge-ready state, including automated CI monitoring,
-review conversation resolution, and strict quality gates.
+Manages YOUR PRs as author - create, monitor, fix, prepare for merge. For reviewing others' PRs, use `/review-pr`.
 
 ## Scope
 
-**SINGLE PR** - This command manages one PR at a time, either specified by argument or determined from the current branch.
-
-<!-- markdownlint-disable-file MD013 -->
+**SINGLE PR** - One PR at a time, from argument or current branch.
 
 ## Critical Rules
 
-1. **NEVER use auto-merge.** Always wait for explicit user approval.
-2. **ALL checks must pass.** Never merge with failed checks, even if they appear to be infrastructure issues.
-3. **ALL review conversations must be PHYSICALLY RESOLVED.** Not just addressed - marked as resolved in GitHub.
-   Use [PR Thread Resolution Enforcement Skill](../skills/pr-thread-resolution-enforcement/SKILL.md) to verify.
-4. **Run all validation locally before pushing.** This includes linters, formatters, and pre-commit hooks.
-5. **User must approve the merge.** Only request user review AFTER all checks pass AND all conversations are resolved.
-6. **ALWAYS commit, push, and create PR when work is complete.** Do not ask the user if they want a PR - create it automatically.
-   This kicks off automated reviews and gives users a single place to view all changes.
-7. **ALWAYS watch CI checks after PR creation.** Run `gh pr checks <PR_URL> --watch` as a background task for the first 60 seconds
-   to catch quick failures. Fix any issues before returning to the user.
+1. **NEVER auto-merge** - Wait for explicit user approval
+2. **ALL checks must pass** - Never merge with failures
+3. **ALL conversations RESOLVED** - Use the pr-thread-resolution-enforcement skill to verify
+4. **Run validation locally** before pushing
+5. **User approves merge** - Only after checks pass AND conversations resolved
+6. **Create PR immediately** when work complete - kicks off reviews
+7. **Watch CI** - Run `gh pr checks <PR> --watch` after creation
 
-## Useful Watch Commands
+## Phase 1: Create PR
 
-These commands block and wait for completion - use them instead of polling:
+1. Run local validation (`markdownlint-cli2 .`, project linters)
+2. Verify clean: `git status`
+3. Push: `git push -u origin $(git branch --show-current)`
+4. Create PR with summary, testing instructions, changes list
+5. Wait: `gh pr checks <PR_NUMBER> --watch`
 
-```bash
-# Watch all PR checks until they complete (recommended)
-gh pr checks <PR_NUMBER> --watch
+## Phase 2: Resolution Loop
 
-# Watch a specific workflow run
-gh run watch <RUN_ID>
+### 2.1 Health Check
 
-# Watch with custom interval (seconds)
-gh pr checks <PR_NUMBER> --watch --interval 5
+Use the pr-health-check skill: `gh pr view <PR> --json state,mergeable,statusCheckRollup,reviews`
 
-# Exit immediately on first failure
-gh pr checks <PR_NUMBER> --watch --fail-fast
-```
+### 2.2 Fix Failed Checks
 
-## Phase 1: Create the Pull Request
+Identify → view logs → fix locally → validate → commit → push → wait → loop back to 2.1
 
-**Prerequisites**:
+### 2.3 Resolve Conversations
 
-1. **Run Local Validation First**: Before pushing, run all applicable checks locally:
-   - `markdownlint-cli2 .` for markdown files (REQUIRED)
-   - `terraform fmt -check` and `terraform validate` for Terraform
-   - Any project-specific linters or formatters
-2. **Verify Working Directory is Clean**: Run `git status` - output should show `working tree clean`.
-3. **Push Local Branch to Remote**: `git push -u origin $(git branch --show-current)`
-4. **Link to Related Issue**: If this PR implements a GitHub issue, follow the [Issue Linking Guidelines](../../docs/guidelines/issue-linking.md)
-   for branch naming, PR description keywords, and bidirectional linking.
+Use the pr-thread-resolution-enforcement skill. For batch: `/resolve-pr-review-thread`
 
-**PR Description Template:**
+## Phase 3: Pre-Handoff
 
-```markdown
-## Summary
-Brief overview of changes made.
+Verify ALL pass before requesting review:
 
-## Related PRD
-Link to the PRD file: `.tmp/prd-<task-name>.md`
+1. All checks pass: `gh pr checks <PR>`
+2. Mergeable: `gh pr view <PR> --json mergeable`
+3. Threads resolved (MUST return 0): Use the pr-thread-resolution-enforcement skill verification query
 
-## Testing Instructions
-- [ ] Steps to test the changes
-- [ ] Expected behavior
-
-## Changes Made
-- List of key changes
-
-## Additional Notes
-Any other relevant information for reviewers.
-```
-
-**Wait for CI**: `gh pr checks <PR_NUMBER> --watch`
-
-## Phase 2: PR Resolution Loop
-
-Repeatedly check and fix the PR until ALL requirements are met.
-
-### 2.1. PR Health Check
-
-Use [PR Health Check Skill](../skills/pr-health-check/SKILL.md) for merge-readiness criteria.
-
-**Quick check**: `gh pr view <PR_NUMBER> --json state,mergeable,statusCheckRollup,reviews`
-
-### 2.2. Fix Failed Checks
-
-**NEVER skip or ignore failed checks.** Even if a check appears to be an infrastructure issue, investigate and fix it.
-
-1. **Identify Failed Checks**: `gh pr checks <PR_NUMBER>`
-2. **View Logs**: `gh run view <RUN_ID> --log`
-3. **Fix Locally First**: Reproduce and fix the issue locally before pushing.
-4. **Run Local Validation**: Re-run all local checks to verify the fix.
-5. **Commit and Push**: Commit with a clear message describing the fix.
-6. **Wait for CI**: `gh pr checks <PR_NUMBER> --watch`
-7. **Restart Loop**: Return to 2.1.
-
-### 2.3. Read Line-Level Review Comments
-
-See [GitHub CLI Patterns](../skills/github-cli-patterns/SKILL.md) for line-level comment API patterns.
-
-### 2.4. Resolve PR Conversations
-
-> **STRICT BLOCKER**: ALL conversations must be PHYSICALLY MARKED AS RESOLVED before requesting user review.
-
-Use [PR Thread Resolution Enforcement Skill](../skills/pr-thread-resolution-enforcement/SKILL.md) for:
-
-- Verification query (must return 0 unresolved threads)
-- Resolution workflow (reply AND resolve atomically)
-- GraphQL operations via [GitHub GraphQL Skill](../skills/github-graphql/SKILL.md)
-
-**For batch resolution**: Use `/resolve-pr-review-thread` command
-
-### 2.5. Address All Feedback
-
-**List**: `gh pr view <PR_NUMBER> --json reviews,comments`
-
-**Address every piece of feedback**:
-
-- If correct: Fix, commit, push, and resolve the conversation.
-- If incorrect: Reply with explanation, then resolve the conversation.
-
-**Restart Loop**: Return to 2.1.
-
-## Phase 3: Pre-Handoff Verification
-
-**Before requesting user review, verify ALL of the following:**
-
-```bash
-# 1. All checks pass
-gh pr checks <PR_NUMBER>
-
-# 2. PR is mergeable
-gh pr view <PR_NUMBER> --json mergeable
-
-# 3. All conversations resolved (MANDATORY VERIFICATION)
-# Use PR Thread Resolution Enforcement Skill verification query
-# Must return 0 unresolved threads - commands abort if verification fails
-gh api graphql --raw-field 'query=query { repository(owner: "{OWNER}", name: "{REPO}") { pullRequest(number: {NUMBER}) \
-  { reviewThreads(last: 100) { nodes { isResolved } } } } }' | \
-  jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)] | length'
-```
-
-**CRITICAL**: The last command MUST return `0`. If it returns any number > 0, conversations are not fully resolved and you MUST:
-
-1. Return to Phase 2.4 (Resolve PR Conversations)
-2. Address remaining threads
-3. Re-run verification until it returns 0
-4. NEVER request user review if verification fails
-
-**Only if ALL three verifications pass** (especially verification returning 0), request user review:
-
-> "PR #XX is ready for your review. All checks pass, all conversations are resolved and verified, and the PR is mergeable. Please review and merge when ready."
+**Only if all three pass**: "PR #XX ready for review. All checks pass, conversations resolved."
 
 ## Phase 4: Merge (User Action)
 
-The user performs the merge:
+User merges: `--squash` for small changes, `--rebase` for larger/multiple commits.
 
-- **Squash merge**: For small, single-concept changes (`gh pr merge --squash`)
-- **Rebase merge**: For larger changes or multiple logical commits (`gh pr merge --rebase`)
+## Related
 
-## Common Commands
+Use the github-cli-patterns skill for all `gh` commands.
 
-See [GitHub CLI Patterns](../skills/github-cli-patterns/SKILL.md) for all `gh` commands.
-
-**Key operations**: PR creation, `gh pr checks --watch`, JSON queries, line comments
-
-**Local validation**: `markdownlint-cli2 .`, `terraform validate`, `npm audit`
-
-## Usage Instructions
-
-> **Usage:**
->
-> **Command Execution**: `/manage-pr`
->
-> **Example Prompts**:
->
-> - "Create a PR for my current branch and monitor until all checks pass"
-> - "Fix all failing checks on PR #42 and resolve review conversations"
-> - "Prepare PR #15 for merge by ensuring all checks pass and conversations are resolved"
-> - "Monitor and fix my PR until it's merge-ready"
-
-**Workflow Integration**:
-
-- **Pre-work context**: `/init-worktree` establishes clean branch for development
-- **Issue context**: `/shape-issues` and `/resolve-issues` provide background for PR creation
-- **Review phase**: Others use `/review-pr` to review your PR
-- **Feedback resolution**: Use `/resolve-pr-review-thread` for efficient review thread resolution
-
-**Complete Development Lifecycle**: `/init-worktree` -> `/resolve-issues` -> `/manage-pr` -> (reviewer uses `/review-pr`) ->
-`/resolve-pr-review-thread` -> merge
-
-This command ensures PRs are created properly, monitored continuously, and meet all quality gates before requesting human review.
+Workflow: `/init-worktree` → `/resolve-issues` → `/manage-pr` → `/review-pr` → `/resolve-pr-review-thread` → merge.
