@@ -45,7 +45,7 @@ gh pr list --author @me --state open --json number | jq length
 ## Sub-Agents
 
 | Task | Agent/Command | Skills |
-|------|--------------|--------|
+| ------ | ------------ | -------- |
 | Branch updates | worktree-manager agent | worktree-management, github-cli-patterns |
 | CI fixes | /fix-pr-ci | pr-health-check |
 | Review threads | /resolve-pr-review-thread | pr-thread-resolution-enforcement, github-graphql |
