@@ -1,6 +1,7 @@
 ---
 name: ci-fixer
-description: Specialized sub-agent for analyzing and fixing CI failures in pull requests
+description: Use PROACTIVELY when CI checks fail. Analyzes and fixes CI failures in pull requests.
+model: sonnet
 author: JacobPEvans
 allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), Read, Grep, Glob, TodoWrite, Edit
 ---

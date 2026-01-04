@@ -1,6 +1,7 @@
 ---
 name: permissions-analyzer
-description: Discover local permission settings, classify by safety, deduplicate against repo patterns
+description: Discovers local permission settings, classifies by safety, deduplicates against repo patterns.
+model: haiku
 author: JacobPEvans
 allowed-tools: Task, TaskOutput, Bash(find:*), Bash(cat:*), Glob(**), Grep(**), Read(**), TodoWrite
 ---

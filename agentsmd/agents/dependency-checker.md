@@ -1,6 +1,7 @@
 ---
 name: dependency-checker
-description: Specialized sub-agent for checking outdated dependencies and security vulnerabilities
+description: Use PROACTIVELY to check outdated dependencies and security vulnerabilities. Scans package files.
+model: haiku
 author: JacobPEvans
 allowed-tools: Task, TaskOutput, Bash(npm:*), Bash(yarn:*), Bash(pnpm:*), Bash(pip:*), Bash(cargo:*), Bash(go get:*), Bash(go mod:*), Bash(bundle:*), Bash(cd:*), Bash(pwd:*), Read, Grep, Glob, TodoWrite
 ---

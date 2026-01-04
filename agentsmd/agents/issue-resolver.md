@@ -1,6 +1,7 @@
 ---
 name: issue-resolver
-description: Specialized sub-agent for analyzing and implementing GitHub issue solutions
+description: Use PROACTIVELY when implementing GitHub issues. Analyzes requirements and implements solutions.
+model: sonnet
 author: JacobPEvans
 allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), Read, Write, Edit, Grep, Glob, TodoWrite
 ---

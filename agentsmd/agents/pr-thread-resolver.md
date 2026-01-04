@@ -1,6 +1,7 @@
 ---
 name: pr-thread-resolver
-description: Specialized sub-agent for resolving PR review threads through implementation or explanation
+description: Use PROACTIVELY when PR has unresolved review threads. Implements changes or explains, then resolves threads.
+model: sonnet
 author: JacobPEvans
 allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), WebFetch, Read, Edit, Grep, Glob, TodoWrite, Write, mcp__plugin_greptile_greptile__*
 ---

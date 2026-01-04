@@ -1,6 +1,7 @@
 ---
 name: code-reviewer
-description: Specialized code review sub-agent for security, quality, and maintainability analysis
+description: Use PROACTIVELY after code changes. Reviews security, quality, and maintainability.
+model: sonnet
 author: JacobPEvans
 allowed-tools: Task, TaskOutput, Read, Grep, Glob, TodoWrite
 ---

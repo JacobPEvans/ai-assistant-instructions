@@ -1,6 +1,7 @@
 ---
 name: linter-fixer
-description: Specialized sub-agent for running linters and automatically fixing code quality issues
+description: Use PROACTIVELY when linting fails. Runs linters and automatically fixes code quality issues.
+model: haiku
 author: JacobPEvans
 allowed-tools: Task, TaskOutput, Bash(npm:*), Bash(yarn:*), Bash(pnpm:*), Bash(eslint:*), Bash(markdownlint:*), Bash(ruff:*), Bash(black:*), Bash(flake8:*), Bash(clippy:*), Bash(cargo fmt:*), Bash(gofmt:*), Bash(golangci-lint:*), Bash(cd:*), Bash(pwd:*), Read, Edit, Grep, Glob, TodoWrite
 ---

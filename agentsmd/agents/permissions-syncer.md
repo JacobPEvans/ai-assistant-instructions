@@ -1,6 +1,7 @@
 ---
 name: permissions-syncer
-description: Apply approved permission changes, sync across tools, cleanup local settings
+description: Applies approved permission changes, syncs across tools, cleans local settings.
+model: haiku
 author: JacobPEvans
 allowed-tools: Task, TaskOutput, Bash(cat:*), Bash(rm:*), Bash(jq:*), Glob(**), Read(**), Write(**), Edit(**), TodoWrite
 ---
