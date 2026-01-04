@@ -74,7 +74,7 @@ can reduce token usage by an estimated **40-60%**.
 
 **Optimization:**
 
-- **Action:** Replace all workflow sections with: "See [PR Thread Resolution Enforcement Skill](../agentsmd/skills/pr-thread-resolution-enforcement/SKILL.md)"
+- **Action:** Replace all workflow sections with: "See [PR Thread Resolution Enforcement Skill](../../agentsmd/skills/pr-thread-resolution-enforcement/SKILL.md)"
 - **Replace with:** Task tool invocation pattern to skill
 - **Token Savings:** ~1,000 words (~25-30% in affected commands)
 
@@ -119,7 +119,7 @@ can reduce token usage by an estimated **40-60%**.
 **Optimization:**
 
 - **Action:** Remove all batching explanations
-- **Replace with:** "Use [Subagent Batching Skill](../agentsmd/skills/subagent-batching/SKILL.md) for parallel execution"
+- **Replace with:** "Use [Subagent Batching Skill](../../agentsmd/skills/subagent-batching/SKILL.md) for parallel execution"
 - **Token Savings:** ~500 words (~20% in affected commands)
 
 ### 5. PR Health Check Patterns (MEDIUM IMPACT)
@@ -492,13 +492,13 @@ Use Task tool with these agents:
 
 Quick reference for all available skills:
 
-- [GitHub GraphQL](../agentsmd/skills/github-graphql/SKILL.md) - GraphQL query patterns
-- [PR Thread Resolution](../agentsmd/skills/pr-thread-resolution-enforcement/SKILL.md) - Thread resolution workflow
-- [Subagent Batching](../agentsmd/skills/subagent-batching/SKILL.md) - Parallel execution patterns
-- [Worktree Management](../agentsmd/skills/worktree-management/SKILL.md) - Worktree lifecycle
-- [PR Health Check](../agentsmd/skills/pr-health-check/SKILL.md) - Merge-readiness criteria
-- [PR Comment Limits](../agentsmd/skills/pr-comment-limit-enforcement/SKILL.md) - 50-comment limit enforcement
-- [GitHub CLI Patterns](../agentsmd/skills/github-cli-patterns/SKILL.md) - Common gh commands
+- [GitHub GraphQL](../../agentsmd/skills/github-graphql/SKILL.md) - GraphQL query patterns
+- [PR Thread Resolution](../../agentsmd/skills/pr-thread-resolution-enforcement/SKILL.md) - Thread resolution workflow
+- [Subagent Batching](../../agentsmd/skills/subagent-batching/SKILL.md) - Parallel execution patterns
+- [Worktree Management](../../agentsmd/skills/worktree-management/SKILL.md) - Worktree lifecycle
+- [PR Health Check](../../agentsmd/skills/pr-health-check/SKILL.md) - Merge-readiness criteria
+- [PR Comment Limits](../../agentsmd/skills/pr-comment-limit-enforcement/SKILL.md) - 50-comment limit enforcement
+- [GitHub CLI Patterns](../../agentsmd/skills/github-cli-patterns/SKILL.md) - Common gh commands
 ```
 
 ### 3. Automated Token Measurement
