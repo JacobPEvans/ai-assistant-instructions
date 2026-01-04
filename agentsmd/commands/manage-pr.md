@@ -30,8 +30,32 @@ Manages YOUR PRs as author - create, monitor, fix, prepare for merge. For review
 1. Run local validation (`markdownlint-cli2 .`, project linters)
 2. Verify clean: `git status`
 3. Push: `git push -u origin $(git branch --show-current)`
-4. Create PR with summary, testing instructions, changes list
-5. Wait: `gh pr checks <PR_NUMBER> --watch`
+4. Create PR using template:
+
+```bash
+gh pr create --title "<type>: <description>" --body "$(cat <<'EOF'
+## Summary
+
+<1-3 bullet points describing what changed and why>
+
+## Changes
+
+- <specific file or component change>
+- <specific file or component change>
+
+## Test Plan
+
+- [ ] <verification step 1>
+- [ ] <verification step 2>
+
+## Related
+
+Closes #<issue-number> (if applicable)
+EOF
+)"
+```
+
+**Step 5:** Wait for CI: `gh pr checks <PR_NUMBER> --watch`
 
 ## Phase 2: Resolution Loop
 

@@ -3,7 +3,7 @@ name: linter-fixer
 description: Code quality specialist. Use PROACTIVELY when linting fails or code style issues found.
 model: haiku
 author: JacobPEvans
-tools: Bash(npm:*), Bash(eslint:*), Bash(markdownlint:*), Bash(ruff:*), Bash(black:*), Bash(cargo:*), Bash(go:*), Read, Edit, Grep, Glob
+allowed-tools: Task, TaskOutput, Bash(npm:*), Bash(eslint:*), Bash(markdownlint:*), Bash(ruff:*), Bash(black:*), Bash(cargo:*), Bash(go:*), Edit
 ---
 
 # Linter Fixer Sub-Agent

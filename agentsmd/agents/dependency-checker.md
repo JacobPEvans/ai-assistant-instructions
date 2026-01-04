@@ -3,7 +3,7 @@ name: dependency-checker
 description: Security scanner for outdated dependencies. Use PROACTIVELY to check vulnerabilities.
 model: haiku
 author: JacobPEvans
-tools: Bash(npm:*), Bash(yarn:*), Bash(pnpm:*), Bash(pip:*), Bash(cargo:*), Bash(go:*), Bash(bundle:*), Read, Grep, Glob
+allowed-tools: Task, TaskOutput, Bash(npm:*), Bash(yarn:*), Bash(pnpm:*), Bash(pip:*), Bash(cargo:*), Bash(go:*), Bash(bundle:*)
 ---
 
 # Dependency Checker Sub-Agent

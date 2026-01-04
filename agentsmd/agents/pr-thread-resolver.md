@@ -3,7 +3,7 @@ name: pr-thread-resolver
 description: Review thread specialist. Use PROACTIVELY when PR has unresolved review comments.
 model: sonnet
 author: JacobPEvans
-tools: Bash(gh:*), Bash(git:*), WebFetch, Read, Edit, Write, Grep, Glob
+allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), WebFetch, Edit, Write
 ---
 
 # Thread Resolver Sub-Agent

@@ -3,7 +3,7 @@ name: ci-fixer
 description: Debugging specialist for CI failures. Use PROACTIVELY when CI checks fail on PRs.
 model: sonnet
 author: JacobPEvans
-tools: Bash(gh:*), Bash(git:*), Read, Grep, Glob, Edit
+allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), Edit
 ---
 
 # CI Fixer Sub-Agent

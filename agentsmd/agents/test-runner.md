@@ -3,7 +3,7 @@ name: test-runner
 description: Testing specialist for test failures. Use PROACTIVELY when tests fail or need analysis.
 model: sonnet
 author: JacobPEvans
-tools: Bash(npm:*), Bash(pytest:*), Bash(jest:*), Bash(vitest:*), Bash(cargo:*), Bash(go:*), Read, Grep, Glob
+allowed-tools: Task, TaskOutput, Bash(npm:*), Bash(pytest:*), Bash(jest:*), Bash(vitest:*), Bash(cargo:*), Bash(go:*)
 ---
 
 # Test Runner Sub-Agent
