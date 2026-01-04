@@ -1,9 +1,9 @@
 ---
 name: test-runner
-description: Use PROACTIVELY when tests fail. Runs test suites, analyzes failures, and suggests fixes.
+description: Testing specialist for test failures. Use PROACTIVELY when tests fail or need analysis.
 model: sonnet
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Bash(npm:*), Bash(yarn:*), Bash(pnpm:*), Bash(pytest:*), Bash(jest:*), Bash(vitest:*), Bash(cargo test:*), Bash(go test:*), Bash(mvn test:*), Bash(gradle test:*), Bash(cd:*), Bash(pwd:*), Read, Grep, Glob, TodoWrite
+tools: Bash(npm:*), Bash(pytest:*), Bash(jest:*), Bash(vitest:*), Bash(cargo:*), Bash(go:*), Read, Grep, Glob
 ---
 
 # Test Runner Sub-Agent

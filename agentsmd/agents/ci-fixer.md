@@ -1,9 +1,9 @@
 ---
 name: ci-fixer
-description: Use PROACTIVELY when CI checks fail. Analyzes and fixes CI failures in pull requests.
+description: Debugging specialist for CI failures. Use PROACTIVELY when CI checks fail on PRs.
 model: sonnet
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), Read, Grep, Glob, TodoWrite, Edit
+tools: Bash(gh:*), Bash(git:*), Read, Grep, Glob, Edit
 ---
 
 # CI Fixer Sub-Agent

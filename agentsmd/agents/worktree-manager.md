@@ -1,9 +1,9 @@
 ---
 name: worktree-manager
-description: Use PROACTIVELY for worktree operations. Creates, cleans, and syncs git worktrees.
+description: Git worktree specialist. Use PROACTIVELY for worktree creation, cleanup, and sync.
 model: haiku
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Bash(git worktree:*), Bash(git branch:*), Bash(git checkout:*), Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*), Bash(git status:*), Bash(git rev-parse:*), Bash(basename:*), Bash(pwd:*), Bash(cd:*), Bash(ls:*), Bash(mkdir:*), Bash(awk:*), Bash(grep:*), Bash(tr:*), Bash(head:*)
+tools: Bash(git:*), Bash(ls:*), Bash(mkdir:*), Read, Grep, Glob
 ---
 
 # Worktree Manager Sub-Agent

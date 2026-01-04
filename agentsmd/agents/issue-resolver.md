@@ -1,9 +1,9 @@
 ---
 name: issue-resolver
-description: Use PROACTIVELY when implementing GitHub issues. Analyzes requirements and implements solutions.
+description: Implementation specialist for GitHub issues. Use PROACTIVELY when resolving issues.
 model: sonnet
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), Read, Write, Edit, Grep, Glob, TodoWrite
+tools: Bash(gh:*), Bash(git:*), Read, Write, Edit, Grep, Glob
 ---
 
 # Issue Resolver Sub-Agent

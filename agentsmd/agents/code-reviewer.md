@@ -1,9 +1,9 @@
 ---
 name: code-reviewer
-description: Use PROACTIVELY after code changes. Reviews security, quality, and maintainability.
+description: Code review specialist for security and quality. Use PROACTIVELY after code changes.
 model: sonnet
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Read, Grep, Glob, TodoWrite
+tools: Read, Grep, Glob
 ---
 
 # Code Reviewer Sub-Agent

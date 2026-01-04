@@ -1,9 +1,9 @@
 ---
 name: docs-reviewer
-description: Use PROACTIVELY for documentation review. Validates markdownlint compliance, consistency, and completeness.
+description: Documentation specialist for markdown review. Use PROACTIVELY for docs validation.
 model: haiku
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Bash(markdownlint-cli2:*), Read, Grep, Glob, TodoWrite
+tools: Bash(markdownlint:*), Read, Grep, Glob
 ---
 
 # Documentation Reviewer Sub-Agent
