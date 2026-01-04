@@ -37,7 +37,7 @@ or all open PR branches when using the `all` parameter.
 1. **Verify state**: `git branch --show-current`, `git status --porcelain`
    - STOP if on main or uncommitted changes
 2. **Find main worktree**: Use the worktree-management skill
-3. **Update main**: `cd "$MAIN_WORKTREE" && git fetch origin main && git pull origin main`
+3. **Update main**: See the worktree-management skill for main branch synchronization
 4. **Merge**: `git merge origin/main --no-edit`
 5. **Push**: `git push origin $(git branch --show-current)`
 6. **Report**: branch, main SHA, merge status
@@ -53,7 +53,12 @@ Process all open PR branches. Use the subagent-batching skill for parallel patte
 1. **Get repo**: `gh repo view --json nameWithOwner`
 2. **Update main**: CRITICAL - must happen first
 3. **List open PRs**: `gh pr list --state open --json number,headRefName,title`
-4. **Process PRs**: Max 5 subagents concurrent. Each: fetch, worktree, merge, push
+4. **Process PRs**: Max 5 subagents concurrent. Each subagent receives the branch name and must:
+   - Fetch latest: `git fetch origin <branch-name>`
+   - Create worktree: `git worktree add ~/git/<repo-name>/<branch-name> -b <branch-name> origin/<branch-name>`
+   - Merge main: `git merge origin/main --no-edit`
+   - Push: `git push origin <branch-name>`
+   - Report: branch, status (merged/conflict/failed)
 5. **Cleanup**: `git worktree remove` and `git worktree prune`
 6. **Report**: repo, main SHA, clean/conflicts/failed per PR
 

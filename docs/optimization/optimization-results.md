@@ -187,6 +187,10 @@ Total savings: **6,525 words** (42% average reduction).
 
 **Breakdown of 12 Optimizations**:
 
+> **Note**: The following table shows **word counts**, not token counts. Token counts may
+> vary based on the tokenization model used (Claude uses a different tokenizer than word
+> count). The word counts provide a consistent metric for comparing file size reduction.
+
 | Command | Before | After | Saved | Reduction |
 | ------- | ------ | ----- | ----- | --------- |
 | auto-claude.md | 3,323 | 1,933 | 1,390 | 41.8% |

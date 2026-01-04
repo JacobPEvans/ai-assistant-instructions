@@ -47,7 +47,7 @@ Comprehensive automation for resolving GitHub Issues through strategic analysis,
 
 **5.** **Branch & Implement**: `git checkout -b feature/issues-{issue-number}`, follow existing patterns.
 
-**6.** **Quality Assurance**: `npm run typecheck && npm run test:run && npm run build && npm run lint`
+**6.** **Quality Assurance**: `bun run typecheck && bun run test:run && bun run build && bun run lint`
 
 #### Phase 3: Professional PR Creation & Finalization
 

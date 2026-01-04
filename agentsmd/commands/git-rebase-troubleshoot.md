@@ -48,7 +48,7 @@ Check: `gh pr view <branch> --json checks,reviews,statusCheckRollup`
 
 ## Error: Embedded Git Repository
 
-Nested .git directory found. Fix: `git rm --cached folder` or add to `.gitignore`.
+Nested .git directory found. Fix: `git rm --cached <folder-name>` or add to `.gitignore`.
 
 ---
 

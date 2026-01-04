@@ -43,18 +43,17 @@ Use the worktree-management skill. Remove if merged/deleted/clean. Run `git work
 
 ### 4. Switch to Main and Sync
 
-1. Get main path: `MAIN_PATH=$(git worktree list | head -1 | awk '{print $1}')`
-2. Switch: `cd "$MAIN_PATH" && git switch main`
-3. Sync: `git fetch --all --prune && git pull`
-4. Clean merged branches: `git branch --merged main` (exclude main/master/develop), delete with `git branch -d`
+See the worktree-management skill for main branch synchronization and merging patterns.
 
 ### 5. Generate Branch and Worktree Names
 
-**Branch naming**: lowercase, spaces→hyphens, prefix `feat/` (default) or `fix/` (if contains "fix"/"bug").
+**Branch naming**: lowercase, spaces → hyphens, prefix `feat/` (default) or `fix/` (if contains "fix"/"bug").
 
 **Worktree path**: `~/git/<repo-name>/<branch-name>/`
 
 Examples: "add dark mode" → `feat/add-dark-mode`, "fix login bug" → `fix/login-bug`
+
+See the worktree-management skill for branch naming conventions and worktree path structure.
 
 ### 6. Create Worktree
 
