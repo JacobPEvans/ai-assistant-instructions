@@ -34,6 +34,19 @@ Then follow the [Worktree Workflow](../agentsmd/rules/worktrees.md) guide.
 - [Worktree Workflow](../agentsmd/rules/worktrees.md) - Development with git worktrees
 - [Permission System](../agentsmd/docs/permission-system.md) - AI tool permission management
 
+## Projects
+
+Planning documents for major initiatives:
+
+- [Multi-Model Orchestration](projects/multi-model-orchestration/PLAN.md) - Hybrid AI orchestration system design
+
+## Optimization
+
+Token and performance optimization analysis:
+
+- [Command Optimization Plan](optimization/command-optimization-plan.md) - DRY principles for commands
+- [Optimization Results](optimization/optimization-results.md) - Completed optimizations and savings
+
 ## Architecture
 
 - [System Overview](../agentsmd/docs/permission-system.md) - How permissions integrate
