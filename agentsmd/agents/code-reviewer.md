@@ -3,7 +3,7 @@ name: code-reviewer
 description: Code review specialist for security and quality. Use PROACTIVELY after code changes.
 model: sonnet
 author: JacobPEvans
-allowed-tools: Task, TaskOutput
+allowed-tools: Task, TaskOutput, Read, Grep, Glob, TodoWrite
 ---
 
 # Code Reviewer Sub-Agent

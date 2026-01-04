@@ -3,7 +3,7 @@ name: permissions-analyzer
 description: Permission scanner for AI tool settings. Classifies and deduplicates permission patterns.
 model: haiku
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Bash(find:*), Bash(cat:*)
+allowed-tools: Task, TaskOutput, Read, Grep, Glob, TodoWrite, Bash(find:*), Bash(cat:*)
 ---
 
 # Permissions Analyzer

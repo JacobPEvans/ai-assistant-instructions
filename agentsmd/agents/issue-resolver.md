@@ -3,7 +3,7 @@ name: issue-resolver
 description: Implementation specialist for GitHub issues. Use PROACTIVELY when resolving issues.
 model: sonnet
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), Write, Edit
+allowed-tools: Task, TaskOutput, Read, Grep, Glob, TodoWrite, Bash(gh:*), Bash(git:*), Write, Edit
 ---
 
 # Issue Resolver Sub-Agent
