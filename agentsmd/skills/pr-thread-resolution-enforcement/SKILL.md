@@ -1,9 +1,11 @@
 ---
-title: "PR Thread Resolution Enforcement"
-description: "Canonical patterns for verifying PR review threads are marked as resolved before work completion"
+name: pr-thread-resolution-enforcement
+description: Use when resolving PR review threads. Enforces that all threads are marked resolved before completion.
 version: "1.0.0"
 author: "JacobPEvans"
 ---
+
+# PR Thread Resolution Enforcement
 
 <!-- markdownlint-disable-file MD013 -->
 

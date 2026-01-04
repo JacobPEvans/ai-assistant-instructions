@@ -1,9 +1,11 @@
 ---
-title: "GitHub GraphQL API Patterns"
-description: "Standardized GraphQL query and mutation patterns for GitHub PR, review thread, and comment operations"
+name: github-graphql
+description: Use when querying GitHub via GraphQL. Provides patterns for PR threads, comments, and mutations.
 version: "1.0.0"
 author: "JacobPEvans"
 ---
+
+# GitHub GraphQL Patterns
 
 <!-- markdownlint-disable-file MD013 -->
 

@@ -1,9 +1,11 @@
 ---
-title: "Permission Safety Classification"
-description: "Rules for classifying permissions as allow/ask/deny based on operation type and risk"
+name: permission-safety-classification
+description: Use when classifying AI tool permissions. Rules for allow/ask/deny based on risk level.
 version: "1.0.0"
 author: "JacobPEvans"
 ---
+
+# Permission Safety Classification
 
 <!-- markdownlint-disable-file MD013 -->
 

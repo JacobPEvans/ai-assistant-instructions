@@ -1,9 +1,11 @@
 ---
-title: "Permission Deduplication"
-description: "Pattern matching rules to identify redundant permissions covered by broader patterns"
+name: permission-deduplication
+description: Use when deduplicating permissions. Identifies redundant patterns covered by broader rules.
 version: "1.0.0"
 author: "JacobPEvans"
 ---
+
+# Permission Deduplication
 
 <!-- markdownlint-disable-file MD013 -->
 

@@ -1,9 +1,11 @@
 ---
-title: "PR Health Check"
-description: "Canonical patterns for validating PR merge-readiness and checking PR status"
+name: pr-health-check
+description: Use when checking if PR is ready to merge. Validates merge-readiness and PR status patterns.
 version: "1.0.0"
 author: "JacobPEvans"
 ---
+
+# PR Health Check
 
 <!-- markdownlint-disable-file MD013 -->
 

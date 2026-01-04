@@ -1,9 +1,11 @@
 ---
-title: "GitHub CLI Patterns"
-description: "Common gh CLI command patterns for PR, issue, and repository operations"
+name: github-cli-patterns
+description: Use when working with gh CLI. Provides patterns for PRs, issues, reviews, and repository operations.
 version: "1.0.0"
 author: "JacobPEvans"
 ---
+
+# GitHub CLI Patterns
 
 Common GitHub CLI (gh) command patterns used across commands and agents. Single source of truth for gh CLI usage to reduce duplication.
 

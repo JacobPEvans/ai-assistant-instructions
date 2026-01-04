@@ -1,9 +1,11 @@
 ---
-title: "PR Comment Limit Enforcement"
-description: "Canonical patterns for enforcing 50-comment limit on pull requests to prevent infinite review cycles"
+name: pr-comment-limit-enforcement
+description: Use when posting PR comments. Enforces 50-comment limit to prevent infinite review cycles.
 version: "1.0.0"
 author: "JacobPEvans"
 ---
+
+# PR Comment Limit Enforcement
 
 <!-- markdownlint-disable-file MD013 -->
 

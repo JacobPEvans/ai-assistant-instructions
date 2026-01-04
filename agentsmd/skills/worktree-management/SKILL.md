@@ -1,9 +1,11 @@
 ---
-title: "Worktree Management"
-description: "Canonical patterns for git worktree creation, cleanup, branch naming, and synchronization"
+name: worktree-management
+description: Use when managing git worktrees. Provides patterns for creation, cleanup, and branch naming.
 version: "1.0.0"
 author: "JacobPEvans"
 ---
+
+# Worktree Management
 
 <!-- markdownlint-disable-file MD013 -->
 

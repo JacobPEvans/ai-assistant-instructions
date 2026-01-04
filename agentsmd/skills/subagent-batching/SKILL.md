@@ -1,9 +1,11 @@
 ---
-title: "Subagent Batching"
-description: "Canonical patterns for parallel subagent execution with 5-agent limit and batch validation"
+name: subagent-batching
+description: Use when running multiple subagents. Provides patterns for parallel execution with 5-agent limit.
 version: "1.0.0"
 author: "JacobPEvans"
 ---
+
+# Subagent Batching
 
 <!-- markdownlint-disable-file MD013 -->
 
