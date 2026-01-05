@@ -1,7 +1,7 @@
 ---
 description: Delegate tasks to external AI models via PAL MCP tools
 model: haiku
-type: "command"
+author: JacobPEvans
 allowed-tools: Task, TaskOutput
 ---
 

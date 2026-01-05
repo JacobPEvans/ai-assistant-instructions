@@ -1,16 +1,12 @@
 ---
-title: "Review PR"
-description: "Conduct comprehensive PR reviews with systematic analysis, quality checks, and constructive feedback"
+description: Conduct comprehensive PR reviews with systematic analysis, quality checks, and constructive feedback
 model: sonnet
-type: "command"
-version: "1.0.0"
+author: roksechs
+source: https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3
 allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), Bash(npm:*), Read, Grep, Glob, TodoWrite
-think: true
-author: "roksechs"
-source: "https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3"
 ---
 
-## PR Review Conductor
+# Review PR
 
 > **Attribution**: This command is from [roksechs](https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3)
 

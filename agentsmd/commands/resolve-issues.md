@@ -1,16 +1,12 @@
 ---
-title: "Resolve Issues"
-description: "Analyze and resolve GitHub Issues efficiently with intelligent prioritization and batch processing"
+description: Analyze and resolve GitHub Issues efficiently with intelligent prioritization and batch processing
 model: sonnet
-type: "command"
-version: "1.0.0"
+author: roksechs
+source: https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3
 allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), Bash(npm:*), Bash(bun:*), Read, Write, Edit, Grep, Glob, TodoWrite
-think: true
-author: "roksechs"
-source: "https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3"
 ---
 
-## GitHub Issue Resolver
+# Resolve Issues
 
 > **Attribution**: This command is from [roksechs](https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3)
 > Part of the development lifecycle: `/shape-issues` -> `/resolve-issues` -> `/review-pr` -> `/resolve-pr-review-thread`
@@ -19,7 +15,7 @@ source: "https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3"
 
 Comprehensive automation for resolving GitHub Issues through strategic analysis, prioritization, and efficient implementation.
 
-### Workflow Overview
+## Workflow Overview
 
 **Think step by step and use thinking mode to:**
 
@@ -28,7 +24,7 @@ Comprehensive automation for resolving GitHub Issues through strategic analysis,
 - Plan the most efficient implementation approach
 - Consider potential conflicts and dependencies
 
-#### Phase 1: Smart Issue Analysis & Prioritization
+### Phase 1: Smart Issue Analysis & Prioritization
 
 **With thinking mode, perform comprehensive analysis:**
 
@@ -41,7 +37,7 @@ Comprehensive automation for resolving GitHub Issues through strategic analysis,
 
 **3.** **Check Existing PRs**: `gh pr list` to avoid duplicating ongoing work.
 
-#### Phase 2: Strategic Planning & Implementation
+### Phase 2: Strategic Planning & Implementation
 
 **4.** **TodoWrite**: Break down issues into tasks, track progress, mark completions.
 
@@ -49,7 +45,7 @@ Comprehensive automation for resolving GitHub Issues through strategic analysis,
 
 **6.** **Quality Assurance**: `bun run typecheck && bun run test:run && bun run build && bun run lint`
 
-#### Phase 3: Professional PR Creation & Finalization
+### Phase 3: Professional PR Creation & Finalization
 
 **7.** **Commit & PR Creation**: Follow the issue-linking guidelines.
 Use `Closes #issue-number`. Include summary, issues addressed, testing results.

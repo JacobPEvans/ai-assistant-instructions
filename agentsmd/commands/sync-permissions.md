@@ -1,6 +1,7 @@
 ---
 description: Merge local AI permission settings into repository-wide permissions
 model: haiku
+author: JacobPEvans
 allowed-tools: Task, TaskOutput, TodoWrite, AskUserQuestion
 ---
 

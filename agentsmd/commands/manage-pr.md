@@ -1,13 +1,11 @@
 ---
-title: "Manage PR"
-description: "Complete workflow for creating, monitoring, and fixing pull requests until ready to merge"
+description: Complete workflow for creating, monitoring, and fixing pull requests until ready to merge
 model: sonnet
-type: "command"
-version: "1.0.0"
+author: JacobPEvans
 allowed-tools: Task, TaskOutput, Bash(gh:*), Bash(git:*), Bash(markdownlint-cli2:*), Read, TodoWrite
-think: false
-author: "JacobPEvans"
 ---
+
+# Manage PR
 
 Manages YOUR PRs as author - create, monitor, fix, prepare for merge. For reviewing others' PRs, use `/review-pr`.
 

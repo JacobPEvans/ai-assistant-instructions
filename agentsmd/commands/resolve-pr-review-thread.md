@@ -1,14 +1,11 @@
 ---
-title: "Resolve PR Review Thread"
-description: "Resolve PR review threads with systematic implementation or explanation, then mark as resolved"
+description: Resolve PR review threads with systematic implementation or explanation, then mark as resolved
 model: sonnet
-type: "command"
-version: "3.0.0"
+author: JacobPEvans
 allowed-tools: Task, TaskOutput, Bash(gh:*)
-think: true
 ---
 
-## Resolve PR Review Threads
+# Resolve PR Review Thread
 
 Orchestrates resolution of GitHub PR review comments by delegating to the specialized `thread-resolver` subagent.
 
