@@ -1,6 +1,7 @@
 ---
 description: Troubleshoot pre-commit hook failures and auto-fixes
 model: haiku
+author: JacobPEvans
 allowed-tools: Bash(git:*), Read, Grep, Glob
 ---
 

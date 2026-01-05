@@ -1,16 +1,12 @@
 ---
-title: "Shape Issues"
-description: "Shape raw ideas into actionable GitHub Issues using iterative exploration and timebox-based prioritization"
+description: Shape raw ideas into actionable GitHub Issues using iterative exploration and timebox-based prioritization
 model: opus
-type: "command"
-version: "1.0.0"
+author: roksechs
+source: https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3
 allowed-tools: Task, TaskOutput, AskUserQuestion, Bash(gh:*), WebFetch, Read, Grep, Glob, WebSearch, TodoWrite
-think: true
-author: "roksechs"
-source: "https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3"
 ---
 
-## Issue Shaping Workshop
+# Shape Issues
 
 > **Attribution**: This command is from [roksechs](https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3)
 > Part of the development lifecycle:
@@ -19,7 +15,7 @@ source: "https://gist.github.com/roksechs/3f24797d4b4e7519e18b7835c6d8a2d3"
 Iterative Issue exploration and shaping process that transforms rough ideas into well-defined,
 time-boxed GitHub Issues using Shape Up methodology and continuous discovery principles.
 
-### Phases
+## Phases
 
 1. **Problem Exploration**: Examine raw ideas, map pain points, assess timebox
 2. **Solution Sketching**: Brainstorm approaches, set scope boundaries, identify risks

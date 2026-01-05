@@ -1,6 +1,7 @@
 ---
 description: Quickly add always-allow permissions to all AI tools
 model: haiku
+author: JacobPEvans
 allowed-tools: Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*), Bash(git checkout:*), Bash(git status:*), Bash(git worktree add:*), Bash(git worktree list:*), Bash(git branch:*), AskUserQuestion, Read, Glob, Write
 ---
 

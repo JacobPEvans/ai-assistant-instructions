@@ -1,6 +1,7 @@
 ---
 description: Rebase feature branch onto main and push to origin
 model: haiku
+author: JacobPEvans
 allowed-tools: Bash(git:*), Bash(gh:*)
 ---
 

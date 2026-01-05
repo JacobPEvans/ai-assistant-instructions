@@ -1,6 +1,7 @@
 ---
 description: Troubleshoot git worktree, branch, and refname issues
 model: haiku
+author: JacobPEvans
 allowed-tools: Bash(git:*), Read
 ---
 
