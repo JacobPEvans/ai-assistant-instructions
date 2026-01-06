@@ -1,5 +1,7 @@
 {
   "commands": [
+    "awk",
+    "basename",
     "ls",
     "cat",
     "head",
@@ -15,6 +17,7 @@
     "diff",
     "cut",
     "sort",
+    "tr",
     "uniq",
     "jq",
     "yq",
