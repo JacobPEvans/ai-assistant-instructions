@@ -25,7 +25,7 @@ This is enforced automatically before each commit using `pre-commit`.
 ### Pre-commit Hook
 
 The project includes a `.pre-commit-config.yaml` file that configures `markdownlint-cli2` to run on all `.md` files.
-This ensures that any file that violates the rules defined in `.markdownlint.json` cannot be committed.
+This ensures that any file that violates the rules defined in `.markdownlint-cli2.jsonc` cannot be committed.
 
 ### Local Setup
 

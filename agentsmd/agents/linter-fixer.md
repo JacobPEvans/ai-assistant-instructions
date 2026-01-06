@@ -530,7 +530,7 @@ Or run: npx eslint --init
 - Excellent auto-fix support for formatting
 - Can fix heading styles, list indentation, trailing spaces
 - Cannot fix content issues (broken links, spelling)
-- Uses .markdownlint.json configuration
+- Uses .markdownlint-cli2.jsonc configuration
 
 ### Ruff (Python)
 
