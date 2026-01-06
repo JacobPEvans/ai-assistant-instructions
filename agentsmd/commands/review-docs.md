@@ -38,7 +38,7 @@ Review the project's documentation files (`.md`) for consistency, completeness, 
       * Never break words mid-character or split natural phrases
     * All other markdownlint rules must pass
     * Fix existing violations before creating pull requests
-    * Configuration in `.markdownlint.json` sets MD013 to 160 characters
+    * Configuration in `.markdownlint-cli2.jsonc` sets MD013 to 160 characters
 
 4. **Content Quality Verification**:
     * Is the documentation accurate and up-to-date with the current codebase?
