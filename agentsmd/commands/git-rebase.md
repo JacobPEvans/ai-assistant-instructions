@@ -21,6 +21,9 @@ feature-branch ──rebase──> main ──push──> origin/main → PR aut
 2. No ambiguous refs: `git show-ref origin/main` (1 line only)
 3. Discover paths via `git worktree list` (use the worktree-management skill)
 
+**Note**: This command works regardless of local folder naming. Paths are discovered via `git worktree list`,
+and remote operations use git metadata (origin URL), not directory names.
+
 ## Four Steps
 
 ```bash

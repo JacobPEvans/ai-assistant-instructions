@@ -54,6 +54,9 @@ See the worktree-management skill for main branch synchronization and merging pa
 
 Examples: "add dark mode" → `feat/add-dark-mode`, "fix login bug" → `fix/login-bug`
 
+**Note on folder naming**: The `<repo-name>` folder can be any name (e.g., `my-custom-folder`). Subsequent
+commands like `/git-rebase` use git metadata (remote URL) and `git worktree list`, not directory names.
+
 See the worktree-management skill for branch naming conventions and worktree path structure.
 
 ### 6. Create Worktree
