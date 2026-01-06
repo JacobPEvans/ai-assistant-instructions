@@ -67,3 +67,11 @@ repos:
         files: ^agentsmd/commands/.*\.md$
         pass_filenames: true
         stages: [pre-commit]
+      - id: validate-permissions
+        name: validate-permissions
+        description: "Validate permission files for cclint compatibility"
+        entry: bash scripts/validate-permissions.sh
+        language: system
+        files: ^agentsmd/permissions/.*\.json$
+        pass_filenames: false
+        stages: [pre-commit]

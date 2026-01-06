@@ -32,5 +32,9 @@ jobs:
         with:
           node-version: '24'
 
+      - name: Validate permissions first
+        run: |
+          bash scripts/validate-permissions.sh
+
       - name: Run cclint
         run: npx @carlrannaberg/cclint --verbose

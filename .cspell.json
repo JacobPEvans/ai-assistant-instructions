@@ -154,7 +154,10 @@
     "signingkey",
     "subnetting",
     "pkill",
-    "plutil"
+    "plutil",
+    "cclint",
+    "cclintrc",
+    "carlrannaberg"
   ],
   "files": [
     "**/*.md"
