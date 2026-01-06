@@ -12,6 +12,7 @@
     "tree",
     "pwd",
     "cd",
+    "rm",
     "diff",
     "cut",
     "sort",
