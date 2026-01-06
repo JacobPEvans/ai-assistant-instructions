@@ -262,6 +262,12 @@ Worktrees are stale when:
 - **Draft mode**: Use for WIP, convert to ready when tests pass
 - **Merge gates**: 50-comment limit enforced, all review threads must be resolved
 
+## Language Selection
+
+**Prefer Python/Go over shell scripts.** Shell only for simple wrappers (<5 lines).
+
+**Why**: Better error handling, testability, security (no injection/quoting issues), cross-platform portability.
+
 ## Architecture
 
 Commands, sub-agents, and skills follow a **three-tier architecture** for maintainability:
