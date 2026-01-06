@@ -61,6 +61,7 @@
     "ps",
     "top -l 1",
     "df",
+    "defaults read",
     "du",
     "free",
     "launchctl list",
