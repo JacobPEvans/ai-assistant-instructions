@@ -1,0 +1,7 @@
+{
+  "commands": [
+    "git rebase --abort",
+    "git rebase --continue",
+    "git rebase --skip"
+  ]
+}
