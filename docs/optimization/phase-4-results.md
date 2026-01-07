@@ -139,7 +139,7 @@ and compressing large skills. Additionally, critical token conservation guidelin
 ## Token Savings Summary
 
 | Optimization | Lines Changed | Estimated Tokens |
-|--------------|---------------|------------------|
+| ------------ | ------------- | ------------------ |
 | Permission consolidation | -30 overhead | +500-700 |
 | Git patterns to CLAUDE.md | +60 CLAUDE.md, -5 commands | +200-400 |
 | Token conservation guidelines | +65 CLAUDE.md | +900 (investment for future) |
@@ -161,7 +161,7 @@ now in one place instead of duplicated across files.
 ## Cumulative Impact
 
 | Phase | Token Savings | Status |
-|-------|---------------|--------|
+| ----- | ------------- | ------ |
 | Phase 1-2 | 9,800-11,700 | ✅ Completed (command refactoring) |
 | Phase 3 | 2,000-2,500 | 🚧 In Progress (two-skill architecture) |
 | **Phase 4** | **3,700-4,500** | **✅ Completed** |
