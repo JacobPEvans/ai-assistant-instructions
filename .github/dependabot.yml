@@ -1,11 +1,4 @@
 version: 2
-updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    commit-message:
-      prefix: "ci(deps)"
-    labels:
-      - "dependencies"
-    open-pull-requests-limit: 5
+updates: []
+# GitHub Actions updates now handled by Renovate with automerge enabled
+# See renovate.json for configuration
