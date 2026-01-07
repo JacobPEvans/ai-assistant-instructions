@@ -5,7 +5,7 @@ ERRORS=0
 
 # Find all command files and validate each
 # Using find + while read instead of for loop to comply with project rules
-while IFS= read -r f; do
+while IFS= read -r -d '' f; do
   # Skip symlinks
   [ -L "$f" ] && continue
 
@@ -13,23 +13,23 @@ while IFS= read -r f; do
   FM=$(sed -n '/^---$/,/^---$/p' "$f" 2>/dev/null)
 
   # Check for required 'description' field
-  if ! echo "$FM" | grep -q "^description:"; then
+  if ! grep -q "^description:" <<< "$FM"; then
     echo "ERROR: $f missing description"
     ((ERRORS++))
   fi
 
   # Check for required 'allowed-tools' field
-  if ! echo "$FM" | grep -q "^allowed-tools:"; then
+  if ! grep -q "^allowed-tools:" <<< "$FM"; then
     echo "ERROR: $f missing allowed-tools"
     ((ERRORS++))
   fi
 
   # Check for deprecated 'tools' field (should use 'allowed-tools')
-  if echo "$FM" | grep -q "^tools:"; then
+  if grep -q "^tools:" <<< "$FM"; then
     echo "ERROR: $f uses 'tools:' instead of 'allowed-tools:'"
     ((ERRORS++))
   fi
-done < <(find . -path "*commands/*.md" -not -path "*/node_modules/*" -print 2>/dev/null)
+done < <(find . -path "*commands/*.md" -not -path "*/node_modules/*" -print0 2>/dev/null)
 
 if [ "$ERRORS" -eq 0 ]; then
   echo "All command files valid"
