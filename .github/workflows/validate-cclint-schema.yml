@@ -56,6 +56,7 @@ jobs:
 
       - name: Validate cclintrc.jsonc syntax
         run: |
+          npm install jsonc-parser --no-save
           node -e "
           const fs = require('fs');
           const { parseTree } = require('jsonc-parser');
