@@ -113,6 +113,8 @@ See [Soul](./agentsmd/rules/soul.md) for personality and voice guidelines.
 
 Applies to: code, docs, todos, commands, agents, skills, rules.
 
+**Single-Purpose Design**: Each command, agent, skill, and rule must have one clearly defined purpose. This constraint keeps files focused and token counts minimal.
+
 ### Hierarchy and Usage
 
 **Preference order** (from least to most preferred):
@@ -140,16 +142,43 @@ Note: Claude Code loads skills when commands reference them, not at startup.
 
 ### Best Practices
 
-**Frontmatter** (required):
+**Frontmatter** (required, varies by type):
 
-```yaml
----
-name: skill-name
-description: Verb-noun or noun-verb pattern. Use common keywords for pattern matching.
-version: "1.0.0"
-author: "JacobPEvans"
----
-```
+- **Skills**:
+
+  ```yaml
+  ---
+  name: skill-name
+  description: Pattern description
+  version: "X.Y.Z"  # Increment patch for small fixes, minor for features, major for breaking changes (human-only)
+  author: "JacobPEvans"
+  ---
+  ```
+
+- **Agents**:
+
+  ```yaml
+  ---
+  name: agent-name
+  description: Action-focused description
+  model: haiku  # or sonnet/opus
+  author: JacobPEvans
+  allowed-tools: [list of tools]
+  ---
+  ```
+
+- **Commands**:
+
+  ```yaml
+  ---
+  description: Workflow summary
+  model: haiku  # or sonnet/opus
+  author: JacobPEvans
+  allowed-tools: [list of tools]
+  ---
+  ```
+
+- **Rules**: No frontmatter required
 
 **Naming conventions**:
 
@@ -162,9 +191,9 @@ does. For skills use noun phrases; for agents/commands use verb phrases.
 
 ### Cross-Referencing
 
-Within commands/agents/skills: Reference by name only (e.g., "the github-cli-patterns skill"). Claude has all names loaded - links waste tokens.
+Within commands/agents/skills/rules: Reference by name only (e.g., "the github-cli-patterns skill"). Claude has all names loaded - links waste tokens.
 
-In docs/workflows: Use normal markdown links.
+In `docs/` and all files outside `agentsmd/`: Use normal markdown links.
 
 ## Git Workflow Patterns
 
@@ -172,26 +201,33 @@ Universal patterns for git worktree and branch management. Commands reference th
 
 ### Worktree Structure
 
-- **Path format**: `~/git/<repo-name>/<branch-name>/`
-- **Example**: `~/git/ai-assistant-instructions/feat_add-dark-mode/`
-- **Note**: Folder names are arbitrary - commands use git metadata (remote URL, `git worktree list`), not directory names
+Repository structure follows this pattern:
+
+```text
+~/git/<repo-name>/
+├── .git/                    # Shared git directory (bare repo)
+├── main/                    # Main branch worktree
+├── feat/<branch-name>/      # Feature worktrees (e.g., feat/add-dark-mode/)
+└── fix/<branch-name>/       # Fix worktrees (e.g., fix/login-bug/)
+```
+
+**Key points**:
+
+- Main worktree is always at `~/git/<repo>/main/`
+- Branch names use conventional format with slashes (e.g., `feat/add-dark-mode`)
+- Worktree paths mirror branch names exactly (no sanitization)
 
 ### Branch Naming
 
+Follows [Conventional Branch](https://conventional-branch.github.io/) standard:
+
 - **Format**: `<type>/<description>`
-- **Types**: `feat/`, `fix/`, `docs/`, `refactor/`, `test/`
-- **Rules**: lowercase, spaces → hyphens, alphanumeric only
+- **Types**: `feat/`, `fix/`, `docs/`, `refactor/`, `test/`, `chore/`, `hotfix/`
+- **Rules**: lowercase, hyphens separate words, alphanumeric + hyphens only
 - **Examples**:
   - "add dark mode" → `feat/add-dark-mode`
   - "fix login bug" → `fix/login-bug`
-
-### Branch Sanitization for Paths
-
-Convert branch names to safe directory names:
-
-- **Pattern**: `tr -c 'A-Za-z0-9._-' '_'`
-- **Why**: Slashes create subdirectories; sanitization ensures single directory
-- **Example**: `feat/my-feature` → `feat_my-feature`
+  - "update readme" → `docs/update-readme`
 
 ### Worktree Lifecycle
 
@@ -204,11 +240,12 @@ Convert branch names to safe directory names:
 
 Always sync main before creating worktrees:
 
-1. Find main worktree: `git worktree list | grep '\[main\]' | awk '{print $1}'`
-2. Switch to main: `cd <main-path> && git switch main`
-3. Fetch: `git fetch --all --prune`
-4. Pull: `git pull`
-5. Return: `cd -`
+1. Switch to main: `cd ~/git/<repo>/main && git switch main`
+2. Fetch: `git fetch --all --prune`
+3. Pull: `git pull`
+4. Return: `cd -`
+
+Main worktree is always located at `~/git/<repo>/main/` - no search required.
 
 ### Stale Worktree Detection
 
