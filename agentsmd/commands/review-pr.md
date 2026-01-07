@@ -37,7 +37,8 @@ See the github-cli-patterns skill for:
 - **Review Submission**: `gh pr review --approve`, `--request-changes`
 - **Line Comments**: via gh API
 
-For local quality checks: `bun run typecheck && bun run test:run && bun run build && bun run lint`
+For local quality checks: `npm run typecheck && npm run test && npm run build && npm run lint`
+(Adjust to match your project's package manager scripts if using yarn, pnpm, or bun)
 
 ### Review Workflow
 
