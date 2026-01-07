@@ -126,7 +126,7 @@ Applies to: code, docs, todos, commands, agents, skills, rules.
 
 **Always loaded** (startup):
 
-- CLAUDE.md (this file) - minimal, links to everything
+- AGENTS.md (this file) - minimal, links to everything
 - Universal skills: worktree-management, github-cli-patterns, subagent-batching, permission-patterns
 - High-frequency patterns (used 50+ times)
 
@@ -157,7 +157,8 @@ author: "JacobPEvans"
 - Agents: `noun-doer` (e.g., `permissions-analyzer`, `code-reviewer`)
 - Commands: `verb-noun` (e.g., `init-worktree`, `sync-main`)
 
-**Descriptions**: Use most common keywords related to task. Maximizes pattern matching for discovery.
+**Descriptions**: Follow verb/noun patterns matching entity names - describe what the entity
+does. For skills use noun phrases; for agents/commands use verb phrases.
 
 ### Cross-Referencing
 
@@ -203,7 +204,7 @@ Convert branch names to safe directory names:
 
 Always sync main before creating worktrees:
 
-1. Find main worktree: `git worktree list | head -1 | awk '{print $1}'`
+1. Find main worktree: `git worktree list | grep '\[main\]' | awk '{print $1}'`
 2. Switch to main: `cd <main-path> && git switch main`
 3. Fetch: `git fetch --all --prune`
 4. Pull: `git pull`

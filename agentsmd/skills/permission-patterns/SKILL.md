@@ -81,20 +81,11 @@ Wildcards (`*`) match any value. More wildcards = broader coverage.
 
 #### WebFetch Domains
 
-Root domains cover their subdomains, but different root domains are separate.
+Domain coverage for WebFetch follows the same rules as the **Domain Coverage** section under **Safety Classification** (root domains cover their subdomains; different root domains are separate).
 
-**Coverage examples**:
+In addition, treat ports as distinct from subdomains:
 
-- `github.com` covers `api.github.com`, `docs.github.com`, `status.github.com`
-- `docker.com` covers `docs.docker.com`, `hub.docker.com`
-
-**No coverage**:
-
-- `github.com` does NOT cover `githubusercontent.com` (different root domain)
-- `github.com` does NOT cover `raw.githubusercontent.com` (separate root, not `raw.github.com`)
-- `github.com` does NOT cover `github.io` (different TLD)
-- `api.github.com` does NOT cover `docs.github.com` (different subdomains, no root coverage)
-- `localhost` does NOT cover `localhost:3000` (port is a distinct entity, not a subdomain)
+- `localhost` does NOT cover `localhost:3000` (a port is not a subdomain and must be specified explicitly)
 
 #### File Paths
 
@@ -189,5 +180,5 @@ The notation shows exact argument positions, not whether the command uses the `B
 
 ## Commands Using This Skill
 
-- `.claude/agents/permissions-analyzer.md` - Uses classification and deduplication to filter permissions during discovery
+- `agentsmd/agents/permissions-analyzer.md` - Uses classification and deduplication to filter permissions during discovery
 - `/sync-permissions` command - Indirectly uses this skill through the permissions-analyzer agent

@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-Phase 4 successfully optimized Claude Code's initial context loading through consolidation, inlining universal patterns to CLAUDE.md,
+Phase 4 successfully optimized Claude Code's initial context loading through consolidation, inlining universal patterns to AGENTS.md,
 and compressing large skills. Additionally, critical token conservation guidelines were added to ensure ongoing optimization.
 
 **Total Estimated Savings**: ~3,700-4,500 tokens at startup (14-18% reduction from Phase 4 baseline)
@@ -15,14 +15,14 @@ and compressing large skills. Additionally, critical token conservation guidelin
 
 **Actions**:
 
-- Created `/agentsmd/skills/permission-patterns/SKILL.md` (191 lines)
+- Created `/agentsmd/skills/permission-patterns/SKILL.md` (193 lines)
 - Consolidated `permission-safety-classification` (76 lines) + `permission-deduplication` (115 lines)
 - Updated `permissions-analyzer` agent to reference unified skill
 - Deleted 2 old skill directories
 
 **Results**:
 
-- **Lines reduced**: 191 (consolidated) vs 191 (76+115) = Eliminated duplicate headers (~30 lines overhead)
+- **Lines reduced**: 193 (consolidated) vs 191 (76+115) = Eliminated duplicate headers (~30 lines overhead)
 - **Files reduced**: 9 skills → 8 skills (11% reduction)
 - **Estimated token savings**: ~500-700 tokens (header overhead + reduced file loading)
 
@@ -83,7 +83,7 @@ and compressing large skills. Additionally, critical token conservation guidelin
 
 **Files Modified**:
 
-- `CLAUDE.md` (added Token Conservation section)
+- `AGENTS.md` (added Token Conservation section)
 
 ---
 
@@ -199,9 +199,9 @@ now in one place instead of duplicated across files.
 
 - `agentsmd/skills/permission-patterns/SKILL.md`
 
-### Updated (8)
+### Updated (9)
 
-- `CLAUDE.md`
+- `AGENTS.md`
 - `agentsmd/agents/permissions-analyzer.md`
 - `agentsmd/commands/init-worktree.md`
 - `agentsmd/commands/sync-main.md`
