@@ -1,11 +1,39 @@
 #!/bin/bash
 # Validate Claude Code commands have description and allowed-tools (correct field name, not "tools")
-set -e; ERRORS=0
-for f in $(find . -path "*commands/*.md" 2>/dev/null | grep -v node_modules); do
+
+ERRORS=0
+
+# Find all command files and validate each
+# Using find + while read instead of for loop to comply with project rules
+while IFS= read -r f; do
+  # Skip symlinks
   [ -L "$f" ] && continue
+
+  # Extract frontmatter (between --- markers)
   FM=$(sed -n '/^---$/,/^---$/p' "$f" 2>/dev/null)
-  echo "$FM" | grep -q "^description:" || { echo "ERROR: $f missing description"; ERRORS=$((ERRORS+1)); }
-  echo "$FM" | grep -q "^allowed-tools:" || { echo "ERROR: $f missing allowed-tools"; ERRORS=$((ERRORS+1)); }
-  echo "$FM" | grep -q "^tools:" && { echo "ERROR: $f uses 'tools:' instead of 'allowed-tools:'"; ERRORS=$((ERRORS+1)); }
-done
-[ $ERRORS -eq 0 ] && echo "All command files valid" || exit 1
+
+  # Check for required 'description' field
+  if ! echo "$FM" | grep -q "^description:"; then
+    echo "ERROR: $f missing description"
+    ((ERRORS++))
+  fi
+
+  # Check for required 'allowed-tools' field
+  if ! echo "$FM" | grep -q "^allowed-tools:"; then
+    echo "ERROR: $f missing allowed-tools"
+    ((ERRORS++))
+  fi
+
+  # Check for deprecated 'tools' field (should use 'allowed-tools')
+  if echo "$FM" | grep -q "^tools:"; then
+    echo "ERROR: $f uses 'tools:' instead of 'allowed-tools:'"
+    ((ERRORS++))
+  fi
+done < <(find . -path "*commands/*.md" -not -path "*/node_modules/*" -print 2>/dev/null)
+
+if [ "$ERRORS" -eq 0 ]; then
+  echo "All command files valid"
+  exit 0
+else
+  exit 1
+fi
