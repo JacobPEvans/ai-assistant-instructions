@@ -9,13 +9,11 @@
 # 1. All permission JSON files have valid syntax
 # 2. Permission files contain shell commands (git:*, npm:*, etc.)
 # 3. Permission files do NOT contain tool names (Edit, Bash, MultiEdit, etc.)
-# 4. The cclint schema is accessible and parseable
-# 5. valid-tools.json is generated and up-to-date
+# 4. valid-tools.json is generated and up-to-date
 #
 # Exit codes:
 #   0 - All validations passed
 #   1 - Validation errors found
-#   2 - Schema fetch or processing failed
 ################################################################################
 
 set -euo pipefail
@@ -31,11 +29,7 @@ NC='\033[0m' # No Color
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 PERMISSIONS_DIR="${REPO_ROOT}/agentsmd/permissions"
 VALID_TOOLS_FILE="${PERMISSIONS_DIR}/valid-tools.json"
-CACHE_DIR="${REPO_ROOT}/.cache"
-SCHEMA_CACHE="${CACHE_DIR}/cclint-schema.json"
 
-# Exit status
-EXIT_STATUS=0
 
 ################################################################################
 # Functions
@@ -92,31 +86,18 @@ generate_valid_tools_json() {
     cclint_version=$(npm view @carlrannaberg/cclint version 2>/dev/null || echo "0.2.10")
     timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 
-    # Generate valid-tools.json
-    {
-        echo "{"
-        echo "  \"timestamp\": \"$timestamp\","
-        echo "  \"cclint_version\": \"$cclint_version\","
-        echo "  \"schema_url\": \"https://raw.githubusercontent.com/carlrannaberg/cclint/main/schema.json\","
-        echo "  \"valid_tools\": ["
-
-        local first=true
-        while IFS= read -r tool; do
-            if [[ -n "$tool" ]]; then
-                if [[ "$first" == true ]]; then
-                    echo "    \"$tool\""
-                    first=false
-                else
-                    echo "    ,\"$tool\""
-                fi
-            fi
-        done <<< "$tools_list"
-
-        echo "  ],"
-        echo "  \"mcp_pattern\": \"mcp__.*\","
-        echo "  \"note\": \"Valid cclint tools as of version $cclint_version\""
-        echo "}"
-    }
+    # Use jq to safely generate the JSON output, which is more robust than echo statements
+    echo "$tools_list" | jq -R . | jq -s . | jq \
+      --arg ts "$timestamp" \
+      --arg ver "$cclint_version" \
+      '{
+        timestamp: $ts,
+        cclint_version: $ver,
+        schema_url: "https://raw.githubusercontent.com/carlrannaberg/cclint/main/schema.json",
+        valid_tools: .,
+        mcp_pattern: "mcp__.*",
+        note: "Valid cclint tools as of version \($ver)"
+      }'
 }
 
 # Load valid tools from valid-tools.json or schema
@@ -235,31 +216,6 @@ validate_all_permissions() {
     fi
 }
 
-# Check if schema has changed
-check_schema_changes() {
-    local new_schema_file="$1"
-    local valid_tools_file="$2"
-
-    if [[ ! -f "$valid_tools_file" ]]; then
-        log_info "First time generating valid-tools.json"
-        return 0
-    fi
-
-    # Compare timestamps and versions
-    local new_version
-    new_version=$(jq -r '.properties.version // "unknown"' "$new_schema_file")
-
-    local old_version
-    old_version=$(jq -r '.cclint_version // "unknown"' "$valid_tools_file")
-
-    if [[ "$new_version" != "$old_version" ]]; then
-        log_warning "cclint schema version changed: $old_version → $new_version"
-        return 1
-    fi
-
-    return 0
-}
-
 ################################################################################
 # Main
 ################################################################################
@@ -294,11 +250,7 @@ main() {
     # Update valid-tools.json
     log_info "Updating $VALID_TOOLS_FILE..."
     mkdir -p "$PERMISSIONS_DIR"
-    cp "$temp_valid_tools" "$VALID_TOOLS_FILE"
-
-    # Make it pretty JSON
-    jq '.' "$VALID_TOOLS_FILE" > "${VALID_TOOLS_FILE}.tmp"
-    mv "${VALID_TOOLS_FILE}.tmp" "$VALID_TOOLS_FILE"
+    jq '.' "$temp_valid_tools" > "$VALID_TOOLS_FILE"
 
     log_success "Validation complete - valid-tools.json updated"
     rm -f "$temp_valid_tools"

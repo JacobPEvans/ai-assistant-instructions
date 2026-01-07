@@ -75,7 +75,10 @@ bash scripts/validate-permissions.sh
 - A `commands` array (regular permission files)
 - A `domains` array (domain/webfetch files)
 - An `mcp` array (MCP-related files)
-- Shell command prefixes: `git:*`, `docker:*`, `npm:*`, `kubectl:*`, etc.
+- Shell command patterns:
+  - Command prefixes (e.g., `git:*`, `docker:*`, `npm:*`, `kubectl:*`)
+  - Simple command names without colons (e.g., `awk`, `basename`, `tr`)
+  - Must not be Claude Code tool names
 
 ❌ **FAIL** - Permission files should NOT contain:
 
