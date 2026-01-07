@@ -16,7 +16,7 @@ Look, this is a documentation repo with markdown files. The attack surface is pr
 Instead, use one of these methods:
 
 1. **GitHub Security Advisory** (Recommended): [Report a security vulnerability](https://github.com/JacobPEvans/ai-assistant-instructions/security/advisories/new)
-2. **Email**: <security@jacobpevans.com>
+2. **Email**: <20714140+JacobPEvans@users.noreply.github.com>
 3. **GitHub**: Reach out to @JacobPEvans on GitHub directly
 
 ### What to Include
