@@ -7,7 +7,7 @@
     {
       "description": "Auto-merge official GitHub Actions (including major versions)",
       "matchDatasources": ["github-actions"],
-      "matchPackagePatterns": ["^actions/.*"],
+      "matchPackagePrefixes": ["actions/"],
       "automerge": true,
       "automergeType": "squash",
       "minimumReleaseAge": null
