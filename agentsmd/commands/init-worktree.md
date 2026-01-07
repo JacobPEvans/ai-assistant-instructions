@@ -14,7 +14,7 @@ Initialize a clean worktree in `~/git/<repo-name>/<branch-name>/` for new develo
 
 ## Related
 
-Use the worktrees rule and branch-hygiene rule.
+See CLAUDE.md "Git Workflow Patterns" for branch naming, worktree structure, and lifecycle management.
 
 ## Usage
 
@@ -40,28 +40,23 @@ Note current branch and directory for reporting.
 
 ### 3. Clean Stale Worktrees
 
-Use the worktree-management skill. Remove if merged/deleted/clean. Run `git worktree prune`.
+Identify stale worktrees (merged/deleted/gone branches). Remove using `git worktree remove` + `git branch -d`. Run `git worktree prune`.
+
+See CLAUDE.md "Stale Worktree Detection" for detection criteria.
 
 ### 4. Switch to Main and Sync
 
-See the worktree-management skill for main branch synchronization and merging patterns.
+Sync main branch from remote. See CLAUDE.md "Main Branch Synchronization" for the pattern.
 
 ### 5. Generate Branch and Worktree Names
 
-**Branch naming**: lowercase, spaces → hyphens, prefix `feat/` (default) or `fix/` (if contains "fix"/"bug").
-
-**Worktree path**: `~/git/<repo-name>/<branch-name>/`
-
-Examples: "add dark mode" → `feat/add-dark-mode`, "fix login bug" → `fix/login-bug`
-
-**Note on folder naming**: The `<repo-name>` folder can be any name (e.g., `my-custom-folder`). Subsequent
-commands like `/git-rebase` use git metadata (remote URL) and `git worktree list`, not directory names.
-
-See the worktree-management skill for branch naming conventions and worktree path structure.
+Apply branch naming rules from CLAUDE.md "Branch Naming" section. Sanitize for path using CLAUDE.md "Branch Sanitization" pattern.
 
 ### 6. Create Worktree
 
 `git worktree add ~/git/<repo-name>/<branch-name> -b <branch-name> main`
+
+See CLAUDE.md "Worktree Structure" for path format.
 
 ### 7. Verify and Report
 

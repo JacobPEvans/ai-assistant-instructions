@@ -92,6 +92,138 @@ See [Worktrees](./agentsmd/rules/worktrees.md) for structure and usage details.
 
 See [Soul](./agentsmd/rules/soul.md) for personality and voice guidelines.
 
+## Token Conservation
+
+**Critical**: Context tokens are limited (200K window). Minimize token usage at startup while maximizing capability through lazy-loading.
+
+### File Size Limits
+
+- **Maximum**: 1,000 tokens per file (hard limit)
+- **Target**: 500 tokens per file (ideal)
+- **CLAUDE.md additions**: Absolute bare minimum tokens - link to rules/agents/skills for details
+
+### DRY Principle (Don't Repeat Yourself)
+
+**NEVER duplicate**. Define once, reference everywhere:
+
+- Numbers, thresholds, limits (e.g., 50-comment PR limit)
+- Patterns, workflows, algorithms
+- Documentation, descriptions, explanations
+- Configuration values
+
+Applies to: code, docs, todos, commands, agents, skills, rules.
+
+### Hierarchy and Usage
+
+**Preference order** (from least to most preferred):
+
+1. **Commands** - Thin wrappers only. Orchestrate agents/skills, never contain logic.
+2. **Rules** - For directory/file-specific patterns. Link from CLAUDE.md when universal.
+3. **Skills** - Reusable patterns. Keep <500 tokens. Reference freely across commands/agents.
+4. **Agents** - Execution workers. Can switch models for targeted tasks. Return only what orchestrator needs.
+
+### Loading Strategy
+
+**Always loaded** (startup):
+
+- CLAUDE.md (this file) - minimal, links to everything
+- Universal skills: worktree-management, github-cli-patterns, subagent-batching, permission-patterns
+- High-frequency patterns (used 50+ times)
+
+**Load on-demand** (when command invokes):
+
+- PR workflow skills: pr-comment-limit-enforcement, pr-health-check, pr-thread-resolution-enforcement, github-graphql
+- Specialized skills used <20% of sessions
+- Troubleshooting agents
+
+Note: Claude Code loads skills when commands reference them, not at startup.
+
+### Best Practices
+
+**Frontmatter** (required):
+
+```yaml
+---
+name: skill-name
+description: Verb-noun or noun-verb pattern. Use common keywords for pattern matching.
+version: "1.0.0"
+author: "JacobPEvans"
+---
+```
+
+**Naming conventions**:
+
+- Skills: `noun-verb` (e.g., `permission-patterns`, `worktree-management`)
+- Agents: `noun-doer` (e.g., `permissions-analyzer`, `code-reviewer`)
+- Commands: `verb-noun` (e.g., `init-worktree`, `sync-main`)
+
+**Descriptions**: Use most common keywords related to task. Maximizes pattern matching for discovery.
+
+### Cross-Referencing
+
+Within commands/agents/skills: Reference by name only (e.g., "the github-cli-patterns skill"). Claude has all names loaded - links waste tokens.
+
+In docs/workflows: Use normal markdown links.
+
+## Git Workflow Patterns
+
+Universal patterns for git worktree and branch management. Commands reference these patterns to avoid duplication.
+
+### Worktree Structure
+
+- **Path format**: `~/git/<repo-name>/<branch-name>/`
+- **Example**: `~/git/ai-assistant-instructions/feat_add-dark-mode/`
+- **Note**: Folder names are arbitrary - commands use git metadata (remote URL, `git worktree list`), not directory names
+
+### Branch Naming
+
+- **Format**: `<type>/<description>`
+- **Types**: `feat/`, `fix/`, `docs/`, `refactor/`, `test/`
+- **Rules**: lowercase, spaces → hyphens, alphanumeric only
+- **Examples**:
+  - "add dark mode" → `feat/add-dark-mode`
+  - "fix login bug" → `fix/login-bug`
+
+### Branch Sanitization for Paths
+
+Convert branch names to safe directory names:
+
+- **Pattern**: `tr -c 'A-Za-z0-9._-' '_'`
+- **Why**: Slashes create subdirectories; sanitization ensures single directory
+- **Example**: `feat/my-feature` → `feat_my-feature`
+
+### Worktree Lifecycle
+
+1. **Create**: `git worktree add ~/git/<repo>/<branch> -b <branch> main`
+2. **Switch**: `cd ~/git/<repo>/<branch>`
+3. **Work**: Make changes, commit
+4. **Cleanup**: Remove merged/deleted branches, run `git worktree prune`
+
+### Main Branch Synchronization
+
+Always sync main before creating worktrees:
+
+1. Find main worktree: `git worktree list | head -1 | awk '{print $1}'`
+2. Switch to main: `cd <main-path> && git switch main`
+3. Fetch: `git fetch --all --prune`
+4. Pull: `git pull`
+5. Return: `cd -`
+
+### Stale Worktree Detection
+
+Worktrees are stale when:
+
+- **Branch merged**: `git branch --merged main | grep "^  $BRANCH$"`
+- **Remote deleted**: `git branch -vv | grep "\[gone\]"`
+- **Cleanup**: `git worktree remove <path>` + `git branch -d <branch>` + `git worktree prune`
+
+### PR Creation Pattern
+
+- **Title format**: `<type>: <description>` (e.g., "feat: add dark mode")
+- **Body structure**: Summary bullets + test plan + related issues
+- **Draft mode**: Use for WIP, convert to ready when tests pass
+- **Merge gates**: 50-comment limit enforced, all review threads must be resolved
+
 ## Architecture
 
 Commands, sub-agents, and skills follow a **three-tier architecture** for maintainability:

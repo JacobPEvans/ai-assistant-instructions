@@ -29,11 +29,11 @@ For each discovered file, extract permissions and track source paths.
 
 ### 2. Classify Permissions
 
-Apply `permission-safety-classification` skill to categorize each permission as ALLOW/ASK/DENY.
+Apply the safety classification rules from the `permission-patterns` skill to categorize each permission as ALLOW/ASK/DENY.
 
 ### 3. Deduplicate
 
-Compare against existing repo permissions using `permission-deduplication` skill.
+Compare against existing repo permissions using the deduplication rules from the `permission-patterns` skill.
 
 Skip permissions already covered by broader patterns (e.g., skip `git status:*` if `git:*:*` exists).
 

@@ -21,6 +21,7 @@ or all open PR branches when using the `all` parameter.
 
 ## Related
 
+- CLAUDE.md "Git Workflow Patterns" - Main synchronization and merge patterns
 - merge-conflict-resolution rule - How to resolve conflicts
 - subagent-parallelization rule - Parallel execution patterns
 
@@ -37,11 +38,10 @@ or all open PR branches when using the `all` parameter.
 
 1. **Verify state**: `git branch --show-current`, `git status --porcelain`
    - STOP if on main or uncommitted changes
-2. **Find main worktree**: Use the worktree-management skill
-3. **Update main**: See the worktree-management skill for main branch synchronization
-4. **Merge**: `git merge origin/main --no-edit`
-5. **Push**: `git push origin $(git branch --show-current)`
-6. **Report**: branch, main SHA, merge status
+2. **Find and sync main**: Use CLAUDE.md "Main Branch Synchronization" pattern
+3. **Merge**: `git merge origin/main --no-edit`
+4. **Push**: `git push origin $(git branch --show-current)`
+5. **Report**: branch, main SHA, merge status
 
 ---
 
