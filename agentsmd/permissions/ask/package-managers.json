@@ -1,18 +1,14 @@
 {
   "commands": [
-    "npm:*",
+    "pipx run:*",
+    "pipx:*",
+    "uvx:*",
+    "uv run:*",
+    "bunx:*",
     "npx:*",
-    "yarn:*",
-    "pnpm:*",
-    "pip:*",
-    "pip3:*",
-    "poetry:*",
-    "cargo:*",
-    "gem:*",
-    "bundle:*",
-    "go install:*",
-    "go get:*",
-    "composer:*",
+    "pnpx:*",
+    "go run:*",
+    "cargo run:*",
     "pyenv install:*"
   ]
 }

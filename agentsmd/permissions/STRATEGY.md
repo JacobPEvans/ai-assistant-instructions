@@ -120,7 +120,7 @@ agentsmd/permissions/
 ├── ask/
 │   ├── git.json               # Git: merge, reset, rebase, cherry-pick, worktree remove
 │   ├── dangerous-operations.json  # rm, mv, cp, chmod, chown, sed, awk
-│   ├── package-managers.json  # npm:*, pip:*, cargo:* (blanket wildcards)
+│   ├── package-managers.json  # Package runners: pipx run, uvx, bunx, npx (ask before running)
 │   ├── containers.json        # docker exec, docker run, kubectl exec/apply/delete
 │   ├── cloud.json             # AWS: ec2 terminate, s3 rm, RDS delete, etc.
 │   ├── system.json            # osascript, defaults, launchctl, ssh-keygen
@@ -133,6 +133,7 @@ agentsmd/permissions/
 │   ├── dangerous.json         # rm -rf /, sudo rm, mkfs, fdisk, sensitive file reads
 │   ├── git.json               # git commit --no-verify, hook bypass
 │   ├── network.json           # curl POST/PUT/DELETE, nc -l, socat
+│   ├── package-install.json   # All non-Nix package install commands (pip, npm, yarn, etc.)
 │   └── shell.json             # xargs, for loops
 │
 └── domains/
@@ -145,32 +146,41 @@ commands NOT covered by core.json wildcards.
 
 ## Nix-First Philosophy
 
-**All package managers require confirmation (Ask) - NO exceptions.**
+**All package install commands are auto-DENIED. Package runners require confirmation (Ask).**
 
-This repository uses **Nix as the primary package manager**. Traditional package managers
-(npm, pip, cargo, etc.) should NEVER be auto-approved because:
+This repository uses **Nix as the primary package manager**. Traditional package manager
+install commands (npm install, pip install, cargo install, etc.) are blocked because:
 
 1. **Nix provides everything** - All tools should be installed via `nix-shell`, `nix develop`, or nixpkgs
 2. **Prevents system pollution** - No node_modules, site-packages, or ~/.cargo cluttering the system
 3. **Reproducibility** - Nix ensures consistent environments across machines
 4. **Declarative** - Dependencies are declared in flake.nix or shell.nix, not installed imperatively
 
-**Package managers in Ask list** (blanket wildcards - ALL commands require confirmation):
+**Package install commands in Deny list** (auto-blocked, no exceptions):
 
 ```text
-npm:*        # Never auto-approve npm commands
-npx:*        # Never auto-approve npx commands
-yarn:*       # Never auto-approve yarn commands
-pnpm:*       # Never auto-approve pnpm commands
-pip:*        # Never auto-approve pip commands
-pip3:*       # Never auto-approve pip3 commands
-poetry:*     # Never auto-approve poetry commands
-cargo:*      # Never auto-approve cargo commands
-gem:*        # Never auto-approve Ruby gem commands
-bundle:*     # Never auto-approve bundler commands
-go install:* # Never auto-approve go install
-go get:*     # Never auto-approve go get
-composer:*   # Never auto-approve PHP composer
+pip install:*           # Blocked - use nix-shell -p python3Packages.X
+pip3 install:*          # Blocked - use nix-shell -p python3Packages.X
+python -m pip install:* # Blocked - use nix-shell -p python3Packages.X
+npm install:*           # Blocked - use nix-shell -p nodePackages.X
+yarn add:*              # Blocked - use nix-shell -p nodePackages.X
+cargo install:*         # Blocked - use nix-shell -p X
+gem install:*           # Blocked - use nix-shell -p rubyPackages.X
+poetry add:*            # Blocked - use nix-shell -p python3Packages.X
+conda install:*         # Blocked - use nix-shell -p X
+```
+
+**Package runners in Ask list** (can run without installing - requires confirmation):
+
+```text
+pipx run:*    # Runs Python package without installing
+uvx:*         # UV package runner (runs without installing)
+uv run:*      # UV run command
+bunx:*        # Bun package runner
+npx:*         # Node package runner
+pnpx:*        # PNPM package runner
+go run:*      # Go run command (doesn't install)
+cargo run:*   # Cargo run command (doesn't install)
 ```
 
 **Preferred approach**: Use `nix-shell -p <package>` for temporary tools, or add to flake.nix/shell.nix

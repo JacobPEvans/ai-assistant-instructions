@@ -1,0 +1,25 @@
+{
+  "commands": [
+    "pip install:*",
+    "pip3 install:*",
+    "python -m pip install:*",
+    "python3 -m pip install:*",
+    "npm install:*",
+    "npm i:*",
+    "yarn add:*",
+    "yarn install:*",
+    "pnpm add:*",
+    "pnpm install:*",
+    "cargo install:*",
+    "gem install:*",
+    "bundle install:*",
+    "go install:*",
+    "composer require:*",
+    "composer install:*",
+    "conda install:*",
+    "mamba install:*",
+    "micromamba install:*",
+    "poetry add:*",
+    "poetry install:*"
+  ]
+}
