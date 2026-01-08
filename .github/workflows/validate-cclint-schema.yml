@@ -1,146 +1,18 @@
+# Validate cclint Schema and Permissions - Push to main wrapper
+# PRs are validated via ci-gate.yml
+
 name: Validate cclint Schema and Permissions
 
 on:
-  pull_request:
-    paths:
-      - 'agentsmd/permissions/**/*.json'
-      - 'scripts/validate-permissions.sh'
-      - '.cclintrc.jsonc'
   push:
-    branches:
-      - main
+    branches: [main]
     paths:
       - 'agentsmd/permissions/**/*.json'
-      - 'agentsmd/permissions/valid-tools.json'
       - 'scripts/validate-permissions.sh'
       - '.cclintrc.jsonc'
   workflow_dispatch:
     # Manual trigger for ad-hoc schema validation
 
 jobs:
-  validate-permissions:
-    name: "Validate Permission Files"
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      contents: read
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-
-      - name: Run permission validation
-        run: bash scripts/validate-permissions.sh
-
-      - name: Upload validation report
-        if: failure()
-        uses: actions/upload-artifact@v6
-        with:
-          name: validation-report
-          path: agentsmd/permissions/valid-tools.json
-          retention-days: 7
-
-  check-cclint-config:
-    name: "Verify cclint Configuration"
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      contents: read
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: '24'
-
-      - name: Validate cclintrc.jsonc syntax
-        run: |
-          npm install jsonc-parser --no-save
-          node -e "
-          const fs = require('fs');
-          const { parseTree } = require('jsonc-parser');
-          try {
-            const content = fs.readFileSync('.cclintrc.jsonc', 'utf8');
-            parseTree(content);
-            console.log('✅ .cclintrc.jsonc is valid');
-          } catch (e) {
-            console.error('❌ Invalid .cclintrc.jsonc syntax:', e.message);
-            process.exit(1);
-          }
-          "
-
-      - name: Verify schema URL is accessible
-        run: |
-          SCHEMA_URL=$(grep -o '"$schema": "[^"]*' .cclintrc.jsonc | cut -d'"' -f4)
-          echo "Schema URL: ${SCHEMA_URL}"
-          if curl -sf "${SCHEMA_URL}" > /dev/null 2>&1; then
-            echo "✅ Schema URL is accessible"
-          else
-            echo "⚠️  Schema URL might be inaccessible (could be network issue)"
-          fi
-
-  detect-schema-changes:
-    name: "Detect Schema Changes"
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      contents: read
-      pull-requests: write
-    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-
-      - name: Check for valid-tools.json changes
-        id: schema_check
-        run: |
-          CURRENT_VERSION=$(npm view @carlrannaberg/cclint version 2>/dev/null || echo "unknown")
-          echo "current_version=${CURRENT_VERSION}" >> "$GITHUB_OUTPUT"
-
-          if [[ -f "agentsmd/permissions/valid-tools.json" ]]; then
-            PREVIOUS_VERSION=$(jq -r '.cclint_version' agentsmd/permissions/valid-tools.json)
-            echo "previous_version=${PREVIOUS_VERSION}" >> "$GITHUB_OUTPUT"
-
-            if [[ "${CURRENT_VERSION}" != "${PREVIOUS_VERSION}" ]]; then
-              echo "SCHEMA_CHANGED=true" >> "$GITHUB_ENV"
-              echo "ℹ️  cclint version changed: ${PREVIOUS_VERSION} → ${CURRENT_VERSION}"
-            else
-              echo "✅ cclint version is unchanged: ${CURRENT_VERSION}"
-            fi
-          else
-            echo "⚠️  valid-tools.json not found"
-          fi
-
-      - name: Post comment on PR if schema changed
-        if: env.SCHEMA_CHANGED == 'true' && github.event_name == 'pull_request'
-        uses: actions/github-script@v8
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '⚠️  **Schema Version Change Detected**\n\nThe cclint schema version has changed. Please review `agentsmd/permissions/valid-tools.json` to ensure it\'s up-to-date.'
-            })
-
-  final-cclint-check:
-    name: "Run cclint on .claude Files"
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      contents: read
-    needs: validate-permissions
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: '24'
-
-      - name: Run cclint
-        run: npx @carlrannaberg/cclint --verbose
+  validate:
+    uses: ./.github/workflows/_validate-cclint.yml

@@ -1,0 +1,27 @@
+# Reusable workflow for markdown linting
+# Called by: ci-gate.yml (PRs), markdownlint.yml (push to main)
+
+name: Markdown Lint (Reusable)
+
+on:
+  workflow_call:
+
+jobs:
+  markdownlint:
+    name: "Lint Markdown Files"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Validate command frontmatter
+        run: ./scripts/validate-commands.sh
+
+      - name: Run markdownlint
+        uses: DavidAnson/markdownlint-cli2-action@v22
+        with:
+          globs: '**/*.md'
+          fix: true

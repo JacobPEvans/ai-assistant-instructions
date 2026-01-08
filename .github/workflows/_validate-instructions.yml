@@ -1,0 +1,24 @@
+# Reusable workflow for validating instruction files
+# Called by: ci-gate.yml (PRs), validate-instructions.yml (push to main)
+
+name: Validate Instruction Files (Reusable)
+
+on:
+  workflow_call:
+
+jobs:
+  validate-instructions:
+    name: "Validate Instruction Files"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Verify code_review_instructions.md exists
+        run: |
+          if [ ! -f "agentsmd/docs/code_review_instructions.md" ]; then
+            echo "ERROR: agentsmd/docs/code_review_instructions.md is missing"
+            exit 1
+          fi
+          echo "SUCCESS: code_review_instructions.md exists"

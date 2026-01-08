@@ -1,0 +1,183 @@
+# CI Gate - Conditional Required Checks
+#
+# FRAMEWORK: Merge Gatekeeper Pattern
+# ====================================
+# Solves: "Required checks that only run when relevant files change"
+#
+# Problem: GitHub branch protection only supports "always required" or "not required"
+#          Path-filtered workflows that don't run = pending forever = blocks merge
+#
+# Solution: Single workflow that:
+# 1. Always triggers on ALL PRs (no path filters at workflow level)
+# 2. Detects which file categories changed
+# 3. Calls reusable workflows conditionally (skipped = success)
+# 4. Final "Merge Gate" job aggregates all results
+#
+# Branch Protection: Set ONLY "Merge Gate" as required check
+#
+# Adding New Checks:
+# 1. Create reusable workflow: _your-check.yml with `on: workflow_call`
+# 2. Add filter pattern under `changes.steps.filter.with.filters`
+# 3. Add job that calls the reusable workflow with appropriate `if:` condition
+# 4. Add job name to `gate.needs` array and `allowed-skips`
+
+name: CI Gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ==========================================================================
+  # CHANGE DETECTION
+  # ==========================================================================
+  changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      claude-config: ${{ steps.filter.outputs.claude-config }}
+      agentsmd: ${{ steps.filter.outputs.agentsmd }}
+      permissions: ${{ steps.filter.outputs.permissions }}
+      markdown: ${{ steps.filter.outputs.markdown }}
+      yaml: ${{ steps.filter.outputs.yaml }}
+      scripts: ${{ steps.filter.outputs.scripts }}
+      workflows: ${{ steps.filter.outputs.workflows }}
+      is-deps-only: ${{ steps.detect-deps.outputs.is-deps-only }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Detect file changes
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            claude-config:
+              - '.claude/**'
+              - 'CLAUDE.md'
+              - '.cclintrc.jsonc'
+            agentsmd:
+              - 'agentsmd/**'
+            permissions:
+              - 'agentsmd/permissions/**'
+              - 'scripts/validate-permissions.sh'
+            markdown:
+              - '**/*.md'
+              - '.markdownlint-cli2.jsonc'
+              - '.cspell.json'
+            yaml:
+              - '**/*.yml'
+              - '**/*.yaml'
+              - '.yamllint.yml'
+            scripts:
+              - 'scripts/**'
+            workflows:
+              - '.github/workflows/**'
+
+      # SECURITY: Uses env vars to safely handle untrusted PR metadata
+      # See: https://github.blog/security/vulnerability-research/how-to-catch-github-actions-workflow-injections-before-attackers-do/
+      - name: Detect Dependency-Only Commits
+        id: detect-deps
+        env:
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          # Skip expensive checks for Renovate dependency-only PRs
+          # Author: app/renovate, Title starts with: chore(deps)
+          if [[ "$PR_AUTHOR" == "app/renovate" && "$PR_TITLE" == chore\(deps\)* ]]; then
+            echo "is-deps-only=true" >> "$GITHUB_OUTPUT"
+            echo "ℹ️  Detected Renovate dependency-only PR"
+          else
+            echo "is-deps-only=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  # ==========================================================================
+  # CONDITIONAL CHECKS (call reusable workflows)
+  # ==========================================================================
+
+  cclint:
+    name: Claude Code Lint
+    needs: changes
+    if: needs.changes.outputs.claude-config == 'true' || needs.changes.outputs.agentsmd == 'true'
+    uses: ./.github/workflows/_cclint.yml
+
+  validate-cclint:
+    name: Validate cclint Schema
+    needs: changes
+    if: needs.changes.outputs.permissions == 'true' || needs.changes.outputs.claude-config == 'true'
+    uses: ./.github/workflows/_validate-cclint.yml
+
+  markdownlint:
+    name: Markdown Lint
+    needs: changes
+    if: needs.changes.outputs.markdown == 'true'
+    uses: ./.github/workflows/_markdownlint.yml
+
+  spellcheck:
+    name: Spell Check
+    needs: changes
+    if: needs.changes.outputs.markdown == 'true'
+    uses: ./.github/workflows/_spellcheck.yml
+
+  token-limits:
+    name: Token Limits
+    needs: changes
+    # Skip for dependency-only PRs (expensive check)
+    if: |
+      needs.changes.outputs.is-deps-only == 'false' &&
+      (needs.changes.outputs.claude-config == 'true' ||
+       needs.changes.outputs.agentsmd == 'true' ||
+       needs.changes.outputs.markdown == 'true')
+    uses: ./.github/workflows/_token-limits.yml
+    secrets:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+  validate-instructions:
+    name: Validate Instructions
+    needs: changes
+    if: needs.changes.outputs.agentsmd == 'true'
+    uses: ./.github/workflows/_validate-instructions.yml
+
+  yaml-lint:
+    name: YAML Lint
+    needs: changes
+    if: needs.changes.outputs.yaml == 'true' || needs.changes.outputs.workflows == 'true'
+    uses: ./.github/workflows/_yaml-lint.yml
+
+  # ==========================================================================
+  # MERGE GATE - The ONLY required check in branch protection
+  # ==========================================================================
+  gate:
+    name: Merge Gate
+    needs:
+      - changes
+      - cclint
+      - validate-cclint
+      - markdownlint
+      - spellcheck
+      - token-limits
+      - validate-instructions
+      - yaml-lint
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check all results
+        uses: re-actors/alls-green@release/v1
+        with:
+          # Jobs that can be skipped based on file changes or deps-only
+          allowed-skips: >-
+            cclint,
+            validate-cclint,
+            markdownlint,
+            spellcheck,
+            token-limits,
+            validate-instructions,
+            yaml-lint
+          jobs: ${{ toJSON(needs) }}

@@ -1,21 +1,15 @@
+# Spell Check - Push to main wrapper
+# PRs are validated via ci-gate.yml
+
 name: Spell Check
 
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
+    paths:
+      - '**/*.md'
+      - '.cspell.json'
 
 jobs:
   spellcheck:
-    name: "Check Spelling"
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v6
-
-      - name: Check spelling
-        uses: streetsidesoftware/cspell-action@v8
-        with:
-          files: '**/*.md'
-          config: .cspell.json
+    uses: ./.github/workflows/_spellcheck.yml

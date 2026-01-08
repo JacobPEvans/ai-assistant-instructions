@@ -1,15 +1,11 @@
+# Claude Code Lint - Push to main wrapper
+# PRs are validated via ci-gate.yml
+
 name: Claude Code Lint
 
 on:
-  pull_request:
-    paths:
-      - '.claude/**'
-      - 'agentsmd/**'
-      - 'CLAUDE.md'
-      - '.cclintrc.jsonc'
   push:
-    branches:
-      - main
+    branches: [main]
     paths:
       - '.claude/**'
       - 'agentsmd/**'
@@ -18,23 +14,4 @@ on:
 
 jobs:
   cclint:
-    name: "Validate Claude Code Files"
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: '24'
-
-      - name: Validate permissions first
-        run: |
-          bash scripts/validate-permissions.sh
-
-      - name: Run cclint
-        run: npx @carlrannaberg/cclint --verbose
+    uses: ./.github/workflows/_cclint.yml

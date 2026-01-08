@@ -1,20 +1,14 @@
+# Validate Instruction Files - Push to main wrapper
+# PRs are validated via ci-gate.yml
+
 name: Validate Instruction Files
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'agentsmd/**'
 
 jobs:
   validate-instructions:
-    name: "Validate Instruction Files"
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-
-      - name: Verify code_review_instructions.md exists
-        run: |
-          if [ ! -f "agentsmd/docs/code_review_instructions.md" ]; then
-            echo "ERROR: agentsmd/docs/code_review_instructions.md is missing"
-            exit 1
-          fi
-          echo "SUCCESS: code_review_instructions.md exists"
+    uses: ./.github/workflows/_validate-instructions.yml

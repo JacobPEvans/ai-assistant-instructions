@@ -1,0 +1,22 @@
+# Reusable workflow for YAML linting
+# Called by: ci-gate.yml (PRs), yaml-lint.yml (push to main)
+
+name: YAML Lint (Reusable)
+
+on:
+  workflow_call:
+
+jobs:
+  yaml-lint:
+    name: "Lint YAML Files"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Lint YAML files
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: '.'
+          config_file: .yamllint.yml

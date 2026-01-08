@@ -1,0 +1,30 @@
+# Reusable workflow for Claude Code lint validation
+# Called by: ci-gate.yml (PRs), cclint.yml (push to main)
+
+name: Claude Code Lint (Reusable)
+
+on:
+  workflow_call:
+
+jobs:
+  cclint:
+    name: "Validate Claude Code Files"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Validate permissions first
+        run: |
+          bash scripts/validate-permissions.sh
+
+      - name: Run cclint
+        run: npx @carlrannaberg/cclint --verbose
