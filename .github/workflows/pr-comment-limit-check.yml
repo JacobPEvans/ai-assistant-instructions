@@ -154,11 +154,14 @@ jobs:
           fi
 
       - name: Log comment count
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          TOTAL_COMMENTS: ${{ steps.check-count.outputs.total_comments }}
         run: |
           echo "## PR Comment Check" >> $GITHUB_STEP_SUMMARY
-          echo "- **PR Number**: ${{ github.event.pull_request.number }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Total Comments**: ${{ steps.check-count.outputs.total_comments }}" >> $GITHUB_STEP_SUMMARY
-          if [ "${{ steps.check-count.outputs.total_comments }}" -ge 50 ]; then
+          echo "- **PR Number**: $PR_NUMBER" >> $GITHUB_STEP_SUMMARY
+          echo "- **Total Comments**: $TOTAL_COMMENTS" >> $GITHUB_STEP_SUMMARY
+          if [ "$TOTAL_COMMENTS" -ge 50 ]; then
             echo "- **Status**: ⚠️ Limit reached - auto-resolution triggered" >> $GITHUB_STEP_SUMMARY
           else
             echo "- **Status**: ✓ Under limit" >> $GITHUB_STEP_SUMMARY

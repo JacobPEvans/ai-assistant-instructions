@@ -16,15 +16,17 @@ jobs:
       pull-requests: write
       id-token: write
     steps:
+      # SECURITY: Use head.sha instead of head.ref to prevent ref injection
       - uses: actions/checkout@v6
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
+          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 1
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: anthropics/claude-code-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
 
@@ -34,7 +36,7 @@ jobs:
 
           prompt: |
             REPO: ${{ github.repository }}
-            PR NUMBER: ${{ github.event.pull_request.number }}
+            PR NUMBER: ${PR_NUMBER}
 
             Quick documentation check:
             1. Read PLANNING.md - note if PR title matches any planned tasks

@@ -22,6 +22,10 @@ jobs:
       - uses: anthropics/claude-code-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
 
@@ -31,10 +35,10 @@ jobs:
 
           prompt: |
             REPO: ${{ github.repository }}
-            ISSUE NUMBER: ${{ github.event.issue.number }}
-            TITLE: ${{ github.event.issue.title }}
-            BODY: ${{ github.event.issue.body }}
-            AUTHOR: ${{ github.event.issue.user.login }}
+            ISSUE NUMBER: ${ISSUE_NUMBER}
+            TITLE: ${ISSUE_TITLE}
+            BODY: ${ISSUE_BODY}
+            AUTHOR: ${ISSUE_AUTHOR}
 
             Analyze this new issue and:
             1. Determine type: bug, enhancement, question, or documentation
@@ -42,7 +46,7 @@ jobs:
             3. Check for duplicates using gh search issues
 
             Apply labels using separate flags for each label:
-            gh issue edit ${{ github.event.issue.number }} --add-label "label1" --add-label "label2"
+            gh issue edit ${ISSUE_NUMBER} --add-label "label1" --add-label "label2"
 
             Available type labels: type:bug, type:feature, type:docs, question
             Available priority labels: priority:critical, priority:high, priority:medium, priority:low
