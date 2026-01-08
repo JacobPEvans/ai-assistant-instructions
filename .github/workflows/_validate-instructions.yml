@@ -1,7 +1,7 @@
 # Reusable workflow for validating instruction files
 # Called by: ci-gate.yml (PRs), validate-instructions.yml (push to main)
 
-name: Validate Instruction Files (Reusable)
+name: Instruction Validation (Reusable)
 
 on:
   workflow_call:

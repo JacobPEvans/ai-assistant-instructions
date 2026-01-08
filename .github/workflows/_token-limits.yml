@@ -1,7 +1,7 @@
-# Reusable workflow for token limit enforcement
+# Reusable workflow for token limit checking
 # Called by: ci-gate.yml (PRs), token-limits.yml (push to main)
 
-name: Token Limit Enforcement (Reusable)
+name: Token Limit Check (Reusable)
 
 on:
   workflow_call:

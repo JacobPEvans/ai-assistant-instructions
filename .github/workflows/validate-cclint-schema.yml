@@ -1,7 +1,7 @@
-# Validate cclint Schema and Permissions - Push to main wrapper
+# Schema Validation - Push to main wrapper
 # PRs are validated via ci-gate.yml
 
-name: Validate cclint Schema and Permissions
+name: Schema Validation
 
 on:
   push:

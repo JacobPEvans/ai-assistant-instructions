@@ -28,16 +28,32 @@ Settings → Rules → Rulesets → main
   → Add: "Merge Gate"
 ```
 
+## PR Check Names
+
+These are the check names that appear in GitHub PR status:
+
+| Check Name | Description |
+|------------|-------------|
+| CI Gate / Detect Changes | Identifies which file categories changed |
+| CI Gate / Claude Code Lint | Validates Claude Code configuration |
+| CI Gate / Schema Validation | Validates cclint schema and permissions |
+| CI Gate / Markdown Lint | Checks markdown formatting |
+| CI Gate / Spell Check | Checks spelling in markdown files |
+| CI Gate / Token Limit Check | Enforces token usage limits |
+| CI Gate / Instruction Validation | Validates required instruction files |
+| CI Gate / YAML Lint | Validates YAML syntax |
+| CI Gate / Merge Gate | Aggregates all check results (REQUIRED) |
+
 ## Path Filter Categories
 
 | Category | Files | Triggers |
 |----------|-------|----------|
-| `claude-config` | `.claude/**`, `CLAUDE.md`, `.cclintrc.jsonc` | cclint, validate-cclint, token-limits |
-| `agentsmd` | `agentsmd/**` | cclint, validate-instructions, token-limits |
-| `permissions` | `agentsmd/permissions/**`, `scripts/validate-permissions.sh` | validate-cclint |
-| `markdown` | `**/*.md`, `.markdownlint-cli2.jsonc`, `.cspell.json` | markdownlint, spellcheck, token-limits |
-| `yaml` | `**/*.yml`, `**/*.yaml`, `.yamllint.yml` | yaml-lint |
-| `workflows` | `.github/workflows/**` | yaml-lint |
+| `claude-config` | `.claude/**`, `CLAUDE.md`, `.cclintrc.jsonc` | Claude Code Lint, Schema Validation, Token Limit Check |
+| `agentsmd` | `agentsmd/**` | Claude Code Lint, Instruction Validation, Token Limit Check |
+| `permissions` | `agentsmd/permissions/**`, `scripts/validate-permissions.sh` | Schema Validation |
+| `markdown` | `**/*.md`, `.markdownlint-cli2.jsonc`, `.cspell.json` | Markdown Lint, Spell Check, Token Limit Check |
+| `yaml` | `**/*.yml`, `**/*.yaml`, `.yamllint.yml` | YAML Lint |
+| `workflows` | `.github/workflows/**` | YAML Lint |
 
 ## Workflow Architecture
 
@@ -46,13 +62,13 @@ Settings → Rules → Rulesets → main
 │                    REUSABLE WORKFLOWS                       │
 │         (Implementation - triggered via workflow_call)       │
 ├─────────────────────────────────────────────────────────────┤
-│  _cclint.yml           │ Claude Code config validation      │
-│  _markdownlint.yml     │ Markdown formatting                │
-│  _spellcheck.yml       │ Spelling validation                │
-│  _token-limits.yml     │ Token usage enforcement            │
-│  _validate-cclint.yml  │ Schema & permissions validation    │
-│  _validate-instructions.yml │ Required files check          │
-│  _yaml-lint.yml        │ YAML syntax validation             │
+│  _cclint.yml              │ Claude Code Lint                │
+│  _markdownlint.yml        │ Markdown Lint                   │
+│  _spellcheck.yml          │ Spell Check                     │
+│  _token-limits.yml        │ Token Limit Check               │
+│  _validate-cclint.yml     │ Schema Validation               │
+│  _validate-instructions.yml │ Instruction Validation        │
+│  _yaml-lint.yml           │ YAML Lint                       │
 └─────────────────────────────────────────────────────────────┘
                               │
               ┌───────────────┴───────────────┐

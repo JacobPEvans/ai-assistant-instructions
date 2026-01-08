@@ -1,7 +1,7 @@
-# Validate Instruction Files - Push to main wrapper
+# Instruction Validation - Push to main wrapper
 # PRs are validated via ci-gate.yml
 
-name: Validate Instruction Files
+name: Instruction Validation
 
 on:
   push:

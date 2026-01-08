@@ -1,4 +1,4 @@
-# Reusable workflow for cclint schema and permissions validation
+# Reusable workflow for schema and permissions validation
 # Called by: ci-gate.yml (PRs), validate-cclint-schema.yml (push to main)
 #
 # Contains 4 jobs:
@@ -7,7 +7,7 @@
 # 3. detect-schema-changes - Detects schema version changes (PR only)
 # 4. final-cclint-check - Runs cclint validation
 
-name: Validate cclint Schema and Permissions (Reusable)
+name: Schema Validation (Reusable)
 
 on:
   workflow_call:

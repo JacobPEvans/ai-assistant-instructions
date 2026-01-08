@@ -1,7 +1,7 @@
-# Token Limit Enforcement - Push to main wrapper
+# Token Limit Check - Push to main wrapper
 # PRs are validated via ci-gate.yml
 
-name: Token Limit Enforcement
+name: Token Limit Check
 
 on:
   push:
