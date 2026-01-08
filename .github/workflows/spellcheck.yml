@@ -10,6 +10,9 @@ on:
       - '**/*.md'
       - '.cspell.json'
 
+permissions:
+  contents: read
+
 jobs:
   spellcheck:
     uses: ./.github/workflows/_spellcheck.yml

@@ -47,7 +47,6 @@ jobs:
       permissions: ${{ steps.filter.outputs.permissions }}
       markdown: ${{ steps.filter.outputs.markdown }}
       yaml: ${{ steps.filter.outputs.yaml }}
-      scripts: ${{ steps.filter.outputs.scripts }}
       workflows: ${{ steps.filter.outputs.workflows }}
       is-deps-only: ${{ steps.detect-deps.outputs.is-deps-only }}
     steps:
@@ -76,8 +75,6 @@ jobs:
               - '**/*.yml'
               - '**/*.yaml'
               - '.yamllint.yml'
-            scripts:
-              - 'scripts/**'
             workflows:
               - '.github/workflows/**'
 
@@ -113,6 +110,9 @@ jobs:
     needs: changes
     if: needs.changes.outputs.permissions == 'true' || needs.changes.outputs.claude-config == 'true'
     uses: ./.github/workflows/_validate-cclint.yml
+    with:
+      caller_event: pull_request
+      pr_number: ${{ github.event.pull_request.number }}
 
   markdownlint:
     name: Markdown Lint
@@ -136,6 +136,9 @@ jobs:
        needs.changes.outputs.agentsmd == 'true' ||
        needs.changes.outputs.markdown == 'true')
     uses: ./.github/workflows/_token-limits.yml
+    with:
+      caller_event: pull_request
+      base_ref: ${{ github.base_ref }}
     secrets:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 

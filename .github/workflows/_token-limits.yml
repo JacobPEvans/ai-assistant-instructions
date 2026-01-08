@@ -5,6 +5,19 @@ name: Token Limit Check (Reusable)
 
 on:
   workflow_call:
+    inputs:
+      # When called via workflow_call, github.event_name is "workflow_call"
+      # Caller must pass the original event context for the token limits script
+      caller_event:
+        description: "Original event type from calling workflow (pull_request, push, etc.)"
+        type: string
+        required: false
+        default: "push"
+      base_ref:
+        description: "Base ref for PR diffs (e.g., 'main')"
+        type: string
+        required: false
+        default: "main"
     secrets:
       ANTHROPIC_API_KEY:
         required: true
@@ -29,6 +42,7 @@ jobs:
       - name: Check token limits
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          EVENT_NAME: ${{ github.event_name }}
-          BASE_REF: ${{ github.base_ref }}
+          # Use inputs since github.event_name is 'workflow_call' when called via workflow_call
+          EVENT_NAME: ${{ inputs.caller_event }}
+          BASE_REF: ${{ inputs.base_ref }}
         run: scripts/enforce-token-limits.sh

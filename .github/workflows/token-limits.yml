@@ -11,6 +11,9 @@ on:
       - 'agentsmd/**'
       - '**/*.md'
 
+permissions:
+  contents: read
+
 jobs:
   token-limits:
     uses: ./.github/workflows/_token-limits.yml

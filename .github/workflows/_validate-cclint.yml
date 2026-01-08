@@ -11,6 +11,19 @@ name: Schema Validation (Reusable)
 
 on:
   workflow_call:
+    inputs:
+      # When called via workflow_call, github.event_name is "workflow_call"
+      # Caller must pass the original event context for PR-specific logic
+      caller_event:
+        description: "Original event type from calling workflow (pull_request, push, etc.)"
+        type: string
+        required: false
+        default: "push"
+      pr_number:
+        description: "PR number for posting comments (only needed for pull_request events)"
+        type: number
+        required: false
+        default: 0
 
 jobs:
   validate-permissions:
@@ -83,7 +96,8 @@ jobs:
       contents: read
       pull-requests: write
     # Only run on PRs (not push to main)
-    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
+    # Uses caller_event input since github.event_name is 'workflow_call' when called via workflow_call
+    if: inputs.caller_event == 'pull_request' || github.event_name == 'workflow_dispatch'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -109,12 +123,13 @@ jobs:
           fi
 
       - name: Post comment on PR if schema changed
-        if: env.SCHEMA_CHANGED == 'true' && github.event_name == 'pull_request'
+        # Use inputs.caller_event since github.event_name is 'workflow_call' when called via workflow_call
+        if: env.SCHEMA_CHANGED == 'true' && inputs.caller_event == 'pull_request' && inputs.pr_number > 0
         uses: actions/github-script@v8
         with:
           script: |
             github.rest.issues.createComment({
-              issue_number: context.issue.number,
+              issue_number: ${{ inputs.pr_number }},
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: '⚠️  **Schema Version Change Detected**\n\nThe cclint schema version has changed. Please review `agentsmd/permissions/valid-tools.json` to ensure it\'s up-to-date.'

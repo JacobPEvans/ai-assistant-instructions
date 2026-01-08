@@ -13,6 +13,9 @@ on:
   workflow_dispatch:
     # Manual trigger for ad-hoc schema validation
 
+permissions:
+  contents: read
+
 jobs:
   validate:
     uses: ./.github/workflows/_validate-cclint.yml

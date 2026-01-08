@@ -9,6 +9,9 @@ on:
     paths:
       - 'agentsmd/**'
 
+permissions:
+  contents: read
+
 jobs:
   validate-instructions:
     uses: ./.github/workflows/_validate-instructions.yml

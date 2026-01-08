@@ -12,6 +12,9 @@ on:
       - 'CLAUDE.md'
       - '.cclintrc.jsonc'
 
+permissions:
+  contents: read
+
 jobs:
   cclint:
     uses: ./.github/workflows/_cclint.yml

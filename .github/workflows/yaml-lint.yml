@@ -11,6 +11,9 @@ on:
       - '**/*.yaml'
       - '.yamllint.yml'
 
+permissions:
+  contents: read
+
 jobs:
   yaml-lint:
     uses: ./.github/workflows/_yaml-lint.yml
