@@ -84,7 +84,7 @@ jobs:
 
           prompt: |
             REPO: ${{ github.repository }}
-            PR NUMBER: ${PR_NUMBER}
+            PR NUMBER: ${{ github.event.pull_request.number }}
 
             Review this PR focusing on:
             - Security: Secrets management, input validation, access control
