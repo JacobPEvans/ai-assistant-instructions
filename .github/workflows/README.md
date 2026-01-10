@@ -33,7 +33,7 @@ Settings → Rules → Rulesets → main
 These are the check names that appear in GitHub PR status:
 
 | Check Name | Description |
-|------------|-------------|
+| ---------- | ----------- |
 | CI Gate / Detect Changes | Identifies which file categories changed |
 | CI Gate / Claude Code Lint | Validates Claude Code configuration |
 | CI Gate / Schema Validation | Validates cclint schema and permissions |
@@ -47,7 +47,7 @@ These are the check names that appear in GitHub PR status:
 ## Path Filter Categories
 
 | Category | Files | Triggers |
-|----------|-------|----------|
+| -------- | ----- | -------- |
 | `claude-config` | `.claude/**`, `CLAUDE.md`, `.cclintrc.jsonc` | Claude Code Lint, Schema Validation, Token Limit Check |
 | `agentsmd` | `agentsmd/**` | Claude Code Lint, Instruction Validation, Token Limit Check |
 | `permissions` | `agentsmd/permissions/**`, `scripts/validate-permissions.sh` | Schema Validation |
