@@ -140,9 +140,9 @@ For each comment, **use the Read tool** with offset/limit parameters:
 
 **Example**: Comment on line 45
 
-- Calculate offset: `max(0, 45 - 15)` = 30 (start 15 lines before)
-- Set limit: 30 (read 30 lines for context)
-- Call: `Read(file_path="/path/to/file", offset=30, limit=30)`
+1. Calculate offset: `max(0, 45 - 15 - 1)` = 29 (to start 15 lines before, 0-indexed)
+2. Set limit: 30 (to read 30 lines for context)
+3. Call: `Read(file_path="/path/to/file", offset=29, limit=30)`
 
 **CRITICAL**: NEVER use bash commands (`cat`, `head`, `tail`, `sed`) to read files. Always use the Read tool.
 
