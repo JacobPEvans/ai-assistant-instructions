@@ -30,7 +30,7 @@ gh pr list --author @me --state open --json number | jq length
 0. CHECK PR COUNT → set mode
 1. SCAN - Gather state (PR-focus: only PRs; Normal: all)
 2. PRIORITIZE:
-   1. PRs behind main (worktree-manager agent)
+   1. PRs behind main (/sync-main)
    2. Failing CI (/fix-pr-ci)
    3. Review comments (/resolve-pr-review-thread)
    4. PRs ready to merge (/git-refresh)
@@ -46,7 +46,7 @@ gh pr list --author @me --state open --json number | jq length
 
 | Task | Agent/Command | Skills |
 | ------ | ------------ | -------- |
-| Branch updates | worktree-manager agent | worktree-management, github-cli-patterns |
+| Branch updates | /sync-main | worktree-management, github-cli-patterns |
 | CI fixes | /fix-pr-ci | pr-health-check |
 | Review threads | /resolve-pr-review-thread | pr-thread-resolution-enforcement, github-graphql |
 | Merge PRs | /git-refresh | pr-health-check |

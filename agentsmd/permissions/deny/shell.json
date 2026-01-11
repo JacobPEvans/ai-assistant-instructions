@@ -1,6 +1,9 @@
 {
   "commands": [
-    "xargs",
-    "for "
+    "awk",
+    "cat",
+    "for ",
+    "grep",
+    "sed"
   ]
 }

@@ -63,7 +63,6 @@ The `ask/` directory contains specific command patterns that require confirmatio
     "cargo install:*",         // Requires confirmation: modifies system
     "rm:*",                    // Dangerous: deletes files
     "mv:*",                    // Dangerous: moves/renames files
-    "cp:*",                    // Dangerous: overwrites files
     "chmod:*",                 // Dangerous: changes permissions
     "chown:*"                  // Dangerous: changes ownership
   ]
@@ -92,16 +91,16 @@ Deny:
 
 When AI executes commands:
 
-| Command | Match | Result | Reason |
-| --- | --- | --- | --- |
-| `git status` | Allow `git:*` (only) | Allowed | Only Allow matches, most specific |
-| `git log` | Allow `git:*` (only) | Allowed | Only Allow matches |
-| `git merge main` | Allow `git:*` + Ask `git merge:*` | **Ask** | Ask is stricter, overrides Allow |
-| `git reset HEAD~1` | Allow `git:*` + Ask `git reset:*` | **Ask** | Ask is stricter |
-| `git commit --no-verify` | Deny `git commit --no-verify:*` | **Deny** | Deny overrides all |
-| `docker ps` | Allow `docker:*` (only) | Allowed | Only Allow matches |
-| `docker exec <container>` | Allow `docker:*` + Ask `docker exec:*` | **Ask** | Ask is stricter |
-| `docker run -v /root:/root` | Deny `docker run -v /root:*` | **Deny** | Deny overrides all |
+| Command                     | Match                                  | Result   | Reason                            |
+| --------------------------- | -------------------------------------- | -------- | --------------------------------- |
+| `git status`                | Allow `git:*` (only)                   | Allowed  | Only Allow matches, most specific |
+| `git log`                   | Allow `git:*` (only)                   | Allowed  | Only Allow matches                |
+| `git merge main`            | Allow `git:*` + Ask `git merge:*`      | **Ask**  | Ask is stricter, overrides Allow  |
+| `git reset HEAD~1`          | Allow `git:*` + Ask `git reset:*`      | **Ask**  | Ask is stricter                   |
+| `git commit --no-verify`    | Deny `git commit --no-verify:*`        | **Deny** | Deny overrides all                |
+| `docker ps`                 | Allow `docker:*` (only)                | Allowed  | Only Allow matches                |
+| `docker exec <container>`   | Allow `docker:*` + Ask `docker exec:*` | **Ask**  | Ask is stricter                   |
+| `docker run -v /root:/root` | Deny `docker run -v /root:*`           | **Deny** | Deny overrides all                |
 
 ## File Organization
 

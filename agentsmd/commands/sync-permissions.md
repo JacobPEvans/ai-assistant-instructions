@@ -23,7 +23,7 @@ Currently, only Claude and Gemini permissions are discovered and synced. Copilot
 
 ### Phase 1: Discovery & Analysis
 
-Invoke `permissions-analyzer` agent (`.claude/agents/permissions-analyzer.md`) to scan home directory, classify permissions, and deduplicate against existing patterns.
+Invoke `permissions-analyzer` agent to scan home directory, classify permissions, and deduplicate against existing patterns.
 
 **Currently scans:**
 
@@ -50,6 +50,6 @@ Review analysis report. Ask user to approve, modify, or cancel.
 Command → Agent → Skill pattern:
 
 - Agents: `permissions-analyzer`, `permissions-syncer`
-- Skills: `permission-safety-classification`, `permission-deduplication`
+- Skill: `permission-patterns` (safety classification, deduplication, token-efficient extraction)
 
 See the command-agent-skill-architecture rule.

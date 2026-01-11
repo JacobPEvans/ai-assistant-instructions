@@ -50,18 +50,17 @@ BRANCH_NAME=$(echo "$DESCRIPTION" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | tr
 BRANCH_NAME="${PREFIX}/${BRANCH_NAME}"
 ```
 
-## Branch Sanitization for Worktree Paths
+## Worktree Path Structure
 
-When creating worktree directories from branch names, sanitize the branch name:
+Branch names with slashes create nested directories, which is the intended behavior:
 
 ```bash
-# Sanitize branch name for directory path
+# Branch with slash creates nested structure
 BRANCH="feat/my-feature"
-SANITIZED_BRANCH=$(printf '%s' "$BRANCH" | tr -c 'A-Za-z0-9._-' '_')
-# Result: feat_my-feature
+# Creates: ~/git/repo-name/feat/my-feature/
 ```
 
-**Why**: Slashes in branch names create subdirectories. Sanitizing ensures worktree path is a single directory.
+**Note**: Slashes in branch names are preserved to maintain 1:1 mapping between branch names and directory structure.
 
 ## Worktree Creation Pattern
 
@@ -70,14 +69,14 @@ SANITIZED_BRANCH=$(printf '%s' "$BRANCH" | tr -c 'A-Za-z0-9._-' '_')
 All worktrees follow this structure:
 
 ```text
-~/git/{REPO_NAME}/{SANITIZED_BRANCH}/
+~/git/{REPO_NAME}/{BRANCH_NAME}/
 ```
 
 **Example**:
 
 - Repo: `ai-assistant-instructions`
 - Branch: `feat/add-dark-mode`
-- Path: `~/git/ai-assistant-instructions/feat_add-dark-mode/`
+- Path: `~/git/ai-assistant-instructions/feat/add-dark-mode/`
 
 ### Creation Steps
 
@@ -102,21 +101,15 @@ All worktrees follow this structure:
    git pull
    ```
 
-4. **Sanitize branch name**:
+4. **Create worktree**:
 
    ```bash
-   SANITIZED_BRANCH=$(printf '%s' "$BRANCH_NAME" | tr -c 'A-Za-z0-9._-' '_')
-   ```
-
-5. **Create worktree**:
-
-   ```bash
-   WORKTREE_PATH=~/git/${REPO_NAME}/${SANITIZED_BRANCH}
-   mkdir -p ~/git/${REPO_NAME}
+   WORKTREE_PATH=~/git/${REPO_NAME}/${BRANCH_NAME}
+   mkdir -p "$(dirname "$WORKTREE_PATH")"
    git worktree add "$WORKTREE_PATH" -b "$BRANCH_NAME" main
    ```
 
-6. **Verify**:
+5. **Verify**:
 
    ```bash
    cd "$WORKTREE_PATH"
@@ -242,15 +235,31 @@ git rev-parse --is-inside-work-tree
 ## Commands Using This Skill
 
 - `/init-worktree` - Primary worktree creation command
+- `/create-worktrees:create-worktrees` - Create worktrees for all open PRs (plugin)
 - `/fix-pr-ci` - Creates worktrees for PR branches
 - `/sync-main` - Syncs main across worktrees
 - `/git-refresh` - Cleanup and sync workflow
 
+## Plugin Integration
+
+For creating worktrees for all open PRs, use the **create-worktrees plugin** instead of manual creation:
+
+```bash
+/create-worktrees:create-worktrees
+```
+
+This plugin automatically:
+
+- Fetches all open PRs via GitHub CLI
+- Creates worktrees for each PR branch
+- Handles branch names with slashes correctly
+- Cleans up stale worktrees
+
 ## Related Resources
 
-- worktree-manager agent - Full automation for worktree operations
 - worktrees rule - Policy and structure documentation
 - branch-hygiene rule - Branch management best practices
+- create-worktrees plugin - Create worktrees for all open PRs
 
 ## Troubleshooting
 
@@ -300,7 +309,7 @@ git worktree remove "$WORKTREE_PATH"
 ## Best Practices
 
 1. **Always sync main** before creating new worktrees
-2. **Use sanitization** for worktree directory names (slashes → underscores)
+2. **Preserve slashes in branch names** - Directory nesting follows branch structure (e.g., `feat/my-feature` creates `~/git/repo/feat/my-feature/`)
 3. **Clean regularly** - Remove merged/gone worktrees to save disk space
 4. **Never work on main** - Always create a feature branch worktree
 5. **One worktree per feature** - Isolation prevents conflicts

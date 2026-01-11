@@ -61,65 +61,20 @@ Local/private addresses always DENY:
 
 Rules for detecting when a specific permission is already covered by a broader existing pattern.
 
-### Pattern Coverage Rules
-
-#### Bash Permissions
-
-Wildcards (`*`) match any value. More wildcards = broader coverage.
-
-**Coverage examples**:
-
-- `git:*:*` covers `git status:*`, `git log:*`, `git diff:*`
-- `npm:*:*` covers `npm list:*`, `npm install:*`
-- `docker:*:*` covers `docker ps:*`, `docker volume ls:*`
-- `*--version:*` covers `npm --version:*`, `docker --version:*`
-
-**No coverage**:
-
-- `git status:*` does NOT cover `git log:*` (different commands)
-- `npm:*` does NOT cover `npm:*:*` (different arg counts)
+### Coverage Rules
 
 #### WebFetch Domains
 
-Domain coverage for WebFetch follows the same rules as the **Domain Coverage** section under **Safety Classification** (root domains cover their subdomains; different root domains are separate).
+Domain coverage follows the same rules as the **Domain Coverage** section above. Ports are distinct:
 
-In addition, treat ports as distinct from subdomains:
-
-- `localhost` does NOT cover `localhost:3000` (a port is not a subdomain and must be specified explicitly)
+- `localhost` does NOT cover `localhost:3000`
 
 #### File Paths
 
-Broader wildcards cover more specific patterns.
-
-**Coverage examples**:
+Broader wildcards cover more specific patterns:
 
 - `Read(**)` covers any Read permission
 - `Glob(**/*)` covers `Glob(**/*.js)`, `Glob(**/package.json)`
-
-### Deduplication Algorithm Example
-
-When checking if a new permission is already covered by an existing one, validate argument counts match:
-
-```python
-def is_covered(existing_pattern, new_pattern):
-    # Extract components
-    existing_cmd, *existing_args = existing_pattern.split(':')
-    new_cmd, *new_args = new_pattern.split(':')
-
-    # Commands must match
-    if existing_cmd != new_cmd:
-        return False
-
-    # Argument counts must be identical (otherwise patterns aren't comparable)
-    if len(existing_args) != len(new_args):
-        return False
-
-    # Each position: existing must be "*" or match exactly
-    return all(
-        existing_arg == "*" or existing_arg == new_arg
-        for existing_arg, new_arg in zip(existing_args, new_args)
-    )
-```
 
 ### Root Domain Recommendations
 
@@ -137,48 +92,7 @@ When discovering a safe permission, suggest related safe commands in the same fa
 
 ---
 
-## Bash Permission Format
-
-Bash permission patterns use colon-separated positions. Each segment after the tool name corresponds to one whitespace-separated argument in the shell command. A `*` in any position matches exactly one argument at that position.
-
-### Wildcard `*` by position
-
-- Pattern `git:*` matches `git` with exactly one argument (any value)
-  - Matches: `git status`, `git branch`, `git log`
-  - Does NOT match: `git` (no arguments), `git status -sb` (two arguments)
-- Pattern `git:*:*` matches `git` with exactly two arguments (both can be anything)
-  - Matches: `git status -sb`, `git branch -a`, `git log --oneline`
-  - Does NOT match: `git`, `git status`, `git status -sb --decorate` (three arguments)
-
-### Command-specific patterns (literals plus wildcards)
-
-- Pattern `git:status:*` (written as `Bash(git status:*)`) matches `git status` with exactly one additional argument
-  - Matches: `git status -sb`, `git status --short`
-  - Does NOT match: `git status` (no extra argument), `git branch -a`
-- Pattern `git:*:*` (written as `Bash(git:*:*)`) matches any `git <subcommand> <arg>`
-  - Matches: `git status -sb`, `git branch -a`, `git log --oneline`
-- Pattern `npm:list:*` (written as `Bash(npm list:*)`) matches `npm list` with exactly one additional argument
-  - Matches: `npm list --depth=0`
-  - Does NOT match: `npm list` (no extra argument), `npm install express`
-- Pattern `npm:*:*` (written as `Bash(npm:*:*)`) matches any `npm <subcommand> <arg>`
-  - Matches: `npm list --depth=0`, `npm install express`
-
-### Pattern Notation Clarification
-
-Patterns are defined by the number of arguments, where each `:` separates argument positions:
-
-- `git:*` matches `git` with exactly **one** argument (any value)
-- `git:*:*` matches `git` with exactly **two** arguments (any values)
-- `git status:*` matches `git status` as a command pair, plus exactly **one** additional argument
-
-The notation shows exact argument positions, not whether the command uses the `Bash()` wrapper:
-
-- `Bash(git:*:*)` - Same as `git:*:*`, the `Bash()` wrapper doesn't change the matching rules
-- Both match git commands with exactly two arguments where both can be anything
-
----
-
 ## Commands Using This Skill
 
-- `agentsmd/agents/permissions-analyzer.md` - Uses classification and deduplication to filter permissions during discovery
+- `permissions-analyzer` agent - Uses classification and deduplication to filter permissions during discovery
 - `/sync-permissions` command - Indirectly uses this skill through the permissions-analyzer agent
