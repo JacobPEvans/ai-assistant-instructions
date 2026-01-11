@@ -33,50 +33,84 @@ permissions/
 
 ## Format
 
-### Command Files (allow/ and deny/)
+### Command Files (allow/, ask/, and deny/)
+
+**CRITICAL**: Commands should NOT include the `:*` wildcard suffix. The Nix
+formatter automatically appends `:*` when generating tool-specific permissions.
+
+**Correct format:**
 
 ```json
 {
   "commands": [
-    "command-name",
-    "command-name arg",
-    ...
+    "git",
+    "docker",
+    "git merge",
+    "npm run"
   ]
 }
 ```
 
-**Note**: The `dangerous.json` file in `deny/` may also include a `patterns` field for file path patterns (e.g., for Claude's Read tool deny list):
+**Incorrect format (DO NOT USE):**
 
 ```json
 {
-  "commands": ["rm -rf", "sudo rm", ...],
-  "patterns": ["~/.ssh/*", "~/.aws/*", ...]
+  "commands": [
+    "git:*",       // WRONG - creates Bash(git:*:*)
+    "docker:*",    // WRONG - creates Bash(docker:*:*)
+    "git merge:*"  // WRONG - creates Bash(git merge:*:*)
+  ]
 }
 ```
 
-### Domains File (domains/)
+### Why No `:*` Suffix?
+
+The Nix permission formatter (`formatters.nix`) automatically appends `:*` to
+create the final permission format. Adding `:*` in source files results in
+invalid double-wildcard patterns:
+
+- **Correct**: `"git"` → `"Bash(git:*)"` ✓
+- **Wrong**: `"git:*"` → `"Bash(git:*:*)"` ✗
+
+The validation script (`scripts/validate-permissions.sh`) will reject any
+commands ending with `:*` to prevent this mistake.
+
+### Special File Formats
+
+**dangerous.json** in `deny/` includes both commands and file patterns:
+
+```json
+{
+  "commands": ["rm -rf", "sudo rm"],
+  "patterns": ["~/.ssh/*", "~/.aws/*"]
+}
+```
+
+**webfetch.json** in `domains/` uses domains array:
 
 ```json
 {
   "domains": [
-    "example.com",
-    ...
+    "github.com",
+    "anthropic.com"
   ]
 }
 ```
 
-## Usage
+## Tool-Specific Conversion
 
-Tools like Claude, Gemini, and Copilot can load these permissions by:
+The Nix formatter converts these tool-agnostic commands into tool-specific
+formats:
 
-1. Reading all JSON files in `allow/` and `deny/` directories
-2. Converting commands to tool-specific permission format
-3. Applying them to the tool's permission system
+**Claude Code:**
 
-For example, to convert to Claude's format:
+- Source: `"git"` → Output: `"Bash(git:*)"`
+- Source: `"git merge"` → Output: `"Bash(git merge:*)"`
 
-- `"git status"` → `"Bash(git status:*)"`
-- `"curl -X GET"` → `"Bash(curl -X GET:*)"`
+**Gemini CLI:**
+
+- Source: `"git"` → Output: `"ShellTool(git)"`
+- Source: `"git merge"` → Output: `"ShellTool(git merge)"`
 
 ## Maintenance
 

@@ -1,5 +1,5 @@
 {
   "commands": [
-    "security unlock-keychain:*"
+    "security unlock-keychain"
   ]
 }
