@@ -2,8 +2,8 @@
   "commands": [
     "alias",
     "asdf",
-    "aws-vault",
     "aws",
+    "aws-vault",
     "basename",
     "bat",
     "brew",

@@ -105,6 +105,7 @@ All worktrees follow this structure:
 
    ```bash
    WORKTREE_PATH=~/git/${REPO_NAME}/${BRANCH_NAME}
+   mkdir -p "$(dirname "$WORKTREE_PATH")"
    git worktree add "$WORKTREE_PATH" -b "$BRANCH_NAME" main
    ```
 
@@ -308,7 +309,7 @@ git worktree remove "$WORKTREE_PATH"
 ## Best Practices
 
 1. **Always sync main** before creating new worktrees
-2. **Use sanitization** for worktree directory names (slashes → underscores)
+2. **Preserve slashes in branch names** - Directory nesting follows branch structure (e.g., `feat/my-feature` creates `~/git/repo/feat/my-feature/`)
 3. **Clean regularly** - Remove merged/gone worktrees to save disk space
 4. **Never work on main** - Always create a feature branch worktree
 5. **One worktree per feature** - Isolation prevents conflicts

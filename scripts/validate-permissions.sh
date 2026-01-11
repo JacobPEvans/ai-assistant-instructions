@@ -80,9 +80,7 @@ EOF
 # Generate valid-tools.json
 generate_valid_tools_json() {
     local tools_list="$1"
-    local cclint_version
-
-    cclint_version=$(npm view @carlrannaberg/cclint version 2>/dev/null || echo "0.2.10")
+    local cclint_version="$2"
 
     # Use jq to safely generate the JSON output, which is more robust than echo statements
     echo "$tools_list" | jq -R . | jq -s . | jq \
@@ -268,7 +266,7 @@ main() {
         tools_list=$(get_valid_tools_list)
 
         local new_valid_tools_json
-        new_valid_tools_json=$(generate_valid_tools_json "$tools_list")
+        new_valid_tools_json=$(generate_valid_tools_json "$tools_list" "$cclint_version")
 
         # Create temp file for new valid-tools.json
         local temp_valid_tools

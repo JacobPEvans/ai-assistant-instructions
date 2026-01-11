@@ -1,6 +1,7 @@
 {
   "commands": [
     "bunx",
+    "cargo run",
     "go run",
     "npx",
     "pipx",
