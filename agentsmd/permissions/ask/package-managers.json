@@ -1,14 +1,13 @@
 {
   "commands": [
-    "pipx run",
-    "pipx",
-    "uvx",
-    "uv run",
     "bunx",
-    "npx",
-    "pnpx",
     "go run",
-    "cargo run",
-    "pyenv install"
+    "npx",
+    "pipx",
+    "pipx run",
+    "pnpx",
+    "pyenv install",
+    "uv run",
+    "uvx"
   ]
 }

@@ -1,17 +1,11 @@
 {
   "commands": [
-    "rm",
-    "rmdir",
-    "mv",
-    "cp",
     "chmod",
     "chown",
-    "sed",
-    "awk",
-    "ln",
-    "ln -s",
-    "ln -sf",
-    "tar -xzf",
-    "unzip"
+    "cp",
+    "mv",
+    "rm",
+    "rmdir",
+    "sed"
   ]
 }

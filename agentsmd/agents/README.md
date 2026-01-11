@@ -86,7 +86,6 @@ All sub-agents are located directly in `.claude/agents/`:
 
 ### Utility Sub-Agents
 
-- **worktree-manager.md**: Manages git worktrees including creation, cleanup of stale worktrees, and synchronization
 - **test-runner.md**: Executes test suites, analyzes failures, and suggests fixes across multiple test frameworks
 - **linter-fixer.md**: Runs linters and automatically fixes code quality issues without bypassing checks
 - **dependency-checker.md**: Checks for outdated dependencies and security vulnerabilities across multiple ecosystems
@@ -160,8 +159,7 @@ Practical examples of invoking this sub-agent.
 ├── researcher.md         # Research specialist
 ├── reviewer.md           # Multi-model consensus reviewer
 ├── test-runner.md        # Test execution agent
-├── pr-thread-resolver.md # PR thread resolver
-└── worktree-manager.md   # Git worktree manager
+└── pr-thread-resolver.md # PR thread resolver
 ```
 
 ## Related Documentation
