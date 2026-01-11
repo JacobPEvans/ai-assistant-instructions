@@ -17,6 +17,7 @@
     "dirname",
     "docker",
     "du",
+    "echo",
     "env",
     "export",
     "eza",

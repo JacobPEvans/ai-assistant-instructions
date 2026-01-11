@@ -6,9 +6,6 @@
     "doppler environments",
     "doppler projects",
     "doppler secrets",
-    "gcloud secrets list",
-    "op item list",
-    "op vault list",
     "vault kv list",
     "vault list"
   ]
