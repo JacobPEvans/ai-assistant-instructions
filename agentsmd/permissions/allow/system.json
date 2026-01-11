@@ -1,6 +1,5 @@
 {
   "commands": [
-    "basename",
     "defaults read",
     "htop",
     "launchctl list",
@@ -22,7 +21,6 @@
     "tar -tzf",
     "tar -xzf",
     "tldr",
-    "top -l 1",
-    "tr"
+    "top -l 1"
   ]
 }

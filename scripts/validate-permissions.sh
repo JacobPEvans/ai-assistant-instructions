@@ -203,6 +203,23 @@ validate_permission_file() {
     return $((errors == 0 ? 0 : 1))
 }
 
+# Check for duplicates across all files in allow/, ask/, deny/
+check_all_duplicates() {
+    local errors=0
+    for category in allow ask deny; do
+        local dir="${PERMISSIONS_DIR}/${category}"
+        [[ ! -d "$dir" ]] && continue
+        local dups
+        dups=$(find "$dir" -name "*.json" -exec jq -r '.commands[]? // empty' {} \; 2>/dev/null | sort | uniq -d)
+        if [[ -n "$dups" ]]; then
+            log_error "Duplicates in ${category}/: $dups"
+            ((errors++))
+        fi
+    done
+    [[ $errors -eq 0 ]] && log_success "No duplicate commands"
+    return $errors
+}
+
 # Validate all permission files
 validate_all_permissions() {
     local valid_tools_file="$1"
@@ -287,6 +304,12 @@ main() {
 
         log_success "Validation complete - valid-tools.json updated"
         rm -f "$temp_valid_tools"
+    fi
+
+    # Check for duplicates across all categories
+    if ! check_all_duplicates; then
+        log_error "Duplicate check failed"
+        exit 1
     fi
 
     echo -e "\n${GREEN}All permission files are compatible with cclint${NC}\n"
