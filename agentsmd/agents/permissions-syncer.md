@@ -3,7 +3,7 @@ name: permissions-syncer
 description: Permission sync specialist. Applies approved changes and cleans local settings.
 model: haiku
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Read, Grep, Glob, TodoWrite, Bash(cat:*), Bash(rm:*), Bash(jq:*), Write, Edit
+allowed-tools: Task, TaskOutput, Read, Grep, Glob, TodoWrite, Bash(rm:*), Bash(jq:*), Bash(cp:*), Bash(mv:*), Bash(mktemp:*), Write, Edit
 ---
 
 # Permissions Syncer
@@ -98,25 +98,22 @@ Note: The temp file pattern using mktemp is necessary because jq cannot safely w
 
 For each processed local settings file from Phase 1:
 
-1. Display full contents before deletion
+1. Extract and display permission summary before deletion (token-efficient)
 2. Delete the file
 3. Report deletion
 
 Rather than using a bash `for` loop (which violates repository style guide), invoke this cleanup
 operation multiple times using parallel task execution for each file path discovered in Phase 1.
 
-Example cleanup for a single file:
+Example cleanup for a single file (token-efficient extraction):
 
 ```bash
-echo "═══════════════════════════════════════════════════════════"
-echo "Contents of ~/.claude/settings.local.json (before deletion):"
-echo "═══════════════════════════════════════════════════════════"
-cat ~/.claude/settings.local.json
-echo ""
-echo "Deleting: ~/.claude/settings.local.json"
+# Show permission counts instead of full JSON
+jq '{allow: (.allow | length), deny: (.deny | length)}' ~/.claude/settings.local.json
 rm ~/.claude/settings.local.json
-echo "✓ Deleted"
 ```
+
+Use the Read tool to view full contents if needed for debugging.
 
 ### 6. Verify
 
