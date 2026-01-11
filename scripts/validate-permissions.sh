@@ -161,8 +161,20 @@ validate_permission_file() {
         ((line_num++))
         [[ -z "$command" ]] && continue
 
+        # Check for patterns ending with :* (formatter adds this automatically)
+        # The Nix formatter will append :* to create Bash(cmd:*) format
+        # Source files should contain "git" not "git:*"
+        if [[ "$command" =~ :\*$ ]]; then
+            log_error "$file (line $line_num): Pattern ends with ':*' - formatter adds this automatically"
+            echo "  Command: '$command'"
+            echo "  ERROR: The Nix formatter automatically appends ':*' when generating Bash() permissions"
+            echo "  HINT: Use 'git' not 'git:*', use 'git merge' not 'git merge:*'"
+            echo "  RESULT: 'git' → 'Bash(git:*)' (correct), 'git:*' → 'Bash(git:*:*)' (invalid)"
+            ((errors++))
+        fi
+
         # Check if this looks like a tool name (contains no : or .)
-        # Valid commands: git:*, docker:*, npm:*, npm@version:*, etc.
+        # Valid commands: git, docker, npm, npm run, git merge, etc.
         # Invalid: Edit, Bash, MultiEdit, Read, Write, etc.
 
         if [[ ! "$command" =~ : ]]; then
@@ -172,7 +184,7 @@ validate_permission_file() {
                 log_error "$file (line $line_num): Tool name in commands array"
                 echo "  Command: '$command'"
                 echo "  ERROR: Tool names like '$command' belong in .claude/settings.json, not permissions"
-                echo "  HINT: Use shell commands like 'git:*', 'npm:*', 'docker:*'"
+                echo "  HINT: Use shell commands like 'git', 'npm', 'docker'"
                 ((errors++))
             fi
         fi

@@ -1,18 +1,18 @@
 {
   "commands": [
-    "git merge:*",
-    "git reset:*",
-    "git restore:*",
-    "git rm:*",
-    "git cherry-pick:*",
-    "git worktree remove:*",
-    "git gc:*",
-    "git prune:*",
-    "git rebase:*",
-    "git commit --amend:*",
-    "git push --force:*",
-    "git push --force-with-lease:*",
-    "git clean:*",
-    "git reflog:*"
+    "git merge",
+    "git reset",
+    "git restore",
+    "git rm",
+    "git cherry-pick",
+    "git worktree remove",
+    "git gc",
+    "git prune",
+    "git rebase",
+    "git commit --amend",
+    "git push --force",
+    "git push --force-with-lease",
+    "git clean",
+    "git reflog"
   ]
 }

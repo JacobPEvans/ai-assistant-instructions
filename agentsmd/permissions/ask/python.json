@@ -1,6 +1,6 @@
 {
   "commands": [
-    "python:*",
-    "python3:*"
+    "python",
+    "python3"
   ]
 }
