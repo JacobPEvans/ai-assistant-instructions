@@ -81,23 +81,35 @@ EOF
 generate_valid_tools_json() {
     local tools_list="$1"
     local cclint_version
-    local timestamp
 
     cclint_version=$(npm view @carlrannaberg/cclint version 2>/dev/null || echo "0.2.10")
-    timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 
     # Use jq to safely generate the JSON output, which is more robust than echo statements
     echo "$tools_list" | jq -R . | jq -s . | jq \
-      --arg ts "$timestamp" \
       --arg ver "$cclint_version" \
       '{
-        timestamp: $ts,
         cclint_version: $ver,
         schema_url: "https://raw.githubusercontent.com/carlrannaberg/cclint/main/schema.json",
         valid_tools: .,
         mcp_pattern: "mcp__.*",
         note: "Valid cclint tools as of version \($ver)"
       }'
+}
+
+# Check if valid-tools.json is up-to-date
+is_valid_tools_current() {
+    local valid_tools_file="$1"
+    local current_version="$2"
+
+    # File doesn't exist
+    [[ ! -f "$valid_tools_file" ]] && return 1
+
+    # Check if version matches
+    local file_version
+    file_version=$(jq -r '.cclint_version' "$valid_tools_file" 2>/dev/null || echo "")
+
+    [[ "$file_version" == "$current_version" ]] && return 0
+    return 1
 }
 
 # Load valid tools from valid-tools.json or schema
@@ -237,35 +249,47 @@ main() {
     echo -e "${BLUE}  Permission Validation for cclint Compatibility${NC}"
     echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}\n"
 
-    # Get valid tools list
-    log_info "Loading valid tools list..."
-    local tools_list
-    tools_list=$(get_valid_tools_list)
+    # Get current cclint version
+    local cclint_version
+    cclint_version=$(npm view @carlrannaberg/cclint version 2>/dev/null || echo "0.2.10")
 
-    # Generate valid-tools.json
-    log_info "Generating valid-tools.json..."
-    local new_valid_tools_json
-    new_valid_tools_json=$(generate_valid_tools_json "$tools_list")
+    # Check if valid-tools.json is up-to-date
+    if is_valid_tools_current "$VALID_TOOLS_FILE" "$cclint_version"; then
+        log_info "valid-tools.json is up-to-date (version $cclint_version)"
+        # File is current, just validate using it
+        if ! validate_all_permissions "$VALID_TOOLS_FILE"; then
+            log_error "Permission validation failed"
+            exit 1
+        fi
+    else
+        # File is missing or outdated, regenerate it
+        log_info "Regenerating valid-tools.json (version $cclint_version)..."
+        local tools_list
+        tools_list=$(get_valid_tools_list)
 
-    # Create temp file for new valid-tools.json
-    local temp_valid_tools
-    temp_valid_tools=$(mktemp)
-    echo "$new_valid_tools_json" > "$temp_valid_tools"
+        local new_valid_tools_json
+        new_valid_tools_json=$(generate_valid_tools_json "$tools_list")
 
-    # Validate all permission files
-    if ! validate_all_permissions "$temp_valid_tools"; then
-        log_error "Permission validation failed"
+        # Create temp file for new valid-tools.json
+        local temp_valid_tools
+        temp_valid_tools=$(mktemp)
+        echo "$new_valid_tools_json" > "$temp_valid_tools"
+
+        # Validate all permission files
+        if ! validate_all_permissions "$temp_valid_tools"; then
+            log_error "Permission validation failed"
+            rm -f "$temp_valid_tools"
+            exit 1
+        fi
+
+        # Update valid-tools.json
+        log_info "Updating $VALID_TOOLS_FILE..."
+        mkdir -p "$PERMISSIONS_DIR"
+        jq '.' "$temp_valid_tools" > "$VALID_TOOLS_FILE"
+
+        log_success "Validation complete - valid-tools.json updated"
         rm -f "$temp_valid_tools"
-        exit 1
     fi
-
-    # Update valid-tools.json
-    log_info "Updating $VALID_TOOLS_FILE..."
-    mkdir -p "$PERMISSIONS_DIR"
-    jq '.' "$temp_valid_tools" > "$VALID_TOOLS_FILE"
-
-    log_success "Validation complete - valid-tools.json updated"
-    rm -f "$temp_valid_tools"
 
     echo -e "\n${GREEN}All permission files are compatible with cclint${NC}\n"
     exit 0
