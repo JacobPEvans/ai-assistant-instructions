@@ -1,5 +1,13 @@
 {
   "commands": [
-    "security unlock-keychain"
+    "aws secretsmanager get-secret-value",
+    "doppler run",
+    "doppler secrets get",
+    "gcloud secrets versions access",
+    "op item get",
+    "op read",
+    "security unlock-keychain",
+    "vault kv get",
+    "vault read"
   ]
 }
