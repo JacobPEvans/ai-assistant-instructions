@@ -3,7 +3,6 @@
     "awk",
     "cat",
     "for ",
-    "grep",
     "sed"
   ]
 }
