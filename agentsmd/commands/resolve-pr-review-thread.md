@@ -26,15 +26,15 @@ Orchestrates resolution of GitHub PR review comments by delegating to the specia
 ### Single PR Mode
 
 1. Get current PR number from context
-2. Check for unresolved review threads
+2. Check for unresolved threads via GraphQL (see query below - `gh pr view --json` does NOT support `reviewThreads`)
 3. Launch `pr-thread-resolver` subagent for this PR
 4. **VERIFY** using the pr-thread-resolution-enforcement skill
 5. Only report completion if verification returns 0 unresolved threads
 
 ### All Mode
 
-1. List all open PRs in current repository
-2. Filter PRs with unresolved threads
+1. List all open PRs: `gh pr list --state open --json number`
+2. For each PR, check unresolved threads via GraphQL (NOT `gh pr view --json`)
 3. Launch parallel subagents in batches of 5
 4. Wait for batch completion before starting next batch
 5. **VERIFY EACH BATCH** using the pr-thread-resolution-enforcement skill
@@ -58,6 +58,6 @@ gh api graphql --raw-field \
 
 - **Skill**: pr-thread-resolution-enforcement - Canonical enforcement patterns (REQUIRED)
 - **Skill**: github-graphql - GraphQL mutation patterns
-- **Agent**: pr-thread-resolver - Detailed comment interpretation and resolution logic
+- **Agent**: pr-thread-resolver - Local agent (NOT `pr-review-toolkit:*`), detailed comment resolution logic
 - **Rule**: pr-comment-limits - 50-comment limit enforcement
 - **Rule**: subagent-parallelization - Batching strategy

@@ -6,6 +6,8 @@ author: JacobPEvans
 allowed-tools: Task, TaskOutput, Read, Grep, Glob, TodoWrite, Bash(gh:*), Bash(git:*), WebFetch, Edit, Write
 ---
 
+<!-- markdownlint-disable-file MD013 -->
+
 # Thread Resolver Sub-Agent
 
 ## Purpose
@@ -74,9 +76,11 @@ Scope: All unresolved threads
 
 ### Step 1: Retrieve Unresolved Threads
 
-Use the github-graphql skill patterns for retrieving review threads.
+**CRITICAL**: Use GraphQL, NOT `gh pr view --json`. The `reviewThreads` field is NOT available in `gh pr view`.
 
-**Query**: `reviewThreads` with `last: 100` to get all threads.
+```bash
+gh api graphql --raw-field 'query=query { repository(owner: "{OWNER}", name: "{REPO}") { pullRequest(number: {NUMBER}) { reviewThreads(last: 100) { nodes { id isResolved path line startLine comments(last: 100) { nodes { body author { login } } } } } } } }'
+```
 
 **Extract**:
 
