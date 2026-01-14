@@ -121,9 +121,11 @@ gh run rerun <RUN_ID>  # Entire workflow
 
 For GraphQL operations, use the github-graphql skill.
 
+**IMPORTANT**: `gh pr view --json` does NOT support `reviewThreads`. Use GraphQL instead:
+
 ```bash
-# GraphQL
-gh api graphql --raw-field 'query=...'
+# GraphQL (required for reviewThreads) - see github-graphql skill for full patterns
+gh api graphql --raw-field 'query=query { repository(owner: "O", name: "R") { pullRequest(number: N) { reviewThreads(last: 100) { ... } } } }'
 
 # REST API
 gh api repos/<OWNER>/<REPO>/pulls/<PR_NUMBER>
