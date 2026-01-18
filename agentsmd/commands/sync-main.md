@@ -54,7 +54,7 @@ Process all open PR branches. Use the subagent-batching skill for parallel patte
 1. **Get repo**: `gh repo view --json nameWithOwner`
 2. **Update main**: CRITICAL - must happen first
 3. **List open PRs**: `gh pr list --state open --json number,headRefName,title`
-4. **Process PRs**: Max 5 subagents concurrent. Each subagent receives the branch name and must:
+4. **Process PRs**: Launch subagents in parallel. Each subagent receives the branch name and must:
    - Fetch latest: `git fetch origin <branch-name>`
    - Create worktree: `git worktree add ~/git/<repo-name>/<branch-name> -b <branch-name> origin/<branch-name>`
    - Merge main: `git merge origin/main --no-edit`

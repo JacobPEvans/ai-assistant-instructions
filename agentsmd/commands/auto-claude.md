@@ -21,7 +21,7 @@ You COORDINATE work - never execute code changes directly. Continuously find wor
 gh pr list --author @me --state open --json number | jq length
 ```
 
-**≥10 PRs**: PR-FOCUS MODE - Only resolve existing PRs, max 5 agents in parallel
+**≥10 PRs**: PR-FOCUS MODE - Only resolve existing PRs, agents in parallel
 **<10 PRs**: NORMAL MODE - All priorities apply, sequential agents
 
 ## Core Loop
@@ -36,7 +36,7 @@ gh pr list --author @me --state open --json number | jq length
    4. PRs ready to merge (/git-refresh)
    --- BLOCKED IN PR-FOCUS MODE ---
    5-10. Bugs, issues, code analysis, docs, tests, deps
-3. DISPATCH - Use subagent-batching skill (5 max parallel in PR-focus, sequential otherwise)
+3. DISPATCH - Use subagent-batching skill (parallel in PR-focus, sequential otherwise)
 4. AWAIT completion
 5. CAPTURE results, emit JSON events
 6. LOOP to step 0
