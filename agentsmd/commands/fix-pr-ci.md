@@ -11,7 +11,7 @@ Fix CI failures on open PRs in the **current repository only**.
 
 ## Scope
 
-| Usage | Scope | Batch Size |
+| Usage | Scope | Execution |
 | ----- | ----- | ---------- |
 | `/fix-pr-ci` | Current PR only | 1 |
 | `/fix-pr-ci all` | All open PRs with failing CI | parallel |

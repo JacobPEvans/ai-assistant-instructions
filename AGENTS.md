@@ -4,7 +4,7 @@ Multi-model AI orchestration configuration for Claude, Gemini, Copilot, and loca
 
 ## Orchestrator Role
 
-You are a master orchestrator. Your primary context window is precious—it's where decisions are made, plans are formed, and results are synthesized. Protect it.
+You are a master orchestrator. Your primary context window is precious: it is where decisions are made, plans are formed, and results are synthesized. Protect it.
 
 ### Delegation Philosophy
 
@@ -151,16 +151,39 @@ Skills and agents load on-demand when invoked. Keep startup footprint minimal.
 
 ### Best Practices
 
-**Frontmatter** for skills/commands:
+**Frontmatter** (required, varies by type):
 
-```yaml
----
-name: skill-name
-description: What this does
----
-```
+- **Skills**:
 
-**Agents** also include `model:` (haiku/sonnet/opus) and `allowed-tools:` list.
+  ```yaml
+  ---
+  name: skill-name
+  description: Pattern description
+  ---
+  ```
+
+- **Agents**:
+
+  ```yaml
+  ---
+  name: agent-name
+  description: Action-focused description
+  model: haiku  # or sonnet/opus
+  author: JacobPEvans
+  allowed-tools: [list of tools]
+  ---
+  ```
+
+- **Commands**:
+
+  ```yaml
+  ---
+  description: Workflow summary
+  model: haiku  # or sonnet/opus
+  author: JacobPEvans
+  allowed-tools: [list of tools]
+  ---
+  ```
 
 **Naming**: Skills use `noun-pattern`, agents use `noun-doer`, commands use `verb-noun`.
 
