@@ -11,10 +11,10 @@ Fix CI failures on open PRs in the **current repository only**.
 
 ## Scope
 
-| Usage | Scope | Batch Size |
+| Usage | Scope | Execution |
 | ----- | ----- | ---------- |
 | `/fix-pr-ci` | Current PR only | 1 |
-| `/fix-pr-ci all` | All open PRs with failing CI | 5 |
+| `/fix-pr-ci all` | All open PRs with failing CI | parallel |
 
 ## Related
 
@@ -43,7 +43,7 @@ git worktree add "$HOME/git/<repo-name>/$SAFE_BRANCH_DIR" "$BRANCH_NAME"
 
 ### 4. Launch Subagents
 
-**Single**: One subagent. **All**: Batches of 5 max (use the subagent-batching skill).
+**Single**: One subagent. **All**: Parallel batches (use the subagent-batching skill).
 
 **Subagent prompt**: Fix CI for PR #{N} at {PATH}. Steps: `gh run list`, `gh run view {ID} --log-failed`, fix root cause, test locally, commit, push.
 

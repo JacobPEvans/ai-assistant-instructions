@@ -18,7 +18,7 @@ Orchestrates resolution of GitHub PR review comments by delegating to the specia
 
 ```bash
 /resolve-pr-review-thread              # Current PR only
-/resolve-pr-review-thread all          # All open PRs with unresolved comments (batch size: 5)
+/resolve-pr-review-thread all          # All open PRs with unresolved comments (parallel)
 ```
 
 ## Workflow
@@ -35,7 +35,7 @@ Orchestrates resolution of GitHub PR review comments by delegating to the specia
 
 1. List all open PRs: `gh pr list --state open --json number`
 2. For each PR, check unresolved threads via GraphQL (NOT `gh pr view --json`)
-3. Launch parallel subagents in batches of 5
+3. Launch parallel subagents in batches
 4. Wait for batch completion before starting next batch
 5. **VERIFY EACH BATCH** using the pr-thread-resolution-enforcement skill
 6. Only proceed to next batch if all PRs in current batch verify to 0 unresolved threads

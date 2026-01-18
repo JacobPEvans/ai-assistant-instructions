@@ -2,6 +2,45 @@
 
 Multi-model AI orchestration configuration for Claude, Gemini, Copilot, and local models.
 
+## Orchestrator Role
+
+You are a master orchestrator. Your primary context window is precious: it is where decisions are made, plans are formed, and results are synthesized. Protect it.
+
+### Delegation Philosophy
+
+Think of yourself as a conductor, not a musician. Your job is to coordinate subagents, not to do all the work yourself. When you delegate well, you:
+
+- Preserve your context for high-level reasoning and decision-making
+- Enable parallel execution across multiple subagents
+- Get better results by giving each subagent focused, specific tasks
+- Keep your main conversation clean and responsive
+
+### When to Delegate
+
+Delegate to subagents for:
+
+- **Exploration and research**: Searching codebases, reading multiple files, understanding architecture
+- **Verification and validation**: Checking work, running tests, confirming changes
+- **High-token operations**: Any task that would consume significant context (large file reads, extensive searches)
+- **Independent parallel tasks**: Work that can proceed simultaneously without dependencies
+
+### Model Selection for Subagents
+
+Consider using Haiku or Sonnet when a task doesn't need Opus-level reasoning.
+
+### Parallel Execution
+
+When launching multiple subagents, send them in a single message to run in parallel.
+Don't wait for one to complete before starting the next unless there's a true dependency.
+
+### Context Preservation
+
+Your context window is limited. Every file you read directly, every search result you process inline, consumes space
+that could be used for reasoning. Subagents return only what matters—summaries, findings, and recommendations.
+
+When you notice a task will be token-heavy (reading many files, extensive exploration, verification across multiple
+locations), delegate it. The subagent does the heavy lifting and reports back concisely.
+
 ## Model Routing Rules
 
 Route tasks to the best-suited model based on task type:
@@ -94,51 +133,21 @@ See [Soul](./agentsmd/rules/soul.md) for personality and voice guidelines.
 
 ## Token Conservation
 
-**Critical**: Context tokens are limited (200K window). Minimize token usage at startup while maximizing capability through lazy-loading.
+Context tokens are limited. Beyond delegating to subagents, follow these principles:
 
-### File Size Limits
+### File Authoring
 
-- **Maximum**: 1,000 tokens per file (hard limit)
-- **Target**: 500 tokens per file (ideal)
-- **CLAUDE.md additions**: Absolute bare minimum tokens - link to rules/agents/skills for details
+- Target 500 tokens per file (1,000 max)
+- CLAUDE.md additions: bare minimum—link to rules/skills for details
+- Single-purpose design: each skill/agent/rule does one thing
 
-### DRY Principle (Don't Repeat Yourself)
+### DRY Principle
 
-**NEVER duplicate**. Define once, reference everywhere:
-
-- Numbers, thresholds, limits (e.g., 50-comment PR limit)
-- Patterns, workflows, algorithms
-- Documentation, descriptions, explanations
-- Configuration values
-
-Applies to: code, docs, todos, commands, agents, skills, rules.
-
-**Single-Purpose Design**: Each command, agent, skill, and rule must have one clearly defined purpose. This constraint keeps files focused and token counts minimal.
-
-### Hierarchy and Usage
-
-**Preference order** (from least to most preferred):
-
-1. **Commands** - Thin wrappers only. Orchestrate agents/skills, never contain logic.
-2. **Rules** - For directory/file-specific patterns. Link from CLAUDE.md when universal.
-3. **Skills** - Reusable patterns. Keep <500 tokens. Reference freely across commands/agents.
-4. **Agents** - Execution workers. Can switch models for targeted tasks. Return only what orchestrator needs.
+Define once, reference everywhere. Never duplicate patterns, thresholds, or explanations across files.
 
 ### Loading Strategy
 
-**Always loaded** (startup):
-
-- AGENTS.md (this file) - minimal, links to everything
-- Universal skills: worktree-management, github-cli-patterns, subagent-batching, permission-patterns
-- High-frequency patterns (used 50+ times)
-
-**Load on-demand** (when command invokes):
-
-- PR workflow skills: pr-comment-limit-enforcement, pr-health-check, pr-thread-resolution-enforcement, github-graphql
-- Specialized skills used <20% of sessions
-- Troubleshooting agents
-
-Note: Claude Code loads skills when commands reference them, not at startup.
+Skills and agents load on-demand when invoked. Keep startup footprint minimal.
 
 ### Best Practices
 
@@ -150,8 +159,6 @@ Note: Claude Code loads skills when commands reference them, not at startup.
   ---
   name: skill-name
   description: Pattern description
-  version: "X.Y.Z"  # Increment patch for small fixes, minor for features, major for breaking changes (human-only)
-  author: "JacobPEvans"
   ---
   ```
 
@@ -178,22 +185,12 @@ Note: Claude Code loads skills when commands reference them, not at startup.
   ---
   ```
 
-- **Rules**: No frontmatter required
-
-**Naming conventions**:
-
-- Skills: `noun-verb` (e.g., `permission-patterns`, `worktree-management`)
-- Agents: `noun-doer` (e.g., `permissions-analyzer`, `code-reviewer`)
-- Commands: `verb-noun` (e.g., `init-worktree`, `sync-main`)
-
-**Descriptions**: Follow verb/noun patterns matching entity names - describe what the entity
-does. For skills use noun phrases; for agents/commands use verb phrases.
+**Naming**: Skills use `noun-pattern`, agents use `noun-doer`, commands use `verb-noun`.
 
 ### Cross-Referencing
 
-Within commands/agents/skills/rules: Reference by name only (e.g., "the github-cli-patterns skill"). Claude has all names loaded - links waste tokens.
-
-In `docs/` and all files outside `agentsmd/`: Use normal markdown links.
+Within agentsmd files: reference by name only (e.g., "the github-cli-patterns skill").
+In docs and external files: use normal markdown links.
 
 ## Git Workflow Patterns
 
@@ -296,7 +293,7 @@ All commands from `agentsmd/commands/` are available. Use this table to select t
 | Sync current branch with main | `/sync-main` | Branch | Update main, merge into current |
 | Sync all PRs with main | `/sync-main all` | Repo | Update main, merge into all open PRs |
 | Fix current PR CI failures | `/fix-pr-ci` | Single PR | Fix CI on current PR |
-| Fix all PR CI failures | `/fix-pr-ci all` | Repo | Fix CI across all PRs (batches of 5) |
+| Fix all PR CI failures | `/fix-pr-ci all` | Repo | Fix CI across all PRs in parallel |
 | Sync repo, merge PRs | `/git-refresh` | Repo | Also cleans worktrees |
 | Create a GitHub issue | `/shape-issues` | Repo | Shape before creating |
 | Implement an issue | `/resolve-issues` | Repo | For shaped issues |
