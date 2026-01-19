@@ -294,21 +294,29 @@ Universal patterns for git worktree and branch management. Commands reference th
 
 ### Worktree Structure
 
-Repository structure follows this pattern:
+All repositories live under `~/git/`. Each repository follows this exact structure:
 
 ```text
 ~/git/<repo-name>/
 ├── .git/                    # Shared git directory (bare repo)
-├── main/                    # Main branch worktree
-├── feat/<branch-name>/      # Feature worktrees (e.g., feat/add-dark-mode/)
-└── fix/<branch-name>/       # Fix worktrees (e.g., fix/login-bug/)
+├── .docs/                   # Project-specific docs (secrets, setup, architecture)
+├── main/                    # Main branch worktree (always present)
+├── feat/<feature-name>/     # Feature worktrees (e.g., feat/add-dark-mode/)
+├── fix/<bug-name>/          # Bug fix worktrees (e.g., fix/login-timeout/)
+├── docs/<doc-name>/         # Documentation worktrees
+├── refactor/<name>/         # Refactoring worktrees
+├── test/<name>/             # Test worktrees
+├── chore/<name>/            # Chore worktrees
+└── hotfix/<name>/           # Hotfix worktrees
 ```
 
 **Key points**:
 
-- Main worktree is always at `~/git/<repo>/main/`
-- Branch names use conventional format with slashes (e.g., `feat/add-dark-mode`)
-- Worktree paths mirror branch names exactly (no sanitization)
+- All repos at `~/git/<repo-name>/` (not nested deeper)
+- `.docs/` folder at repo root contains project-specific documentation (not in worktrees)
+- Main worktree always at `~/git/<repo>/main/`
+- Worktree paths mirror branch names exactly: `feat/add-dark-mode` → `~/git/<repo>/feat/add-dark-mode/`
+- Never work directly in the bare repo root—always use a worktree
 
 ### Branch Naming
 
