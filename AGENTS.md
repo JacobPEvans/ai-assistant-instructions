@@ -352,6 +352,8 @@ Worktrees are stale when:
 
 - **Title format**: `<type>: <description>` (e.g., "feat: add dark mode")
 - **Body structure**: Summary bullets + test plan + related issues
+- **Issue linking**: Use `Closes #<issue>` (features), `Fixes #<issue>` (bugs) for auto-closure
+- **Bidirectional link**: After PR creation, run `gh issue comment <issue> --body "PR: #<pr>"`
 - **Draft mode**: Use for WIP, convert to ready when tests pass
 - **Merge gates**: 50-comment limit enforced, all review threads must be resolved
 

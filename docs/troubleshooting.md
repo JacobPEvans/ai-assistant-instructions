@@ -40,14 +40,7 @@ Common issues and solutions for using this repository.
 
 ### "Can't create worktree"
 
-**Problem**: `/init-worktree` fails or git worktree commands error out.
-
-**Solution**:
-
-1. Update Git to 2.30+: `git --version`
-2. Make sure main branch is up-to-date: `git fetch origin && git checkout main && git pull`
-3. Check for stale worktrees: `git worktree list`
-4. Clean up stale worktrees: `git worktree prune`
+See AGENTS.md "Git Workflow Patterns" section for worktree requirements and troubleshooting.
 
 ### "Broken symlinks after rebase"
 
@@ -102,7 +95,7 @@ Common issues and solutions for using this repository.
 ## Getting Help
 
 - 🐛 [Open an Issue](https://github.com/JacobPEvans/ai-assistant-instructions/issues)
-- 📖 [Read the Full Docs](README.md)
+- 📖 [Read the Main README](../README.md)
 - 🔒 [Security Issues](../SECURITY.md)
 
 ---

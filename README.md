@@ -79,54 +79,9 @@ Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 
 ## Key Commands
 
-### Initialization & Setup
+See AGENTS.md "Commands" section for the complete command reference table.
 
-| Command | Description |
-| ------- | ----------- |
-| `/init-worktree` | Initialize a clean worktree for development |
-
-### Git & Repository Management
-
-| Command | Description |
-| ------- | ----------- |
-| `/git-refresh` | Merge PRs, sync repo, cleanup stale worktrees |
-| `/sync-main` | Sync current branch with main (use `all` for all PRs) |
-| `/sync-permissions` | Sync AI assistant permissions to repo |
-
-### Code Review & Quality
-
-| Command | Description |
-| ------- | ----------- |
-| `/review-code` | Structured code review with quality checks |
-| `/infrastructure-review` | Review Terraform/Terragrunt infrastructure |
-| `/review-docs` | Review and improve documentation |
-| `/generate-code` | Scaffold new code with standards |
-
-### PR Lifecycle Management
-
-| Command | Description |
-| ------- | ----------- |
-| `/manage-pr` | Complete PR lifecycle management |
-| `/fix-pr-ci` | Fix CI failures (use `all` for all PRs) |
-| `/resolve-pr-review-thread` | Resolve review threads (use `all` for all PRs) |
-| `/pr-review-feedback` | GraphQL patterns for PR thread resolution |
-| `/ready-player-one` | Orchestrate PR finalization across all repositories and report merge-readiness status |
-
-### Issue & Architecture Management
-
-| Command | Description |
-| ------- | ----------- |
-| `/shape-issues` | Shape raw ideas into actionable GitHub issues |
-| `/resolve-issues` | Analyze and implement GitHub issues |
-| `/review-pr` | Comprehensive PR review with systematic analysis |
-
-### Delegation & Integration
-
-| Command | Description |
-| ------- | ----------- |
-| `/delegate-to-ai` | Delegate tasks to external AI assistants |
-
-All commands live in [`agentsmd/commands/`](agentsmd/commands/). See the [Commands](agentsmd/commands/) reference for detailed documentation on each.
+All commands live in [`agentsmd/commands/`](agentsmd/commands/).
 
 ## Core Concepts
 
