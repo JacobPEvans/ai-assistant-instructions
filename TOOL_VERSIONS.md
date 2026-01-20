@@ -81,12 +81,4 @@ For YAML validation.
 
 ## Why Nix?
 
-**Nix provides**:
-
-- **No system pollution**: No global node_modules, site-packages, or ~/.cargo
-- **Reproducibility**: Same environment across all machines
-- **Declarative**: Dependencies defined in flake.nix or shell.nix
-- **Isolation**: Each project gets its own environment
-
-**Traditional package managers (npm, pip, cargo) are discouraged** and require explicit confirmation
-when used. See [Permission Strategy](agentsmd/permissions/STRATEGY.md#nix-first-philosophy) for details.
+Nix provides reproducible, isolated environments without system pollution. See AGENTS.md for philosophy and permission details.
