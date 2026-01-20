@@ -13,16 +13,6 @@ on:
         required: false
         type: number
         default: 5
-      check-comment-limit:
-        description: 'Check PR comment limit before running'
-        required: false
-        type: boolean
-        default: true
-      comment-limit:
-        description: 'Maximum number of comments before skipping review'
-        required: false
-        type: number
-        default: 50
     secrets:
       CLAUDE_CODE_OAUTH_TOKEN:
         required: true
@@ -45,42 +35,8 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Check PR comment limit
-        if: inputs.check-comment-limit
-        id: comment-check
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          REPO_OWNER: ${{ github.repository_owner }}
-          REPO_NAME: ${{ github.event.repository.name }}
-          COMMENT_LIMIT: ${{ inputs.comment-limit }}
-        run: |
-          TOTAL_COMMENTS=$(gh api graphql -f query='
-          query {
-            repository(owner: "'$REPO_OWNER'", name: "'$REPO_NAME'") {
-              pullRequest(number: '$PR_NUMBER') {
-                comments(last: 100) {
-                  totalCount
-                }
-                reviewThreads(last: 100) {
-                  totalCount
-                }
-              }
-            }
-          }' --jq '.data.repository.pullRequest.comments.totalCount + .data.repository.pullRequest.reviewThreads.totalCount')
-
-          echo "total_comments=$TOTAL_COMMENTS" >> $GITHUB_OUTPUT
-          if [ "$TOTAL_COMMENTS" -ge "$COMMENT_LIMIT" ]; then
-            echo "⚠️ PR has reached ${COMMENT_LIMIT}-comment limit - skipping Claude review"
-            echo "skip_review=true" >> $GITHUB_OUTPUT
-          else
-            echo "✓ Comment count: $TOTAL_COMMENTS (under ${COMMENT_LIMIT}-comment limit)"
-            echo "skip_review=false" >> $GITHUB_OUTPUT
-          fi
-
       - name: Run Claude Code Review
         id: claude-review
-        if: ${{ !inputs.check-comment-limit || steps.comment-check.outputs.skip_review == 'false' }}
         uses: anthropics/claude-code-action@v1
         timeout-minutes: 3
         env:

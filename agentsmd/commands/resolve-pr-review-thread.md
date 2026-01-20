@@ -59,5 +59,4 @@ gh api graphql --raw-field \
 - **Skill**: pr-thread-resolution-enforcement - Canonical enforcement patterns (REQUIRED)
 - **Skill**: github-graphql - GraphQL mutation patterns
 - **Agent**: pr-thread-resolver - Local agent (NOT `pr-review-toolkit:*`), detailed comment resolution logic
-- **Rule**: pr-comment-limits - 50-comment limit enforcement
 - **Rule**: subagent-parallelization - Batching strategy

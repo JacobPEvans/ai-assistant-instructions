@@ -215,9 +215,16 @@ cmd_resume() {
         print_info "Opening session picker..."
         claude --resume
     else
+        # Sanitize search term to prevent command injection
+        local safe_term
+        safe_term=$(sanitize_name "$search_term")
+        if [ -z "$safe_term" ]; then
+            print_error "Invalid search term. Only alphanumeric and hyphens allowed."
+            return 1
+        fi
         print_header "Finding Sessions"
-        print_info "Searching for: $search_term"
-        claude --resume "$search_term"
+        print_info "Searching for: $safe_term"
+        claude --resume "$safe_term"
     fi
 }
 
