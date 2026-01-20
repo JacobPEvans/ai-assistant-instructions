@@ -300,6 +300,7 @@ All repositories live under `~/git/`. Each repository follows this exact structu
 ~/git/<repo-name>/
 ├── .git/                    # Shared git directory (bare repo)
 ├── .docs/                   # Project-specific docs (secrets, setup, architecture)
+├── AGENTS.md                # Project-specific AI instructions (may contain sensitive info)
 ├── main/                    # Main branch worktree (always present)
 ├── feat/<feature-name>/     # Feature worktrees (e.g., feat/add-dark-mode/)
 ├── fix/<bug-name>/          # Bug fix worktrees (e.g., fix/login-timeout/)
