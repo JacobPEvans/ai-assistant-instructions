@@ -31,8 +31,6 @@ Runs Claude Code review on pull requests with configurable parameters.
 
 - `max-turns` (number, default: 5) - Maximum turns for Claude Code
 - `timeout-minutes` (number, default: 5) - Timeout for the action
-- `check-comment-limit` (boolean, default: true) - Check PR comment limit before running
-- `comment-limit` (number, default: 50) - Maximum comments before skipping
 
 **Secrets:**
 

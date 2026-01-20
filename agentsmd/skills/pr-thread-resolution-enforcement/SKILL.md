@@ -203,7 +203,6 @@ Next steps: Author needs to respond to blocking feedback on line 89
 - pr-thread-resolver agent - Full implementation patterns
 - /resolve-pr-review-thread command - Orchestrator using this skill
 - /manage-pr command - Uses verification pattern
-- pr-comment-limits rule - Works with verification
 
 ## Troubleshooting
 

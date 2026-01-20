@@ -89,8 +89,6 @@ See AGENTS.md "Git Workflow Patterns" section for worktree requirements and trou
 
 1. Check PR size - large PRs with many changes take longer
 2. Reduce scope if possible - review individual files at a time
-3. Some commands have comment limits to prevent token overuse
-4. See [PR Comment Limits](../agentsmd/rules/pr-comment-limits.md)
 
 ## Getting Help
 

@@ -365,7 +365,7 @@ Worktrees are stale when:
 - **Issue linking**: Use `Closes #<issue>` (features), `Fixes #<issue>` (bugs) for auto-closure
 - **Bidirectional link**: After PR creation, run `gh issue comment <issue> --body "PR: #<pr>"`
 - **Draft mode**: Use for WIP, convert to ready when tests pass
-- **Merge gates**: 50-comment limit enforced, all review threads must be resolved
+- **Merge gates**: All review threads must be resolved
 
 ## Language Selection
 
@@ -400,20 +400,25 @@ All commands from `agentsmd/commands/` are available. Use this table to select t
 | Sync permissions across repos | `/sync-permissions` | Repo | Merge local settings to repo permissions |
 | Sync current branch with main | `/sync-main` | Branch | Update main, merge into current |
 | Sync all PRs with main | `/sync-main all` | Repo | Update main, merge into all open PRs |
+| Rebase branch onto main | `/git-rebase` | Branch | Rebase and push to origin |
+| Troubleshoot rebase failures | `/git-rebase-troubleshoot` | Branch | Recover from failed rebases |
+| Troubleshoot worktree issues | `/git-worktree-troubleshooting` | Repo | Fix worktree/branch/refname issues |
+| Troubleshoot pre-commit | `/git-precommit-troubleshooting` | Repo | Fix pre-commit hook failures |
 | Fix current PR CI failures | `/fix-pr-ci` | Single PR | Fix CI on current PR |
 | Fix all PR CI failures | `/fix-pr-ci all` | Repo | Fix CI across all PRs in parallel |
 | Sync repo, merge PRs | `/git-refresh` | Repo | Also cleans worktrees |
 | Create a GitHub issue | `/shape-issues` | Repo | Shape before creating |
 | Implement an issue | `/resolve-issues` | Repo | For shaped issues |
 | Review a PR | `/review-pr` | Single PR | Systematic review |
+| Review code | `/review-code` | Repo | Thorough code reviews |
+| Review documentation | `/review-docs` | Repo | Markdown validation |
 | Resolve PR review feedback | `/resolve-pr-review-thread` | Single PR | After review comments |
 | Resolve all PR review threads | `/resolve-pr-review-thread all` | Repo | Address comments on all PRs |
 | Manage your own PR | `/manage-pr` | Single PR | PR author workflow |
-| Review documentation | `/review-docs` | Repo | Markdown validation |
-
-**PR Comment Limit**: All PR-related commands respect a **50-comment limit per PR** to prevent infinite review cycles.
-See [PR Comment Limits rule](./agentsmd/rules/pr-comment-limits.md) for details.
-When a PR reaches 50 comments, all future comments are automatically resolved.
+| Finalize PRs across repos | `/ready-player-one` | Multi-repo | Report merge-readiness status |
+| Autonomous maintenance | `/auto-claude` | Repo | Continuously finds work |
+| Delegate to AI models | `/delegate-to-ai` | Session | External AI via PAL MCP |
+| Add tool permissions | `/quick-add-permission` | Repo | Quick always-allow setup |
 
 ## Related Files
 

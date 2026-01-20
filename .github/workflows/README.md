@@ -106,7 +106,6 @@ like `token-limits` to speed up dependency update merges.
 
 These workflows run independently and are not part of the Merge Gate:
 
-- `pr-comment-limit-check.yml` - Enforces 50-comment limit on PRs
 - `issue-resolver.yml` - Auto-labels GitHub issues
 - `link-check.yml` - Validates links (push to main only)
 - `sync-symlinks.yml` - Syncs command symlinks (push to main only)

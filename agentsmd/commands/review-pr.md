@@ -16,10 +16,6 @@ Comprehensive and systematic Pull Request review system focusing on code quality
 
 **SINGLE PR** - This command reviews one PR at a time, specified by argument or determined from current branch.
 
-> **PR Comment Limit**: This command respects the **50-comment limit per PR** defined in the
-> the pr-comment-limits rule.
-> If a PR has reached 50 comments, this command will not post new comments. See the rule for details.
-
 ### Review Phases
 
 1. **Analyze**: Scope, issue linkage, risks
@@ -44,8 +40,7 @@ For local quality checks: `bun run typecheck && bun run test:run && bun run buil
 1. **Context**: Gather PR details via `gh pr view` (use the github-cli-patterns skill)
 2. **Quality**: Checkout with `gh pr checkout`, run local quality checks
 3. **Code Review**: Check architecture, code quality, tests, documentation
-4. **Comment Limit**: Check 50-comment limit per the pr-comment-limit-enforcement skill
-5. **Submit**: Categorize feedback (Critical → Major → Minor → Enhancement), record decision
+4. **Submit**: Categorize feedback (Critical → Major → Minor → Enhancement), record decision
 
 ### Feedback Categories
 

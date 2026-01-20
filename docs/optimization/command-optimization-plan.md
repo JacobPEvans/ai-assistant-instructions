@@ -497,7 +497,6 @@ Quick reference for all available skills:
 - [Subagent Batching](../../agentsmd/skills/subagent-batching/SKILL.md) - Parallel execution patterns
 - [Worktree Management](../../agentsmd/skills/worktree-management/SKILL.md) - Worktree lifecycle
 - [PR Health Check](../../agentsmd/skills/pr-health-check/SKILL.md) - Merge-readiness criteria
-- [PR Comment Limits](../../agentsmd/skills/pr-comment-limit-enforcement/SKILL.md) - 50-comment limit enforcement
 - [GitHub CLI Patterns](../../agentsmd/skills/github-cli-patterns/SKILL.md) - Common gh commands
 ```
 

@@ -78,7 +78,7 @@ validate_branch_name() {
 sanitize_name() {
     local name="$1"
     # Convert to lowercase, replace spaces and special chars with hyphens
-    echo "$name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]/-/g' | sed 's/-+/-/g' | sed 's/^-//;s/-$//'
+    echo "$name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]/-/g' | tr -s '-' | sed 's/^-//;s/-$//'
 }
 
 # Show available sessions
@@ -215,9 +215,16 @@ cmd_resume() {
         print_info "Opening session picker..."
         claude --resume
     else
+        # Sanitize search term to prevent command injection
+        local safe_term
+        safe_term=$(sanitize_name "$search_term")
+        if [ -z "$safe_term" ]; then
+            print_error "Invalid search term. Only alphanumeric and hyphens allowed."
+            return 1
+        fi
         print_header "Finding Sessions"
-        print_info "Searching for: $search_term"
-        claude --resume "$search_term"
+        print_info "Searching for: $safe_term"
+        claude --resume "$safe_term"
     fi
 }
 
