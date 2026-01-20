@@ -78,7 +78,7 @@ validate_branch_name() {
 sanitize_name() {
     local name="$1"
     # Convert to lowercase, replace spaces and special chars with hyphens
-    echo "$name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]/-/g' | sed 's/-+/-/g' | sed 's/^-//;s/-$//'
+    echo "$name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]/-/g' | tr -s '-' | sed 's/^-//;s/-$//'
 }
 
 # Show available sessions
