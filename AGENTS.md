@@ -116,8 +116,9 @@ When `localOnlyMode` is enabled or `--local` flag is passed:
 Use these placeholders consistently across all repositories:
 
 | Type | Scrubbed Value | Examples |
-|------|---|---|
+| --- | --- | --- |
 | IPv4 Address | `192.168.0.*` | `192.168.0.1`, `192.168.0.100` (last octet can be accurate) |
+| IPv6 Address | `2001:db8::*` | `2001:db8::1` (documentation prefix) |
 | External Domain | `example.com` | For external/public services and APIs |
 | Internal Domain | `example.local` | For internal/LAN hostnames and services |
 | API Endpoint | `https://api.example.com:8006/api2/json` | Use scrubbed domain pattern |
@@ -147,7 +148,7 @@ provider "proxmox" {
 ### Runtime Secret Injection
 
 **AI/Claude Projects:**
-API keys retrieved at runtime from macOS Keychain (`ai-secrets` keychain).
+API keys are retrieved at runtime from macOS Keychain (`ai-secrets` keychain).
 Keys are NEVER stored in files or environment variables.
 
 **Infrastructure Projects:**
@@ -185,7 +186,7 @@ services:
     password: SuperSecure!Pass123
 
   api:
-    endpoint: https://api.prod.aws.amazon.com
+    endpoint: https://api.example.com
     token: <actual-jwt-token-value>
 ```
 
