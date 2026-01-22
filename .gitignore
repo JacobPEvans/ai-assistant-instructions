@@ -1,8 +1,6 @@
 todos/
 result
 
-agent-os
-
 # Use docs/ instead of these legacy folders
 .specs/
 .tmp/

@@ -165,7 +165,6 @@
   ],
   "ignorePaths": [
     ".git",
-    "agent-os",
     "node_modules"
   ]
 }
