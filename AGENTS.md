@@ -86,8 +86,7 @@ When choosing implementations or tools:
 
 1. **Anthropic Official** - Claude Code plugins, skills, patterns
 2. **PAL MCP** - Multi-model orchestration tools
-3. **Agent OS** - Structured development workflows
-4. **Personal/Custom** - Only when no alternative exists
+3. **Personal/Custom** - Only when no alternative exists
 
 ## Local-Only Mode
 
