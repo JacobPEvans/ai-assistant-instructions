@@ -30,10 +30,10 @@ gh pr list --author @me --state open --json number | jq length
 0. CHECK PR COUNT → set mode
 1. SCAN - Gather state (PR-focus: only PRs; Normal: all)
 2. PRIORITIZE:
-   1. PRs behind main (/sync-main)
+   1. PRs behind main (/sync-main) - Report status, then run /sync-main per policy without asking questions
    2. Failing CI (/fix-pr-ci)
    3. Review comments (/resolve-pr-review-thread)
-   4. PRs ready to merge (/git-refresh)
+   4. PRs ready to merge (/git-refresh) - Report readiness, do NOT merge
    --- BLOCKED IN PR-FOCUS MODE ---
    5-10. Bugs, issues, code analysis, docs, tests, deps
 3. DISPATCH - Use subagent-batching skill (parallel in PR-focus, sequential otherwise)
@@ -55,7 +55,7 @@ gh pr list --author @me --state open --json number | jq length
 ## Sub-Agent Instructions
 
 Include: ONE task per PR (<200 lines), may spawn helpers, report files/PR/blockers, NEVER ask questions,
-merge via rebase+fast-forward, always add `ai:created` label to new issues.
+always add `ai:created` label to new issues. **NEVER merge PRs automatically** - report readiness instead.
 
 ## Forbidden
 
@@ -69,9 +69,9 @@ merge via rebase+fast-forward, always add `ai:created` label to new issues.
 
 ## PR Lifecycle
 
-Create PR within 60s of first commit → fix CI → resolve threads → 60s quiet period → rebase → merge → remove worktree.
+Create PR within 60s of first commit → fix CI → resolve threads → 60s quiet period → report readiness → wait for user merge → remove worktree.
 
-Use the worktree-management skill for cleanup and the github-cli-patterns skill for commands.
+Use the worktree-management skill for cleanup and the github-cli-patterns skill for commands. User handles merging via `/git-rebase` or manual approval.
 
 ## Resilience
 

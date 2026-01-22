@@ -39,29 +39,34 @@ or all open PR branches when using the `all` parameter.
 1. **Verify state**: `git branch --show-current`, `git status --porcelain`
    - STOP if on main or uncommitted changes
 2. **Find and sync main**: Use CLAUDE.md "Main Branch Synchronization" pattern
-3. **Merge**: `git merge origin/main --no-edit`
-4. **Push**: `git push origin $(git branch --show-current)`
-5. **Report**: branch, main SHA, merge status
+3. **Check for updates**: `git fetch origin main && git merge-base --is-ancestor origin/main HEAD`
+4. **Inform user**: Report if branch is behind main with summary of commits
+5. **Request confirmation**: Ask user if they want to merge main into current branch
+6. **Merge (if confirmed)**: `git merge origin/main --no-edit`
+7. **Push (if confirmed)**: `git push origin $(git branch --show-current)`
+8. **Report**: branch, main SHA, merge status or "merge declined by user"
 
 ---
 
 ## All Branches Mode (Orchestrator)
 
-Process all open PR branches. Use the subagent-batching skill for parallel patterns.
+Report sync status for all open PR branches. Use the subagent-batching skill for parallel patterns.
 
 ### Steps
 
 1. **Get repo**: `gh repo view --json nameWithOwner`
 2. **Update main**: CRITICAL - must happen first
 3. **List open PRs**: `gh pr list --state open --json number,headRefName,title`
-4. **Process PRs**: Launch subagents in parallel. Each subagent receives the branch name and must:
+4. **Check each PR**: Launch subagents in parallel. Each subagent receives the branch name and must:
    - Fetch latest: `git fetch origin <branch-name>`
-   - Create worktree: `git worktree add ~/git/<repo-name>/<branch-name> -b <branch-name> origin/<branch-name>`
-   - Merge main: `git merge origin/main --no-edit`
-   - Push: `git push origin <branch-name>`
-   - Report: branch, status (merged/conflict/failed)
-5. **Cleanup**: `git worktree remove` and `git worktree prune`
-6. **Report**: repo, main SHA, clean/conflicts/failed per PR
+   - Check if behind main: `git merge-base --is-ancestor origin/main HEAD`
+   - Report: branch name, merge status (current/behind/conflict/needs-merge)
+   - Do NOT merge or push changes
+5. **Compile results**: Gather all reports
+6. **Report**: repo, main SHA, merge-readiness for each PR (current/behind/conflict)
+7. **Prompt user**: Ask which PRs should be synced with main (if any are behind)
+8. **Sync only confirmed**: Only merge confirmed branches after user approval
+9. **Cleanup**: `git worktree remove` and `git worktree prune`
 
 ---
 

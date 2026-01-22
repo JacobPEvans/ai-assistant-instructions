@@ -1,17 +1,18 @@
 ---
-description: Merge current branch's PR (if mergeable), sync local repo, and cleanup stale worktrees
+description: Check PR merge readiness, sync local repo, and cleanup stale worktrees
 model: haiku
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Bash(gh pr list:*), Bash(gh pr merge:*), Bash(gh pr view:*), Bash(git branch:*), Bash(git checkout:*), Bash(git fetch:*), Bash(git log:*), Bash(git pull:*), Bash(git status:*), Bash(git switch:*), Bash(git worktree list:*), Bash(git worktree prune:*), Bash(git worktree remove:*), Bash(grep:*)
+allowed-tools: Task, TaskOutput, Bash(gh pr list:*), Bash(gh pr view:*), Bash(git branch:*), Bash(git checkout:*), Bash(git fetch:*), Bash(git log:*), Bash(git pull:*), Bash(git status:*), Bash(git switch:*), Bash(git worktree list:*), Bash(git worktree prune:*), Bash(git worktree remove:*), Bash(grep:*)
 ---
 
 # Git Refresh
 
-Merge open PRs (if mergeable), sync the local repository, and cleanup stale worktrees.
+Check open PR merge-readiness status, sync the local repository, and cleanup stale worktrees.
+**Note**: Does not automatically merge PRs - only reports readiness status for each PR.
 
 ## Steps
 
-### 1. Identify PRs to Merge
+### 1. Identify Open PRs
 
 **CRITICAL**: Always check for open PRs, regardless of current branch.
 
@@ -27,19 +28,19 @@ gh pr view --json state,number,title 2>/dev/null
 gh pr list --author @me --state open --json number,title,headRefName
 ```
 
-1.3. If any open PRs exist, evaluate each for mergeability.
+1.3. If any open PRs exist, evaluate each for merge-readiness.
 
-### 2. Merge Eligible PRs
+### 2. Report Merge-Readiness Status
 
-For each open PR found:
+For each open PR found, **DO NOT MERGE** - only check and report status:
 
 2.1. Check merge status:
 
 ```bash
-gh pr view NUMBER --json state,mergeable,statusCheckRollup
+gh pr view NUMBER --json state,mergeable,statusCheckRollup,reviewDecision
 ```
 
-2.2. **Mergeable criteria**:
+2.2. **Merge-ready criteria**:
 
 Quick summary:
 
@@ -49,11 +50,12 @@ Quick summary:
 - All review threads resolved
 - Review decision APPROVED or not required
 
-2.3. If mergeable, merge the PR using the local rebase workflow to preserve commit signatures.
+2.3. Report: PR is ready, blocked by CI, has conflicts, or needs review.
 
-2.4. If not mergeable, report why and continue to next PR or sync.
+2.4. Continue to next PR.
 
-> **Note**: All PR merges must use the git rebase workflow to ensure commit signatures are preserved. GitHub's `gh pr merge` does not sign commits.
+> **Note**: User must explicitly merge PRs using `/git-rebase` to preserve commit
+> signatures. This command only reports readiness status.
 
 ### 3. Sync Workflow
 
@@ -129,7 +131,3 @@ git status
 - Auto-merge enabled but not yet merged
 
 Always run `gh pr list --author @me --state open` to find work that needs merging.
-
-## Merge Process
-
-All merges follow the local rebase workflow to preserve commit signatures.
