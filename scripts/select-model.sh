@@ -65,6 +65,22 @@ analyze_complexity() {
 
   # Check if input is a file path
   if [[ -f "$input" ]]; then
+    # Validate path to prevent directory traversal
+    local real_path
+    real_path=$(realpath "$input" 2>/dev/null) || {
+      echo "Error: Cannot resolve path: $input" >&2
+      return 1
+    }
+    local cwd_real
+    cwd_real=$(realpath "$PWD")
+    # Prevent path traversal by ensuring the resolved path is within the current directory.
+    # Paths must either be exactly the current directory or start with "$cwd_real/".
+    # Running from the root directory is also disallowed for security.
+    if [[ "$cwd_real" == "/" ]] || [[ "$real_path" != "$cwd_real"/* && "$real_path" != "$cwd_real" ]]; then
+      echo "Error: Path must be within current directory. Traversal to '$real_path' is not allowed." >&2
+      return 1
+    fi
+
     # File-based analysis
     line_count=$(wc -l < "$input" | tr -d ' ')
 
@@ -146,7 +162,7 @@ select_model() {
         ;;
       decision)
         echo "Model: deepseek-r1:70b + qwen3-next:80b"
-        printf "Command: bash -c 'echo \"Model 1 (DeepSeek R1):\" && ollama run deepseek-r1:70b && echo -e \"\\\\nModel 2 (Qwen):\\\" && ollama run qwen3-next:80b'\n"
+        echo "Command: bash -c 'echo \"Model 1 (DeepSeek R1):\" && ollama run deepseek-r1:70b && echo -e \"\\nModel 2 (Qwen):\" && ollama run qwen3-next:80b'"
         echo "Rationale: Cost-sensitive critical decision - using best-reasoning + general local models"
         return 0
         ;;
