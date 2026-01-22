@@ -4,9 +4,9 @@
 set -euo pipefail
 
 # Escape value for safe use in GITHUB_OUTPUT (prevents workflow command injection)
-# Escapes %, \n, \r which could inject workflow commands via ::
+# Escapes %, \r, \n which could inject workflow commands via ::
 escape_output() {
-    printf '%s' "$1" | sed 's/%/%25/g; s/\r/%0D/g' | tr '\n' ' '
+    printf '%s' "$1" | sed $'s/%/%25/g; s/\r/%0D/g' | tr $'\n' ' '
 }
 
 symlinks="" regular="" broken=""

@@ -67,16 +67,16 @@ analyze_complexity() {
   if [[ -f "$input" ]]; then
     # Validate path to prevent directory traversal
     local real_path
-    real_path=$(realpath -q "$input" 2>/dev/null) || {
+    real_path=$(realpath "$input" 2>/dev/null) || {
       echo "Error: Cannot resolve path: $input" >&2
       return 1
     }
     local cwd_real
     cwd_real=$(realpath "$PWD")
     # Prevent path traversal by ensuring the resolved path is within the current directory.
-    # A trailing slash is added to avoid prefix vulnerabilities (e.g., /data vs /data-secret).
+    # Paths must either be exactly the current directory or start with "$cwd_real/".
     # Running from the root directory is also disallowed for security.
-    if [[ "$cwd_real" == "/" ]] || [[ "$real_path" != "$cwd_real/"* ]]; then
+    if [[ "$cwd_real" == "/" ]] || [[ "$real_path" != "$cwd_real"/* && "$real_path" != "$cwd_real" ]]; then
       echo "Error: Path must be within current directory. Traversal to '$real_path' is not allowed." >&2
       return 1
     fi
