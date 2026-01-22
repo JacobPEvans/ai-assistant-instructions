@@ -99,9 +99,13 @@ list_sessions() {
     echo "Sessions in $projects_dir:"
     echo ""
 
+    # Get the home directory pattern for decoding (e.g., -Users-username -> ~)
+    local home_pattern="${HOME//\//-}"  # /Users/name -> -Users-name
+    home_pattern="${home_pattern#-}"    # Remove leading dash if present
+
     ls -1 "$projects_dir" | while read -r project_dir; do
-        # Decode the project directory name
-        local decoded="${project_dir//-Users-jevans/~}"
+        # Decode the project directory name by replacing home dir pattern with ~
+        local decoded="${project_dir//-${home_pattern}/~}"
         echo "  • $decoded"
     done
 }

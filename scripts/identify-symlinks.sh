@@ -3,6 +3,12 @@
 # Outputs to GITHUB_OUTPUT or stdout
 set -euo pipefail
 
+# Escape value for safe use in GITHUB_OUTPUT (prevents workflow command injection)
+# Escapes %, \n, \r which could inject workflow commands via ::
+escape_output() {
+    printf '%s' "$1" | sed 's/%/%25/g; s/\r/%0D/g' | tr '\n' ' '
+}
+
 symlinks="" regular="" broken=""
 
 while IFS= read -r -d '' f; do
@@ -13,9 +19,9 @@ while IFS= read -r -d '' f; do
     fi
 done < <(find . -name '*.md' -not -path './.git/*' -print0)
 
-cat >> "${GITHUB_OUTPUT:-/dev/stdout}" <<EOF
-symlinks=${symlinks% }
-regular_files=${regular% }
-broken_symlinks=${broken% }
-has_broken_symlinks=$([[ -n "$broken" ]] && echo true || echo false)
-EOF
+{
+    echo "symlinks=$(escape_output "${symlinks% }")"
+    echo "regular_files=$(escape_output "${regular% }")"
+    echo "broken_symlinks=$(escape_output "${broken% }")"
+    echo "has_broken_symlinks=$([[ -n "$broken" ]] && echo true || echo false)"
+} >> "${GITHUB_OUTPUT:-/dev/stdout}"
