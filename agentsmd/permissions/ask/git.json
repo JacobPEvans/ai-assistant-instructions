@@ -12,7 +12,6 @@
     "git commit --amend",
     "git push --force",
     "git push --force-with-lease",
-    "git clean",
-    "git reflog"
+    "git clean"
   ]
 }

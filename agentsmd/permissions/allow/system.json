@@ -15,6 +15,8 @@
     "security find-generic-password",
     "security list-keychains",
     "security show-keychain-info",
+    "ssh-add",
+    "ssh-agent",
     "sw_vers",
     "tar --disable-copyfile",
     "tar -czf",

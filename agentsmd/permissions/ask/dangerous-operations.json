@@ -1,6 +1,5 @@
 {
   "commands": [
-    "awk",
     "chmod",
     "chown",
     "cp",
