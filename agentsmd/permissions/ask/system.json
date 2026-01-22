@@ -19,8 +19,6 @@
     "redis-cli",
     "softwareupdate",
     "sqlite3",
-    "ssh-add",
-    "ssh-agent",
     "ssh-keygen",
     "system_profiler"
   ]
