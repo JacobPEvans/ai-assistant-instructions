@@ -30,7 +30,7 @@ gh pr list --author @me --state open --json number | jq length
 0. CHECK PR COUNT → set mode
 1. SCAN - Gather state (PR-focus: only PRs; Normal: all)
 2. PRIORITIZE:
-   1. PRs behind main (/sync-main) - Report status, ask user for confirmation
+   1. PRs behind main (/sync-main) - Report status, then run /sync-main per policy without asking questions
    2. Failing CI (/fix-pr-ci)
    3. Review comments (/resolve-pr-review-thread)
    4. PRs ready to merge (/git-refresh) - Report readiness, do NOT merge
@@ -69,11 +69,9 @@ always add `ai:created` label to new issues. **NEVER merge PRs automatically** -
 
 ## PR Lifecycle
 
-Create PR within 60s of first commit → fix CI → resolve threads → 60s quiet period → report readiness → wait for user
-merge → remove worktree.
+Create PR within 60s of first commit → fix CI → resolve threads → 60s quiet period → report readiness → wait for user merge → remove worktree.
 
-Use the worktree-management skill for cleanup and the github-cli-patterns skill for commands. User handles merging via
-`/git-rebase` or manual approval.
+Use the worktree-management skill for cleanup and the github-cli-patterns skill for commands. User handles merging via `/git-rebase` or manual approval.
 
 ## Resilience
 
