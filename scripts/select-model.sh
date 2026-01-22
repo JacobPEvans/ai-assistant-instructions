@@ -73,8 +73,11 @@ analyze_complexity() {
     }
     local cwd_real
     cwd_real=$(realpath "$PWD")
-    if [[ "$real_path" != "$cwd_real"* ]]; then
-      echo "Error: Path must be within current directory" >&2
+    # Prevent path traversal by ensuring the resolved path is within the current directory.
+    # A trailing slash is added to avoid prefix vulnerabilities (e.g., /data vs /data-secret).
+    # Running from the root directory is also disallowed for security.
+    if [[ "$cwd_real" == "/" ]] || [[ "$real_path" != "$cwd_real/"* ]]; then
+      echo "Error: Path must be within current directory. Traversal to '$real_path' is not allowed." >&2
       return 1
     fi
 
