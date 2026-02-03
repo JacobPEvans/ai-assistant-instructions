@@ -2,7 +2,7 @@
 description: Initialize a clean worktree for new development work
 model: haiku
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Bash(awk:*), Bash(basename:*), Bash(cd:*), Bash(gh pr list:*), Bash(gh pr view:*), Bash(git branch:*), Bash(git checkout:*), Bash(git fetch:*), Bash(git pull:*), Bash(git rev-parse:*), Bash(git status:*), Bash(git switch:*), Bash(git worktree add:*), Bash(git worktree list:*), Bash(git worktree prune:*), Bash(git worktree remove:*), Bash(grep:*), Bash(head:*), Bash(ls:*), Bash(mkdir:*), Bash(pwd:*), Bash(tr:*), TodoWrite
+allowed-tools: Task, TaskOutput, Bash(awk:*), Bash(basename:*), Bash(cd:*), Bash(gh pr list:*), Bash(gh pr view:*), Bash(git branch:*), Bash(git checkout:*), Bash(git fetch:*), Bash(git pull:*), Bash(git rev-parse:*), Bash(git status:*), Bash(git switch:*), Bash(git worktree add:*), Bash(git worktree list:*), Bash(git worktree prune:*), Bash(git worktree remove:*), Bash(grep:*), Bash(head:*), Bash(ln -s:*), Bash(ls:*), Bash(mkdir:*), Bash(pwd:*), Bash(test:*), Bash(tr:*), TodoWrite
 ---
 
 # Init Worktree
@@ -58,6 +58,19 @@ Apply branch naming rules from CLAUDE.md "Branch Naming" section. Sanitize for p
 
 See CLAUDE.md "Worktree Structure" for path format.
 
-### 7. Verify and Report
+### 7. Symlink .docs/ (if exists)
 
-Switch to worktree, verify with `git status`. Report: previous branch, worktrees cleaned, new location.
+If `.docs/` exists at repo root, symlink it into the worktree for project-specific documentation access:
+
+```bash
+# Check if .docs/ exists at repo root
+if [ -d ~/git/<repo-name>/.docs ]; then
+  ln -s ~/git/<repo-name>/.docs ~/git/<repo-name>/<branch-name>/.docs
+fi
+```
+
+This ensures project-specific docs (infrastructure commands, secrets patterns, connection details) are available in all worktrees.
+
+### 8. Verify and Report
+
+Switch to worktree, verify with `git status`. Report: previous branch, worktrees cleaned, new location, and whether `.docs/` was symlinked.
