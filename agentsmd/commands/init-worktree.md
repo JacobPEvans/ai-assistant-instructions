@@ -65,6 +65,10 @@ If `.docs/` exists at repo root, symlink it into the worktree for project-specif
 ```bash
 # Check if .docs/ exists at repo root
 if [ -d ~/git/<repo-name>/.docs ]; then
+  # Remove any existing .docs in the worktree to ensure idempotency
+  if [ -e ~/git/<repo-name>/<branch-name>/.docs ]; then
+    rm -rf ~/git/<repo-name>/<branch-name>/.docs
+  fi
   ln -s ~/git/<repo-name>/.docs ~/git/<repo-name>/<branch-name>/.docs
 fi
 ```
