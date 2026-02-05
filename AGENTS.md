@@ -109,7 +109,7 @@ When `localOnlyMode` is enabled or `--local` flag is passed:
 ❌ Database credentials
 ❌ AWS account IDs, ARNs, or API keys
 ❌ Encryption keys or secrets
-❌ **User-specific absolute paths**: `/Users/{username}/*`, `/home/{username}/*`, `$HOME/*`, `~/*` in git-tracked files
+❌ User-specific absolute paths
 
 ### Scrubbed Values for Git-Committed Files
 
@@ -127,14 +127,14 @@ Use these placeholders consistently across all repositories:
 
 ### Portable Path References
 
-**NEVER commit absolute user paths in git-tracked files.** Use these alternatives:
+**NEVER commit absolute user paths in git-tracked files.** This includes `/Users/{username}/*`, `/home/{username}/*`, `$HOME/*`, and `~/*` patterns. Use these alternatives:
 
 | Bad (User-Specific) | Good (Portable) | Use Case |
 | --- | --- | --- |
 | `/Users/john/.local/bin/tool` | `tool` | Use PATH lookup for system commands |
 | `entry: /Users/john/.local/bin/ansible-lint` | `entry: ansible-lint` | Pre-commit hooks, scripts |
-| `~/.ssh/id_rsa` | Comment with placeholder | Example files, templates |
-| `$HOME/git/nix-config/main` | `${NIX_SHELL}` (env var) | Configurable paths in scripts |
+| `~/.ssh/id_rsa` | Placeholder comment (e.g., `# /path/to/your/ssh/key`) | Example files, templates |
+| `$HOME/git/nix-config/main` | `${NIX_CONFIG_PATH}/main` (env var) | Configurable paths in scripts |
 | `/home/user/project/file.txt` | `./file.txt` or `../file.txt` | Relative paths within project |
 
 **When to use environment variables:**
