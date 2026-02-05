@@ -109,6 +109,7 @@ When `localOnlyMode` is enabled or `--local` flag is passed:
 ❌ Database credentials
 ❌ AWS account IDs, ARNs, or API keys
 ❌ Encryption keys or secrets
+❌ **User-specific absolute paths**: `/Users/{username}/*`, `/home/{username}/*`, `$HOME/*`, `~/*` in git-tracked files
 
 ### Scrubbed Values for Git-Committed Files
 
@@ -123,6 +124,34 @@ Use these placeholders consistently across all repositories:
 | API Endpoint | `https://api.example.com:8006/api2/json` | Use scrubbed domain pattern |
 | Username | `terraform`, `admin`, `user` | Generic role-based names |
 | Tokens/Keys | `your-token-here` or `<token>` | Clearly marked as placeholder |
+
+### Portable Path References
+
+**NEVER commit absolute user paths in git-tracked files.** Use these alternatives:
+
+| Bad (User-Specific) | Good (Portable) | Use Case |
+| --- | --- | --- |
+| `/Users/john/.local/bin/tool` | `tool` | Use PATH lookup for system commands |
+| `entry: /Users/john/.local/bin/ansible-lint` | `entry: ansible-lint` | Pre-commit hooks, scripts |
+| `~/.ssh/id_rsa` | Comment with placeholder | Example files, templates |
+| `$HOME/git/nix-config/main` | `${NIX_SHELL}` (env var) | Configurable paths in scripts |
+| `/home/user/project/file.txt` | `./file.txt` or `../file.txt` | Relative paths within project |
+
+**When to use environment variables:**
+
+- Scripts that reference external projects
+- Tool paths that vary by installation
+- Any path outside the current repository
+
+**When to use relative paths:**
+
+- Files within the same repository
+- Cross-references between project files
+
+**When to comment out with placeholders:**
+
+- Example configuration files (`.example` suffix)
+- Template files that users copy and customize
 
 ### Variable References in Git-Committed Code
 
