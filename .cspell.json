@@ -158,7 +158,8 @@
     "plutil",
     "cclint",
     "cclintrc",
-    "carlrannaberg"
+    "carlrannaberg",
+    "wiggum"
   ],
   "files": [
     "**/*.md"
