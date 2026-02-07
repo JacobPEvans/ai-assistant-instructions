@@ -46,8 +46,8 @@ Or just browse the [documentation](docs/) and cherry-pick what you need.
 .
 ├── AGENTS.md                  # Main AgentsMD entry point
 ├── agentsmd/                  # Supporting files
-│   ├── commands/              # Reusable command prompts
 │   ├── rules/                 # Core principles and standards
+│   ├── skills/                # Canonical patterns and rules
 │   └── workflows/             # The 5-step development workflow
 ├── .claude/                   # Claude-specific symlinks
 ├── .copilot/                  # GitHub Copilot symlinks
@@ -126,7 +126,7 @@ Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 | ------- | ----------- |
 | `/delegate-to-ai` | Delegate tasks to external AI assistants |
 
-All commands live in [`agentsmd/commands/`](agentsmd/commands/). See the [Commands](agentsmd/commands/) reference for detailed documentation on each.
+See [AGENTS.md](AGENTS.md) for the full list of available skills and tools.
 
 ## Core Concepts
 

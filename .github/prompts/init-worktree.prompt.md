@@ -1,1 +1,0 @@
-../../agentsmd/commands/init-worktree.md

@@ -158,7 +158,13 @@
     "plutil",
     "cclint",
     "cclintrc",
-    "carlrannaberg"
+    "carlrannaberg",
+    "cribl",
+    "jacobpevans",
+    "mgmt",
+    "netflow",
+    "VMID",
+    "VMIDs"
   ],
   "files": [
     "**/*.md"
