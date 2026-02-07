@@ -3,7 +3,7 @@ name: infra-orchestrator
 description: Cross-repo infrastructure orchestration for terraform and ansible pipelines
 model: sonnet
 author: JacobPEvans
-allowed-tools: [Task, TaskOutput, Bash, Read, Grep, Glob]
+allowed-tools: Task, TaskOutput, Bash, Read, Grep, Glob
 ---
 
 # Infrastructure Orchestrator

@@ -88,6 +88,8 @@ Detailed output structure...
 ---
 name: skill-name
 description: Pattern description
+version: "1.0.0"
+author: "JacobPEvans"
 ---
 
 # Pattern Name
@@ -118,6 +120,40 @@ Guidelines for using this pattern...
 | **How do I do this task?** | Sub-Agent |
 | **What's the right pattern?** | Skill |
 
+## When to Use This Architecture
+
+### Create a Sub-Agent When
+
+- The task requires multiple steps with complex logic
+- You need to handle edge cases and error scenarios
+- The operation needs detailed reporting or output
+- The task will be invoked by multiple different workflows
+- You need to coordinate between multiple tools or systems
+
+### Create a Skill When
+
+- You have a pattern that multiple agents need to reference
+- You're defining classification rules or decision trees
+- The logic is the "right way" to do something consistently
+- You want to avoid duplicating the same rules across agents
+
+### Keep It Simple When
+
+- The task is a single straightforward operation
+- The logic is unlikely to be reused elsewhere
+- You can accomplish it directly without abstraction
+
+**Don't over-architect**: Not every task needs both tiers. Start simple and refactor to this pattern when complexity or reuse demands it.
+
+### Parallel Operations
+
+For parallel operations (like resolving multiple PR threads):
+
+- Create a dedicated, atomic sub-agent for the single operation
+- Invoke it multiple times in parallel using the Task tool with `run_in_background=true`
+- Wait for completion with multiple `TaskOutput` calls (each with `block=true`) in a single message
+- Never use sequential loops for parallel work
+
 ### Example: Permission Sync
 
 **Skill** (`/sync-permissions` - auto-creates slash command):
@@ -139,7 +175,7 @@ How to analyze:
 4. Generate report
 ```
 
-**Skill** (`permission-safety-classification`):
+**Skill** (`permission-patterns`):
 
 ```text
 The right pattern:
@@ -166,8 +202,7 @@ Apply pattern-name rules:
 ```markdown
 ## Related Skills
 
-- permission-safety-classification skill - Classification patterns
-- permission-deduplication skill - Deduplication patterns
+- permission-patterns skill - Safety classification and deduplication patterns
 ```
 
 ## Directory Structure
@@ -175,9 +210,11 @@ Apply pattern-name rules:
 ```text
 agentsmd/
 ├── skills/                # Canonical patterns
-│   ├── permission-safety-classification/
+│   ├── permission-patterns/
 │   │   └── SKILL.md
-│   ├── permission-deduplication/
+│   ├── github-cli-patterns/
+│   │   └── SKILL.md
+│   ├── github-graphql/
 │   │   └── SKILL.md
 │   └── ...
 └── rules/                 # Meta: Architecture docs

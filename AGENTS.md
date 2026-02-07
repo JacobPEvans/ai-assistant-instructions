@@ -444,11 +444,11 @@ Skills from plugins auto-create slash commands. Use this table to find the right
 | Sync terraform inventory | `/infra-sync-inventory` | `infra-orchestration@jacobpevans-cc-plugins` | Distribute terraform outputs |
 | E2E pipeline test | `/infra-e2e-test` | `infra-orchestration@jacobpevans-cc-plugins` | Validate full stack |
 | Review a PR | `pr-review-toolkit` plugin | `claude-plugins-official` | Multi-agent PR review |
-| Review code | `code-reviewer` Task agent | Built-in | Confidence-scored review |
-| Resolve PR threads | `pr-thread-resolver` Task agent | Built-in | After review comments |
-| Fix CI failures | `ci-fixer` Task agent | Built-in | Fix CI on PRs |
-| Implement issues | `issue-resolver` Task agent | Built-in | For shaped issues |
-| Review documentation | `docs-reviewer` Task agent | Built-in | Markdown validation |
+| Review code | `code-reviewer` Task agent | Repo (`.claude/agents/code-reviewer.md`) | Confidence-scored review |
+| Resolve PR threads | `pr-thread-resolver` Task agent | Repo (`.claude/agents/pr-thread-resolver.md`) | After review comments |
+| Fix CI failures | `ci-fixer` Task agent | Repo (`.claude/agents/ci-fixer.md`) | Fix CI on PRs |
+| Implement issues | `issue-resolver` Task agent | Repo (`.claude/agents/issue-resolver.md`) | For shaped issues |
+| Review documentation | `docs-reviewer` Task agent | Repo (`.claude/agents/docs-reviewer.md`) | Markdown validation |
 
 ## Related Files
 

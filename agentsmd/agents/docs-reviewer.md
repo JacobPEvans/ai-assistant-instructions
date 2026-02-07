@@ -213,3 +213,4 @@ This sub-agent can be invoked by:
 - `docs-reviewer` Task agent - Standalone documentation reviews
 - PR review workflows - As part of comprehensive PR reviews
 - Pre-commit hooks - Automated validation
+- Other agents requiring documentation validation - Via the Task tool
