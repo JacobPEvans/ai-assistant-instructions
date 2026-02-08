@@ -39,11 +39,20 @@ If fails again, origin/main was updated during rebase - start over from `/git-re
 
 GH013 error about PR/status checks. This is NOT a block if commits are from approved PR.
 
-**Causes**: CI not passing, reviews not approved, merge conflict.
+**Most common cause**: CodeQL scanning hasn't completed on rebased commits.
 
-**Fix order**: Rebase feature → push (triggers CI) → wait for checks → merge to main → push.
+**Causes**: CI not passing, reviews not approved, merge conflict, CodeQL pending.
 
-Check: `gh pr view <branch> --json checks,reviews,statusCheckRollup`
+**Fix order**:
+
+1. Push rebased branch: `git push --force-with-lease origin <branch>`
+2. Wait for checks: `gh pr checks --watch`
+3. When all checks pass: `git merge <branch> --ff-only`
+4. Push to origin: `git push origin main`
+
+Check status: `gh pr view <branch> --json checks,reviews,statusCheckRollup`
+
+**Never use `gh pr merge`** - this bypasses the local fast-forward verification and can cause inconsistencies between local and remote state.
 
 ---
 
@@ -96,4 +105,4 @@ Verify before retrying:
 
 If unresolved: check `git reflog`, review `git log -10 --oneline`, ask user.
 
-**DO NOT**: Use `--force` (use `--force-with-lease`), use `gh pr merge`, run `git rebase -i`.
+**DO NOT**: Use `--force` (use `--force-with-lease`), use `gh pr merge` (always do local merge + push), run `git rebase -i`.

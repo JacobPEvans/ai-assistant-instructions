@@ -118,6 +118,44 @@ Orphaned branches should either have a PR created immediately or be deleted (if 
 - **Clean state**: Always start from latest main
 - **Concurrent sessions**: Multiple AI sessions can work on different branches safely
 
+## Starting Claude Code Sessions
+
+**Always start Claude Code from a worktree directory, not the bare repo root.**
+
+### From Bare Repo Root (Wrong)
+
+Starting Claude from `~/git/<repo>/` causes:
+
+- `git rev-parse --show-toplevel` fails (no working tree)
+- `CLAUDE.md` and `AGENTS.md` not loaded into context
+- `git status` reports nothing useful
+- File operations require absolute paths
+- No access to committed files
+
+### From Worktree Directory (Correct)
+
+Starting Claude from `~/git/<repo>/main/` or any feature worktree:
+
+- Full git context available
+- `CLAUDE.md` and `AGENTS.md` automatically loaded
+- `git status` shows actual working tree state
+- All committed files accessible for reading/editing
+- Relative paths work as expected
+
+### Recommendation
+
+Before starting Claude Code:
+
+```bash
+cd ~/git/<repo>/main/
+```
+
+Or for feature work:
+
+```bash
+cd ~/git/<repo>/feat/<branch-name>/
+```
+
 ## Migration from Standard Checkout
 
 If you have an existing repository at `~/git/<repo>/` (standard git checkout):
