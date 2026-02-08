@@ -122,6 +122,18 @@ Use inline suggestions for:
 - Type safety completions
 - Documentation generation
 
+## Project-Specific Rules
+
+These rules are unique to this codebase and must be enforced during reviews:
+
+- **Frontmatter required**: All skills, agents, and rules files must have valid YAML frontmatter with `name` and `description` fields
+- **Token limits**: Files should target 500 tokens (1,000 max). Flag files that exceed this
+- **Cross-references**: Within agentsmd files, reference by name only (e.g., "the github-cli-patterns skill"). Never use markdown file links
+- **Portable paths**: No absolute user paths (`/Users/*`, `/home/*`, `$HOME/*`, `~/*`). Use relative paths, env vars, or PATH lookup
+- **No bash `for` loops**: They break permission matching. Use parallel commands or tool-native batch operations
+- **Naming conventions**: Skills use `noun-pattern`, agents use `noun-doer`
+- **Log format**: Use `YYYY-MM-DD HH:mm:ss [LEVEL] {message}` (see code-standards.md)
+
 ## Review Checklist
 
 Before merging any change:

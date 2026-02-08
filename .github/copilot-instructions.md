@@ -1,1 +1,1 @@
-../AGENTS.md
+../agentsmd/docs/code_review_instructions.md
