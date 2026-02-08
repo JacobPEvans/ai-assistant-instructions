@@ -2,7 +2,7 @@
 description: Troubleshoot and recover from git rebase failures
 model: haiku
 author: JacobPEvans
-allowed-tools: Bash(git:*), Bash(gh pr view:*), Bash(gh pr list:*), Read, Grep, Glob
+allowed-tools: Bash(git:*), Bash(gh pr view:*), Bash(gh pr list:*), Bash(gh pr checks:*), Read, Grep, Glob
 ---
 
 # Git Rebase Troubleshoot
@@ -37,7 +37,7 @@ If fails again, origin/main was updated during rebase - start over from `/git-re
 
 ## Error: Repository Rule Violations
 
-GH013 error about PR/status checks. This is NOT a block if commits are from approved PR.
+GH013 error indicates branch protection rules blocking the push. This is expected - you must wait for required checks to pass before merging.
 
 **Most common cause**: CodeQL scanning hasn't completed on rebased commits.
 
@@ -45,14 +45,14 @@ GH013 error about PR/status checks. This is NOT a block if commits are from appr
 
 **Fix order**:
 
-1. Push rebased branch: `git push --force-with-lease origin <branch>`
-2. Wait for checks: `gh pr checks --watch`
-3. When all checks pass: `git merge <branch> --ff-only`
-4. Push to origin: `git push origin main`
+1. Push rebased branch: `cd <BRANCH_PATH> && git push --force-with-lease origin <branch>`
+2. Wait for checks: `cd <BRANCH_PATH> && gh pr checks --watch`
+3. When all checks pass: `cd <MAIN_PATH> && git merge --ff-only <branch>`
+4. Push to origin: `cd <MAIN_PATH> && git push origin main`
 
 Check status: `gh pr view <branch> --json checks,reviews,statusCheckRollup`
 
-**Never use `gh pr merge`** - this bypasses the local fast-forward verification and can cause inconsistencies between local and remote state.
+**Never use `gh pr merge`** - bypasses commit signing and local fast-forward verification.
 
 ---
 

@@ -124,17 +124,17 @@ Orphaned branches should either have a PR created immediately or be deleted (if 
 
 ### From Bare Repo Root (Wrong)
 
-Starting Claude from `~/git/<repo>/` causes:
+Starting Claude from `~/git/<repo-name>/` causes:
 
 - `git rev-parse --show-toplevel` fails (no working tree)
 - `CLAUDE.md` and `AGENTS.md` not loaded into context
-- `git status` reports nothing useful
+- `git status` fails with error: `fatal: this operation must be run in a work tree`
 - File operations require absolute paths
 - No access to committed files
 
 ### From Worktree Directory (Correct)
 
-Starting Claude from `~/git/<repo>/main/` or any feature worktree:
+Starting Claude from `~/git/<repo-name>/main/` or any feature worktree:
 
 - Full git context available
 - `CLAUDE.md` and `AGENTS.md` automatically loaded
@@ -147,13 +147,13 @@ Starting Claude from `~/git/<repo>/main/` or any feature worktree:
 Before starting Claude Code:
 
 ```bash
-cd ~/git/<repo>/main/
+cd ~/git/<repo-name>/main/
 ```
 
 Or for feature work:
 
 ```bash
-cd ~/git/<repo>/feat/<branch-name>/
+cd ~/git/<repo-name>/feat/<branch-name>/
 ```
 
 ## Migration from Standard Checkout
