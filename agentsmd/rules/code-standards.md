@@ -31,7 +31,26 @@ Before writing any code, ensure you:
 
 - **Robustness**: Implement comprehensive error handling.
 - **Clarity**: Provide meaningful error messages that can help with debugging.
-- **Logging**: Log errors with sufficient context.
+- **Logging**: See Logging Standards section below.
+
+## Logging Standards
+
+Use standardized log format: `YYYY-MM-DD HH:mm:ss [LEVEL] {message}`
+
+**Log levels**:
+
+- **ERROR**: System failures, exceptions requiring attention
+- **WARN**: Unexpected but recoverable conditions
+- **INFO**: Normal operational messages
+- **DEBUG**: Detailed diagnostic information
+
+**Language-specific**:
+
+- **Python**: Use `logging` module, not `print()`
+- **Bash**: `echo "[$(date '+%Y-%m-%d %H:%M:%S')] [LEVEL] message"`
+- **JavaScript/TypeScript**: Use Winston or structured logger
+
+**Best practices**: Include context (operation, user, resource), avoid logging secrets
 
 ## Technology-Specific Guidelines
 

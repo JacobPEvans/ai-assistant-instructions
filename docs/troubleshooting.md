@@ -28,12 +28,12 @@ Common issues and solutions for using this repository.
 
 ### "Permission denied when running scripts"
 
-**Problem**: Scripts in `agentsmd/commands/` fail with permission errors.
+**Problem**: Scripts fail with permission errors.
 
 **Solution**:
 
-1. Make scripts executable: `chmod +x agentsmd/commands/*.sh`
-2. Check that you have the required commands in your allow list
+1. Make scripts executable: `chmod +x scripts/*.sh`
+2. Check that you have the required tools in your allow list
 3. See [Permission System](../agentsmd/docs/permission-system.md) for details
 
 ## Git Workflow Issues
@@ -60,7 +60,7 @@ See AGENTS.md "Git Workflow Patterns" section for worktree requirements and trou
 
 **Solution**:
 
-1. Use relative paths like `[Link](../agentsmd/commands/)`
+1. Use relative paths like `[Link](../agentsmd/rules/)`
 2. Always include `.md` extension in links - for example, link to `guide.md` not `guide`
 3. Avoid paths with spaces or special characters
 4. Test locally with a markdown viewer before committing

@@ -1,1 +1,0 @@
-../../agentsmd/commands/resolve-issues.md

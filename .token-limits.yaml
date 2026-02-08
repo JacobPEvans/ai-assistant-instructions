@@ -8,9 +8,6 @@ defaults:
 
 # File-specific limits
 limits:
-  # Commands - keep these thin (orchestrators only)
-  agentsmd/commands/*.md: 1000
-
   # Agents - can be larger but should still be focused
   agentsmd/agents/*.md: 2500
 

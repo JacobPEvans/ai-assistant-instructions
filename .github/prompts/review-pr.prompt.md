@@ -1,1 +1,0 @@
-../../agentsmd/commands/review-pr.md

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # select-model.sh - Automatic model selection based on task requirements
 #
-# This script implements the decision tree from agentsmd/commands/delegate-to-ai.md
+# This script implements the decision tree from the delegate-to-ai skill
 # to select the best AI model for a given task considering cost, privacy, and capability needs.
 #
 # Usage: select-model.sh [options]

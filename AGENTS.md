@@ -403,11 +403,12 @@ Worktrees are stale when:
 
 ## Architecture
 
-Commands, sub-agents, and skills follow a **three-tier architecture** for maintainability:
+Skills and sub-agents follow a **two-tier architecture**:
 
-- **Commands** (`agentsmd/commands/`) - Orchestrate user-facing workflows
 - **Sub-Agents** (`.claude/agents/`) - Execute specialized tasks
-- **Skills** (`agentsmd/skills/`) - Canonical patterns referenced by commands and agents
+- **Skills** (`agentsmd/skills/`) - Canonical patterns referenced by agents
+
+Skills in plugins auto-create slash commands. No separate command files needed.
 
 See [Command-Agent-Skill Architecture](./agentsmd/rules/command-agent-skill-architecture.md) for the complete pattern.
 
@@ -418,40 +419,40 @@ Claude has all names loaded at startup - file links waste tokens.
 
 **In docs, workflows, and other files**: Use normal markdown links. These aren't Claude Code features.
 
-## Commands
+## Available Skills & Tools
 
-All commands from `agentsmd/commands/` are available. Use this table to select the right one:
+Skills from plugins auto-create slash commands. Use this table to find the right tool:
 
-| Intent | Command | Scope | Notes |
+| Intent | Skill/Tool | Source | Notes |
 | --- | --- | --- | --- |
-| Start new development | `/init-worktree` | Repo | Always first for new work |
-| Sync permissions across repos | `/sync-permissions` | Repo | Merge local settings to repo permissions |
-| Sync current branch with main | `/sync-main` | Branch | Update main, merge into current |
-| Sync all PRs with main | `/sync-main all` | Repo | Update main, merge into all open PRs |
-| Rebase branch onto main | `/git-rebase` | Branch | Rebase and push to origin |
-| Troubleshoot rebase failures | `/git-rebase-troubleshoot` | Branch | Recover from failed rebases |
-| Troubleshoot worktree issues | `/git-worktree-troubleshooting` | Repo | Fix worktree/branch/refname issues |
-| Troubleshoot pre-commit | `/git-precommit-troubleshooting` | Repo | Fix pre-commit hook failures |
-| Fix current PR CI failures | `/fix-pr-ci` | Single PR | Fix CI on current PR |
-| Fix all PR CI failures | `/fix-pr-ci all` | Repo | Fix CI across all PRs in parallel |
-| Sync repo, merge PRs | `/git-refresh` | Repo | Also cleans worktrees |
-| Create a GitHub issue | `/shape-issues` | Repo | Shape before creating |
-| Implement an issue | `/resolve-issues` | Repo | For shaped issues |
-| Review a PR | `/review-pr` | Single PR | Systematic review |
-| Review code | `/review-code` | Repo | Thorough code reviews |
-| Review documentation | `/review-docs` | Repo | Markdown validation |
-| Resolve PR review feedback | `/resolve-pr-review-thread` | Single PR | After review comments |
-| Resolve all PR review threads | `/resolve-pr-review-thread all` | Repo | Address comments on all PRs |
-| Manage your own PR | `/manage-pr` | Single PR | PR author workflow |
-| Finalize PRs across repos | `/ready-player-one` | Multi-repo | Report merge-readiness status |
-| Autonomous maintenance | `/auto-claude` | Repo | Continuously finds work |
-| Delegate to AI models | `/delegate-to-ai` | Session | External AI via PAL MCP |
-| Add tool permissions | `/quick-add-permission` | Repo | Quick always-allow setup |
+| Start new development | `/init-worktree` | `git-workflows@jacobpevans-cc-plugins` | Always first for new work |
+| Sync branch with main | `/sync-main` | `git-workflows@jacobpevans-cc-plugins` | Update main, merge into current |
+| Sync repo, merge PRs | `/git-refresh` | `git-workflows@jacobpevans-cc-plugins` | Also cleans worktrees |
+| Rebase branch onto main | `/git-rebase` | `git-rebase-workflow@jacobpevans-cc-plugins` | Rebase and push to origin |
+| Rebase + merge PR | `/rebase-pr` | `git-rebase-workflow@jacobpevans-cc-plugins` | Local rebase-merge workflow |
+| Troubleshoot rebase | `/git-rebase-troubleshoot` | `git-troubleshooting@jacobpevans-cc-plugins` | Recover from failed rebases |
+| Troubleshoot worktrees | `/git-worktree-troubleshooting` | `git-troubleshooting@jacobpevans-cc-plugins` | Fix worktree/branch/refname |
+| Troubleshoot pre-commit | `/git-precommit-troubleshooting` | `git-troubleshooting@jacobpevans-cc-plugins` | Fix pre-commit hook failures |
+| Manage your PR | `/manage-pr` | `github-workflows@jacobpevans-cc-plugins` | PR author workflow |
+| Finalize PRs across repos | `/ready-player-one` | `github-workflows@jacobpevans-cc-plugins` | Multi-repo merge readiness |
+| Create GitHub issues | `/shape-issues` | `github-workflows@jacobpevans-cc-plugins` | Shape before creating |
+| Autonomous maintenance | `/auto-claude` | `ai-delegation@jacobpevans-cc-plugins` | Continuously finds work |
+| Delegate to AI models | `/delegate-to-ai` | `ai-delegation@jacobpevans-cc-plugins` | External AI via PAL MCP |
+| Sync permissions | `/sync-permissions` | `config-management@jacobpevans-cc-plugins` | Merge local to repo permissions |
+| Add tool permissions | `/quick-add-permission` | `config-management@jacobpevans-cc-plugins` | Quick always-allow setup |
+| Orchestrate infrastructure | `/infra-orchestrate` | `infra-orchestration@jacobpevans-cc-plugins` | Cross-repo terraform+ansible |
+| Sync terraform inventory | `/infra-sync-inventory` | `infra-orchestration@jacobpevans-cc-plugins` | Distribute terraform outputs |
+| E2E pipeline test | `/infra-e2e-test` | `infra-orchestration@jacobpevans-cc-plugins` | Validate full stack |
+| Review a PR | `pr-review-toolkit` plugin | `claude-plugins-official` | Multi-agent PR review |
+| Review code | `code-reviewer` Task agent | Repo (`.claude/agents/code-reviewer.md`) | Confidence-scored review |
+| Resolve PR threads | `pr-thread-resolver` Task agent | Repo (`.claude/agents/pr-thread-resolver.md`) | After review comments |
+| Fix CI failures | `ci-fixer` Task agent | Repo (`.claude/agents/ci-fixer.md`) | Fix CI on PRs |
+| Implement issues | `issue-resolver` Task agent | Repo (`.claude/agents/issue-resolver.md`) | For shaped issues |
+| Review documentation | `docs-reviewer` Task agent | Repo (`.claude/agents/docs-reviewer.md`) | Markdown validation |
 
 ## Related Files
 
 - `agentsmd/rules/` - Standards and guidelines
 - `agentsmd/workflows/` - 5-step development workflow
-- `agentsmd/commands/` - Slash command definitions
 - `agentsmd/docs/` - Setup documentation
 - `.claude/`, `.gemini/`, `.copilot/` - Vendor configs (symlinked)

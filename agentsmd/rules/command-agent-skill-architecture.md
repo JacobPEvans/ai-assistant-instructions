@@ -1,70 +1,19 @@
-# Command-Agent-Skill Architecture
+# Agent-Skill Architecture
 
-Standardized three-tier architecture for organizing complex workflows in Claude Code.
+Standardized two-tier architecture for organizing complex workflows in Claude Code.
 
 ## Purpose
 
 Provides clear separation of concerns between:
 
-- **Commands**: User-facing workflow orchestration
 - **Sub-Agents**: Specialized task execution
-- **Skills**: Reusable canonical patterns
+- **Skills**: Reusable canonical patterns (auto-create slash commands via plugins)
 
 This architecture prevents code/logic duplication and ensures maintainability.
 
-## The Three Tiers
+## The Two Tiers
 
-### Tier 1: Commands (`agentsmd/commands/`)
-
-**What**: User-facing entry points that orchestrate workflows.
-
-**Responsibilities**:
-
-- Define the high-level workflow (phases, steps)
-- Manage user interaction and approvals
-- Invoke sub-agents at appropriate breakpoints
-- Handle the "happy path" from start to finish
-
-**What commands should NOT do**:
-
-- Contain detailed implementation logic
-- Duplicate patterns that belong in skills
-- Perform complex operations directly (delegate to agents)
-
-**Example structure**:
-
-```markdown
----
-description: Brief command summary
-model: haiku
-allowed-tools: Task, TaskOutput, TodoWrite, AskUserQuestion
----
-
-# Command Name
-
-Brief description of what this command does.
-
-## Workflow
-
-### Phase 1: Do Something
-
-Invoke the `foo-analyzer` sub-agent to:
-- Task 1
-- Task 2
-- Task 3
-
-### Phase 2: User Approval
-
-Ask user for approval...
-
-### Phase 3: Execute
-
-Invoke the `foo-syncer` sub-agent to:
-- Apply changes
-- Verify results
-```
-
-### Tier 2: Sub-Agents (`.claude/agents/`)
+### Tier 1: Sub-Agents (`.claude/agents/`)
 
 **What**: Specialized workers that perform focused, well-defined tasks.
 
@@ -79,7 +28,6 @@ Invoke the `foo-syncer` sub-agent to:
 
 - Duplicate logic from skills (reference them instead)
 - Try to do too many things (single responsibility)
-- Make decisions that belong at command level
 
 **Example structure**:
 
@@ -105,7 +53,7 @@ What this agent accomplishes.
 
 Detailed instructions...
 
-**Reference Skill**: `agentsmd/skills/thing-pattern/SKILL.md`
+**Reference Skill**: the thing-pattern skill
 
 Apply patterns from skill...
 
@@ -116,37 +64,30 @@ More instructions...
 ## Output Format
 
 Detailed output structure...
-
-## Integration Points
-
-This agent is invoked by:
-- `/command-name` - Phase X
-- Other contexts...
 ```
 
-### Tier 3: Skills (`agentsmd/skills/*/SKILL.md`)
+### Tier 2: Skills (Plugin Skills + `agentsmd/skills/`)
 
-**What**: Canonical patterns and rules for specific tasks.
+**What**: Canonical patterns and rules for specific tasks. Plugin skills auto-create slash commands.
 
 **Responsibilities**:
 
 - Document the "right way" to do something
 - Provide decision trees and classification rules
-- Define patterns that multiple agents/commands use
+- Define patterns that multiple agents use
 - Serve as single source of truth for a pattern
 
 **What skills should NOT do**:
 
-- Contain workflow orchestration (that's for commands)
-- Execute operations (that's for agents)
+- Execute complex operations (that's for agents)
 - Be overly specific to one use case
 
 **Example structure**:
 
 ```markdown
 ---
-title: "Pattern Name"
-description: "What this pattern covers"
+name: skill-name
+description: Pattern description
 version: "1.0.0"
 author: "JacobPEvans"
 ---
@@ -167,11 +108,6 @@ Detailed classification rules, decision trees, examples...
 
 Specific examples of applying the pattern...
 
-## Commands Using This Skill
-
-- `/command-name` - Purpose
-- `agent-name` - How used
-
 ## Best Practices
 
 Guidelines for using this pattern...
@@ -181,16 +117,49 @@ Guidelines for using this pattern...
 
 | Question | Answer |
 | --- | --- |
-| **What's the process?** | Command |
 | **How do I do this task?** | Sub-Agent |
 | **What's the right pattern?** | Skill |
 
+## When to Use This Architecture
+
+### Create a Sub-Agent When
+
+- The task requires multiple steps with complex logic
+- You need to handle edge cases and error scenarios
+- The operation needs detailed reporting or output
+- The task will be invoked by multiple different workflows
+- You need to coordinate between multiple tools or systems
+
+### Create a Skill When
+
+- You have a pattern that multiple agents need to reference
+- You're defining classification rules or decision trees
+- The logic is the "right way" to do something consistently
+- You want to avoid duplicating the same rules across agents
+
+### Keep It Simple When
+
+- The task is a single straightforward operation
+- The logic is unlikely to be reused elsewhere
+- You can accomplish it directly without abstraction
+
+**Don't over-architect**: Not every task needs both tiers. Start simple and refactor to this pattern when complexity or reuse demands it.
+
+### Parallel Operations
+
+For parallel operations (like resolving multiple PR threads):
+
+- Create a dedicated, atomic sub-agent for the single operation
+- Invoke it multiple times in parallel using the Task tool with `run_in_background=true`
+- Wait for completion with multiple `TaskOutput` calls (each with `block=true`) in a single message
+- Never use sequential loops for parallel work
+
 ### Example: Permission Sync
 
-**Command** (`/sync-permissions`):
+**Skill** (`/sync-permissions` - auto-creates slash command):
 
 ```text
-The process:
+The pattern:
 1. Analyze permissions (invoke agent)
 2. Get user approval
 3. Apply changes (invoke agent)
@@ -206,88 +175,59 @@ How to analyze:
 4. Generate report
 ```
 
-**Skill** (`permission-safety-classification`):
+**Skill** (`permission-patterns`):
 
 ```text
 The right pattern:
-- Read-only operations → ALLOW
-- Modifications → ASK
-- Destructive operations → DENY
+- Read-only operations -> ALLOW
+- Modifications -> ASK
+- Destructive operations -> DENY
 [detailed rules...]
 ```
 
-## When to Use This Architecture
-
-Use this three-tier pattern when:
-
-- Workflow has multiple distinct phases
-- Logic can be reused across commands
-- User approval/interaction is needed
-- Task is complex enough to benefit from separation
-
-**Don't over-architect**: Simple commands with 1-2 steps don't need agents.
-
 ## Referencing Between Tiers
 
-### Commands → Agents
+### Agents -> Skills
 
 ```markdown
-**Invoke agent**:
-
-Use the Task tool to invoke the foo-analyzer agent (.claude/agents/foo-analyzer.md)
-```
-
-### Agents → Skills
-
-```markdown
-**Reference Skill**: `agentsmd/skills/pattern-name/SKILL.md`
+**Reference Skill**: the pattern-name skill
 
 Apply pattern-name rules:
 - Rule 1
 - Rule 2
 ```
 
-### Skills → Related Skills
+### Skills -> Related Skills
 
 ```markdown
 ## Related Skills
 
-- permission-safety-classification skill - Classification patterns
-- permission-deduplication skill - Deduplication patterns
+- permission-patterns skill - Safety classification and deduplication patterns
 ```
 
 ## Directory Structure
 
 ```text
 agentsmd/
-├── commands/              # Tier 1: User-facing commands
-│   ├── sync-permissions.md
-│   ├── init-worktree.md
-│   └── ...
-├── skills/                # Tier 3: Canonical patterns
-│   ├── permission-safety-classification/
+├── skills/                # Canonical patterns
+│   ├── permission-patterns/
 │   │   └── SKILL.md
-│   ├── permission-deduplication/
+│   ├── github-cli-patterns/
+│   │   └── SKILL.md
+│   ├── github-graphql/
 │   │   └── SKILL.md
 │   └── ...
 └── rules/                 # Meta: Architecture docs
     └── command-agent-skill-architecture.md
 
 .claude/
-└── agents/                # Tier 2: Task executors
+└── agents/                # Task executors
     ├── permissions-analyzer.md
     ├── permissions-syncer.md
     └── ...
 ```
 
 ## Best Practices
-
-### Commands
-
-1. **Be brief**: Delegate details to agents
-2. **Define phases**: Clear breakpoints for user interaction
-3. **Orchestrate**: Don't implement, invoke
-4. **User-centric**: Focus on the user experience flow
 
 ### Sub-Agents
 
@@ -298,38 +238,22 @@ agentsmd/
 
 ### Skills
 
-1. **Reusable**: Multiple commands/agents should use it
+1. **Reusable**: Multiple agents should use it
 2. **Canonical**: Single source of truth for a pattern
 3. **Examples-rich**: Show concrete applications
 4. **Decision trees**: Help with classification/choices
 
 ## Anti-Patterns
 
-### ❌ Command does too much
-
-```markdown
-## Steps
-
-1. Find all files
-2. Parse each file
-3. Classify permissions
-4. Deduplicate against patterns
-5. Apply changes
-6. Sync across tools
-[50 more lines of detailed logic...]
-```
-
-**Fix**: Create agents for major phases, reference skills for patterns.
-
-### ❌ Agent duplicates skill logic
+### Agent duplicates skill logic
 
 ```markdown
 ## Step 2: Classify Permission
 
 If permission is read-only:
-  - list, ls, show → ALLOW
+  - list, ls, show -> ALLOW
 If permission modifies:
-  - update, set → ASK
+  - update, set -> ASK
 [duplicating safety classification skill...]
 ```
 
@@ -338,39 +262,21 @@ If permission modifies:
 ```markdown
 ## Step 2: Classify Permission
 
-**Reference Skill**: `permission-safety-classification/SKILL.md`
+**Reference Skill**: the permission-safety-classification skill
 
 Apply classification rules from skill.
 ```
 
-### ❌ Skill is too specific
+### Skill is too specific
 
 ```markdown
 # Sync Permissions for Claude Settings
 
 This skill explains how to sync Claude permissions...
-[only useful for one command]
+[only useful for one agent]
 ```
 
-**Fix**: Make skill generic about permission deduplication, not specific to one command.
-
-## Migration Guide
-
-Converting existing long-form commands:
-
-1. **Identify phases** in the command
-2. **Extract implementation details** into agents (1 per major phase)
-3. **Extract reusable patterns** into skills
-4. **Update command** to be brief orchestration
-5. **Test the flow** end-to-end
-
-## Examples
-
-Well-architected commands following this pattern:
-
-- `/sync-permissions` - Three-phase workflow with two agents and two skills
-- `/init-worktree` - References worktree-management skill
-- `/fix-pr-ci` - Uses subagent-batching skill
+**Fix**: Make skill generic about permission deduplication, not specific to one agent.
 
 ## Related Documentation
 

@@ -163,7 +163,7 @@ Suggested: npm install -g current-package@latest
 ### Link Issues
 
 ```text
-File: agentsmd/commands/example.md
+File: agentsmd/rules/example.md
 Line 15: Broken link to ../rules/nonexistent.md
 Suggested: Update to ../rules/existing-file.md
 ```
@@ -184,7 +184,7 @@ Run auto-fix and report remaining issues.
 ```markdown
 @agentsmd/agents/docs-reviewer.md
 
-Validate all links in agentsmd/commands/ directory.
+Validate all links in agentsmd/rules/ directory.
 Focus: Internal link accuracy
 ```
 
@@ -210,8 +210,7 @@ Focus: Content quality, markdownlint, AI-friendly formatting
 
 This sub-agent can be invoked by:
 
-- `/review-docs` - Standalone documentation reviews
-- `/review-pr` - As part of comprehensive PR reviews
-- `/manage-pr` - During PR creation workflow
+- `docs-reviewer` Task agent - Standalone documentation reviews
+- PR review workflows - As part of comprehensive PR reviews
 - Pre-commit hooks - Automated validation
-- Custom commands - Any command needing docs validation
+- Other agents requiring documentation validation - Via the Task tool
