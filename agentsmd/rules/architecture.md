@@ -15,11 +15,11 @@ basic repository instructions to include comprehensive workspace management.
 ```text
 agentsmd/                            # Single source of truth
 ├── AGENTS.md                        # Main entry point for all AI assistants
-├── commands/                        # Reusable command prompts
 ├── rules/                           # Core principles and architecture
 │   ├── architecture.md              # This file - system design decisions
 │   ├── project-scope.md             # Project scope and boundaries
 │   └── workspace-management.md      # Multi-project workspace guidelines
+├── skills/                          # Canonical patterns and rules
 └── workflows/                       # Development workflow documentation
 
 .copilot/                            # Symlinks to agentsmd/
@@ -30,7 +30,7 @@ agentsmd/                            # Single source of truth
 
 .github/
 ├── copilot-instructions.md          # Main repository-wide AgentsMD config
-└── .copilot-*.md                    # Symlinks to agentsmd/commands/
+└── .copilot-*.md                    # Copilot-specific config files
 ```
 
 ### Design Rationale
@@ -40,7 +40,7 @@ agentsmd/                            # Single source of truth
 - **`agentsmd/`**: Single source of truth for all AI assistant content
   - `AGENTS.md`: Main entry point referenced by all vendors
   - `rules/`: Core principles, architecture, and workspace management
-  - `commands/`: Reusable command prompts for common tasks
+  - `agents/`: Sub-agents for specialized task execution
   - `workflows/`: Step-by-step development workflow documentation
 
 - **Vendor directories (`.copilot/`, `.claude/`, `.gemini/`)**: Symlinks only
@@ -50,7 +50,7 @@ agentsmd/                            # Single source of truth
 
 - **`.github/`**: GitHub-specific integration
   - `copilot-instructions.md`: Repository-wide AgentsMD config
-  - `.copilot-*.md`: Symlinks to `agentsmd/commands/`
+  - `.copilot-*.md`: Copilot-specific config files
 
 #### AI Optimization Principles
 
