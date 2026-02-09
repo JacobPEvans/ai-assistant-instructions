@@ -40,7 +40,7 @@ agentsmd/                            # Single source of truth
 - **`agentsmd/`**: Single source of truth for all AI assistant content
   - `AGENTS.md`: Main entry point referenced by all vendors
   - `rules/`: Core principles, architecture, and workspace management
-  - `commands/`: Reusable command prompts for common tasks
+  - `agents/`: Sub-agents for specialized task execution
   - `workflows/`: Step-by-step development workflow documentation
 
 - **Vendor directories (`.copilot/`, `.claude/`, `.gemini/`)**: Symlinks only

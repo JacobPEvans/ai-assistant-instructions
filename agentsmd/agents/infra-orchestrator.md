@@ -10,26 +10,14 @@ allowed-tools: Task, TaskOutput, Bash, Read, Grep, Glob
 
 Coordinates cross-repo infrastructure changes across the terraform and ansible pipeline.
 
-## Source of Truth
+## Core Patterns
 
-`terraform-proxmox` is the source of truth for:
+Follow these infrastructure rules for orchestration:
 
-- VM/container IPs and port assignments
-- VMIDs and resource allocation
-- Network topology and firewall rules
-
-Terraform outputs (`ansible_inventory`) feed downstream ansible repos.
-
-## Execution Order
-
-Changes must flow through this pipeline in order:
-
-1. `terraform-proxmox` - Provision VMs/containers on Proxmox VE
-2. `ansible-proxmox` - Configure the Proxmox host itself
-3. `ansible-proxmox-apps` - Configure applications on provisioned VMs
-4. `ansible-splunk` - Configure Splunk Enterprise
-
-Each stage depends on the prior stage completing successfully.
+- **Execution order**: See the deployment-order rule for the terraform→ansible pipeline sequence
+- **Terraform contract**: See the terraform-inventory-contract rule for how terraform outputs feed ansible
+- **Secret management**: See the doppler-integration rule for runtime secret injection
+- **Network addressing**: See the ip-addressing rule for IP allocation standards
 
 ## Repo Paths
 
