@@ -424,10 +424,9 @@ If one comment lists multiple issues:
 
 This sub-agent can be invoked by:
 
-- `/resolve-pr-review-thread` - Single PR thread resolution
-- `/resolve-pr-review-thread all` - All PRs in current repo
+- `superpowers:receiving-code-review` skill - Receive and implement code review feedback
 - `/manage-pr` - During PR workflow if reviews come in
-- Custom commands - Any workflow needing review response
+- Task tool with subagent_type=`pr-thread-resolver` - Direct invocation for review resolution
 
 ## Error Handling
 
@@ -442,5 +441,5 @@ If unable to resolve a thread:
 ## Related Documentation
 
 - github-graphql skill - Canonical GraphQL patterns for all PR operations
-- /resolve-pr-review-thread command
+- receiving-code-review superpowers skill - Parent workflow for review handling
 - subagent-parallelization rule

@@ -299,18 +299,7 @@ Skills and agents load on-demand when invoked. Keep startup footprint minimal.
   ---
   ```
 
-- **Commands**:
-
-  ```yaml
-  ---
-  description: Workflow summary
-  model: haiku  # or sonnet/opus
-  author: JacobPEvans
-  allowed-tools: [list of tools]
-  ---
-  ```
-
-**Naming**: Skills use `noun-pattern`, agents use `noun-doer`, commands use `verb-noun`.
+**Naming**: Skills use `noun-pattern`, agents use `noun-doer`.
 
 ### Cross-Referencing
 
@@ -421,9 +410,13 @@ Claude has all names loaded at startup - file links waste tokens.
 
 ## Available Skills & Tools
 
-Skills from plugins auto-create slash commands. Use this table to find the right tool:
+Use this section to find the right tool for your task:
 
-| Intent | Skill/Tool | Source | Notes |
+### Plugin Slash Commands
+
+External plugins that auto-create slash commands:
+
+| Intent | Command | Plugin Source | Notes |
 | --- | --- | --- | --- |
 | Start new development | `/init-worktree` | `git-workflows@jacobpevans-cc-plugins` | Always first for new work |
 | Sync branch with main | `/sync-main` | `git-workflows@jacobpevans-cc-plugins` | Update main, merge into current |
@@ -443,12 +436,39 @@ Skills from plugins auto-create slash commands. Use this table to find the right
 | Orchestrate infrastructure | `/infra-orchestrate` | `infra-orchestration@jacobpevans-cc-plugins` | Cross-repo terraform+ansible |
 | Sync terraform inventory | `/infra-sync-inventory` | `infra-orchestration@jacobpevans-cc-plugins` | Distribute terraform outputs |
 | E2E pipeline test | `/infra-e2e-test` | `infra-orchestration@jacobpevans-cc-plugins` | Validate full stack |
-| Review a PR | `pr-review-toolkit` plugin | `claude-plugins-official` | Multi-agent PR review |
-| Review code | `code-reviewer` Task agent | Repo (`.claude/agents/code-reviewer.md`) | Confidence-scored review |
-| Resolve PR threads | `pr-thread-resolver` Task agent | Repo (`.claude/agents/pr-thread-resolver.md`) | After review comments |
-| Fix CI failures | `ci-fixer` Task agent | Repo (`.claude/agents/ci-fixer.md`) | Fix CI on PRs |
-| Implement issues | `issue-resolver` Task agent | Repo (`.claude/agents/issue-resolver.md`) | For shaped issues |
-| Review documentation | `docs-reviewer` Task agent | Repo (`.claude/agents/docs-reviewer.md`) | Markdown validation |
+
+### Superpowers Skills
+
+Skills from the official `superpowers` plugin. Use via Skill tool or slash commands:
+
+| Intent | Skill | Notes |
+| --- | --- | --- |
+| Receive code review feedback | `superpowers:receiving-code-review` | After review comments received |
+| Request code review | `superpowers:requesting-code-review` | Before merge, after work complete |
+| Verify work completion | `superpowers:verification-before-completion` | Before claiming "done" |
+| TDD workflow | `superpowers:test-driven-development` | For features/bugfixes |
+| Debug systematically | `superpowers:systematic-debugging` | For bugs/failures |
+| Finalize development branch | `superpowers:finishing-a-development-branch` | All tests pass, ready for review |
+| Brainstorm solutions | `superpowers:brainstorming` | Before creating features |
+| Write implementation plans | `superpowers:writing-plans` | Multi-step task planning |
+| Execute plans | `superpowers:executing-plans` | Run plans in separate context |
+| Dispatch parallel agents | `superpowers:dispatching-parallel-agents` | 2+ independent tasks |
+| Find superpowers | `superpowers:using-superpowers` | Discover available superpowers |
+| Multi-agent development | `superpowers:subagent-driven-development` | Execute plans with agents |
+| Create/edit skills | `superpowers:writing-skills` | Skill development |
+| Use git worktrees | `superpowers:using-git-worktrees` | Feature isolation |
+| Interactive CLI tools | `superpowers:using-tmux-for-interactive-commands` | vim, git rebase -i, etc. |
+
+### Official Plugins & Task Agents
+
+| Intent | Name | Type | Source | Notes |
+| --- | --- | --- | --- | --- |
+| Review a PR | `pr-review-toolkit` | plugin | `claude-plugins-official` | Multi-agent PR review |
+| Review code | `code-reviewer` | Task agent | Repo (`.claude/agents/code-reviewer.md`) | Confidence-scored review |
+| Resolve PR threads | `pr-thread-resolver` | Task agent | Repo (`.claude/agents/pr-thread-resolver.md`) | After review comments |
+| Fix CI failures | `ci-fixer` | Task agent | Repo (`.claude/agents/ci-fixer.md`) | Fix CI on PRs |
+| Implement issues | `issue-resolver` | Task agent | Repo (`.claude/agents/issue-resolver.md`) | For shaped issues |
+| Review documentation | `docs-reviewer` | Task agent | Repo (`.claude/agents/docs-reviewer.md`) | Markdown validation |
 
 ## Related Files
 

@@ -585,12 +585,12 @@ Your mission:
 
 This sub-agent can be invoked by:
 
-- `/resolve-issues` - Verify dependencies as part of issue resolution
+- `issue-resolver` agent - Verify dependencies as part of issue resolution
 - `/manage-pr` - Check dependencies before creating PR
 - CI/CD pipelines - Automated dependency scanning
 - Scheduled tasks - Weekly/monthly dependency audits
 - Security workflows - Respond to vulnerability alerts
-- Custom workflows - Any scenario requiring dependency analysis
+- Other agents - Any workflow requiring dependency analysis
 
 ## Error Handling
 

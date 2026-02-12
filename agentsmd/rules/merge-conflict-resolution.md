@@ -219,11 +219,11 @@ Mark for human review when:
 | `git checkout --conflict=merge <file>` | Re-create conflict markers |
 | `git merge --abort` | Abort merge and return to pre-merge state |
 
-## Integration with Commands
+## Integration with Workflows
 
-Several commands reference this guide:
+Several workflows reference this guide:
 
 - `/sync-main` - Merges main into current branch
 - `/sync-main all` - Merges main into all open PRs
-- `/fix-pr-ci` - May need to resolve conflicts when fixing CI
+- `ci-fixer` agent - May need to resolve conflicts when fixing CI
 - `/init-worktree` - Starts from synced main to avoid conflicts
