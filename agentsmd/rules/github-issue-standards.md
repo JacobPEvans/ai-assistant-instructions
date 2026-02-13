@@ -36,7 +36,7 @@ Use prefixes to categorize issues:
 
 ### Status Labels (add as appropriate)
 
-- `ready-for-dev` - Shaped and ready for `/resolve-issues`
+- `ready-for-dev` - Shaped and ready for `issue-resolver` Task agent
 - `help-wanted` - Open for contributors
 - `good-first-issue` - Suitable for newcomers
 
@@ -204,14 +204,14 @@ These are distinct from acceptance criteria - they describe HOW to verify:
 | Scope creep            | Issue grows unbounded      | Define "Out of scope" section                |
 | No size estimate       | Work expands indefinitely  | Add size label (xs/s/m/l/xl)                 |
 
-## Integration with Commands
+## Integration with Tools
 
-| Action | Command |
-| ------ | ------- |
+| Action | Tool |
+| ------ | ---- |
 | Create/shape issues | `/shape-issues` |
-| Implement issues | `/resolve-issues` |
-| Review resulting PR | `/review-pr` |
-| Resolve PR feedback | `/resolve-pr-review-thread` |
+| Implement issues | `issue-resolver` Task agent |
+| Review resulting PR | `pr-review-toolkit` plugin |
+| Resolve PR feedback | `superpowers:receiving-code-review` skill |
 
 ## PR-Issue Linking
 

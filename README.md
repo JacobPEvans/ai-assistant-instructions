@@ -95,30 +95,30 @@ Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 
 ### Code Review & Quality
 
-| Command | Description |
-| ------- | ----------- |
-| `/review-code` | Structured code review with quality checks |
+| Tool/Skill | Description |
+| ---------- | ----------- |
+| `code-reviewer` Task agent | Confidence-scored code review with security checks |
 | `/infrastructure-review` | Review Terraform/Terragrunt infrastructure |
-| `/review-docs` | Review and improve documentation |
+| `docs-reviewer` Task agent | Review and validate documentation |
 | `/generate-code` | Scaffold new code with standards |
 
 ### PR Lifecycle Management
 
-| Command | Description |
-| ------- | ----------- |
+| Tool/Skill | Description |
+| ---------- | ----------- |
 | `/manage-pr` | Complete PR lifecycle management |
-| `/fix-pr-ci` | Fix CI failures (use `all` for all PRs) |
-| `/resolve-pr-review-thread` | Resolve review threads (use `all` for all PRs) |
+| `ci-fixer` Task agent | Fix CI failures on PRs |
+| `superpowers:receiving-code-review` | Implement code review feedback systematically |
 | `/pr-review-feedback` | GraphQL patterns for PR thread resolution |
 | `/ready-player-one` | Orchestrate PR finalization across all repositories and report merge-readiness status |
 
 ### Issue & Architecture Management
 
-| Command | Description |
-| ------- | ----------- |
+| Tool/Skill | Description |
+| ---------- | ----------- |
 | `/shape-issues` | Shape raw ideas into actionable GitHub issues |
-| `/resolve-issues` | Analyze and implement GitHub issues |
-| `/review-pr` | Comprehensive PR review with systematic analysis |
+| `issue-resolver` Task agent | Analyze and implement GitHub issues |
+| `pr-review-toolkit` plugin | Comprehensive PR review with multi-agent analysis |
 
 ### Delegation & Integration
 

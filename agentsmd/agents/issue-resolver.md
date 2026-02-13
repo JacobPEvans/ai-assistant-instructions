@@ -399,9 +399,9 @@ Your mission:
 
 This sub-agent can be invoked by:
 
-- `/resolve-issues` - For batch issue resolution
+- Task tool with subagent_type=`issue-resolver` - For shaped issue resolution
 - `/manage-pr` - During PR creation workflow
-- Custom commands - Any workflow needing issue implementation
+- Other agents - Any workflow needing issue implementation
 
 ## Error Handling
 
@@ -419,4 +419,4 @@ If unable to complete after reasonable effort:
 - code-standards rule
 - worktrees rule
 - subagent-parallelization rule
-- /resolve-issues command
+- github-issue-standards rule
