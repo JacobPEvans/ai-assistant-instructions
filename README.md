@@ -1,6 +1,11 @@
 # AI Assistant Instructions
 
 > Teaching AI assistants how to help you better. Yes, it's AI instructions written with AI assistance. We've come full circle.
+>
+> **⚠️ MIGRATION IN PROGRESS**: Claude, Gemini, Copilot, and other AI assistant custom commands,
+> skills, and agents are moving to [JacobPEvans/claude-code-plugins](https://github.com/JacobPEvans/claude-code-plugins)
+> and will be delivered as portable plugins. This repository now maintains only user home directory
+> configuration files (`CLAUDE.md`, `AGENTS.md`, etc.) for generic instructions and standards.
 
 [![License][license-badge]][license-url]
 [![Markdown Lint][markdownlint-badge]][markdownlint-url]
