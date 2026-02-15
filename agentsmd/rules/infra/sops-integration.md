@@ -107,8 +107,8 @@ Or use the `community.sops` collection for native integration:
 ### Encrypt / Decrypt Commands
 
 ```bash
-# Encrypt a new file
-sops --encrypt --age age1your-public-key secrets.yml > secrets.enc.yml
+# Encrypt a new file (uses .sops.yaml)
+sops --encrypt secrets.yml > secrets.enc.yml
 
 # Edit an encrypted file in-place
 sops secrets.enc.yml
