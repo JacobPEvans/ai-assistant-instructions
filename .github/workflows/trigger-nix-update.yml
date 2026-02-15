@@ -21,7 +21,7 @@ jobs:
     steps:
       - name: Trigger nix repository flake update
         run: |
-          gh api repos/JacobPEvans/nix-config/dispatches \
+          gh api repos/JacobPEvans/nix/dispatches \
             --method POST \
             --field event_type='upstream-repo-updated' \
             --field client_payload[flake_input_name]='ai-assistant-instructions' \
