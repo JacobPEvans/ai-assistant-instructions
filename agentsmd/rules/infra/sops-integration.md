@@ -26,28 +26,28 @@ with SOPS. If it can be injected at runtime, use Doppler.
 
 ### Key Location
 
-The age private key lives at `~/.config/sops/age/keys.txt` (SOPS default).
+The age private key lives at `$HOME/.config/sops/age/keys.txt` (SOPS default).
 
 ### Key Backup
 
 Back up the age private key to Doppler:
 
 ```bash
-doppler secrets set SOPS_AGE_KEY="$(cat ~/.config/sops/age/keys.txt)" \
+doppler secrets set SOPS_AGE_KEY="$(cat $HOME/.config/sops/age/keys.txt)" \
   --project iac-conf-mgmt --config prd
 ```
 
 ### Key Generation
 
 ```bash
-mkdir -p ~/.config/sops/age
-age-keygen -o ~/.config/sops/age/keys.txt
+mkdir -p $HOME/.config/sops/age
+age-keygen -o $HOME/.config/sops/age/keys.txt
 ```
 
 Extract the public key (for `.sops.yaml`):
 
 ```bash
-age-keygen -y ~/.config/sops/age/keys.txt
+age-keygen -y $HOME/.config/sops/age/keys.txt
 ```
 
 ## Repository Configuration
@@ -56,10 +56,7 @@ Every repo using SOPS needs a `.sops.yaml` at the root:
 
 ```yaml
 creation_rules:
-  - path_regex: \.enc\.ya?ml$
-    age: >-
-      age1your-public-key-here
-  - path_regex: secrets/.*\.ya?ml$
+  - path_regex: (\.enc\.ya?ml$|secrets/.*\.ya?ml$)
     age: >-
       age1your-public-key-here
 ```
@@ -94,7 +91,7 @@ data "sops_file" "secrets" {
 Replace `ansible-vault` with SOPS-encrypted variable files:
 
 ```bash
-# Decrypt to stdout, pipe to ansible
+# Inject decrypted secrets as env vars for ansible
 sops exec-env secrets.enc.yml 'doppler run -- ansible-playbook -i inventory/hosts.yml site.yml'
 ```
 
