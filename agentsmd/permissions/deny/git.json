@@ -7,7 +7,6 @@
     "git rebase --no-verify",
     "git config core.hooksPath",
     "git -c core.hooksPath",
-    "git -C",
     "pre-commit uninstall",
     "rm .git/hooks",
     "rm -rf .git/hooks",

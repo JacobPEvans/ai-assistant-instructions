@@ -70,5 +70,4 @@ Use standardized log format: `YYYY-MM-DD HH:mm:ss [LEVEL] {message}`
   - Instead: Run multiple simple commands in parallel
   - Instead: Use tool-native batch operations (e.g., `git add file1 file2 file3`)
   - Instead: Use find with -exec (when appropriate)
-- **NEVER use `git -C <path>`**: This breaks permission patterns. Run git commands from the correct directory.
 - **Prefer parallel execution**: Multiple independent commands should run in parallel, not chained with `&&`
