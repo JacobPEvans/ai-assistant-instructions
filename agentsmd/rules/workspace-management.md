@@ -20,7 +20,7 @@ Each project must maintain:
 
 - **Branching**: `main` for production, `feature/*` for development, `experiment/*` for temporary tests.
 - **Commits**: Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
-- **Command Execution**: Run git commands directly from the working directory. Do not use `git -C <path>` as it breaks permission pattern matching.
+- **Command Execution**: Run git commands directly from the working directory.
 
 ### Git Worktree Policy
 

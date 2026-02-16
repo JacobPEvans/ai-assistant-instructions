@@ -43,16 +43,6 @@ For Infrastructure as Code guidelines, see [Infrastructure Standards](./infrastr
 
 ## Git Command Standards
 
-### git -C Flag Usage
-
-**NEVER** use `git -C <path>` - always run git commands directly.
-
-- Bad: `git -C ~/.config/nix status`
-- Good: `git status`
-
-The `-C` flag breaks permission pattern matching and causes unnecessary approval prompts.
-If you need to operate on a different repo, note that your working directory is already set correctly.
-
 ### Bash for Loop Usage
 
 **NEVER** use bash `for` loops in commands - always prefer parallel execution of simple commands.
@@ -62,7 +52,7 @@ If you need to operate on a different repo, note that your working directory is 
 
 Reasons to avoid `for` loops:
 
-1. Breaks permission pattern matching (like `git -C`)
+1. Breaks permission pattern matching
 2. Forces sequential execution instead of parallel
 3. Reduces efficiency and increases latency
 4. Makes commands harder to read and debug
