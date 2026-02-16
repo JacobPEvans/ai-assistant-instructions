@@ -183,6 +183,7 @@ Keys are NEVER stored in files or environment variables.
 Inject secrets at runtime via secure channels:
 
 - **Doppler**: Centralized secret management with `doppler run --name-transformer tf-var`
+- **SOPS + age**: Encrypt secrets at rest in git (see the sops-integration rule)
 - **Environment Variables**: CI/CD secrets or local .env (never committed)
 - **AWS Secrets Manager / Parameter Store**: For AWS deployments
 - **SSH Agent**: For private keys (agent forwarding only, never commit keys)
