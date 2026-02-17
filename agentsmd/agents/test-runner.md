@@ -554,7 +554,7 @@ Your mission:
 
 This sub-agent can be invoked by:
 
-- `/manage-pr` - Run tests before creating PR
+- `/finalize-pr` - Run tests before creating PR
 - `issue-resolver` agent - Verify issue resolution with tests
 - `ci-fixer` agent - Diagnose test failures in CI
 - Code Generator sub-agent - Validate generated code

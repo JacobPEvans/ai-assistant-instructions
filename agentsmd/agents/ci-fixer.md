@@ -337,7 +337,7 @@ Your mission:
 This sub-agent can be invoked by:
 
 - Task tool with subagent_type=`ci-fixer` - Fix CI failures on current or all PRs
-- `/manage-pr` - During PR creation workflow if CI fails
+- `/finalize-pr` - During PR creation workflow if CI fails
 - Other agents - Any workflow needing CI failure resolution
 
 ## Error Handling

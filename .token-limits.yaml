@@ -50,7 +50,7 @@ refactoring:
     strategy: "Move PR orchestration logic to subagent, command becomes simple task launcher"
     target_tokens: 500
 
-  auto-claude:
+  auto-maintain:
     current_tokens: 5800
     strategy: "Extract state machine logic to subagent, keep command as coordinator"
     target_tokens: 1000

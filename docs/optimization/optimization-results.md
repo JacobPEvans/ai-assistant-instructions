@@ -1,5 +1,8 @@
 # Command Token Optimization Results
 
+> **ARCHIVED**: This document is a historical snapshot from the command optimization effort.
+> Command names referenced here may be outdated. See AGENTS.md for current canonical names.
+
 ## Executive Summary
 
 Successfully optimized the top 12 commands in the repository by applying DRY principles and leveraging Claude Code's skill architecture.
