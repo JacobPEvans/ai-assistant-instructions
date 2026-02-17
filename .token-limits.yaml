@@ -35,7 +35,7 @@ policy:
 # Refactoring strategy for violations
 # When a file violates the limit, use this strategy:
 refactoring:
-  resolve-pr-review-thread:
+  resolve-pr-threads:
     current_tokens: 6300
     strategy: "Extract detailed workflows and examples to subagent, keep command as thin orchestrator"
     target_tokens: 800

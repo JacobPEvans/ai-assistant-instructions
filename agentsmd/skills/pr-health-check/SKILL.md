@@ -147,9 +147,8 @@ gh pr list --state open --json number,title,state,mergeable,statusCheckRollup
 
 ## Commands Using This Skill
 
-- `/finalize-pr` - Phase 2.1 (PR Health Check)
-- `/finalize-pr` - To filter which PRs need fixing
-- `/finalize-prs` - To verify PRs are healthy before merge
+- `/finalize-pr` - Phase 2.1 (PR Health Check) and CI diagnosis for a single PR
+- `/finalize-prs` - To filter which PRs need fixing and verify PRs are healthy before merge
 - Any workflow needing PR status validation
 
 ## Related Resources
@@ -159,7 +158,7 @@ gh pr list --state open --json number,title,state,mergeable,statusCheckRollup
 
 ## Integration Points
 
-### With Manage PR
+### With /finalize-pr
 
 In `/finalize-pr` Phase 2.1, use this skill to determine next action:
 
@@ -174,7 +173,7 @@ if reviewDecision != APPROVED: → /resolve-pr-threads (review feedback)
 if all healthy: → Proceed to Phase 3
 ```
 
-### With Fix PR CI
+### With /finalize-prs
 
 Use PR health check to prioritize which PRs to fix:
 
