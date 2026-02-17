@@ -425,7 +425,7 @@ If one comment lists multiple issues:
 This sub-agent can be invoked by:
 
 - `superpowers:receiving-code-review` skill - Receive and implement code review feedback
-- `/manage-pr` - During PR workflow if reviews come in
+- `/finalize-pr` - During PR workflow if reviews come in
 - Task tool with subagent_type=`pr-thread-resolver` - Direct invocation for review resolution
 
 ## Error Handling

@@ -1,5 +1,8 @@
 # Command Token Optimization Plan
 
+> **ARCHIVED**: This document is a historical snapshot from the command optimization effort.
+> Command names referenced here may be outdated. See AGENTS.md for current canonical names.
+
 ## Executive Summary
 
 Analysis of the 20 custom commands reveals significant token usage due to duplication of patterns,

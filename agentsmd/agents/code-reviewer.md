@@ -156,6 +156,6 @@ Focus: Resource optimization, cost efficiency, security groups
 This sub-agent can be invoked by:
 
 - `pr-review-toolkit` plugin - For comprehensive PR reviews
-- `/manage-pr` - During PR creation workflow
+- `/finalize-pr` - During PR creation workflow
 - Task tool with subagent_type=`code-reviewer` - For standalone code reviews
 - Other agents - Any workflow needing code analysis

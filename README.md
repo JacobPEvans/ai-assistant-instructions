@@ -96,7 +96,7 @@ Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 
 | Command | Description |
 | ------- | ----------- |
-| `/git-refresh` | Merge PRs, sync repo, cleanup stale worktrees |
+| `/refresh-repo` | Merge PRs, sync repo, cleanup stale worktrees |
 | `/sync-main` | Sync current branch with main (use `all` for all PRs) |
 | `/sync-permissions` | Sync AI assistant permissions to repo |
 
@@ -105,19 +105,16 @@ Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 | Tool/Skill | Description |
 | ---------- | ----------- |
 | `code-reviewer` Task agent | Confidence-scored code review with security checks |
-| `/infrastructure-review` | Review Terraform/Terragrunt infrastructure |
 | `docs-reviewer` Task agent | Review and validate documentation |
-| `/generate-code` | Scaffold new code with standards |
 
 ### PR Lifecycle Management
 
 | Tool/Skill | Description |
 | ---------- | ----------- |
-| `/manage-pr` | Complete PR lifecycle management |
+| `/finalize-pr` | Complete PR lifecycle management |
 | `ci-fixer` Task agent | Fix CI failures on PRs |
 | `superpowers:receiving-code-review` | Implement code review feedback systematically |
-| `/pr-review-feedback` | GraphQL patterns for PR thread resolution |
-| `/ready-player-one` | Orchestrate PR finalization across all repositories and report merge-readiness status |
+| `/finalize-prs` | Orchestrate PR finalization across all repositories and report merge-readiness status |
 
 ### Issue & Architecture Management
 

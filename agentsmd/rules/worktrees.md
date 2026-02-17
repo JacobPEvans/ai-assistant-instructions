@@ -85,7 +85,7 @@ A worktree is stale if ANY of these are true:
 
 Every worktree/branch with commits must have an associated PR.
 
-This is required for auto-claude and all automated workflows:
+This is required for auto-maintain and all automated workflows:
 
 1. Create worktree with `/init-worktree`
 2. Make changes and commit

@@ -400,7 +400,7 @@ Your mission:
 This sub-agent can be invoked by:
 
 - Task tool with subagent_type=`issue-resolver` - For shaped issue resolution
-- `/manage-pr` - During PR creation workflow
+- `/finalize-pr` - During PR creation workflow
 - Other agents - Any workflow needing issue implementation
 
 ## Error Handling
