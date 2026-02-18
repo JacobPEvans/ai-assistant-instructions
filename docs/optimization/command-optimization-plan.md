@@ -122,7 +122,7 @@ can reduce token usage by an estimated **40-60%**.
 **Optimization:**
 
 - **Action:** Remove all batching explanations
-- **Replace with:** "Use [Subagent Batching Skill](../../agentsmd/skills/subagent-batching/SKILL.md) for parallel execution"
+- **Replace with:** "Use `superpowers:dispatching-parallel-agents` for parallel execution"
 - **Token Savings:** ~500 words (~20% in affected commands)
 
 ### 5. PR Health Check Patterns (MEDIUM IMPACT)
@@ -497,7 +497,7 @@ Quick reference for all available skills:
 
 - [GitHub GraphQL](../../agentsmd/skills/github-graphql/SKILL.md) - GraphQL query patterns
 - [PR Thread Resolution](../../agentsmd/skills/pr-thread-resolution-enforcement/SKILL.md) - Thread resolution workflow
-- [Subagent Batching](../../agentsmd/skills/subagent-batching/SKILL.md) - Parallel execution patterns
+- `superpowers:dispatching-parallel-agents` - Parallel execution patterns
 - [Worktree Management](../../agentsmd/skills/worktree-management/SKILL.md) - Worktree lifecycle
 - [PR Health Check](../../agentsmd/skills/pr-health-check/SKILL.md) - Merge-readiness criteria
 - [GitHub CLI Patterns](../../agentsmd/skills/github-cli-patterns/SKILL.md) - Common gh commands

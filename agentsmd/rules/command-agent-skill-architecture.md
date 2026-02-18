@@ -147,12 +147,8 @@ Guidelines for using this pattern...
 
 ### Parallel Operations
 
-For parallel operations (like resolving multiple PR threads):
-
-- Create a dedicated, atomic sub-agent for the single operation
-- Invoke it multiple times in parallel using the Task tool with `run_in_background=true`
-- Wait for completion with multiple `TaskOutput` calls (each with `block=true`) in a single message
-- Never use sequential loops for parallel work
+Invoke `superpowers:dispatching-parallel-agents` for parallel dispatch patterns.
+Key point: create atomic sub-agents for single operations, then dispatch them in parallel.
 
 ### Example: Permission Sync
 
