@@ -43,22 +43,7 @@ For Infrastructure as Code guidelines, see [Infrastructure Standards](./infrastr
 
 ## Git Command Standards
 
-### Bash for Loop Usage
-
-**NEVER** use bash `for` loops in commands - always prefer parallel execution of simple commands.
-
-- Bad: `for file in *.md; do markdownlint "$file"; done`
-- Good: Run multiple `markdownlint` commands in parallel (separate tool calls)
-
-Reasons to avoid `for` loops:
-
-1. Breaks permission pattern matching
-2. Forces sequential execution instead of parallel
-3. Reduces efficiency and increases latency
-4. Makes commands harder to read and debug
-
-**Preferred approach**: When you need to perform the same operation on multiple items, make multiple parallel tool calls instead of using loops.
-This maximizes efficiency and works better with permission systems.
+For bash loop restrictions and parallel execution requirements, see the code-standards rule.
 
 ## Language-Specific Conventions
 
