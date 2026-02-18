@@ -122,7 +122,7 @@ can reduce token usage by an estimated **40-60%**.
 **Optimization:**
 
 - **Action:** Remove all batching explanations
-- **Replace with:** "Use `superpowers:dispatching-parallel-agents` for parallel execution"
+- **Replace with:** "Use [`superpowers:dispatching-parallel-agents`](../../AGENTS.md#superpowers-skills) for parallel execution"
 - **Token Savings:** ~500 words (~20% in affected commands)
 
 ### 5. PR Health Check Patterns (MEDIUM IMPACT)
