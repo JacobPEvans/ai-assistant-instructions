@@ -231,14 +231,14 @@ GitHub secret scanning and branch protection help, but **personal responsibility
 
 **All changes must be made on a dedicated worktree/branch.** This repo uses worktrees for session isolation.
 
-See [Worktrees](./agentsmd/rules/worktrees.md) for structure and usage details.
+See @agentsmd/rules/worktrees.md for structure and usage details.
 
 **Key requirements:**
 
 - **ALWAYS run `/init-worktree` before starting any new development work**
 - Create worktrees from a synced main branch
 - Keep main regularly updated: `cd ~/git/<repo>/main && git pull`
-- See [Branch Hygiene](./agentsmd/rules/branch-hygiene.md) for sync rules
+- See @agentsmd/rules/branch-hygiene.md for sync rules
 
 **Skip worktrees only for:**
 
@@ -254,7 +254,7 @@ See [Worktrees](./agentsmd/rules/worktrees.md) for structure and usage details.
 - **Clarity**: Ask for clarification when requests are ambiguous
 - **No Sycophancy**: Provide correct advice, not validation of bad ideas
 
-See [Soul](./agentsmd/rules/soul.md) for personality and voice guidelines.
+See @agentsmd/rules/soul.md for personality and voice guidelines.
 
 ## Token Conservation
 
@@ -304,7 +304,7 @@ Skills and agents load on-demand when invoked. Keep startup footprint minimal.
 ### Cross-Referencing
 
 Within agentsmd files: reference by name only (e.g., "the github-cli-patterns skill").
-In docs and external files: use normal markdown links.
+In CLAUDE.md files: use `@path/to/file` syntax when linking. In non-Claude docs: use standard markdown links.
 
 ## Git Workflow Patterns
 
@@ -399,14 +399,21 @@ Skills and sub-agents follow a **two-tier architecture**:
 
 Skills in plugins auto-create slash commands. No separate command files needed.
 
-See [Command-Agent-Skill Architecture](./agentsmd/rules/command-agent-skill-architecture.md) for the complete pattern.
+See @agentsmd/rules/command-agent-skill-architecture.md for the complete pattern.
 
 ## Cross-Referencing Convention
 
-**Within commands, agents, skills, and rules**: Reference by name only (e.g., "the github-cli-patterns skill").
-Claude has all names loaded at startup - file links waste tokens.
+**When linking files in CLAUDE.md**: Always use `@path/to/file` syntax, never markdown links.
+Example: `@agentsmd/rules/soul.md`. The `@` syntax is the official Claude Code import — it actually
+loads the file's content into context. Standard markdown link syntax (bracket-parens) is inert text only.
 
-**In docs, workflows, and other files**: Use normal markdown links. These aren't Claude Code features.
+**Rules auto-loading**: Files in `.claude/rules/` auto-load as project memory without any `@` import.
+Use `.claude/rules/` (or symlink `agentsmd/rules/` there) for rules that should always be in context.
+Use `@` imports for one-off references to files outside `.claude/rules/`.
+
+**Within commands, agents, skills**: Reference by name only (e.g., "the github-cli-patterns skill").
+
+**In non-Claude docs**: Use standard markdown links.
 
 ## Available Skills & Tools
 
@@ -483,7 +490,7 @@ Skills from the official `superpowers` plugin. Use via Skill tool or slash comma
 
 ## Related Files
 
-- `agentsmd/rules/` - Standards and guidelines
+- `.claude/rules/` → symlinked to `agentsmd/rules/` — auto-loaded by Claude Code as project rules
 - `agentsmd/workflows/` - 5-step development workflow
 - `agentsmd/docs/` - Setup documentation
-- `.claude/`, `.gemini/`, `.copilot/` - Vendor configs (symlinked)
+- `.claude/agents/`, `.claude/skills/` — symlinked to `agentsmd/agents/`, `agentsmd/skills/`
