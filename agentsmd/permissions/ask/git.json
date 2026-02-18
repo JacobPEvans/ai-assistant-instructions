@@ -5,7 +5,6 @@
     "git restore",
     "git rm",
     "git cherry-pick",
-    "git worktree remove",
     "git gc",
     "git prune",
     "git rebase",
