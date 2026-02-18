@@ -108,13 +108,13 @@ services:
     endpoint: https://api.example.com:8080
     token: ${API_TOKEN}
 
-# ❌ BAD - Real values and hardcoded secrets
+# ❌ BAD - Hardcoded real-looking values instead of variables
 services:
   database:
-    host: db-prod.company.internal
+    host: db-prod.example.local
     port: 5432
     username: postgres
-    password: SuperSecure!Pass123
+    password: "<hardcoded-password-here>"
 
   api:
     endpoint: https://api.example.com

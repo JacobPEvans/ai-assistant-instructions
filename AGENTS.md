@@ -97,10 +97,10 @@ When `localOnlyMode` is enabled or `--local` flag is passed:
 
 ## Cross-Referencing Convention
 
-**In CLAUDE.md files**: Use `@path/to/file` to link files whose content should load into context.
-Always prefer `@` over markdown links when linking files — it composes content inline, ensuring
-referenced material is available without a separate file read. Reserve markdown links only for
-"see X if relevant" conditional references where you explicitly do NOT want content auto-loaded.
+**In Claude Code instruction files**: Use `@path/to/file` to compose content inline.
+Always prefer `@` over markdown links — referenced content loads automatically without a separate file
+read. Reserve markdown links only for "see X if relevant" conditional references where you explicitly
+do NOT want content auto-loaded.
 
 **Within agents, skills, and rules**: Reference by name only (e.g., "the code-standards rule").
 Rules in `.claude/rules/` auto-load every session. Other files load on demand when referenced.
