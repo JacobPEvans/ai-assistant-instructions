@@ -30,8 +30,7 @@ Consider using Haiku or Sonnet when a task doesn't need Opus-level reasoning.
 
 ### Parallel Execution
 
-When launching multiple subagents, send them in a single message to run in parallel.
-Don't wait for one to complete before starting the next unless there's a true dependency.
+Invoke `superpowers:dispatching-parallel-agents` when facing 2+ independent tasks. It covers identification, dispatch, and integration patterns.
 
 ### Context Preservation
 
