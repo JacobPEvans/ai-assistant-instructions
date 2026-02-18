@@ -55,6 +55,7 @@ The `ask/` directory contains specific command patterns that require confirmatio
     "git reset:*",             // Dangerous: can lose work
     "git rebase:*",            // Dangerous: rewrites history
     "git cherry-pick:*",       // Dangerous: cherry-picks specific commits
+    "git worktree remove --force:*", // Dangerous: can discard uncommitted changes
     "docker exec:*",           // Dangerous: executes in running container
     "docker run:*",            // Dangerous: creates new container
     "npm install:*",           // Requires confirmation: modifies dependencies
@@ -116,7 +117,7 @@ agentsmd/permissions/
 │   └── tools.json             # Dev tools: rbenv, goenv, redis-cli, ollama, shellcheck, etc.
 │
 ├── ask/
-│   ├── git.json               # Git: merge, reset, rebase, cherry-pick
+│   ├── git.json               # Git: merge, reset, rebase, cherry-pick, worktree remove --force, restore, rm, gc/prune, commit --amend, push --force, clean
 │   ├── dangerous-operations.json  # rm, mv, cp, chmod, chown, sed, awk
 │   ├── package-managers.json  # Package runners: pipx run, uvx, bunx, npx (ask before running)
 │   ├── containers.json        # docker exec, docker run, kubectl exec/apply/delete
@@ -194,6 +195,7 @@ These commands are consistently placed in the Ask list because they're powerful 
 - `git reset:*` - Can lose work if reset to wrong commit
 - `git rebase:*` - Rewrites history, dangerous if not careful
 - `git cherry-pick:*` - Can create conflicts or duplicate commits
+- `git worktree remove --force:*` - Can discard uncommitted changes in a working tree
 
 ### File Operations
 
