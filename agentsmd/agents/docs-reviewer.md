@@ -106,15 +106,7 @@ Check:
 - Use descriptive link text (e.g., "Conventional Commits standard" instead of "click here")
 - Structure content for AI consumption with numbered steps and subtasks
 
-### 7. Memory Bank Integration
-
-Update if needed:
-
-- technical-context memory-bank
-- project-brief memory-bank
-- progress-tracking memory-bank
-
-### 8. Link Validation
+### 7. Link Validation
 
 - Check that all internal and external links are valid
 - Verify relative paths work correctly from their source location
