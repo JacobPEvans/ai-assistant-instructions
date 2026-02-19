@@ -231,14 +231,14 @@ GitHub secret scanning and branch protection help, but **personal responsibility
 
 **All changes must be made on a dedicated worktree/branch.** This repo uses worktrees for session isolation.
 
-See @agentsmd/rules/worktrees.md for structure and usage details.
+See `@agentsmd/rules/worktrees.md` for structure and usage details.
 
 **Key requirements:**
 
 - **ALWAYS run `/init-worktree` before starting any new development work**
 - Create worktrees from a synced main branch
 - Keep main regularly updated: `cd ~/git/<repo>/main && git pull`
-- See @agentsmd/rules/branch-hygiene.md for sync rules
+- See `@agentsmd/rules/branch-hygiene.md` for sync rules
 
 **Skip worktrees only for:**
 
@@ -254,7 +254,7 @@ See @agentsmd/rules/worktrees.md for structure and usage details.
 - **Clarity**: Ask for clarification when requests are ambiguous
 - **No Sycophancy**: Provide correct advice, not validation of bad ideas
 
-See @agentsmd/rules/soul.md for personality and voice guidelines.
+See `@agentsmd/rules/soul.md` for personality and voice guidelines.
 
 ## Token Conservation
 
@@ -304,7 +304,7 @@ Skills and agents load on-demand when invoked. Keep startup footprint minimal.
 ### Cross-Referencing
 
 Within agentsmd files: reference by name only (e.g., "the github-cli-patterns skill").
-In CLAUDE.md files: use `@path/to/file` syntax when linking. In non-Claude docs: use standard markdown links.
+In CLAUDE.md, AGENTS.md, and other Claude-loaded docs: use `@path/to/file` syntax when linking. In non-Claude docs: use standard markdown links.
 
 ## Git Workflow Patterns
 
@@ -399,7 +399,7 @@ Skills and sub-agents follow a **two-tier architecture**:
 
 Skills in plugins auto-create slash commands. No separate command files needed.
 
-See @agentsmd/rules/command-agent-skill-architecture.md for the complete pattern.
+See `@agentsmd/rules/command-agent-skill-architecture.md` for the complete pattern.
 
 ## Cross-Referencing Convention
 
@@ -490,7 +490,7 @@ Skills from the official `superpowers` plugin. Use via Skill tool or slash comma
 
 ## Related Files
 
-- `.claude/rules/` → symlinked to `agentsmd/rules/` — auto-loaded by Claude Code as project rules
+- `.claude/rules` → symlinked to `agentsmd/rules/` — auto-loaded by Claude Code as project rules
 - `agentsmd/workflows/` - 5-step development workflow
 - `agentsmd/docs/` - Setup documentation
 - `.claude/agents/`, `.claude/skills/` — symlinked to `agentsmd/agents/`, `agentsmd/skills/`
