@@ -53,3 +53,4 @@ nix develop <nix-config-path>/shells/packer \
 - Each shell pins exact tool versions via Nix flakes
 - Use `--command bash -c` to run commands inside the shell
 - The nix-config path should be configured via environment variable or relative reference
+- These are direct execution patterns for Bash tool calls, not templates for script files (see the direct-execution rule)

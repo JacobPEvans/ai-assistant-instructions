@@ -67,7 +67,8 @@ Use standardized log format: `YYYY-MM-DD HH:mm:ss [LEVEL] {message}`
 ### Bash / Shell
 
 - **NEVER use `for` loops**: For loops break permission matching and require interactive prompts. This is a hard ban.
-  - Instead: Run multiple simple commands in parallel
+  - Instead: Make multiple individual Bash tool calls (one per operation, in parallel)
   - Instead: Use tool-native batch operations (e.g., `git add file1 file2 file3`)
   - Instead: Use find with -exec (when appropriate)
-- **Prefer parallel execution**: Multiple independent commands should run in parallel, not chained with `&&`
+- **Prefer parallel tool calls**: Independent commands should be separate, parallel Bash tool invocations
+- **NEVER generate scripts to run tasks**: Execute commands via tool calls, not by writing `.sh` or `.py` files. See the direct-execution rule.
