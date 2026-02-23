@@ -18,6 +18,14 @@ By integrating an MCP server, you elevate the AI's capability from simple text g
 - **Power**: Enables the AI to perform tasks that would be impossible with text output alone, such as scaffolding a new project or refactoring multiple
   files.
 
+### Execution Method
+
+Direct tool invocations are the correct execution method. See the direct-execution rule.
+
+AI assistants must NOT generate intermediate scripts to accomplish tasks they can perform
+through direct tool calls. The tool interface IS the execution layer -- do not add
+script files as an indirection layer between you and the commands you need to run.
+
 ## Shell Command Conventions
 
 ### Permission-Aware Execution

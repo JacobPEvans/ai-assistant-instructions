@@ -198,7 +198,7 @@ digraph network {
 | **Infrastructure** | Terraform + Terragrunt | Industry standard, cost management, state isolation |
 | **Cloud Provider** | AWS (primary) | Extensive free tier, mature ecosystem |
 | **Region Preference** | us-east-2 | Cost optimization, latency considerations |
-| **Scripting** | PowerShell (Windows), Bash (Unix) | Platform-appropriate automation |
+| **Shell Automation** | PowerShell (Windows), Bash (Unix) | For human-authored, repo-committed automation only |
 | **Documentation** | Markdown with strict linting | AI-friendly, version controllable |
 
 ### Development Environment
