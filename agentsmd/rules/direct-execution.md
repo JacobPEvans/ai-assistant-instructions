@@ -36,7 +36,9 @@ Scripts are appropriate ONLY when the deliverable IS a script:
 
 ## Subagent Type Selection
 
-When delegating to a Task subagent, choose the type based on what tools the subagent needs:
+When delegating to a Task subagent, choose the type based on what tools the subagent needs.
+This table covers the Task tool's built-in tool-restriction profiles; named subagent types
+(e.g., `code-reviewer`, `ci-fixer`) are separate and always include their declared tool sets.
 
 | `subagent_type` | Available Tools | Use When |
 | --- | --- | --- |
@@ -46,9 +48,10 @@ When delegating to a Task subagent, choose the type based on what tools the suba
 
 **Critical rule**: If a subagent needs to read, write, or edit files, NEVER use `subagent_type: "Bash"`.
 
-Bash-only agents that must edit files fall back to `python -c`, `sed`, and `awk` — violating this
-rule, bypassing the permission model, and producing harder-to-debug results. Use `general-purpose`
-instead, which has the Read/Edit/Write tools available.
+When Bash-only agents need to edit files, they often work around the limitation by using tools like
+`python -c`, `sed`, or `awk` to modify files directly. This bypasses the Read/Edit/Write tools and
+the permission model, and makes changes harder to audit and debug. For any task that needs file reads,
+writes, or edits, use `general-purpose` instead so the subagent can rely on Read/Edit/Write tools.
 
 ## Disambiguation
 
