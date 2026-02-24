@@ -28,6 +28,12 @@ Delegate to subagents for:
 
 Consider using Haiku or Sonnet when a task doesn't need Opus-level reasoning.
 
+### Subagent Type Selection
+
+Never use `subagent_type: "Bash"` for tasks that involve reading, writing, or editing files — Bash agents
+lack file tools and fall back to `sed`/`awk`/Python scripts. Use `general-purpose` instead.
+See the direct-execution rule for the full subagent type selection table.
+
 ### Parallel Execution
 
 Invoke `superpowers:dispatching-parallel-agents` when facing 2+ independent tasks. It covers identification, dispatch, and integration patterns.
