@@ -41,7 +41,7 @@ When delegating to a Task subagent, choose the type based on what tools the suba
 | `subagent_type` | Available Tools | Use When |
 | --- | --- | --- |
 | `general-purpose` | All tools (Read, Edit, Write, Bash, Glob, Grep, …) | Any task involving file reads, edits, or writes |
-| `Explore` | Read-only tools (Read, Glob, Grep, Bash, …) | Exploration and research only |
+| `Explore` | Exploration tools (Read, Glob, Grep, Bash, …) | Exploration and research only; no file modifications |
 | `Bash` | Bash only | Pure shell operations with no file modifications |
 
 **Critical rule**: If a subagent needs to read, write, or edit files, NEVER use `subagent_type: "Bash"`.
