@@ -1,5 +1,6 @@
 {
   "commands": [
-    "for "
+    "for ",
+    "python3 -c"
   ]
 }
