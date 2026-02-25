@@ -1,4 +1,4 @@
-# Testing Philosophy
+# Concept: Testing Philosophy
 
 ## Core Preference: Continuous Over One-Time
 
@@ -23,7 +23,7 @@ One-time tests are appropriate for:
 
 - **IaC validation**: `terraform plan`, `terraform validate`, `ansible-lint`, syntax checks
 - **Linting and formatting**: Pre-commit hooks, `markdownlint-cli2`
-- **Unit tests for application code**: TDD red-green-refactor cycle (see the code-standards rule)
+- **Unit tests for application code**: TDD red-green-refactor cycle (see the [code-standards](./code-standards.md) rule)
 - **Smoke tests**: Post-deploy sanity checks (acceptable as a complement to continuous monitoring, not a replacement)
 
 ## Proactive Alerting Requirement
