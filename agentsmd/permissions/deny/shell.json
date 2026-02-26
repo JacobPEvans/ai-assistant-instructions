@@ -2,9 +2,17 @@
   "commands": [
     "python3 <<",
     "python3 -c",
-    "python3 /dev/",
     "python3 /tmp/",
-    "python /dev/",
-    "python /tmp/"
+    "python3 /dev/null",
+    "python3 /dev/zero",
+    "python3 /dev/random",
+    "python3 /dev/urandom",
+    "python <<",
+    "python -c",
+    "python /tmp/",
+    "python /dev/null",
+    "python /dev/zero",
+    "python /dev/random",
+    "python /dev/urandom"
   ]
 }
