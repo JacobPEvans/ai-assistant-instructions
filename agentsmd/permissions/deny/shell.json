@@ -1,6 +1,24 @@
 {
   "commands": [
     "python3 <<",
-    "python3 -c"
+    "python3 -c",
+    "python3 /tmp/",
+    "python3 /dev/null",
+    "python3 /dev/zero",
+    "python3 /dev/random",
+    "python3 /dev/urandom",
+    "python3 /dev/stdin",
+    "python3 /dev/stdout",
+    "python3 /dev/stderr",
+    "python <<",
+    "python -c",
+    "python /tmp/",
+    "python /dev/null",
+    "python /dev/zero",
+    "python /dev/random",
+    "python /dev/urandom",
+    "python /dev/stdin",
+    "python /dev/stdout",
+    "python /dev/stderr"
   ]
 }
