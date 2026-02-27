@@ -126,7 +126,10 @@ bash scripts/validate-permissions.sh
 ```json
 {
   "mcp": [
-    "mcp__plugin_greptile_greptile__*"
+    "mcp__plugin_context7_context7__*",
+    "mcp__plugin_greptile_greptile__*",
+    "mcp__plugin_playwright_playwright__*",
+    "mcp__plugin_slack_slack__*"
   ]
 }
 ```
