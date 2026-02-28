@@ -1,5 +1,9 @@
 # Multi-Model AI Orchestration System
 
+> **ARCHIVED PLAN**: This document contains historical planning notes.
+> The Python scripts shown are **deprecated design artifacts** — do NOT use as templates.
+> All orchestration is handled via PAL MCP tools and direct CLI invocations.
+
 ## Executive Summary
 
 Implement a hybrid multi-model orchestration system enabling Claude (or any AI agent) to

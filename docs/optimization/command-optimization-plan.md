@@ -505,20 +505,8 @@ Quick reference for all available skills:
 
 ### 3. Automated Token Measurement
 
-**Recommendation:** Add a script to measure token usage of all commands
-
-**Script:** `.scripts/measure-command-tokens.sh`
-
-```bash
-#!/bin/bash
-for cmd in agentsmd/commands/*.md; do
-  words=$(wc -w < "$cmd")
-  bytes=$(wc -c < "$cmd")
-  echo "$words words, $bytes bytes - $(basename "$cmd")"
-done | sort -rn
-```
-
-Run before/after refactoring to verify savings.
+**Recommendation:** Measure token usage by running `wc -c` on individual command files
+via parallel Bash tool calls. Do NOT create a measurement script.
 
 ## Next Steps
 
