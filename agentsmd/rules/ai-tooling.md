@@ -43,6 +43,15 @@ See [Gemini CLI Configuration](https://geminicli.com/docs/get-started/configurat
 
 Always prefer using allowed commands to maintain automation flow without interrupting the user for confirmation.
 
+### Prefer Ecosystem Tools Over Custom Code
+
+Before any data processing, config generation, or automation task:
+
+1. **Research what exists** — use Context7 MCP, PAL MCP, and web search to verify current capabilities
+2. **Check ecosystem built-ins** — Nix, Terraform, Ansible, GitHub Actions all have extensive native functionality
+3. **Use existing CLI tools** — `jq`, `yq`, `gh`, `curl`, `nix eval` handle most tasks
+4. **Run commands directly** — the Bash tool is the execution layer, not a script-writing tool
+
 ### Handling Blocked Commands
 
 If a command is blocked or requires confirmation:
