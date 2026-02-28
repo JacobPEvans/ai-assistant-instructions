@@ -34,6 +34,16 @@ Never use `subagent_type: "Bash"` for tasks that involve reading, writing, or ed
 lack file tools and fall back to `sed`/`awk` one-liners or `python -c` commands. Use `general-purpose` instead.
 See the direct-execution rule for the full subagent type selection table.
 
+### Research First, Never Script
+
+Before implementing any solution, verify what already exists. Use Context7 MCP, PAL MCP, and web
+search to check current tool capabilities — do not trust training data. Libraries gain features,
+CLIs add subcommands, ecosystems grow.
+
+Your primary role when solving problems is to find and use existing, robust tools — not to invent
+new ones. One-off scripts are an anti-pattern indicating a failure to find the right tool. Execute
+commands directly via tool calls. See the direct-execution rule for the workflow and alternatives.
+
 ### Parallel Execution
 
 Invoke `superpowers:dispatching-parallel-agents` when facing 2+ independent tasks. It covers identification, dispatch, and integration patterns.
