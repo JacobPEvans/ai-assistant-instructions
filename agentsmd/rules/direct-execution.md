@@ -1,38 +1,53 @@
 # Direct Execution
 
-AI assistants execute tasks by running commands directly, not by generating scripts.
+AI assistants solve problems by finding and using existing tools, not by generating scripts.
 
-## Core Principle
+## The Workflow
 
-**Use direct tool invocations, not script files.** When you need to accomplish a task:
+Every task follows this sequence:
 
-1. Run commands individually via the Bash tool (or equivalent)
-2. Run independent commands as parallel tool calls in a single response
-3. Chain dependent commands with `&&` in a single Bash tool call
+1. **Identify the tool** — What existing CLI, builtin, or module handles this? (`jq`, `gh`, `nix eval`, `terraform output`, etc.)
+2. **Verify capabilities** — Use Context7 MCP, PAL MCP, or web search to confirm the tool can do what you need
+3. **Execute directly** — Run the command via the Bash tool (or equivalent tool call)
+4. **Parallelize** — Run independent commands as parallel tool calls in a single response
 
-## Do This, Not That
+If no existing tool handles the task, ask the user before writing any code.
 
-| Do This | Not This |
-| --- | --- |
-| Multiple individual Bash tool calls | Writing a `.sh` or `.py` file then executing it |
-| `git add file1 file2 file3` (one call) | A loop script that iterates over files |
-| Parallel tool invocations for independent tasks | A wrapper script that orchestrates steps |
-| Sequential tool calls for dependent operations | A Python script that chains subprocess calls |
+## Ecosystem Alternatives
 
-## Why Scripts Are Wrong Here
+When you reach for a script, use these instead:
 
-- **Permission bypass**: Written scripts sidestep the tool permission model
-- **Debugging opacity**: Script failures are harder to trace than individual command failures
-- **Wasted tokens**: Generating script source code consumes context without adding value
-- **Temp file pollution**: Scripts written to `/tmp` or project dirs create cleanup burden
+| Task | Use This | Not This |
+| --- | --- | --- |
+| JSON manipulation | `jq` via Bash tool | Python script |
+| API calls | `curl` or `gh api` via Bash tool | Python/curl script |
+| Text/file processing | `grep`, `sed`, `awk` as direct commands | Processing script |
+| Config generation | Nix functions (`lib.mkIf`, `lib.generators.*`) | Shell/Python generator |
+| Nix data processing | `builtins.fromJSON`, `builtins.readFile`, `lib.strings.*` | Python wrapper |
+| CI/CD automation | Marketplace actions, reusable workflows, composite actions | Custom shell script in workflow |
+| GitHub Actions logic | Expressions, `fromJSON()`, matrix strategies | Python/bash in workflow step |
+| Infrastructure config | Ansible modules, Terraform resources/data sources | Configuration script |
+| Infrastructure validation | `terraform validate`, `ansible-lint`, check modes | Validation script |
+| State queries | `terraform output`, `terraform state show`, Ansible facts | Query script |
+| Permission/JSON file edits | `jq` commands via Bash tool | Python file manipulation |
+| Multi-file git operations | Parallel Bash tool calls (`git add f1 f2 f3`) | Loop script |
+
+## Why This Matters
+
+- **Permission model**: Direct tool calls go through the permission system; scripts bypass it
+- **Debugging**: Individual command failures are traceable; script failures are opaque
+- **Token efficiency**: Generating script source wastes context
+- **Temp file pollution**: Scripts in `/tmp/` create cleanup burden
 
 ## Exceptions
 
 Scripts are appropriate ONLY when the deliverable IS a script:
 
-- User explicitly asks to create a script
-- The task is writing automation code that will be committed to the repository
-- CI/CD workflow files (GitHub Actions YAML, `Makefile`s, etc.)
+- User explicitly asked to create a script file
+- The script will be committed as a permanent repository artifact
+- Examples: CI/CD workflows, pre-commit hooks, `Makefile`s, committed `scripts/` CI artifacts
+
+Scripts are never appropriate for one-off tasks, temp files, or anything in `/tmp/`.
 
 ## Subagent Type Selection
 
