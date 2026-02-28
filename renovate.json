@@ -1,16 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
-  ],
-  "packageRules": [
-    {
-      "description": "Auto-merge official GitHub Actions (including major versions)",
-      "matchDatasources": ["github-actions"],
-      "matchPackagePrefixes": ["actions/"],
-      "automerge": true,
-      "automergeType": "squash",
-      "minimumReleaseAge": null
-    }
+    "config:recommended",
+    "local>JacobPEvans/.github:renovate-presets"
   ]
 }
