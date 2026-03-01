@@ -3,6 +3,7 @@
     "cat > /tmp/",
     "cat >> /tmp/",
     "tee /tmp/",
+    "python3 - <<",
     "python3 <<",
     "python3 -c",
     "python3 -",
