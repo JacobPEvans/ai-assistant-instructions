@@ -19,7 +19,7 @@ repo/
 
 ## Day-to-Day Workflow
 
-1. `cd ~/git/<repo>/main/` → direnv auto-activates the shell
+1. `cd <repo>/main/` → direnv auto-activates the shell
 2. New repo? → scaffold with a template (see below)
 3. Need to customize? → edit the repo's `flake.nix`
 
@@ -32,7 +32,7 @@ repo/
 
   ```sh
   use flake
-  export SOPS_AGE_KEY_FILE=${SOPS_AGE_KEY_FILE:-$HOME/.config/sops/age/keys.txt}
+  export SOPS_AGE_KEY_FILE=${SOPS_AGE_KEY_FILE:-${XDG_CONFIG_HOME:-$HOME/.config}/sops/age/keys.txt}
   ```
 
 - No `NIX_CONFIG_PATH` needed — the flake is local to the repo
