@@ -167,8 +167,14 @@
     "VMIDs",
     "envrc",
     "awscli",
+    "awscli2",
+    "helmfile",
+    "k9s",
     "kubeconform",
-    "shfmt"
+    "opentofu",
+    "shfmt",
+    "tfsec",
+    "trivy"
   ],
   "files": [
     "**/*.md"
