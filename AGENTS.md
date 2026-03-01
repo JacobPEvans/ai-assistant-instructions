@@ -130,6 +130,7 @@ This includes: secrets policy, worktree patterns, branch hygiene, code standards
 architecture, soul/voice guidelines, and more.
 
 @agentsmd/skills-registry.md
+@agentsmd/rules/infra/dev-shell-architecture.md
 
 ## Related Files
 

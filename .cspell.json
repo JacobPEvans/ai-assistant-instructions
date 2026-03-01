@@ -164,7 +164,17 @@
     "mgmt",
     "netflow",
     "VMID",
-    "VMIDs"
+    "VMIDs",
+    "envrc",
+    "awscli",
+    "awscli2",
+    "helmfile",
+    "k9s",
+    "kubeconform",
+    "opentofu",
+    "shfmt",
+    "tfsec",
+    "trivy"
   ],
   "files": [
     "**/*.md"
