@@ -7,7 +7,7 @@ on:
 permissions:
   contents: read
   actions: read
-  security-events: read
+  security-events: write
 tracker-id: malicious-code-scan
 tools:
   github:
@@ -41,7 +41,7 @@ When suspicious patterns are detected, generate code-scanning alerts (not standa
 ## Current Context
 
 - **Repository**: ${{ github.repository }}
-- **Analysis Date**: $(date +%Y-%m-%d)
+- **Analysis Date**: Current date (determined at runtime)
 - **Analysis Window**: Last 3 days of commits
 - **Scanner**: Malicious Code Scanner
 
@@ -137,7 +137,9 @@ For each file that changed in the last 3 days:
 1. **Get the full diff** to understand what changed:
 
    ```bash
-   git log --since="3 days ago" --all -p -- $(cat /tmp/changed_files.txt | tr '\n' ' ') 2>/dev/null | head -2000
+   while IFS= read -r file; do
+     [ -f "$file" ] && git log --since="3 days ago" --all -p -- "$file" 2>/dev/null
+   done < /tmp/changed_files.txt | head -2000
    ```
 
 2. **Analyze new function additions** for suspicious logic:

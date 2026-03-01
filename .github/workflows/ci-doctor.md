@@ -14,10 +14,13 @@ on:
     branches:
       - main
 
-# Only trigger for failures - check in the workflow body
-if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+# Only trigger for failures or cancellations - check in the workflow body
+if: ${{ github.event.workflow_run.conclusion == 'failure' || github.event.workflow_run.conclusion == 'cancelled' }}
 
-permissions: read-all
+permissions:
+  contents: read
+  actions: read
+  issues: write
 
 network: defaults
 

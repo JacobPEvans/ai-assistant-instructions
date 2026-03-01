@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
-  issues: read
+  issues: write
 strict: true
 network:
   allowed:
