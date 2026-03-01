@@ -217,7 +217,7 @@ These are distinct from acceptance criteria - they describe HOW to verify:
 
 When implementing work for a GitHub issue, bidirectional linking is required.
 
-See the issue-linking guidelines for complete documentation on:
+See the issue-pr-linking rule for complete documentation on:
 
 - Branch naming conventions
 - PR description keywords
