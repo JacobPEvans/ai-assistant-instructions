@@ -164,7 +164,11 @@
     "mgmt",
     "netflow",
     "VMID",
-    "VMIDs"
+    "VMIDs",
+    "envrc",
+    "awscli",
+    "kubeconform",
+    "shfmt"
   ],
   "files": [
     "**/*.md"
