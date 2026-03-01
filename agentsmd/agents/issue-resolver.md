@@ -209,7 +209,7 @@ Update relevant documentation:
 
 ### Step 9: Commit Changes
 
-Follow the issue-linking guidelines for proper commit formatting and issue references.
+Follow the issue-pr-linking rule for proper commit formatting and issue references.
 
 ```bash
 git add {files}

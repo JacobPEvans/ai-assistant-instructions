@@ -81,6 +81,15 @@ A worktree is stale if ANY of these are true:
 - Branch no longer exists on remote
 - Worktree has no uncommitted changes and PR is merged
 
+**Squash-merge detection**: When a branch was squash-merged, the remote branch is deleted but the local
+worktree remains. Check with:
+
+```bash
+gh pr list --repo JacobPEvans/<repo> --state merged --head <branch-name>
+```
+
+If a merged PR exists for the branch: the worktree is stale regardless of local changes.
+
 ## PR Requirement
 
 Every worktree/branch with commits must have an associated PR.
