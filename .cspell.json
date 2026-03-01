@@ -174,7 +174,14 @@
     "opentofu",
     "shfmt",
     "tfsec",
-    "trivy"
+    "trivy",
+    "agentic",
+    "toolsets",
+    "backdoors",
+    "unshallow",
+    "exfiltration",
+    "unsanitized",
+    "tinyurl"
   ],
   "files": [
     "**/*.md"
