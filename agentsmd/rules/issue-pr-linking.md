@@ -7,7 +7,7 @@ Every PR must reference related issues. Every issue must link back to its PR. Th
 Search for related issues:
 
 ```bash
-gh issue list --state open --search "<keywords from your branch/work>"
+gh issue list --repo JacobPEvans/<repo> --state open --search "<keywords from your branch/work>"
 ```
 
 ## PR Body Requirements

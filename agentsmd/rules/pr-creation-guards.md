@@ -11,8 +11,17 @@ A zombie PR occurs when a squash-merge deletes the remote branch but leaves the 
 gh pr list --repo JacobPEvans/<repo> --state merged --head <current-branch>
 ```
 
-If a merged PR exists for this branch: **STOP**. Do not create a new PR.
+If a merged PR exists for this branch, also run Guard 4's commit check before concluding it is stale:
+
+```bash
+git log origin/main..HEAD --oneline
+```
+
+If a merged PR exists AND there are no commits ahead of main: **STOP**. Do not create a new PR.
 Instead: remove the stale local worktree (`git worktree remove <path>`).
+
+If commits exist ahead of main, the branch may have been reused or have new work beyond the merged
+PR. Inspect those commits before removing anything.
 
 Also check by content similarity — squash-merge creates a new commit, so the branch name won't match:
 

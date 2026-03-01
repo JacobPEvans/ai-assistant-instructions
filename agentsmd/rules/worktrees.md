@@ -88,7 +88,15 @@ worktree remains. Check with:
 gh pr list --repo JacobPEvans/<repo> --state merged --head <branch-name>
 ```
 
-If a merged PR exists for the branch: the worktree is stale regardless of local changes.
+If a merged PR exists for the branch, also verify there are no new commits beyond main:
+
+```bash
+git log origin/main..HEAD --oneline
+```
+
+If a merged PR exists AND the above output is empty (no new commits): the worktree is stale.
+If there are commits not yet in main, the branch may have new work — do not remove without
+inspecting those commits first.
 
 ## PR Requirement
 
