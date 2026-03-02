@@ -18,7 +18,7 @@ Each project must maintain:
 
 ### Git Workflow Standards
 
-- **Branching**: `main` for production, `feature/*` for development, `experiment/*` for temporary tests.
+- **Branching**: `main` for production, `feat/<description>` for features, `fix/<description>` for fixes. See [Worktrees](./worktrees.md) for the authoritative branch naming standard.
 - **Commits**: Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
 - **Command Execution**: Run git commands directly from the working directory.
 
