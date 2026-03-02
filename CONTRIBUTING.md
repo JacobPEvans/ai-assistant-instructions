@@ -9,7 +9,7 @@ First off, thanks for considering contributing to this project. It's just me her
 1. Run `/init-worktree feat "description"` to create a clean worktree
 2. Make your changes in the worktree
 3. Commit your changes (`git commit -m 'feat: add some cool thing'`)
-4. Push to the branch (`git push origin feature/cool-thing`)
+4. Push to the branch (`git push origin feat/cool-thing`)
 5. Open a Pull Request
 
 For more details, see [Worktree Workflow](agentsmd/rules/worktrees.md).
