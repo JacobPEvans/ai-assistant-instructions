@@ -1,6 +1,6 @@
 ---
-timeout-minutes: 5
 engine: copilot
+timeout-minutes: 5
 on:
   roles: all
   issues:
@@ -23,12 +23,12 @@ concurrency:
 tools:
   github:
     mode: local
-    read-only: false
+    read-only: true
     toolsets: [default]
 permissions:
   contents: read
-  issues: write
-  pull-requests: write
+  issues: read
+  pull-requests: read
 safe-outputs:
   add-labels:
     allowed: [spam, ai-generated, link-spam, ai-inspected]
@@ -109,10 +109,8 @@ Based on your analysis:
    - If link spam is detected, use the `add-labels` safe output to add the `link-spam` label to the issue
    - If AI-generated content is detected, use the `add-labels` safe output to add the `ai-generated` label to the issue
    - Multiple labels can be added if multiple types are detected
-   - **If no warnings or issues are found** and the content appears legitimate and on-topic,
-     use the `add-labels` safe output to add the `ai-inspected` label to indicate the issue has been reviewed
-   - **If workflow_dispatch** was used, ensure the labels are applied to the correct issue/PR
-     as specified in the input URL when calling `add-labels`
+   - **If no warnings or issues are found** and content appears legitimate, use the `add-labels` safe output to add the `ai-inspected` label
+   - **If workflow_dispatch** was used, ensure the labels are applied to the correct issue/PR as specified in the input URL when calling `add-labels`
 
 2. **For Comments** (when comment ID is present):
    - If any type of spam, link spam, or AI-generated spam is detected:
@@ -129,8 +127,7 @@ Based on your analysis:
      - AI-generated code comments with promotional content
    - If spam, link spam, or suspicious patterns are detected:
      - Use the `add-labels` safe output to add appropriate labels (`spam`, `link-spam`, `ai-generated`)
-   - **If no warnings or issues are found** and the PR appears legitimate,
-     use the `add-labels` safe output to add the `ai-inspected` label
+   - **If no warnings or issues are found** and the PR appears legitimate, use the `add-labels` safe output to add the `ai-inspected` label
 
 ## Important Guidelines
 
