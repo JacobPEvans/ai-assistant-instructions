@@ -8,14 +8,14 @@ engine: copilot
 
 on:
   workflow_run:
-    workflows: ["CI Gate"]  # Monitor the CI workflow specifically
+    workflows: ["CI Gate"]
     types:
       - completed
     branches:
       - main
 
-# Only trigger for failures or cancellations - check in the workflow body
-if: ${{ github.event.workflow_run.conclusion == 'failure' || github.event.workflow_run.conclusion == 'cancelled' }}
+# Only trigger for failures - check in the workflow body
+if: ${{ github.event.workflow_run.conclusion == 'failure' }}
 
 permissions:
   contents: read
@@ -114,7 +114,7 @@ Your goal is to conduct a deep investigation when the CI workflow fails.
 2. **Update Pattern Database**: Enhance knowledge with new findings by updating pattern files
 3. **Save Artifacts**: Store detailed logs and analysis in the cached directories
 
-### Phase 6: Looking for Existing Issues
+### Phase 6: Looking for existing issues
 
 1. **Convert the report to a search query**
     - Use any advanced search features in GitHub Issues to find related issues
@@ -133,8 +133,7 @@ Your goal is to conduct a deep investigation when the CI workflow fails.
    - **Reproduction Steps**: How to reproduce the issue locally
    - **Recommended Actions**: Specific steps to fix the issue
    - **Prevention Strategies**: How to avoid similar failures
-   - **AI Team Self-Improvement**: Give a short set of additional prompting instructions to copy-and-paste into instructions.md
-     for AI coding agents to help prevent this type of failure in future
+   - **AI Team Self-Improvement**: Short prompting instructions to copy-and-paste into instructions.md for AI coding agents to prevent this failure type
    - **Historical Context**: Similar past failures and their resolutions
 2. **Actionable Deliverables**:
    - Create an issue with investigation results (if warranted)
@@ -149,7 +148,7 @@ Your goal is to conduct a deep investigation when the CI workflow fails.
 When creating an investigation issue, use this structure:
 
 ```markdown
-# CI Failure Investigation - Run #${{ github.event.workflow_run.run_number }}
+# 🏥 CI Failure Investigation - Run #${{ github.event.workflow_run.run_number }}
 
 ## Summary
 [Brief description of the failure]
@@ -175,8 +174,7 @@ When creating an investigation issue, use this structure:
 [How to prevent similar failures]
 
 ## AI Team Self-Improvement
-[Short set of additional prompting instructions to copy-and-paste into instructions.md
-for AI coding agents to help prevent this type of failure in future]
+[Short set of additional prompting instructions to copy-and-paste into instructions.md for AI coding agents to help prevent this type of failure in future]
 
 ## Historical Context
 [Similar past failures and patterns]

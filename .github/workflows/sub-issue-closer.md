@@ -1,7 +1,7 @@
 ---
 description: Scheduled workflow that recursively closes parent issues when all sub-issues are 100% complete
-name: Sub-Issue Closer
 engine: copilot
+name: Sub-Issue Closer
 on:
   schedule: daily
   workflow_dispatch:
@@ -27,7 +27,7 @@ safe-outputs:
 timeout-minutes: 15
 ---
 
-# Sub-Issue Closer
+# Sub-Issue Closer 🔒
 
 You are an intelligent agent that automatically closes parent issues when all their sub-issues are 100% complete.
 
@@ -84,7 +84,7 @@ For each parent issue that is 100% complete:
 2. **Add a comment** explaining the closure using the `add_comment` safe output:
 
    ```json
-   {"type": "add_comment", "issue_number": 123, "body": "Automatically closed - all sub-issues complete."}
+   {"type": "add_comment", "issue_number": 123, "body": "All sub-issues completed. Closed automatically. Sub-issues: X/X (100%)"}
    ```
 
 ### Step 5: Report Summary
@@ -110,19 +110,29 @@ At the end of processing, provide a summary of:
 During processing, maintain clear logging:
 
 ```text
-Analyzing parent issues...
+🔍 Analyzing parent issues...
 
-Issue #42: "Feature: Add dark mode"
+📋 Issue #42: "Feature: Add dark mode"
    State: OPEN
-   Sub-issues: 5 total, 5/5 closed (100%)
-   Action: CLOSING
+   Sub-issues: 5 total
+   - #43: "Design dark mode colors" [CLOSED]
+   - #44: "Implement dark mode toggle" [CLOSED]
+   - #45: "Add dark mode to settings" [CLOSED]
+   - #46: "Test dark mode" [CLOSED]
+   - #47: "Document dark mode" [CLOSED]
+   Status: 5/5 closed (100%)
+   ✅ All sub-issues complete - CLOSING
 
-Issue #50: "Feature: User authentication"
+📋 Issue #50: "Feature: User authentication"
    State: OPEN
-   Sub-issues: 3 total, 2/3 closed (67%)
-   Action: keeping open
+   Sub-issues: 3 total
+   - #51: "Add login page" [CLOSED]
+   - #52: "Add logout functionality" [OPEN]
+   - #53: "Add password reset" [CLOSED]
+   Status: 2/3 closed (67%)
+   ⏸️  Incomplete - keeping open
 
-Summary:
+✅ Summary:
    - Parent issues analyzed: 2
    - Issues closed: 1
    - Issues remaining open: 1
