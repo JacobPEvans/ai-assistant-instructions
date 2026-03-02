@@ -1,12 +1,13 @@
 ---
 description: Scheduled workflow that recursively closes parent issues when all sub-issues are 100% complete
+engine: copilot
 name: Sub-Issue Closer
 on:
   schedule: daily
   workflow_dispatch:
 permissions:
   contents: read
-  issues: read
+  issues: write
 strict: true
 network:
   allowed:

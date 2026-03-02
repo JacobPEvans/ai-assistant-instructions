@@ -23,12 +23,12 @@ concurrency:
 tools:
   github:
     mode: local
-    read-only: true
+    read-only: false
     toolsets: [default]
 permissions:
   contents: read
-  issues: read
-  pull-requests: read
+  issues: write
+  pull-requests: write
 safe-outputs:
   add-labels:
     allowed: [spam, ai-generated, link-spam, ai-inspected]

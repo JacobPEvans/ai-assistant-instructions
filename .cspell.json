@@ -181,7 +181,8 @@
     "unshallow",
     "exfiltration",
     "unsanitized",
-    "tinyurl"
+    "tinyurl",
+    "pathspec"
   ],
   "files": [
     "**/*.md"
