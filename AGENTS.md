@@ -34,6 +34,8 @@ Never use `subagent_type: "Bash"` for tasks that involve reading, writing, or ed
 lack file tools and fall back to `sed`/`awk` one-liners or `python -c` commands. Use `general-purpose` instead.
 See the direct-execution rule for the full subagent type selection table.
 
+@agentsmd/rules/agent-dispatching.md
+
 ### Research First, Never Script
 
 Before implementing any solution, verify what already exists. Use Context7 MCP, PAL MCP, and web
