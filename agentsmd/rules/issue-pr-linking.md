@@ -38,7 +38,10 @@ gh issue comment <issue-num> --repo JacobPEvans/<repo> --body "Implementation: #
 | Type | Branch Pattern | Example |
 | ---- | -------------- | ------- |
 | Feature | `feature/<description>` | `feature/add-dark-mode` |
-| Fix | `bugfix/<description>` | `bugfix/login-timeout` |
+| Bugfix | `bugfix/<description>` | `bugfix/login-timeout` |
+| Hotfix | `hotfix/<description>` | `hotfix/critical-patch` |
+| Release | `release/<version>` | `release/v1.2.0` |
+| Chore | `chore/<description>` | `chore/update-readme` |
 
 Use the conventional branch prefixes: `feature/`, `bugfix/`, `hotfix/`, `release/`, `chore/`.
 Note: commit message types (`feat:`, `fix:`, `docs:`, etc.) are separate from branch names.
