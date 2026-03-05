@@ -59,7 +59,7 @@ Example:
 ```text
 Fix CI failures for PR #142
 Repository: owner/repo
-Branch: feat/new-feature
+Branch: feature/new-feature
 Worktree: /path/to/worktree
 Failing checks:
   - ESLint (exit code 1)
@@ -296,8 +296,8 @@ Recommendation: {human intervention needed / additional context required}
 
 Fix CI failures for PR #142
 Repository: JacobPEvans/ai-assistant-instructions
-Branch: feat/new-feature
-Worktree: /Users/jevans/git/ai-assistant-instructions/feat/new-feature
+Branch: feature/new-feature
+Worktree: /Users/jevans/git/ai-assistant-instructions/feature/new-feature
 Failing checks:
   - markdownlint
   - TypeScript check
@@ -310,8 +310,8 @@ Failing checks:
 
 Fix all CI failures for PR #89 in owner/repo
 
-Branch: fix/bug-123
-Worktree: /Users/name/git/repo/fix/bug-123
+Branch: bugfix/bug-123
+Worktree: /Users/name/git/repo/bugfix/bug-123
 Title: Fix authentication bug
 Failing checks: ESLint, Jest tests (2 failures)
 

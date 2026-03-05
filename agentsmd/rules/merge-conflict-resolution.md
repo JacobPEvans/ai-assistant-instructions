@@ -72,7 +72,7 @@ git pull origin main
 
 ```bash
 # Switch to your feature branch worktree
-cd ~/git/<repo>/feat/<branch>
+cd ~/git/<repo>/feature/<branch>
 
 # Merge main into your branch
 git merge origin/main --no-edit

@@ -33,14 +33,18 @@ Add a bidirectional link comment on the issue:
 gh issue comment <issue-num> --repo JacobPEvans/<repo> --body "Implementation: #<pr-num>"
 ```
 
-## Branch Naming (Use feat/fix — NOT feature/issue-123)
+## Branch Naming
 
 | Type | Branch Pattern | Example |
 | ---- | -------------- | ------- |
-| Feature | `feat/<description>` | `feat/add-dark-mode` |
-| Fix | `fix/<description>` | `fix/login-timeout` |
+| Feature | `feature/<description>` | `feature/add-dark-mode` |
+| Bugfix | `bugfix/<description>` | `bugfix/login-timeout` |
+| Hotfix | `hotfix/<description>` | `hotfix/critical-patch` |
+| Release | `release/<version>` | `release/v1.2.0` |
+| Chore | `chore/<description>` | `chore/update-readme` |
 
-Do NOT use `feature/issue-123-*` — the worktrees rule uses `feat/` and `fix/`.
+Use the conventional branch prefixes: `feature/`, `bugfix/`, `hotfix/`, `release/`, `chore/`.
+Note: commit message types (`feat:`, `fix:`, `docs:`, etc.) are separate from branch names.
 
 ## Commit Messages
 

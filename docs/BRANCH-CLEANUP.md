@@ -44,9 +44,9 @@ Analyzing branches for safe deletion...
 
 Merged branches safe to delete (102):
 ========================================
-fix/update-all-symlinks-to-agentsmd
-fix/readme-command-count
-feat/issue-90-pr-review-guidance
+bugfix/update-all-symlinks-to-agentsmd
+bugfix/readme-command-count
+feature/issue-90-pr-review-guidance
 ... (more branches)
 
 To apply these deletions, run:
@@ -90,7 +90,7 @@ bash scripts/cleanup-stale-branches.sh --remote-only --apply
 Preserve specific branches (comma-separated):
 
 ```bash
-bash scripts/cleanup-stale-branches.sh --exclude=feat/important,fix/critical --apply
+bash scripts/cleanup-stale-branches.sh --exclude=feature/important,bugfix/critical --apply
 ```
 
 ## How It Works
@@ -170,9 +170,9 @@ If you accidentally delete a branch:
 
 This script implements the automated cleanup workflow described in Issue #110. The issue identified these stale branches as needing removal:
 
-- `fix/update-all-symlinks-to-agentsmd` (PR #106)
-- `fix/readme-command-count` (PR #102)
-- `feat/issue-90-pr-review-guidance` (PR #99)
+- `bugfix/update-all-symlinks-to-agentsmd` (PR #106)
+- `bugfix/readme-command-count` (PR #102)
+- `feature/issue-90-pr-review-guidance` (PR #99)
 
 The script now handles these and identifies 100+ additional stale branches that should be cleaned up.
 
@@ -193,9 +193,9 @@ Analyzing branches for safe deletion...
 
 Merged branches safe to delete (102):
 ========================================
-fix/update-all-symlinks-to-agentsmd
-fix/readme-command-count
-feat/issue-90-pr-review-guidance
+bugfix/update-all-symlinks-to-agentsmd
+bugfix/readme-command-count
+feature/issue-90-pr-review-guidance
 ...
 ```
 
@@ -212,10 +212,10 @@ Merged branches safe to delete (102):
 
 Deleting 102 branches...
 
-  ✓ Deleted local: fix/update-all-symlinks-to-agentsmd
-  ✓ Deleted remote: origin/fix/update-all-symlinks-to-agentsmd
-  ✓ Deleted local: fix/readme-command-count
-  ✓ Deleted remote: origin/fix/readme-command-count
+  ✓ Deleted local: bugfix/update-all-symlinks-to-agentsmd
+  ✓ Deleted remote: origin/bugfix/update-all-symlinks-to-agentsmd
+  ✓ Deleted local: bugfix/readme-command-count
+  ✓ Deleted remote: origin/bugfix/readme-command-count
   ...
 
 Cleanup summary:
@@ -231,7 +231,7 @@ bash scripts/cleanup-stale-branches.sh --remote-only --apply
 ### Example 4: Preserve specific branches
 
 ```bash
-bash scripts/cleanup-stale-branches.sh --exclude=feat/important-wip,fix/critical-bug --apply
+bash scripts/cleanup-stale-branches.sh --exclude=feature/important-wip,bugfix/critical-bug --apply
 ```
 
 ## Automation Opportunities

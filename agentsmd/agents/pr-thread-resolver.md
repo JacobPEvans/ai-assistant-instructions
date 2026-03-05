@@ -67,7 +67,7 @@ Example:
 ```text
 Resolve review threads for PR #142
 Repository: owner/repo
-Branch: feat/new-feature
+Branch: feature/new-feature
 Working directory: /path/to/worktree
 Scope: All unresolved threads
 ```
@@ -331,8 +331,8 @@ Next steps:
 
 Resolve all review threads for PR #142
 Repository: JacobPEvans/ai-assistant-instructions
-Branch: feat/new-feature
-Working directory: /Users/jevans/git/ai-assistant-instructions/feat/new-feature
+Branch: feature/new-feature
+Working directory: /Users/jevans/git/ai-assistant-instructions/feature/new-feature
 ```
 
 ### Example 2: Resolve Specific File
@@ -342,7 +342,7 @@ Working directory: /Users/jevans/git/ai-assistant-instructions/feat/new-feature
 
 Resolve review comments for PR #89
 Repository: owner/repo
-Branch: fix/auth-bug
+Branch: bugfix/auth-bug
 Focus: src/auth/*.ts files only
 ```
 

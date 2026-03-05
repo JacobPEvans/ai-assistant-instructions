@@ -6,10 +6,10 @@ First off, thanks for considering contributing to this project. It's just me her
 
 **This repo uses git worktrees for session isolation.** Always start here:
 
-1. Run `/init-worktree feat "description"` to create a clean worktree
+1. Run `/init-worktree feature "description"` to create a clean worktree
 2. Make your changes in the worktree
 3. Commit your changes (`git commit -m 'feat: add some cool thing'`)
-4. Push to the branch (`git push origin feat/cool-thing`)
+4. Push to the branch (`git push origin feature/cool-thing`)
 5. Open a Pull Request
 
 For more details, see [Worktree Workflow](agentsmd/rules/worktrees.md).
@@ -38,6 +38,11 @@ markdownlint-cli2 "**/*.md"
 ```
 
 Follow the existing patterns in `agentsmd/`. If you're not sure about something, just make your best guess. I can always tweak it during review.
+
+### Branch Names vs Commit Messages
+
+Branch names use conventional branch prefixes: `feature/`, `bugfix/`, `hotfix/`, `release/`, `chore/`.
+Commit messages use conventional commit types: `feat:`, `fix:`, `docs:`, `refactor:`, etc. These are separate conventions.
 
 ### Commit Messages
 

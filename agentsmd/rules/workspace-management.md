@@ -18,8 +18,8 @@ Each project must maintain:
 
 ### Git Workflow Standards
 
-- **Branching**: `main` for production, `feat/<description>` for features, `fix/<description>` for fixes.
-  See [Worktrees](./worktrees.md) for the authoritative branch naming standard.
+- **Branching**: `main` for production; use conventional branch prefixes: `feature/`, `bugfix/`, `hotfix/`, `release/`, `chore/`.
+  Branch types are distinct from conventional commit types (`feat:`, `fix:`, `docs:`, etc.) — branches are temporary and use fewer, broader categories.
 - **Commits**: Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
 - **Command Execution**: Run git commands directly from the working directory.
 

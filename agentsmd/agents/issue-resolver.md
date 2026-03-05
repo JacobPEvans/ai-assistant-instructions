@@ -343,7 +343,7 @@ Recommendation:
 Implement Issue #42
 Repository: JacobPEvans/ai-assistant-instructions
 Title: Add caching layer to API
-Working Directory: /Users/jevans/git/repo/feat/caching
+Working Directory: /Users/jevans/git/repo/feature/caching
 ```
 
 ### Example 2: Batched Issues
@@ -358,7 +358,7 @@ Related: Issue #43 - Cache invalidation strategy
 Related: Issue #44 - Cache metrics monitoring
 
 Repository: owner/repo
-Working Directory: /Users/name/git/repo/feat/caching-system
+Working Directory: /Users/name/git/repo/feature/caching-system
 
 These issues are functionally related and should be implemented together
 for consistency and efficiency.
