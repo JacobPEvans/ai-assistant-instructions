@@ -69,7 +69,7 @@ provider "proxmox" {
 
 # ❌ WRONG - Hardcoded real values
 provider "proxmox" {
-  pm_api_url      = "https://192.168.1.52:8006/api2/json"
+  pm_api_url      = "https://192.168.0.52:8006/api2/json"
   pm_api_token_id = "terraform@pam!abc123xyz="
   pm_user         = "terraform@pam"
 }
