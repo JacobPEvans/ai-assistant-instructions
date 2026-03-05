@@ -1,6 +1,7 @@
 # Issue/PR Bidirectional Linking
 
-Every PR must reference related issues. Every issue must link back to its PR. This has failed 3 times — it's now a rule (auto-loads).
+Every PR must reference related issues (Renovate and Dependabot bot PRs are exempt).
+Every issue must link back to its PR. This has failed 3 times — it's now a rule (auto-loads).
 
 ## Before Creating a PR
 
@@ -12,7 +13,7 @@ gh issue list --repo JacobPEvans/<repo> --state open --search "<keywords from yo
 
 ## PR Body Requirements
 
-Every PR body must include a "Related Issues" section:
+Every PR body must include a "Related Issues" section (bot PRs from Renovate and Dependabot are exempt):
 
 ```markdown
 ## Related Issues

@@ -126,7 +126,7 @@ A branch is orphaned if:
 - It has commits beyond main
 - It does NOT have an associated PR
 
-Orphaned branches should either have a PR created immediately or be deleted (if work is abandoned).
+Orphaned branches MUST either have a PR created immediately or be deleted (if work is abandoned).
 
 ## Why Worktrees
 
