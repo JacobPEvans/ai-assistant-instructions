@@ -124,7 +124,7 @@ ollama pull devstral-2:latest    # Mistral's latest code model (needs newer Olla
 ~/git/ai-assistant-instructions/
 ├── main/                         # Main branch (read-only for development)
 ├── feature/multi-model-orchestration/  # This feature worktree
-└── bugfix/some-bug/                 # Example fix worktree
+└── bugfix/some-bug/                 # Example bugfix worktree
 
 ~/git/nix-config/
 ├── main/                         # Main branch

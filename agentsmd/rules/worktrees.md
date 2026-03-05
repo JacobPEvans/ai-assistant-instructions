@@ -13,7 +13,10 @@ All development work MUST be done in a dedicated worktree. This ensures isolatio
 ├── .git/                    # Shared git directory (bare repo)
 ├── main/                    # Main branch worktree (read-only for development)
 ├── feature/<branch-name>/   # Feature worktrees
-└── bugfix/<branch-name>/    # Fix worktrees
+├── bugfix/<branch-name>/    # Bugfix worktrees
+├── hotfix/<branch-name>/    # Hotfix worktrees
+├── release/<branch-name>/   # Release worktrees
+└── chore/<branch-name>/     # Chore worktrees
 ```
 
 ### Key Points
@@ -29,7 +32,10 @@ All development work MUST be done in a dedicated worktree. This ensures isolatio
 | ----------- | ----------- | ------------- |
 | Main | `main` | `~/git/<repo>/main/` |
 | Feature | `feature/add-feature` | `~/git/<repo>/feature/add-feature/` |
-| Fix | `bugfix/bug-name` | `~/git/<repo>/bugfix/bug-name/` |
+| Bugfix | `bugfix/bug-name` | `~/git/<repo>/bugfix/bug-name/` |
+| Hotfix | `hotfix/critical-issue` | `~/git/<repo>/hotfix/critical-issue/` |
+| Release | `release/1.2.0` | `~/git/<repo>/release/1.2.0/` |
+| Chore | `chore/dependency-updates` | `~/git/<repo>/chore/dependency-updates/` |
 
 ## Creating Worktrees
 
