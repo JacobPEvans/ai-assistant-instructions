@@ -12,8 +12,8 @@ All development work MUST be done in a dedicated worktree. This ensures isolatio
 ~/git/<repo-name>/
 ├── .git/                    # Shared git directory (bare repo)
 ├── main/                    # Main branch worktree (read-only for development)
-├── feat/<branch-name>/      # Feature worktrees
-└── fix/<branch-name>/       # Fix worktrees
+├── feature/<branch-name>/   # Feature worktrees
+└── bugfix/<branch-name>/    # Fix worktrees
 ```
 
 ### Key Points
@@ -28,8 +28,8 @@ All development work MUST be done in a dedicated worktree. This ensures isolatio
 | Branch Type | Branch Name | Worktree Path |
 | ----------- | ----------- | ------------- |
 | Main | `main` | `~/git/<repo>/main/` |
-| Feature | `feat/add-feature` | `~/git/<repo>/feat/add-feature/` |
-| Fix | `fix/bug-name` | `~/git/<repo>/fix/bug-name/` |
+| Feature | `feature/add-feature` | `~/git/<repo>/feature/add-feature/` |
+| Fix | `bugfix/bug-name` | `~/git/<repo>/bugfix/bug-name/` |
 
 ## Creating Worktrees
 
@@ -42,7 +42,7 @@ git worktree add ~/git/<repo-name>/<branch-name> -b <branch-name> main
 Example:
 
 ```bash
-git worktree add ~/git/ai-assistant-instructions/feat/add-dark-mode -b feat/add-dark-mode main
+git worktree add ~/git/ai-assistant-instructions/feature/add-dark-mode -b feature/add-dark-mode main
 ```
 
 ## Listing Worktrees
@@ -56,7 +56,7 @@ Example output:
 ```text
 /Users/user/git/ai-assistant-instructions                  (bare)
 /Users/user/git/ai-assistant-instructions/main             aa4aa1f [main]
-/Users/user/git/ai-assistant-instructions/feat/new-feature  b123456 [feat/new-feature]
+/Users/user/git/ai-assistant-instructions/feature/new-feature  b123456 [feature/new-feature]
 ```
 
 ## Removing Worktrees
@@ -170,7 +170,7 @@ cd ~/git/<repo-name>/main/
 Or for feature work:
 
 ```bash
-cd ~/git/<repo-name>/feat/<branch-name>/
+cd ~/git/<repo-name>/feature/<branch-name>/
 ```
 
 ## Migration from Standard Checkout

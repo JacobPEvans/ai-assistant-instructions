@@ -12,7 +12,7 @@
 
 **Evidence:** In `active-pull-request` worktree, the model "completed" rebase but:
 
-- `docs/fix-label-naming` = `main` = `7a61cdc` (same commit)
+- `chore/fix-label-naming` = `main` = `7a61cdc` (same commit)
 - `origin/main` = `53f6b8b` (6 commits ahead - NEVER PUSHED!)
 
 ## Problem Statement
@@ -276,7 +276,7 @@ git checkout main && echo "different" > shared-file && git commit -am "main chan
 ```bash
 $ cd ~/git/ai-assistant-instructions/worktrees/active-pull-request
 $ git branch -vv
-* docs/fix-label-naming  7a61cdc  # Local branch
+* chore/fix-label-naming  7a61cdc  # Local branch
   main                   7a61cdc  # Same as local - merge happened
   origin/main            53f6b8b  # 6 COMMITS AHEAD - never pushed!
 ```

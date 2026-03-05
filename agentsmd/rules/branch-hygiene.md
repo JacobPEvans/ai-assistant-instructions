@@ -56,7 +56,7 @@ After syncing main, update your feature branch:
 
 ```bash
 # Switch to feature worktree
-cd ~/git/<repo>/feat/my-feature
+cd ~/git/<repo>/feature/my-feature
 
 # Merge main into your branch
 git merge origin/main --no-edit
