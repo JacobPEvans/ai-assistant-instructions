@@ -12,7 +12,7 @@ gh issue list --repo JacobPEvans/<repo> --state open --search "<keywords from yo
 
 ## PR Body Requirements
 
-Every PR body must include a "Related Issues" section:
+Every PR body must include a "Related Issues" section (bot PRs from Renovate and Dependabot are exempt):
 
 ```markdown
 ## Related Issues
