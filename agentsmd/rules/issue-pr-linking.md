@@ -1,6 +1,7 @@
 # Issue/PR Bidirectional Linking
 
-Every PR must reference related issues. Every issue must link back to its PR. This has failed 3 times — it's now a rule (auto-loads).
+Every PR must reference related issues (Renovate and Dependabot bot PRs are exempt).
+Every issue must link back to its PR. This has failed 3 times — it's now a rule (auto-loads).
 
 ## Before Creating a PR
 
