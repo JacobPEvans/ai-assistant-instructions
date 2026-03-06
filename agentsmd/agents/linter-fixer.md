@@ -3,7 +3,7 @@ name: linter-fixer
 description: Code quality specialist. Use PROACTIVELY when linting fails or code style issues found.
 model: haiku
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Read, Grep, Glob, TodoWrite, Bash(npm:*), Bash(eslint:*), Bash(markdownlint:*), Bash(ruff:*), Bash(black:*), Bash(cargo:*), Bash(go:*), Edit
+allowed-tools: Task, TaskOutput, Read, Grep, Glob, TodoWrite, Bash(npm:*), Bash(eslint:*), Bash(markdownlint:*), Bash(markdownlint-cli2:*), Bash(ruff:*), Bash(black:*), Bash(cargo:*), Bash(go:*), Edit
 ---
 
 # Linter Fixer Sub-Agent
@@ -128,20 +128,20 @@ fi
 
 ```bash
 # With auto-fix
-npx eslint . --ext .js,.ts,.jsx,.tsx --fix
+eslint . --ext .js,.ts,.jsx,.tsx --fix
 
 # Report only
-npx eslint . --ext .js,.ts,.jsx,.tsx --format stylish
+eslint . --ext .js,.ts,.jsx,.tsx --format stylish
 ```
 
 **Markdown (markdownlint):**
 
 ```bash
 # With auto-fix
-npx markdownlint-cli2 "**/*.md" --fix
+markdownlint-cli2 "**/*.md" --fix
 
 # Report only
-npx markdownlint-cli2 "**/*.md"
+markdownlint-cli2 "**/*.md"
 ```
 
 **Python (Ruff):**
@@ -212,13 +212,13 @@ Execute linter with auto-fix enabled:
 
 ```bash
 # Example for ESLint
-npx eslint {FILES} --fix
+eslint {FILES} --fix
 
 # Example for Ruff
 ruff check --fix {FILES}
 
 # Example for markdownlint
-npx markdownlint-cli2 --fix {FILES}
+markdownlint-cli2 --fix {FILES}
 ```
 
 #### Step 2: Verify Changes
@@ -295,7 +295,7 @@ FILES=("src/auth.ts" "src/utils.ts")
 #### Step 2: Run Linter on Subset
 
 ```bash
-npx eslint ${FILES[@]} --fix
+eslint ${FILES[@]} --fix
 ```
 
 #### Step 3: Report Results
@@ -486,11 +486,8 @@ This sub-agent can be invoked by:
 Linter: {linter-name}
 Issue: Command not found
 
-Install with:
-{installation-command}
-
-Example:
-npm install --save-dev eslint
+Resolution:
+Ensure the tool is available in the dev shell (check the repo's Nix dev-shell definition, e.g. flake.nix or shell.nix).
 ```
 
 ### If Configuration Missing
@@ -506,7 +503,7 @@ Create one of:
 - .eslintrc.js
 - eslint.config.js
 
-Or run: npx eslint --init
+Or run: eslint --init
 ```
 
 ### If Auto-fix Fails
