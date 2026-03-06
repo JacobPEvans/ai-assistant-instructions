@@ -21,7 +21,7 @@ When you reach for a script, use these instead:
 | --- | --- | --- |
 | JSON manipulation | `jq` via Bash tool | Python script |
 | API calls | `curl` or `gh api` via Bash tool | Python/curl script |
-| Text processing (pipe filter) | `grep`/`sed`/`awk` to filter stdin/piped output (never `-i`) | Processing script |
+| Text processing (pipe filter) | `grep`/`sed`/`awk` to filter stdin/piped output (never in-place editing) | Processing script |
 | File reading | `Read` tool | `cat`, `head`, `tail` via Bash |
 | File editing | `Edit` tool | `sed -i`, `awk`, `python -c` via Bash |
 | File creation | `Write` tool | `cat >`, heredocs, `echo >` via Bash |
