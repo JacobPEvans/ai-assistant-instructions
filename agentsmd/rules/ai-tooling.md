@@ -28,13 +28,13 @@ script files as an indirection layer between you and the commands you need to ru
 
 ### File Operations via Dedicated Tools
 
-Claude Code provides dedicated file tools that MUST be used instead of Bash equivalents:
+Use dedicated file tools instead of Bash equivalents:
 
 - **Read** (not `cat`/`head`/`tail`): Read file contents with line numbers and offset support
 - **Edit** (not `sed`/`awk`): Atomic edits with diff tracking and permission auditing
 - **Write** (not `cat >`/heredocs): Create files with content validation
-- **Grep** (not `grep`/`rg`): Search with optimized permissions and access
-- **Glob** (not `find`/`ls`): Pattern-based file discovery
+- **Grep** (not `grep`/`rg`/`ag`): Search with optimized permissions and access
+- **Glob** (not `find`/`ls`/`fd`): Pattern-based file discovery
 
 This is non-negotiable. Bash file manipulation bypasses permissions and audit trails.
 
