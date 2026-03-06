@@ -1,0 +1,13 @@
+name: Best Practices
+on:
+  schedule:
+    - cron: "0 3 * * 2,5"
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+  pull-requests: write
+jobs:
+  best-practices:
+    uses: JacobPEvans/ai-workflows/.github/workflows/best-practices.yml@v0.8.0
+    secrets: inherit
