@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   review:
-    uses: JacobPEvans/ai-workflows/.github/workflows/claude-review.yml@v0.8.0
+    uses: JacobPEvans/ai-workflows/.github/workflows/claude-review.yml@v0.9.0
     with:
       review_prompt: "Focus on AI instruction quality, CLAUDE.md patterns, documentation accuracy, and security of agent configurations"
       allowed_bots: "claude[bot]"
