@@ -23,6 +23,8 @@ Delegate to subagents for:
 - **Verification and validation**: Checking work, running tests, confirming changes
 - **High-token operations**: Any task that would consume significant context (large file reads, extensive searches)
 - **Independent parallel tasks**: Work that can proceed simultaneously without dependencies
+- **External AI models**: Use `/delegate-to-ai` to route tasks to the best-suited external model via PAL MCP
+  (research to Gemini, code review to multi-model consensus, etc.)
 
 ### Model Selection for Subagents
 
@@ -33,6 +35,21 @@ Consider using Haiku or Sonnet when a task doesn't need Opus-level reasoning.
 Never use `subagent_type: "Bash"` for tasks that involve reading, writing, or editing files — Bash agents
 lack file tools and fall back to `sed`/`awk` one-liners or `python -c` commands. Use `general-purpose` instead.
 See the direct-execution rule for the full subagent type selection table.
+
+### File Operations — Hard Rule
+
+**NEVER use Bash to read, edit, or create files.** Use the dedicated tools:
+
+| Operation | Correct Tool | NEVER Use |
+| --- | --- | --- |
+| Read a file | `Read` | `cat`, `head`, `tail`, `less`, `bat` |
+| Edit a file | `Edit` | `sed`, `awk`, `perl -i`, `python -c`, `ed` |
+| Create a file | `Write` | `cat >`, `echo >`, `tee`, heredocs (`<< EOF`) |
+| Search file contents | `Grep` | `grep`, `rg`, `ag` |
+| Find files by pattern | `Glob` | `find`, `ls`, `fd` |
+
+This applies to the orchestrator AND all subagents. No exceptions. No "just this once."
+Subagents that lack these tools (Bash type) must NOT be used for file tasks — use `general-purpose`.
 
 @agentsmd/rules/agent-dispatching.md
 
@@ -57,6 +74,12 @@ that could be used for reasoning. Subagents return only what matters—summaries
 
 When you notice a task will be token-heavy (reading many files, extensive exploration, verification across multiple
 locations), delegate it. The subagent does the heavy lifting and reports back concisely.
+
+### External Model Delegation
+
+Use `/delegate-to-ai` to route work to external AI models via PAL MCP. This is the preferred
+way to leverage non-Claude models for tasks where they excel (research, consensus, code review).
+See the Model Routing Rules table for which model fits which task type.
 
 ## Model Routing Rules
 

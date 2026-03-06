@@ -66,9 +66,12 @@ Use standardized log format: `YYYY-MM-DD HH:mm:ss [LEVEL] {message}`
 
 ### Bash / Shell
 
+- **NEVER use Bash for file operations**: Use `Read` to read, `Edit` to modify, `Write` to create,
+  `Grep` to search, `Glob` to find files. Use Bash only to invoke external CLIs (git, terraform, docker, jq, curl, gh),
+  not for reading, editing, or creating repo files.
 - **NEVER use `for` loops**: For loops break permission matching and require interactive prompts. This is a hard ban.
   - Instead: Make multiple individual Bash tool calls (one per operation, in parallel)
   - Instead: Use tool-native batch operations (e.g., `git add file1 file2 file3`)
-  - Instead: Use find with -exec (when appropriate)
+  - Instead: Use `git add file1 file2 file3` or similar tool-native batch forms
 - **Prefer parallel tool calls**: Independent commands should be separate, parallel Bash tool invocations
 - **NEVER generate scripts to run tasks**: Execute commands via tool calls, not by writing `.sh` or `.py` files. See the direct-execution rule.

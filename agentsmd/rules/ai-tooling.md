@@ -26,6 +26,18 @@ AI assistants must NOT generate intermediate scripts to accomplish tasks they ca
 through direct tool calls. The tool interface IS the execution layer -- do not add
 script files as an indirection layer between you and the commands you need to run.
 
+### File Operations via Dedicated Tools
+
+Use dedicated file tools instead of Bash equivalents:
+
+- **Read** (not `cat`/`head`/`tail`): Read file contents with line numbers and offset support
+- **Edit** (not `sed`/`awk`): Atomic edits with diff tracking and permission auditing
+- **Write** (not `cat >`/heredocs): Create files with content validation
+- **Grep** (not `grep`/`rg`/`ag`): Search with optimized permissions and access
+- **Glob** (not `find`/`ls`/`fd`): Pattern-based file discovery
+
+This is non-negotiable. Bash file manipulation bypasses permissions and audit trails.
+
 ## Shell Command Conventions
 
 ### Permission-Aware Execution
