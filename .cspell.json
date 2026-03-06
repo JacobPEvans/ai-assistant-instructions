@@ -182,7 +182,9 @@
     "exfiltration",
     "unsanitized",
     "tinyurl",
-    "pathspec"
+    "pathspec",
+    "heredocs",
+    "unauditable"
   ],
   "files": [
     "**/*.md"

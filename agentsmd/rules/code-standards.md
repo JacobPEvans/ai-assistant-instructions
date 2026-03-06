@@ -66,6 +66,8 @@ Use standardized log format: `YYYY-MM-DD HH:mm:ss [LEVEL] {message}`
 
 ### Bash / Shell
 
+- **NEVER use Bash for file operations**: Use `Read` to read, `Edit` to modify, `Write` to create,
+  `Grep` to search, `Glob` to find files. Bash is for system commands only (git, terraform, docker, etc.)
 - **NEVER use `for` loops**: For loops break permission matching and require interactive prompts. This is a hard ban.
   - Instead: Make multiple individual Bash tool calls (one per operation, in parallel)
   - Instead: Use tool-native batch operations (e.g., `git add file1 file2 file3`)

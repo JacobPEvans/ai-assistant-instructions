@@ -21,7 +21,11 @@ When you reach for a script, use these instead:
 | --- | --- | --- |
 | JSON manipulation | `jq` via Bash tool | Python script |
 | API calls | `curl` or `gh api` via Bash tool | Python/curl script |
-| Text/file processing | `grep`, `sed`, `awk` as direct commands | Processing script |
+| Text processing (stdout) | `grep`, `sed`, `awk` piped (never `-i` / in-place) | Processing script |
+| File reading | `Read` tool | `cat`, `head`, `tail` via Bash |
+| File editing | `Edit` tool | `sed -i`, `awk`, `python -c` via Bash |
+| File creation | `Write` tool | `cat >`, heredocs, `echo >` via Bash |
+| File search | `Grep` tool | `grep`, `rg` via Bash |
 | Config generation | Nix functions (`lib.mkIf`, `lib.generators.*`) | Shell/Python generator |
 | Nix data processing | `builtins.fromJSON`, `builtins.readFile`, `lib.strings.*` | Python wrapper |
 | CI/CD automation | Marketplace actions, reusable workflows, composite actions | Custom shell script in workflow |
@@ -31,6 +35,7 @@ When you reach for a script, use these instead:
 | State queries | `terraform output`, `terraform state show`, Ansible facts | Query script |
 | Permission/JSON file edits | `jq` commands via Bash tool | Python file manipulation |
 | Multi-file git operations | Parallel Bash tool calls (`git add f1 f2 f3`) | Loop script |
+| Delegate to external AI | `/delegate-to-ai` via PAL MCP | Manual model routing |
 
 ## Why This Matters
 
