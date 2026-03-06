@@ -138,7 +138,7 @@ npm test -- --verbose --no-cache
 **JavaScript/TypeScript (Vitest):**
 
 ```bash
-npx vitest run --reporter=verbose
+vitest run --reporter=verbose
 ```
 
 **Python (Pytest):**
@@ -225,7 +225,7 @@ pytest -v -k "{pattern}"
 **Vitest:**
 
 ```bash
-npx vitest run --reporter=verbose --testNamePattern="{pattern}"
+vitest run --reporter=verbose --testNamePattern="{pattern}"
 ```
 
 **Cargo:**
@@ -400,7 +400,7 @@ npm test -- --watch --verbose
 **Vitest:**
 
 ```bash
-npx vitest --reporter=verbose
+vitest --reporter=verbose
 ```
 
 **Pytest:**
