@@ -3,7 +3,7 @@ name: linter-fixer
 description: Code quality specialist. Use PROACTIVELY when linting fails or code style issues found.
 model: haiku
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Read, Grep, Glob, TodoWrite, Bash(npm:*), Bash(eslint:*), Bash(markdownlint:*), Bash(ruff:*), Bash(black:*), Bash(cargo:*), Bash(go:*), Edit
+allowed-tools: Task, TaskOutput, Read, Grep, Glob, TodoWrite, Bash(npm:*), Bash(eslint:*), Bash(markdownlint:*), Bash(markdownlint-cli2:*), Bash(ruff:*), Bash(black:*), Bash(cargo:*), Bash(go:*), Edit
 ---
 
 # Linter Fixer Sub-Agent
@@ -486,11 +486,8 @@ This sub-agent can be invoked by:
 Linter: {linter-name}
 Issue: Command not found
 
-Install with:
-{installation-command}
-
-Example:
-Ensure the tool is available in the dev shell (check flake.nix).
+Resolution:
+Ensure the tool is available in the dev shell (check the repo's Nix dev-shell definition, e.g. flake.nix or shell.nix).
 ```
 
 ### If Configuration Missing
