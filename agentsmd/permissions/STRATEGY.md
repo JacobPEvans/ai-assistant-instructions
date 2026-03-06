@@ -168,7 +168,7 @@ poetry add:*            # Blocked - use nix-shell -p python3Packages.X
 conda install:*         # Blocked - use nix-shell -p X
 ```
 
-**Preferred approach**: Tools should come from the nix dev shell via direnv.
+**Preferred approach**: Tools should come from the Nix dev shell (`nix develop`, typically via direnv).
 Package runners (pipx, npx, bunx) are a last resort and require confirmation.
 
 **Package runners in Ask list** (can run without installing - requires confirmation):
