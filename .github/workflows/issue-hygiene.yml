@@ -13,5 +13,5 @@ permissions:
 
 jobs:
   hygiene:
-    uses: JacobPEvans/ai-workflows/.github/workflows/issue-hygiene.yml@v0.9.3
+    uses: JacobPEvans/ai-workflows/.github/workflows/issue-hygiene.yml@v0.9.4
     secrets: inherit
