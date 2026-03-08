@@ -1,14 +1,16 @@
 name: Post-Merge Test Review
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
     inputs:
       commit_sha:
         description: 'Commit SHA to review'
         required: false
         type: string
+  # --- DISABLED AUTOMATIC TRIGGERS (restore by uncommenting) ---
+  # push:
+  #   branches: [main]
+  # --- END DISABLED ---
 
 permissions:
   actions: write
@@ -17,21 +19,23 @@ permissions:
   pull-requests: write
 
 jobs:
-  dispatch:
-    if: github.event_name == 'push'
-    runs-on: ubuntu-latest
-    permissions:
-      actions: write
-    steps:
-      - name: Re-trigger as workflow_dispatch
-        env:
-          WORKFLOW_NAME: ${{ github.workflow }}
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh workflow run "$WORKFLOW_NAME" \
-            --repo "${{ github.repository }}" \
-            --ref main \
-            -f commit_sha="${{ github.sha }}"
+  # --- DISABLED AUTOMATIC TRIGGERS (restore by uncommenting) ---
+  # dispatch:
+  #   if: github.event_name == 'push'
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     actions: write
+  #   steps:
+  #     - name: Re-trigger as workflow_dispatch
+  #       env:
+  #         WORKFLOW_NAME: ${{ github.workflow }}
+  #         GH_TOKEN: ${{ github.token }}
+  #       run: |
+  #         gh workflow run "$WORKFLOW_NAME" \
+  #           --repo "${{ github.repository }}" \
+  #           --ref main \
+  #           -f commit_sha="${{ github.sha }}"
+  # --- END DISABLED ---
 
   review:
     if: github.event_name == 'workflow_dispatch'
