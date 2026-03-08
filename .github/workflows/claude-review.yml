@@ -1,10 +1,13 @@
 name: Claude Code Review
 
 on:
-  pull_request:
-    types: [opened, synchronize]
-  issue_comment:
-    types: [created]
+  workflow_dispatch:
+  # --- DISABLED AUTOMATIC TRIGGERS (restore by uncommenting) ---
+  # pull_request:
+  #   types: [opened, synchronize]
+  # issue_comment:
+  #   types: [created]
+  # --- END DISABLED ---
 
 permissions:
   actions: read

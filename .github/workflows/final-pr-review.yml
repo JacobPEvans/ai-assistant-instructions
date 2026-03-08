@@ -1,10 +1,13 @@
 name: Final PR Review
 
 on:
-  pull_request_review:
-    types: [submitted]
-  check_suite:
-    types: [completed]
+  workflow_dispatch:
+  # --- DISABLED AUTOMATIC TRIGGERS (restore by uncommenting) ---
+  # pull_request_review:
+  #   types: [submitted]
+  # check_suite:
+  #   types: [completed]
+  # --- END DISABLED ---
 
 permissions:
   checks: read
