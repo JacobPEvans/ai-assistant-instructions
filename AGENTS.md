@@ -166,6 +166,10 @@ All other standards are available as on-demand skills via these plugins:
 | `infra-standards` | `/infrastructure-standards` | Terraform/Ansible/Proxmox work |
 | `project-standards` | `/agentsmd-authoring`, `/workspace-standards`, `/skills-registry` | AgentsMD editing, workspace setup |
 
+Skills contain multiple subsections from the original rules. For example, `/pr-standards`
+includes PR guards, issue linking, and no-AI-mentions. Agent references use
+section names within the canonical skill (e.g., "the no-AI-mentions section of `/pr-standards`").
+
 ## Related Files
 
 - `agentsmd/rules/` — 4 auto-loaded essential rules

@@ -14,6 +14,8 @@ File operations:
 - Bash is ONLY for running system commands (git, terraform, ansible, etc.)
 ```
 
+Explore agents are exempt (read-only, no Edit/Write tools).
+
 ## Why This Matters
 
 Bash file operations bypass permissions, produce unauditable changes, and fail silently.

@@ -43,3 +43,7 @@
 - Major side quests (any non-simple fix): Create an issue and move on
 - More autonomy for internal repos
 - Always explain complex reasoning
+
+## 7. Communication Signals
+
+- ALL CAPS from user = "let's get back on track buddy" - refocus immediately
