@@ -1,1 +1,0 @@
-../agentsmd/rules/workspace-management.md

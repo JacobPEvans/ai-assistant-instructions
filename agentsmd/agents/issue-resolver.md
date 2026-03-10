@@ -34,7 +34,7 @@ Designed to be invoked by orchestration commands for autonomous issue implementa
 
 ### Implementation Quality
 
-- Follow the code-standards rule
+- Follow the code-standards skill (in the code-standards plugin)
 - Write clean, maintainable, well-documented code
 - Ensure backward compatibility unless breaking change is required
 - Follow existing patterns and architectural conventions
@@ -170,7 +170,7 @@ npm test
 
 ### Step 6: Implement Solution
 
-Follow the code-standards rule:
+Follow code quality standards:
 
 - **Clear naming**: Descriptive variable/function names
 - **Modularity**: Single responsibility per module
@@ -209,7 +209,7 @@ Update relevant documentation:
 
 ### Step 9: Commit Changes
 
-Follow the issue-pr-linking rule for proper commit formatting and issue references.
+Follow issue-PR linking standards for proper commit formatting and issue references.
 
 ```bash
 git add {files}
@@ -416,7 +416,7 @@ If unable to complete after reasonable effort:
 
 ## Related Documentation
 
-- code-standards rule
-- worktrees rule
+- code-standards skill (in the code-standards plugin)
+- worktree-management skill
 - subagent-parallelization rule
-- github-issue-standards rule
+- github-issue-standards skill (in the git-standards plugin)

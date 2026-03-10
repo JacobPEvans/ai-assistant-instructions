@@ -671,5 +671,5 @@ Try:
 
 ## Related Documentation
 
-- code-standards rule - Dependency management standards and security practices
+- code-standards skill (in the code-standards plugin) - Dependency management standards and security practices
 - ci-fixer agent - Automated CI failure resolution

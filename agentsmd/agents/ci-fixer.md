@@ -352,6 +352,6 @@ If unable to fix after 3 attempts:
 
 ## Related Documentation
 
-- code-standards rule
-- worktrees rule
+- code-standards skill (in the code-standards plugin)
+- worktree-management skill
 - subagent-parallelization rule

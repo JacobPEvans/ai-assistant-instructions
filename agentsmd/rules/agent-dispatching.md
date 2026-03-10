@@ -14,10 +14,6 @@ File operations:
 - Bash is ONLY for running system commands (git, terraform, ansible, etc.)
 ```
 
-Explore agents are exempt (read-only, no Edit/Write tools).
-
 ## Why This Matters
 
-Bash file operations bypass the permission model, produce unauditable changes, and fail
-silently. The Read/Edit/Write tools provide atomic operations with full audit trails.
-Subagents using `sed`/`awk`/`python -c` for file edits are the #1 quality issue — enforce this strictly.
+Bash file operations bypass permissions, produce unauditable changes, and fail silently.
