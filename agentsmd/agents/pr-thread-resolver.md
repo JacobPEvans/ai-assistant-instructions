@@ -52,7 +52,7 @@ Every comment must be marked as resolved via GraphQL `resolvePullRequestReviewTh
 
 - Do NOT mention @gemini-code-assist, @copilot, or other AI bots
 - Reply without tagging unless explicitly requesting assistance
-- See the no-ai-mentions skill (in the code-standards plugin) for complete guidelines
+- See the no-AI-mentions section of the `/pr-standards` skill (in the `git-standards` plugin) for complete guidelines
 
 ## Input Format
 
@@ -392,7 +392,7 @@ If reviewers give conflicting feedback in different threads:
 3. Ask for consensus if unclear
 4. Tag HUMAN reviewers only: "@username" (e.g., @john-smith)
    - NEVER tag AI assistants (e.g., @gemini-code-assist)
-   - See the no-ai-mentions skill (in the code-standards plugin) for guidelines
+   - See the no-AI-mentions section of the `/pr-standards` skill (in the `git-standards` plugin) for guidelines
 
 ### Outdated Comments
 

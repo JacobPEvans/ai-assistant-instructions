@@ -14,10 +14,10 @@ Coordinates cross-repo infrastructure changes across the terraform and ansible p
 
 Follow these infrastructure rules for orchestration:
 
-- **Execution order**: See the deployment-order skill (in the infra-standards plugin) for the terraform->ansible pipeline
-- **Terraform contract**: See the terraform-inventory-contract skill (in the infra-standards plugin)
-- **Secret management**: See the doppler-integration skill (in the infra-standards plugin)
-- **Network addressing**: See the ip-addressing skill (in the infra-standards plugin)
+- **Execution order**: See the deployment order section of the `/infrastructure-standards` skill (in the `infra-standards` plugin) for the terraform->ansible pipeline
+- **Terraform contract**: See the terraform inventory contract section of the `/infrastructure-standards` skill (in the `infra-standards` plugin)
+- **Secret management**: See the Doppler integration section of the `/infrastructure-standards` skill (in the `infra-standards` plugin)
+- **Network addressing**: See the IP addressing section of the `/infrastructure-standards` skill (in the `infra-standards` plugin)
 
 ## Repo Paths
 

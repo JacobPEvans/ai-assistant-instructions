@@ -209,7 +209,7 @@ Update relevant documentation:
 
 ### Step 9: Commit Changes
 
-Follow issue-PR linking standards for proper commit formatting and issue references.
+Follow the issue-PR linking section of the `/pr-standards` skill (in the `git-standards` plugin) for proper commit formatting and issue references.
 
 ```bash
 git add {files}
@@ -419,4 +419,4 @@ If unable to complete after reasonable effort:
 - code-standards skill (in the code-standards plugin)
 - worktree-management skill
 - subagent-parallelization rule
-- github-issue-standards skill (in the git-standards plugin)
+- GitHub issue standards section of the `/pr-standards` skill (in the `git-standards` plugin)
