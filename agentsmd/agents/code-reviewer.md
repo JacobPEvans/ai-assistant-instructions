@@ -24,7 +24,7 @@ Can be invoked by other commands or agents for focused code analysis.
 
 This sub-agent applies:
 
-- code-standards skill (in the code-standards plugin)
+- `/code-quality-standards` skill (in the `code-standards` plugin)
 - infrastructure-standards skill (in the infra-standards plugin)
 - review-standards skill (in the code-standards plugin)
 
