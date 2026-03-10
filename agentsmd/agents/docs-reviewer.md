@@ -93,10 +93,10 @@ Check:
 
 ### 5. Project Standards Compliance
 
-- Follow the documentation-standards rule
+- Follow the documentation standards section of the `/code-quality-standards` skill (in the `code-standards` plugin)
 - Use hierarchical numbering (1., 1.1., 1.1.1.) for AI-trackable structure
 - Ensure AI-first writing (concise, structured)
-- Verify adherence to the dry-principle rule
+- Verify adherence to the DRY principle (don't repeat yourself)
 - Link to other documents instead of repeating information
 
 ### 6. AI-Friendly Formatting

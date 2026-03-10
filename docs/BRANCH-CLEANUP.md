@@ -298,6 +298,6 @@ If you find issues or have improvements:
 
 ## Related Documentation
 
-- [Git Branch Hygiene](../agentsmd/rules/branch-hygiene.md)
-- [Worktrees](../agentsmd/rules/worktrees.md)
+- Git workflow standards skill (in the git-standards plugin) - Branch hygiene and worktree policies
+- [Worktree Management Skill](../agentsmd/skills/worktree-management/SKILL.md)
 - [Issue #110](https://github.com/JacobPEvans/ai-assistant-instructions/issues/110)

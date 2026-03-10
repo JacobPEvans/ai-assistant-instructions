@@ -12,7 +12,7 @@ First off, thanks for considering contributing to this project. It's just me her
 4. Push to the branch (`git push origin feature/cool-thing`)
 5. Open a Pull Request
 
-For more details, see [Worktree Workflow](agentsmd/rules/worktrees.md).
+For more details, see the [Worktree Management Skill](agentsmd/skills/worktree-management/SKILL.md).
 
 That's it. I'm not picky.
 

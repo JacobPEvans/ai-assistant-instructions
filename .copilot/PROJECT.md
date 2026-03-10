@@ -1,1 +1,0 @@
-../agentsmd/rules/project-scope.md

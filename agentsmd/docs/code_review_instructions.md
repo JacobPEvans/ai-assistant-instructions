@@ -151,6 +151,6 @@ Before merging any change:
 
 ## Related Documentation
 
-- [Code Standards](../rules/code-standards.md) - Universal coding standards
-- [Styleguide](../rules/styleguide.md) - Coding style and conventions
+- `/code-quality-standards` skill (in the `code-standards` plugin) - Universal coding standards
+- `/review-standards` skill (in the `code-standards` plugin) - Coding style and conventions
 - [Code Reviewer Sub-Agent](../agents/code-reviewer.md) - Claude Code review details

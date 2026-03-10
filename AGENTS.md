@@ -51,8 +51,6 @@ See the direct-execution rule for the full subagent type selection table.
 This applies to the orchestrator AND all subagents. No exceptions. No "just this once."
 Subagents that lack these tools (Bash type) must NOT be used for file tasks — use `general-purpose`.
 
-@agentsmd/rules/agent-dispatching.md
-
 ### Research First, Never Script
 
 Before implementing any solution, verify what already exists. Use Context7 MCP, PAL MCP, and web
@@ -143,23 +141,37 @@ Always prefer `@` over markdown links — referenced content loads automatically
 read. Reserve markdown links only for "see X if relevant" conditional references where you explicitly
 do NOT want content auto-loaded.
 
-**Within agents, skills, and rules**: Reference by name only (e.g., "the code-standards rule").
-Rules in `.claude/rules/` auto-load every session. Other files load on demand when referenced.
+**Within agents, skills, and rules**: Reference by name only (e.g., "the secrets-policy rule").
+Rules in `.claude/rules/` auto-load every session. Skills and agents load on demand when referenced.
 
 **In docs and external files**: Use markdown links. These aren't parsed by Claude Code.
 
-## Auto-Loaded Rules
+## Auto-Loaded Rules (4 Essential)
 
-All files in `agentsmd/rules/` auto-load every session via `.claude/rules/ -> ../agentsmd/rules`.
-This includes: secrets policy, worktree patterns, branch hygiene, code standards, authoring standards,
-architecture, soul/voice guidelines, and more.
+Only 4 rules auto-load each session via `.claude/rules/ -> ../agentsmd/rules`:
 
-@agentsmd/skills-registry.md
-@agentsmd/rules/infra/dev-shell-architecture.md
+- `secrets-policy.md` — Never commit secrets
+- `direct-execution.md` — Use tools directly, never generate scripts
+- `agent-dispatching.md` — File operations block for subagents
+- `soul.md` — Voice and personality guidelines
+
+## On-Demand Standards (via Plugins)
+
+All other standards are available as on-demand skills via these plugins:
+
+| Plugin | Skills | Trigger |
+| --- | --- | --- |
+| `git-standards` | `/git-workflow-standards`, `/pr-standards` | Branch/PR/issue work |
+| `code-standards` | `/code-quality-standards`, `/review-standards` | Writing/reviewing code |
+| `infra-standards` | `/infrastructure-standards` | Terraform/Ansible/Proxmox work |
+| `project-standards` | `/agentsmd-authoring`, `/workspace-standards`, `/skills-registry` | AgentsMD editing, workspace setup |
+
+Skills contain multiple subsections from the original rules. For example, `/pr-standards`
+includes PR guards, issue linking, and no-AI-mentions. Agent references use
+section names within the canonical skill (e.g., "the no-AI-mentions section of `/pr-standards`").
 
 ## Related Files
 
-- `agentsmd/rules/` - Standards and guidelines (auto-loaded via `.claude/rules/`)
-- `agentsmd/workflows/` - 5-step development workflow
-- `agentsmd/docs/` - Setup documentation
-- `.claude/`, `.gemini/`, `.copilot/` - Vendor configs (symlinked)
+- `agentsmd/rules/` — 4 auto-loaded essential rules
+- `agentsmd/workflows/` — 5-step development workflow
+- `.claude/`, `.gemini/`, `.copilot/` — Vendor configs (symlinked)

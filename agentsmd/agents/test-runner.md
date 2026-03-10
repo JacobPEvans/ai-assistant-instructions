@@ -593,6 +593,6 @@ Manual action required: {instructions}
 
 ## Related Documentation
 
-- code-standards rule - Testing standards
+- `/code-quality-standards` skill (in the `code-standards` plugin) - Testing standards
 - ci-fixer agent - Automated CI failure resolution
 - coder agent - Test generation

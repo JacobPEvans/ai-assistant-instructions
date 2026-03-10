@@ -260,8 +260,7 @@ This plugin automatically:
 
 ## Related Resources
 
-- worktrees rule - Policy and structure documentation
-- branch-hygiene rule - Branch management best practices
+- git-workflow-standards skill (in the git-standards plugin) - Worktree and branch policies
 - create-worktrees plugin - Create worktrees for all open PRs
 
 ## Troubleshooting

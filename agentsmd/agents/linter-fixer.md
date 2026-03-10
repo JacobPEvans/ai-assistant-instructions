@@ -552,6 +552,6 @@ Or run: eslint --init
 
 ## Related Documentation
 
-- code-standards rule - Project code quality standards
+- `/code-quality-standards` skill (in the `code-standards` plugin) - Project code quality standards
 - ci-fixer agent - Automated CI failure resolution
 - coder agent - Code generation standards
