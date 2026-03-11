@@ -185,8 +185,10 @@ needed, create a new release rather than changing the existing one.
 
 - Always open releases as **drafts** until fully complete (all assets uploaded, notes finalized)
 - Promote from draft to published only when everything is ready
-- All repos use [Google's release-please](https://github.com/googleapis/release-please) for automated patch and
-  minor version bumps; major version bumps require manual review and approval and are triggered by a `BREAKING CHANGE:` footer in a commit message
+- All repos use [Google's release-please](https://github.com/googleapis/release-please) for automated version bumps:
+  - **Patch** bumps: `fix:` commits
+  - **Minor** bumps: `feat:` commits **and** `BREAKING CHANGE:` footer commits (due to `versioning: always-bump-minor` in the central config)
+  - **Major** bumps: only by manually editing `.release-please-manifest.json` — no commit type can trigger this automatically
 - Templates and reusable workflows live in [JacobPEvans/.github](https://github.com/JacobPEvans/.github)
 
 ## Related Files
