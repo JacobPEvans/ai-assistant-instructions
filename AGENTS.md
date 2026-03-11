@@ -170,6 +170,15 @@ Skills contain multiple subsections from the original rules. For example, `/pr-s
 includes PR guards, issue linking, and no-AI-mentions. Agent references use
 section names within the canonical skill (e.g., "the no-AI-mentions section of `/pr-standards`").
 
+## GitHub Releases
+
+Releases are **immutable**. Once created, a release cannot be modified or deleted — ever.
+
+- Always open releases as **drafts** until fully complete (all assets uploaded, notes finalized)
+- Promote from draft to published only when everything is ready
+- All repos use [Google's release-please](https://github.com/googleapis/release-please) for automated patch and minor version bumps
+- Templates and reusable workflows live in [JacobPEvans/.github](https://github.com/JacobPEvans/.github)
+
 ## Related Files
 
 - `agentsmd/rules/` — 4 auto-loaded essential rules
