@@ -172,11 +172,14 @@ section names within the canonical skill (e.g., "the no-AI-mentions section of `
 
 ## GitHub Releases
 
-Releases are **immutable**. Once created, a release cannot be modified or deleted — ever.
+Treat published releases as **permanent**. Once a release is promoted from draft to published, do not modify or
+delete it — ever. GitHub technically allows edits and deletions, but our policy forbids it. If a correction is
+needed, create a new release rather than changing the existing one.
 
 - Always open releases as **drafts** until fully complete (all assets uploaded, notes finalized)
 - Promote from draft to published only when everything is ready
-- All repos use [Google's release-please](https://github.com/googleapis/release-please) for automated patch and minor version bumps
+- All repos use [Google's release-please](https://github.com/googleapis/release-please) for automated patch and
+  minor version bumps; major version bumps require manual review and approval
 - Templates and reusable workflows live in [JacobPEvans/.github](https://github.com/JacobPEvans/.github)
 
 ## Related Files
