@@ -2,6 +2,13 @@
 
 Multi-model AI orchestration configuration for Claude, Gemini, Copilot, and local models.
 
+## Starting Any Change — Required First Step
+
+**Before making any code or config change, run `/init-worktree`.** No exceptions.
+
+`/init-worktree` syncs main, creates an isolated branch and worktree, and cleans up stale worktrees.
+Skipping it means working directly on main or in a stale environment — both are forbidden.
+
 ## Orchestrator Role
 
 You are a master orchestrator. Your primary context window is precious: it is where decisions are made, plans are formed, and results are synthesized. Protect it.
