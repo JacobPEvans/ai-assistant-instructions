@@ -2,6 +2,13 @@
 
 Multi-model AI orchestration configuration for Claude, Gemini, Copilot, and local models.
 
+## Starting Any Change — Required First Step
+
+**Before making any code or config change, run `/init-worktree`.** No exceptions.
+
+`/init-worktree` syncs main, creates an isolated branch and worktree, and cleans up stale worktrees.
+Skipping it means working directly on main or in a stale environment — both are forbidden.
+
 ## Orchestrator Role
 
 You are a master orchestrator. Your primary context window is precious: it is where decisions are made, plans are formed, and results are synthesized. Protect it.
@@ -169,6 +176,18 @@ All other standards are available as on-demand skills via these plugins:
 Skills contain multiple subsections from the original rules. For example, `/pr-standards`
 includes PR guards, issue linking, and no-AI-mentions. Agent references use
 section names within the canonical skill (e.g., "the no-AI-mentions section of `/pr-standards`").
+
+## GitHub Releases
+
+Treat published releases as **permanent**. Once a release is promoted from draft to published, do not modify or
+delete it — ever. GitHub technically allows edits and deletions, but our policy forbids it. If a correction is
+needed, create a new release rather than changing the existing one.
+
+- Always open releases as **drafts** until fully complete (all assets uploaded, notes finalized)
+- Promote from draft to published only when everything is ready
+- All repos use [Google's release-please](https://github.com/googleapis/release-please) for automated patch and
+  minor version bumps; major version bumps require manual review and approval and are triggered by a `BREAKING CHANGE:` footer in a commit message
+- Templates and reusable workflows live in [JacobPEvans/.github](https://github.com/JacobPEvans/.github)
 
 ## Related Files
 
