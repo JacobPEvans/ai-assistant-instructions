@@ -186,7 +186,7 @@ needed, create a new release rather than changing the existing one.
 - Always open releases as **drafts** until fully complete (all assets uploaded, notes finalized)
 - Promote from draft to published only when everything is ready
 - All repos use [Google's release-please](https://github.com/googleapis/release-please) for automated patch and
-  minor version bumps; major version bumps require manual review and approval
+  minor version bumps; major version bumps require manual review and approval and are triggered by a `BREAKING CHANGE:` footer in a commit message
 - Templates and reusable workflows live in [JacobPEvans/.github](https://github.com/JacobPEvans/.github)
 
 ## Related Files
