@@ -173,7 +173,7 @@ jobs:
       - token-limits
       - validate-instructions
       - yaml-lint
-    if: always()
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
       - name: Check all results
