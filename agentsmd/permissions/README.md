@@ -63,11 +63,12 @@ formatter automatically appends `*` when generating tool-specific permissions.
 }
 ```
 
-### Why No `*` Suffix?
+### Why No Wildcard Suffix?
 
-The Nix permission formatter (`formatters.nix`) automatically appends `*` to
-create the final permission format. Adding `*` in source files results in
-invalid double-wildcard patterns:
+The Nix permission formatter (`formatters.nix`) automatically appends
+a space-wildcard (`*`) when generating the final `Bash(cmd *)` format.
+Adding a wildcard suffix in source files results in invalid
+double-wildcard patterns:
 
 - **Correct**: `"git"` → `"Bash(git *)"` (space enforces word boundary)
 - **Wrong**: `"git *"` → `"Bash(git * *)"` (double wildcard)
@@ -76,7 +77,7 @@ The space format enforces word boundaries: `Bash(nix *)` matches `nix search`
 but does NOT match `nix-env` (which is a separate binary).
 
 The validation script (`scripts/validate-permissions.sh`) will reject any
-commands ending with `*` to prevent this mistake.
+commands ending with `:*` or a trailing wildcard to prevent this mistake.
 
 ### Special File Formats
 

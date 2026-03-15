@@ -174,7 +174,7 @@ validate_permission_file() {
         # Check for patterns ending with ' *' or ':*' (formatter adds ' *' automatically)
         # The Nix formatter will append ' *' to create Bash(cmd *) format
         # Source files should contain "git" not "git *" or "git:*"
-        if [[ "$command" =~ [[:space:]]\*$ ]] || [[ "$command" =~ :\*$ ]]; then
+        if [[ "$command" =~ ([[:space:]]|:)\*$ ]]; then
             log_error "$file (line $line_num): Pattern ends with wildcard - formatter adds this automatically"
             echo "  Command: '$command'"
             echo "  ERROR: The Nix formatter automatically appends ' *' when generating Bash() permissions"
