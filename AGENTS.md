@@ -191,6 +191,12 @@ needed, create a new release rather than changing the existing one.
   - **Major** bumps: only by manually editing `.release-please-manifest.json` — no commit type can trigger this automatically
 - Templates and reusable workflows live in [JacobPEvans/.github](https://github.com/JacobPEvans/.github)
 
+## Dependency Versioning
+
+JacobPEvans repos reference other JacobPEvans repos by `@main` or major version tag —
+never SHA or minor/patch pins. Non-trusted external actions use SHA commit hashes;
+trusted orgs are defined in `JacobPEvans/.github/renovate-presets.json`.
+
 ## Related Files
 
 - `agentsmd/rules/` — 4 auto-loaded essential rules
