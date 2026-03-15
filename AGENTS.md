@@ -198,6 +198,16 @@ needed, create a new release rather than changing the existing one.
 - **External actions**: Use SHA commit hashes for untrusted sources; trusted orgs
   are defined in `JacobPEvans/.github/renovate-presets.json`
 
+## Public vs Private Repository Separation
+
+Never reference private repos (names, features, tools) in public repo content. If a repo is private,
+treat it as if it doesn't exist when writing public-facing docs, sites, or READMEs. This includes
+repo names, project descriptions, architecture diagrams, and any identifying details.
+
+When updating public-facing content (GitHub Pages sites, public READMEs, portfolios), audit for any
+mentions of private repositories before committing. Use `gh repo view OWNER/REPO` to check
+visibility when in doubt.
+
 ## Related Files
 
 - `agentsmd/rules/` — 4 auto-loaded essential rules
