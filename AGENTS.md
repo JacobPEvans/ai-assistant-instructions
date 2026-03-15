@@ -193,9 +193,10 @@ needed, create a new release rather than changing the existing one.
 
 ## Dependency Versioning
 
-JacobPEvans repos reference other JacobPEvans repos by `@main` or major version tag —
-never SHA or minor/patch pins. Non-trusted external actions use SHA commit hashes;
-trusted orgs are defined in `JacobPEvans/.github/renovate-presets.json`.
+- **JacobPEvans self-references**: Use `@main` or major version tag — never SHA
+  or minor/patch pins
+- **External actions**: Use SHA commit hashes for untrusted sources; trusted orgs
+  are defined in `JacobPEvans/.github/renovate-presets.json`
 
 ## Related Files
 
