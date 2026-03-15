@@ -198,7 +198,7 @@ treat it as if it doesn't exist when writing public-facing docs, sites, or READM
 repo names, project descriptions, architecture diagrams, and any identifying details.
 
 When updating public-facing content (GitHub Pages sites, public READMEs, portfolios), audit for any
-mentions of private repositories before committing. Use `gh repo view <owner>/<repo>` to check
+mentions of private repositories before committing. Use `gh repo view OWNER/REPO` to check
 visibility when in doubt.
 
 ## Related Files
