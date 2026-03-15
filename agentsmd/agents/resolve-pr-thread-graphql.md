@@ -3,7 +3,7 @@ name: resolve-pr-thread-graphql
 description: Atomic agent for resolving a single GitHub PR review thread via GraphQL mutation
 model: haiku
 author: JacobPEvans
-allowed-tools: Bash(gh api:*)
+allowed-tools: Bash(gh api *)
 ---
 
 # Resolve PR Thread GraphQL Sub-Agent

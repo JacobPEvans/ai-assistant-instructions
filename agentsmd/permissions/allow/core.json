@@ -47,8 +47,6 @@
     "mkdir",
     "mktemp",
     "more",
-    "nix-store",
-    "nix",
     "node",
     "printenv",
     "printf",

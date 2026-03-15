@@ -5,8 +5,6 @@
     "launchctl list",
     "launchctl print",
     "ln",
-    "ln -s",
-    "ln -sf",
     "mdfind",
     "mdls",
     "ncdu",

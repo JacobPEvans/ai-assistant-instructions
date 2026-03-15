@@ -3,7 +3,7 @@ name: docs-reviewer
 description: Documentation specialist for markdown review. Use PROACTIVELY for docs validation.
 model: haiku
 author: JacobPEvans
-allowed-tools: Task, TaskOutput, Read, Grep, Glob, TodoWrite, Bash(markdownlint:*)
+allowed-tools: Task, TaskOutput, Read, Grep, Glob, TodoWrite, Bash(markdownlint *), Bash(markdownlint-cli2 *), Edit
 ---
 
 # Documentation Reviewer Sub-Agent
