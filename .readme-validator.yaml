@@ -1,0 +1,7 @@
+# README Validator Configuration
+# Excludes internal documentation READMEs that aren't project root READMEs
+
+exclude_paths:
+  - "agentsmd/agents/README.md"
+  - "agentsmd/permissions/README.md"
+  - "agentsmd/**/README.md"
