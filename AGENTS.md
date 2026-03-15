@@ -191,6 +191,13 @@ needed, create a new release rather than changing the existing one.
   - **Major** bumps: only by manually editing `.release-please-manifest.json` — no commit type can trigger this automatically
 - Templates and reusable workflows live in [JacobPEvans/.github](https://github.com/JacobPEvans/.github)
 
+## Dependency Versioning
+
+- **JacobPEvans self-references**: Use `@main` or major version tag — never SHA
+  or minor/patch pins
+- **External actions**: Use SHA commit hashes for untrusted sources; trusted orgs
+  are defined in `JacobPEvans/.github/renovate-presets.json`
+
 ## Public vs Private Repository Separation
 
 Never reference private repos (names, features, tools) in public repo content. If a repo is private,
