@@ -104,12 +104,12 @@ Route tasks to the best-suited model based on task type:
 
 | Task Type | Cloud Model | Local Model | PAL MCP Tool |
 | --- | --- | --- | --- |
-| Research & Analysis | Gemini 3 Pro | qwen3-next:80b | `chat`, `clink` |
-| Complex Coding | Claude Opus 4.5 | qwen3-coder:30b | `codereview` |
-| Fast Tasks | Claude Sonnet 4.5 | qwen3-next:latest | `chat` |
-| Code Review | Multi-model consensus | deepseek-r1:70b | `consensus` |
-| Architecture | Claude Opus 4.5 | qwen3-next:80b | `planner` |
-| Pre-commit | Claude Sonnet 4.5 | qwen3-coder:30b | `precommit` |
+| Research & Analysis | Gemini 3 Pro | qwen3-next | `chat`, `clink` |
+| Complex Coding | Claude Opus 4.6 | qwen3-coder-next | `codereview` |
+| Fast Tasks | Claude Sonnet 4.6 | qwen3-next | `chat` |
+| Code Review | Multi-model consensus | deepseek-r1 | `consensus` |
+| Architecture | Claude Opus 4.6 | qwen3-next | `planner` |
+| Pre-commit | Claude Sonnet 4.6 | qwen3-coder-next | `precommit` |
 
 ## PAL MCP Tools
 
@@ -136,6 +136,19 @@ Get agreement from multiple models. Use for critical decisions.
 ### `planner` - Architecture Planning
 
 Design and planning tasks. Use for system design.
+
+### Local Model Names
+
+Use bare Ollama model names with PAL tools. Never prefix with `custom/` — PAL interprets
+`/` as an OpenRouter model path and routes to the wrong provider.
+
+| Correct        | Wrong                 |
+|----------------|-----------------------|
+| `gpt-oss:120b` | `custom/gpt-oss:120b` |
+| `qwen3-next`   | `ollama/qwen3-next`   |
+
+Run `sync-ollama-models` after pulling/removing models, then restart Claude Code.
+Use PAL `listmodels` tool to see all available models and their aliases.
 
 ## Priority Order
 
