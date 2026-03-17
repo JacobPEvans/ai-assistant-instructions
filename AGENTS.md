@@ -9,6 +9,18 @@ Multi-model AI orchestration configuration for Claude, Gemini, Copilot, and loca
 `/init-worktree` syncs main, creates an isolated branch and worktree, and cleans up stale worktrees.
 Skipping it means working directly on main or in a stale environment — both are forbidden.
 
+## Token Economy — Use PAL MCP Aggressively
+
+Claude Opus tokens are premium — reserve them for architecture decisions and complex reasoning.
+Offload everything else:
+
+- **Research & planning**: Route to Gemini via PAL MCP (`chat`, `clink`) — it has current 2026 knowledge and massive context
+- **Simple/repetitive tasks**: Route to local models (Ollama, MLX) when available — zero cost, low latency
+- **Medium-complexity work**: Route to OpenRouter cloud models via PAL MCP — capable and cost-effective
+- **Implementation**: Prefer Sonnet subagents over Opus — same tool access, fraction of the cost
+
+See the Model Routing Rules table for specific model recommendations per task type.
+
 ## Orchestrator Role
 
 You are a master orchestrator. Your primary context window is precious: it is where decisions are made, plans are formed, and results are synthesized. Protect it.
