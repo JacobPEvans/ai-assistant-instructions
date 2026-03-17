@@ -104,12 +104,17 @@ Route tasks to the best-suited model based on task type:
 
 | Task Type | Cloud Model | Local Model | PAL MCP Tool |
 | --- | --- | --- | --- |
-| Research & Analysis | Gemini 3 Pro | qwen3-next:80b | `chat`, `clink` |
-| Complex Coding | Claude Opus 4.5 | qwen3-coder:30b | `codereview` |
-| Fast Tasks | Claude Sonnet 4.5 | qwen3-next:latest | `chat` |
-| Code Review | Multi-model consensus | deepseek-r1:70b | `consensus` |
-| Architecture | Claude Opus 4.5 | qwen3-next:80b | `planner` |
-| Pre-commit | Claude Sonnet 4.5 | qwen3-coder:30b | `precommit` |
+| Research & Analysis | Gemini 3 Pro | qwen3-next | `chat`, `clink` |
+| Complex Coding | Claude Opus 4.6 | qwen3-coder-next | `codereview` |
+| Fast Tasks | Claude Sonnet 4.6 | qwen3-next | `chat` |
+| Code Review | Multi-model consensus | deepseek-r1 | `consensus` |
+| Architecture | Claude Opus 4.6 | qwen3-next | `planner` |
+| Pre-commit | Claude Sonnet 4.6 | qwen3-coder-next | `precommit` |
+
+Local model names in this table are **bare Ollama aliases** (no tag). PAL resolves them to the
+currently-pulled tagged version (e.g., `qwen3-next` → `qwen3-next:latest`). Use a tag only when
+you need a specific variant — for example, `gpt-oss:120b` selects the 120b parameter variant
+rather than the default. Run `listmodels` in PAL to see all available models and their exact tags.
 
 ## PAL MCP Tools
 
@@ -136,6 +141,25 @@ Get agreement from multiple models. Use for critical decisions.
 ### `planner` - Architecture Planning
 
 Design and planning tasks. Use for system design.
+
+### `listmodels` - List Available Models
+
+List all models registered with PAL and their aliases. Use to discover what is available before
+routing to a local model, and to confirm exact tag names.
+
+### Local Model Names
+
+Use bare Ollama model names with PAL tools. Never prefix with `custom/` — PAL interprets
+`/` as an OpenRouter model path and routes to the wrong provider.
+
+| Correct        | Wrong                 |
+|----------------|-----------------------|
+| `gpt-oss:120b` | `custom/gpt-oss:120b` |
+| `qwen3-next`   | `ollama/qwen3-next`   |
+
+Run `sync-ollama-models` (defined in nix-ai — available in your shell after a rebuild) after
+pulling or removing Ollama models, then restart Claude Code.
+Use the PAL `listmodels` tool to see all available models and their aliases.
 
 ## Priority Order
 
