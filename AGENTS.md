@@ -14,10 +14,10 @@ Skipping it means working directly on main or in a stale environment — both ar
 Claude Opus tokens are premium — reserve them for architecture decisions and complex reasoning.
 Offload everything else:
 
-- **Research & planning**: Route to Gemini via PAL MCP (`chat`, `clink`) — it has current 2026 knowledge and massive context
+- **Research & planning**: Route to Gemini via `chat` (single model) or `clink` (multi-model parallel) — up-to-date knowledge and massive context
 - **Simple/repetitive tasks**: Route to local models (Ollama, MLX) when available — zero cost, low latency
 - **Medium-complexity work**: Route to OpenRouter cloud models via PAL MCP — capable and cost-effective
-- **Implementation**: Prefer Sonnet subagents over Opus — same tool access, fraction of the cost
+- **Day-to-day implementation**: Prefer Sonnet subagents over Opus — same tool access, fraction of the cost; reserve Opus for genuinely complex coding and architecture
 
 See the Model Routing Rules table for specific model recommendations per task type.
 
