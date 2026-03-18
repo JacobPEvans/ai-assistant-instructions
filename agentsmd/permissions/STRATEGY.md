@@ -30,14 +30,14 @@ The `allow/` directory contains broad, tool-level patterns that grant wide acces
 ```json
 {
   "commands": [
-    "git:*",              // All git commands allowed
-    "docker:*",           // All docker commands allowed
-    "npm:*",              // All npm commands allowed
-    "pip:*",              // All pip commands allowed
-    "cargo:*",            // All cargo commands allowed
-    "kubectl:*",          // All kubectl commands allowed
-    "terraform:*",        // All terraform commands allowed
-    "aws:*"               // All aws commands allowed
+    "git",                // All git commands allowed
+    "docker",             // All docker commands allowed
+    "npm",                // All npm commands allowed
+    "pip",                // All pip commands allowed
+    "cargo",              // All cargo commands allowed
+    "kubectl",            // All kubectl commands allowed
+    "terraform",          // All terraform commands allowed
+    "aws"                 // All aws commands allowed
   ]
 }
 ```
@@ -51,24 +51,24 @@ The `ask/` directory contains specific command patterns that require confirmatio
 ```json
 {
   "commands": [
-    "git merge:*",             // Dangerous: can create merge conflicts
-    "git reset:*",             // Dangerous: can lose work
-    "git rebase:*",            // Dangerous: rewrites history
-    "git cherry-pick:*",       // Dangerous: cherry-picks specific commits
-    "docker exec:*",           // Dangerous: executes in running container
-    "docker run:*",            // Dangerous: creates new container
-    "npm install:*",           // Requires confirmation: modifies dependencies
-    "pip install:*",           // Requires confirmation: modifies dependencies
-    "cargo install:*",         // Requires confirmation: modifies system
-    "rm:*",                    // Dangerous: deletes files
-    "mv:*",                    // Dangerous: moves/renames files
-    "chmod:*",                 // Dangerous: changes permissions
-    "chown:*"                  // Dangerous: changes ownership
+    "git merge",               // Dangerous: can create merge conflicts
+    "git reset",               // Dangerous: can lose work
+    "git rebase",              // Dangerous: rewrites history
+    "git cherry-pick",         // Dangerous: cherry-picks specific commits
+    "docker exec",             // Dangerous: executes in running container
+    "docker run",              // Dangerous: creates new container
+    "npm install",             // Requires confirmation: modifies dependencies
+    "pip install",             // Requires confirmation: modifies dependencies
+    "cargo install",           // Requires confirmation: modifies system
+    "rm",                      // Dangerous: deletes files
+    "mv",                      // Dangerous: moves/renames files
+    "chmod",                   // Dangerous: changes permissions
+    "chown"                    // Dangerous: changes ownership
   ]
 }
 ```
 
-This provides **control**: when the AI tries `git merge`, it triggers an Ask confirmation even though `git:*` is allowed.
+This provides **control**: when the AI tries `git merge`, it triggers an Ask confirmation even though `git` is allowed.
 
 ### How Precedence Works
 
@@ -76,37 +76,37 @@ Example: User has these permissions configured:
 
 ```text
 Allow:
-  - git:*
-  - docker:*
+  - Bash(git *)
+  - Bash(docker *)
 
 Ask:
-  - git merge:*
-  - docker exec:*
+  - Bash(git merge *)
+  - Bash(docker exec *)
 
 Deny:
-  - git commit --no-verify:*
-  - docker run -v /root:*
+  - Bash(git commit --no-verify *)
+  - Bash(docker run -v /root *)
 ```
 
 When AI executes commands:
 
-| Command                     | Match                                  | Result   | Reason                            |
-| --------------------------- | -------------------------------------- | -------- | --------------------------------- |
-| `git status`                | Allow `git:*` (only)                   | Allowed  | Only Allow matches, most specific |
-| `git log`                   | Allow `git:*` (only)                   | Allowed  | Only Allow matches                |
-| `git merge main`            | Allow `git:*` + Ask `git merge:*`      | **Ask**  | Ask is stricter, overrides Allow  |
-| `git reset HEAD~1`          | Allow `git:*` + Ask `git reset:*`      | **Ask**  | Ask is stricter                   |
-| `git commit --no-verify`    | Deny `git commit --no-verify:*`        | **Deny** | Deny overrides all                |
-| `docker ps`                 | Allow `docker:*` (only)                | Allowed  | Only Allow matches                |
-| `docker exec <container>`   | Allow `docker:*` + Ask `docker exec:*` | **Ask**  | Ask is stricter                   |
-| `docker run -v /root:/root` | Deny `docker run -v /root:*`           | **Deny** | Deny overrides all                |
+| Command                     | Match                                                   | Result   | Reason                            |
+| --------------------------- | ------------------------------------------------------- | -------- | --------------------------------- |
+| `git status`                | Allow `Bash(git *)` (only)                              | Allowed  | Only Allow matches, most specific |
+| `git log`                   | Allow `Bash(git *)` (only)                              | Allowed  | Only Allow matches                |
+| `git merge main`            | Allow `Bash(git *)` + Ask `Bash(git merge *)`           | **Ask**  | Ask is stricter, overrides Allow  |
+| `git reset HEAD~1`          | Allow `Bash(git *)` + Ask `Bash(git reset *)`           | **Ask**  | Ask is stricter                   |
+| `git commit --no-verify`    | Deny `Bash(git commit --no-verify *)`                   | **Deny** | Deny overrides all                |
+| `docker ps`                 | Allow `Bash(docker *)` (only)                           | Allowed  | Only Allow matches                |
+| `docker exec <container>`   | Allow `Bash(docker *)` + Ask `Bash(docker exec *)`      | **Ask**  | Ask is stricter                   |
+| `docker run -v /root:/root` | Deny `Bash(docker run -v /root *)`                      | **Deny** | Deny overrides all                |
 
 ## File Organization
 
 ```text
 agentsmd/permissions/
 ├── allow/
-│   ├── core.json              # Coarse wildcards: git:*, gh:*, docker:*, aws:*, terraform:*, etc.
+│   ├── core.json              # Coarse allows: git, gh, docker, aws, terraform, etc.
 │   ├── nix.json               # Nix ecosystem: darwin-rebuild, direnv, devbox, devenv, etc.
 │   ├── nodejs.json            # Node.js toolchain: npm, yarn, pnpm, nvm, fnm, nodenv
 │   ├── python.json            # Python toolchain: pip, poetry, pyenv, pytest, conda, etc.
@@ -138,9 +138,9 @@ agentsmd/permissions/
     └── webfetch.json          # Allowed fetch domains for WebFetch tool
 ```
 
-**Note**: The allow/ directory uses coarse wildcards in `core.json` (e.g., `git:*`, `docker:*`, `aws:*`)
+**Note**: The allow/ directory uses bare command names in `core.json` (e.g., `git`, `docker`, `aws`)
 which cover entire command families. Separate files only exist for tool families that have unique
-commands NOT covered by core.json wildcards.
+commands NOT covered by core.json entries.
 
 ## Nix-First Philosophy
 
@@ -157,15 +157,15 @@ install commands (npm install, pip install, cargo install, etc.) are blocked bec
 **Package install commands in Deny list** (auto-blocked, no exceptions):
 
 ```text
-pip install:*           # Blocked - use nix-shell -p python3Packages.X
-pip3 install:*          # Blocked - use nix-shell -p python3Packages.X
-python -m pip install:* # Blocked - use nix-shell -p python3Packages.X
-npm install:*           # Blocked - use nix-shell -p nodePackages.X
-yarn add:*              # Blocked - use nix-shell -p nodePackages.X
-cargo install:*         # Blocked - use nix-shell -p X
-gem install:*           # Blocked - use nix-shell -p rubyPackages.X
-poetry add:*            # Blocked - use nix-shell -p python3Packages.X
-conda install:*         # Blocked - use nix-shell -p X
+pip install             # Blocked - use nix-shell -p python3Packages.X
+pip3 install            # Blocked - use nix-shell -p python3Packages.X
+python -m pip install   # Blocked - use nix-shell -p python3Packages.X
+npm install             # Blocked - use nix-shell -p nodePackages.X
+yarn add                # Blocked - use nix-shell -p nodePackages.X
+cargo install           # Blocked - use nix-shell -p X
+gem install             # Blocked - use nix-shell -p rubyPackages.X
+poetry add              # Blocked - use nix-shell -p python3Packages.X
+conda install           # Blocked - use nix-shell -p X
 ```
 
 **Preferred approach**: Tools should come from the Nix dev shell (`nix develop`, typically via direnv).
@@ -174,14 +174,14 @@ Package runners (pipx, npx, bunx) are a last resort and require confirmation.
 **Package runners in Ask list** (can run without installing - requires confirmation):
 
 ```text
-pipx run:*    # Runs Python package without installing
-uvx:*         # UV package runner (runs without installing)
-uv run:*      # UV run command
-bunx:*        # Bun package runner
-npx:*         # Node package runner
-pnpx:*        # PNPM package runner
-go run:*      # Go run command (doesn't install)
-cargo run:*   # Cargo run command (doesn't install)
+pipx run      # Runs Python package without installing
+uvx           # UV package runner (runs without installing)
+uv run        # UV run command
+bunx          # Bun package runner
+npx           # Node package runner
+pnpx          # PNPM package runner
+go run        # Go run command (doesn't install)
+cargo run     # Cargo run command (doesn't install)
 ```
 
 **Preferred approach**: Use `nix-shell -p <package>` for temporary tools, or add to flake.nix/shell.nix
@@ -193,30 +193,30 @@ These commands are consistently placed in the Ask list because they're powerful 
 
 ### Git Commands
 
-- `git merge:*` - Can create merge conflicts or merge unwanted changes
-- `git reset:*` - Can lose work if reset to wrong commit
-- `git rebase:*` - Rewrites history, dangerous if not careful
-- `git cherry-pick:*` - Can create conflicts or duplicate commits
+- `git merge` - Can create merge conflicts or merge unwanted changes
+- `git reset` - Can lose work if reset to wrong commit
+- `git rebase` - Rewrites history, dangerous if not careful
+- `git cherry-pick` - Can create conflicts or duplicate commits
 
 ### File Operations
 
-- `rm:*` - Deletes files (can be permanent)
-- `mv:*` - Moves/renames files (can overwrite)
-- `cp:*` - Copies files (can overwrite)
-- `chmod:*` - Changes permissions
-- `chown:*` - Changes ownership
+- `rm` - Deletes files (can be permanent)
+- `mv` - Moves/renames files (can overwrite)
+- `cp` - Copies files (can overwrite)
+- `chmod` - Changes permissions
+- `chown` - Changes ownership
 
 ### Container Operations
 
-- `docker exec:*` - Executes code in running container
-- `docker run:*` - Starts new container (resource commitment)
-- `docker context create:*` - Creates new context
+- `docker exec` - Executes code in running container
+- `docker run` - Starts new container (resource commitment)
+- `docker context create` - Creates new context
 
 ### System Operations
 
-- `osascript:*` - Executes AppleScript (OS automation)
-- `system_profiler:*` - Reads system information
-- `defaults read/write:*` - Modifies system defaults
+- `osascript` - Executes AppleScript (OS automation)
+- `system_profiler` - Reads system information
+- `defaults read/write` - Modifies system defaults
 
 ## Token Efficiency
 
@@ -225,11 +225,11 @@ This hierarchical approach significantly reduces token usage:
 **Before** (individual permissions):
 
 ```text
-Bash(git status:*)
-Bash(git log:*)
-Bash(git diff:*)
-Bash(git show:*)
-Bash(git branch:*)
+Bash(git status *)
+Bash(git log *)
+Bash(git diff *)
+Bash(git show *)
+Bash(git branch *)
 ... 45 more git commands
 ```
 
@@ -239,15 +239,15 @@ Bash(git branch:*)
 
 ```text
 Allow:
-  - git:*
-  - docker:*
-  - npm:*
+  - Bash(git *)
+  - Bash(docker *)
+  - Bash(npm *)
   ... (30-40 patterns)
 
 Ask:
-  - git merge:*
-  - git reset:*
-  - docker exec:*
+  - Bash(git merge *)
+  - Bash(git reset *)
+  - Bash(docker exec *)
   ... (80-100 patterns)
 ```
 
@@ -257,8 +257,8 @@ Ask:
 
 ## Implementation Notes
 
-1. **Coarse Allow patterns** should match tool names: `git:*`, `docker:*`, `npm:*`
-2. **Specific Ask patterns** should match dangerous subcommands: `git merge:*`, `docker exec:*`
+1. **Coarse Allow patterns** should match tool names: `git`, `docker`, `npm`
+2. **Specific Ask patterns** should match dangerous subcommands: `git merge`, `docker exec`
 3. **Deny patterns** should be as specific as possible to avoid false positives
 4. **Tool-agnostic format**: These files use simple command lists, not Claude-specific syntax
 5. **nix-config formatting**: The nix-config repo converts these to tool-specific formats during build
@@ -273,7 +273,7 @@ When Claude Code encounters multiple matching permissions:
 4. **Default behavior** - If no rules match, behavior depends on Claude Code defaults
 
 **Pattern matching**: Patterns use glob-style matching. More specific patterns (e.g.,
-`git merge:*`) match before less specific (e.g., `git:*`), but permission level still
+`Bash(git merge *)`) match before less specific (e.g., `Bash(git *)`), but permission level still
 wins (Ask > Allow despite specificity differences).
 
 ## Future Enhancements

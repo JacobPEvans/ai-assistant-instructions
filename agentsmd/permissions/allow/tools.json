@@ -50,6 +50,18 @@
     "claude config list",
     "claude config get",
     "markdownlint-cli2",
-    "pre-commit"
+    "pre-commit",
+    "ansible-lint",
+    "bandit",
+    "bats",
+    "bun test",
+    "cspell",
+    "lychee",
+    "molecule",
+    "mypy",
+    "playwright",
+    "ruff",
+    "tflint",
+    "yamllint"
   ]
 }
