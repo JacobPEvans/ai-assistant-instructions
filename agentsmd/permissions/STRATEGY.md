@@ -33,14 +33,16 @@ The `allow/` directory contains broad, tool-level patterns that grant wide acces
     "git",                // All git commands allowed
     "docker",             // All docker commands allowed
     "npm",                // All npm commands allowed
-    "pip",                // All pip commands allowed
-    "cargo",              // All cargo commands allowed
     "kubectl",            // All kubectl commands allowed
     "terraform",          // All terraform commands allowed
     "aws"                 // All aws commands allowed
   ]
 }
 ```
+
+> **Note**: Not all tools are coarse-allowed at the bare-command level. For example, `cargo` and `pip`
+> use specific subcommand entries (e.g., `cargo build`, `pip list`) rather than a broad coarse allow,
+> because they have dangerous subcommands (`cargo install`, `pip install`) that need Ask-level control.
 
 This provides **convenience**: common tools work without friction, and the AI can be productive with minimal permission prompts.
 
@@ -72,7 +74,8 @@ This provides **control**: when the AI tries `git merge`, it triggers an Ask con
 
 ### How Precedence Works
 
-Example: User has these permissions configured:
+Example: User has these permissions configured (shown in Claude Code's generated `settings.json`
+format — the `Bash(command *)` syntax is generated output, not what you write in the JSON source files):
 
 ```text
 Allow:
