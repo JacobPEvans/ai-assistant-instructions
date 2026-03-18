@@ -7,7 +7,7 @@
 #
 # This script ensures that:
 # 1. All permission JSON files have valid syntax
-# 2. Permission files contain shell commands (git:*, npm:*, etc.)
+# 2. Permission files contain shell commands (git, npm, etc.)
 # 3. Permission files do NOT contain tool names (Edit, Bash, MultiEdit, etc.)
 # 4. valid-tools.json is generated and up-to-date
 #
