@@ -223,8 +223,11 @@ needed, create a new release rather than changing the existing one.
 - Promote from draft to published only when everything is ready
 - All repos use [Google's release-please](https://github.com/googleapis/release-please) for automated version bumps:
   - **Patch** bumps: `fix:` commits
-  - **Minor** bumps: `feat:` commits **and** `BREAKING CHANGE:` footer commits (due to `versioning: always-bump-minor` in the central config)
-  - **Major** bumps: only by manually editing `.release-please-manifest.json` — no commit type can trigger this automatically
+  - **Minor** bumps: `feat:` commits
+  - **Major** bumps: human-initiated only — edit `.release-please-manifest.json` manually.
+    Automated major bumps (including from `BREAKING CHANGE:` footers) are blocked by the release workflow.
+  - Prefer `fix:` for config tweaks, small improvements, incremental adjustments, and dependency updates
+  - Reserve `feat:` for genuinely new capabilities, integrations, or significant behavioral changes
 - Templates and reusable workflows live in [JacobPEvans/.github](https://github.com/JacobPEvans/.github)
 
 ## Dependency Versioning
