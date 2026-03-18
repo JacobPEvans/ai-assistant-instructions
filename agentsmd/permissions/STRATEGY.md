@@ -95,10 +95,10 @@ When AI executes commands:
 | `git status`                | Allow `Bash(git *)` (only)                              | Allowed  | Only Allow matches, most specific |
 | `git log`                   | Allow `Bash(git *)` (only)                              | Allowed  | Only Allow matches                |
 | `git merge main`            | Allow `Bash(git *)` + Ask `Bash(git merge *)`           | **Ask**  | Ask is stricter, overrides Allow  |
-| `git reset HEAD~1`          | Allow `Bash(git *)` + Ask `Bash(git reset *)`           | **Ask**  | Ask is stricter                   |
+| `git reset HEAD~1`          | Allow `Bash(git *)` + Ask `Bash(git reset *)`           | **Ask**  | Ask is stricter, overrides Allow  |
 | `git commit --no-verify`    | Deny `Bash(git commit --no-verify *)`                   | **Deny** | Deny overrides all                |
 | `docker ps`                 | Allow `Bash(docker *)` (only)                           | Allowed  | Only Allow matches                |
-| `docker exec <container>`   | Allow `Bash(docker *)` + Ask `Bash(docker exec *)`      | **Ask**  | Ask is stricter                   |
+| `docker exec <container>`   | Allow `Bash(docker *)` + Ask `Bash(docker exec *)`      | **Ask**  | Ask is stricter, overrides Allow  |
 | `docker run -v /root:/root` | Deny `Bash(docker run -v /root *)`                      | **Deny** | Deny overrides all                |
 
 ## File Organization
