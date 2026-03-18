@@ -224,7 +224,8 @@ needed, create a new release rather than changing the existing one.
 - All repos use [Google's release-please](https://github.com/googleapis/release-please) for automated version bumps:
   - **Patch** bumps: `fix:` commits
   - **Minor** bumps: `feat:` commits
-  - **Major** bumps: human-initiated only — edit `.release-please-manifest.json` manually. Automated major bumps are blocked by the release workflow.
+  - **Major** bumps: human-initiated only — edit `.release-please-manifest.json` manually.
+    Automated major bumps (including from `BREAKING CHANGE:` footers) are blocked by the release workflow.
   - Prefer `fix:` for config tweaks, small improvements, incremental adjustments, and dependency updates
   - Reserve `feat:` for genuinely new capabilities, integrations, or significant behavioral changes
 - Templates and reusable workflows live in [JacobPEvans/.github](https://github.com/JacobPEvans/.github)
