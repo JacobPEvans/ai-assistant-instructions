@@ -71,7 +71,7 @@ Good patterns, well-written code, improvements over previous state.
 
 When `AI_ORCHESTRATION_LOCAL_ONLY=true`:
 
-- Try MLX first: mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit (port 11435)
+- Try MLX first: mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit (port 11436)
 - Fall back to Ollama: deepseek-r1 for primary analysis (port 11434)
 - Cross-validation: MLX Qwen3-235B or Ollama qwen3-next
 - No cloud API calls
