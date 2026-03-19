@@ -19,7 +19,7 @@ actual research work to specialized models (Gemini 3 Pro or local models) via PA
 | Mode | Model | Use Case |
 | ---- | ----- | -------- |
 | Cloud | Gemini 3 Pro | Large context analysis, web research |
-| Local (MLX) | mlx-community/Qwen3-235B-A22B-4bit | Offline research, private data (port 11435) |
+| Local (MLX) | mlx-community/Qwen3-235B-A22B-4bit | Offline research, private data (port 11436) |
 | Local (Ollama) | qwen3-next | Fallback when MLX unavailable (port 11434) |
 
 ## Capabilities
@@ -53,7 +53,7 @@ pal clink "Research question here"
 
 When `AI_ORCHESTRATION_LOCAL_ONLY=true` or `--local` flag is passed:
 
-- Try MLX first: mlx-community/Qwen3-235B-A22B-4bit (port 11435)
+- Try MLX first: mlx-community/Qwen3-235B-A22B-4bit (port 11436)
 - Fall back to Ollama: qwen3-next (port 11434)
 - No cloud API calls
 - OLLAMA_HOST environment variable is respected

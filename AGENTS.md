@@ -111,7 +111,7 @@ Route tasks to the best-suited model based on task type:
 | Architecture | Claude Opus 4.6 | mlx-community/Qwen3-235B-A22B-4bit | qwen3-next | `planner` |
 | Pre-commit | Claude Sonnet 4.6 | TBD | qwen3-coder-next | `precommit` |
 
-Always try MLX first (port 11435). If MLX unavailable, fall back to Ollama (port 11434).
+Always try MLX first (port 11436). If MLX unavailable, fall back to Ollama (port 11434).
 
 Local model names in the Ollama column are **bare Ollama aliases** (no tag). PAL resolves them to
 the currently-pulled tagged version (e.g., `qwen3-next` → `qwen3-next:latest`). Use a tag only
