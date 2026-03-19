@@ -102,18 +102,20 @@ See the Model Routing Rules table for which model fits which task type.
 
 Route tasks to the best-suited model based on task type:
 
-| Task Type | Cloud Model | Local Model | PAL MCP Tool |
-| --- | --- | --- | --- |
-| Research & Analysis | Gemini 3 Pro | qwen3-next | `chat`, `clink` |
-| Complex Coding | Claude Opus 4.6 | qwen3-coder-next | `codereview` |
-| Fast Tasks | Claude Sonnet 4.6 | qwen3-next | `chat` |
-| Code Review | Multi-model consensus | deepseek-r1 | `consensus` |
-| Architecture | Claude Opus 4.6 | qwen3-next | `planner` |
-| Pre-commit | Claude Sonnet 4.6 | qwen3-coder-next | `precommit` |
+| Task Type | Cloud Model | Local (MLX preferred) | Local (Ollama fallback) | PAL MCP Tool |
+| --- | --- | --- | --- | --- |
+| Research & Analysis | Gemini 3 Pro | mlx-community/Qwen3-235B-A22B-4bit | qwen3-next | `chat`, `clink` |
+| Complex Coding | Claude Opus 4.6 | TBD | qwen3-coder-next | `codereview` |
+| Fast Tasks | Claude Sonnet 4.6 | mlx-community/Qwen3.5-27B-4bit | qwen3-next | `chat` |
+| Code Review | Multi-model consensus | mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit | deepseek-r1 | `consensus` |
+| Architecture | Claude Opus 4.6 | mlx-community/Qwen3-235B-A22B-4bit | qwen3-next | `planner` |
+| Pre-commit | Claude Sonnet 4.6 | TBD | qwen3-coder-next | `precommit` |
 
-Local model names in this table are **bare Ollama aliases** (no tag). PAL resolves them to the
-currently-pulled tagged version (e.g., `qwen3-next` → `qwen3-next:latest`). Use a tag only when
-you need a specific variant — for example, `gpt-oss:120b` selects the 120b parameter variant
+Always try MLX first (port 11435). If MLX unavailable, fall back to Ollama (port 11434).
+
+Local model names in the Ollama column are **bare Ollama aliases** (no tag). PAL resolves them to
+the currently-pulled tagged version (e.g., `qwen3-next` → `qwen3-next:latest`). Use a tag only
+when you need a specific variant — for example, `gpt-oss:120b` selects the 120b parameter variant
 rather than the default. Run `listmodels` in PAL to see all available models and their exact tags.
 
 ## PAL MCP Tools

@@ -1,6 +1,6 @@
 ---
 name: researcher
-description: Research tasks delegated to current best research model (Gemini 3 Pro cloud, qwen3-next:80b local)
+description: Research tasks delegated to current best research model (Gemini 3 Pro cloud, MLX Qwen3-235B local)
 model: sonnet
 allowed-tools: Task, TaskOutput, WebFetch, Read, Grep, Glob, WebSearch
 author: JacobPEvans
@@ -9,17 +9,18 @@ author: JacobPEvans
 # Researcher Agent
 
 Research specialist using the best available model for research tasks.
-Routes to Gemini 3 Pro (cloud) or qwen3-next:80b (local) via PAL MCP.
+Routes to Gemini 3 Pro (cloud) or MLX Qwen3-235B (local) via PAL MCP.
 
 **Note**: This agent uses Sonnet for orchestration and task coordination, while delegating
-actual research work to specialized models (Gemini 3 Pro or qwen3-next:80b) via PAL MCP.
+actual research work to specialized models (Gemini 3 Pro or local models) via PAL MCP.
 
 ## Model Selection
 
 | Mode | Model | Use Case |
 | ---- | ----- | -------- |
 | Cloud | Gemini 3 Pro | Large context analysis, web research |
-| Local | qwen3-next:80b | Offline research, private data |
+| Local (MLX) | mlx-community/Qwen3-235B-A22B-4bit | Offline research, private data (port 11435) |
+| Local (Ollama) | qwen3-next | Fallback when MLX unavailable (port 11434) |
 
 ## Capabilities
 
@@ -52,7 +53,8 @@ pal clink "Research question here"
 
 When `AI_ORCHESTRATION_LOCAL_ONLY=true` or `--local` flag is passed:
 
-- Routes to qwen3-next:80b via Ollama
+- Try MLX first: mlx-community/Qwen3-235B-A22B-4bit (port 11435)
+- Fall back to Ollama: qwen3-next (port 11434)
 - No cloud API calls
 - OLLAMA_HOST environment variable is respected
 
