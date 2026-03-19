@@ -17,11 +17,11 @@ then synthesizes findings into a unified review.
 
 ## Models Used
 
-| Role | Cloud Model | Local Model |
-| ---- | ----------- | ----------- |
-| Primary | Gemini 3 Pro | qwen3-next:80b |
-| Secondary | Claude Opus 4.5 | deepseek-r1:70b |
-| Synthesis | Claude Sonnet 4.5 | qwen3-next:latest |
+| Role | Cloud Model | Local (MLX preferred) | Local (Ollama fallback) |
+| ---- | ----------- | --------------------- | ----------------------- |
+| Primary | Gemini 3 Pro | mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit | deepseek-r1 |
+| Secondary | Claude Opus 4.6 | mlx-community/Qwen3-235B-A22B-4bit | qwen3-next |
+| Synthesis | Claude Sonnet 4.6 | mlx-community/Qwen3.5-27B-4bit | qwen3-next |
 
 ## Review Process
 
@@ -71,8 +71,9 @@ Good patterns, well-written code, improvements over previous state.
 
 When `AI_ORCHESTRATION_LOCAL_ONLY=true`:
 
-- Routes to deepseek-r1:70b for primary analysis
-- Uses qwen3-next:80b for cross-validation
+- Try MLX first: mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit (port 11435)
+- Fall back to Ollama: deepseek-r1 for primary analysis (port 11434)
+- Cross-validation: MLX Qwen3-235B or Ollama qwen3-next
 - No cloud API calls
 
 ## Severity Guidelines
