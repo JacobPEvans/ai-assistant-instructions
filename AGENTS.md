@@ -15,7 +15,7 @@ Claude Opus tokens are premium — reserve them for architecture decisions and c
 Offload everything else:
 
 - **Research & planning**: Route to Gemini via `chat` (single model) or `clink` (multi-model parallel) — up-to-date knowledge and massive context
-- **Simple/repetitive tasks**: Route to local models (Ollama, MLX) when available — zero cost, low latency
+- **Simple/repetitive tasks**: Route to local models (MLX) when available — zero cost, low latency
 - **Medium-complexity work**: Route to OpenRouter cloud models via PAL MCP — capable and cost-effective
 - **Day-to-day implementation**: Prefer Sonnet subagents over Opus — same tool access, fraction of the cost; reserve Opus for genuinely complex coding and architecture
 
@@ -102,21 +102,20 @@ See the Model Routing Rules table for which model fits which task type.
 
 Route tasks to the best-suited model based on task type:
 
-| Task Type | Cloud Model | Local (MLX preferred) | Local (Ollama fallback) | PAL MCP Tool |
-| --- | --- | --- | --- | --- |
-| Research & Analysis | Gemini 3 Pro | mlx-community/Qwen3-235B-A22B-4bit | qwen3-next | `chat`, `clink` |
-| Complex Coding | Claude Opus 4.6 | TBD | qwen3-coder-next | `codereview` |
-| Fast Tasks | Claude Sonnet 4.6 | mlx-community/Qwen3.5-27B-4bit | qwen3-next | `chat` |
-| Code Review | Multi-model consensus | mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit | deepseek-r1 | `consensus` |
-| Architecture | Claude Opus 4.6 | mlx-community/Qwen3-235B-A22B-4bit | qwen3-next | `planner` |
-| Pre-commit | Claude Sonnet 4.6 | TBD | qwen3-coder-next | `precommit` |
+| Task Type | Cloud Model | Local (MLX) | PAL MCP Tool |
+| --- | --- | --- | --- |
+| Research & Analysis | Gemini 3 Pro | mlx-community/Qwen3-235B-A22B-4bit | `chat`, `clink` |
+| Complex Coding | Claude Opus 4.6 | mlx-community/Qwen3-Coder-Next | `codereview` |
+| Fast Tasks | Claude Sonnet 4.6 | mlx-community/Qwen3.5-27B-4bit | `chat` |
+| Code Review | Multi-model consensus | mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit | `consensus` |
+| Architecture | Claude Opus 4.6 | mlx-community/Qwen3-235B-A22B-4bit | `planner` |
+| Pre-commit | Claude Sonnet 4.6 | mlx-community/Qwen3-Coder-30B-A3B-Instruct | `precommit` |
 
-Always try MLX first (port 11436). If MLX unavailable, fall back to Ollama (port 11434).
+All local inference routes through MLX (port 11434).
 
-Local model names in the Ollama column are **bare Ollama aliases** (no tag). PAL resolves them to
-the currently-pulled tagged version (e.g., `qwen3-next` → `qwen3-next:latest`). Use a tag only
-when you need a specific variant — for example, `gpt-oss:120b` selects the 120b parameter variant
-rather than the default. Run `listmodels` in PAL to see all available models and their exact tags.
+Local model names in the MLX column are **HuggingFace model IDs** used by vllm-mlx.
+PAL discovers available models via the MLX server's `/v1/models` endpoint. Run `listmodels`
+in PAL to see all registered models and their aliases.
 
 ## PAL MCP Tools
 
@@ -151,16 +150,16 @@ routing to a local model, and to confirm exact tag names.
 
 ### Local Model Names
 
-Use bare Ollama model names with PAL tools. Never prefix with `custom/` — PAL interprets
+Use HuggingFace model IDs or PAL-registered aliases with PAL tools. Never prefix with `custom/` — PAL interprets
 `/` as an OpenRouter model path and routes to the wrong provider.
 
 | Correct        | Wrong                 |
 |----------------|-----------------------|
 | `gpt-oss:120b` | `custom/gpt-oss:120b` |
-| `qwen3-next`   | `ollama/qwen3-next`   |
+| `gpt-oss`      | `ollama/gpt-oss`      |
 
-Run `sync-ollama-models` (defined in nix-ai — available in your shell after a rebuild) after
-pulling or removing Ollama models, then restart Claude Code.
+Run `sync-mlx-models` (defined in nix-ai — available in your shell after a rebuild) after
+switching models, then restart Claude Code.
 Use the PAL `listmodels` tool to see all available models and their aliases.
 
 ## Priority Order
@@ -175,9 +174,9 @@ When choosing implementations or tools:
 
 When `localOnlyMode` is enabled or `--local` flag is passed:
 
-- All tasks route to Ollama models
-- `OLLAMA_HOST` is passed to PAL MCP
+- All tasks route to MLX inference server (port 11434)
 - No cloud API calls are made
+- Ensure vllm-mlx LaunchAgent is running (`launchctl list | grep vllm-mlx`)
 
 ## Cross-Referencing Convention
 
