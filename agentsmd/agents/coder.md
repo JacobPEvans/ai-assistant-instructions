@@ -12,11 +12,11 @@ Coding specialist with automatic tier selection based on task complexity.
 
 ## Model Tiers
 
-| Tier | Cloud Model | Local (MLX preferred) | Local (Ollama fallback) | When Used |
-| ---- | ----------- | --------------------- | ----------------------- | --------- |
-| Frontier | Claude Opus 4.6 | TBD | qwen3-coder-next | Complex tasks (100+ lines, architecture) |
-| Fast | Claude Sonnet 4.6 | mlx-community/Qwen3.5-27B-4bit | qwen3-next | Standard tasks (bug fixes, small features) |
-| Local | N/A | TBD | qwen3-coder-next | Private repos, offline work |
+| Tier | Cloud Model | Local (MLX) | When Used |
+| ---- | ----------- | ----------- | --------- |
+| Frontier | Claude Opus 4.6 | mlx-community/Qwen3-Coder-Next | Complex tasks (100+ lines, architecture) |
+| Fast | Claude Sonnet 4.6 | mlx-community/Qwen3.5-27B-4bit | Standard tasks (bug fixes, small features) |
+| Local | N/A | mlx-community/Qwen3-Coder-Next | Private repos, offline work |
 
 ## Automatic Tier Selection
 
@@ -56,7 +56,7 @@ Explicitly request to force a specific tier:
 
 - "use frontier model for this" - Forces Opus 4.6
 - "use fast model" - Forces Sonnet 4.6
-- "use local model" or `--local` flag - Forces MLX first, then Ollama fallback
+- "use local model" or `--local` flag - Forces MLX inference server
 
 ## Output Format
 
