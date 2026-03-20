@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.2.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.1.0...v1.2.0) (2026-03-20)
+
+
+### Features
+
+* add test/lint tool permissions and fix :* format ([#507](https://github.com/JacobPEvans/ai-assistant-instructions/issues/507)) ([85e139c](https://github.com/JacobPEvans/ai-assistant-instructions/commit/85e139cd3671c5de9ed39991bd83507221820558))
+* add token economy section to AGENTS.md ([#505](https://github.com/JacobPEvans/ai-assistant-instructions/issues/505)) ([c8fe1ca](https://github.com/JacobPEvans/ai-assistant-instructions/commit/c8fe1caa67b5a632943c5475085e2b139baea7d3))
+* auto-approve PAL, HuggingFace, memory, and AWS MCP tools ([#514](https://github.com/JacobPEvans/ai-assistant-instructions/issues/514)) ([3e59464](https://github.com/JacobPEvans/ai-assistant-instructions/commit/3e59464c1bfa738aaf4a0d5cb1a0f990f8a99c56))
+* MLX-first model routing — add MLX preferred column, update cloud to 4.6 ([#511](https://github.com/JacobPEvans/ai-assistant-instructions/issues/511)) ([5ee434d](https://github.com/JacobPEvans/ai-assistant-instructions/commit/5ee434de4361c1ec1e21eccaac041864b4b7a9a4))
+
+
+### Bug Fixes
+
+* add release-please config for manifest mode ([ccdbd2b](https://github.com/JacobPEvans/ai-assistant-instructions/commit/ccdbd2bb39a0e73c90ce0493c78ffc34d369f3df))
+* add release-please secrets and sync VERSION ([b327262](https://github.com/JacobPEvans/ai-assistant-instructions/commit/b3272624c1f9688e961267fc8cd4f3fd1df67a74))
+* audit tool permissions, agent restrictions, and Bash format migration ([#504](https://github.com/JacobPEvans/ai-assistant-instructions/issues/504)) ([a68d8b5](https://github.com/JacobPEvans/ai-assistant-instructions/commit/a68d8b56352825aaa1fd917db422295f178da234))
+* **ci:** use !cancelled() instead of always() in Merge Gate condition ([#501](https://github.com/JacobPEvans/ai-assistant-instructions/issues/501)) ([e6e9f3a](https://github.com/JacobPEvans/ai-assistant-instructions/commit/e6e9f3a6969004db648fb7d06a0b5f3c36a87217))
+* remove stale :* format from validate-permissions comment ([#509](https://github.com/JacobPEvans/ai-assistant-instructions/issues/509)) ([a90ba52](https://github.com/JacobPEvans/ai-assistant-instructions/commit/a90ba523515e682506d0fd2066c4cdb288b01c44))
+* update MLX port from 11435 to 11436 (screenpipe conflict) ([#513](https://github.com/JacobPEvans/ai-assistant-instructions/issues/513)) ([aa15e32](https://github.com/JacobPEvans/ai-assistant-instructions/commit/aa15e32e8bbe2868c44379f3cf81c47533fc80aa))
+* update model routing table and add local model naming guidance ([#506](https://github.com/JacobPEvans/ai-assistant-instructions/issues/506)) ([f47ba79](https://github.com/JacobPEvans/ai-assistant-instructions/commit/f47ba79e45c40a2b116607e2f06669f7f2656987))
+* update routing docs for MLX-only, fill TBD entries ([9234191](https://github.com/JacobPEvans/ai-assistant-instructions/commit/923419183fec1813fe439b175fbb39db5d0d4cfc))
+* update routing docs for MLX-only, fill TBD entries ([#515](https://github.com/JacobPEvans/ai-assistant-instructions/issues/515)) ([9234191](https://github.com/JacobPEvans/ai-assistant-instructions/commit/923419183fec1813fe439b175fbb39db5d0d4cfc))
+* update version bump docs to reflect default semver strategy ([#508](https://github.com/JacobPEvans/ai-assistant-instructions/issues/508)) ([5631835](https://github.com/JacobPEvans/ai-assistant-instructions/commit/563183576662d52526fc84ad47cf3a479a7825a6))
+
 ## [1.1.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.0.1...v1.1.0) (2026-03-11)
 
 
