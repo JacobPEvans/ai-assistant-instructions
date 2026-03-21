@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.2.1...v1.3.0) (2026-03-21)
+
+
+### Features
+
+* add pre-integration checklist for new inference backends ([#517](https://github.com/JacobPEvans/ai-assistant-instructions/issues/517)) ([5cc389f](https://github.com/JacobPEvans/ai-assistant-instructions/commit/5cc389f132fa4f1ef4464b419f2ec6f0fa321849))
+
 ## [1.2.1](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.2.0...v1.2.1) (2026-03-21)
 
 
