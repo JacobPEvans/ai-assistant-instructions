@@ -186,7 +186,9 @@
     "pathspec",
     "heredocs",
     "unauditable",
-    "vllm"
+    "vllm",
+    "plist",
+    "plists"
   ],
   "files": [
     "**/*.md"
