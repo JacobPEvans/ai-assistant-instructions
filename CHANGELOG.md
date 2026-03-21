@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.2.0...v1.2.1) (2026-03-21)
+
+
+### Bug Fixes
+
+* remove greptile mcp permissions ([#518](https://github.com/JacobPEvans/ai-assistant-instructions/issues/518)) ([608c197](https://github.com/JacobPEvans/ai-assistant-instructions/commit/608c197186096489387913e18e076e5fdf2edfd6))
+
 ## [1.2.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.1.0...v1.2.0) (2026-03-20)
 
 
