@@ -190,14 +190,15 @@ Rules in `.claude/rules/` auto-load every session. Skills and agents load on dem
 
 **In docs and external files**: Use markdown links. These aren't parsed by Claude Code.
 
-## Auto-Loaded Rules (4 Essential)
+## Auto-Loaded Rules (5 Essential)
 
-Only 4 rules auto-load each session via `.claude/rules/ -> ../agentsmd/rules`:
+Only 5 rules auto-load each session via `.claude/rules/ -> ../agentsmd/rules`:
 
 - `secrets-policy.md` — Never commit secrets
 - `direct-execution.md` — Use tools directly, never generate scripts
 - `agent-dispatching.md` — File operations block for subagents
 - `soul.md` — Voice and personality guidelines
+- `nix-tool-policy.md` — Never install tools that Nix dev shells provide
 
 ## On-Demand Standards (via Plugins)
 

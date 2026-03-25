@@ -9,7 +9,8 @@
 - `pipx install <tool>` / `pipx reinstall <tool>` — pipx virtualenvs reference Nix store Python; breaks after GC
 - `pip install <tool>` / `pip3 install <tool>` — same problem, also pollutes global Python
 - `uv pip install <tool>` — same Nix store Python problem
-- `uv run <tool>` — unnecessary; tools are on PATH from the dev shell
+- `uv run <tool>` — generally unnecessary in Nix dev shells; prefer bare commands from the dev shell PATH.
+  Last-resort package runner (with confirmation) only when the dev shell does not provide the tool.
 - `brew install <tool>` for tools already in the dev shell — creates version conflicts
 
 ## What To Do Instead
@@ -20,7 +21,11 @@
 
 3. **If direnv exec fails**: Use `nix develop --command <command>` as a fallback. This is slower but always works.
 
-4. **Never install globally**: The correct response to a missing tool is activating the dev shell, not installing the tool system-wide.
+4. **If the tool truly isn't in the flake**: Prefer adding the tool to `flake.nix` so it becomes part of the dev shell.
+   For one-off usage, run it via `nix shell -p <tool>` rather than installing with pipx/pip/uv.
+
+5. **Never install globally**: Do not respond to a missing tool by installing it system-wide with pipx/pip/uv/brew;
+   use the dev shell or a temporary Nix invocation, and update `flake.nix` when the tool is needed long term.
 
 ## Why This Matters
 
