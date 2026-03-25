@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.3.0...v1.3.1) (2026-03-25)
+
+
+### Bug Fixes
+
+* replace broken MLX routing slots with downloaded models ([#523](https://github.com/JacobPEvans/ai-assistant-instructions/issues/523)) ([bae3b50](https://github.com/JacobPEvans/ai-assistant-instructions/commit/bae3b5059485449cda894584d9ac34f195867aed))
+
 ## [1.3.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.2.1...v1.3.0) (2026-03-21)
 
 
