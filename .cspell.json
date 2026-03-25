@@ -107,6 +107,7 @@
     "toplevel",
     "unpushed",
     "venv",
+    "virtualenvs",
     "webfetch",
     "webui",
     "Orbstack",
