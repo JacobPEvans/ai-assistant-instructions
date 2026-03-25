@@ -105,13 +105,19 @@ Route tasks to the best-suited model based on task type:
 | Task Type | Cloud Model | Local (MLX) | PAL MCP Tool |
 | --- | --- | --- | --- |
 | Research & Analysis | Gemini 3 Pro | mlx-community/Qwen3-235B-A22B-4bit | `chat`, `clink` |
-| Complex Coding | Claude Opus 4.6 | mlx-community/Qwen3-Coder-Next | `codereview` |
+| Complex Coding | Claude Opus 4.6 | mlx-community/Qwen3.5-122B-A10B-4bit | `codereview` |
 | Fast Tasks | Claude Sonnet 4.6 | mlx-community/Qwen3.5-27B-4bit | `chat` |
-| Code Review | Multi-model consensus | mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit | `consensus` |
+| Code Review | Multi-model consensus | mlx-community/Qwen3.5-27B-4bit | `consensus` |
 | Architecture | Claude Opus 4.6 | mlx-community/Qwen3-235B-A22B-4bit | `planner` |
-| Pre-commit | Claude Sonnet 4.6 | mlx-community/Qwen3-Coder-30B-A3B-Instruct | `precommit` |
+| Pre-commit | Claude Sonnet 4.6 | mlx-community/Qwen3.5-35B-A3B-4bit | `precommit` |
 
 All local inference routes through MLX (port 11434).
+
+The **default local model** (always loaded) is `mlx-community/Qwen3.5-27B-4bit` (15 GB).
+Larger local models in the table (`mlx-community/Qwen3.5-35B-A3B-4bit`,
+`mlx-community/Qwen3.5-122B-A10B-4bit`, `mlx-community/Qwen3-235B-A22B-4bit`) are
+**on-demand only** — load them via `mlx-switch` (defined in nix-ai) when needed for heavy tasks.
+Only the default local model is available without manual switching.
 
 Local model names in the MLX column are **HuggingFace model IDs** used by vllm-mlx.
 PAL discovers available models via the MLX server's `/v1/models` endpoint. Run `listmodels`
