@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.3.1...v1.3.2) (2026-03-25)
+
+
+### Bug Fixes
+
+* add shared nix-tool-policy rule for dev shell repos ([#522](https://github.com/JacobPEvans/ai-assistant-instructions/issues/522)) ([9c4ac5e](https://github.com/JacobPEvans/ai-assistant-instructions/commit/9c4ac5ebef2e37837e612973b3129f0e6b326355))
+
 ## [1.3.1](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.3.0...v1.3.1) (2026-03-25)
 
 
