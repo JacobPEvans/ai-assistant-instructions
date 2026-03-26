@@ -1,5 +1,9 @@
 # Multi-Model AI Orchestration System
 
+> **Note (2026-03-25)**: This plan was written when Ollama was part of the stack. Ollama has been fully removed
+> and replaced by MLX (vllm-mlx) on port 11434. Model references using Ollama-style tags (e.g., `qwen3-coder:30b`)
+> should be read as their HuggingFace equivalents.
+>
 > **ARCHIVED PLAN**: This document contains historical planning notes.
 > The Python scripts shown are **deprecated design artifacts** — do NOT use as templates.
 > All orchestration is handled via PAL MCP tools and direct CLI invocations.
@@ -792,4 +796,4 @@ ln -sf ~/git/ai-assistant-instructions/feature/multi-model-orchestration/agentsm
 - [PAL MCP Server](https://github.com/BeehiveInnovations/pal-mcp-server)
 - [Anthropic Skills](https://github.com/anthropics/skills)
 - [Claude Code Plugins](https://www.anthropic.com/news/claude-code-plugins)
-- [LLM Rankings Dec 2025](https://vertu.com/lifestyle/top-8-ai-models-ranked-gemini-3-chatgpt-5-1-grok-4-claude-4-5-more/)
+- LLM Rankings Dec 2025 (source link no longer available)

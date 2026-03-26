@@ -116,7 +116,7 @@ agentsmd/permissions/
 │   ├── rust.json              # Rust toolchain: cargo (rustc/rustup covered in core.json)
 │   ├── network.json           # Network utilities: ping, dig, host, netstat, lsof, pgrep
 │   ├── system.json            # System utilities: ln, readlink, htop, launchctl, plutil, etc.
-│   └── tools.json             # Dev tools: rbenv, goenv, redis-cli, ollama, shellcheck, etc.
+│   └── tools.json             # Dev tools: rbenv, goenv, redis-cli, shellcheck, etc.
 │
 ├── ask/
 │   ├── git.json               # Git: merge, reset, rebase, cherry-pick, restore, rm, gc/prune, commit --amend, push --force, clean

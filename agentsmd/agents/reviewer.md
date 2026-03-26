@@ -17,11 +17,11 @@ then synthesizes findings into a unified review.
 
 ## Models Used
 
-| Role | Cloud Model | Local (MLX preferred) | Local (Ollama fallback) |
-| ---- | ----------- | --------------------- | ----------------------- |
-| Primary | Gemini 3 Pro | mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit | deepseek-r1 |
-| Secondary | Claude Opus 4.6 | mlx-community/Qwen3-235B-A22B-4bit | qwen3-next |
-| Synthesis | Claude Sonnet 4.6 | mlx-community/Qwen3.5-27B-4bit | qwen3-next |
+| Role | Cloud Model | Local (MLX) |
+| ---- | ----------- | ----------- |
+| Primary | Gemini 3 Pro | mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit |
+| Secondary | Claude Opus 4.6 | mlx-community/Qwen3-235B-A22B-4bit |
+| Synthesis | Claude Sonnet 4.6 | mlx-community/Qwen3.5-27B-4bit |
 
 ## Review Process
 
@@ -71,9 +71,8 @@ Good patterns, well-written code, improvements over previous state.
 
 When `AI_ORCHESTRATION_LOCAL_ONLY=true`:
 
-- Try MLX first: mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit (port 11436)
-- Fall back to Ollama: deepseek-r1 for primary analysis (port 11434)
-- Cross-validation: MLX Qwen3-235B or Ollama qwen3-next
+- Use MLX: mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit for primary analysis (port 11434)
+- Cross-validation: mlx-community/Qwen3-235B-A22B-4bit
 - No cloud API calls
 
 ## Severity Guidelines

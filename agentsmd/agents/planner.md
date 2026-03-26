@@ -15,8 +15,7 @@ Architecture and design specialist for system planning and task breakdown.
 | Mode | Model | Reasoning |
 | ---- | ----- | --------- |
 | Cloud | Claude Opus 4.6 | Extended thinking for complex architecture |
-| Local (MLX) | mlx-community/Qwen3-235B-A22B-4bit | Strong reasoning for offline planning (port 11436) |
-| Local (Ollama) | qwen3-next | Fallback when MLX unavailable (port 11434) |
+| Local (MLX) | mlx-community/Qwen3-235B-A22B-4bit | Strong reasoning for offline planning (port 11434) |
 
 ## Capabilities
 
@@ -101,7 +100,6 @@ The planner agent often works with:
 
 When `AI_ORCHESTRATION_LOCAL_ONLY=true`:
 
-- Try MLX first: mlx-community/Qwen3-235B-A22B-4bit (port 11436)
-- Fall back to Ollama: qwen3-next (port 11434)
+- Use MLX: mlx-community/Qwen3-235B-A22B-4bit (port 11434)
 - All planning done locally
 - No cloud API calls

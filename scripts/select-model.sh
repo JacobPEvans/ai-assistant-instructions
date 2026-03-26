@@ -7,7 +7,7 @@
 # Usage: select-model.sh [options]
 #   --task-type=<research|coding|review|decision|default>
 #   --cost-sensitive (flag - prefer free local models)
-#   --private (flag - sensitive data, must use local Ollama)
+#   --private (flag - sensitive data, must use local MLX)
 #   --large-context (flag - need 1M+ context window)
 #   --analyze-complexity=<prompt|filepath> (optional complexity analysis)
 #
@@ -132,9 +132,10 @@ select_model() {
 
   # Step 1: Is the data sensitive or confidential?
   if [[ "$private" == "true" ]]; then
-    echo "Model: ollama"
-    echo "Selected: deepseek-r1:70b (local reasoning) or qwen3-next:80b (local general)"
-    echo "Command: ollama run deepseek-r1:70b"
+    echo "Model: mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit"
+    echo "Selected: mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit (local reasoning) or mlx-community/Qwen3-235B-A22B-4bit (local general)"
+    # Use PAL MCP chat tool: pal chat --model mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit "<prompt>"
+    echo "Command: pal chat --model mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit"
     echo "Rationale: Private/sensitive data must stay local. Never use cloud APIs."
     return 0
   fi
@@ -143,32 +144,37 @@ select_model() {
   if [[ "$cost_sensitive" == "true" ]]; then
     case "$task_type" in
       coding)
-        echo "Model: qwen3-coder:30b"
-        echo "Command: ollama run qwen3-coder:30b"
+        echo "Model: mlx-community/Qwen3-Coder-30B-A3B-Instruct"
+        # Use PAL MCP chat tool: pal chat --model mlx-community/Qwen3-Coder-30B-A3B-Instruct "<prompt>"
+        echo "Command: pal chat --model mlx-community/Qwen3-Coder-30B-A3B-Instruct"
         echo "Rationale: Cost-sensitive coding task - using free local specialized model"
         return 0
         ;;
       review)
-        echo "Model: deepseek-r1:70b"
-        echo "Command: ollama run deepseek-r1:70b"
+        echo "Model: mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit"
+        # Use PAL MCP chat tool: pal chat --model mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit "<prompt>"
+        echo "Command: pal chat --model mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit"
         echo "Rationale: Cost-sensitive code review - using free local reasoning model"
         return 0
         ;;
       research)
-        echo "Model: qwen3-next:80b"
-        echo "Command: ollama run qwen3-next:80b"
+        echo "Model: mlx-community/Qwen3-235B-A22B-4bit"
+        # Use PAL MCP chat tool: pal chat --model mlx-community/Qwen3-235B-A22B-4bit "<prompt>"
+        echo "Command: pal chat --model mlx-community/Qwen3-235B-A22B-4bit"
         echo "Rationale: Cost-sensitive research/analysis - using free local general model"
         return 0
         ;;
       decision)
-        echo "Model: deepseek-r1:70b + qwen3-next:80b"
-        echo "Command: bash -c 'echo \"Model 1 (DeepSeek R1):\" && ollama run deepseek-r1:70b && echo -e \"\\nModel 2 (Qwen):\" && ollama run qwen3-next:80b'"
+        echo "Model: mlx-community/DeepSeek-R1-Distill-Llama-70B-4bit + mlx-community/Qwen3-235B-A22B-4bit"
+        # Use PAL MCP clink tool for parallel multi-model: pal clink "<prompt>"
+        echo "Command: pal clink"
         echo "Rationale: Cost-sensitive critical decision - using best-reasoning + general local models"
         return 0
         ;;
       default)
-        echo "Model: qwen3-next:80b"
-        echo "Command: ollama run qwen3-next:80b"
+        echo "Model: mlx-community/Qwen3-235B-A22B-4bit"
+        # Use PAL MCP chat tool: pal chat --model mlx-community/Qwen3-235B-A22B-4bit "<prompt>"
+        echo "Command: pal chat --model mlx-community/Qwen3-235B-A22B-4bit"
         echo "Rationale: Cost-sensitive generic task - using free local model"
         return 0
         ;;
@@ -231,9 +237,11 @@ select_model() {
   fi
 
   # Default: Start local, fall back to cloud
-  echo "Model: ollama-with-fallback"
-  echo "Selected: qwen3-next:80b (local) → gemini-3-pro (cloud fallback)"
-  echo "Command: ollama run qwen3-next:80b || gemini chat --model gemini-3-pro"
+  echo "Model: mlx-with-fallback"
+  echo "Selected: mlx-community/Qwen3-235B-A22B-4bit (local) → gemini-3-pro (cloud fallback)"
+  # Use PAL MCP chat tool with local model first: pal chat --model mlx-community/Qwen3-235B-A22B-4bit "<prompt>"
+  # Fall back to cloud: pal chat --model gemini-3-pro "<prompt>"
+  echo "Command: pal chat --model mlx-community/Qwen3-235B-A22B-4bit"
   echo "Rationale: Default/general task - try local first for cost/privacy, fall back to cloud if needed"
   return 0
 }
