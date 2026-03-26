@@ -1,6 +1,6 @@
 # Pre-Integration Checklist for New Inference Backends
 
-Complete every item before merging a new inference backend (MLX, Ollama, vLLM, etc.).
+Complete every item before merging a new inference backend (MLX (vllm-mlx), vLLM, etc.).
 Based on the MLX arc retrospective where 5 of 14 PRs were reactive fixes that this checklist
 would have prevented.
 
@@ -9,7 +9,7 @@ would have prevented.
 - [ ] Document peak RAM usage for the largest model you plan to serve
 - [ ] Document sustained (idle-loaded) RAM usage with a model resident
 - [ ] Verify total system RAM can handle the backend plus normal workload (browser, IDE, Claude Code)
-- [ ] Set an explicit memory ceiling in the LaunchAgent or service config (e.g., `mlx_max_memory`, `OLLAMA_MAX_VRAM`)
+- [ ] Set an explicit memory ceiling in the LaunchAgent or service config (e.g., `mlx_max_memory`, `VLLM_MAX_MEMORY`)
 - [ ] Confirm OOM behavior: does the process get killed, crash gracefully, or hang?
 - [ ] Test with the largest model on the lowest-spec target machine
 
@@ -49,13 +49,13 @@ would have prevented.
 
 - [ ] List every new environment variable the backend introduces
 - [ ] Check for naming conflicts with existing variables (`env | grep -i <prefix>`)
-- [ ] Follow the existing naming convention (e.g., `OLLAMA_HOST`, `MLX_*`)
+- [ ] Follow the existing naming convention (e.g., `MLX_*`, `VLLM_*`)
 - [ ] Document which variables are required vs. optional, with defaults
 - [ ] Verify variables are set in the correct scope (LaunchAgent plist, shell profile, or Nix config)
 
 ## LaunchAgent / Service Management
 
-- [ ] Define startup order: does this service depend on another (e.g., network, Ollama)?
+- [ ] Define startup order: does this service depend on another (e.g., network, vllm-mlx)?
 - [ ] Add a health check endpoint or command (e.g., `curl http://localhost:<port>/v1/models`)
 - [ ] Set `KeepAlive` or restart policy so the service recovers from crashes
 - [ ] Set `ThrottleInterval` to prevent restart loops from consuming resources
