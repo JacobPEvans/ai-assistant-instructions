@@ -242,8 +242,10 @@ needed, create a new release rather than changing the existing one.
 
 - **JacobPEvans self-references**: Use `@main` or major version tag — never SHA
   or minor/patch pins
-- **External actions**: Use SHA commit hashes for untrusted sources; trusted orgs
-  are defined in `JacobPEvans/.github/renovate-presets.json`
+- **Trusted external actions**: Use semantic version tags (e.g., `@v6`, `@v2.3.5`) —
+  trusted orgs are listed in `JacobPEvans/.github/renovate-presets.json`
+- **Untrusted external actions**: Use SHA commit hashes — only for orgs NOT in the
+  trusted list. SHA pinning is the exception, not the default
 
 ## Public vs Private Repository Separation
 
