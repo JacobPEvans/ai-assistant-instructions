@@ -45,6 +45,17 @@ Scripts are appropriate ONLY when the deliverable IS a script:
 
 Never for one-off tasks or temp files.
 
+## When Scripts ARE Needed
+
+If you genuinely need a script (user asked, or it's a committed artifact):
+
+1. Place it in the repo's `scripts/` directory (or `hooks/` for git/plugin hooks)
+2. Use proper file extension (.sh, .py)
+3. For Nix: use `writeShellApplication` with `runtimeInputs`, reference via `${./scripts/foo.sh}`
+4. For GitHub Actions: place in `.github/scripts/`, call from workflow step
+5. For inline Nix wrappers: one-liner `exec` patterns in `writeShellScriptBin` are acceptable
+6. NEVER create temp/throwaway scripts — if it's not committed, it's not needed
+
 ## Subagent Type Selection
 
 | `subagent_type` | Available Tools | Use When |
