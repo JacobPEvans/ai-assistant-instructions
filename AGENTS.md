@@ -55,30 +55,17 @@ Never use `subagent_type: "Bash"` for tasks that involve reading, writing, or ed
 lack file tools and fall back to `sed`/`awk` one-liners or `python -c` commands. Use `general-purpose` instead.
 See the direct-execution rule for the full subagent type selection table.
 
-### File Operations — Hard Rule
+### Script Prevention (Enforced by Hooks)
 
-**NEVER use Bash to read, edit, or create files.** Use the dedicated tools:
+Runtime hooks BLOCK script generation. The `direct-execution` and `agent-dispatching` auto-loaded
+rules are the authoritative policies. If a hook blocks you: check the alternatives table in
+direct-execution.md, use Context7 MCP to find native tools, or ask the user. Committed artifacts
+in `scripts/`, `hooks/`, `.github/`, `tests/` are allowed.
 
-| Operation | Correct Tool | NEVER Use |
-| --- | --- | --- |
-| Read a file | `Read` | `cat`, `head`, `tail`, `less`, `bat` |
-| Edit a file | `Edit` | `sed`, `awk`, `perl -i`, `python -c`, `ed` |
-| Create a file | `Write` | `cat >`, `echo >`, `tee`, heredocs (`<< EOF`) |
-| Search file contents | `Grep` | `grep`, `rg`, `ag` |
-| Find files by pattern | `Glob` | `find`, `ls`, `fd` |
-
-This applies to the orchestrator AND all subagents. No exceptions. No "just this once."
-Subagents that lack these tools (Bash type) must NOT be used for file tasks — use `general-purpose`.
-
-### Research First, Never Script
+### Research First
 
 Before implementing any solution, verify what already exists. Use Context7 MCP, PAL MCP, and web
-search to check current tool capabilities — do not trust training data. Libraries gain features,
-CLIs add subcommands, ecosystems grow.
-
-Your primary role when solving problems is to find and use existing, robust tools — not to invent
-new ones. One-off scripts are an anti-pattern indicating a failure to find the right tool. Execute
-commands directly via tool calls. See the direct-execution rule for the workflow and alternatives.
+search to check current tool capabilities — do not trust training data.
 
 ### Parallel Execution
 
