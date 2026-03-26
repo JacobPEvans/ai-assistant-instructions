@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.3](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.3.2...v1.3.3) (2026-03-26)
+
+
+### Bug Fixes
+
+* clarify dependency versioning policy for trusted vs untrusted actions ([#528](https://github.com/JacobPEvans/ai-assistant-instructions/issues/528)) ([41ed466](https://github.com/JacobPEvans/ai-assistant-instructions/commit/41ed4665d77d92ae9f1fe8db5d9e6c2ce4680148))
+
 ## [1.3.2](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.3.1...v1.3.2) (2026-03-25)
 
 
