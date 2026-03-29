@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.4.1...v1.4.2) (2026-03-29)
+
+
+### Bug Fixes
+
+* consolidate allowed script locations in direct-execution.md ([#537](https://github.com/JacobPEvans/ai-assistant-instructions/issues/537)) ([5e98224](https://github.com/JacobPEvans/ai-assistant-instructions/commit/5e982242201f955ed08199a625945b6f5bec89e9))
+
 ## [1.4.1](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.4.0...v1.4.1) (2026-03-29)
 
 
