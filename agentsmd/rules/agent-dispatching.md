@@ -16,6 +16,12 @@ File operations:
 
 Explore agents are exempt (read-only, no Edit/Write tools).
 
+Script policy (Required in every subagent prompt):
+
+- NEVER generate custom scripts — use native tools (jq, curl, gh api, Nix functions, etc.)
+- If blocked by a hook, follow the alternatives in the block message
+- Committed scripts go in scripts/ only — never temp files
+
 ## Why This Matters
 
 Bash file operations bypass permissions, produce unauditable changes, and fail silently.
