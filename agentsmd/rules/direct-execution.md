@@ -51,7 +51,7 @@ If you genuinely need a script (user asked, or it's a committed artifact):
 
 1. Place it in an allowed directory (`scripts/`, `hooks/`, `.github/`, or `tests/`)
 2. Use proper file extension (.sh, .py)
-3. For Nix: use `writeShellApplication` with `runtimeInputs`, reference via `${./scripts/foo.sh}`
+3. For Nix: use `writeShellApplication` with `runtimeInputs`, reference via `${./<relative-path>}`
 4. For inline Nix wrappers: one-liner `exec` patterns in `writeShellScriptBin` are acceptable
 5. NEVER create temp/throwaway scripts — if it's not committed, it's not needed
 
