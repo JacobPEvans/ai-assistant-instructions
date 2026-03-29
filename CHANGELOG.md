@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.4.0...v1.4.1) (2026-03-29)
+
+
+### Bug Fixes
+
+* align script locations with write-script-guard enforcement ([#535](https://github.com/JacobPEvans/ai-assistant-instructions/issues/535)) ([e989bb6](https://github.com/JacobPEvans/ai-assistant-instructions/commit/e989bb68d1f85573d059c9b2c70961905126742f))
+
 ## [1.4.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.3.4...v1.4.0) (2026-03-29)
 
 
