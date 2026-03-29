@@ -20,7 +20,7 @@ Script policy (Required in every subagent prompt):
 
 - NEVER generate custom scripts — use native tools (jq, curl, gh api, Nix functions, etc.)
 - If blocked by a hook, follow the alternatives in the block message
-- Committed scripts go in scripts/ only — never temp files
+- Committed scripts go in allowed locations (scripts/, hooks/, .github/, tests/) — never temp files
 
 ## Why This Matters
 
