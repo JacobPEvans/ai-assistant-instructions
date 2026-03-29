@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.3.4...v1.4.0) (2026-03-29)
+
+
+### Features
+
+* strengthen script prevention rules and subagent propagation ([#529](https://github.com/JacobPEvans/ai-assistant-instructions/issues/529)) ([3197e8f](https://github.com/JacobPEvans/ai-assistant-instructions/commit/3197e8f43bce7e834af7cfaede2a25dd1e7e6698))
+
 ## [1.3.4](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.3.3...v1.3.4) (2026-03-29)
 
 
