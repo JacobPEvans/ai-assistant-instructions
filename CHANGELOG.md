@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.4](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.3.3...v1.3.4) (2026-03-29)
+
+
+### Bug Fixes
+
+* block npm run commands in permission deny list ([#532](https://github.com/JacobPEvans/ai-assistant-instructions/issues/532)) ([61dd316](https://github.com/JacobPEvans/ai-assistant-instructions/commit/61dd316c99b6e84f1d8b83eaa2a7ad11a6c89a2e))
+
 ## [1.3.3](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.3.2...v1.3.3) (2026-03-26)
 
 
