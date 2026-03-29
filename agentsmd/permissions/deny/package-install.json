@@ -11,6 +11,8 @@
     "micromamba install",
     "npm i",
     "npm install",
+    "npm run",
+    "npm test",
     "pip install",
     "pip3 install",
     "pnpm add",
