@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.3](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.4.2...v1.4.3) (2026-04-02)
+
+
+### Bug Fixes
+
+* pin npx cclint to [@0](https://github.com/0).2.10 with Renovate annotation ([#539](https://github.com/JacobPEvans/ai-assistant-instructions/issues/539)) ([d4fc35d](https://github.com/JacobPEvans/ai-assistant-instructions/commit/d4fc35d9b6dbb13a7596825df5261ca82ef1f141))
+
 ## [1.4.2](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.4.1...v1.4.2) (2026-03-29)
 
 
