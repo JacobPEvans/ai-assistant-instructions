@@ -154,4 +154,5 @@ jobs:
           node-version: '24'
 
       - name: Run cclint
-        run: npx @carlrannaberg/cclint --verbose
+        # renovate: datasource=npm depName=@carlrannaberg/cclint
+        run: npx @carlrannaberg/cclint@0.2.10 --verbose
