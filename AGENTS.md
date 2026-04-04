@@ -25,7 +25,7 @@ Before implementing anything, exhaust every alternative:
 Scripts are acceptable ONLY when the deliverable IS a script: the user explicitly asked
 for one, or it will be committed as a permanent artifact (`scripts/`, `hooks/`, `.github/`, `tests/`).
 
-See the `direct-execution` auto-loaded rule for the full alternatives table.
+See the `direct-execution` rule for the full alternatives table.
 
 ## Token Economy — Use PAL MCP Aggressively
 
@@ -76,7 +76,7 @@ See the direct-execution rule for the full subagent type selection table.
 ### Script Prevention & Research First
 
 No scripts — see top-level "No Scripts" section. If a hook blocks you, check the alternatives
-table in direct-execution.md, use Context7 MCP to find native tools, or ask the user.
+table in the `direct-execution` rule, use Context7 MCP to find native tools, or ask the user.
 
 ### Parallel Execution
 
@@ -145,7 +145,7 @@ Larger models are on-demand via `mlx-switch`. Run `listmodels` for available mod
 | `listmodels` | List available models and aliases. |
 
 **Local model names**: Use HuggingFace model IDs or PAL aliases.
-Never prefix with `custom/` or `ollama/` (PAL interprets `/` as OpenRouter path).
+Never add provider-style prefixes like `custom/` or `ollama/` — PAL routes these as OpenRouter paths.
 Run `sync-mlx-models` after switching models, then restart Claude Code.
 
 ## Priority Order
