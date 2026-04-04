@@ -4,9 +4,10 @@ Reusable GitHub Actions workflows for this repository and the broader org.
 
 ## Overview
 
-Shared workflows are centralized in [JacobPEvans/ai-workflows](https://github.com/JacobPEvans/ai-workflows).
-That repository provides the canonical reusable workflows for AI-powered CI tasks (PR review, issue triage,
-doc sync, and linting) that supersede the former `.github-shared/workflows/` prototype in this repo.
+Shared AI reusable workflows are centralized in [ai-workflows]. That repository provides the
+canonical reusable workflows for AI-powered CI tasks (PR review, issue triage, doc sync, and
+linting) that supersede the former `.github-shared/workflows/` prototype in this repo. Other
+org-wide shared workflows (branch protection, CodeQL, etc.) live in [.github].
 
 All AI workflow tasks use `OPENROUTER_API_KEY` rather than `CLAUDE_CODE_OAUTH_TOKEN`. Using
 subscription OAuth tokens in unattended CI violates Claude Code ToS.
@@ -18,7 +19,7 @@ subscription OAuth tokens in unattended CI violates Claude Code ToS.
 | `claude-review.yml` | PR review routed through OpenRouter |
 | `issue-triage.yml` | Issue triage via AI models |
 | `doc-sync.yml` | PR/documentation sync checks |
-| `markdownlint.yml` | Markdown linting |
+| `markdownlint.yml` | Markdown linting (org-wide) |
 
 **Example usage:**
 
@@ -41,7 +42,7 @@ This repo uses several local reusable workflows orchestrated by `ci-gate.yml`:
 | Workflow | Purpose |
 | -------- | ------- |
 | `_cclint.yml` | Claude Code linting |
-| `_markdownlint.yml` | Markdown linting |
+| `_markdownlint.yml` | Markdown linting (local) |
 | `_spellcheck.yml` | Spell checking |
 | `_token-limits.yml` | Token limit enforcement |
 | `_validate-cclint.yml` | CCLint schema validation |
@@ -50,5 +51,10 @@ This repo uses several local reusable workflows orchestrated by `ci-gate.yml`:
 
 ## References
 
-- [GitHub Reusable Workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows)
-- [Sharing workflows with your organization](https://docs.github.com/en/actions/administering-github-actions/sharing-workflows-secrets-and-runners-with-your-organization)
+- [GitHub Reusable Workflows][reusable-workflows]
+- [Sharing workflows with your organization][sharing-workflows]
+
+[ai-workflows]: https://github.com/JacobPEvans/ai-workflows
+[.github]: https://github.com/JacobPEvans/.github
+[reusable-workflows]: https://docs.github.com/en/actions/using-workflows/reusing-workflows
+[sharing-workflows]: https://docs.github.com/en/actions/administering-github-actions/sharing-workflows-secrets-and-runners-with-your-organization
