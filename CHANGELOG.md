@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.4](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.4.3...v1.4.4) (2026-04-04)
+
+
+### Bug Fixes
+
+* add output discipline and elevate no-scripts rule ([#542](https://github.com/JacobPEvans/ai-assistant-instructions/issues/542)) ([d6a4645](https://github.com/JacobPEvans/ai-assistant-instructions/commit/d6a4645df65c65cc246441bb8668c1801a9f1604))
+* remove claude-review + deprecated shared workflows ([#541](https://github.com/JacobPEvans/ai-assistant-instructions/issues/541)) ([28a03d4](https://github.com/JacobPEvans/ai-assistant-instructions/commit/28a03d4e43be03244410a6763efb9fa9aa27a1f1))
+
 ## [1.4.3](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.4.2...v1.4.3) (2026-04-02)
 
 
