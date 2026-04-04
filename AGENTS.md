@@ -9,6 +9,24 @@ Multi-model AI orchestration configuration for Claude, Gemini, Copilot, and loca
 `/init-worktree` syncs main, creates an isolated branch and worktree, and cleans up stale worktrees.
 Skipping it means working directly on main or in a stale environment — both are forbidden.
 
+## No Scripts — Research Native Solutions First
+
+**Never generate scripts.** This is the single most important rule. Runtime hooks enforce it.
+
+Before implementing anything, exhaust every alternative:
+
+1. **Search for native tools** — Use Context7 MCP, PAL MCP, web search, local MLX models
+2. **Check current-year best practices** — Do not trust training data; verify what exists now
+3. **Prefer third-party/community solutions** — Even partially-supported external tools
+   are better than maintaining custom scripts
+4. **Use existing CLIs and builtins** — `jq`, `gh api`, `curl`, Nix functions,
+   Ansible modules, Terraform resources, marketplace GitHub Actions
+
+Scripts are acceptable ONLY when the deliverable IS a script: the user explicitly asked
+for one, or it will be committed as a permanent artifact (`scripts/`, `hooks/`, `.github/`, `tests/`).
+
+See the `direct-execution` rule for the full alternatives table.
+
 ## Token Economy — Use PAL MCP Aggressively
 
 Claude Opus tokens are premium — reserve them for architecture decisions and complex reasoning.
@@ -55,17 +73,10 @@ Never use `subagent_type: "Bash"` for tasks that involve reading, writing, or ed
 lack file tools and fall back to `sed`/`awk` one-liners or `python -c` commands. Use `general-purpose` instead.
 See the direct-execution rule for the full subagent type selection table.
 
-### Script Prevention (Enforced by Hooks)
+### Script Prevention & Research First
 
-Runtime hooks BLOCK script generation. The `direct-execution` and `agent-dispatching` auto-loaded
-rules are the authoritative policies. If a hook blocks you: check the alternatives table in
-direct-execution.md, use Context7 MCP to find native tools, or ask the user. Committed artifacts
-in `scripts/`, `hooks/`, `.github/`, `tests/` are allowed.
-
-### Research First
-
-Before implementing any solution, verify what already exists. Use Context7 MCP, PAL MCP, and web
-search to check current tool capabilities — do not trust training data.
+No scripts — see top-level "No Scripts" section. If a hook blocks you, check the alternatives
+table in the `direct-execution` rule, use Context7 MCP to find native tools, or ask the user.
 
 ### Parallel Execution
 
@@ -85,9 +96,29 @@ Use `/delegate-to-ai` to route work to external AI models via PAL MCP. This is t
 way to leverage non-Claude models for tasks where they excel (research, consensus, code review).
 See the Model Routing Rules table for which model fits which task type.
 
-## Model Routing Rules
+## Output Discipline
 
-Route tasks to the best-suited model based on task type:
+Optimize for information density. Every token emitted consumes the user's context window.
+
+**Format rules:**
+
+- Lead with result or answer. No preamble.
+- Short, direct sentences. Cut filler.
+- No narration of intent ("Let me...", "I'll now...", "I'm going to...").
+- No restating the question or summarizing what was asked.
+- Tools first, explain after. Show work, not plans to work.
+- Tables and lists over prose for structured data.
+- One-line acknowledgments for simple confirmations.
+
+**Preserve depth where it matters:**
+
+- Complex reasoning, architecture decisions, tradeoff analysis warrant full explanation.
+- Error diagnosis should include root cause, not just the fix.
+- When the user asks "why", give the real answer.
+
+This is about output format, not thinking. Reason thoroughly. Write concisely.
+
+## Model Routing Rules
 
 | Task Type | Cloud Model | Local (MLX) | PAL MCP Tool |
 | --- | --- | --- | --- |
@@ -98,62 +129,24 @@ Route tasks to the best-suited model based on task type:
 | Architecture | Claude Opus 4.6 | mlx-community/Qwen3-235B-A22B-4bit | `planner` |
 | Pre-commit | Claude Sonnet 4.6 | mlx-community/Qwen3.5-35B-A3B-4bit | `precommit` |
 
-All local inference routes through MLX (port 11434).
-
-The **default local model** (always loaded) is `mlx-community/Qwen3.5-27B-4bit` (15 GB).
-Larger local models in the table (`mlx-community/Qwen3.5-35B-A3B-4bit`,
-`mlx-community/Qwen3.5-122B-A10B-4bit`, `mlx-community/Qwen3-235B-A22B-4bit`) are
-**on-demand only** — load them via `mlx-switch` (defined in nix-ai) when needed for heavy tasks.
-Only the default local model is available without manual switching.
-
-Local model names in the MLX column are **HuggingFace model IDs** used by vllm-mlx.
-PAL discovers available models via the MLX server's `/v1/models` endpoint. Run `listmodels`
-in PAL to see all registered models and their aliases.
+Default local model: `mlx-community/Qwen3.5-27B-4bit` (always loaded).
+Larger models are on-demand via `mlx-switch`. Run `listmodels` for available models and aliases.
 
 ## PAL MCP Tools
 
-### `chat` - Single Model Conversation
+| Tool | Purpose |
+| --- | --- |
+| `chat` | Single model prompt. Straightforward tasks. |
+| `clink` | Multi-model parallel. Research and exploration. |
+| `codereview` | Multi-model code review. Before significant commits. |
+| `precommit` | Quick pre-commit review. Git hook integrated. |
+| `consensus` | Multi-model agreement. Critical decisions. |
+| `planner` | Architecture and design planning. |
+| `listmodels` | List available models and aliases. |
 
-Route a prompt to a single model. Use for straightforward tasks.
-
-### `clink` - Multi-Model Parallel
-
-Query multiple models simultaneously. Use for research and exploration.
-
-### `codereview` - Code Review
-
-Get code review from multiple models. Use before significant commits.
-
-### `precommit` - Pre-commit Review
-
-Quick review before committing. Integrated with git hooks.
-
-### `consensus` - Multi-Model Consensus
-
-Get agreement from multiple models. Use for critical decisions.
-
-### `planner` - Architecture Planning
-
-Design and planning tasks. Use for system design.
-
-### `listmodels` - List Available Models
-
-List all models registered with PAL and their aliases. Use to discover what is available before
-routing to a local model, and to confirm exact tag names.
-
-### Local Model Names
-
-Use HuggingFace model IDs or PAL-registered aliases with PAL tools. Never prefix with `custom/` — PAL interprets
-`/` as an OpenRouter model path and routes to the wrong provider.
-
-| Correct        | Wrong                 |
-|----------------|-----------------------|
-| `gpt-oss:120b` | `custom/gpt-oss:120b` |
-| `gpt-oss`      | `ollama/gpt-oss`      |
-
-Run `sync-mlx-models` (defined in nix-ai — available in your shell after a rebuild) after
-switching models, then restart Claude Code.
-Use the PAL `listmodels` tool to see all available models and their aliases.
+**Local model names**: Use HuggingFace model IDs or PAL aliases.
+Never add provider-style prefixes like `custom/` or `ollama/` — PAL routes these as OpenRouter paths.
+Run `sync-mlx-models` after switching models, then restart Claude Code.
 
 ## Priority Order
 
@@ -246,6 +239,6 @@ visibility when in doubt.
 
 ## Related Files
 
-- `agentsmd/rules/` — 4 auto-loaded essential rules
+- `agentsmd/rules/` — Auto-loaded essential rules
 - `agentsmd/workflows/` — 5-step development workflow
 - `.claude/`, `.gemini/`, `.copilot/` — Vendor configs (symlinked)
