@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.5.0...v1.5.1) (2026-04-07)
+
+
+### Bug Fixes
+
+* replace deleted /init-worktree references with /refresh-repo ([#546](https://github.com/JacobPEvans/ai-assistant-instructions/issues/546)) ([9e0c793](https://github.com/JacobPEvans/ai-assistant-instructions/commit/9e0c79306d3f85feb59e15392daf6861d9786a06))
+
 ## [1.5.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.4.4...v1.5.0) (2026-04-07)
 
 
