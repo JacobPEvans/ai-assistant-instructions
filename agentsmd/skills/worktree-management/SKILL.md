@@ -100,7 +100,7 @@ All worktrees follow this structure:
    ```bash
    cd "$MAIN_PATH"
    git switch main
-   git fetch --all --prune
+   git fetch --all --prune --force
    git pull
    ```
 
@@ -187,7 +187,7 @@ cd "$MAIN_PATH"
 git switch main
 
 # Fetch and prune
-git fetch --all --prune
+git fetch --all --prune --force
 
 # Pull latest
 git pull
@@ -237,11 +237,9 @@ git rev-parse --is-inside-work-tree
 
 ## Commands Using This Skill
 
-- `/init-worktree` - Primary worktree creation command
+- `/refresh-repo` - Sync main, check PR status, cleanup stale worktrees
 - `/create-worktrees:create-worktrees` - Create worktrees for all open PRs (plugin)
-
 - `/sync-main` - Syncs main across worktrees
-- `/refresh-repo` - Cleanup and sync workflow
 
 ## Plugin Integration
 

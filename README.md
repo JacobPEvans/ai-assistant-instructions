@@ -86,17 +86,11 @@ Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 
 ## Key Commands
 
-### Initialization & Setup
-
-| Command | Description |
-| ------- | ----------- |
-| `/init-worktree` | Initialize a clean worktree for development |
-
 ### Git & Repository Management
 
 | Command | Description |
 | ------- | ----------- |
-| `/refresh-repo` | Merge PRs, sync repo, cleanup stale worktrees |
+| `/refresh-repo` | Sync main, check PR status, cleanup stale worktrees |
 | `/sync-main` | Sync current branch with main (use `all` for all PRs) |
 | `/sync-permissions` | Sync AI assistant permissions to repo |
 
