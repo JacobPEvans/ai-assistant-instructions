@@ -90,7 +90,7 @@ Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 
 | Command | Description |
 | ------- | ----------- |
-| `/init-worktree` | Initialize a clean worktree for development |
+| `/refresh-repo` | Sync main, check PR status, cleanup stale worktrees |
 
 ### Git & Repository Management
 

@@ -6,7 +6,7 @@ Common issues and solutions for using this repository.
 
 ### "Claude Code not finding commands"
 
-**Problem**: You run a command like `/init-worktree` but Claude says it's not recognized.
+**Problem**: You run a command like `/refresh-repo` but Claude says it's not recognized.
 
 **Solution**:
 
