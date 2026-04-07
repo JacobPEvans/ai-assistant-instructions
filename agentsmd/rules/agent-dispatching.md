@@ -1,3 +1,7 @@
+---
+description: Require file operation tool blocks in every subagent prompt — Read/Edit/Write/Grep/Glob over Bash equivalents
+---
+
 # Agent Dispatching
 
 ## File Operations Block (Required in Every Subagent Prompt)

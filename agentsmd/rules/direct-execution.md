@@ -1,3 +1,7 @@
+---
+description: Use existing tools directly instead of generating scripts — research first, execute via tool calls
+---
+
 # Direct Execution
 
 AI assistants solve problems by finding and using existing tools, not by generating scripts.

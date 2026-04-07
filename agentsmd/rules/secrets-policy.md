@@ -1,3 +1,7 @@
+---
+description: Never commit secrets, credentials, real IPs, or sensitive data to git — use variable references and scrubbed values
+---
+
 # Secrets & Sensitive Data Policy
 
 **CRITICAL**: Never commit sensitive data to git. All git-committed files must use scrubbed values and variable references.

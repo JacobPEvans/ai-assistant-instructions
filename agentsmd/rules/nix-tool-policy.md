@@ -1,3 +1,7 @@
+---
+description: Never install tools that Nix dev shells provide — no pipx, pip, npm -g, brew in flake repos
+---
+
 # Nix Tool Policy
 
 ## Rule: Never Install Tools That Nix Dev Shells Provide
