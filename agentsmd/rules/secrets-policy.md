@@ -1,5 +1,15 @@
 ---
 description: Never commit secrets, credentials, real IPs, or sensitive data to git — use variable references and scrubbed values
+paths:
+  - "**/.env*"
+  - "**/*.json"
+  - "**/*.yaml"
+  - "**/*.yml"
+  - "**/*.toml"
+  - "**/*.conf"
+  - "**/*.cfg"
+  - "**/*.nix"
+  - "**/*.tf"
 ---
 
 # Secrets & Sensitive Data Policy

@@ -1,5 +1,11 @@
 ---
 description: Use existing tools directly instead of generating scripts — research first, execute via tool calls
+paths:
+  - "**/*.sh"
+  - "**/*.py"
+  - "scripts/**"
+  - ".github/**"
+  - "Makefile"
 ---
 
 # Direct Execution

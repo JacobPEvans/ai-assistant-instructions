@@ -1,5 +1,11 @@
 ---
 description: Never install tools that Nix dev shells provide — no pipx, pip, npm -g, brew in flake repos
+paths:
+  - "flake.nix"
+  - "flake.lock"
+  - ".envrc"
+  - "shell.nix"
+  - "default.nix"
 ---
 
 # Nix Tool Policy
