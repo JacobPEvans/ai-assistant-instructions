@@ -7,7 +7,7 @@ Multi-model AI orchestration configuration for Claude, Gemini, Copilot, and loca
 **Before making any code or config change, run `/refresh-repo` then create a worktree.** No exceptions.
 
 `/refresh-repo` syncs main from remote, checks PR status, and cleans up stale worktrees.
-Then create a branch worktree: `git worktree add ~/git/<repo>/<type>/<name> -b <type>/<name> main`
+Then create a branch worktree: `mkdir -p ~/git/<repo>/<type> && git worktree add ~/git/<repo>/<type>/<name> -b <type>/<name> main`
 
 ## No Scripts — Research Native Solutions First
 

@@ -239,9 +239,7 @@ git rev-parse --is-inside-work-tree
 
 - `/refresh-repo` - Sync main, check PR status, cleanup stale worktrees
 - `/create-worktrees:create-worktrees` - Create worktrees for all open PRs (plugin)
-
 - `/sync-main` - Syncs main across worktrees
-- `/refresh-repo` - Cleanup and sync workflow
 
 ## Plugin Integration
 
