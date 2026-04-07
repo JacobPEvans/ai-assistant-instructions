@@ -176,19 +176,19 @@ Rules in `.claude/rules/` auto-load every session. Skills and agents load on dem
 
 **In docs and external files**: Use markdown links. These aren't parsed by Claude Code.
 
-## Auto-Loaded Rules (7 Total)
+## Auto-Loaded Rules
 
 Rules in `.claude/rules/ -> ../agentsmd/rules`. Universal rules load every session;
 path-scoped rules lazy-load only when matching files enter context.
 
-**Universal (4 — load every session):**
+**Universal (load every session):**
 
 - `tool-use.md` — Native tools over Bash, subagent dispatching, script policy
 - `soul.md` — Voice and personality guidelines
 - `skill-execution-integrity.md` — Every skill invocation is fresh, not a continuation
 - `secrets-policy.md` — Never commit secrets (principle only)
 
-**Path-scoped (3 — lazy-load on matching files):**
+**Path-scoped (lazy-load on matching files):**
 
 - `nix-tool-policy.md` — Nix dev shell rules (flake.nix, *.nix, .envrc)
 - `ci-cd-policy.md` — CI/CD automation rules (.github/**, scripts/**, hooks/**)
