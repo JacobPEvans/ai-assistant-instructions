@@ -1,3 +1,14 @@
+---
+description: Never install tools that Nix dev shells provide — use Nix functions over scripts in flake repos
+paths:
+  - "flake.nix"
+  - "flake.lock"
+  - ".envrc"
+  - "shell.nix"
+  - "default.nix"
+  - "**/*.nix"
+---
+
 # Nix Tool Policy
 
 ## Rule: Never Install Tools That Nix Dev Shells Provide
@@ -26,6 +37,20 @@
 
 5. **Never install globally**: Do not respond to a missing tool by installing it system-wide with pipx/pip/uv/brew;
    use the dev shell or a temporary Nix invocation, and update `flake.nix` when the tool is needed long term.
+
+## Nix-Specific Alternatives
+
+| Task | Use This | Not This |
+| --- | --- | --- |
+| Config generation | Nix functions (`lib.mkIf`, `lib.generators.*`) | Shell/Python generator |
+| Nix data processing | `builtins.fromJSON`, `builtins.readFile`, `lib.strings.*` | Python wrapper |
+
+## Nix Script Patterns
+
+When a Nix script IS needed (committed artifact):
+
+- Use `writeShellApplication` with `runtimeInputs`, reference via `${./<relative-path>}`
+- For inline Nix wrappers: one-liner `exec` patterns in `writeShellScriptBin` are acceptable
 
 ## Why This Matters
 

@@ -25,7 +25,7 @@ Before implementing anything, exhaust every alternative:
 Scripts are acceptable ONLY when the deliverable IS a script: the user explicitly asked
 for one, or it will be committed as a permanent artifact (`scripts/`, `hooks/`, `.github/`, `tests/`).
 
-See the `direct-execution` rule for the full alternatives table.
+See the `tool-use` rule for the full alternatives table.
 
 ## Token Economy — Use PAL MCP Aggressively
 
@@ -71,12 +71,12 @@ Consider using Haiku or Sonnet when a task doesn't need Opus-level reasoning.
 
 Never use `subagent_type: "Bash"` for tasks that involve reading, writing, or editing files — Bash agents
 lack file tools and fall back to `sed`/`awk` one-liners or `python -c` commands. Use `general-purpose` instead.
-See the direct-execution rule for the full subagent type selection table.
+See the `tool-use` rule for the full subagent type selection table.
 
 ### Script Prevention & Research First
 
 No scripts — see top-level "No Scripts" section. If a hook blocks you, check the alternatives
-table in the `direct-execution` rule, use Context7 MCP to find native tools, or ask the user.
+table in the `tool-use` rule, use Context7 MCP to find native tools, or ask the user.
 
 ### Parallel Execution
 
@@ -176,15 +176,23 @@ Rules in `.claude/rules/` auto-load every session. Skills and agents load on dem
 
 **In docs and external files**: Use markdown links. These aren't parsed by Claude Code.
 
-## Auto-Loaded Rules (5 Essential)
+## Auto-Loaded Rules
 
-Only 5 rules auto-load each session via `.claude/rules/ -> ../agentsmd/rules`:
+Rules in `.claude/rules/ -> ../agentsmd/rules`. Universal rules load every session;
+path-scoped rules lazy-load only when matching files enter context.
 
-- `secrets-policy.md` — Never commit secrets
-- `direct-execution.md` — Use tools directly, never generate scripts
-- `agent-dispatching.md` — File operations block for subagents
+**Universal (load every session):**
+
+- `tool-use.md` — Native tools over Bash, subagent dispatching, script policy
 - `soul.md` — Voice and personality guidelines
-- `nix-tool-policy.md` — Never install tools that Nix dev shells provide
+- `skill-execution-integrity.md` — Every skill invocation is fresh, not a continuation
+- `secrets-policy.md` — Never commit secrets (principle only)
+
+**Path-scoped (lazy-load on matching files):**
+
+- `nix-tool-policy.md` — Nix dev shell rules (flake.nix, *.nix, .envrc)
+- `ci-cd-policy.md` — CI/CD automation rules (.github/**, scripts/**, hooks/**)
+- `config-secrets.md` — Secret scrubbing details (.env*,*.json, *.yaml,*.tf)
 
 ## On-Demand Standards (via Plugins)
 
