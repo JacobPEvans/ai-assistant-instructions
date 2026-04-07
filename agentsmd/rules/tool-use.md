@@ -1,14 +1,8 @@
 ---
-description: Use existing tools directly instead of generating scripts — research first, execute via tool calls
-paths:
-  - "**/*.sh"
-  - "**/*.py"
-  - "scripts/**"
-  - ".github/**"
-  - "Makefile"
+description: Use native tools (Read/Edit/Write/Grep/Glob) over Bash equivalents — research existing solutions before generating scripts
 ---
 
-# Direct Execution
+# Tool Use
 
 AI assistants solve problems by finding and using existing tools, not by generating scripts.
 Research what exists before implementing anything — do not trust training data.
@@ -35,16 +29,12 @@ Check AI assistant settings files (`~/.claude/settings.json`, `~/.gemini/setting
 | JSON manipulation | `jq` via Bash tool | Python script |
 | API calls | `curl` or `gh api` via Bash tool | Python/curl script |
 | Text processing (pipe filter) | `grep`/`sed`/`awk` on stdin (never in-place) | Processing script |
-| Config generation | Nix functions (`lib.mkIf`, `lib.generators.*`) | Shell/Python generator |
-| Nix data processing | `builtins.fromJSON`, `builtins.readFile`, `lib.strings.*` | Python wrapper |
-| CI/CD automation | Marketplace actions, reusable workflows, composite actions | Custom shell script |
-| GitHub Actions logic | Expressions, `fromJSON()`, matrix strategies | Python/bash in step |
-| Infrastructure config | Ansible modules, Terraform resources/data sources | Configuration script |
-| Infrastructure validation | `terraform validate`, `ansible-lint`, check modes | Validation script |
-| State queries | `terraform output`, `terraform state show`, Ansible facts | Query script |
 | Permission/JSON transforms | `Read` + `jq` (via Bash) + `Edit`/`Write` | Python file manipulation |
 | Multi-file git operations | Parallel Bash tool calls (`git add f1 f2 f3`) | Loop script |
 | Delegate to external AI | `/delegate-to-ai` via PAL MCP | Manual model routing |
+| Infrastructure config | Ansible modules, Terraform resources/data sources | Configuration script |
+| Infrastructure validation | `terraform validate`, `ansible-lint`, check modes | Validation script |
+| State queries | `terraform output`, `terraform state show`, Ansible facts | Query script |
 
 ## Exceptions
 
@@ -55,15 +45,27 @@ Scripts are appropriate ONLY when the deliverable IS a script:
 
 Never for one-off tasks or temp files.
 
-## When Scripts ARE Needed
+## File Operations Block (Required in Every Subagent Prompt)
 
-If you genuinely need a script (user asked, or it's a committed artifact):
+Every file-editing subagent prompt MUST include this block verbatim:
 
-1. Place it in an allowed directory (`scripts/`, `hooks/`, `.github/`, or `tests/`)
-2. Use proper file extension (.sh, .py)
-3. For Nix: use `writeShellApplication` with `runtimeInputs`, reference via `${./<relative-path>}`
-4. For inline Nix wrappers: one-liner `exec` patterns in `writeShellScriptBin` are acceptable
-5. NEVER create temp/throwaway scripts — if it's not committed, it's not needed
+```text
+File operations:
+- Read files with the Read tool (NEVER cat, head, tail, less, bat)
+- Edit existing files with the Edit tool (NEVER sed, awk, perl -i, python -c)
+- Create new files with the Write tool (NEVER cat >, echo >, tee, heredocs)
+- Search file contents with the Grep tool (NEVER grep, rg, ag via Bash)
+- Find files with the Glob tool (NEVER find, ls, fd via Bash)
+- Bash is ONLY for running system commands (git, terraform, ansible, etc.)
+```
+
+Explore agents are exempt (read-only, no Edit/Write tools).
+
+Script policy (Required in every subagent prompt):
+
+- NEVER generate custom scripts — use native tools (jq, curl, gh api, Nix functions, etc.)
+- If blocked by a hook, follow the alternatives in the block message
+- Committed scripts go in allowed locations (scripts/, hooks/, .github/, tests/) — never temp files
 
 ## Subagent Type Selection
 
@@ -76,3 +78,7 @@ If you genuinely need a script (user asked, or it's a committed artifact):
 **Critical rule**: If a subagent needs to read, write, or edit files, NEVER use `subagent_type: "Bash"`.
 Bash-only agents work around missing tools with `python -c`/`sed`/`awk`, bypassing permissions and audit trails.
 Use `general-purpose` instead.
+
+## Why This Matters
+
+Bash file operations bypass permissions, produce unauditable changes, and fail silently.

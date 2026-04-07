@@ -7,4 +7,4 @@
 > PR creation with proper variable support.
 >
 > The `cat > /tmp/` and heredoc scripting patterns from the previous version are
-> explicitly prohibited. See the direct-execution rule.
+> explicitly prohibited. See the tool-use rule.
