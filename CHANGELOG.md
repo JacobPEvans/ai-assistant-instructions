@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.4.4...v1.5.0) (2026-04-07)
+
+
+### Features
+
+* add AI merge gate and Copilot setup ([#545](https://github.com/JacobPEvans/ai-assistant-instructions/issues/545)) ([b46ce85](https://github.com/JacobPEvans/ai-assistant-instructions/commit/b46ce85b233d1e0fd7d49558150966ef51bb41f3))
+
 ## [1.4.4](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.4.3...v1.4.4) (2026-04-04)
 
 
