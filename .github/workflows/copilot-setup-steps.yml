@@ -1,0 +1,11 @@
+name: Copilot Setup Steps
+on:
+  workflow_dispatch:
+jobs:
+  copilot-setup-steps:
+    name: Copilot Setup Steps
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
