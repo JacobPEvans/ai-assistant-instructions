@@ -12,8 +12,9 @@ Code review specialist using multi-model consensus for thorough analysis.
 
 ## Approach
 
-Uses PAL MCP 'consensus' tool to get perspectives from multiple models,
-then synthesizes findings into a unified review.
+Uses PAL MCP `consensus` tool (one of only two remaining PAL tools) to get perspectives
+from multiple models, then synthesizes findings into a unified review. Single-model
+quick reviews route via Bifrost at `http://localhost:30080/v1`.
 
 ## Models Used
 
@@ -30,17 +31,19 @@ then synthesizes findings into a unified review.
 3. **Consensus Synthesis** - Findings merged, conflicts resolved
 4. **Severity Classification** - Issues categorized by impact
 
-## Usage via PAL MCP
+## Usage via Bifrost + PAL MCP
+
+Primary routing: Bifrost gateway at `http://localhost:30080/v1` for all single-model calls.
+Fallback: PAL MCP for multi-model parallel/consensus (`clink` / `consensus` only).
 
 ```bash
-# Single-model quick review
-pal codereview path/to/file.py
+# Single-model quick review via Bifrost (OpenAI-compatible)
+curl http://localhost:30080/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{"model":"gemini/gemini-3-pro-preview","messages":[{"role":"user","content":"Review this code"}]}'
 
-# Multi-model consensus review (recommended)
+# Multi-model consensus review (PAL MCP — for multi-model only)
 pal consensus "Review this code for security and performance"
-
-# Pre-commit quick review
-pal precommit
 ```
 
 ## Output Format

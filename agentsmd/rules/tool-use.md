@@ -31,7 +31,7 @@ Check AI assistant settings files (`~/.claude/settings.json`, `~/.gemini/setting
 | Text processing (pipe filter) | `grep`/`sed`/`awk` on stdin (never in-place) | Processing script |
 | Permission/JSON transforms | `Read` + `jq` (via Bash) + `Edit`/`Write` | Python file manipulation |
 | Multi-file git operations | Parallel Bash tool calls (`git add f1 f2 f3`) | Loop script |
-| Delegate to external AI | `/delegate-to-ai` via PAL MCP | Manual model routing |
+| Delegate to external AI | Bifrost `/v1/chat/completions` at `:30080` or `/delegate-to-ai` for `clink`/`consensus` | Manual model routing |
 | Infrastructure config | Ansible modules, Terraform resources/data sources | Configuration script |
 | Infrastructure validation | `terraform validate`, `ansible-lint`, check modes | Validation script |
 | State queries | `terraform output`, `terraform state show`, Ansible facts | Query script |

@@ -37,17 +37,21 @@ Coding specialist with automatic tier selection based on task complexity.
 - Documentation generation
 - Multi-language support
 
-## Usage via PAL MCP
+## Usage via Bifrost + PAL MCP
+
+Primary routing: Bifrost gateway at `http://localhost:30080/v1` for all single-model calls.
+Fallback: PAL MCP for multi-model parallel/consensus (`clink` / `consensus` only).
 
 ```bash
-# Standard coding task (auto-selects tier)
-pal chat "Implement feature X"
+# Standard coding task via Bifrost (OpenAI-compatible)
+curl http://localhost:30080/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{"model":"anthropic/claude-sonnet-4-6","messages":[{"role":"user","content":"Implement feature X"}]}'
 
-# Explicit frontier model
-pal chat --model claude-opus-4-5 "Complex architectural change"
-
-# Code review before commit
-pal precommit
+# Explicit frontier model via Bifrost
+curl http://localhost:30080/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{"model":"anthropic/claude-opus-4-6","messages":[{"role":"user","content":"Complex architectural change"}]}'
 ```
 
 ## Override

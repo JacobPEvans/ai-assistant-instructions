@@ -36,14 +36,19 @@ Automatically selected when task contains keywords:
 - dependencies, sequence
 - trade-offs, options
 
-## Usage via PAL MCP
+## Usage via Bifrost + PAL MCP
+
+Primary routing: Bifrost gateway at `http://localhost:30080/v1` for all single-model calls.
+Fallback: PAL MCP for multi-model parallel/consensus (`clink` / `consensus` only).
 
 ```bash
-# Architecture planning
-pal planner "Design the authentication system"
+# Architecture planning via Bifrost (OpenAI-compatible)
+curl http://localhost:30080/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{"model":"anthropic/claude-opus-4-6","messages":[{"role":"user","content":"Design the auth system"}]}'
 
-# Implementation breakdown
-pal planner "Break down issue #123 into implementation tasks"
+# Multi-model planning consensus (PAL MCP — for multi-model only)
+pal consensus "Design the authentication system"
 ```
 
 ## Output Format

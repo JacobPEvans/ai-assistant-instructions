@@ -2,20 +2,17 @@
 
 ## [1.5.1](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.5.0...v1.5.1) (2026-04-07)
 
-
 ### Bug Fixes
 
 * replace deleted /init-worktree references with /refresh-repo ([#546](https://github.com/JacobPEvans/ai-assistant-instructions/issues/546)) ([9e0c793](https://github.com/JacobPEvans/ai-assistant-instructions/commit/9e0c79306d3f85feb59e15392daf6861d9786a06))
 
 ## [1.5.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.4.4...v1.5.0) (2026-04-07)
 
-
 ### Features
 
 * add AI merge gate and Copilot setup ([#545](https://github.com/JacobPEvans/ai-assistant-instructions/issues/545)) ([b46ce85](https://github.com/JacobPEvans/ai-assistant-instructions/commit/b46ce85b233d1e0fd7d49558150966ef51bb41f3))
 
 ## [1.4.4](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.4.3...v1.4.4) (2026-04-04)
-
 
 ### Bug Fixes
 
@@ -24,13 +21,11 @@
 
 ## [1.4.3](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.4.2...v1.4.3) (2026-04-02)
 
-
 ### Bug Fixes
 
 * pin npx cclint to [@0](https://github.com/0).2.10 with Renovate annotation ([#539](https://github.com/JacobPEvans/ai-assistant-instructions/issues/539)) ([d4fc35d](https://github.com/JacobPEvans/ai-assistant-instructions/commit/d4fc35d9b6dbb13a7596825df5261ca82ef1f141))
 
 ## [1.4.2](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.4.1...v1.4.2) (2026-03-29)
-
 
 ### Bug Fixes
 
@@ -38,13 +33,11 @@
 
 ## [1.4.1](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.4.0...v1.4.1) (2026-03-29)
 
-
 ### Bug Fixes
 
 * align script locations with write-script-guard enforcement ([#535](https://github.com/JacobPEvans/ai-assistant-instructions/issues/535)) ([e989bb6](https://github.com/JacobPEvans/ai-assistant-instructions/commit/e989bb68d1f85573d059c9b2c70961905126742f))
 
 ## [1.4.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.3.4...v1.4.0) (2026-03-29)
-
 
 ### Features
 
@@ -52,13 +45,11 @@
 
 ## [1.3.4](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.3.3...v1.3.4) (2026-03-29)
 
-
 ### Bug Fixes
 
 * block npm run commands in permission deny list ([#532](https://github.com/JacobPEvans/ai-assistant-instructions/issues/532)) ([61dd316](https://github.com/JacobPEvans/ai-assistant-instructions/commit/61dd316c99b6e84f1d8b83eaa2a7ad11a6c89a2e))
 
 ## [1.3.3](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.3.2...v1.3.3) (2026-03-26)
-
 
 ### Bug Fixes
 
@@ -66,13 +57,11 @@
 
 ## [1.3.2](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.3.1...v1.3.2) (2026-03-25)
 
-
 ### Bug Fixes
 
 * add shared nix-tool-policy rule for dev shell repos ([#522](https://github.com/JacobPEvans/ai-assistant-instructions/issues/522)) ([9c4ac5e](https://github.com/JacobPEvans/ai-assistant-instructions/commit/9c4ac5ebef2e37837e612973b3129f0e6b326355))
 
 ## [1.3.1](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.3.0...v1.3.1) (2026-03-25)
-
 
 ### Bug Fixes
 
@@ -80,13 +69,11 @@
 
 ## [1.3.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.2.1...v1.3.0) (2026-03-21)
 
-
 ### Features
 
 * add pre-integration checklist for new inference backends ([#517](https://github.com/JacobPEvans/ai-assistant-instructions/issues/517)) ([5cc389f](https://github.com/JacobPEvans/ai-assistant-instructions/commit/5cc389f132fa4f1ef4464b419f2ec6f0fa321849))
 
 ## [1.2.1](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.2.0...v1.2.1) (2026-03-21)
-
 
 ### Bug Fixes
 
@@ -94,14 +81,12 @@
 
 ## [1.2.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.1.0...v1.2.0) (2026-03-20)
 
-
 ### Features
 
 * add test/lint tool permissions and fix :* format ([#507](https://github.com/JacobPEvans/ai-assistant-instructions/issues/507)) ([85e139c](https://github.com/JacobPEvans/ai-assistant-instructions/commit/85e139cd3671c5de9ed39991bd83507221820558))
 * add token economy section to AGENTS.md ([#505](https://github.com/JacobPEvans/ai-assistant-instructions/issues/505)) ([c8fe1ca](https://github.com/JacobPEvans/ai-assistant-instructions/commit/c8fe1caa67b5a632943c5475085e2b139baea7d3))
 * auto-approve PAL, HuggingFace, memory, and AWS MCP tools ([#514](https://github.com/JacobPEvans/ai-assistant-instructions/issues/514)) ([3e59464](https://github.com/JacobPEvans/ai-assistant-instructions/commit/3e59464c1bfa738aaf4a0d5cb1a0f990f8a99c56))
 * MLX-first model routing — add MLX preferred column, update cloud to 4.6 ([#511](https://github.com/JacobPEvans/ai-assistant-instructions/issues/511)) ([5ee434d](https://github.com/JacobPEvans/ai-assistant-instructions/commit/5ee434de4361c1ec1e21eccaac041864b4b7a9a4))
-
 
 ### Bug Fixes
 
@@ -117,7 +102,6 @@
 * update version bump docs to reflect default semver strategy ([#508](https://github.com/JacobPEvans/ai-assistant-instructions/issues/508)) ([5631835](https://github.com/JacobPEvans/ai-assistant-instructions/commit/563183576662d52526fc84ad47cf3a479a7825a6))
 
 ## [1.1.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.0.1...v1.1.0) (2026-03-11)
-
 
 ### ⚠ BREAKING CHANGES
 
@@ -156,7 +140,6 @@
 * restore default tools to allowed-tools declarations ([6cdfd55](https://github.com/JacobPEvans/ai-assistant-instructions/commit/6cdfd55c98e3bc4e5144526da29901f037a94d96))
 * rewrite direct-execution rule with workflow-first approach ([#467](https://github.com/JacobPEvans/ai-assistant-instructions/issues/467)) ([a9ec9c1](https://github.com/JacobPEvans/ai-assistant-instructions/commit/a9ec9c18080de07b3cfd2bd56cc5e3ce0a686ff3))
 * **rules:** add agent-dispatching rule for file tool constraints ([#483](https://github.com/JacobPEvans/ai-assistant-instructions/issues/483)) ([28f9b71](https://github.com/JacobPEvans/ai-assistant-instructions/commit/28f9b71a0920ec1f6b7a5bdf87c1a3ee27827fc1))
-
 
 ### Bug Fixes
 
@@ -212,7 +195,6 @@
 * simplify MCP greptile permissions using wildcard only ([35c150a](https://github.com/JacobPEvans/ai-assistant-instructions/commit/35c150ada4daa59176c0b99a1be611d1c8020181))
 * use matchPackagePrefixes for safer pattern matching ([f8c9f3d](https://github.com/JacobPEvans/ai-assistant-instructions/commit/f8c9f3d180beef08554dfc89db646b0454881250))
 * wrap long line in resolve-pr-thread-graphql agent Role section ([47fc269](https://github.com/JacobPEvans/ai-assistant-instructions/commit/47fc269723bf573c0f3d9c1b972ad7ea900d3ea1))
-
 
 ### Miscellaneous Chores
 
