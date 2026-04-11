@@ -2,6 +2,13 @@
 
 Multi-model AI orchestration configuration for Claude, Gemini, Copilot, and local models.
 
+This file (`AGENTS.md`, symlinked as `CLAUDE.md` and `GEMINI.md`) is the
+canonical configuration source. Commands, skills, agents, and hooks are
+delivered as plugins from
+[JacobPEvans/claude-code-plugins](https://github.com/JacobPEvans/claude-code-plugins);
+this repo keeps only the generic pieces that aren't plugin-delivered
+(rules, workflows, permission framework, CI gates).
+
 ## Starting Any Change — Required First Step
 
 **Before making any code or config change, run `/refresh-repo` then create a worktree.** No exceptions.
@@ -253,6 +260,9 @@ visibility when in doubt.
 
 ## Related Files
 
-- `agentsmd/rules/` — Auto-loaded essential rules
+- `agentsmd/rules/` — Auto-loaded essential rules (sourced via `.claude/rules` symlink)
 - `agentsmd/workflows/` — 5-step development workflow
-- `.claude/`, `.gemini/`, `.copilot/` — Vendor configs (symlinked)
+- `agentsmd/permissions/` — Permission framework (allow / ask / deny JSON configs)
+- `agentsmd/docs/` — Permission framework and workflow support docs
+- `.claude/rules`, `.copilot/instructions.md`, `.gemini/config.yaml` — Vendor entry points (symlinked where possible)
+- [JacobPEvans/claude-code-plugins](https://github.com/JacobPEvans/claude-code-plugins) — Commands, skills, agents, and hooks
