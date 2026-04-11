@@ -27,21 +27,27 @@ for one, or it will be committed as a permanent artifact (`scripts/`, `hooks/`, 
 
 See the `tool-use` rule for the full alternatives table.
 
-## Token Economy — Use PAL MCP Aggressively
+## Token Economy — Use Bifrost + Native Subagents Aggressively
 
 Claude Opus tokens are premium — reserve them for architecture decisions and complex reasoning.
 Offload everything else:
 
-- **Research & planning**: Route to Gemini via `chat` (single model) or `clink` (multi-model parallel) — up-to-date knowledge and massive context
-- **Simple/repetitive tasks**: Route to local models (MLX) when available — zero cost, low latency
-- **Medium-complexity work**: Route to OpenRouter cloud models via PAL MCP — capable and cost-effective
-- **Day-to-day implementation**: Prefer Sonnet subagents over Opus — same tool access, fraction of the cost; reserve Opus for genuinely complex coding and architecture
+- **Single-model calls**: Route via Bifrost at `http://localhost:30080/v1/chat/completions` (OpenAI-compatible) —
+  multi-provider routing to OpenAI, Gemini, Anthropic, OpenRouter, and local MLX
+- **Multi-model parallel**: `clink` / `consensus` via PAL MCP (only remaining PAL tools — all others replaced by native subagents)
+- **Research & planning**: Route to Gemini via Bifrost (`gemini/gemini-3-pro-preview`) or `clink` (multi-model parallel) —
+  up-to-date knowledge and massive context
+- **Simple/repetitive tasks**: Route to local models (MLX) via Bifrost — zero cost, low latency
+- **Medium-complexity work**: Route to OpenRouter cloud models via Bifrost — capable and cost-effective
+- **Day-to-day implementation**: Prefer Sonnet subagents over Opus — same tool access, fraction of the cost;
+  reserve Opus for genuinely complex coding and architecture
 
 See the Model Routing Rules table for specific model recommendations per task type.
 
 ## Orchestrator Role
 
-You are a master orchestrator. Your primary context window is precious: it is where decisions are made, plans are formed, and results are synthesized. Protect it.
+You are a master orchestrator. Your primary context window is precious: it is where decisions are made,
+plans are formed, and results are synthesized. Protect it.
 
 ### Delegation Philosophy
 
@@ -120,14 +126,14 @@ This is about output format, not thinking. Reason thoroughly. Write concisely.
 
 ## Model Routing Rules
 
-| Task Type | Cloud Model | Local (MLX) | PAL MCP Tool |
+| Task Type | Cloud Model | Bifrost Path | Local (MLX) |
 | --- | --- | --- | --- |
-| Research & Analysis | Gemini 3 Pro | mlx-community/Qwen3-235B-A22B-4bit | `chat`, `clink` |
-| Complex Coding | Claude Opus 4.6 | mlx-community/Qwen3.5-122B-A10B-4bit | `codereview` |
-| Fast Tasks | Claude Sonnet 4.6 | mlx-community/Qwen3.5-27B-4bit | `chat` |
-| Code Review | Multi-model consensus | mlx-community/Qwen3.5-27B-4bit | `consensus` |
-| Architecture | Claude Opus 4.6 | mlx-community/Qwen3-235B-A22B-4bit | `planner` |
-| Pre-commit | Claude Sonnet 4.6 | mlx-community/Qwen3.5-35B-A3B-4bit | `precommit` |
+| Research & Analysis | Gemini 3 Pro | `gemini/gemini-3-pro-preview` | mlx-community/Qwen3-235B-A22B-4bit |
+| Complex Coding | Claude Opus 4.6 | `anthropic/claude-opus-4-6` | mlx-community/Qwen3.5-122B-A10B-4bit |
+| Fast Tasks | Claude Sonnet 4.6 | `anthropic/claude-sonnet-4-6` | mlx-community/Qwen3.5-27B-4bit |
+| Code Review | Multi-model consensus | Multiple Bifrost calls + PAL `consensus` | mlx-community/Qwen3.5-27B-4bit |
+| Architecture | Claude Opus 4.6 | `anthropic/claude-opus-4-6` | mlx-community/Qwen3-235B-A22B-4bit |
+| Pre-commit | Claude Sonnet 4.6 | `anthropic/claude-sonnet-4-6` | mlx-community/Qwen3.5-35B-A3B-4bit |
 
 Default local model: `mlx-community/Qwen3.5-27B-4bit` (always loaded).
 Larger models are on-demand via `mlx-switch`. Run `listmodels` for available models and aliases.
@@ -136,13 +142,12 @@ Larger models are on-demand via `mlx-switch`. Run `listmodels` for available mod
 
 | Tool | Purpose |
 | --- | --- |
-| `chat` | Single model prompt. Straightforward tasks. |
 | `clink` | Multi-model parallel. Research and exploration. |
-| `codereview` | Multi-model code review. Before significant commits. |
-| `precommit` | Quick pre-commit review. Git hook integrated. |
 | `consensus` | Multi-model agreement. Critical decisions. |
-| `planner` | Architecture and design planning. |
-| `listmodels` | List available models and aliases. |
+
+All other PAL tools have native Claude Code equivalents. See
+[nix-ai#450](https://github.com/JacobPEvans/nix-ai/issues/450) for the full audit matrix.
+For single-model calls, use Bifrost directly at `http://localhost:30080/v1/chat/completions`.
 
 **Local model names**: Use HuggingFace model IDs or PAL aliases.
 Never add provider-style prefixes like `custom/` or `ollama/` — PAL routes these as OpenRouter paths.
@@ -153,8 +158,9 @@ Run `sync-mlx-models` after switching models, then restart Claude Code.
 When choosing implementations or tools:
 
 1. **Anthropic Official** - Claude Code plugins, skills, patterns
-2. **PAL MCP** - Multi-model orchestration tools
-3. **Personal/Custom** - Only when no alternative exists
+2. **Bifrost AI Gateway** - Multi-provider routing (HTTP MCP + OpenAI API at `localhost:30080`)
+3. **PAL MCP** - Only for `clink` / `consensus` multi-model tools
+4. **Personal/Custom** - Only when no alternative exists
 
 ## Local-Only Mode
 

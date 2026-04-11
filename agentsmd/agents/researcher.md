@@ -9,10 +9,12 @@ author: JacobPEvans
 # Researcher Agent
 
 Research specialist using the best available model for research tasks.
-Routes to Gemini 3 Pro (cloud) or MLX Qwen3-235B (local) via PAL MCP.
+Routes to Gemini 3 Pro (cloud) via the Bifrost gateway, or MLX Qwen3-235B (local) for
+offline research. Multi-model parallel research falls back to PAL MCP `clink`.
 
 **Note**: This agent uses Sonnet for orchestration and task coordination, while delegating
-actual research work to specialized models (Gemini 3 Pro or local models) via PAL MCP.
+actual research work to specialized models (Gemini 3 Pro via Bifrost, local MLX models, or
+PAL `clink` for multi-model parallel runs).
 
 ## Model Selection
 
@@ -38,13 +40,18 @@ Automatically selected when task contains keywords:
 - explore (alternatives|approaches|solutions)
 - understand, learn about, study
 
-## Usage via PAL MCP
+## Usage via Bifrost + PAL MCP
+
+Primary routing: Bifrost gateway at `http://localhost:30080/v1` for all single-model calls.
+Fallback: PAL MCP for multi-model parallel/consensus (`clink` / `consensus` only).
 
 ```bash
-# Single model research
-pal chat --model gemini-3-pro "Research question here"
+# Single model research via Bifrost (OpenAI-compatible)
+curl http://localhost:30080/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{"model":"gemini/gemini-3-pro-preview","messages":[{"role":"user","content":"Research question"}]}'
 
-# Multi-model parallel research
+# Multi-model parallel research (PAL MCP — for multi-model only)
 pal clink "Research question here"
 ```
 
