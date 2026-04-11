@@ -135,9 +135,6 @@ This is about output format, not thinking. Reason thoroughly. Write concisely.
 | Architecture | Claude Opus 4.6 | `anthropic/claude-opus-4-6` | mlx-community/Qwen3-235B-A22B-4bit |
 | Pre-commit | Claude Sonnet 4.6 | `anthropic/claude-sonnet-4-6` | mlx-community/Qwen3.5-35B-A3B-4bit |
 
-Multi-model work (`Code Review`, consensus decisions) uses PAL MCP's `clink` / `consensus` —
-the only PAL tools that remain. Everything else routes through Bifrost directly.
-
 Default local model: `mlx-community/Qwen3.5-27B-4bit` (always loaded).
 Larger models are on-demand via `mlx-switch`. Run `listmodels` for available models and aliases.
 
