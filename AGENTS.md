@@ -204,6 +204,7 @@ path-scoped rules lazy-load only when matching files enter context.
 **Path-scoped (lazy-load on matching files):**
 
 - `nix-tool-policy.md` — Nix dev shell rules (flake.nix, *.nix, .envrc)
+- `nix-package-placement.md` — Where tools belong across the nix quartet (*.nix, flake.*)
 - `ci-cd-policy.md` — CI/CD automation rules (.github/**, scripts/**, hooks/**)
 - `config-secrets.md` — Secret scrubbing details (.env*,*.json, *.yaml,*.tf)
 

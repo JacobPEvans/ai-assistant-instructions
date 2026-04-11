@@ -193,7 +193,10 @@
     "unauditable",
     "vllm",
     "plist",
-    "plists"
+    "plists",
+    "mactop",
+    "portaudio",
+    "pyright"
   ],
   "files": [
     "**/*.md"
