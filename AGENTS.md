@@ -145,21 +145,14 @@ This is about output format, not thinking. Reason thoroughly. Write concisely.
 Default local model: `mlx-community/Qwen3.5-27B-4bit` (always loaded).
 Larger models are on-demand via `mlx-switch`. Run `listmodels` for available models and aliases.
 
-### Provider gotchas
+### Provider Gotchas
 
-- **Gemini thinking models — reasoning tokens count against `max_tokens`.**
-  All current Gemini thinking models (including `gemini-3-pro-preview` and the
-  current flash variants) consume internal reasoning tokens **before** emitting
-  the user-facing answer, and those reasoning tokens are billed against the
-  `max_tokens` budget on the OpenAI-compatible API. If `max_tokens` is too
-  small, the model can burn the entire budget on reasoning and return
-  `choices: null` with `completion_tokens_details.reasoning_tokens` matching
-  `completion_tokens`. **Always set `max_tokens >= 100`** for any Gemini
-  thinking-model call via the OpenAI-compatible API; budget
-  ~30 tokens for reasoning overhead plus your expected answer length. This
-  affects every OpenAI-compatible client (direct or through Bifrost), not
-  just one model version — the behavior is a Gemini API surface standard for
-  thinking models.
+- **Gemini thinking-model reasoning tokens.** **Set `max_tokens >= 100`** for
+  any Gemini thinking-model call via the OpenAI-compatible API. Reasoning
+  tokens count against the `max_tokens` budget before the answer is emitted —
+  with too small a limit, ~30 % of requests return `choices: null`. Budget
+  ~30 tokens for reasoning overhead plus expected answer length. Applies
+  to every OpenAI-compatible client (direct or through Bifrost).
 
 ## PAL MCP Tools
 
