@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.5.1...v1.6.0) (2026-04-11)
+
+
+### Features
+
+* migrate model routing docs to Bifrost AI gateway ([594f6e4](https://github.com/JacobPEvans/ai-assistant-instructions/commit/594f6e40e4f669966c0742f4b62b2e269e289fe0))
+
 ## [1.5.1](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.5.0...v1.5.1) (2026-04-07)
 
 ### Bug Fixes
