@@ -9,10 +9,12 @@ author: JacobPEvans
 # Researcher Agent
 
 Research specialist using the best available model for research tasks.
-Routes to Gemini 3 Pro (cloud) or MLX Qwen3-235B (local) via PAL MCP.
+Routes to Gemini 3 Pro (cloud) via the Bifrost gateway, or MLX Qwen3-235B (local) for
+offline research. Multi-model parallel research falls back to PAL MCP `clink`.
 
 **Note**: This agent uses Sonnet for orchestration and task coordination, while delegating
-actual research work to specialized models (Gemini 3 Pro or local models) via PAL MCP.
+actual research work to specialized models (Gemini 3 Pro via Bifrost, local MLX models, or
+PAL `clink` for multi-model parallel runs).
 
 ## Model Selection
 

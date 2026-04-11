@@ -32,7 +32,7 @@ See the `tool-use` rule for the full alternatives table.
 Claude Opus tokens are premium — reserve them for architecture decisions and complex reasoning.
 Offload everything else:
 
-- **Single-model calls**: Route via Bifrost `/v1/chat/completions` at `http://localhost:30080` (OpenAI-compatible) —
+- **Single-model calls**: Route via Bifrost at `http://localhost:30080/v1/chat/completions` (OpenAI-compatible) —
   multi-provider routing to OpenAI, Gemini, Anthropic, OpenRouter, and local MLX
 - **Multi-model parallel**: `clink` / `consensus` via PAL MCP (only remaining PAL tools — all others replaced by native subagents)
 - **Research & planning**: Route to Gemini via Bifrost (`gemini/gemini-3-pro-preview`) or `clink` (multi-model parallel) —
@@ -126,14 +126,17 @@ This is about output format, not thinking. Reason thoroughly. Write concisely.
 
 ## Model Routing Rules
 
-| Task Type | Cloud Model | Bifrost Path | Local (MLX) | PAL MCP Tool |
-| --- | --- | --- | --- | --- |
-| Research & Analysis | Gemini 3 Pro | `gemini/gemini-3-pro-preview` | mlx-community/Qwen3-235B-A22B-4bit | `chat`, `clink` |
-| Complex Coding | Claude Opus 4.6 | `anthropic/claude-opus-4-6` | mlx-community/Qwen3.5-122B-A10B-4bit | `codereview` |
-| Fast Tasks | Claude Sonnet 4.6 | `anthropic/claude-sonnet-4-6` | mlx-community/Qwen3.5-27B-4bit | `chat` |
-| Code Review | Multi-model consensus | `(multiple Bifrost calls)` + `consensus` | mlx-community/Qwen3.5-27B-4bit | `consensus` |
-| Architecture | Claude Opus 4.6 | `anthropic/claude-opus-4-6` | mlx-community/Qwen3-235B-A22B-4bit | `planner` |
-| Pre-commit | Claude Sonnet 4.6 | `anthropic/claude-sonnet-4-6` | mlx-community/Qwen3.5-35B-A3B-4bit | `precommit` |
+| Task Type | Cloud Model | Bifrost Path | Local (MLX) |
+| --- | --- | --- | --- |
+| Research & Analysis | Gemini 3 Pro | `gemini/gemini-3-pro-preview` | mlx-community/Qwen3-235B-A22B-4bit |
+| Complex Coding | Claude Opus 4.6 | `anthropic/claude-opus-4-6` | mlx-community/Qwen3.5-122B-A10B-4bit |
+| Fast Tasks | Claude Sonnet 4.6 | `anthropic/claude-sonnet-4-6` | mlx-community/Qwen3.5-27B-4bit |
+| Code Review | Multi-model consensus | Multiple Bifrost calls + PAL `consensus` | mlx-community/Qwen3.5-27B-4bit |
+| Architecture | Claude Opus 4.6 | `anthropic/claude-opus-4-6` | mlx-community/Qwen3-235B-A22B-4bit |
+| Pre-commit | Claude Sonnet 4.6 | `anthropic/claude-sonnet-4-6` | mlx-community/Qwen3.5-35B-A3B-4bit |
+
+Multi-model work (`Code Review`, consensus decisions) uses PAL MCP's `clink` / `consensus` —
+the only PAL tools that remain. Everything else routes through Bifrost directly.
 
 Default local model: `mlx-community/Qwen3.5-27B-4bit` (always loaded).
 Larger models are on-demand via `mlx-switch`. Run `listmodels` for available models and aliases.
