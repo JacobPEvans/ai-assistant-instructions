@@ -2,12 +2,13 @@
 
 > Teaching AI assistants how to help you better. Yes, it's AI instructions written with AI assistance. We've come full circle.
 >
-> **⚠️ MIGRATION IN PROGRESS**: Claude, Gemini, Copilot, and other AI assistant custom commands,
-> skills, and agents are being moved to [JacobPEvans/claude-code-plugins](https://github.com/JacobPEvans/claude-code-plugins)
-> to be delivered as portable plugins. During this transition, this repository primarily maintains user home
-> directory configuration files (`CLAUDE.md`, `AGENTS.md`, etc.) for generic instructions and standards, and still
-> includes legacy plugin directories and workflows (for example `agentsmd/`, `/commands`, and GitHub workflows)
-> that will be migrated or removed over time.
+> **Scope**: Commands, skills, agents, and hooks have been migrated to
+> [JacobPEvans/claude-code-plugins](https://github.com/JacobPEvans/claude-code-plugins)
+> and are delivered as portable plugins. This repository now maintains the generic pieces
+> that aren't plugin-delivered: the canonical `AGENTS.md` / `CLAUDE.md` / `GEMINI.md`
+> configuration, the auto-loaded rules in `agentsmd/rules/`, the 5-step development
+> workflow in `agentsmd/workflows/`, the permission framework in `agentsmd/permissions/`,
+> and the CI / validation tooling that keeps all of the above honest.
 
 [![License][license-badge]][license-url]
 [![Markdown Lint][markdownlint-badge]][markdownlint-url]
@@ -28,41 +29,68 @@ Think of it as a style guide, but for your AI pair programmer.
 - **(Optional) Python 3.8+** for validation hooks
 - **(Optional) Node.js 18+** for markdown linting
 
-## Quick Start
+## Installation
 
 ```bash
 # 1. Clone the repo
 git clone https://github.com/JacobPEvans/ai-assistant-instructions.git
 
-# 2. Copy agentsmd to your project
-cp -r ai-assistant-instructions/agentsmd your-project/
+# 2. Copy AGENTS.md (and optionally agentsmd/rules/) to your project
+cp ai-assistant-instructions/AGENTS.md your-project/
+cp -r ai-assistant-instructions/agentsmd/rules your-project/agentsmd/
 
-# 3. Create vendor symlinks
+# 3. Create vendor symlinks so each AI tool reads the same source
 cd your-project
 ln -s AGENTS.md CLAUDE.md
+ln -s AGENTS.md GEMINI.md
 
-# 4. Verify setup (if using Claude Code)
+# 4. Install the plugins from JacobPEvans/claude-code-plugins
+#    (commands, skills, agents, and hooks live there, not here)
+claude marketplace add JacobPEvans/claude-code-plugins
+claude plugin install git-workflows github-workflows git-standards
+
+# 5. Verify setup
 claude doctor
 ```
 
 Or just browse the [documentation](docs/) and cherry-pick what you need.
 
+## Usage
+
+Once installed, the AI assistants read `CLAUDE.md` / `AGENTS.md` / `GEMINI.md`
+automatically at session start, and the auto-loaded rules in `agentsmd/rules/`
+are pulled in for every session. Plugin-delivered commands and skills from
+[JacobPEvans/claude-code-plugins](https://github.com/JacobPEvans/claude-code-plugins)
+are invoked via slash commands (`/refresh-repo`, `/finalize-pr`, `/ship`, etc.)
+or directly by name.
+
+See the [5-step workflow](#the-5-step-workflow) below for the expected
+development loop, and [AGENTS.md](AGENTS.md) for the full set of rules,
+routing decisions, and on-demand standards.
+
 ## Directory Structure
 
 ```text
 .
-├── AGENTS.md                  # Main AgentsMD entry point
-├── agentsmd/                  # Supporting files
-│   ├── rules/                 # Core principles and standards
-│   ├── skills/                # Canonical patterns and rules
-│   └── workflows/             # The 5-step development workflow
-├── .claude/                   # Claude-specific symlinks
-├── .copilot/                  # GitHub Copilot symlinks
-├── .gemini/                   # Gemini symlinks
-└── .github/                   # GitHub integration (prompts, workflows)
+├── AGENTS.md                  # Canonical configuration (CLAUDE.md / GEMINI.md are symlinks)
+├── agentsmd/
+│   ├── rules/                 # Auto-loaded universal and path-scoped rules
+│   ├── workflows/             # The 5-step development workflow
+│   ├── permissions/           # Permission framework (allow / ask / deny JSON configs)
+│   └── docs/                  # Permission and workflow support docs
+├── .claude/rules              # Symlink → agentsmd/rules
+├── .copilot/instructions.md   # Symlink → AGENTS.md
+├── .gemini/config.yaml        # Gemini-specific config
+├── scripts/                   # Validation helpers (token limits, permissions, links)
+└── .github/workflows/         # CI gates (markdown, spellcheck, link check, CodeQL, release-please)
 ```
 
-Everything in `.claude/`, `.copilot/`, and `.gemini/` symlinks back to `agentsmd/`. One source, multiple consumers. DRY principle in action.
+Claude-Code plugins (commands, skills, agents, hooks) live in
+[JacobPEvans/claude-code-plugins](https://github.com/JacobPEvans/claude-code-plugins)
+and are consumed via the `git-workflows`, `github-workflows`, `git-standards`,
+`code-standards`, `infra-standards`, `project-standards`, `ai-delegation`,
+`config-management`, `content-guards`, `git-guards`, `script-guards`,
+`codeql-resolver`, and `session-analytics` plugins (among others).
 
 ## Supported AI Assistants
 
@@ -84,47 +112,29 @@ This repo centers on a rigorous development workflow:
 
 Full details in [`agentsmd/workflows/`](agentsmd/workflows/).
 
-## Key Commands
+## Plugin-delivered commands, skills, agents, and hooks
 
-### Git & Repository Management
+All slash commands, skills, agents, and hooks previously listed in this README
+now ship as plugins in
+[JacobPEvans/claude-code-plugins](https://github.com/JacobPEvans/claude-code-plugins).
+Install the marketplace and enable the plugins you need:
 
-| Command | Description |
-| ------- | ----------- |
-| `/refresh-repo` | Sync main, check PR status, cleanup stale worktrees |
-| `/sync-main` | Sync current branch with main (use `all` for all PRs) |
-| `/sync-permissions` | Sync AI assistant permissions to repo |
+| Plugin | Provides |
+| --- | --- |
+| `git-workflows` | `/refresh-repo`, `/sync-main`, `/rebase-pr`, `/troubleshoot-*` |
+| `github-workflows` | `/finalize-pr`, `/squash-merge-pr`, `/ship`, `/resolve-pr-threads`, `/shape-issues`, `/trigger-ai-reviews` |
+| `git-standards` | `/git-workflow-standards`, `/pr-standards` |
+| `code-standards` | `/code-quality-standards`, `/review-standards` |
+| `infra-standards` | `/infrastructure-standards` |
+| `project-standards` | `/agentsmd-authoring`, `/workspace-standards`, `/skills-registry` |
+| `ai-delegation` | `/delegate-to-ai`, `/auto-maintain` |
+| `config-management` | `/sync-permissions`, `/quick-add-permission` |
+| `codeql-resolver` | `/resolve-codeql` + specialist agents |
+| `session-analytics` | `/token-breakdown` |
+| `content-guards`, `git-guards`, `script-guards`, `pr-lifecycle`, `pal-health`, `process-cleanup` | PreToolUse / PostToolUse / Stop hooks |
 
-### Code Review & Quality
-
-| Tool/Skill | Description |
-| ---------- | ----------- |
-| `code-reviewer` Task agent | Confidence-scored code review with security checks |
-| `docs-reviewer` Task agent | Review and validate documentation |
-
-### PR Lifecycle Management
-
-| Tool/Skill | Description |
-| ---------- | ----------- |
-| `/finalize-pr` | Complete PR lifecycle management |
-| `ci-fixer` Task agent | Fix CI failures on PRs |
-| `superpowers:receiving-code-review` | Implement code review feedback systematically |
-| `/finalize-prs` | Orchestrate PR finalization across all repositories and report merge-readiness status |
-
-### Issue & Architecture Management
-
-| Tool/Skill | Description |
-| ---------- | ----------- |
-| `/shape-issues` | Shape raw ideas into actionable GitHub issues |
-| `issue-resolver` Task agent | Analyze and implement GitHub issues |
-| `pr-review-toolkit` plugin | Comprehensive PR review with multi-agent analysis |
-
-### Delegation & Integration
-
-| Command | Description |
-| ------- | ----------- |
-| `/delegate-to-ai` | Delegate tasks to external AI assistants |
-
-See [AGENTS.md](AGENTS.md) for the full list of available skills and tools.
+See [AGENTS.md](AGENTS.md) for the full on-demand standards table and the
+auto-loaded rules reference.
 
 ## Core Concepts
 
