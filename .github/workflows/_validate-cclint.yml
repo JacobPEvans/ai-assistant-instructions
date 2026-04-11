@@ -125,7 +125,7 @@ jobs:
       - name: Post comment on PR if schema changed
         # Use inputs.caller_event since github.event_name is 'workflow_call' when called via workflow_call
         if: env.SCHEMA_CHANGED == 'true' && inputs.caller_event == 'pull_request' && inputs.pr_number > 0
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             github.rest.issues.createComment({
