@@ -47,7 +47,7 @@ editor integration because IDEs activate the system environment, not a project s
 ```bash
 # Zero-install ephemeral runs (like bunx but for Nix):
 nix run nixpkgs#d2 -- input.d2 output.svg
-nix run nixpkgs#nodePackages.mermaid-cli -- -i input.mmd -o output.svg
+nix run nixpkgs#mermaid-cli -- -i input.mmd -o output.svg
 nix run nixpkgs#python3Packages.grip -- README.md
 
 # Enter a project shell with tools available:
