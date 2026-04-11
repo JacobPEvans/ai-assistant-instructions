@@ -35,14 +35,17 @@ Think of it as a style guide, but for your AI pair programmer.
 # 1. Clone the repo
 git clone https://github.com/JacobPEvans/ai-assistant-instructions.git
 
-# 2. Copy AGENTS.md (and optionally agentsmd/rules/) to your project
+# 2. Copy AGENTS.md into your project
 cp ai-assistant-instructions/AGENTS.md your-project/
+
+#    Optional: copy the auto-loaded rules too
+mkdir -p your-project/agentsmd
 cp -r ai-assistant-instructions/agentsmd/rules your-project/agentsmd/
 
 # 3. Create vendor symlinks so each AI tool reads the same source
 cd your-project
-ln -s AGENTS.md CLAUDE.md
-ln -s AGENTS.md GEMINI.md
+ln -sf AGENTS.md CLAUDE.md
+ln -sf AGENTS.md GEMINI.md
 
 # 4. Install the plugins from JacobPEvans/claude-code-plugins
 #    (commands, skills, agents, and hooks live there, not here)
@@ -131,7 +134,7 @@ Install the marketplace and enable the plugins you need:
 | `config-management` | `/sync-permissions`, `/quick-add-permission` |
 | `codeql-resolver` | `/resolve-codeql` + specialist agents |
 | `session-analytics` | `/token-breakdown` |
-| `content-guards`, `git-guards`, `script-guards`, `pr-lifecycle`, `pal-health`, `process-cleanup` | PreToolUse / PostToolUse / Stop hooks |
+| `content-guards`, `git-guards`, `script-guards`, `pr-lifecycle`, `pal-health`, `process-cleanup` | PreToolUse / PostToolUse / Stop hooks — invoked automatically |
 
 See [AGENTS.md](AGENTS.md) for the full on-demand standards table and the
 auto-loaded rules reference.

@@ -13,8 +13,8 @@ First off, thanks for considering contributing to this project. It's just me her
 5. Open a Pull Request
 
 For more details, see the `/refresh-repo`, `/sync-main`, and `/troubleshoot-worktree`
-skills in [JacobPEvans/claude-code-plugins](https://github.com/JacobPEvans/claude-code-plugins)
-(the `git-workflows` plugin).
+commands in the `git-workflows` plugin at
+[JacobPEvans/claude-code-plugins](https://github.com/JacobPEvans/claude-code-plugins).
 
 That's it. I'm not picky.
 
