@@ -1,5 +1,5 @@
 ---
-description: Package placement decision matrix for the nix-darwin / nix-ai / nix-home / nix-devenv quartet — where tools belong and when to use nix run instead
+description: Package placement decision matrix for the nix repos — where tools belong and when to use nix run instead
 paths:
   - "**/*.nix"
   - "flake.nix"
@@ -8,7 +8,15 @@ paths:
 
 # Nix Package Placement
 
-Three tiers. Place a tool in the lowest tier that satisfies all its requirements.
+Prefer the most ephemeral install that still meets the tool's real requirements.
+Promote a tool from ephemeral to project-scoped (devenv shell) only when running
+it on-demand is too slow; promote from project-scoped to always-on (`home.packages`
+or `environment.systemPackages`) only when it must be on `$PATH` everywhere,
+outside any project context.
+
+The table below is ordered the same way — always-on at the top, ephemeral at the
+bottom. Work upward from the bottom of the table; stop at the first row that
+satisfies your tool's needs.
 
 ## Placement Decision Matrix
 
@@ -59,7 +67,7 @@ uvx aider-chat
 uvx ruff check .
 ```
 
-## Quartet Repo Responsibilities
+## Repo Responsibilities
 
 | Repo | Scope |
 | --- | --- |
@@ -69,3 +77,5 @@ uvx ruff check .
 | **nix-devenv** | Reusable project shells and importable modules: per-language toolchains |
 
 Full package lists live in each repo's source files — this rule contains placement logic only.
+Adding a repo to this set? Update this table, the decision matrix categories above,
+and `AGENTS.md` in each consumer repo that references the rule.
