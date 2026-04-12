@@ -61,6 +61,7 @@
     "playwright",
     "ruff",
     "tflint",
-    "yamllint"
+    "yamllint",
+    "obsidian"
   ]
 }
