@@ -5,7 +5,16 @@
   "import": [
     "https://raw.githubusercontent.com/JacobPEvans/.github/main/cspell/base.json"
   ],
-  "words": [],
-  "files": ["**/*.md"],
+  "words": [
+    "Qdrant",
+    "qdrant",
+    "Ntfy",
+    "ntfy",
+    "Mailpit",
+    "mailpit",
+    "Nomic",
+    "nomic"
+  ],
+  "files": ["**/*.md", "/tmp/*.md"],
   "ignorePaths": [".git", "node_modules"]
 }
