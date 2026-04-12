@@ -13,8 +13,10 @@
     "Mailpit",
     "mailpit",
     "Nomic",
-    "nomic"
+    "nomic",
+    "agentics",
+    "githubnext"
   ],
   "files": ["**/*.md", "/tmp/*.md"],
-  "ignorePaths": [".git", "node_modules"]
+  "ignorePaths": [".git", "node_modules", ".github/aw/**"]
 }

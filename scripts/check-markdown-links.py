@@ -13,11 +13,19 @@ GREEN = '\033[0;32m'
 NC = '\033[0m'
 
 def find_markdown_files(root_dir: Path) -> Generator[Path, None, None]:
-    """Find all markdown files excluding .git directory."""
+    """Find all markdown files excluding .git and generated directories."""
+    # Directories to skip during traversal
+    skip_dirs = {'.git', 'node_modules'}
+
     for root, dirs, files in os.walk(root_dir):
-        # Skip .git directory
-        if '.git' in dirs:
-            dirs.remove('.git')
+        # Skip excluded directories
+        dirs[:] = [d for d in dirs if d not in skip_dirs]
+
+        # Skip gh-aw compiled imports (linguist-generated)
+        root_path = Path(root)
+        if root_path.is_relative_to(root_dir / '.github' / 'aw'):
+            dirs.clear()
+            continue
 
         for file in files:
             if file.endswith('.md'):
