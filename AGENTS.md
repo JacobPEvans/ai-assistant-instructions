@@ -140,9 +140,9 @@ This is about output format, not thinking. Reason thoroughly. Write concisely.
 | Fast Tasks | Claude Sonnet 4.6 | `anthropic/claude-sonnet-4-6` | mlx-community/Qwen3.5-27B-4bit |
 | Code Review | Multi-model consensus | Multiple Bifrost calls + PAL `consensus` | mlx-community/Qwen3.5-27B-4bit |
 | Architecture | Claude Opus 4.6 | `anthropic/claude-opus-4-6` | mlx-community/Qwen3-235B-A22B-4bit |
-| Pre-commit | Claude Sonnet 4.6 | `anthropic/claude-sonnet-4-6` | mlx-community/Qwen3.5-35B-A3B-4bit |
+| Pre-commit | Claude Sonnet 4.6 | `anthropic/claude-sonnet-4-6` | mlx-community/Qwen3-Coder-30B-A3B-Instruct-4bit |
 
-Default local model: `mlx-community/Qwen3.5-27B-4bit` (always loaded).
+Default local model: `mlx-community/Qwen3-Coder-30B-A3B-Instruct-4bit` (always loaded).
 Larger models are on-demand via `mlx-switch`. Run `listmodels` for available models and aliases.
 
 ## PAL MCP Tools
