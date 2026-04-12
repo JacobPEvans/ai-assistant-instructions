@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.2](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.7.1...v1.7.2) (2026-04-12)
+
+
+### Bug Fixes
+
+* **cspell:** migrate to shared org-wide dictionary hierarchy ([3715223](https://github.com/JacobPEvans/ai-assistant-instructions/commit/3715223b3a989c38c4612e06b647afd23cd8d325))
+
 ## [1.7.1](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.7.0...v1.7.1) (2026-04-12)
 
 
