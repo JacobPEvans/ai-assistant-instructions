@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.6.0...v1.7.0) (2026-04-12)
+
+
+### Features
+
+* **rules:** add nix-package-placement decision matrix ([#554](https://github.com/JacobPEvans/ai-assistant-instructions/issues/554)) ([0f33a9b](https://github.com/JacobPEvans/ai-assistant-instructions/commit/0f33a9b3ea181744fbb3548dcb053502bb607dbf))
+
 ## [1.6.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.5.1...v1.6.0) (2026-04-11)
 
 
