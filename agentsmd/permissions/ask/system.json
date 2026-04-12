@@ -20,6 +20,8 @@
     "softwareupdate",
     "sqlite3",
     "ssh-keygen",
-    "system_profiler"
+    "system_profiler",
+    "obsidian eval",
+    "obsidian trash"
   ]
 }
