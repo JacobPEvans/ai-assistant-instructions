@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.7.0...v1.7.1) (2026-04-12)
+
+
+### Bug Fixes
+
+* **permissions:** add obsidian CLI to allow and ask lists ([685a781](https://github.com/JacobPEvans/ai-assistant-instructions/commit/685a7812afe08bd46a70685e41d95f5452c7cab7))
+
 ## [1.7.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.6.0...v1.7.0) (2026-04-12)
 
 
