@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.3](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.7.2...v1.7.3) (2026-04-13)
+
+
+### Bug Fixes
+
+* **gh-aw:** recompile agentic workflow lock files with v0.68.1 ([404c354](https://github.com/JacobPEvans/ai-assistant-instructions/commit/404c35464e2a9b7a8949a3e234a6525ae4c8bd72))
+
 ## [1.7.2](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.7.1...v1.7.2) (2026-04-12)
 
 
