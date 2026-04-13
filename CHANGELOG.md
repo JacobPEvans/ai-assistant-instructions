@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.4](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.7.3...v1.7.4) (2026-04-13)
+
+
+### Bug Fixes
+
+* remove broken claude.yml badge (workflow was removed) ([#574](https://github.com/JacobPEvans/ai-assistant-instructions/issues/574)) ([5e9b363](https://github.com/JacobPEvans/ai-assistant-instructions/commit/5e9b363a3bc407a5eb67d67bc7390e3bcd3dd99a))
+
 ## [1.7.3](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.7.2...v1.7.3) (2026-04-13)
 
 
