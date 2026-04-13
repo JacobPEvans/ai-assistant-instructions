@@ -12,7 +12,6 @@
 
 [![License][license-badge]][license-url]
 [![Markdown Lint][markdownlint-badge]][markdownlint-url]
-[![Claude Code Review][claude-badge]][claude-url]
 [![pre-commit][precommit-badge]][precommit-url]
 
 ## What Is This?
@@ -185,7 +184,5 @@ Found a vulnerability? Please report it responsibly. See [SECURITY.md](SECURITY.
 [license-url]: LICENSE
 [markdownlint-badge]: https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/markdownlint.yml/badge.svg
 [markdownlint-url]: https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/markdownlint.yml
-[claude-badge]: https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/claude.yml/badge.svg
-[claude-url]: https://github.com/JacobPEvans/ai-assistant-instructions/actions/workflows/claude.yml
 [precommit-badge]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit
 [precommit-url]: https://github.com/pre-commit/pre-commit
