@@ -58,6 +58,10 @@ name: "AI Moderator"
   # skip-bots: # Skip-bots processed as bot check in pre-activation job
   # - github-actions # Skip-bots processed as bot check in pre-activation job
   # - copilot # Skip-bots processed as bot check in pre-activation job
+  # - renovate # Skip-bots processed as bot check in pre-activation job
+  # - dependabot # Skip-bots processed as bot check in pre-activation job
+  # - release-please # Skip-bots processed as bot check in pre-activation job
+  # - jacobpevans-github-actions # Skip-bots processed as bot check in pre-activation job
   # skip-roles: # Skip-roles processed as role check in pre-activation job
   # - admin # Skip-roles processed as role check in pre-activation job
   # - maintainer # Skip-roles processed as role check in pre-activation job
