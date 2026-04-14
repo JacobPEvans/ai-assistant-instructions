@@ -58,6 +58,10 @@ name: "AI Moderator"
   # skip-bots: # Skip-bots processed as bot check in pre-activation job
   # - github-actions # Skip-bots processed as bot check in pre-activation job
   # - copilot # Skip-bots processed as bot check in pre-activation job
+  # - renovate # Skip-bots processed as bot check in pre-activation job
+  # - dependabot # Skip-bots processed as bot check in pre-activation job
+  # - release-please # Skip-bots processed as bot check in pre-activation job
+  # - jacobpevans-github-actions # Skip-bots processed as bot check in pre-activation job
   # skip-roles: # Skip-roles processed as role check in pre-activation job
   # - admin # Skip-roles processed as role check in pre-activation job
   # - maintainer # Skip-roles processed as role check in pre-activation job
@@ -1004,7 +1008,7 @@ jobs:
         id: check_skip_bots
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         env:
-          GH_AW_SKIP_BOTS: "github-actions,copilot"
+          GH_AW_SKIP_BOTS: "github-actions,copilot,renovate,dependabot,release-please,jacobpevans-github-actions"
           GH_AW_WORKFLOW_NAME: "AI Moderator"
         with:
           script: |
