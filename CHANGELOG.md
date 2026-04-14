@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.5](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.7.4...v1.7.5) (2026-04-14)
+
+
+### Bug Fixes
+
+* add automation bots to AI Moderator skip-bots ([#572](https://github.com/JacobPEvans/ai-assistant-instructions/issues/572)) ([23ba1f1](https://github.com/JacobPEvans/ai-assistant-instructions/commit/23ba1f1856cf3631fa27b1f02aafe3ddbb825f3e))
+
 ## [1.7.4](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.7.3...v1.7.4) (2026-04-13)
 
 
