@@ -201,11 +201,11 @@ select_model() {
   # Step 5: Need specialized coding?
   if [[ "$task_type" == "coding" ]]; then
     if [[ "$complexity" == "high" ]]; then
-      echo "Model: claude-opus-4-5"
+      echo "Model: claude-opus"
       echo "Command: Using Claude directly (current session)"
       echo "Rationale: High-complexity coding task - Claude Opus for superior architecture and reasoning"
     else
-      echo "Model: claude-sonnet-4-5"
+      echo "Model: claude-sonnet"
       echo "Command: Using Claude directly (current session)"
       echo "Rationale: Standard coding task - Claude Sonnet for efficient code generation"
     fi
@@ -216,7 +216,7 @@ select_model() {
   if [[ "$task_type" == "review" ]]; then
     if [[ "$complexity" == "high" ]]; then
       echo "Model: consensus"
-      echo "Selected: claude-opus-4-5 + gemini-3-pro + deepseek-r1:70b (local)"
+      echo "Selected: claude-opus + gemini-3-pro + deepseek-r1:70b (local)"
       echo "Command: Multi-model review for high-complexity code"
       echo "Rationale: High-complexity review requires expert perspectives - adding Opus for deeper analysis"
     else

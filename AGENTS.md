@@ -40,7 +40,8 @@ Claude Opus tokens are premium — reserve them for architecture decisions and c
 Offload everything else:
 
 - **Single-model calls**: Route via Bifrost at `http://localhost:30080/v1/chat/completions` (OpenAI-compatible) —
-  multi-provider routing to OpenAI, Gemini, Anthropic, OpenRouter, and local MLX
+  multi-provider routing to OpenAI, Gemini, OpenRouter, and local MLX
+  (not Anthropic — Claude runs subscription-only via Claude Code; Codex also accessible via `/codex*` skills)
 - **Multi-model parallel**: `clink` / `consensus` via PAL MCP (only remaining PAL tools — all others replaced by native subagents)
 - **Research & planning**: Route to Gemini via Bifrost (`gemini/gemini-3-pro-preview`) or `clink` (multi-model parallel) —
   up-to-date knowledge and massive context
@@ -136,11 +137,11 @@ This is about output format, not thinking. Reason thoroughly. Write concisely.
 | Task Type | Cloud Model | Bifrost Path | Local (MLX) |
 | --- | --- | --- | --- |
 | Research & Analysis | Gemini 3 Pro | `gemini/gemini-3-pro-preview` | mlx-community/Qwen3-235B-A22B-4bit |
-| Complex Coding | Claude Opus 4.6 | `anthropic/claude-opus-4-6` | mlx-community/Qwen3.5-122B-A10B-4bit |
-| Fast Tasks | Claude Sonnet 4.6 | `anthropic/claude-sonnet-4-6` | mlx-community/Qwen3.5-27B-4bit |
+| Complex Coding | Claude Opus | Claude Code (subscription) | mlx-community/Qwen3.5-122B-A10B-4bit |
+| Fast Tasks | Claude Sonnet | Claude Code (subscription) | mlx-community/Qwen3.5-27B-4bit |
 | Code Review | Multi-model consensus | Multiple Bifrost calls + PAL `consensus` | mlx-community/Qwen3.5-27B-4bit |
-| Architecture | Claude Opus 4.6 | `anthropic/claude-opus-4-6` | mlx-community/Qwen3-235B-A22B-4bit |
-| Pre-commit | Claude Sonnet 4.6 | `anthropic/claude-sonnet-4-6` | mlx-community/Qwen3.5-35B-A3B-4bit |
+| Architecture | Claude Opus | Claude Code (subscription) | mlx-community/Qwen3-235B-A22B-4bit |
+| Pre-commit | Claude Sonnet | Claude Code (subscription) | mlx-community/Qwen3.5-35B-A3B-4bit |
 
 Default local model: `mlx-community/Qwen3.5-27B-4bit` (always loaded).
 Larger models are on-demand via `mlx-switch`. Run `listmodels` for available models and aliases.

@@ -15,7 +15,8 @@
     "Nomic",
     "nomic",
     "agentics",
-    "githubnext"
+    "githubnext",
+    "listmodels"
   ],
   "files": ["**/*.md", "/tmp/*.md"],
   "ignorePaths": [".git", "node_modules", ".github/aw/**"]
