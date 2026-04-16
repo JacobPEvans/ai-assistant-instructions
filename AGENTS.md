@@ -134,7 +134,7 @@ This is about output format, not thinking. Reason thoroughly. Write concisely.
 
 ## Model Routing Rules
 
-| Task Type | Cloud Model | Bifrost Path | Local (MLX) |
+| Task Type | Cloud Model | Access Method | Local (MLX) |
 | --- | --- | --- | --- |
 | Research & Analysis | Gemini 3 Pro | `gemini/gemini-3-pro-preview` | mlx-community/Qwen3-235B-A22B-4bit |
 | Complex Coding | Claude Opus | Claude Code (subscription) | mlx-community/Qwen3.5-122B-A10B-4bit |
