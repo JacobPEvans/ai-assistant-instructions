@@ -146,6 +146,15 @@ This is about output format, not thinking. Reason thoroughly. Write concisely.
 Default local model: `mlx-community/Qwen3.5-27B-4bit` (always loaded).
 Larger models are on-demand via `mlx-switch`. Run `listmodels` for available models and aliases.
 
+### Provider Gotchas
+
+- **Gemini thinking-model reasoning tokens.** **Set `max_tokens >= 100`** for
+  any Gemini thinking-model call via the OpenAI-compatible API. Reasoning
+  tokens count against the `max_tokens` budget before the answer is emitted —
+  with too small a limit, ~30 % of requests return `choices: null`. Budget
+  ~30 tokens for reasoning overhead plus expected answer length. Applies
+  to every OpenAI-compatible client (direct or through Bifrost).
+
 ## PAL MCP Tools
 
 | Tool | Purpose |
