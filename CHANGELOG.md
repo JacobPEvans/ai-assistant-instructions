@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.6](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.7.5...v1.7.6) (2026-04-16)
+
+
+### Bug Fixes
+
+* remove version-pinned Claude model references ([#582](https://github.com/JacobPEvans/ai-assistant-instructions/issues/582)) ([1f6333a](https://github.com/JacobPEvans/ai-assistant-instructions/commit/1f6333a0d44d3a1e8b9c1d874351fb6200fa373b))
+
 ## [1.7.5](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.7.4...v1.7.5) (2026-04-14)
 
 
