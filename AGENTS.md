@@ -134,17 +134,22 @@ This is about output format, not thinking. Reason thoroughly. Write concisely.
 
 ## Model Routing Rules
 
-| Task Type | Cloud Model | Access Method | Local (MLX) |
+| Task Type | Cloud Model | Access Method | Local (MLX via Bifrost) |
 | --- | --- | --- | --- |
-| Research & Analysis | Gemini 3 Pro | `gemini/gemini-3-pro-preview` | mlx-community/Qwen3-235B-A22B-4bit |
-| Complex Coding | Claude Opus | Claude Code (subscription) | mlx-community/Qwen3.5-122B-A10B-4bit |
-| Fast Tasks | Claude Sonnet | Claude Code (subscription) | mlx-community/Qwen3.5-27B-4bit |
-| Code Review | Multi-model consensus | Multiple Bifrost calls + PAL `consensus` | mlx-community/Qwen3.5-27B-4bit |
-| Architecture | Claude Opus | Claude Code (subscription) | mlx-community/Qwen3-235B-A22B-4bit |
-| Pre-commit | Claude Sonnet | Claude Code (subscription) | mlx-community/Qwen3.5-35B-A3B-4bit |
+| Research & Analysis | Gemini 3 Pro | `gemini/gemini-3-pro-preview` | `mlx-local/mlx-community/Qwen3-235B-A22B-4bit` |
+| Complex Coding | Claude Opus | Claude Code (subscription) | `mlx-local/mlx-community/Qwen3.5-122B-A10B-4bit` |
+| Fast Tasks | Claude Sonnet | Claude Code (subscription) | `mlx-local/mlx-community/Qwen3.5-27B-4bit` |
+| Code Review | Multi-model consensus | Multiple Bifrost calls + PAL `consensus` | `mlx-local/mlx-community/Qwen3.5-27B-4bit` |
+| Architecture | Claude Opus | Claude Code (subscription) | `mlx-local/mlx-community/Qwen3-235B-A22B-4bit` |
+| Pre-commit | Claude Sonnet | Claude Code (subscription) | `mlx-local/mlx-community/Qwen3.5-35B-A3B-4bit` |
 
-Default local model: `mlx-community/Qwen3.5-27B-4bit` (always loaded).
+Default local model: `mlx-local/mlx-community/Qwen3.5-27B-4bit` (always loaded).
 Larger models are on-demand via `mlx-switch`. Run `listmodels` for available models and aliases.
+
+> **Bifrost prefix required**: Local MLX models must use the `mlx-local/` provider prefix
+> when routing through Bifrost (e.g. `mlx-local/mlx-community/Qwen3.5-27B-4bit`).
+> PAL MCP's `custom_models.json` and `CUSTOM_MODEL_NAME` are pre-configured with this prefix.
+> Use bare `mlx-community/` names only when calling the vllm-mlx server directly (port 11434).
 
 ### Provider Gotchas
 
