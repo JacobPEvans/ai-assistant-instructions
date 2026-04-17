@@ -146,10 +146,11 @@ This is about output format, not thinking. Reason thoroughly. Write concisely.
 Default local model: `mlx-local/mlx-community/Qwen3.5-27B-4bit` (always loaded).
 Larger models are on-demand via `mlx-switch`. Run `listmodels` for available models and aliases.
 
-> **Bifrost prefix required**: Local MLX models must use the `mlx-local/` provider prefix
-> when routing through Bifrost (e.g. `mlx-local/mlx-community/Qwen3.5-27B-4bit`).
-> PAL MCP's `custom_models.json` and `CUSTOM_MODEL_NAME` are pre-configured with this prefix.
-> Use bare `mlx-community/` names only when calling the vllm-mlx server directly (port 11434).
+> **Bifrost prefix required**: This `mlx-local/` prefix is a Bifrost-only exception to the
+> general advice elsewhere not to add provider-style prefixes to local model names for
+> PAL/OpenRouter routing. PAL MCP's `custom_models.json` and `CUSTOM_MODEL_NAME` are
+> pre-configured with this prefix. Use bare `mlx-community/` names only when calling the
+> vllm-mlx server directly (port 11434).
 
 ### Provider Gotchas
 
