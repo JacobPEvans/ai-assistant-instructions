@@ -161,6 +161,7 @@ for details.
 
 ## Need Help?
 
+- [Codex Quick Start](docs/codex-quick-start.md) - repo analysis, prompt patterns, and Codex parity backlog
 - 📖 [Documentation Home](docs/) - Getting started guides and references
 - 🐛 [Issues](https://github.com/JacobPEvans/ai-assistant-instructions/issues) - Report bugs or request features
 
