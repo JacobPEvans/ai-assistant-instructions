@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.1](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.8.0...v1.8.1) (2026-04-18)
+
+
+### Bug Fixes
+
+* recompile aw workflow lock files to fix AI Moderator ([#588](https://github.com/JacobPEvans/ai-assistant-instructions/issues/588)) ([dd14349](https://github.com/JacobPEvans/ai-assistant-instructions/commit/dd143497df2a0709d32681b111901bf9221ecced))
+
 ## [1.8.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.7.6...v1.8.0) (2026-04-18)
 
 
