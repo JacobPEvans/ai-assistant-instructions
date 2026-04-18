@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.7.6...v1.8.0) (2026-04-18)
+
+
+### Features
+
+* add Copilot label-driven automation pipeline ([#587](https://github.com/JacobPEvans/ai-assistant-instructions/issues/587)) ([0bf2e3f](https://github.com/JacobPEvans/ai-assistant-instructions/commit/0bf2e3f0743ce12d72929724f0761c43d68c0411))
+
 ## [1.7.6](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.7.5...v1.7.6) (2026-04-16)
 
 
