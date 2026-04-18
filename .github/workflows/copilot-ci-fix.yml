@@ -1,0 +1,109 @@
+# Copilot CI Fix
+#
+# Triggered when CI Gate fails on a non-main branch Copilot PR.
+# Submits a REQUEST_CHANGES review with failure logs to trigger Copilot's feedback loop.
+# Max 2 fix attempts per PR (tracked via comment markers).
+
+name: Copilot CI Fix
+
+on:
+  workflow_run:
+    workflows: ["CI Gate"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: copilot-ci-fix-${{ github.event.workflow_run.head_branch || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  should-fix:
+    name: Check eligibility
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      pull-requests: read
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
+      pr_number: ${{ steps.check.outputs.pr_number }}
+      attempt: ${{ steps.check.outputs.attempt }}
+    steps:
+      - name: Checkout scripts
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: .github/scripts
+          path: .repo-scripts
+
+      - name: Check eligibility
+        id: check
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const run = require('./.repo-scripts/.github/scripts/copilot-pipeline/check-fix-eligibility.js');
+            await run({ github, context, core });
+
+  get-failure-details:
+    name: Get failure logs
+    needs: should-fix
+    if: needs.should-fix.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+    outputs:
+      failure_logs: ${{ steps.get-logs.outputs.logs }}
+    steps:
+      - name: Checkout scripts
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: .github/scripts
+          path: .repo-scripts
+
+      - name: Download failure logs
+        id: get-logs
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const run = require('./.repo-scripts/.github/scripts/copilot-pipeline/get-ci-failure-logs.js');
+            await run({ github, context, core });
+
+  submit-review:
+    name: Request Copilot fix
+    needs: [should-fix, get-failure-details]
+    if: >-
+      needs.should-fix.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      issues: write
+    timeout-minutes: 5
+    steps:
+      - name: Checkout scripts
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: .github/scripts
+          path: .repo-scripts
+
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.GH_ACTION_JACOBPEVANS_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
+      - name: Submit fix review
+        uses: actions/github-script@v9
+        env:
+          PR_NUMBER: ${{ needs.should-fix.outputs.pr_number }}
+          FAILURE_LOGS: ${{ needs.get-failure-details.outputs.failure_logs }}
+          ATTEMPT: ${{ needs.should-fix.outputs.attempt }}
+        with:
+          github-token: ${{ steps.app-token.outputs.token }}
+          script: |
+            const run = require('./.repo-scripts/.github/scripts/copilot-pipeline/submit-fix-review.js');
+            await run({ github, context, core });

@@ -9,3 +9,8 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v6
+
+      - name: Install linting tools
+        run: |
+          npm install -g markdownlint-cli2 cspell
+          pip install --user yamllint
