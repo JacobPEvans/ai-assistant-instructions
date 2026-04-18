@@ -1,0 +1,43 @@
+# Copilot PR Slack Notification
+#
+# Fires when copilot[bot] opens or marks a PR ready for review.
+# Sends a Block Kit notification to #github-automation Slack channel.
+
+name: Copilot PR Notification
+
+on:
+  pull_request:
+    types: [opened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  notify:
+    if: github.event.pull_request.user.login == 'copilot[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Checkout scripts
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: .github/scripts
+          path: .repo-scripts
+
+      - name: Send Slack notification
+        uses: actions/github-script@v9
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.GH_SLACK_WEBHOOK_URL_GITHUB_AUTOMATION }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          REPO_NAME: ${{ github.repository }}
+          EVENT_TYPE: ${{ github.event.action }}
+        with:
+          script: |
+            const run = require('./.repo-scripts/.github/scripts/copilot-pipeline/send-copilot-slack-notify.js');
+            await run({ github, context, core });

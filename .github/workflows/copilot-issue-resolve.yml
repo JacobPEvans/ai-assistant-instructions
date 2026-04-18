@@ -1,0 +1,50 @@
+# Copilot Issue Resolver
+#
+# Label-triggered: fires when ai:ready label is applied to an issue.
+# Assigns the issue to copilot[bot] coding agent which creates a PR.
+# Label state machine: ai:ready → (removed) + ai:assigned → Copilot creates PR
+
+name: Copilot Issue Resolver
+
+on:
+  issues:
+    types: [labeled]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "Issue number to assign to Copilot"
+        required: true
+        type: string
+
+permissions:
+  issues: write
+  pull-requests: read
+
+concurrency:
+  group: copilot-resolve-${{ github.event.issue.number || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  resolve:
+    if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'ai:ready'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: read
+    timeout-minutes: 5
+    steps:
+      - name: Checkout scripts
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: .github/scripts
+          path: .repo-scripts
+
+      - name: Assign to Copilot
+        uses: actions/github-script@v9
+        env:
+          ISSUE_NUMBER: ${{ inputs.issue_number || '0' }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const run = require('./.repo-scripts/.github/scripts/copilot-pipeline/resolve-with-copilot.js');
+            await run({ github, context, core });

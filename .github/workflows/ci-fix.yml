@@ -2,11 +2,9 @@ name: CI Fix (Claude)
 
 on:
   workflow_dispatch:
-  # --- DISABLED AUTOMATIC TRIGGERS (restore by uncommenting) ---
-  # workflow_run:
-  #   workflows: ["CI Gate"]
-  #   types: [completed]
-  # --- END DISABLED ---
+  workflow_run:
+    workflows: ["CI Gate"]
+    types: [completed]
 
 permissions:
   actions: read
@@ -15,19 +13,15 @@ permissions:
   issues: write
   pull-requests: write
 
-# --- DISABLED AUTOMATIC TRIGGERS (restore by uncommenting) ---
-# concurrency:
-#   group: ci-fix-${{ github.event.workflow_run.head_branch }}
-#   cancel-in-progress: true
-# --- END DISABLED ---
+concurrency:
+  group: ci-fix-${{ github.event.workflow_run.head_branch }}
+  cancel-in-progress: false
 
 jobs:
   fix:
-    # --- DISABLED AUTOMATIC TRIGGERS (restore by uncommenting) ---
-    # if: >-
-    #   github.event.workflow_run.conclusion == 'failure' &&
-    #   github.event.workflow_run.head_branch != 'main'
-    # --- END DISABLED ---
+    if: >-
+      github.event.workflow_run.conclusion == 'failure' &&
+      github.event.workflow_run.head_branch != 'main'
     uses: JacobPEvans/ai-workflows/.github/workflows/ci-fix.yml@main
     with:
       repo_context: "AI assistant instruction files and CLAUDE.md patterns for multi-model orchestration (Claude, Gemini, Copilot)"
