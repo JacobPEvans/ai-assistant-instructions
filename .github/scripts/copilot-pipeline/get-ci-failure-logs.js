@@ -13,7 +13,8 @@ module.exports = async ({ github, context, core }) => {
     logs += `\n=== FAILED JOB: ${job.name} ===\n`;
     try {
       const logData = await github.rest.actions.downloadJobLogsForWorkflowRun({ owner, repo, job_id: job.id });
-      logs += logData.data.split('\n').slice(-200).join('\n');
+      const text = typeof logData.data === 'string' ? logData.data : String(logData.data ?? '');
+      logs += text.split('\n').slice(-200).join('\n');
     } catch (e) {
       logs += `(Could not download logs: ${e.message})\n`;
     }
