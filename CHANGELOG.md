@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.2](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.8.1...v1.8.2) (2026-04-21)
+
+
+### Bug Fixes
+
+* **ci:** add gh-aw-pin-refresh workflow and recompile lock files ([9155505](https://github.com/JacobPEvans/ai-assistant-instructions/commit/91555058e53631a7e3e01244a3ced999f317508d))
+
 ## [1.8.1](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.8.0...v1.8.1) (2026-04-18)
 
 
