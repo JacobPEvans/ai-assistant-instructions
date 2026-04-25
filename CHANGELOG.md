@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.8.3...v1.9.0) (2026-04-25)
+
+
+### Features
+
+* harden no-scripts policy and slim AGENTS.md to 137 lines ([24be89a](https://github.com/JacobPEvans/ai-assistant-instructions/commit/24be89a4ef4dbae917b64b4dc17555ae03db1137))
+
 ## [1.8.3](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.8.2...v1.8.3) (2026-04-24)
 
 
