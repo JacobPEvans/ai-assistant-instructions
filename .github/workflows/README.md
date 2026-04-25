@@ -1,5 +1,21 @@
 # GitHub Actions Workflows
 
+## Installation
+
+These workflows live in `.github/workflows/` and run automatically — no installation step is required.
+Branch protection rules reference the **Merge Gate** check (see below).
+
+```text
+# To enable on a fork or new clone:
+git clone https://github.com/JacobPEvans/ai-assistant-instructions.git
+# (workflows activate on next push to GitHub)
+```
+
+## Usage
+
+Workflows trigger on pull-request events and push-to-`main`.
+Open a PR to exercise the full CI Gate, or push to `main` to run the push-only wrappers.
+
 ## Merge Gatekeeper Pattern
 
 This repository uses the **Merge Gatekeeper Pattern** for CI validation on pull requests.
@@ -38,7 +54,6 @@ These are the check names that appear in GitHub PR status:
 | CI Gate / Claude Code Lint | Validates Claude Code configuration |
 | CI Gate / Schema Validation | Validates cclint schema and permissions |
 | CI Gate / Markdown Lint | Checks markdown formatting |
-| CI Gate / Spell Check | Checks spelling in markdown files |
 | CI Gate / Token Limit Check | Enforces token usage limits |
 | CI Gate / Instruction Validation | Validates required instruction files |
 | CI Gate / YAML Lint | Validates YAML syntax |
@@ -51,7 +66,7 @@ These are the check names that appear in GitHub PR status:
 | `claude-config` | `.claude/**`, `CLAUDE.md`, `.cclintrc.jsonc` | Claude Code Lint, Schema Validation, Token Limit Check |
 | `agentsmd` | `agentsmd/**` | Claude Code Lint, Instruction Validation, Token Limit Check |
 | `permissions` | `agentsmd/permissions/**`, `scripts/validate-permissions.sh` | Schema Validation |
-| `markdown` | `**/*.md`, `.markdownlint-cli2.jsonc`, `.cspell.json` | Markdown Lint, Spell Check, Token Limit Check |
+| `markdown` | `**/*.md`, `.markdownlint-cli2.jsonc` | Markdown Lint, Token Limit Check |
 | `yaml` | `**/*.yml`, `**/*.yaml`, `.yamllint.yml` | YAML Lint |
 | `workflows` | `.github/workflows/**` | YAML Lint |
 
@@ -64,7 +79,6 @@ These are the check names that appear in GitHub PR status:
 ├─────────────────────────────────────────────────────────────┤
 │  _cclint.yml              │ Claude Code Lint                │
 │  _markdownlint.yml        │ Markdown Lint                   │
-│  _spellcheck.yml          │ Spell Check                     │
 │  _token-limits.yml        │ Token Limit Check               │
 │  _validate-cclint.yml     │ Schema Validation               │
 │  _validate-instructions.yml │ Instruction Validation        │
@@ -79,10 +93,9 @@ These are the check names that appear in GitHub PR status:
 ├─────────────────────────┤     ├─────────────────────────┤
 │ • Detects file changes  │     │ cclint.yml              │
 │ • Calls reusable flows  │     │ markdownlint.yml        │
-│ • Merge Gate aggregates │     │ spellcheck.yml          │
-│ • ONLY required check   │     │ token-limits.yml        │
-└─────────────────────────┘     │ validate-cclint-schema  │
-                                │ validate-instructions   │
+│ • Merge Gate aggregates │     │ token-limits.yml        │
+│ • ONLY required check   │     │ validate-cclint-schema  │
+└─────────────────────────┘     │ validate-instructions   │
                                 │ yaml-lint.yml           │
                                 └─────────────────────────┘
 ```

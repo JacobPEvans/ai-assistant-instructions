@@ -47,15 +47,6 @@ All other PAL tools have native Claude Code equivalents.
 See [nix-ai#450](https://github.com/JacobPEvans/nix-ai/issues/450) for the audit matrix.
 For single-model calls, use Bifrost directly.
 
-## Provider Gotchas
-
-- **Gemini thinking-model reasoning tokens.** Set `max_tokens >= 100`
-  for any Gemini thinking-model call via the OpenAI-compatible API.
-  Reasoning tokens count against the budget before the answer is emitted —
-  with too small a limit, ~30% of requests return `choices: null`.
-  Budget ~30 tokens for reasoning overhead plus expected answer length.
-  Applies to every OpenAI-compatible client, direct or through Bifrost.
-
 ## Local-Only Mode
 
 When `localOnlyMode` is enabled or `--local` flag is passed:

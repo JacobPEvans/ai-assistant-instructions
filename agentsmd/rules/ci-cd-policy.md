@@ -17,21 +17,6 @@ paths:
 | CI/CD automation | Marketplace actions, reusable workflows, composite actions | Custom shell script |
 | GitHub Actions logic | Expressions, `fromJSON()`, matrix strategies | Python/bash in step |
 
-## Committed Script Rules
-
-The No Scripts iron law in AGENTS.md applies first and always —
-allowed location is necessary but **not** sufficient.
-
-When a script is genuinely the best answer (after the search log proves
-no native, ecosystem, third-party, or community solution exists, AND
-the line count gate is satisfied):
-
-1. Place in an allowed directory: `scripts/`, `hooks/`, `.github/`, `tests/`,
-   or in a top-level `Makefile`
-2. Use the proper file extension (`.sh`, `.py`, etc.)
-3. Never create temp or throwaway scripts.
-   If it's not committed under one of those paths, it's not needed.
-
 ## GitHub Releases
 
 Treat published releases as **permanent**.

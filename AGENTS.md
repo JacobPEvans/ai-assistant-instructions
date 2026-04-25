@@ -2,8 +2,7 @@
 
 Multi-model AI orchestration for Claude, Gemini, Copilot, Codex, and local models.
 Commands, skills, agents, and hooks are delivered as plugins from
-[JacobPEvans/claude-code-plugins](https://github.com/JacobPEvans/claude-code-plugins);
-this repo holds the generic pieces (rules, workflows, permission framework, CI gates).
+[JacobPEvans/claude-code-plugins](https://github.com/JacobPEvans/claude-code-plugins).
 
 ## Starting Any Change
 
@@ -12,123 +11,83 @@ on a `<type>/<name>` branch off `main`. No exceptions.
 
 ## No Scripts — Iron Law
 
-**A custom script is the LAST RESORT, never the first.
-Anything you write is already worse-maintained than something that already exists.
-Writing a script without first proving — with evidence, in your reply — that no
-native tool, no third-party CLI, and no popular community solution exists is a
-policy violation.**
+**A custom script is the LAST RESORT, never the first. Anything you can write
+is already worse-maintained than something that already exists. Search first,
+script only when every tier comes up empty AND the user explicitly approves.**
 
-### Mandatory Search Hierarchy (in this order)
+### Mandatory Search (every tier, every time)
 
-Before any `.sh`, `.py`, `.ts`, `.js`, `.rb`, `.pl`, or inline `python -c` /
-`bash -c` / `node -e` body that contains logic, you MUST search EVERY tier
-below and document the result:
+Before any `.sh` / `.py` / `.ts` / `.js` / `.rb` / `.pl` or inline
+`python -c` / `bash -c` / `node -e` body that contains logic, search and
+document each tier:
 
-1. **Native CLIs and builtins** — `jq`, `gh`, `git`, `curl`, `awk`, `sed`
-   (on stdin only), system utilities, language-shipped tools.
-2. **Ecosystem-native primitives** — Ansible modules, Terraform resources
-   and data sources, Nix functions, GitHub Actions from the marketplace,
-   pre-commit hooks, Makefile targets.
-3. **Third-party CLIs and libraries** — packaged tools (Homebrew, apt, pip,
-   npm, cargo). Even partial fits beat custom code.
+1. **Native CLIs / builtins** — `jq`, `gh`, `git`, `curl`, system utilities
+2. **Ecosystem primitives** — Ansible modules, Terraform resources, Nix
+   functions, marketplace GitHub Actions, pre-commit hooks
+3. **Third-party packaged tools** — Homebrew, apt, pip, npm, cargo
 4. **Popular community solutions** — well-starred GitHub projects, official
-   plugins, awesome-* lists, Stack Overflow consensus solutions.
+   plugins, awesome-* lists
 
-The search MUST be assisted by a cheap model via Bifrost
-(`http://localhost:30080/v1/chat/completions` — pick a current model from
-`listmodels`, never hardcode one) AND cross-checked with Context7 MCP
-for the relevant ecosystem. Your training data is stale; do not trust it.
+The search MUST be assisted by a cheap model via Bifrost (no hardcoded model
+ids — use `listmodels`) AND cross-checked with Context7. Training data is
+stale; do not trust it.
 
-### Required Evidence in Your Reply
+In your reply, include a one-line-per-tier search log: tool searched →
+found / not found, with a reason if not found. Empty rows or "n/a" are
+rejected.
 
-Before any script is written, your reply MUST contain a "Search log" block:
+### The 10-Line Gate
 
-```text
-Search log:
-- Native:        <tool searched> -> <found / not found, with reason>
-- Ecosystem:     <module/resource searched> -> <found / not found>
-- Third-party:   <package/CLI searched> -> <found / not found>
-- Community:     <repo/plugin searched> -> <found / not found>
-- Bifrost query: <verbatim prompt sent> -> <key parts of response>
-- Context7:      <library queried> -> <key finding>
-```
+Auto-approval applies ONLY when the search comes up empty AND the script
+is under **10 non-comment lines**. Counting: shebang counts; every code
+line, heredoc/multi-line-string line, and continuation line counts; blank
+and pure-comment lines don't; no semicolon-stuffing.
 
-Empty rows or "n/a" are rejected. If a row says "not found", say WHY it
-doesn't fit ("only handles JSON, we need YAML"; "abandoned 3 years").
+At 10+ non-comment lines, ASK the user explicitly and wait for an
+unambiguous yes. Hook blocks are TERMINAL DENIALS, not menus of fallbacks.
 
-### The 10-Line Carve-Out
+## Orchestrator Role
 
-If — and ONLY if — the search log shows every tier exhausted AND the script
-is **fewer than 10 non-comment lines**, you MAY write it without further
-approval.
+You are a master orchestrator. Your primary context window is precious:
+it is where decisions are made, plans are formed, and results are synthesized.
+Protect it. Delegate exploration, verification, and high-token operations to
+subagents — they return only what matters.
 
-**Counting rules (strict, no gaming):**
+Never use `subagent_type: "Bash"` for tasks that read, write, or edit files
+(Bash agents fall back to `sed` / `awk` / `python -c` and bypass audit).
+Use `general-purpose`. See the `tool-use` rule.
 
-- Counts as a line: shebang (`#!/usr/bin/env bash`), any line with executable
-  code, every line of a multi-line string or heredoc, every physical line of
-  a continuation (`\` at EOL, implicit Python parens).
-- Does NOT count: blank lines, lines that are pure comments
-  (`#`, `//`, `/* */`, `"""..."""` on its own line).
-- One statement per line. Semicolon-stuffing to compress count is a violation.
+## Token Economy — Use Bifrost + Native Subagents Aggressively
 
-At the 10th non-comment line, auto-approval is REVOKED.
-There is no "just barely 10 so it's fine" — 10 is the floor of "needs approval."
+Top-tier reasoning models are premium. Reserve them for architecture
+decisions and complex coding. Offload everything else:
 
-### 10+ Lines: Explicit Approval Required
+- **Single-model calls**: Bifrost at `http://localhost:30080/v1/chat/completions`
+- **Multi-model parallel / agreement**: PAL MCP `clink` / `consensus`
+- **Research, planning, simple / repetitive tasks**: route to local MLX or
+  cheaper cloud models via Bifrost — zero or near-zero cost
+- **External-model delegation**: `/delegate-to-ai`
+- **Day-to-day implementation**: prefer Sonnet-class subagents over Opus-class
 
-For any script reaching 10 non-comment lines:
+## Output Format
 
-1. Present the search log.
-2. Show the proposed script in full with its non-comment line count.
-3. Ask the user explicitly: *"Approve writing this N-line script?"*
-4. Wait for an unambiguous affirmative reply.
-   "Sure", "ok", "go ahead", or continuing the conversation without addressing
-   the question do NOT count. When in doubt, ask again.
+Optimize for information density. Every token emitted consumes the user's
+context window.
 
-### Hard Boundaries
+- Lead with the result. No preamble, no narration of intent.
+- Short, direct sentences. Cut filler.
+- Tools first, explanation after.
+- Tables and lists over prose for structured data.
+- One-line acknowledgments for simple confirmations.
 
-- Hook blocks are TERMINAL DENIALS, not menus of fallbacks.
-  If a hook fires, STOP. Do not interpret the block message as a list of
-  escapes to claim.
-- "I couldn't find a tool quickly" is not the same as "no tool exists."
-  If the search was rushed, redo it.
-- Allowed locations (`scripts/`, `hooks/`, `.github/`, `tests/`, `Makefile`)
-  do NOT exempt the research requirement. Location is a placement rule;
-  research is a creation rule. Both apply.
-- Never write to `/tmp`, never produce throwaway one-offs, never use a script
-  as a "quick way to do this once."
-
-## Orchestrator + Delegation
-
-You are an orchestrator. Your context window is precious; subagents and
-external models do the heavy lifting and report back concisely.
-
-**Delegate to subagents for:**
-
-- Exploration and research — searching codebases, reading multiple files
-- Verification and validation — checking work, running tests, confirming changes
-- High-token operations — anything that would consume significant context
-- Independent parallel tasks — work that can proceed simultaneously
-
-**Token economy:** Reserve top-tier reasoning models for architecture
-decisions and complex coding. Route everything else through cheaper paths:
-
-- Single-model calls: Bifrost at `http://localhost:30080/v1/chat/completions`
-- Multi-model parallel/agreement: PAL MCP `clink` / `consensus`
-- External-model delegation: `/delegate-to-ai`
-- Day-to-day implementation: prefer Sonnet-class subagents over Opus-class
-
-**Subagent types:** Never use `subagent_type: "Bash"` for anything that reads,
-writes, or edits files — Bash agents fall back to `sed`/`awk`/`python -c` and
-bypass audit. Use `general-purpose`. See the `tool-use` rule for the table.
-
-**Parallel execution:** When facing 2+ independent tasks, dispatch them in a
-single message with multiple Agent calls.
+Preserve depth where it matters: complex reasoning, architecture decisions,
+and error diagnosis (root cause, not just the fix). Reason thoroughly,
+write concisely.
 
 ## Model Routing
 
-Reference task classes, not specific model names.
-Identifiers rot — resolve them at call time via `listmodels`.
+Reference task classes, not specific model names. Identifiers rot — resolve
+them at call time via `listmodels`.
 
 | Task class | Where to route |
 | --- | --- |
@@ -138,9 +97,9 @@ Identifiers rot — resolve them at call time via `listmodels`.
 | Code review | Multi-model `consensus` or local MLX via Bifrost |
 | Pre-commit checks | Sonnet-class or local MLX via Bifrost |
 
-Bifrost-specific routing details (prefix conventions, provider gotchas, PAL
-tools, local-only mode) live in the `bifrost-routing` rule, lazy-loaded only
-when relevant files are in context.
+Bifrost-specific routing details (prefix conventions, PAL tools, local-only
+mode) live in the `bifrost-routing` rule, lazy-loaded only when relevant
+files are in context.
 
 ## Auto-Loaded Rules
 

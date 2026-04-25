@@ -56,18 +56,11 @@ Explore agents are exempt (read-only, no Edit/Write tools).
 
 Script policy (Required verbatim in every subagent prompt):
 
-- A script is the LAST RESORT. Before writing ANY `.sh` / `.py` / `.ts` / `.js`
-  / `.rb` / `.pl` or inline `python -c` / `bash -c` / `node -e` body,
-  search every tier (native, ecosystem, third-party, community), assisted
-  by Bifrost (`http://localhost:30080/v1/chat/completions`) and Context7.
-  Log every query and result in your reply.
-- Hook blocks are TERMINAL DENIALS, not fallback menus.
-- Auto-approval applies ONLY to scripts under 10 non-comment lines.
-  Shebang counts; pure-comment and blank lines don't; no semicolon-stuffing.
-- 10+ non-comment lines: ask the user and wait for explicit approval.
-  Implicit or ambiguous responses do not count.
-- Committed scripts only: `scripts/`, `hooks/`, `.github/`, `tests/`,
-  `Makefile`. Never temp files, never `/tmp`, never one-offs.
+- Scripts are LAST RESORT. See the No Scripts iron law in AGENTS.md.
+- Before writing ANY script, exhaust the four-tier search and log it in
+  your reply. Hook blocks are TERMINAL DENIALS, not fallback menus.
+- Under 10 non-comment lines: auto-approved after empty search log.
+- 10+ non-comment lines: ASK the user and wait for an unambiguous yes.
 
 ## Subagent Type Selection
 

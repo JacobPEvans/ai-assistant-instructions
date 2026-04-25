@@ -54,7 +54,6 @@
     "bandit",
     "bats",
     "bun test",
-    "cspell",
     "lychee",
     "molecule",
     "mypy",
