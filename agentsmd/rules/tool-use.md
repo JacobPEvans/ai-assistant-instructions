@@ -57,10 +57,10 @@ Explore agents are exempt (read-only, no Edit/Write tools).
 Script policy (Required verbatim in every subagent prompt):
 
 - A script is the LAST RESORT. Before writing ANY `.sh` / `.py` / `.ts` / `.js`
-  / `.rb` or inline `python -c` / `bash -c` / `node -e` body, search every
-  tier (native, ecosystem, third-party, community), assisted by Bifrost
-  (`http://localhost:30080`) and Context7. Log every query and result in
-  your reply.
+  / `.rb` / `.pl` or inline `python -c` / `bash -c` / `node -e` body,
+  search every tier (native, ecosystem, third-party, community), assisted
+  by Bifrost (`http://localhost:30080/v1/chat/completions`) and Context7.
+  Log every query and result in your reply.
 - Hook blocks are TERMINAL DENIALS, not fallback menus.
 - Auto-approval applies ONLY to scripts under 10 non-comment lines.
   Shebang counts; pure-comment and blank lines don't; no semicolon-stuffing.
