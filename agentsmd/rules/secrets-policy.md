@@ -1,10 +1,11 @@
 ---
-description: Never commit secrets, credentials, or sensitive data to git — use variable references
+description: Never commit secrets, credentials, or sensitive data — use variable references; keep private repo identifiers out of public content
 ---
 
 # Secrets Policy
 
-**CRITICAL**: Never commit sensitive data to git. All git-committed files must use scrubbed values and variable references.
+**CRITICAL**: Never commit sensitive data to git.
+All git-committed files must use scrubbed values and variable references.
 
 ## What NOT to Commit
 
@@ -16,3 +17,15 @@ description: Never commit secrets, credentials, or sensitive data to git — use
 - AWS account IDs, ARNs, or API keys
 - Encryption keys or secrets
 - User-specific absolute paths
+
+## Public vs Private Repository Separation
+
+Never reference private repos (names, features, tools) in public repo content.
+If a repo is private, treat it as if it doesn't exist when writing public-facing
+docs, sites, or READMEs.
+This includes repo names, project descriptions, architecture diagrams, and any
+identifying details.
+
+When updating public-facing content (GitHub Pages sites, public READMEs,
+portfolios), audit for any mentions of private repositories before committing.
+Use `gh repo view OWNER/REPO` to check visibility when in doubt.

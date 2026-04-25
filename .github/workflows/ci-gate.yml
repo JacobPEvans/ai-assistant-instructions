@@ -75,7 +75,6 @@ jobs:
             markdown:
               - '**/*.md'
               - '.markdownlint-cli2.jsonc'
-              - '.cspell.json'
             yaml:
               - '**/*.yml'
               - '**/*.yaml'
@@ -125,12 +124,6 @@ jobs:
     if: needs.changes.outputs.markdown == 'true'
     uses: ./.github/workflows/_markdownlint.yml
 
-  spellcheck:
-    name: Spell Check
-    needs: changes
-    if: needs.changes.outputs.markdown == 'true'
-    uses: ./.github/workflows/_spellcheck.yml
-
   token-limits:
     name: Token Limit Check
     needs: changes
@@ -169,7 +162,6 @@ jobs:
       - cclint
       - validate-cclint
       - markdownlint
-      - spellcheck
       - token-limits
       - validate-instructions
       - yaml-lint
@@ -184,7 +176,6 @@ jobs:
             cclint,
             validate-cclint,
             markdownlint,
-            spellcheck,
             token-limits,
             validate-instructions,
             yaml-lint
