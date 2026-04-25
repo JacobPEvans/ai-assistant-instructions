@@ -16,7 +16,10 @@
     "nomic",
     "agentics",
     "githubnext",
-    "listmodels"
+    "listmodels",
+    "heredocs",
+    "unauditable",
+    "Gitmoji"
   ],
   "files": ["**/*.md", "/tmp/*.md"],
   "ignorePaths": [".git", "node_modules", ".github/aw/**"]

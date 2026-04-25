@@ -1,285 +1,178 @@
 # AI Agents Configuration
 
-Multi-model AI orchestration configuration for Claude, Gemini, Copilot, and local models.
-
-This file (`AGENTS.md`, symlinked as `CLAUDE.md` and `GEMINI.md`) is the
-canonical configuration source. Commands, skills, agents, and hooks are
-delivered as plugins from
+Multi-model AI orchestration for Claude, Gemini, Copilot, Codex, and local models.
+Commands, skills, agents, and hooks are delivered as plugins from
 [JacobPEvans/claude-code-plugins](https://github.com/JacobPEvans/claude-code-plugins);
-this repo keeps only the generic pieces that aren't plugin-delivered
-(rules, workflows, permission framework, CI gates).
+this repo holds the generic pieces (rules, workflows, permission framework, CI gates).
 
-## Starting Any Change — Required First Step
+## Starting Any Change
 
-**Before making any code or config change, run `/refresh-repo` then create a worktree.** No exceptions.
+Run `/refresh-repo`, then create a worktree at `~/git/<repo>/<type>/<name>`
+on a `<type>/<name>` branch off `main`. No exceptions.
 
-`/refresh-repo` syncs main from remote, checks PR status, and cleans up stale worktrees.
-Then create a branch worktree: `mkdir -p ~/git/<repo>/<type> && git worktree add ~/git/<repo>/<type>/<name> -b <type>/<name> main`
+## No Scripts — Iron Law
 
-## No Scripts — Research Native Solutions First
+**A custom script is the LAST RESORT, never the first.
+Anything you write is already worse-maintained than something that already exists.
+Writing a script without first proving — with evidence, in your reply — that no
+native tool, no third-party CLI, and no popular community solution exists is a
+policy violation.**
 
-**Never generate scripts.** This is the single most important rule. Runtime hooks enforce it.
+### Mandatory Search Hierarchy (in this order)
 
-Before implementing anything, exhaust every alternative:
+Before any `.sh`, `.py`, `.ts`, `.js`, `.rb`, `.pl`, or inline `python -c` /
+`bash -c` / `node -e` body that contains logic, you MUST search EVERY tier
+below and document the result:
 
-1. **Search for native tools** — Use Context7 MCP, PAL MCP, web search, local MLX models
-2. **Check current-year best practices** — Do not trust training data; verify what exists now
-3. **Prefer third-party/community solutions** — Even partially-supported external tools
-   are better than maintaining custom scripts
-4. **Use existing CLIs and builtins** — `jq`, `gh api`, `curl`, Nix functions,
-   Ansible modules, Terraform resources, marketplace GitHub Actions
+1. **Native CLIs and builtins** — `jq`, `gh`, `git`, `curl`, `awk`, `sed`
+   (on stdin only), system utilities, language-shipped tools.
+2. **Ecosystem-native primitives** — Ansible modules, Terraform resources
+   and data sources, Nix functions, GitHub Actions from the marketplace,
+   pre-commit hooks, Makefile targets.
+3. **Third-party CLIs and libraries** — packaged tools (Homebrew, apt, pip,
+   npm, cargo). Even partial fits beat custom code.
+4. **Popular community solutions** — well-starred GitHub projects, official
+   plugins, awesome-* lists, Stack Overflow consensus solutions.
 
-Scripts are acceptable ONLY when the deliverable IS a script: the user explicitly asked
-for one, or it will be committed as a permanent artifact (`scripts/`, `hooks/`, `.github/`, `tests/`).
+The search MUST be assisted by a cheap model via Bifrost
+(`http://localhost:30080/v1/chat/completions` — pick a current model from
+`listmodels`, never hardcode one) AND cross-checked with Context7 MCP
+for the relevant ecosystem. Your training data is stale; do not trust it.
 
-See the `tool-use` rule for the full alternatives table.
+### Required Evidence in Your Reply
 
-## Token Economy — Use Bifrost + Native Subagents Aggressively
+Before any script is written, your reply MUST contain a "Search log" block:
 
-Claude Opus tokens are premium — reserve them for architecture decisions and complex reasoning.
-Offload everything else:
+```text
+Search log:
+- Native:        <tool searched> -> <found / not found, with reason>
+- Ecosystem:     <module/resource searched> -> <found / not found>
+- Third-party:   <package/CLI searched> -> <found / not found>
+- Community:     <repo/plugin searched> -> <found / not found>
+- Bifrost query: <verbatim prompt sent> -> <key parts of response>
+- Context7:      <library queried> -> <key finding>
+```
 
-- **Single-model calls**: Route via Bifrost at `http://localhost:30080/v1/chat/completions` (OpenAI-compatible) —
-  multi-provider routing to OpenAI, Gemini, OpenRouter, and local MLX
-  (not Anthropic — Claude runs subscription-only via Claude Code; Codex also accessible via `/codex*` skills)
-- **Multi-model parallel**: `clink` / `consensus` via PAL MCP (only remaining PAL tools — all others replaced by native subagents)
-- **Research & planning**: Route to Gemini via Bifrost (`gemini/gemini-3-pro-preview`) or `clink` (multi-model parallel) —
-  up-to-date knowledge and massive context
-- **Simple/repetitive tasks**: Route to local models (MLX) via Bifrost — zero cost, low latency
-- **Medium-complexity work**: Route to OpenRouter cloud models via Bifrost — capable and cost-effective
-- **Day-to-day implementation**: Prefer Sonnet subagents over Opus — same tool access, fraction of the cost;
-  reserve Opus for genuinely complex coding and architecture
+Empty rows or "n/a" are rejected. If a row says "not found", say WHY it
+doesn't fit ("only handles JSON, we need YAML"; "abandoned 3 years").
 
-See the Model Routing Rules table for specific model recommendations per task type.
+### The 10-Line Carve-Out
 
-## Orchestrator Role
+If — and ONLY if — the search log shows every tier exhausted AND the script
+is **fewer than 10 non-comment lines**, you MAY write it without further
+approval.
 
-You are a master orchestrator. Your primary context window is precious: it is where decisions are made,
-plans are formed, and results are synthesized. Protect it.
+**Counting rules (strict, no gaming):**
 
-### Delegation Philosophy
+- Counts as a line: shebang (`#!/usr/bin/env bash`), any line with executable
+  code, every line of a multi-line string or heredoc, every physical line of
+  a continuation (`\` at EOL, implicit Python parens).
+- Does NOT count: blank lines, lines that are pure comments
+  (`#`, `//`, `/* */`, `"""..."""` on its own line).
+- One statement per line. Semicolon-stuffing to compress count is a violation.
 
-Think of yourself as a conductor, not a musician. Your job is to coordinate subagents, not to do all the work yourself. When you delegate well, you:
+At the 10th non-comment line, auto-approval is REVOKED.
+There is no "just barely 10 so it's fine" — 10 is the floor of "needs approval."
 
-- Preserve your context for high-level reasoning and decision-making
-- Enable parallel execution across multiple subagents
-- Get better results by giving each subagent focused, specific tasks
-- Keep your main conversation clean and responsive
+### 10+ Lines: Explicit Approval Required
 
-### When to Delegate
+For any script reaching 10 non-comment lines:
 
-Delegate to subagents for:
+1. Present the search log.
+2. Show the proposed script in full with its non-comment line count.
+3. Ask the user explicitly: *"Approve writing this N-line script?"*
+4. Wait for an unambiguous affirmative reply.
+   "Sure", "ok", "go ahead", or continuing the conversation without addressing
+   the question do NOT count. When in doubt, ask again.
 
-- **Exploration and research**: Searching codebases, reading multiple files, understanding architecture
-- **Verification and validation**: Checking work, running tests, confirming changes
-- **High-token operations**: Any task that would consume significant context (large file reads, extensive searches)
-- **Independent parallel tasks**: Work that can proceed simultaneously without dependencies
-- **External AI models**: Use `/delegate-to-ai` to route tasks to the best-suited external model via PAL MCP
-  (research to Gemini, code review to multi-model consensus, etc.)
+### Hard Boundaries
 
-### Model Selection for Subagents
+- Hook blocks are TERMINAL DENIALS, not menus of fallbacks.
+  If a hook fires, STOP. Do not interpret the block message as a list of
+  escapes to claim.
+- "I couldn't find a tool quickly" is not the same as "no tool exists."
+  If the search was rushed, redo it.
+- Allowed locations (`scripts/`, `hooks/`, `.github/`, `tests/`, `Makefile`)
+  do NOT exempt the research requirement. Location is a placement rule;
+  research is a creation rule. Both apply.
+- Never write to `/tmp`, never produce throwaway one-offs, never use a script
+  as a "quick way to do this once."
 
-Consider using Haiku or Sonnet when a task doesn't need Opus-level reasoning.
+## Orchestrator + Delegation
 
-### Subagent Type Selection
+You are an orchestrator. Your context window is precious; subagents and
+external models do the heavy lifting and report back concisely.
 
-Never use `subagent_type: "Bash"` for tasks that involve reading, writing, or editing files — Bash agents
-lack file tools and fall back to `sed`/`awk` one-liners or `python -c` commands. Use `general-purpose` instead.
-See the `tool-use` rule for the full subagent type selection table.
+**Delegate to subagents for:**
 
-### Script Prevention & Research First
+- Exploration and research — searching codebases, reading multiple files
+- Verification and validation — checking work, running tests, confirming changes
+- High-token operations — anything that would consume significant context
+- Independent parallel tasks — work that can proceed simultaneously
 
-No scripts — see top-level "No Scripts" section. If a hook blocks you, check the alternatives
-table in the `tool-use` rule, use Context7 MCP to find native tools, or ask the user.
+**Token economy:** Reserve top-tier reasoning models for architecture
+decisions and complex coding. Route everything else through cheaper paths:
 
-### Parallel Execution
+- Single-model calls: Bifrost at `http://localhost:30080/v1/chat/completions`
+- Multi-model parallel/agreement: PAL MCP `clink` / `consensus`
+- External-model delegation: `/delegate-to-ai`
+- Day-to-day implementation: prefer Sonnet-class subagents over Opus-class
 
-Invoke `superpowers:dispatching-parallel-agents` when facing 2+ independent tasks. It covers identification, dispatch, and integration patterns.
+**Subagent types:** Never use `subagent_type: "Bash"` for anything that reads,
+writes, or edits files — Bash agents fall back to `sed`/`awk`/`python -c` and
+bypass audit. Use `general-purpose`. See the `tool-use` rule for the table.
 
-### Context Preservation
+**Parallel execution:** When facing 2+ independent tasks, dispatch them in a
+single message with multiple Agent calls.
 
-Your context window is limited. Every file you read directly, every search result you process inline, consumes space
-that could be used for reasoning. Subagents return only what matters—summaries, findings, and recommendations.
+## Model Routing
 
-When you notice a task will be token-heavy (reading many files, extensive exploration, verification across multiple
-locations), delegate it. The subagent does the heavy lifting and reports back concisely.
+Reference task classes, not specific model names.
+Identifiers rot — resolve them at call time via `listmodels`.
 
-### External Model Delegation
-
-Use `/delegate-to-ai` to route work to external AI models via PAL MCP. This is the preferred
-way to leverage non-Claude models for tasks where they excel (research, consensus, code review).
-See the Model Routing Rules table for which model fits which task type.
-
-## Output Discipline
-
-Optimize for information density. Every token emitted consumes the user's context window.
-
-**Format rules:**
-
-- Lead with result or answer. No preamble.
-- Short, direct sentences. Cut filler.
-- No narration of intent ("Let me...", "I'll now...", "I'm going to...").
-- No restating the question or summarizing what was asked.
-- Tools first, explain after. Show work, not plans to work.
-- Tables and lists over prose for structured data.
-- One-line acknowledgments for simple confirmations.
-
-**Preserve depth where it matters:**
-
-- Complex reasoning, architecture decisions, tradeoff analysis warrant full explanation.
-- Error diagnosis should include root cause, not just the fix.
-- When the user asks "why", give the real answer.
-
-This is about output format, not thinking. Reason thoroughly. Write concisely.
-
-## Model Routing Rules
-
-| Task Type | Cloud Model | Access Method | Local (MLX via Bifrost) |
-| --- | --- | --- | --- |
-| Research & Analysis | Gemini 3 Pro | `gemini/gemini-3-pro-preview` | `mlx-local/mlx-community/Qwen3-235B-A22B-4bit` |
-| Complex Coding | Claude Opus | Claude Code (subscription) | `mlx-local/mlx-community/Qwen3.5-122B-A10B-4bit` |
-| Fast Tasks | Claude Sonnet | Claude Code (subscription) | `mlx-local/mlx-community/Qwen3.5-27B-4bit` |
-| Code Review | Multi-model consensus | Multiple Bifrost calls + PAL `consensus` | `mlx-local/mlx-community/Qwen3.5-27B-4bit` |
-| Architecture | Claude Opus | Claude Code (subscription) | `mlx-local/mlx-community/Qwen3-235B-A22B-4bit` |
-| Pre-commit | Claude Sonnet | Claude Code (subscription) | `mlx-local/mlx-community/Qwen3.5-35B-A3B-4bit` |
-
-Default local model: `mlx-local/mlx-community/Qwen3.5-27B-4bit` (always loaded).
-Larger models are on-demand via `mlx-switch`. Run `listmodels` for available models and aliases.
-
-> **Bifrost prefix required**: This `mlx-local/` prefix is a Bifrost-only exception to the
-> general advice elsewhere not to add provider-style prefixes to local model names for
-> PAL/OpenRouter routing. PAL MCP's `custom_models.json` and `CUSTOM_MODEL_NAME` are
-> pre-configured with this prefix. Use bare `mlx-community/` names only when calling the
-> vllm-mlx server directly (port 11434).
-
-### Provider Gotchas
-
-- **Gemini thinking-model reasoning tokens.** **Set `max_tokens >= 100`** for
-  any Gemini thinking-model call via the OpenAI-compatible API. Reasoning
-  tokens count against the `max_tokens` budget before the answer is emitted —
-  with too small a limit, ~30 % of requests return `choices: null`. Budget
-  ~30 tokens for reasoning overhead plus expected answer length. Applies
-  to every OpenAI-compatible client (direct or through Bifrost).
-
-## PAL MCP Tools
-
-| Tool | Purpose |
+| Task class | Where to route |
 | --- | --- |
-| `clink` | Multi-model parallel. Research and exploration. |
-| `consensus` | Multi-model agreement. Critical decisions. |
+| Research & analysis | Cloud frontier model via Bifrost, or `clink` for consensus |
+| Complex coding & architecture | Top-tier reasoning model (Claude Code subscription) |
+| Fast / repetitive tasks | Sonnet-class or local MLX via Bifrost |
+| Code review | Multi-model `consensus` or local MLX via Bifrost |
+| Pre-commit checks | Sonnet-class or local MLX via Bifrost |
 
-All other PAL tools have native Claude Code equivalents. See
-[nix-ai#450](https://github.com/JacobPEvans/nix-ai/issues/450) for the full audit matrix.
-For single-model calls, use Bifrost directly at `http://localhost:30080/v1/chat/completions`.
-
-**Local model names**: Use HuggingFace model IDs or PAL aliases.
-Never add provider-style prefixes like `custom/` or `ollama/` — PAL routes these as OpenRouter paths.
-Run `sync-mlx-models` after switching models, then restart Claude Code.
-
-## Priority Order
-
-When choosing implementations or tools:
-
-1. **Anthropic Official** - Claude Code plugins, skills, patterns
-2. **Bifrost AI Gateway** - Multi-provider routing (HTTP MCP + OpenAI API at `localhost:30080`)
-3. **PAL MCP** - Only for `clink` / `consensus` multi-model tools
-4. **Personal/Custom** - Only when no alternative exists
-
-## Local-Only Mode
-
-When `localOnlyMode` is enabled or `--local` flag is passed:
-
-- All tasks route to MLX inference server (port 11434)
-- No cloud API calls are made
-- Ensure vllm-mlx LaunchAgent is running (`launchctl list | grep vllm-mlx`)
-
-## Cross-Referencing Convention
-
-**In Claude Code instruction files**: Use `@path/to/file` to compose content inline.
-Always prefer `@` over markdown links — referenced content loads automatically without a separate file
-read. Reserve markdown links only for "see X if relevant" conditional references where you explicitly
-do NOT want content auto-loaded.
-
-**Within agents, skills, and rules**: Reference by name only (e.g., "the secrets-policy rule").
-Rules in `.claude/rules/` auto-load every session. Skills and agents load on demand when referenced.
-
-**In docs and external files**: Use markdown links. These aren't parsed by Claude Code.
+Bifrost-specific routing details (prefix conventions, provider gotchas, PAL
+tools, local-only mode) live in the `bifrost-routing` rule, lazy-loaded only
+when relevant files are in context.
 
 ## Auto-Loaded Rules
 
-Rules in `.claude/rules/ -> ../agentsmd/rules`. Universal rules load every session;
-path-scoped rules lazy-load only when matching files enter context.
+Rules are sourced from `agentsmd/rules/` via `.claude/rules/`.
 
-**Universal (load every session):**
-
-- `tool-use.md` — Native tools over Bash, subagent dispatching, script policy
-- `soul.md` — Voice and personality guidelines
-- `skill-execution-integrity.md` — Every skill invocation is fresh, not a continuation
-- `secrets-policy.md` — Never commit secrets (principle only)
+**Universal (every session):**
+`tool-use`, `soul`, `skill-execution-integrity`, `secrets-policy`.
 
 **Path-scoped (lazy-load on matching files):**
+`nix-tool-policy`, `nix-package-placement`, `ci-cd-policy`, `config-secrets`,
+`bifrost-routing`.
 
-- `nix-tool-policy.md` — Nix dev shell rules (flake.nix, *.nix, .envrc)
-- `nix-package-placement.md` — Where tools belong across the nix repos (*.nix, flake.*)
-- `ci-cd-policy.md` — CI/CD automation rules (.github/**, scripts/**, hooks/**)
-- `config-secrets.md` — Secret scrubbing details (.env*,*.json, *.yaml,*.tf)
-
-## On-Demand Standards (via Plugins)
-
-All other standards are available as on-demand skills via these plugins:
+## On-Demand Standards (Plugins)
 
 | Plugin | Skills | Trigger |
 | --- | --- | --- |
-| `git-standards` | `/git-workflow-standards`, `/pr-standards` | Branch/PR/issue work |
-| `code-standards` | `/code-quality-standards`, `/review-standards` | Writing/reviewing code |
-| `infra-standards` | `/infrastructure-standards` | Terraform/Ansible/Proxmox work |
-| `project-standards` | `/agentsmd-authoring`, `/workspace-standards`, `/skills-registry` | AgentsMD editing, workspace setup |
+| `git-standards` | `/git-workflow-standards`, `/pr-standards` | Branch / PR / issue work |
+| `code-standards` | `/code-quality-standards`, `/review-standards` | Writing / reviewing code |
+| `infra-standards` | `/infrastructure-standards` | Terraform / Ansible / Proxmox |
+| `project-standards` | `/agentsmd-authoring`, `/workspace-standards`, `/skills-registry` | Instruction-file edits |
 
-Skills contain multiple subsections from the original rules. For example, `/pr-standards`
-includes PR guards, issue linking, and no-AI-mentions. Agent references use
-section names within the canonical skill (e.g., "the no-AI-mentions section of `/pr-standards`").
+## Cross-Repo Boundary
 
-## GitHub Releases
-
-Treat published releases as **permanent**. Once a release is promoted from draft to published, do not modify or
-delete it — ever. GitHub technically allows edits and deletions, but our policy forbids it. If a correction is
-needed, create a new release rather than changing the existing one.
-
-- Always open releases as **drafts** until fully complete (all assets uploaded, notes finalized)
-- Promote from draft to published only when everything is ready
-- All repos use [Google's release-please](https://github.com/googleapis/release-please) for automated version bumps:
-  - **Patch** bumps: `fix:` commits
-  - **Minor** bumps: `feat:` commits
-  - **Major** bumps: human-initiated only — edit `.release-please-manifest.json` manually.
-    Automated major bumps (including from `BREAKING CHANGE:` footers) are blocked by the release workflow.
-  - Prefer `fix:` for config tweaks, small improvements, incremental adjustments, and dependency updates
-  - Reserve `feat:` for genuinely new capabilities, integrations, or significant behavioral changes
-- Templates and reusable workflows live in [JacobPEvans/.github](https://github.com/JacobPEvans/.github)
-
-## Dependency Versioning
-
-- **JacobPEvans self-references**: Use `@main` or major version tag — never SHA
-  or minor/patch pins
-- **Trusted external actions**: Use version tags (major tags like `@v6` or full SemVer tags like `@v2.3.5`) —
-  trusted orgs are listed in `JacobPEvans/.github/renovate-presets.json`
-- **Untrusted external actions**: Use SHA commit hashes — only for orgs NOT in the
-  trusted list. SHA pinning is the exception, not the default
-
-## Public vs Private Repository Separation
-
-Never reference private repos (names, features, tools) in public repo content. If a repo is private,
-treat it as if it doesn't exist when writing public-facing docs, sites, or READMEs. This includes
-repo names, project descriptions, architecture diagrams, and any identifying details.
-
-When updating public-facing content (GitHub Pages sites, public READMEs, portfolios), audit for any
-mentions of private repositories before committing. Use `gh repo view OWNER/REPO` to check
-visibility when in doubt.
+This file is the **universal** shared config — it applies to every repo
+that symlinks it as `CLAUDE.md` / `GEMINI.md`.
+Repo-specific or workspace-specific guidance (container rules, log pipelines,
+worktree maps, infra topology) belongs in the per-repo `CLAUDE.md` or in
+`~/git/CLAUDE.md`, **never here**.
 
 ## Related Files
 
-- `agentsmd/rules/` — Auto-loaded essential rules (sourced via `.claude/rules` symlink)
+- `agentsmd/rules/` — auto-loaded rules (sourced via `.claude/rules` symlink)
 - `agentsmd/workflows/` — 5-step development workflow
-- `agentsmd/permissions/` — Permission framework (allow / ask / deny JSON configs)
-- `agentsmd/docs/` — Permission framework and workflow support docs
-- `.claude/rules`, `.copilot/instructions.md`, `.gemini/config.yaml` — Vendor entry points (symlinked where possible)
-- [JacobPEvans/claude-code-plugins](https://github.com/JacobPEvans/claude-code-plugins) — Commands, skills, agents, and hooks
+- `agentsmd/permissions/` — permission framework (allow / ask / deny)
+- [JacobPEvans/claude-code-plugins](https://github.com/JacobPEvans/claude-code-plugins) — plugin source

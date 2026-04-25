@@ -14,8 +14,10 @@ Research what exists before implementing anything — do not trust training data
 3. **Execute directly** — Run via Bash tool (or equivalent tool call)
 4. **Parallelize** — Independent commands as parallel tool calls in a single response
 
-If no existing tool handles the task, ask the user before writing any code.
-Check AI assistant settings files (`~/.claude/settings.json`, `~/.gemini/settings.json`) for pre-approved commands.
+If no existing tool is found, run the **No Scripts** research workflow in
+`AGENTS.md` before considering any code.
+Check AI assistant settings files (`~/.claude/settings.json`,
+`~/.gemini/settings.json`) for pre-approved commands.
 
 ## Ecosystem Alternatives
 
@@ -36,15 +38,6 @@ Check AI assistant settings files (`~/.claude/settings.json`, `~/.gemini/setting
 | Infrastructure validation | `terraform validate`, `ansible-lint`, check modes | Validation script |
 | State queries | `terraform output`, `terraform state show`, Ansible facts | Query script |
 
-## Exceptions
-
-Scripts are appropriate ONLY when the deliverable IS a script:
-
-- User explicitly asked to create a script file
-- The script will be committed as a permanent artifact (CI/CD workflows, pre-commit hooks, `Makefile`s)
-
-Never for one-off tasks or temp files.
-
 ## File Operations Block (Required in Every Subagent Prompt)
 
 Every file-editing subagent prompt MUST include this block verbatim:
@@ -61,11 +54,20 @@ File operations:
 
 Explore agents are exempt (read-only, no Edit/Write tools).
 
-Script policy (Required in every subagent prompt):
+Script policy (Required verbatim in every subagent prompt):
 
-- NEVER generate custom scripts — use native tools (jq, curl, gh api, Nix functions, etc.)
-- If blocked by a hook, follow the alternatives in the block message
-- Committed scripts go in allowed locations (scripts/, hooks/, .github/, tests/) — never temp files
+- A script is the LAST RESORT. Before writing ANY `.sh` / `.py` / `.ts` / `.js`
+  / `.rb` or inline `python -c` / `bash -c` / `node -e` body, search every
+  tier (native, ecosystem, third-party, community), assisted by Bifrost
+  (`http://localhost:30080`) and Context7. Log every query and result in
+  your reply.
+- Hook blocks are TERMINAL DENIALS, not fallback menus.
+- Auto-approval applies ONLY to scripts under 10 non-comment lines.
+  Shebang counts; pure-comment and blank lines don't; no semicolon-stuffing.
+- 10+ non-comment lines: ask the user and wait for explicit approval.
+  Implicit or ambiguous responses do not count.
+- Committed scripts only: `scripts/`, `hooks/`, `.github/`, `tests/`,
+  `Makefile`. Never temp files, never `/tmp`, never one-offs.
 
 ## Subagent Type Selection
 
