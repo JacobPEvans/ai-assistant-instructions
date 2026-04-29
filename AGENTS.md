@@ -84,6 +84,15 @@ Preserve depth where it matters: complex reasoning, architecture decisions,
 and error diagnosis (root cause, not just the fix). Reason thoroughly,
 write concisely.
 
+## Commit & PR Style
+
+No emoji or gitmoji in commit messages, PR titles, PR descriptions, or
+release notes. Conventional-commit prefixes (`feat:`, `fix:`, `chore:`,
+etc.) apply to commit subjects and PR titles only — descriptions and
+release notes are plain prose.
+Applies to AI-authored and AI-assisted commits/PRs alike — no `🤖`, no
+`✨`, no `🐛`. Plain text wins.
+
 ## Model Routing
 
 Reference task classes, not specific model names. Identifiers rot — resolve
