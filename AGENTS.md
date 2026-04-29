@@ -86,8 +86,10 @@ write concisely.
 
 ## Commit & PR Style
 
-No emoji or gitmoji in commit messages, PR titles, or PR descriptions.
-Conventional-commit prefixes only (`feat:`, `fix:`, `chore:`, etc.).
+No emoji or gitmoji in commit messages, PR titles, PR descriptions, or
+release notes. Conventional-commit prefixes (`feat:`, `fix:`, `chore:`,
+etc.) apply to commit subjects and PR titles only — descriptions and
+release notes are plain prose.
 Applies to AI-authored and AI-assisted commits/PRs alike — no `🤖`, no
 `✨`, no `🐛`. Plain text wins.
 
