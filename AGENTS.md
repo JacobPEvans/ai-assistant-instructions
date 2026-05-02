@@ -28,9 +28,10 @@ Before any script or inline code with logic, search and document each tier:
 1. **Native CLIs / builtins** — `jq`, `gh`, `git`, `curl`, system utilities
 2. **Ecosystem primitives** — Ansible modules, Terraform resources, Nix functions, marketplace Actions, pre-commit hooks
 3. **Third-party packaged tools** — Homebrew, apt, pip, npm, cargo
-4. **Popular community solutions** — well-starred GitHub projects, official plugins
+4. **Popular community solutions** — well-starred GitHub projects, official plugins, awesome-* lists
 
-Use a cheap model via Bifrost (`listmodels`) + Context7; include a one-line-per-tier search log in your reply — empty rows are rejected.
+Use a cheap model via Bifrost (`listmodels`) + Context7; include a one-line-per-tier search log
+(tool → found/not found, reason) — empty rows or "n/a" are rejected.
 
 ### The 10-Line Gate
 
@@ -61,7 +62,7 @@ See the `tool-use` rule.
 
 ## Commit & PR Style
 
-See `agentsmd/rules/soul.md` §4 — no emoji; conventional-commit prefixes for subjects/titles; plain prose everywhere else.
+See soul.md section 4 — no emoji; conventional-commit prefixes for subjects/titles; plain prose everywhere else.
 
 ## Model Routing
 
