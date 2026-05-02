@@ -1,1 +1,3 @@
-AGENTS.md
+# AI Agents Configuration
+
+@AGENTS.md
