@@ -1,6 +1,6 @@
 # AI Agents Configuration
 
-Commands, skills, agents, and hooks from [JacobPEvans/claude-code-plugins](https://github.com/JacobPEvans/claude-code-plugins).
+Commands, skills, agents, and hooks are delivered via [JacobPEvans/claude-code-plugins](https://github.com/JacobPEvans/claude-code-plugins).
 
 ## Starting Any Change
 
@@ -35,7 +35,7 @@ Use a cheap model via Bifrost (`listmodels`) + Context7; include a one-line-per-
 ### The 10-Line Gate
 
 Auto-approval only when search is empty AND the script is under 10 non-comment lines
-(shebang and code lines count; blank and pure-comment lines don't; no semicolon-stuffing).
+(shebang, code, heredoc/multi-line-string, and continuation lines count; blank and pure-comment lines don't; no semicolon-stuffing).
 At 10+, ASK and wait for an unambiguous yes. Hook blocks are TERMINAL DENIALS.
 
 ## Orchestrator Role
