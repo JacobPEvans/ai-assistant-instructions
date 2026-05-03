@@ -2,6 +2,82 @@
 
 Commands, skills, agents, and hooks are delivered via [JacobPEvans/claude-code-plugins](https://github.com/JacobPEvans/claude-code-plugins).
 
+## No Scripts — Iron Law
+
+**A custom script is the LAST RESORT. Search first; script only when every
+tier comes up empty AND the user explicitly approves.**
+
+### Scripts must be dedicated files
+
+Scripts MUST be standalone files with a proper extension (`.sh`, `.py`,
+`.ts`, `.js`, `.rb`, `.pl`) under one of: `scripts/`, `.github/scripts/`,
+`.claude/hooks/`, `tests/`, or plugin `hooks/` directories. **Never
+comingled in non-script files. No exceptions.**
+
+### What counts as an inline script (BANNED)
+
+These are scripts even when they don't end in `.sh` — all forbidden in
+non-script files:
+
+- YAML `run:` blocks with logic — `if`, `for`, `while`, `case`, multi-step
+  retry, or more than 3 lines of shell.
+- Markdown code blocks intended for copy-paste-execute, when they contain
+  logic.
+- `Bash` tool commands with embedded multi-line control flow
+  (`while ...; do ...; done`, `for x in ...; do ...; done`,
+  `if [[ ... ]]; then ...; fi`) inside a single `command` string.
+- Heredoc payloads (`<<EOF`, `<<'EOF'`, `<<-EOF`) feeding logic to a target
+  — `bash <<EOF`, `python <<EOF`, `cat <<EOF | sh`.
+- Command-substitution heredocs smuggling a script body into a one-liner:
+  `git commit -m "$(cat <<'EOF' ... EOF)"`,
+  `gh pr create --body "$(cat <<'EOF' ... EOF)"` *when the body is
+  generated logic* (pre-written prose body is fine — see Allowed below).
+- `python -c '...'`, `node -e '...'`, `perl -e '...'`, `ruby -e '...'`,
+  `sh -c '<multiline>'`, `bash -c '<multiline>'`.
+
+### What is allowed (not a script; rule does not trigger)
+
+- Single-line shell commands and pipelines, however clever
+  (`gh api ... | jq -r ... | xargs -I{} gh api --method DELETE ...`).
+- One-line heredocs feeding **pre-existing prose** to a CLI:
+  `gh pr create --body "$(cat <<'EOF' ... EOF)"` where the body is the PR
+  description text the user will see, not generated logic.
+- YAML `run:` blocks of 1–3 lines with no control flow (`run: pnpm install`,
+  `run: terraform validate`).
+- Inline shell inside a single `Bash` call WITHOUT control flow keywords
+  AND WITHOUT newlines (`a && b && c` is fine; multi-line is not).
+
+### Mandatory four-tier search (before any new dedicated script file)
+
+Search and document each tier:
+
+1. **Native CLIs / builtins** — `jq`, `gh`, `git`, `curl`, system utilities
+2. **Ecosystem primitives** — Ansible modules, Terraform resources, Nix
+   functions, marketplace Actions, pre-commit hooks
+3. **Third-party packaged tools** — Homebrew, apt, pip, npm, cargo
+4. **Popular community solutions** — well-starred GitHub projects, official
+   plugins, awesome-* lists
+
+Use a cheap model via Bifrost (`listmodels`) + Context7; include a
+one-line-per-tier search log (tool → found / not found, reason) — empty
+rows or "n/a" are rejected.
+
+### The 10-line gate (only after search is empty)
+
+When a dedicated script file is genuinely required:
+
+- Under 10 non-comment lines AND search empty: auto-approved.
+  (Counting: shebang counts; every code line, heredoc/multi-line-string
+  line, and continuation line counts; blank and pure-comment lines don't;
+  no semicolon-stuffing.)
+- 10+ non-comment lines: ASK the user and wait for an unambiguous yes.
+
+Hook blocks are TERMINAL DENIALS. When a hook blocks an action, stop and
+reconsider — do not look for a workaround.
+
+See `agentsmd/rules/no-scripts.md` for full rationale, worked examples,
+and the dedicated-directory allow-list.
+
 ## Starting Any Change
 
 Run `/refresh-repo`, then create a worktree at `~/git/<repo>/<type>/<name>`
@@ -16,28 +92,6 @@ upstream projects outside the user's organizations.
 If a true one-shot is not achievable, recommend creating GitHub issues in the
 user's own repos for persistent tracking — do not use Claude Code's internal
 TODO system as a substitute for durable issue tracking.
-
-## No Scripts — Iron Law
-
-**A custom script is the LAST RESORT. Search first, script only when every tier comes up empty AND the user explicitly approves.**
-
-### Mandatory Search (every tier, every time)
-
-Before any script or inline code with logic, search and document each tier:
-
-1. **Native CLIs / builtins** — `jq`, `gh`, `git`, `curl`, system utilities
-2. **Ecosystem primitives** — Ansible modules, Terraform resources, Nix functions, marketplace Actions, pre-commit hooks
-3. **Third-party packaged tools** — Homebrew, apt, pip, npm, cargo
-4. **Popular community solutions** — well-starred GitHub projects, official plugins, awesome-* lists
-
-Use a cheap model via Bifrost (`listmodels`) + Context7; include a one-line-per-tier search log
-(tool → found/not found, reason) — empty rows or "n/a" are rejected.
-
-### The 10-Line Gate
-
-Auto-approval only when search is empty AND the script is under 10 non-comment lines
-(shebang, code, heredoc/multi-line-string, and continuation lines count; blank and pure-comment lines don't; no semicolon-stuffing).
-At 10+, ASK and wait for an unambiguous yes. Hook blocks are TERMINAL DENIALS.
 
 ## Orchestrator Role
 
@@ -82,7 +136,7 @@ Bifrost routing details in the `bifrost-routing` rule (lazy-loaded).
 
 Sources: `agentsmd/rules/` via `.claude/rules/`.
 
-**Universal:** `tool-use`, `soul`, `skill-execution-integrity`, `secrets-policy`
+**Universal:** `tool-use`, `soul`, `skill-execution-integrity`, `secrets-policy`, `no-scripts`
 **Path-scoped:** `nix-tool-policy`, `nix-package-placement`, `ci-cd-policy`, `config-secrets`, `bifrost-routing`
 
 ## On-Demand Standards (Plugins)
