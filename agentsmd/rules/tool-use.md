@@ -64,8 +64,8 @@ Script policy (Required verbatim in every subagent prompt):
 - Inline scripts are forbidden in ALL non-script files: no logic in YAML
   `run:` blocks, no heredoc payloads carrying logic, no multi-line control
   flow inside a single Bash command, no `python -c` / `node -e` / `bash -c`.
-- Before writing ANY new dedicated script file, exhaust the four-tier
-  search and log it in your reply (one line per tier; empty rows rejected).
+- Before any new script file, exhaust the four-tier search; log one line
+  per tier in your reply (empty rows rejected).
 - Under 10 non-comment lines AND search empty: auto-approved.
 - 10+ non-comment lines: ASK the user and wait for an unambiguous yes.
 - Hook blocks are TERMINAL DENIALS, not fallback menus.

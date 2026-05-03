@@ -14,38 +14,29 @@ Scripts MUST be standalone files with a proper extension (`.sh`, `.py`,
 `.claude/hooks/`, `tests/`, or `plugins/<name>/hooks/` directories. **Never
 comingled in non-script files. No exceptions.**
 
-### What counts as an inline script (BANNED)
+### Inline scripts (BANNED)
 
-These are scripts even when they don't end in `.sh` — all forbidden in
-non-script files:
+Scripts even when they don't end in `.sh` — all forbidden in non-script files:
 
-- YAML `run:` blocks with logic — `if`, `for`, `while`, `case`, multi-step
-  retry, or more than 3 lines of shell.
-- Markdown code blocks intended for copy-paste-execute, when they contain
-  logic.
-- `Bash` tool commands with embedded multi-line control flow
-  (`while ...; do ...; done`, `for x in ...; do ...; done`,
-  `if [[ ... ]]; then ...; fi`) inside a single `command` string.
-- Heredoc payloads (`<<EOF`, `<<'EOF'`, `<<-EOF`) feeding logic to a target
-  — `bash <<EOF`, `python <<EOF`, `cat <<EOF | sh`.
-- Command-substitution heredocs smuggling a script body into a one-liner:
-  `git commit -m "$(cat <<'EOF' ... EOF)"`,
-  `gh pr create --body "$(cat <<'EOF' ... EOF)"` *when the body is
-  generated logic* (pre-written prose body is fine — see Allowed below).
+- YAML `run:` with logic (`if`/`for`/`while`/`case`, retry chains, 3+ lines).
+- Markdown copy-paste-execute blocks containing logic.
+- Multi-line control flow in a single Bash command (`while ...; do ...; done`,
+  `for ...`, `if ...; then ...`).
+- Heredoc payloads carrying logic — `bash <<EOF`, `python <<EOF`,
+  `cat <<EOF | sh`, or `git commit -m "$(cat <<'EOF' ... EOF)"` with
+  generated content (pre-written prose bodies are fine — see Allowed).
 - `python -c '...'`, `node -e '...'`, `perl -e '...'`, `ruby -e '...'`,
-  `sh -c '<multiline>'`, `bash -c '<multiline>'`.
+  multi-line `sh -c` / `bash -c`.
 
-### What is allowed (not a script; rule does not trigger)
+### Allowed (not a script)
 
-- Single-line shell commands and pipelines, however clever
+- Single-line shell pipelines, however clever
   (`gh api ... | jq -r ... | xargs -I{} gh api --method DELETE ...`).
-- One-line heredocs feeding **pre-existing prose** to a CLI:
-  `gh pr create --body "$(cat <<'EOF' ... EOF)"` where the body is the PR
-  description text the user will see, not generated logic.
-- YAML `run:` blocks of 1–3 lines with no control flow (`run: pnpm install`,
-  `run: terraform validate`).
-- Inline shell inside a single `Bash` call WITHOUT control flow keywords
-  AND WITHOUT newlines (`a && b && c` is fine; multi-line is not).
+- One-line heredocs feeding **pre-existing prose** to a CLI
+  (e.g., `gh pr create --body "$(cat <<'EOF' ... EOF)"` with a static body).
+- YAML `run:` of 1–3 lines without control flow (`run: pnpm install`).
+- Single Bash commands without control-flow keywords or newlines
+  (`a && b && c` is fine; multi-line is not).
 
 ### Mandatory four-tier search (before any new dedicated script file)
 
@@ -64,19 +55,16 @@ rows or "n/a" are rejected.
 
 ### The 10-line gate (only after search is empty)
 
-When a dedicated script file is genuinely required:
+For a genuinely required dedicated script file:
 
-- Under 10 non-comment lines AND search empty: auto-approved.
-  (Counting: shebang counts; every code line, heredoc/multi-line-string
-  line, and continuation line counts; blank and pure-comment lines don't;
-  no semicolon-stuffing.)
-- 10+ non-comment lines: ASK the user and wait for an unambiguous yes.
+- <10 non-comment lines AND search empty: auto-approved.
+  (Code, shebang, heredoc, continuation lines all count; blank and
+  pure-comment lines don't; no semicolon-stuffing.)
+- 10+ non-comment lines: ASK and wait for an unambiguous yes.
 
-Hook blocks are TERMINAL DENIALS. When a hook blocks an action, stop and
-reconsider — do not look for a workaround.
+Hook blocks are TERMINAL DENIALS — stop and reconsider, no workarounds.
 
-See `agentsmd/rules/no-scripts.md` for full rationale, worked examples,
-and the dedicated-directory allow-list.
+See `agentsmd/rules/no-scripts.md` for worked examples and the directory allow-list.
 
 ## Starting Any Change
 
