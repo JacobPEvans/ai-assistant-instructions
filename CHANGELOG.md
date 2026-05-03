@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.3](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.9.2...v1.9.3) (2026-05-03)
+
+
+### Bug Fixes
+
+* **ci:** remove deprecated app-id secret passthrough ([2847e0e](https://github.com/JacobPEvans/ai-assistant-instructions/commit/2847e0ee558081da7cdbddfac5d6a827b2dff27a))
+
 ## [1.9.2](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.9.1...v1.9.2) (2026-05-02)
 
 
