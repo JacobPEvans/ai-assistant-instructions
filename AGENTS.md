@@ -5,13 +5,13 @@ Commands, skills, agents, and hooks are delivered via [JacobPEvans/claude-code-p
 ## No Scripts — Iron Law
 
 **A custom script is the LAST RESORT. Search first; script only when every
-tier comes up empty AND the user explicitly approves.**
+tier comes up empty AND approval is granted (see the 10-line gate below).**
 
 ### Scripts must be dedicated files
 
 Scripts MUST be standalone files with a proper extension (`.sh`, `.py`,
 `.ts`, `.js`, `.rb`, `.pl`) under one of: `scripts/`, `.github/scripts/`,
-`.claude/hooks/`, `tests/`, or plugin `hooks/` directories. **Never
+`.claude/hooks/`, `tests/`, or `plugins/<name>/hooks/` directories. **Never
 comingled in non-script files. No exceptions.**
 
 ### What counts as an inline script (BANNED)
@@ -59,7 +59,7 @@ Search and document each tier:
    plugins, awesome-* lists
 
 Use a cheap model via Bifrost (`listmodels`) + Context7; include a
-one-line-per-tier search log (tool → found / not found, reason) — empty
+one-line-per-tier search log (`<Tier>: <tool> - <found / not found>, <reason>`) — empty
 rows or "n/a" are rejected.
 
 ### The 10-line gate (only after search is empty)

@@ -147,7 +147,7 @@ Before any new dedicated script file, search and log each tier:
 4. **Popular community solutions** — well-starred GitHub projects, official
    plugins, awesome-* lists
 
-Format: one line per tier. `tool searched → found / not found, reason`.
+Format: one line per tier. `<Tier Name>: <tool searched> - <found / not found>, <reason>`.
 Empty rows or "n/a" are rejected.
 
 Worked example:
