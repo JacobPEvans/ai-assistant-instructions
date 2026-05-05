@@ -60,3 +60,11 @@ repos:
         files: ^agentsmd/permissions/(?!valid-tools\.json).*\.json$
         pass_filenames: false
         stages: [pre-commit]
+      - id: check-karpathy-sync
+        name: check-karpathy-sync
+        description: "Verify AGENTS.md external:karpathy block matches vendored file"
+        entry: python3 scripts/check-karpathy-sync.py
+        language: system
+        files: ^(AGENTS\.md|agentsmd/external/karpathy-claude-skills\.md)$
+        pass_filenames: false
+        stages: [pre-commit]

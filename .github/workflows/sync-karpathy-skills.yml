@@ -1,0 +1,99 @@
+name: sync-karpathy-skills
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - agentsmd/external/karpathy-claude-skills.md
+  workflow_dispatch:
+
+permissions: {}
+
+# No-Scripts search log (AGENTS.md No Scripts rule):
+# Tier 1: awk for marker-bounded replacement — native CLI, used in splice step
+# Tier 1: sed (-n address ranges) — fragile for multi-line in-place replacement
+# Tier 2: pre-commit "include external file" hook — none mature in pre-commit registry
+# Tier 3: embedme (npm) — adds Node toolchain to a non-Node repo; rejected
+# Tier 4: cschleiden/replace-tokens marketplace action — for token vars, not multi-line bodies
+
+jobs:
+  sync:
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # GITHUB_HEAD_REF is the auto-populated env var for PR head branch name.
+      # Using it via $GITHUB_HEAD_REF (shell env var) rather than ${{ github.head_ref }}
+      # (expression interpolation) avoids command injection risk.
+      - name: Switch to PR head branch
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch origin "$GITHUB_HEAD_REF"
+          git checkout "$GITHUB_HEAD_REF"
+
+      - name: Extract pinned SHA
+        id: meta
+        run: |
+          echo "sha=$(grep -oP '(?<=<!-- sha: )[a-f0-9]{40}(?= -->)' agentsmd/external/karpathy-claude-skills.md)" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch upstream CLAUDE.md
+        env:
+          UPSTREAM_SHA: ${{ steps.meta.outputs.sha }}
+        run: |
+          curl -fsSL \
+            "https://raw.githubusercontent.com/forrestchang/andrej-karpathy-skills/${UPSTREAM_SHA}/CLAUDE.md" \
+            -o /tmp/upstream.md
+
+      - name: Update vendored file (preserve 4-line header, replace body)
+        run: |
+          head -n 4 agentsmd/external/karpathy-claude-skills.md > /tmp/vendored.md
+          cat /tmp/upstream.md >> /tmp/vendored.md
+          mv /tmp/vendored.md agentsmd/external/karpathy-claude-skills.md
+
+      - name: Splice upstream content into AGENTS.md
+        run: |
+          awk '
+            /^<!-- BEGIN external:karpathy -->/{
+              skip=1; print; print ""
+              while((getline ln < "/tmp/upstream.md") > 0) print ln
+              print ""; next
+            }
+            /^<!-- END external:karpathy -->/{skip=0}
+            !skip{print}
+          ' AGENTS.md > /tmp/agents.md && mv /tmp/agents.md AGENTS.md
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit and push to PR branch
+        if: github.event_name == 'pull_request'
+        env:
+          UPSTREAM_SHA: ${{ steps.meta.outputs.sha }}
+        run: |
+          git diff --exit-code && exit 0 || true
+          git add agentsmd/external/karpathy-claude-skills.md AGENTS.md
+          git commit -m "chore(external): sync karpathy-claude-skills to ${UPSTREAM_SHA}"
+          git push origin "$GITHUB_HEAD_REF"
+
+      - name: Create sync PR (manual dispatch)
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          UPSTREAM_SHA: ${{ steps.meta.outputs.sha }}
+        run: |
+          git diff --exit-code && echo "Already in sync." && exit 0 || true
+          BRANCH="chore/sync-karpathy-$(date -u +%Y%m%d)"
+          git checkout -b "${BRANCH}"
+          git add agentsmd/external/karpathy-claude-skills.md AGENTS.md
+          git commit -m "chore(external): sync karpathy-claude-skills to ${UPSTREAM_SHA}"
+          git push -u origin "${BRANCH}"
+          gh pr create \
+            --title "chore(external): sync karpathy-claude-skills to ${UPSTREAM_SHA}" \
+            --body "Auto-synced by sync-karpathy-skills workflow (manual dispatch)."

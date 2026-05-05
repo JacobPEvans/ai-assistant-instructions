@@ -3,5 +3,16 @@
   "extends": [
     "config:recommended",
     "local>JacobPEvans/.github:renovate-presets"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["^agentsmd/external/karpathy-claude-skills\\.md$"],
+      "matchStrings": ["<!-- sha: (?<currentDigest>[a-f0-9]{40}) -->"],
+      "datasourceTemplate": "git-refs",
+      "packageNameTemplate": "https://github.com/forrestchang/andrej-karpathy-skills",
+      "depNameTemplate": "karpathy-claude-skills",
+      "currentValueTemplate": "main"
+    }
   ]
 }
