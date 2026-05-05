@@ -7,14 +7,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "^agentsmd/external/karpathy-claude-skills\\.md$",
-        "^AGENTS\\.md$"
-      ],
-      "matchStrings": [
-        "<!-- sha: (?<currentDigest>[a-f0-9]{40}) -->",
-        "blob/(?<currentDigest>[a-f0-9]{40})/CLAUDE\\.md"
-      ],
+      "fileMatch": ["^AGENTS\\.md$"],
+      "matchStrings": ["blob/(?<currentDigest>[a-f0-9]{40})/CLAUDE\\.md"],
       "datasourceTemplate": "git-refs",
       "packageNameTemplate": "https://github.com/forrestchang/andrej-karpathy-skills",
       "depNameTemplate": "karpathy-claude-skills",
