@@ -54,13 +54,17 @@ File operations:
 
 Explore agents are exempt (read-only, no Edit/Write tools).
 
-Script policy (Required verbatim in every subagent prompt):
+Script policy (verbatim in every subagent prompt):
 
-- Scripts are LAST RESORT. See the No Scripts iron law in AGENTS.md.
-- Before writing ANY script, exhaust the four-tier search and log it in
-  your reply. Hook blocks are TERMINAL DENIALS, not fallback menus.
-- Under 10 non-comment lines: auto-approved after empty search log.
-- 10+ non-comment lines: ASK the user and wait for an unambiguous yes.
+- Scripts are LAST RESORT — search first; script only after empty four-tier
+  search log AND 10-line gate.
+- Scripts live in dedicated files (`.sh`/`.py`/`.ts`/`.js`/`.rb`/`.pl`) under
+  `scripts/`, `.github/scripts/`, `.claude/hooks/`, `tests/`, or
+  `plugins/<name>/hooks/`. Never inlined in non-script files.
+- Forbidden inline: YAML `run:` with logic, heredocs carrying logic,
+  multi-line Bash control flow, `python -c` / `node -e` / `bash -c`.
+- <10 non-comment lines + empty search: auto-approved. 10+: ASK and wait for yes.
+- Hook blocks are TERMINAL DENIALS.
 
 ## Subagent Type Selection
 

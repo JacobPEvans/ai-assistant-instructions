@@ -2,6 +2,37 @@
 
 Commands, skills, agents, and hooks are delivered via [JacobPEvans/claude-code-plugins](https://github.com/JacobPEvans/claude-code-plugins).
 
+## No Scripts — Iron Law
+
+**Custom scripts are LAST RESORT.** Search first; script only when every tier comes up empty AND the 10-line gate passes.
+
+Scripts MUST live in dedicated files (`.sh`, `.py`, `.ts`, `.js`, `.rb`, `.pl`) under
+`scripts/`, `.github/scripts/`, `.claude/hooks/`, `tests/`, or `plugins/<name>/hooks/`.
+**Never inlined in non-script files.**
+
+**Banned in non-script files** (still scripts without `.sh`):
+
+- YAML `run:` with control flow (`if`/`for`/`while`/`case`) or 3+ lines.
+- Multi-line control flow in a single Bash command.
+- Heredocs carrying logic (`bash <<EOF`, `python <<EOF`, generated `git commit` bodies).
+- Inline interpreters: `python -c`, `node -e`, `perl -e`, `ruby -e`, multi-line `bash -c`.
+- Markdown copy-paste-execute blocks with logic.
+
+**Allowed**: single-line pipelines (`|`/`&&`/`xargs`), 1–3 line YAML `run:` without control flow, one-line heredocs feeding pre-written prose (e.g., static PR bodies).
+
+**Four-tier search** before any new script file — log one line per tier (`<Tier>: <tool> - <found/not found>, <reason>`); empty rows rejected:
+
+1. Native CLIs / builtins (`jq`, `gh`, `git`, `curl`)
+2. Ecosystem primitives (Ansible modules, Terraform resources, marketplace Actions, pre-commit)
+3. Third-party packaged tools (Homebrew, apt, pip, npm, cargo)
+4. Popular community solutions (GitHub projects, official plugins, awesome-* lists)
+
+**10-line gate** (after empty search): <10 non-comment lines auto-approved; 10+ requires
+explicit user yes. Code/shebang/heredoc/continuation count; blanks and comments don't; no
+semicolon-stuffing.
+
+Hook blocks are TERMINAL DENIALS. See `agentsmd/rules/no-scripts.md` for worked examples.
+
 ## Starting Any Change
 
 Run `/refresh-repo`, then create a worktree at `~/git/<repo>/<type>/<name>`
@@ -16,28 +47,6 @@ upstream projects outside the user's organizations.
 If a true one-shot is not achievable, recommend creating GitHub issues in the
 user's own repos for persistent tracking — do not use Claude Code's internal
 TODO system as a substitute for durable issue tracking.
-
-## No Scripts — Iron Law
-
-**A custom script is the LAST RESORT. Search first, script only when every tier comes up empty AND the user explicitly approves.**
-
-### Mandatory Search (every tier, every time)
-
-Before any script or inline code with logic, search and document each tier:
-
-1. **Native CLIs / builtins** — `jq`, `gh`, `git`, `curl`, system utilities
-2. **Ecosystem primitives** — Ansible modules, Terraform resources, Nix functions, marketplace Actions, pre-commit hooks
-3. **Third-party packaged tools** — Homebrew, apt, pip, npm, cargo
-4. **Popular community solutions** — well-starred GitHub projects, official plugins, awesome-* lists
-
-Use a cheap model via Bifrost (`listmodels`) + Context7; include a one-line-per-tier search log
-(tool → found/not found, reason) — empty rows or "n/a" are rejected.
-
-### The 10-Line Gate
-
-Auto-approval only when search is empty AND the script is under 10 non-comment lines
-(shebang, code, heredoc/multi-line-string, and continuation lines count; blank and pure-comment lines don't; no semicolon-stuffing).
-At 10+, ASK and wait for an unambiguous yes. Hook blocks are TERMINAL DENIALS.
 
 ## Orchestrator Role
 
@@ -82,7 +91,7 @@ Bifrost routing details in the `bifrost-routing` rule (lazy-loaded).
 
 Sources: `agentsmd/rules/` via `.claude/rules/`.
 
-**Universal:** `tool-use`, `soul`, `skill-execution-integrity`, `secrets-policy`
+**Universal:** `tool-use`, `soul`, `skill-execution-integrity`, `secrets-policy`, `no-scripts`
 **Path-scoped:** `nix-tool-policy`, `nix-package-placement`, `ci-cd-policy`, `config-secrets`, `bifrost-routing`
 
 ## On-Demand Standards (Plugins)
