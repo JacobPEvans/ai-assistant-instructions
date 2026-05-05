@@ -4,67 +4,34 @@ Commands, skills, agents, and hooks are delivered via [JacobPEvans/claude-code-p
 
 ## No Scripts — Iron Law
 
-**A custom script is the LAST RESORT. Search first; script only when every
-tier comes up empty AND approval is granted (see the 10-line gate below).**
+**Custom scripts are LAST RESORT.** Search first; script only when every tier comes up empty AND the 10-line gate passes.
 
-### Scripts must be dedicated files
+Scripts MUST live in dedicated files (`.sh`, `.py`, `.ts`, `.js`, `.rb`, `.pl`) under
+`scripts/`, `.github/scripts/`, `.claude/hooks/`, `tests/`, or `plugins/<name>/hooks/`.
+**Never inlined in non-script files.**
 
-Scripts MUST be standalone files with a proper extension (`.sh`, `.py`,
-`.ts`, `.js`, `.rb`, `.pl`) under one of: `scripts/`, `.github/scripts/`,
-`.claude/hooks/`, `tests/`, or `plugins/<name>/hooks/` directories. **Never
-comingled in non-script files. No exceptions.**
+**Banned in non-script files** (still scripts without `.sh`):
 
-### Inline scripts (BANNED)
+- YAML `run:` with control flow (`if`/`for`/`while`/`case`) or 3+ lines.
+- Multi-line control flow in a single Bash command.
+- Heredocs carrying logic (`bash <<EOF`, `python <<EOF`, generated `git commit` bodies).
+- Inline interpreters: `python -c`, `node -e`, `perl -e`, `ruby -e`, multi-line `bash -c`.
+- Markdown copy-paste-execute blocks with logic.
 
-Scripts even when they don't end in `.sh` — all forbidden in non-script files:
+**Allowed**: single-line pipelines (`|`/`&&`/`xargs`), 1–3 line YAML `run:` without control flow, one-line heredocs feeding pre-written prose (e.g., static PR bodies).
 
-- YAML `run:` with logic (`if`/`for`/`while`/`case`, retry chains, 3+ lines).
-- Markdown copy-paste-execute blocks containing logic.
-- Multi-line control flow in a single Bash command (`while ...; do ...; done`,
-  `for ...`, `if ...; then ...`).
-- Heredoc payloads carrying logic — `bash <<EOF`, `python <<EOF`,
-  `cat <<EOF | sh`, or `git commit -m "$(cat <<'EOF' ... EOF)"` with
-  generated content (pre-written prose bodies are fine — see Allowed).
-- `python -c '...'`, `node -e '...'`, `perl -e '...'`, `ruby -e '...'`,
-  multi-line `sh -c` / `bash -c`.
+**Four-tier search** before any new script file — log one line per tier (`<Tier>: <tool> - <found/not found>, <reason>`); empty rows rejected:
 
-### Allowed (not a script)
+1. Native CLIs / builtins (`jq`, `gh`, `git`, `curl`)
+2. Ecosystem primitives (Ansible modules, Terraform resources, marketplace Actions, pre-commit)
+3. Third-party packaged tools (Homebrew, apt, pip, npm, cargo)
+4. Popular community solutions (GitHub projects, official plugins, awesome-* lists)
 
-- Single-line shell pipelines, however clever
-  (`gh api ... | jq -r ... | xargs -I{} gh api --method DELETE ...`).
-- One-line heredocs feeding **pre-existing prose** to a CLI
-  (e.g., `gh pr create --body "$(cat <<'EOF' ... EOF)"` with a static body).
-- YAML `run:` of 1–3 lines without control flow (`run: pnpm install`).
-- Single Bash commands without control-flow keywords or newlines
-  (`a && b && c` is fine; multi-line is not).
+**10-line gate** (after empty search): <10 non-comment lines auto-approved; 10+ requires
+explicit user yes. Code/shebang/heredoc/continuation count; blanks and comments don't; no
+semicolon-stuffing.
 
-### Mandatory four-tier search (before any new dedicated script file)
-
-Search and document each tier:
-
-1. **Native CLIs / builtins** — `jq`, `gh`, `git`, `curl`, system utilities
-2. **Ecosystem primitives** — Ansible modules, Terraform resources, Nix
-   functions, marketplace Actions, pre-commit hooks
-3. **Third-party packaged tools** — Homebrew, apt, pip, npm, cargo
-4. **Popular community solutions** — well-starred GitHub projects, official
-   plugins, awesome-* lists
-
-Use a cheap model via Bifrost (`listmodels`) + Context7; include a
-one-line-per-tier search log (`<Tier>: <tool> - <found / not found>, <reason>`) — empty
-rows or "n/a" are rejected.
-
-### The 10-line gate (only after search is empty)
-
-For a genuinely required dedicated script file:
-
-- <10 non-comment lines AND search empty: auto-approved.
-  (Code, shebang, heredoc, continuation lines all count; blank and
-  pure-comment lines don't; no semicolon-stuffing.)
-- 10+ non-comment lines: ASK and wait for an unambiguous yes.
-
-Hook blocks are TERMINAL DENIALS — stop and reconsider, no workarounds.
-
-See `agentsmd/rules/no-scripts.md` for worked examples and the directory allow-list.
+Hook blocks are TERMINAL DENIALS. See `agentsmd/rules/no-scripts.md` for worked examples.
 
 ## Starting Any Change
 

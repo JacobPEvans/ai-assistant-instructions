@@ -54,21 +54,17 @@ File operations:
 
 Explore agents are exempt (read-only, no Edit/Write tools).
 
-Script policy (Required verbatim in every subagent prompt):
+Script policy (verbatim in every subagent prompt):
 
-- Scripts are LAST RESORT. Search first; script only when every tier comes
-  up empty AND approval is granted (see 10-line gate below).
-- Scripts MUST live in dedicated script files (`.sh`, `.py`, `.ts`, `.js`,
-  `.rb`, `.pl`) under `scripts/`, `.github/scripts/`, `.claude/hooks/`,
-  `tests/`, or `plugins/<name>/hooks/` dirs. NEVER comingled in non-script files.
-- Inline scripts are forbidden in ALL non-script files: no logic in YAML
-  `run:` blocks, no heredoc payloads carrying logic, no multi-line control
-  flow inside a single Bash command, no `python -c` / `node -e` / `bash -c`.
-- Before any new script file, exhaust the four-tier search; log one line
-  per tier in your reply (empty rows rejected).
-- Under 10 non-comment lines AND search empty: auto-approved.
-- 10+ non-comment lines: ASK the user and wait for an unambiguous yes.
-- Hook blocks are TERMINAL DENIALS, not fallback menus.
+- Scripts are LAST RESORT — search first; script only after empty four-tier
+  search log AND 10-line gate.
+- Scripts live in dedicated files (`.sh`/`.py`/`.ts`/`.js`/`.rb`/`.pl`) under
+  `scripts/`, `.github/scripts/`, `.claude/hooks/`, `tests/`, or
+  `plugins/<name>/hooks/`. Never inlined in non-script files.
+- Forbidden inline: YAML `run:` with logic, heredocs carrying logic,
+  multi-line Bash control flow, `python -c` / `node -e` / `bash -c`.
+- <10 non-comment lines + empty search: auto-approved. 10+: ASK and wait for yes.
+- Hook blocks are TERMINAL DENIALS.
 
 ## Subagent Type Selection
 
