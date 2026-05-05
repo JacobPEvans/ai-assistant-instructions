@@ -15,21 +15,23 @@ permissions: {}
 # Tier 2: pre-commit "include external file" hook — none mature in pre-commit registry
 # Tier 3: embedme (npm) — adds Node toolchain to a non-Node repo; rejected
 # Tier 4: cschleiden/replace-tokens marketplace action — for token vars, not multi-line bodies
+# Contents API for signed commits — native GitHub API, web-flow auto-signs (no git commit)
 
 jobs:
   sync:
+    if: github.event_name == 'workflow_dispatch' || github.actor == 'renovate[bot]'
     permissions:
       contents: write
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       # GITHUB_HEAD_REF is the auto-populated env var for PR head branch name.
-      # Using it via $GITHUB_HEAD_REF (shell env var) rather than ${{ github.head_ref }}
-      # (expression interpolation) avoids command injection risk.
+      # Using it via $GITHUB_HEAD_REF (shell env var) rather than expression interpolation
+      # avoids command injection risk.
       - name: Switch to PR head branch
         if: github.event_name == 'pull_request'
         run: |
@@ -39,7 +41,12 @@ jobs:
       - name: Extract pinned SHA
         id: meta
         run: |
-          echo "sha=$(grep -oP '(?<=<!-- sha: )[a-f0-9]{40}(?= -->)' agentsmd/external/karpathy-claude-skills.md)" >> "$GITHUB_OUTPUT"
+          SHA=$(grep -oP '(?<=<!-- sha: )[a-f0-9]{40}(?= -->)' agentsmd/external/karpathy-claude-skills.md || true)
+          if [ -z "$SHA" ]; then
+            echo "ERROR: Could not extract 40-char SHA from agentsmd/external/karpathy-claude-skills.md" >&2
+            exit 1
+          fi
+          echo "sha=${SHA}" >> "$GITHUB_OUTPUT"
 
       - name: Fetch upstream CLAUDE.md
         env:
@@ -67,33 +74,66 @@ jobs:
             !skip{print}
           ' AGENTS.md > /tmp/agents.md && mv /tmp/agents.md AGENTS.md
 
-      - name: Configure git identity
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Commit and push to PR branch
+      - name: Commit files to PR branch via Contents API
         if: github.event_name == 'pull_request'
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
           UPSTREAM_SHA: ${{ steps.meta.outputs.sha }}
         run: |
-          git diff --exit-code && exit 0 || true
-          git add agentsmd/external/karpathy-claude-skills.md AGENTS.md
-          git commit -m "chore(external): sync karpathy-claude-skills to ${UPSTREAM_SHA}"
-          git push origin "$GITHUB_HEAD_REF"
+          if git diff --exit-code agentsmd/external/karpathy-claude-skills.md AGENTS.md; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          FILE1_SHA=$(gh api "repos/${REPO}/contents/agentsmd/external/karpathy-claude-skills.md?ref=${GITHUB_HEAD_REF}" --jq '.sha')
+          jq -n \
+            --arg msg "chore(external): sync karpathy-claude-skills to ${UPSTREAM_SHA}" \
+            --arg content "$(base64 -w0 < agentsmd/external/karpathy-claude-skills.md)" \
+            --arg branch "${GITHUB_HEAD_REF}" \
+            --arg sha "${FILE1_SHA}" \
+            '{message:$msg,content:$content,branch:$branch,sha:$sha}' \
+          | gh api "repos/${REPO}/contents/agentsmd/external/karpathy-claude-skills.md" -X PUT --input -
+          FILE2_SHA=$(gh api "repos/${REPO}/contents/AGENTS.md?ref=${GITHUB_HEAD_REF}" --jq '.sha')
+          jq -n \
+            --arg msg "chore(external): sync karpathy-claude-skills to ${UPSTREAM_SHA}" \
+            --arg content "$(base64 -w0 < AGENTS.md)" \
+            --arg branch "${GITHUB_HEAD_REF}" \
+            --arg sha "${FILE2_SHA}" \
+            '{message:$msg,content:$content,branch:$branch,sha:$sha}' \
+          | gh api "repos/${REPO}/contents/AGENTS.md" -X PUT --input -
 
       - name: Create sync PR (manual dispatch)
         if: github.event_name == 'workflow_dispatch'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
           UPSTREAM_SHA: ${{ steps.meta.outputs.sha }}
         run: |
-          git diff --exit-code && echo "Already in sync." && exit 0 || true
+          if git diff --exit-code agentsmd/external/karpathy-claude-skills.md AGENTS.md; then
+            echo "Already in sync."
+            exit 0
+          fi
           BRANCH="chore/sync-karpathy-$(date -u +%Y%m%d)"
-          git checkout -b "${BRANCH}"
-          git add agentsmd/external/karpathy-claude-skills.md AGENTS.md
-          git commit -m "chore(external): sync karpathy-claude-skills to ${UPSTREAM_SHA}"
-          git push -u origin "${BRANCH}"
+          FILE1_SHA=$(gh api "repos/${REPO}/contents/agentsmd/external/karpathy-claude-skills.md?ref=main" --jq '.sha')
+          FILE2_SHA=$(gh api "repos/${REPO}/contents/AGENTS.md?ref=main" --jq '.sha')
+          MAIN_SHA=$(gh api "repos/${REPO}/git/refs/heads/main" --jq '.object.sha')
+          gh api "repos/${REPO}/git/refs" -f "ref=refs/heads/${BRANCH}" -f "sha=${MAIN_SHA}"
+          jq -n \
+            --arg msg "chore(external): sync karpathy-claude-skills to ${UPSTREAM_SHA}" \
+            --arg content "$(base64 -w0 < agentsmd/external/karpathy-claude-skills.md)" \
+            --arg branch "${BRANCH}" \
+            --arg sha "${FILE1_SHA}" \
+            '{message:$msg,content:$content,branch:$branch,sha:$sha}' \
+          | gh api "repos/${REPO}/contents/agentsmd/external/karpathy-claude-skills.md" -X PUT --input -
+          jq -n \
+            --arg msg "chore(external): sync karpathy-claude-skills to ${UPSTREAM_SHA}" \
+            --arg content "$(base64 -w0 < AGENTS.md)" \
+            --arg branch "${BRANCH}" \
+            --arg sha "${FILE2_SHA}" \
+            '{message:$msg,content:$content,branch:$branch,sha:$sha}' \
+          | gh api "repos/${REPO}/contents/AGENTS.md" -X PUT --input -
           gh pr create \
             --title "chore(external): sync karpathy-claude-skills to ${UPSTREAM_SHA}" \
-            --body "Auto-synced by sync-karpathy-skills workflow (manual dispatch)."
+            --body "Auto-synced by sync-karpathy-skills workflow (manual dispatch)." \
+            --head "${BRANCH}" \
+            --base main
