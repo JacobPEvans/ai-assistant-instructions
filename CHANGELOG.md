@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.9.4...v1.10.0) (2026-05-06)
+
+
+### Features
+
+* **agents:** vendor karpathy CLAUDE.md into AGENTS.md with auto-sync ([#616](https://github.com/JacobPEvans/ai-assistant-instructions/issues/616)) ([b465d89](https://github.com/JacobPEvans/ai-assistant-instructions/commit/b465d8991bb1a9b3d002da7524fc9a76cbe7ea89))
+
 ## [1.9.4](https://github.com/JacobPEvans/ai-assistant-instructions/compare/v1.9.3...v1.9.4) (2026-05-04)
 
 
