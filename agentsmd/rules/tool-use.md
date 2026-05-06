@@ -5,7 +5,7 @@ description: Use native tools (Read/Edit/Write/Grep/Glob) over Bash equivalents 
 # Tool Use
 
 AI assistants solve problems by finding and using existing tools, not by generating scripts.
-Research what exists before implementing anything — do not trust training data.
+Research what existing tools handle the task — don't generate scripts when an off-the-shelf tool works.
 
 ## The Workflow
 
