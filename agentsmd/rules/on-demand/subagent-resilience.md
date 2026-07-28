@@ -61,6 +61,17 @@ healthy, so the lead keeps waiting. **Silence is no signal, never progress.**
 - **Serialise the critical path.** Parallel agents against one gate waste
   slots. The blocking item gets the first slot and the lead's attention, not
   equal footing with cosmetic work.
+- **A push is not done until the remote says so.** Read the remote back
+  before reporting a push complete — `git ls-remote origin <branch>`, or the
+  PR's `headRefOid`. A local success message describes what your git thought
+  it did, not what the remote holds. Detached HEAD, a stale base, and a
+  force-push landing on the wrong ref all report success locally.
+- **When two instructions conflict, verify, then take the reversible side.**
+  Crossed messages are normal on a fan-out — the lead's view is minutes stale
+  by the time an agent reads it. Do not pick the more recent reading and act;
+  check what the remote actually contains, then choose the branch of the fork
+  that can be undone. Closing a PR is reversible; merging one that deletes
+  work is not.
 
 Evidence (2026-07-28 overnight run): four agents, 4.4 hours, **two merged
 PRs — both from one agent**. 83% of the window produced zero merged work.
@@ -68,6 +79,14 @@ One agent held 25 files uncommitted for hours; one branch contained only the
 commit that caused the bug it was meant to fix; one produced nothing. All
 three were discovered by inspecting the filesystem, not by any status reply.
 The lead then landed the stalled work itself in four minutes.
+
+The same run produced two near-misses where the **remote ended up in a state
+nobody intended**: a detached-HEAD push, and a revert PR left open and
+mergeable that would have deleted work the lead had just endorsed — its title
+read "revert at team lead's direction", so a routine sweep would have merged
+it. Neither was visible locally. Both were caught by one question — *what
+does the remote actually say?* — and the second was defused by closing rather
+than merging, because only one of those two choices can be undone.
 
 ## Why
 
