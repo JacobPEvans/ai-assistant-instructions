@@ -32,6 +32,43 @@ fallback when that happens.
 - **Don't self-amplify.** When spawns fail, do not retry-loop new spawns on a
   timer; probe occasionally (with backoff), work solo meanwhile.
 
+## The artifact clock
+
+A live agent producing nothing is a worse failure than a dead one: it looks
+healthy, so the lead keeps waiting. **Silence is no signal, never progress.**
+
+- **Push within 30 minutes, even unfinished.** State it in every brief. A
+  branch on the remote is the only proof work exists — unpushed work is
+  invisible to every PR-based check and indistinguishable from no work.
+- **Verify by artifact, never by asking.** Before sending a status message,
+  run the checks. They take seconds and return ground truth; a status reply
+  is at best a claim:
+
+  ```bash
+  gh pr list -R <owner>/<repo> --state open
+  git -C <worktree> rev-list --count origin/<base>..HEAD
+  git -C <worktree> status --porcelain | wc -l
+  ```
+
+- **Two strikes, on a clock.** No artifact at 30 min → one specific
+  corrective instruction. No artifact at 60 min → stop the agent, reassign
+  the work with the diagnosis attached. Never poll a third time.
+- **The lead lands the last mile.** If work exists on disk and is unpushed at
+  the next check, the lead commits and pushes it — no further asking.
+  Merging a green PR, running one diagnostic command, or rescuing an at-risk
+  worktree are lead actions. Delegate what is large or context-heavy, never
+  what is small and blocking.
+- **Serialise the critical path.** Parallel agents against one gate waste
+  slots. The blocking item gets the first slot and the lead's attention, not
+  equal footing with cosmetic work.
+
+Evidence (2026-07-28 overnight run): four agents, 4.4 hours, **two merged
+PRs — both from one agent**. 83% of the window produced zero merged work.
+One agent held 25 files uncommitted for hours; one branch contained only the
+commit that caused the bug it was meant to fix; one produced nothing. All
+three were discovered by inspecting the filesystem, not by any status reply.
+The lead then landed the stalled work itself in four minutes.
+
 ## Why
 
 The failure mode is silent partial loss: some agents finish, later ones die,
