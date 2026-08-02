@@ -1,6 +1,6 @@
 ---
 name: openrouter-models
-description: Choose among the hosted models the shared router serves — discover current ids and prices from the public catalog, understand the router-enforced spend budget, respect the free-tier prompt-logging caveat, and request onboarding of a model the router does not serve yet
+description: Choose among the hosted models the shared router serves — discover current ids and prices from the public catalog, self-enforce a spend budget the router does not meter for you, respect the free-tier prompt-logging caveat, and request onboarding of a model the router does not serve yet
 version: 1.0.0
 author: dryvist homelab
 license: MIT
@@ -19,25 +19,38 @@ shared router — a deliberate per-call choice, never an automatic on-error
 fallback. This skill covers what is available, what it costs, and the rules
 around it. `delegate-to-router` covers the mechanics of the call itself.
 
-## The budget is enforced at the router, not by you
+## The model set is enforced; the budget is yours to enforce
 
-Spend caps, rate limits, and the set of models your credential may reach are
-enforced by the router against your own key. You do not implement the budget
-and you cannot bypass it — a noncompliant or compromised caller hits the same
-ceiling.
+Two different kinds of limit. Treating them the same is how money gets spent.
 
-What this skill asks of you:
+**Enforced at the router:** the set of models your credential may reach. That
+is an allowlist you cannot edit, so a `400` for an unlisted model means the
+policy worked — it costs nothing and is a correct answer.
 
-- **Treat a rejection as a correct answer.** A `429`, a spend-cap message, or a
-  `400` for a non-allowlisted model means the policy worked. Drop to a cheaper
-  tier or defer the work, and say which you did.
-- **Never route around a cap** and never request a broader credential to get
-  past one.
+**NOT enforced, in the general case: your spend.** Metering spend per caller
+needs shared state plus a credential per caller, and a deliberately stateless
+router may have neither. Where that is so, no ceiling exists anywhere except in
+your own behaviour.
+
+So the budget below is real only because you apply it:
+
+- **Track your spend yourself.** Keep a running total in memory keyed by day
+  (`openrouter-spend-<YYYY-MM-DD>`). After each paid call, estimate its cost
+  from the response's token usage times the per-token prices you discovered,
+  and add it. Check the total **before** every paid call.
+- **Stop at the cap.** At or above it, use the locally served tier or a `:free`
+  variant instead, and note the deferral. Nothing else will stop you.
+- **Never read "nothing stopped me" as permission.** An unenforced limit is
+  still a limit; it is just one only you can apply.
 - **Prefer free variants** whenever they are adequate, subject to the egress
-  rule below. Never run a long unattended loop on a paid model.
-- **Surface remaining budget** when you report spend-relevant work, if the
-  router exposes it on your key. Read it from the router; do not reconstruct it
-  from your own tallies, which drift.
+  rule below. Never run a long unattended loop on a paid model — an unattended
+  loop is exactly where self-enforcement fails silently.
+- **Report what you have used** when you report spend-relevant work, so a human
+  can see the total you are enforcing against.
+
+If your deployment DOES enforce spend, it will tell you so, and a `429` or a
+spend-cap message is then also a correct answer to defer on. Trust what your
+deployment states over this skill, which describes the general case.
 
 ## Free tiers log your prompts
 

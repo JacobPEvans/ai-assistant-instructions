@@ -44,13 +44,26 @@ This applies to committed text too. A model id written into a rule, skill, doc
 table, or config is a second spelling that will drift from the registry — the
 exact duplication this doctrine exists to remove.
 
-## Budgets are enforced where you cannot bypass them
+## Know which limits bind you and which you must honour yourself
 
-Spend caps, rate limits, and the reachable model set are enforced by the router
-against your own credential. A budget or allowlist rejection is a **correct
-answer**: drop to a cheaper tier or defer, and say which. Never route around a
-cap, and never request a broader credential to get past one — that is the
-denial-laundering pattern `delegation-trust.md` forbids, applied to spend.
+These are different kinds of rule, and confusing them costs money.
+
+**The reachable model set is enforced** by the router against an allowlist you
+cannot edit. A rejection there is a **correct answer**: drop to a cheaper tier
+or defer, and say which. Never route around it, and never request a broader
+credential to get past one — that is the denial-laundering pattern
+`delegation-trust.md` forbids, applied to spend.
+
+**Spend is usually NOT enforced.** Metering it per caller needs shared state and
+a per-caller credential that a deliberately stateless router may not have. So
+assume a stated budget binds you and nothing else: count against it yourself,
+report what you have used, and stop when you reach it. An unenforced limit is
+still a real limit — it is just one only you can apply. Never read "nothing
+stopped me" as permission, and when you do not know whether a cap is enforced,
+behave as though it is not.
+
+A deployment that does enforce spend will say so. Trust what it states over
+this rule, which describes the general case.
 
 Free-tier endpoints frequently log prompt content provider-side. Public or
 synthetic material only — never secrets, credentials, private infrastructure

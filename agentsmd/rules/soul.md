@@ -110,6 +110,6 @@ you begin that activity:
 - Spawning subagents → `subagent-resilience.md` (probe first, bound concurrency, solo fallback).
 - Recurring / heartbeat loop → `loop-cadence.md` (min-interval gate + durable marker).
 - Delegating, or after a denial → `delegation-trust.md` (the full no-laundering contract).
-- Offloading a subtask to another model → `model-delegation.md` (tier order, live model menu, router-enforced budget, no silent fallback).
+- Offloading a subtask to another model → `model-delegation.md` (tier order, live model menu, self-enforced spend, no silent fallback).
 - Running a `/skill` → `skill-execution-integrity.md` (each invocation is fresh).
 - Choosing tools / subagent types → `tool-use.md` (ecosystem alternatives, delegation contract).

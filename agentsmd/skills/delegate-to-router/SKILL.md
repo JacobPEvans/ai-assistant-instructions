@@ -81,7 +81,7 @@ work yourself and widens what leaves the estate.
 | --- | --- | --- |
 | DNS failure, refused connection, timeout | Router unreachable | Report it; defer the subtask or continue on your own model as a stated choice |
 | `401` / `403` | Credential invalid, expired, or not scoped to that model | Report it; do not retry with a different credential |
-| `429` or a budget message | Rate limit or spend cap hit | Drop to a cheaper tier or defer; see `openrouter-models` |
+| `429` or a budget message | Rate limit or a cap the deployment does enforce | Drop to a cheaper tier or defer; see `openrouter-models` |
 | `400` naming an unknown model | Your id is not served | Re-fetch the menu (step 2); do not retry the same id |
 
 None of these authorize a silent fallback. Absorbing the work back into your
