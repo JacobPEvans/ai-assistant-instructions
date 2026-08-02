@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.25.1](https://github.com/dryvist/ai-assistant-instructions/compare/v1.25.0...v1.25.1) (2026-08-02)
+
+
+### Bug Fixes
+
+* **soul:** route follow-ups to Vikunja, never GitHub issues ([4742d85](https://github.com/dryvist/ai-assistant-instructions/commit/4742d8557cc98bcfe58f688924e73ba17096a18b))
+* **soul:** route follow-ups to Vikunja, never GitHub issues ([0eef74a](https://github.com/dryvist/ai-assistant-instructions/commit/0eef74abceed18c6eab18d891b5070f2420f64ce))
+
 ## [1.25.0](https://github.com/dryvist/ai-assistant-instructions/compare/v1.24.3...v1.25.0) (2026-07-23)
 
 
