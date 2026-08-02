@@ -81,3 +81,9 @@ tuning spend needs the same information.
 - `delegate-to-router` — how to discover the live model menu and place a call.
 - `openrouter-models` — the router-enforced budget, the free-tier logging
   caveat, and the lane for requesting a model the router does not serve.
+
+Both live in `agentsmd/skills/`, which is the only authored copy. That location
+**supersedes any per-consumer copy**: a harness adopting one deletes its local
+version in the same change rather than running both. Two copies of a skill
+about spend and egress will drift on precisely the rules that carry the risk,
+and whichever consumer holds the stale one cannot tell.

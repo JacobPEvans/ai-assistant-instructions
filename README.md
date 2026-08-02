@@ -67,6 +67,12 @@ lives here under `agentsmd/skills/`, next to the rule that governs it, because
 those consumers already take this repository as an input and a second authored
 copy per harness is exactly the drift this repo exists to prevent.
 
+**`agentsmd/skills/` supersedes any per-consumer copy of the same skill.** A
+consumer adopting one of these must delete its local copy in the same change,
+never run both. Two copies do not stay identical — they drift on exactly the
+details that matter, and the consumer holding the stale one has no way to know.
+Adopt or don't; do not carry both.
+
 ## Usage
 
 Once installed, the AI assistants read `CLAUDE.md` / `AGENTS.md` / `GEMINI.md`
