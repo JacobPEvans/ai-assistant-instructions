@@ -54,11 +54,18 @@ Or just browse the [documentation](docs/) and cherry-pick what you need.
 
 ### Slash commands and skills
 
-This repository ships configuration only — no slash commands, skills, agents, or
-hooks. Those are delivered as a separate, installable Claude Code plugin
-marketplace. Once the marketplace is added and the plugins are enabled, commands
-referenced by the workflow (for example `/refresh-repo`, `/finalize-pr`, `/ship`)
-become available alongside the configuration in this repo.
+Slash commands, agents, and hooks are delivered as a separate, installable Claude
+Code plugin marketplace, not from here. Once the marketplace is added and the
+plugins are enabled, commands referenced by the workflow (for example
+`/refresh-repo`, `/finalize-pr`, `/ship`) become available alongside the
+configuration in this repo.
+
+Skills are split by audience. A skill that only makes sense inside Claude Code
+lives in the plugin marketplace. A skill that every harness needs — the same
+behavior for Claude Code, Codex, Antigravity, and the unattended homelab agent —
+lives here under `agentsmd/skills/`, next to the rule that governs it, because
+those consumers already take this repository as an input and a second authored
+copy per harness is exactly the drift this repo exists to prevent.
 
 ## Usage
 
