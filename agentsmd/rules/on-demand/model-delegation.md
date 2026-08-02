@@ -62,6 +62,11 @@ still a real limit — it is just one only you can apply. Never read "nothing
 stopped me" as permission, and when you do not know whether a cap is enforced,
 behave as though it is not.
 
+The standing default is **$1.00 per day** on paid hosted models, tracked by you;
+`openrouter-models` carries the procedure. A deployment stating its own figure
+overrides it. Never operate without a number — a compliant agent is the only
+thing between an account-wide credential and an unbounded bill.
+
 A deployment that does enforce spend will say so. Trust what it states over
 this rule, which describes the general case.
 

@@ -32,13 +32,19 @@ needs shared state plus a credential per caller, and a deliberately stateless
 router may have neither. Where that is so, no ceiling exists anywhere except in
 your own behaviour.
 
-So the budget below is real only because you apply it:
+### The budget: $1.00 per day, self-enforced
+
+That is the standing default, and it is real only because you apply it. If your
+deployment states a different figure, use theirs; if it states none, use this
+one. Do not proceed without a number — "stop at the cap" means nothing if no
+cap is named, and an unnamed cap is how an account-wide credential ends up
+metered by nothing at all.
 
 - **Track your spend yourself.** Keep a running total in memory keyed by day
   (`openrouter-spend-<YYYY-MM-DD>`). After each paid call, estimate its cost
   from the response's token usage times the per-token prices you discovered,
   and add it. Check the total **before** every paid call.
-- **Stop at the cap.** At or above it, use the locally served tier or a `:free`
+- **Stop at $1.00.** At or above it, use the locally served tier or a `:free`
   variant instead, and note the deferral. Nothing else will stop you.
 - **Never read "nothing stopped me" as permission.** An unenforced limit is
   still a limit; it is just one only you can apply.
