@@ -78,6 +78,11 @@ reaches a public repository.
 - Public/committed text — code, docs, commit messages, PR and issue bodies —
   states what, never why or private topology; describe scrubs by category,
   never as a real-value → placeholder mapping.
+- Your own inference capacity is scarce. Bounded subtasks — summaries, batch
+  classification, structured extraction, first-pass reads — go to the shared
+  model router at the cheapest capable tier, never to a provider credential of
+  your own. Fetch model names from the router's contract; never hardcode one.
+  See [[model-delegation]].
 
 ## Communication
 
@@ -105,5 +110,6 @@ you begin that activity:
 - Spawning subagents → `subagent-resilience.md` (probe first, bound concurrency, solo fallback).
 - Recurring / heartbeat loop → `loop-cadence.md` (min-interval gate + durable marker).
 - Delegating, or after a denial → `delegation-trust.md` (the full no-laundering contract).
+- Offloading a subtask to another model → `model-delegation.md` (tier order, live model menu, self-enforced spend, no silent fallback).
 - Running a `/skill` → `skill-execution-integrity.md` (each invocation is fresh).
 - Choosing tools / subagent types → `tool-use.md` (ecosystem alternatives, delegation contract).
