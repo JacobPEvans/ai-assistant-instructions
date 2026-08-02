@@ -96,12 +96,18 @@ tuning spend needs the same information.
 
 ## Skills
 
+The procedures this rule refers to are shipped as skills, not carried here —
+this repository holds configuration only. Both live in the `ai-delegation`
+plugin of the [`claude-code-plugins`](https://github.com/JacobPEvans/claude-code-plugins)
+marketplace:
+
 - `delegate-to-router` — how to discover the live model menu and place a call.
-- `openrouter-models` — the router-enforced budget, the free-tier logging
+- `openrouter-models` — the self-enforced spend budget, the free-tier logging
   caveat, and the lane for requesting a model the router does not serve.
 
-Both live in `agentsmd/skills/`, which is the only authored copy. That location
-**supersedes any per-consumer copy**: a harness adopting one deletes its local
-version in the same change rather than running both. Two copies of a skill
-about spend and egress will drift on precisely the rules that carry the risk,
-and whichever consumer holds the stale one cannot tell.
+Neither depends on Claude Code: both use only shell, `curl`, and `jq`, so a
+non-Claude harness consumes them straight from that repository. **That copy is
+the only authored one.** A harness adopting either deletes its local version in
+the same change rather than running both — two copies of a skill about spend
+and egress will drift on precisely the rules that carry the risk, and whichever
+consumer holds the stale one has no way to know.

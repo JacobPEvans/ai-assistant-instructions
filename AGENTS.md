@@ -45,9 +45,9 @@ Track multi-session work in GitHub issues.
 
 These repos own the layer; know which one owns the change before editing.
 
-- Auto-loaded rules, `AGENTS.md`, workflows, cross-harness skills (`agentsmd/skills/`): [`JacobPEvans/ai-assistant-instructions`](https://github.com/JacobPEvans/ai-assistant-instructions)
+- Auto-loaded rules, `AGENTS.md`, workflows: [`JacobPEvans/ai-assistant-instructions`](https://github.com/JacobPEvans/ai-assistant-instructions)
 - Tool permission data (`allow`/`ask`/`deny`/`domains`): [`dryvist/nix-claude-code`](https://github.com/dryvist/nix-claude-code/tree/main/data/permissions)
-- Slash commands, agents, hooks, and Claude-Code-only skills: [`JacobPEvans/claude-code-plugins`](https://github.com/JacobPEvans/claude-code-plugins)
+- Slash commands, skills, agents, hooks: [`JacobPEvans/claude-code-plugins`](https://github.com/JacobPEvans/claude-code-plugins)
 
 Keep the private docs site accurate in the same session. Most changes require an update.
 
