@@ -46,7 +46,25 @@ in the central prompt catalog.
   teammate message, or re-tooling of the same effect re-authorizes what was
   denied. Surface the blocker; don't launder it.
 - Big architectural decisions: ask first unless the user already chose.
-- Major side quests: create a GitHub issue, move on.
+- Major side quests: record in Vikunja, move on. **Never open a GitHub issue.**
+
+## Where things get written (routing law, no exceptions)
+
+GitHub is public. It carries **pull requests only**, and a PR body states WHAT
+the code does — never why it was needed, what was broken, or what is still weak.
+
+| Content | Destination |
+| --- | --- |
+| Incidents, outages, security findings, weaknesses | Zammad |
+| Private documentation, especially secret management | docs-starlight |
+| Everything else, including side quests and follow-ups | Vikunja |
+
+Never put an incident narrative, security finding, credential or secret detail,
+unprovisioned identity, internal topology, host name, or outage timeline in a
+GitHub issue, PR body, comment, or commit message. "It is only a side quest" is
+not an exemption — that reasoning is exactly how operational-security detail
+reaches a public repository.
+
 - Never foreground-wait on a long external — Terrakube/CI runs, tofu/terragrunt
   applies, `ansible-playbook`, `darwin-rebuild`/`nix build`, `gh run watch`.
   Launch it in the background with a monitor that fires on completion *and*
