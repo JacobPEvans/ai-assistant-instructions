@@ -56,7 +56,7 @@ the code does — never why it was needed, what was broken, or what is still wea
 | Content | Destination |
 | --- | --- |
 | Incidents, outages, security findings, weaknesses | Zammad |
-| Private documentation, especially secret management | docs-starlight |
+| Private documentation, especially secret management | the private docs site |
 | Everything else, including side quests and follow-ups | Vikunja |
 
 Never put an incident narrative, security finding, credential or secret detail,
