@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.26.0](https://github.com/dryvist/ai-assistant-instructions/compare/v1.25.1...v1.26.0) (2026-08-03)
+
+
+### Features
+
+* **rules:** add the model-delegation doctrine rule ([#793](https://github.com/dryvist/ai-assistant-instructions/issues/793)) ([755b055](https://github.com/dryvist/ai-assistant-instructions/commit/755b05548124de4c7463b4abe5d280b6c1595d0c))
+
+
+### Bug Fixes
+
+* **ci:** drop unused id-token: write from ci-fix.yml ([#792](https://github.com/dryvist/ai-assistant-instructions/issues/792)) ([2480212](https://github.com/dryvist/ai-assistant-instructions/commit/2480212d581736a45febccc63b7df9fd1c5ddcac))
+
 ## [1.25.1](https://github.com/dryvist/ai-assistant-instructions/compare/v1.25.0...v1.25.1) (2026-08-02)
 
 
