@@ -1,7 +1,6 @@
 ---
 name: public-disclosure
 description: Public/committed artifacts (code, docs, commits, PR and issue titles/bodies) disclose the minimum — state, never rationale; categories, never real-value mappings.
-paths: ["**/*.md", "**/*.mdx", "**/*.tf", "**/*.yml", "**/*.yaml"]
 ---
 
 # Public Disclosure
