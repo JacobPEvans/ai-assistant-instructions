@@ -30,7 +30,10 @@ surface even when no credential leaks. Environment-specific identity (repo
 names, hosts, destinations) belongs behind a variable sourced from the
 runtime secret store; the committed reference is only the variable name.
 Avoid naming an individual lower-trust or self-hosted software component when
-a whole-system description of the improvement suffices.
+a whole-system description of the improvement suffices. Exception: the bare
+product/tool name is fine (e.g. naming the tracker used for routing) —
+hostnames, FQDNs, URLs, ports, IPs, node/inventory names, credential paths,
+and data-flow/dependency descriptions are still forbidden.
 
 ## Describe scrubs in categories, not mappings
 
