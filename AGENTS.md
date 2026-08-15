@@ -61,7 +61,7 @@ Know which repo owns the change before editing:
 - Tool permissions (`allow`/`ask`/`deny`/`domains`): [`dryvist/nix-claude-code`](https://github.com/dryvist/nix-claude-code/tree/main/data/permissions)
 - Commands, skills, agents, hooks: [`JacobPEvans/claude-code-plugins`](https://github.com/JacobPEvans/claude-code-plugins)
 
-Update the private docs site the same session when a change needs it.
+Update the private docs site in the same session; most changes need it.
 
 ## Orchestration and model routing
 
