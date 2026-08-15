@@ -17,7 +17,9 @@ For deep design/review/refactor work, use the `karpathy-guidelines` skill (`andr
 
 Use the best-supported native, third-party, or community solution. Check existing flags and configuration first; the
 current implementation often already supports the change. Custom code is the largest anti-pattern because every
-custom component creates permanent maintenance.
+custom component creates permanent maintenance. Before writing anything custom, search public code for how the
+problem was already solved — [grep.app](https://grep.app/) greps a million public repositories, and a pattern with
+thousands of hits is idiomatic while one with three is usually a mistake.
 
 ## Starting any change
 
