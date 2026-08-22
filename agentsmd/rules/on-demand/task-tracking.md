@@ -22,6 +22,25 @@ a security finding, a credential detail, or internal topology goes to the
 incident tracker or the private docs site, not into a task description. "It is
 only a side quest" is not an exemption.
 
+## Finding the right project
+
+Do not ask which project a task belongs to. Work it out:
+
+1. **List the projects once** and read the descriptions. Each one states the
+   domain it owns. Enumerate rather than guess — a project whose name looks
+   obvious may be scoped to a single effort.
+2. **Route by domain.** A task that clearly belongs to one domain goes to that
+   domain's project. Only a task with no owning domain goes to the catch-all
+   inbox.
+3. **Verify the listing is complete** before concluding a project does not
+   exist. Confirm the total count, and check whether the result was paginated
+   or truncated.
+
+If working this out was awkward — the listing was noisy, the descriptions were
+thin, a project was mis-scoped — fix that in the same pass. Record the routing
+you used here or in the operator's local configuration. A lookup that is hard
+enough to prompt a question is a documentation defect, not a question.
+
 ## Maintenance windows
 
 A maintenance window is shared, agent-visible "hands off this target" state.
