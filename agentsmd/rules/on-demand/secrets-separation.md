@@ -1,0 +1,76 @@
+---
+name: secrets-separation
+description: How credentials are partitioned, scoped, and reached — separate mounts for internet-facing versus internal, engine-minted over static, one bucket per workload, certificate-first access. Read before creating, moving, or consuming any credential.
+---
+
+# Secrets separation
+
+## The boundary is the mount, not a path prefix
+
+Two key-value mounts, split by blast radius:
+
+| Mount | Holds | Leak impact |
+| --- | --- | --- |
+| external | credentials for services reachable from the public internet | critical — exploitable by anyone, anywhere |
+| internal | services that exist only inside the network | bounded by network access |
+
+A path prefix gives no policy boundary. A separate mount does.
+
+Keep the sub-path structure **identical** in both mounts; only the top level
+differs. Do not invent a second hierarchy for external secrets.
+
+- A credential for anything internet-hosted goes in the external mount. Unsure
+  which side something belongs on? Ask — do not guess.
+- **Never grant a wildcard across an external path.** Grant the single exact
+  path a consumer needs. Wildcards on internal policies are the reason the
+  split was needed; do not reproduce the pattern.
+- **Prefer a secrets engine over static storage** wherever one exists. An
+  engine that mints short-lived credentials removes the rotation problem
+  instead of scheduling it.
+- **Migrating a secret is not done when it is copied.** It is done when the
+  original is deleted, because existing wildcards still reach the old path
+  until then.
+
+## Object storage: one bucket per workload, two keys per bucket
+
+- **Every large or distinct data store gets its own bucket.** Never separate
+  two workloads by key prefix alone — a prefix gives no separate lifecycle
+  policy, no separate cap, no separate key, and no blast-radius boundary.
+  Backups never share with anything.
+- **Exactly two scoped keys per bucket**, named after it: a read-only key
+  (list and read) and a read-write key. Consumers take the narrowest one that
+  works. A reader must never hold a writer key.
+- Account-wide admin keys are break-glass only. Never used by a service, never
+  stored where a service can read them.
+
+## Access: certificate first, break-glass never casually
+
+Try the rungs in order and never invert them:
+
+1. **The certificate authority.** Mint an ephemeral keypair, get it signed,
+   use the certificate, discard both. This is the normal path.
+2. **A legacy shared key**, only while its retirement is unfinished. Assume it
+   is absent on anything recently rebuilt.
+3. **Break-glass admin credential** — last resort, only after 1 and 2 have
+   actually been tried and failed. Say so in the write-up when you use it.
+
+**The principal is not the login user.** A signed certificate carries a
+principal that may be configured against a different account than the one you
+type. A refusal when connecting as the principal's name is *not* evidence the
+authority is missing — test as the configured login user before concluding
+anything about rollout state.
+
+**Never weaken host verification.** No disabling strict host key checking, no
+accept-on-first-use flags, no discarding the known-hosts file. On an estate
+where hosts are rebuilt routinely that trades real protection against
+interception for convenience. Remove the one stale entry, re-verify that host,
+and record why. The real fix is a host certificate authority.
+
+## The failure signature to expect
+
+A helper that exits successfully having exported nothing is the bug — not the
+missing secret. It sends the operator looking in the wrong place. A credential
+helper must fail loudly when it cannot produce a credential.
+
+If a tool cannot authenticate, the fix is the credential path. Never a local
+copy, and never a credential pasted into a file.
