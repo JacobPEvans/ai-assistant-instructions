@@ -11,7 +11,7 @@ sequenceDiagram
     Repo->>AAI: @AGENTS.md import resolves
     AAI-->>CC: Canonical rules + routing loaded
     CC->>AAI: Auto-load agentsmd/rules/
-    AAI-->>CC: tool-use, soul, no-scripts, secrets-policy, …
+    AAI-->>CC: soul, operating-core, rule-tiers, public-disclosure, …
     CC->>Plugins: Load installed skills & hooks
     Plugins-->>CC: PreToolUse / PostToolUse hooks active
 

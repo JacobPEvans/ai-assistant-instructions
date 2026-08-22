@@ -24,7 +24,8 @@ Run `/refresh-repo`, then start in a new worktree.
 If the default branch is `develop`, follow [git-flow](agentsmd/rules/on-demand/git-flow.md): PRs target
 `develop` (squash-merge), `develop` → `main` by merge commit only. Otherwise use trunk flow. Always make
 **atomic commits**, one fix/feature/section per commit, and load the relevant rule under
-`agentsmd/rules/on-demand/` before starting that activity (`soul.md` carries the index).
+`agentsmd/rules/on-demand/` before starting that activity. `agentsmd/rules/rule-tiers.md` is the index:
+it maps every activity to the rule that governs it.
 
 ## Knowledge base
 
@@ -34,7 +35,8 @@ capture new durable knowledge after a change.
 ## Scope
 
 After questions are resolved and the plan is approved, execute end to end in one shot with maximal orchestration.
-Route side quests and follow-ups to Vikunja; route incidents to Zammad. See "Where things get written" below.
+Route side quests and follow-ups to Vikunja; route incidents to Zammad. **Never open a GitHub issue.**
+See "Where things get written" below.
 
 ## Where things get written (routing law, no exceptions)
 

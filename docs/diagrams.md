@@ -56,7 +56,7 @@ graph TD
     GEMINI["GEMINI.md\n(synced document)"]
     COPILOT[".copilot/instructions.md\n(symlink → AGENTS.md)"]
 
-    Rules["**agentsmd/rules/**\nAuto-loaded every session\n· tool-use · soul · okf\n· skill-execution-integrity\n· infra/pre-integration-checklist"]
+    Rules["**agentsmd/rules/**\nAlways on\n· soul · operating-core\n· rule-tiers · public-disclosure\nPath-scoped: okf, shell,\nREADME, renovate, infra"]
     Workflows["**agentsmd/workflows/**\nDefault autonomous loop\nResearch → Plan → Define\nImplement → Finalize"]
 
     Docs["**docs/**\nUser-facing guides\n· codex-quick-start\n· troubleshooting\n· github-actions"]
@@ -99,7 +99,7 @@ sequenceDiagram
     Repo->>AAI: @AGENTS.md import resolves
     AAI-->>CC: Canonical rules + routing loaded
     CC->>AAI: Auto-load agentsmd/rules/
-    AAI-->>CC: tool-use, soul, skill-execution-integrity, nix-tool-policy
+    AAI-->>CC: soul, operating-core, rule-tiers, public-disclosure
     CC->>Plugins: Load installed skills & hooks
     Plugins-->>CC: PreToolUse / PostToolUse hooks active
 
