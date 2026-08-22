@@ -24,6 +24,9 @@ machine the tree is on disk at `~/.agents/agentsmd/rules/on-demand/`.
 | Running a `/skill` | `skill-execution-integrity.md` — each invocation is fresh |
 | Deferring work, or a side quest, or opening a maintenance window | `task-tracking.md` — Vikunja, never a GitHub issue; window contract for disruptive work |
 | Hitting an outage, or finding a security weakness | `incident-management.md` — Zammad; the narrative stays private, the PR states what changed |
+| Changing a live guest, service, or any managed infrastructure | `infrastructure-conventions.md` — rebuild over repair, no manual touches, FQDN never a literal address |
+| Creating, moving, or consuming a credential | `secrets-separation.md` — mount not prefix, engine over static, one bucket per workload, certificate first |
+| Cloning, setting up a repository, or starting a change | `workspace-conventions.md` — transport by visibility, path variables, dev shell, a worktree per change |
 | Choosing tools or subagent types | `tool-use.md` — ecosystem alternatives, delegation contract |
 
 Machine-specific instructions live outside version control in the operator's
