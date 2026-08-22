@@ -22,6 +22,8 @@ machine the tree is on disk at `~/.agents/agentsmd/rules/on-demand/`.
 | Delegating, or acting after a denial | `delegation-trust.md` — the full no-laundering contract |
 | Offloading a subtask to another model | `model-delegation.md` — tier order, live model menu, self-enforced spend, no silent fallback |
 | Running a `/skill` | `skill-execution-integrity.md` — each invocation is fresh |
+| Deferring work, or a side quest, or opening a maintenance window | `task-tracking.md` — Vikunja, never a GitHub issue; window contract for disruptive work |
+| Hitting an outage, or finding a security weakness | `incident-management.md` — Zammad; the narrative stays private, the PR states what changed |
 | Choosing tools or subagent types | `tool-use.md` — ecosystem alternatives, delegation contract |
 
 Machine-specific instructions live outside version control in the operator's
