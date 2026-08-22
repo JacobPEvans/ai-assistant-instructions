@@ -49,6 +49,31 @@ The contract:
 - **Open a window before you start** that class of work, and close it or
   comment when you finish.
 - **Reversible, local, read-only work needs no window.**
+- **A window is a lease, and nothing tells you when yours lapses.** An expired
+  window still reads `done == false`, so a casual glance says "open" while the
+  claim has actually gone. Re-check your own window's `due_date` before you
+  continue work inside it, not just when you open it.
+- **An empty result is not proof of no window.** Listings paginate, and a
+  filter applied client-side narrows only the page already fetched — so a
+  window past the first page is invisible to the query that just told you the
+  target was free. Run a positive control: confirm a window you know exists
+  appears in the result before trusting the absence of any other.
+
+## Scope a window by what it claims
+
+A window is a per-resource claim, not a global mutex. Concurrent windows are
+expected — as many as there are sessions — provided none of them overlap.
+
+That only works if each window names **both halves**:
+
+- **Owns** — the exact resources this session may change.
+- **Does not own** — the neighbouring resources it explicitly leaves free, so
+  another session can claim them without asking.
+
+Where two windows share a host, say so and say whether they conflict on timing
+or on safety. A window that names only what it owns forces every other session
+to assume the worst and wait.
+
 - **Cross-link an incident by URL**: paste the incident ticket URL into the
   window's description and the window URL back into the ticket. A plain URL
   each way is enough to navigate both directions; no integration is needed.
