@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.27.0](https://github.com/dryvist/ai-assistant-instructions/compare/v1.26.0...v1.27.0) (2026-08-22)
+
+
+### Features
+
+* **rules:** add task-tracking and incident-management on-demand rules ([#808](https://github.com/dryvist/ai-assistant-instructions/issues/808)) ([93cd2dc](https://github.com/dryvist/ai-assistant-instructions/commit/93cd2dc20cc5fa5e0d3f51757d1d6a5dd4912679))
+* **rules:** publish infrastructure, secrets, and workspace conventions ([#807](https://github.com/dryvist/ai-assistant-instructions/issues/807)) ([deb16e8](https://github.com/dryvist/ai-assistant-instructions/commit/deb16e87c98fadf3770503b5b3f193b3441b5048))
+
 ## [1.26.0](https://github.com/dryvist/ai-assistant-instructions/compare/v1.25.1...v1.26.0) (2026-08-03)
 
 
