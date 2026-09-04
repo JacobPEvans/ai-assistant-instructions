@@ -72,6 +72,12 @@ exceptions. Read it there; it is not repeated in this file.
 - Public and committed text — code, docs, commit messages, PR and issue bodies
   — states what, never why or private topology; describe scrubs by category,
   never as a real-value → placeholder mapping.
+- **There is no ambient forge authentication.** A hosting CLI (`gh` and its
+  equivalents) is not logged in, and its own status probe reports nothing
+  useful. Mint a short-lived token from the credential store at call time, in
+  the same shell that uses it. A probe that finds no session is the expected
+  state, never a blocker to report back. See
+  `agentsmd/rules/on-demand/secrets-separation.md`.
 - Your own inference capacity is scarce. Bounded subtasks — summaries, batch
   classification, structured extraction, first-pass reads — go to the shared
   model router at the cheapest capable tier, never to a provider credential of
