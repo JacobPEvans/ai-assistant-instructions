@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.27.1](https://github.com/dryvist/ai-assistant-instructions/compare/v1.27.0...v1.27.1) (2026-09-04)
+
+
+### Bug Fixes
+
+* **docs:** drop the bare grep.app URL that link checking cannot verify ([#814](https://github.com/dryvist/ai-assistant-instructions/issues/814)) ([56e766f](https://github.com/dryvist/ai-assistant-instructions/commit/56e766f67686f521164123bc76d03d08e39d32b1))
+
 ## [1.27.0](https://github.com/dryvist/ai-assistant-instructions/compare/v1.26.0...v1.27.0) (2026-08-22)
 
 
