@@ -43,6 +43,39 @@ differs. Do not invent a second hierarchy for external secrets.
 - Account-wide admin keys are break-glass only. Never used by a service, never
   stored where a service can read them.
 
+## Forge credentials: minted per call, never ambient
+
+A code-hosting CLI is **not** authenticated, on any agent harness. Nothing
+logs it in at session start, nothing writes a token to disk, and no
+environment file exports one. This is deliberate, not a gap to fix.
+
+The failure it causes is one every agent hits the same way: reach for the
+CLI's own status probe, read "not logged in", and hand the task back as
+blocked. **A probe that finds no session is the expected state.** It is not
+evidence that credentials are unavailable, and it is not a reason to stop.
+
+Instead:
+
+- **Mint at call time, in the shell that uses it.** A token minted in one
+  command is gone by the next; obtain and use it in a single invocation. Never
+  mint at environment-load time — a direnv-style loader caches its dump to
+  disk, which persists the credential.
+- **Take the narrowest scope.** Read for anything that only reads; a
+  repo-scoped write credential only to write, and release its lease when done.
+- **Interactive convenience wrappers are shell functions or aliases**, so they
+  do not exist in a non-interactive agent shell. Reaching for one and finding
+  nothing says nothing about whether credentials work. Use the underlying
+  command the operator's local notes name.
+- **Tag the mint with an identity that names the agent.** Leases and audit
+  entries otherwise record only the login user, which cannot distinguish one
+  harness from another or one concurrent session from the next.
+- **A minted installation credential has no user identity.** A call that asks
+  "who am I" is expected to be refused; use resource-scoped calls instead.
+
+The concrete helper, its variable names, and the endpoints are
+environment-specific and live in the operator's own local files — never here,
+and never in any committed artifact.
+
 ## Access: certificate first, break-glass never casually
 
 Try the rungs in order and never invert them:
