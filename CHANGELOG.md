@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.28.0](https://github.com/dryvist/ai-assistant-instructions/compare/v1.27.1...v1.28.0) (2026-09-05)
+
+
+### Features
+
+* **hooks:** block raw git commit and push in workflow YAML ([#822](https://github.com/dryvist/ai-assistant-instructions/issues/822)) ([f27a588](https://github.com/dryvist/ai-assistant-instructions/commit/f27a58868e72a87c3f00c52e01f7bce90d258a2e))
+* **settings:** demote never-invoked skills to the manual-invoke tier ([#821](https://github.com/dryvist/ai-assistant-instructions/issues/821)) ([f683bfa](https://github.com/dryvist/ai-assistant-instructions/commit/f683bfaeba1462f633c725a42c9d57bb5154dd6b))
+
+
+### Bug Fixes
+
+* **docs:** keep the sandbox ordered list continuous ([#823](https://github.com/dryvist/ai-assistant-instructions/issues/823)) ([9fb6b6e](https://github.com/dryvist/ai-assistant-instructions/commit/9fb6b6e42420c22eaf7626f324e584607841d1ba))
+
 ## [1.27.1](https://github.com/dryvist/ai-assistant-instructions/compare/v1.27.0...v1.27.1) (2026-09-04)
 
 
