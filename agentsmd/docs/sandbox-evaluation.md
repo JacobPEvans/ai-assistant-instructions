@@ -144,10 +144,10 @@ Use `docker sandbox run -w ~/my-project claude` when you need stricter isolation
 1. Install Docker Desktop 4.50+ with experimental features enabled.
 2. Run Claude Code in sandbox:
 
-```bash
-docker sandbox run -w ~/my-project claude
-docker sandbox run -w ~/my-project -c ~/.claude claude
-```
+   ```bash
+   docker sandbox run -w ~/my-project claude
+   docker sandbox run -w ~/my-project -c ~/.claude claude
+   ```
 
 3. Credentials persist in `docker-claude-sandbox-data`.
 
