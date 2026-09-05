@@ -54,3 +54,11 @@ repos:
         files: ^\.claude/
         pass_filenames: false
         stages: [pre-push]
+      - id: no-runner-git-commit
+        name: no-runner-git-commit
+        description: "Block raw git commit/push in workflow YAML"
+        entry: '\bgit\s+(commit|push)\b'
+        language: pygrep
+        files: '\.github/(workflows/.*\.ya?ml|actions/.+/action\.ya?ml)$'
+        exclude: '_ai-action-with-signing\.ya?ml$'
+        stages: [pre-commit]
