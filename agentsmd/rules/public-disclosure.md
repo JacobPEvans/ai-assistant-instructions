@@ -34,6 +34,19 @@ from the runtime secret store; the committed reference is only the variable
 name. Avoid naming an individual lower-trust or self-hosted software
 component when a whole-system description of the improvement suffices.
 
+## Documentation goes to the private source, never straight to public
+
+All AI-authored documentation is written to the private documentation source.
+An agent does not classify content as public or private and never writes to
+the public documentation site directly — the publisher projection is the only
+authority that turns private source into a generated public-docs pull request.
+Classifying is a disclosure decision, and an agent that makes it is one wrong
+call away from publishing operational detail permanently.
+
+The private source may record sensitive operational facts. It still never
+carries a raw live secret, private key, or recovery code — those live only in
+the secret store.
+
 ## Describe scrubs in categories, not mappings
 
 When a PR or commit describes a sanitization/scrub sweep, describe the
