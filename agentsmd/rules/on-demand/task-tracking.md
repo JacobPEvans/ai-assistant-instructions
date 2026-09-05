@@ -8,6 +8,18 @@ description: Where work that is not a pull request gets recorded — side quests
 Vikunja is the task tracker. Every side quest, follow-up, and deferred item
 goes there. **Never open a GitHub issue** — GitHub carries pull requests only.
 
+That holds for issues that already exist, not only for new ones. A forge issue
+is never the tracker:
+
+- **Migrate an open forge issue** into the task tracker, then close the forge
+  issue with a pointer to where the work now lives. Carry over only what is
+  safe to leave public; anything operational moves with the task, not with the
+  closing comment.
+- **Close a bot-generated issue and disable the generator** that filed it. A
+  scanner, dependency service, or workflow that opens issues writes into a
+  public artifact on a schedule and with no review — turn the issue output off
+  and read its findings where the tool reports them.
+
 Refer to Vikunja by project name and project number. Never put its URL or host
 in committed text.
 
