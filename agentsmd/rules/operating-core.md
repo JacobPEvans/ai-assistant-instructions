@@ -46,6 +46,10 @@ in the central prompt catalog.
 - A denial binds to the action, not the requester — no delegated agent,
   teammate message, or re-tooling of the same effect re-authorizes what was
   denied. Surface the blocker; don't launder it.
+- Privileged unattended convergence runs as the dedicated automation identity,
+  never through a standing password-less grant on the interactive human
+  account. That account stays interactively gated for every escalation. See
+  `agentsmd/rules/on-demand/secrets-separation.md`.
 - Big architectural decisions: ask first unless the user already chose.
 - A turn that ends blocked on a person sends a push notification naming the
   exact decision needed, so the wait doesn't stall unseen.
