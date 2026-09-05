@@ -31,6 +31,37 @@ differs. Do not invent a second hierarchy for external secrets.
   original is deleted, because existing wildcards still reach the old path
   until then.
 
+## Harness identity and trust tiers
+
+Privileged unattended convergence runs as a **dedicated automation identity**
+at the operating-system level, distinct from the interactive human account. The
+human account stays interactively gated — a biometric or password prompt on
+every privilege escalation — and never carries a standing password-less grant
+so that an agent can converge under it. An agent that needs to converge asks
+for the automation identity, not for the gate to be removed.
+
+Classify every harness by capability, and grant to the class:
+
+| Class | Holds |
+| --- | --- |
+| trusted | the credentials its declared work needs, minted per call |
+| untrusted | read-only leaf access to the secret store, and no forge write credential |
+
+An untrusted harness is one whose prompt, tool set, or output path is not fully
+controlled by the operator. Read-only *leaf* access means the exact paths it
+consumes — not a subtree, not a list capability over its neighbours.
+
+**The run wrapper supplies secret zero and nothing else.** Whatever bootstraps
+a process gives it exactly two things: the address of the central store, and
+the login pair of the identity it runs as. Every other value the process needs
+resolves from the central store at run time. A second value in the wrapper is a
+second store, and it will drift.
+
+**A migration out of the bootstrap store is complete only when both are true:**
+a live consumer has been proven to work against the central store, and the
+bootstrap copy has been deleted. A copy that still resolves is still the source
+of truth for whoever reads it first.
+
 ## Object storage: one bucket per workload, two keys per bucket
 
 - **Every large or distinct data store gets its own bucket.** Never separate
