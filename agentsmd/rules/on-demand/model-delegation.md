@@ -33,9 +33,12 @@ because one step inside it is hard; split the job.
 
 ## Never hardcode a model name
 
-Model inventories change far faster than this rule does. Names, aliases, and
-enabled state live in the router's published contract — fetch them at call time
-and select from what is actually served. A name you remembered or copied out of
+Model inventories change far faster than this rule does. Names, aliases,
+enabled state — and, where a deployment publishes them, per-model delegation
+hints (speed class, quality class, what the entry is good for, its measured
+caveats) — live in the router's published contract. Fetch them at call time and
+select from what is actually served. The hints exist so that choosing a tier
+never requires writing a model name down anywhere. A name you remembered or copied out of
 a document is not evidence the router serves it, and a call by an unserved name
 fails. Prefer a stable role alias over a concrete model id where one exists:
 the alias is the part promised to keep working.
@@ -101,7 +104,9 @@ this repository holds configuration only. Both live in the `ai-delegation`
 plugin of the [`claude-code-plugins`](https://github.com/JacobPEvans/claude-code-plugins)
 marketplace:
 
-- `delegate-to-router` — how to discover the live model menu and place a call.
+- `local-subagents` — when a step is worth handing off at all, how to read
+  the live model menu (speed, quality, best-for, context, price) from the
+  router's own contract, and how to place the call.
 - `openrouter-models` — the self-enforced spend budget, the free-tier logging
   caveat, and the lane for requesting a model the router does not serve.
 
