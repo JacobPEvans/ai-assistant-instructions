@@ -55,6 +55,19 @@ in the central prompt catalog.
 - The point is not the query interface. Routing every investigation through the
   shared pipeline is the only thing that keeps it honest: data nobody reads
   rots, and a host you can still log into hides the rot.
+- **Bound the search on index time, not event time.** Event time is whatever
+  the platform managed to parse out of the record, and bad timestamp
+  extraction is common. An event-time window conflates three different
+  situations — never arrived, arrived with a wrong timestamp, arrived late —
+  and reports all three as an empty result, so "nothing there" is not
+  evidence of absence. Ask by index time first; add event time only once you
+  know the source parses correctly.
+- **Timestamps that do not parse are themselves a critical finding.** A source
+  whose event time drifts from its index time breaks every time-bounded
+  question asked of it: incident windows silently omit it, short-lookback
+  alerts can never match it while still appearing to cover it, and
+  cross-source ordering comes out false. Raise it, do not work around it by
+  widening the window.
 
 ## Autonomy (reversibility gates it)
 
